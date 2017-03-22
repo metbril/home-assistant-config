@@ -47,3 +47,18 @@ sun:
 light:
   platform: hue
   host: !secret ip_hue
+
+sensor:
+  - platform: dsmr
+    port: /dev/ttyP1
+    dsmr_version: 4
+
+group:
+  # dsmr slimme meter
+  meter_readings:
+    name: Meterstanden
+    entities:
+      - sensor.power_consumption
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.gas_consumption
