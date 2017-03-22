@@ -118,6 +118,16 @@ notify:
     api_key: !secret pushover_apikey
     user_key: !secret pushover_userkey
 
+# uses known_devices.yaml (ignored by git)
+device_tracker:
+  - platform: asuswrt
+    host: !secret router_host
+    username: !secret router_user
+    password: !secret router_password
+    track_new_devices: no
+    consider_home: 180
+    interval_seconds: 12
+
 group:
 
   ### GROUPS ###
@@ -172,6 +182,12 @@ group:
       - sensor.speedtest_download
       - sensor.speedtest_upload
       - sensor.speedtest_ping
+  family:
+    name: Familie
+    entities:
+      - device_tracker.robert_iphone
+      - device_tracker.monique_iphone
+      - device_tracker.bjorn_iphone
   alerts:
     name: Waarschuwingen
     entities:
