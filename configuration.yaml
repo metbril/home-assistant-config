@@ -78,6 +78,32 @@ sensor:
       - ping
       - download
       - upload
+  - platform: darksky
+    api_key: !secret darksky_apikey
+    units: si
+    monitored_conditions:
+      - temperature
+      - apparent_temperature
+      - dew_point
+      - humidity
+      - pressure
+      - visibility
+      - cloud_cover
+      - wind_speed
+      - wind_bearing
+      - ozone
+      - precip_type
+      - precip_intensity
+      - precip_probability
+      - summary
+      - icon
+      - nearest_storm_distance
+  - platform: waqi
+    token: !secret waqi_token
+    locations:
+      - rotterdam
+    stations:
+      - Rotterdam
 
 binary_sensor:
   - platform: template
@@ -103,6 +129,25 @@ group:
       - sensor.time
       - sun.sun
       - sensor.moon
+  weather:
+    name: Weerbericht
+    entities:
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_icon
+      - sensor.waqi_rotterdam
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_apparent_temperature
+      - sensor.dark_sky_dew_point
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_visibility
+      - sensor.dark_sky_cloud_cover
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_ozone
+      - sensor.dark_sky_precip_type
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
   meter_readings:
     # dsmr slimme meter
     name: Meterstanden
