@@ -48,6 +48,11 @@ light:
   platform: hue
   host: !secret ip_hue
 
+# Text to speech
+tts:
+  - platform: google
+    language: 'nl'
+
 sensor:
   - platform: time_date
     display_options:
