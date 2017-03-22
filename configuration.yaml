@@ -43,3 +43,7 @@ logbook:
 
 # Track the sun
 sun:
+
+light:
+  platform: hue
+  host: !secret ip_hue
