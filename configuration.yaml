@@ -64,6 +64,27 @@ sensor:
   - platform: dsmr
     port: /dev/ttyP1
     dsmr_version: 4
+  - platform: cpuspeed
+  - platform: systemmonitor
+    resources:
+      - type: memory_use_percent
+      - type: processor_use
+      - type: disk_use_percent
+        arg: /
+      - type: last_boot
+      - type: since_last_boot
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+
+binary_sensor:
+  - platform: template
+    sensors:
+      cpu_high:
+        value_template: '{{ states.sensor.cpu_use.state | float > 50 }}'
+        friendly_name: 'CPU is hoog'
 
 notify:
   - name: pushover
@@ -91,6 +112,32 @@ group:
       - sensor.power_consumption_normal
       - sensor.gas_consumption
 
+  system:
+    # Systeeminformatie
+    name: Systeem
+    entities:
+      - sensor.cpu_use
+      - sensor.ram_use
+      - sensor.disk_use_
+      - binary_sensor.cpu_high
+      - binary_sensor.cpu_hot
+  speedtest:
+    name: Speedtest
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+  alerts:
+    name: Waarschuwingen
+    entities:
+      - alert.cpu_high
+      - alert.cpu_hot
+  automation:
+    name: Automatisering
+    entities:
+      - automation.download_laag
+
+
   ### VIEWS ###
 
   view_system:
@@ -99,3 +146,36 @@ group:
     entities:
       - group.system
       - group.speedtest
+  view_automation:
+    name: Automatisering
+    view: yes
+    entities:
+      - group.automation
+      - group.alert
+
+
+# ALERT component
+
+alert:
+  cpu_high:
+    name: CPU is hoog
+    entity_id: binary_sensor.cpu_high
+    state: 'on'
+    repeat: 15
+    can_acknowledge: True
+    skip_first: False
+    notifiers:
+      - Pushover
+
+# AUTOMATION component
+
+automation:
+  - alias: Download laag
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.speedtest_download
+      below: 30
+    action:
+      service: notify.Pushover
+      data:
+        message: "Waarschuwing: speedtest download onder 30Mbit/s"
