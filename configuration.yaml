@@ -65,6 +65,12 @@ sensor:
     port: /dev/ttyP1
     dsmr_version: 4
 
+notify:
+  - name: pushover
+    platform: pushover
+    api_key: !secret pushover_apikey
+    user_key: !secret pushover_userkey
+
 group:
 
   ### GROUPS ###
