@@ -49,16 +49,42 @@ light:
   host: !secret ip_hue
 
 sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+  - platform: worldclock
+    time_zone: Europe/Amsterdam
+  - platform: moon
   - platform: dsmr
     port: /dev/ttyP1
     dsmr_version: 4
 
 group:
-  # dsmr slimme meter
+
+  ### GROUPS ###
+
+  now:
+    name: Nu
+    entities:
+      - sensor.date
+      - sensor.time
+      - sun.sun
+      - sensor.moon
   meter_readings:
+    # dsmr slimme meter
     name: Meterstanden
     entities:
       - sensor.power_consumption
       - sensor.power_consumption_low
       - sensor.power_consumption_normal
       - sensor.gas_consumption
+
+  ### VIEWS ###
+
+  view_system:
+    name: Systeem
+    view: yes
+    entities:
+      - group.system
+      - group.speedtest
