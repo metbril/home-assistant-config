@@ -73,6 +73,11 @@ sensor:
         arg: /
       - type: last_boot
       - type: since_last_boot
+  - platform: command_line
+    name: CPU Temperature
+    command: "cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) }}'
   - platform: speedtest
     monitored_conditions:
       - ping
@@ -110,7 +115,12 @@ binary_sensor:
     sensors:
       cpu_high:
         value_template: '{{ states.sensor.cpu_use.state | float > 50 }}'
-        friendly_name: 'CPU is hoog'
+        friendly_name: 'CPU gebruik is hoog'
+  - platform: template
+    sensors:
+      cpu_hot:
+        value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
+        friendly_name: 'CPU temperatuur is hoog'
 
 notify:
   - name: pushover
