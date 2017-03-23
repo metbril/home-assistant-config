@@ -198,11 +198,6 @@ group:
       - device_tracker.robert_iphone
       - device_tracker.monique_iphone
       - device_tracker.bjorn_iphone
-  alerts:
-    name: Waarschuwingen
-    entities:
-      - alert.cpu_high
-      - alert.cpu_hot
   automation:
     name: Automatisering
     entities:
@@ -229,7 +224,16 @@ group:
 
 alert:
   cpu_high:
-    name: CPU is hoog
+    name: Gebruik CPU is hoog
+    entity_id: binary_sensor.cpu_high
+    state: 'on'
+    repeat: 15
+    can_acknowledge: True
+    skip_first: False
+    notifiers:
+      - pushover
+  cpu_hot:
+    name: Temperatuur CPU is hoog
     entity_id: binary_sensor.cpu_high
     state: 'on'
     repeat: 15
