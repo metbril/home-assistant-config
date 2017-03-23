@@ -64,7 +64,6 @@ sensor:
   - platform: dsmr
     port: /dev/ttyP1
     dsmr_version: 4
-  - platform: cpuspeed
   - platform: systemmonitor
     resources:
       - type: memory_use_percent
@@ -186,6 +185,7 @@ group:
       - sensor.disk_use_
       - binary_sensor.cpu_high
       - binary_sensor.cpu_hot
+      - updater.updater
   speedtest:
     name: Speedtest
     entities:
@@ -207,7 +207,7 @@ group:
     name: Automatisering
     entities:
       - automation.download_laag
-
+      - automation.update_available_notification
 
   ### VIEWS ###
 
@@ -250,3 +250,11 @@ automation:
       service: notify.Pushover
       data:
         message: "Waarschuwing: speedtest download onder 30Mbit/s"
+  - alias: 'Update Available Notification'
+    trigger:
+      platform: state
+      entity_id: updater.updater
+    action:
+      service: notify.pushover
+      data:
+        message: 'Update voor Home Assistant beschikbaar.'
