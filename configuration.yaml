@@ -114,12 +114,12 @@ binary_sensor:
     sensors:
       cpu_high:
         value_template: '{{ states.sensor.cpu_use.state | float > 50 }}'
-        friendly_name: 'CPU gebruik is hoog'
+        friendly_name: 'CPU hoog'
   - platform: template
     sensors:
       cpu_hot:
         value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
-        friendly_name: 'CPU temperatuur is hoog'
+        friendly_name: 'CPU heet'
 
 notify:
   - name: pushover
@@ -236,7 +236,7 @@ alert:
     can_acknowledge: True
     skip_first: False
     notifiers:
-      - Pushover
+      - pushover
 
 # AUTOMATION component
 
@@ -247,9 +247,9 @@ automation:
       entity_id: sensor.speedtest_download
       below: 30
     action:
-      service: notify.Pushover
+      service: notify.pushover
       data:
-        message: "Waarschuwing: speedtest download onder 30Mbit/s"
+        message: "Waarschuwing: speedtest download onder 30Mbit/s."
   - alias: 'Update Available Notification'
     trigger:
       platform: state
