@@ -75,3 +75,4 @@ alert: !include alert.yaml
 # AUTOMATION component
 
 automation: !include automation.yaml
+script: !include script.yaml
