@@ -1,4 +1,5 @@
-purge_days: 3
+db_url: !secret mysql
+purge_days: 7 # keep 1 week
 exclude:
   domains:
     - weblink
