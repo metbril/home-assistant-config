@@ -69,12 +69,14 @@
   view_system:
     name: Systeem
     view: yes
+    icon: mdi:server
     entities:
       - group.system
       - group.speedtest
   view_automation:
     name: Automatisering
     view: yes
+    icon: mdi:auto-fix
     entities:
       - group.automation
       - group.alert
