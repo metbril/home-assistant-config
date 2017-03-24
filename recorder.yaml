@@ -1,0 +1,25 @@
+purge_days: 3
+exclude:
+  domains:
+    - weblink
+    - updater
+    - automation
+    - alert
+    - device_tracker
+    - group
+    - media_player
+    - sun
+    - zone
+  entities:
+    - sensor.date
+    - sensor.time
+    - sensor.last_boot
+    - sensor.since_last_boot
+    - sensor.power_production
+    - sensor.power_production_low
+    - sensor.power_production_high
+    - sensor.power_tariff
+    - sensor.worldclock_sensor
+    - binary_sensor.cpu_high
+    - binary_sensor.cpu_hot
+    - sensor.moon
