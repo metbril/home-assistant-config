@@ -1,0 +1,9 @@
+# not used
+sensor.power_production:
+  hidden: yes
+sensor.power_production_low:
+  hidden: yes
+sensor.power_production_high:
+  hidden: yes
+sensor.hourly_gas_consumption:
+  hidden: yes
