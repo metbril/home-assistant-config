@@ -1,0 +1,80 @@
+
+  ### GROUPS ###
+
+  now:
+    name: Nu
+    entities:
+      - sensor.date
+      - sensor.time
+      - sun.sun
+      - sensor.moon
+  weather:
+    name: Weerbericht
+    entities:
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_icon
+      - sensor.waqi_rotterdam
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_apparent_temperature
+      - sensor.dark_sky_dew_point
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_visibility
+      - sensor.dark_sky_cloud_cover
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_ozone
+      - sensor.dark_sky_precip_type
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
+  meter_readings:
+    # dsmr slimme meter
+    name: Meterstanden
+    entities:
+      - sensor.power_consumption
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.gas_consumption
+
+  system:
+    # Systeeminformatie
+    name: Systeem
+    entities:
+      - sensor.cpu_use
+      - sensor.ram_use
+      - sensor.disk_use_
+      - binary_sensor.cpu_high
+      - binary_sensor.cpu_hot
+      - updater.updater
+  speedtest:
+    name: Speedtest
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+  family:
+    name: Familie
+    entities:
+      - device_tracker.robert_iphone
+      - device_tracker.monique_iphone
+      - device_tracker.bjorn_iphone
+  automation:
+    name: Automatisering
+    entities:
+      - automation.download_laag
+      - automation.update_available_notification
+
+  ### VIEWS ###
+
+  view_system:
+    name: Systeem
+    view: yes
+    entities:
+      - group.system
+      - group.speedtest
+  view_automation:
+    name: Automatisering
+    view: yes
+    entities:
+      - group.automation
+      - group.alert

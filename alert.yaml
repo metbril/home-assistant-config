@@ -1,0 +1,18 @@
+cpu_high:
+  name: Gebruik CPU is hoog
+  entity_id: binary_sensor.cpu_high
+  state: 'on'
+  repeat: 15
+  can_acknowledge: True
+  skip_first: False
+  notifiers:
+    - pushover
+cpu_hot:
+  name: Temperatuur CPU is hoog
+  entity_id: binary_sensor.cpu_high
+  state: 'on'
+  repeat: 15
+  can_acknowledge: True
+  skip_first: False
+  notifiers:
+    - pushover

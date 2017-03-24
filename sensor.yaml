@@ -1,0 +1,54 @@
+- platform: time_date
+  display_options:
+    - 'date'
+    - 'time'
+- platform: worldclock
+  time_zone: Europe/Amsterdam
+- platform: moon
+- platform: dsmr
+  port: /dev/ttyP1
+  dsmr_version: 4
+- platform: systemmonitor
+  resources:
+    - type: memory_use_percent
+    - type: processor_use
+    - type: disk_use_percent
+      arg: /
+    - type: last_boot
+    - type: since_last_boot
+- platform: command_line
+  name: CPU Temperature
+  command: "cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) }}'
+- platform: speedtest
+  monitored_conditions:
+    - ping
+    - download
+    - upload
+- platform: darksky
+  api_key: !secret darksky_apikey
+  units: si
+  monitored_conditions:
+    - temperature
+    - apparent_temperature
+    - dew_point
+    - humidity
+    - pressure
+    - visibility
+    - cloud_cover
+    - wind_speed
+    - wind_bearing
+    - ozone
+    - precip_type
+    - precip_intensity
+    - precip_probability
+    - summary
+    - icon
+    - nearest_storm_distance
+- platform: waqi
+  token: !secret waqi_token
+  locations:
+    - rotterdam
+  stations:
+    - Rotterdam
