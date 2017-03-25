@@ -4,6 +4,7 @@ known_devices.yaml
 phue.conf
 deps/
 tts/
+custom_components/
 
 # MacOS
 .DS_Store
