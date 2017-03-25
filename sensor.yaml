@@ -52,3 +52,5 @@
     - rotterdam
   stations:
     - Rotterdam
+- platform: rfxtrx
+  automatic_add: True

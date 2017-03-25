@@ -1,4 +1,2 @@
-- platform: hue
-  host: !secret ip_hue
 - platform: rfxtrx
   automatic_add: True
