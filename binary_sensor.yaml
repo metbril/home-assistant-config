@@ -1,7 +1,7 @@
 - platform: template
   sensors:
     cpu_high:
-      value_template: '{{ states.sensor.cpu_use.state | float > 50 }}'
+      value_template: '{{ states.sensor.cpu_use.state | float > 80 }}'
       friendly_name: 'CPU hoog'
 - platform: template
   sensors:
