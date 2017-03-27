@@ -7,3 +7,17 @@ sensor.power_production_normal:
   hidden: yes
 sensor.hourly_gas_consumption:
   hidden: yes
+
+sensor.pws_th_humidity:
+  friendly_name: "Luchtvochtigheid"
+  icon: mdi:water-percent
+sensor.pws_th_temperature:
+  friendly_name: "Temperatuur"
+sensor.pws_wind_wind_direction:
+  friendly_name: "Windrichting"
+  icon: mdi:compass
+  unit_of_measurement: "º"
+sensor.pws_rain_rain_rate:
+  friendly_name: "Neerslag"
+  icon: mdi:weather-rainy
+  unit_of_measurement: "mm/u"
