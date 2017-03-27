@@ -2,7 +2,7 @@ alias: 'Inschakelen schemerverlichting'
 trigger:
   platform: sun
   event: sunset
-  offset: "00:30:00"
+  offset: "-00:30:00"
 action:
   service: notify.pushover
   data:
