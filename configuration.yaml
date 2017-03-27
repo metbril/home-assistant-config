@@ -5,10 +5,10 @@ homeassistant:
   elevation: !secret home_ele
   unit_system: metric
   time_zone: Europe/Amsterdam
-  customize: !include customize.yaml
+  customize: !include configuration/customize.yaml
 
-http: !include http.yaml
-group: !include group.yaml
+http: !include configuration/http.yaml
+group: !include configuration/group.yaml
 config:
 updater:
 frontend:
@@ -17,7 +17,7 @@ conversation:
 
 history:
 logbook:
-recorder: !include recorder.yaml
+recorder: !include configuration/recorder.yaml
 
 logger:
   default: warn
@@ -28,15 +28,15 @@ logger:
     homeassistant.components.sensor.rfxtrx: debug
 
 sun:
-tts: !include tts.yaml
-light: !include light.yaml
-rfxtrx: !include rfxtrx.yaml
-sensor: !include sensor.yaml
-switch: !include switch.yaml
-binary_sensor: !include binary_sensor.yaml
-device_tracker: !include device_tracker.yaml
+tts: !include configuration/tts.yaml
+light: !include configuration/light.yaml
+rfxtrx: !include configuration/rfxtrx.yaml
+sensor: !include configuration/sensor.yaml
+switch: !include configuration/switch.yaml
+binary_sensor: !include configuration/binary_sensor.yaml
+device_tracker: !include configuration/device_tracker.yaml
 
-alert: !include alert.yaml
-notify: !include notify.yaml
-script: !include script.yaml
+alert: !include configuration/alert.yaml
+notify: !include configuration/notify.yaml
+script: !include configuration/script.yaml
 automation: !include_dir_list configuration/automation/
