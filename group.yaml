@@ -81,6 +81,13 @@
 
   ### VIEWS ###
 
+  living_view:
+    name: Woonkamer
+    view: yes
+    icon: mdi:sofa
+    entities:
+      - media_player.apple_tv_van_bregt
+      - media_player.woonkamer
   garage_view:
     name: Garage
     view: yes
