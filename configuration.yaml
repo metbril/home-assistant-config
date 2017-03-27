@@ -20,6 +20,7 @@ logbook:
 recorder: !include recorder.yaml
 
 logger:
+  default: warn
   logs:
     homeassistant.components.rfxtrx: debug
     homeassistant.components.switch.rfxtrx: debug
