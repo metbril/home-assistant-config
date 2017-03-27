@@ -24,6 +24,7 @@ tts: !include tts.yaml
 light: !include light.yaml
 rfxtrx: !include rfxtrx.yaml
 sensor: !include sensor.yaml
+switch: !include switch.yaml
 binary_sensor: !include binary_sensor.yaml
 device_tracker: !include device_tracker.yaml
 

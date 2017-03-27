@@ -21,3 +21,7 @@ sensor.pws_rain_rain_rate:
   friendly_name: "Neerslag"
   icon: mdi:weather-rainy
   unit_of_measurement: "mm/u"
+
+switch.motion_garage:
+  friendly_name: "Beweging garage"
+  icon: mdi:run-fast

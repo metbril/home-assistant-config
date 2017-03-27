@@ -73,7 +73,20 @@
       - sensor.pws_rain_rain_rate
       - sensor.pws_wind_wind_direction
 
+  garage:
+    name: Garage
+    entities:
+      - switch.motion_garage
+      - switch.power_garage_door
+
   ### VIEWS ###
+
+  garage_view:
+    name: Garage
+    view: yes
+    icon: mdi:garage
+    entities:
+      - group.garage
 
   view_system:
     name: Systeem

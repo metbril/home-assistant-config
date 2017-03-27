@@ -1,2 +1,6 @@
 - platform: rfxtrx
   automatic_add: True
+  devices:
+    0b110010011600020a010f70:
+      name: Motion Garage
+      fire_event: True
