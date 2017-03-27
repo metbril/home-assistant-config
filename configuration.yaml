@@ -19,6 +19,13 @@ history:
 logbook:
 recorder: !include recorder.yaml
 
+logger:
+  logs:
+    homeassistant.components.rfxtrx: debug
+    homeassistant.components.switch.rfxtrx: debug
+    homeassistant.components.light.rfxtrx: debug
+    homeassistant.components.sensor.rfxtrx: debug
+
 sun:
 tts: !include tts.yaml
 light: !include light.yaml
