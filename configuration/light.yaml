@@ -1,0 +1,11 @@
+# Prefix:
+# 0b is the length of the datapacket
+# 11 means Lighting2
+# 00 means subtype AC
+
+# 0b 11 00 310 0bb136201010f60   0bb13621
+
+- platform: hue
+  host: !secret ip_hue
+- platform: rfxtrx
+  automatic_add: True
