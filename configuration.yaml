@@ -39,4 +39,4 @@ device_tracker: !include device_tracker.yaml
 alert: !include alert.yaml
 notify: !include notify.yaml
 script: !include script.yaml
-automation: !include automation.yaml
+automation: !include_dir_list configuration/automation/
