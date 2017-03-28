@@ -10,4 +10,4 @@ trigger:
 action:
   service: notify.pushover
   data_template:
-    message: "Gasverbruik is nu {{ states.sensor.gas_consumption }} m3"
+    message: "Gasverbruik is nu {{ states.sensor.gas_consumption.state }} m3"
