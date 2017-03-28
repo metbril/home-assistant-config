@@ -1,0 +1,13 @@
+# gas meter reading usually updated around 0:06
+alias: Mindergas at midnight
+hide_entity: no # default no
+trigger:
+  platform: time
+  # run daily at 00:05:00
+  hours: 00
+  minutes: 15
+  seconds: 00
+action:
+  service: notify.pushover
+  data_template:
+    message: "Gasverbruik is nu {{ states.sensor.gas_consumption.state }} m3"
