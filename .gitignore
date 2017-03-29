@@ -6,6 +6,9 @@ deps/
 tts/
 custom_components/
 
+#script contains secrets
+scripts/mindergas.py
+
 # MacOS
 .DS_Store
 ._*

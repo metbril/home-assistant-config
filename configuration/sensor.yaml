@@ -68,3 +68,12 @@
       name: PWS Wind
       data_type:
         - Wind direction
+- platform: rest
+  # https://www.mindergas.nl/member/api
+  name: rest_mindergas
+  resource: https://www.mindergas.nl/api/gas_meter_readings
+  method: POST
+  payload: '{ "date": "{{ (as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading": {{ states.sensor.gas_consumption.state }} }'
+  headers:
+    Content-Type: application/json
+    AUTH-TOKEN: !secret mindergas_token

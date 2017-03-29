@@ -1,5 +1,5 @@
 # gas meter reading usually updated around 0:06
-alias: Mindergas at midnight
+alias: Verstuur gasverbruik
 hide_entity: no # default no
 trigger:
   platform: time
@@ -8,6 +8,4 @@ trigger:
   minutes: 15
   seconds: 00
 action:
-  service: notify.pushover
-  data_template:
-    message: "Gasverbruik is nu {{ states.sensor.gas_consumption.state }} m3"
+  service: script.mindergas

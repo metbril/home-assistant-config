@@ -34,9 +34,10 @@ rfxtrx: !include configuration/rfxtrx.yaml
 sensor: !include configuration/sensor.yaml
 switch: !include configuration/switch.yaml
 binary_sensor: !include configuration/binary_sensor.yaml
+shell_command: !include configuration/shell_command.yaml
 device_tracker: !include configuration/device_tracker.yaml
 
 alert: !include configuration/alert.yaml
 notify: !include configuration/notify.yaml
-script: !include configuration/script.yaml
+script: !include_dir_named configuration/script/
 automation: !include_dir_list configuration/automation/
