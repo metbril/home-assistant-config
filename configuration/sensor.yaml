@@ -45,7 +45,6 @@
     - precip_probability
     - summary
     - icon
-    - nearest_storm_distance
 - platform: waqi
   token: !secret waqi_token
   locations:

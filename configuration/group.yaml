@@ -20,11 +20,12 @@
       - sensor.dark_sky_humidity
       - sensor.dark_sky_pressure
       - sensor.dark_sky_visibility
-      - sensor.dark_sky_cloud_cover
+      - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_wind_speed
       - sensor.dark_sky_wind_bearing
       - sensor.dark_sky_ozone
       - sensor.dark_sky_precip_type
+      - sensor.dark_sky_precip
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_precip_probability
   meter_readings:
