@@ -80,6 +80,19 @@
       - switch.motion_garage
       - switch.power_garage_door
 
+  living_lights:
+    name: Verlichting Woonkamer
+    entities:
+      #kaku
+      - light.kaku_wall_switch_left
+      - light.kaku_wall_switch_right
+      - light.kaku_apa3_1500r_2
+      #hue
+      - light.dressoirkast
+      - light.leeslamp
+      - light.tv_meubel
+      - light.hoge_kast
+
   ### VIEWS ###
 
   living_view:
@@ -87,6 +100,7 @@
     view: yes
     icon: mdi:sofa
     entities:
+      - group.living_lights
       - media_player.apple_tv_van_bregt
       - media_player.woonkamer
   garage_view:
