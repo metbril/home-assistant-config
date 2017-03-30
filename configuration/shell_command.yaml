@@ -1,1 +1,1 @@
-mindergas: 'python /home/homeassistant/.homeassistant/scripts/mindergas.py'
+mindergas: '/srv/homeassistant/bin/python /home/homeassistant/.homeassistant/scripts/mindergas.py'
