@@ -25,3 +25,14 @@ sensor.pws_rain_rain_rate:
 switch.motion_garage:
   friendly_name: "Beweging garage"
   icon: mdi:run-fast
+
+### LIGHTS
+light.kaku_wall_switch_left:
+  friendly_name: "Plafond eettafel"
+  assumed_state: no
+light.kaku_wall_switch_right:
+  friendly_name: "Plafond sofa"
+  assumed_state: no
+light.kaku_apa3_1500r_2:
+  friendly_name: "Staande lamp bureau"
+  assumed_state: no
