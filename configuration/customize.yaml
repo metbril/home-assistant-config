@@ -33,6 +33,6 @@ light.kaku_wall_switch_left:
 light.kaku_wall_switch_right:
   friendly_name: "Plafond sofa"
   assumed_state: no
-light.kaku_apa3_1500r_2:
+light.living_desk:
   friendly_name: "Staande lamp bureau"
   assumed_state: no

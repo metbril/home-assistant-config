@@ -88,7 +88,7 @@
       #kaku
       - light.kaku_wall_switch_left
       - light.kaku_wall_switch_right
-      - light.kaku_apa3_1500r_2
+      - light.living_desk
       #hue
       - light.dressoirkast
       - light.leeslamp

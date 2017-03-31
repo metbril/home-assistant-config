@@ -4,6 +4,4 @@
     event: sunset
     offset: "-00:30:00"
   action:
-    service: notify.pushover
-    data:
-      message: 'Tijd om de verlichting in te schakelen'
+    service: script.dusk
