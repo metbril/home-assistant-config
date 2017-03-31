@@ -7,7 +7,7 @@ tts/
 custom_components/
 
 #script contains secrets
-scripts/mindergas.py
+bin/mindergas.py
 
 # MacOS
 .DS_Store
