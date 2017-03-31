@@ -13,7 +13,7 @@ scripts/mindergas.py
 .DS_Store
 ._*
 
-
+*.log
 
 # sane defaults from cookbook
 
