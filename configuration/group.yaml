@@ -48,6 +48,8 @@
       - sensor.cpu_temperature
       - binary_sensor.cpu_high
       - binary_sensor.cpu_hot
+      - sensor.last_boot
+      - sensor.since_last_boot
       - updater.updater
   speedtest:
     name: Speedtest
