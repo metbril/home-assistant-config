@@ -10,9 +10,11 @@
       name: KAKU Remote 2
     0b11001000bb136203010f60: # 0bb13623 kaku remote 3
       name: KAKU Remote 3
-    # not paired yet 
+    # not paired yet
     # 0b1100100f05e8120a010f60:
     #  name: Diner Ceiling
     # not paired yet
     # 0b1100100f05e8120b010f60:
     #  name: Sofa Ceiling
+    0a140f01000b5501010f60: # lighting5 it 2901.01 On
+      name: Power Garage Door

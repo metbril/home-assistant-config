@@ -25,6 +25,10 @@ sensor.pws_rain_rain_rate:
 switch.motion_garage:
   friendly_name: "Beweging garage"
   icon: mdi:run-fast
+switch.power_garage_door:
+  friendly_name: "Spanning garagedeur"
+  assumed_state: no
+  icon: mdi:power-plug
 
 ### LIGHTS
 light.kaku_wall_switch_left:
