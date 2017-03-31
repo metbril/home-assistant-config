@@ -14,6 +14,9 @@ exclude:
   entities:
     - sensor.date
     - sensor.time
+    - sensor.time_of_day
+    - sensor.worldclock_sensor
+    - sensor.moon
     - sensor.last_boot
     - sensor.since_last_boot
     - sensor.power_production
@@ -21,7 +24,5 @@ exclude:
     - sensor.power_production_normal
     - sensor.power_tariff
     - sensor.hourly_gas_consumption
-    - sensor.worldclock_sensor
     - binary_sensor.cpu_high
     - binary_sensor.cpu_hot
-    - sensor.moon

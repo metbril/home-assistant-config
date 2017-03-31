@@ -6,6 +6,7 @@
     entities:
       - sensor.date
       - sensor.time
+      - sensor.time_of_day
       - sun.sun
       - sensor.moon
   weather:
