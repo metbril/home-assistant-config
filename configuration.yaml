@@ -28,16 +28,20 @@ logger:
     homeassistant.components.sensor.rfxtrx: debug
 
 sun:
-tts: !include configuration/tts.yaml
+
+### INDIVIDUAL FILES
+alert: !include configuration/alert.yaml
+binary_sensor: !include configuration/binary_sensor.yaml
+device_tracker: !include configuration/device_tracker.yaml
 light: !include configuration/light.yaml
+notify: !include configuration/notify.yaml
 rfxtrx: !include configuration/rfxtrx.yaml
 sensor: !include configuration/sensor.yaml
-switch: !include configuration/switch.yaml
-binary_sensor: !include configuration/binary_sensor.yaml
 shell_command: !include configuration/shell_command.yaml
-device_tracker: !include configuration/device_tracker.yaml
+switch: !include configuration/switch.yaml
+tts: !include configuration/tts.yaml
 
-alert: !include configuration/alert.yaml
-notify: !include configuration/notify.yaml
-script: !include_dir_named configuration/script/
-automation: !include_dir_list configuration/automation/
+### MERGED FILES
+automation: !include_dir_merge_list configuration/automation/
+scene: !include_dir_merge_list configuration/scene
+script: !include_dir_merge_named configuration/script/

@@ -1,13 +1,14 @@
 # publish to Mindergas
-alias: Verstuur gasverbruik
-sequence:
-  - service: shell_command.mindergas
-  - service: logbook.log
-    data:
-      name: Gasverbruik
-      message: is verstuurd
-      entity_id: sensor.gas_consumption
-      domain: sensor
-  - service: notify.pushover
-    data_template:
-      message: "Gasverbruik ({{ states.sensor.gas_consumption.state}} m3) is verstuurd naar mindergas.nl"
+mindergas:
+  alias: Verstuur gasverbruik
+  sequence:
+    - service: shell_command.mindergas
+    - service: logbook.log
+      data:
+        name: Gasverbruik
+        message: is verstuurd
+        entity_id: sensor.gas_consumption
+        domain: sensor
+    - service: notify.pushover
+      data_template:
+        message: "Gasverbruik ({{ states.sensor.gas_consumption.state}} m3) is verstuurd naar mindergas.nl"

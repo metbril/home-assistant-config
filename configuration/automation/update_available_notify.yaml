@@ -1,8 +1,8 @@
-alias: 'Update Available Notification'
-trigger:
-  platform: state
-  entity_id: updater.updater
-action:
-  service: notify.pushover
-  data:
-    message: 'Update voor Home Assistant beschikbaar.'
+- alias: 'Update Available Notification'
+  trigger:
+    platform: state
+    entity_id: updater.updater
+  action:
+    service: notify.pushover
+    data:
+      message: 'Update voor Home Assistant beschikbaar.'

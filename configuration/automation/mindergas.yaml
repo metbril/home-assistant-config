@@ -1,11 +1,11 @@
 # gas meter reading usually updated around 0:06
-alias: Verstuur gasverbruik
-hide_entity: no # default no
-trigger:
-  platform: time
-  # run daily at 00:05:00
-  hours: 00
-  minutes: 15
-  seconds: 00
-action:
-  service: script.mindergas
+- alias: Verstuur gasverbruik
+  hide_entity: no # default no
+  trigger:
+    platform: time
+    # run daily at 00:05:00
+    hours: 00
+    minutes: 15
+    seconds: 00
+  action:
+    service: script.mindergas
