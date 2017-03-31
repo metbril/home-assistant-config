@@ -10,15 +10,15 @@
         {% set next_setting = as_timestamp(states.sun.sun.attributes.next_setting) %}
         {% set next_dusk = (next_setting - (30*60)) %}
         {% set night_start  = (midnight_start + (23*3600)) %}
-        {% if (now > morning_start) and (next_rising < tomorrow_start) and (now < next_rising) %}
+        {% if (now >= morning_start) and (now < next_rising) and (next_rising < tomorrow_start)  %}
           ochtend
-        {% elif (next_rising > tomorrow_start) and (now < next_dusk) %}
+        {% elif (next_rising > tomorrow_start) and (now < next_dusk) and (next_dusk < tomorrow_start) %}
           dag
-        {% elif (next_dusk > tomorrow_start) and (next_setting < tomorrow_start) and (now < night_start) %}
+        {% elif (next_dusk > tomorrow_start) and (now < night_start) and (next_setting < tomorrow_start) %}
           scherming
-        {% elif (next_dusk > tomorrow_start) and (next_setting < tomorrow_start) and (now < next_rising) %}
-          avond
         {% elif (next_setting > tomorrow_start) and (now < night_start) %}
+          avond
+        {% elif (now >= night_start) %}
           nacht
         {% else %}
           onbekend
