@@ -52,6 +52,7 @@
       - sensor.last_boot
       - sensor.since_last_boot
       - updater.updater
+      - sensor.bad_login
   speedtest:
     name: Speedtest
     entities:
@@ -118,6 +119,7 @@
     view: yes
     icon: mdi:server
     entities:
+      - sensor.bad_login
       - group.system
       - group.speedtest
   view_automation:

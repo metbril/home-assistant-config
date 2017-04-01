@@ -22,6 +22,10 @@ sensor.pws_rain_rain_rate:
   icon: mdi:weather-rainy
   unit_of_measurement: "mm/u"
 
+sensor.bad_login:
+  friendly_name: "Mislukte inlogpogingen"
+  icon: mdi:alert
+
 switch.motion_garage:
   friendly_name: "Beweging garage"
   icon: mdi:run-fast
