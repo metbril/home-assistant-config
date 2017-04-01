@@ -29,6 +29,10 @@ logger:
 
 sun:
 
+media_player:
+  - platform: sonos
+    hosts: !secret sonos_ip
+
 ### INDIVIDUAL FILES
 alert: !include alert.yaml
 binary_sensor: !include binary_sensor.yaml
