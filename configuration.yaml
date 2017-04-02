@@ -5,10 +5,10 @@ homeassistant:
   elevation: !secret home_ele
   unit_system: metric
   time_zone: Europe/Amsterdam
-  customize: !include customize.yaml
+  customize: !include include/customize.yaml
 
-http: !include http.yaml
-group: !include group.yaml
+http: !include include/http.yaml
+group: !include include/group.yaml
 config:
 updater:
 frontend:
@@ -17,7 +17,7 @@ conversation:
 
 history:
 logbook:
-recorder: !include recorder.yaml
+recorder: !include include/recorder.yaml
 
 logger:
   default: warn
@@ -34,18 +34,18 @@ media_player:
     hosts: !secret sonos_ip
 
 ### INDIVIDUAL FILES
-alert: !include alert.yaml
-binary_sensor: !include binary_sensor.yaml
-device_tracker: !include device_tracker.yaml
-light: !include light.yaml
-notify: !include notify.yaml
-rfxtrx: !include rfxtrx.yaml
+alert: !include include/alert.yaml
+binary_sensor: !include include/binary_sensor.yaml
+device_tracker: !include include/device_tracker.yaml
+light: !include include/light.yaml
+notify: !include include/notify.yaml
+rfxtrx: !include include/rfxtrx.yaml
 sensor: !include_dir_merge_list sensor
-shell_command: !include shell_command.yaml
-switch: !include switch.yaml
-tts: !include tts.yaml
+shell_command: !include include/shell_command.yaml
+switch: !include include/switch.yaml
+tts: !include include/tts.yaml
 
 ### MERGED FILES
-automation: !include_dir_merge_list automation/
-scene: !include_dir_merge_list scene
-script: !include_dir_merge_named script/
+automation: !include_dir_merge_list include/automation/
+scene: !include_dir_merge_list include/scene
+script: !include_dir_merge_named include/script/
