@@ -8,7 +8,7 @@
 - platform: hue
   host: !secret ip_hue
 - platform: rfxtrx
-  automatic_add: True
+  # automatic_add: True
   devices:
     0b1100200099acb60b010f70: # 099acb611 kaku wall left
       name: KAKU Wall Switch Left
