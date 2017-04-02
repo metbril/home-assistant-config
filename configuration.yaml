@@ -9,6 +9,8 @@ homeassistant:
 
 http:
   api_password: !secret http_password
+  ip_ban_enabled: yes
+  login_attempts_threshold: 3
 
 config:
 updater:
