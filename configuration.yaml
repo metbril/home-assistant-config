@@ -21,7 +21,7 @@ logbook:
 
 logger:
   default: warn
-  logs:
+  # logs:
     # homeassistant.components.rfxtrx: debug
 
 sun:
