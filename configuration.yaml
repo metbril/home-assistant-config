@@ -22,10 +22,7 @@ logbook:
 logger:
   default: warn
   logs:
-    homeassistant.components.rfxtrx: debug
-    homeassistant.components.switch.rfxtrx: debug
-    homeassistant.components.light.rfxtrx: debug
-    homeassistant.components.sensor.rfxtrx: debug
+    # homeassistant.components.rfxtrx: debug
 
 sun:
 
