@@ -1,12 +1,16 @@
 # home assistant specific
 secrets.yaml
 known_devices.yaml
-phue.conf
+ip_bans.yaml
+
+#folders
+www/
+lib/
 deps/
 tts/
 custom_components/
 
-#script contains secrets
+# this script contains secrets
 bin/mindergas.py
 
 # MacOS
@@ -22,20 +26,16 @@ bin/mindergas.py
 *.csr
 *.crt
 *.key
-www
 OZW_Log.txt
 home-assistant.log
 home-assistant_v2.db
 *.db-journal
-lib
-deps
-tts
-secrets.yaml
-known_devices.yaml
+
 *.conf
 plex.conf
 phue.conf
 harmony_media_room.conf
 pyozw.sqlite
+
 .*
 !/.gitignore
