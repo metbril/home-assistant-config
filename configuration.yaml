@@ -40,7 +40,6 @@ tts:
 ### MERGE NAMED
 alert: !include_dir_merge_named include/alert
 group: !include_dir_merge_named include/group
-recorder: !include_dir_merge_named include/recorder
 script: !include_dir_merge_named include/script
 shell_command: !include_dir_merge_named include/shell_command
 
@@ -54,3 +53,6 @@ notify: !include_dir_merge_list include/notify
 scene: !include_dir_merge_list include/scene
 sensor: !include_dir_merge_list include/sensor
 switch: !include_dir_merge_list include/switch
+
+### INDIVIDUAL FILES
+recorder: !include include/recorder.yaml

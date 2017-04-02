@@ -1,0 +1,41 @@
+# cannot be split into multiple files, because key can only be used once.
+db_url: !secret mysql
+purge_days: 7 # keep 1 week
+exclude:
+  domains:
+    - weblink
+    - updater
+    - automation
+    - alert
+    - device_tracker
+    - group
+    - media_player
+    - sun
+    - zone
+  entities:
+    - sensor.date
+    - sensor.time
+    - sensor.worldclock_sensor
+    - sensor.moon
+    - sensor.last_boot
+    - sensor.since_last_boot
+    - binary_sensor.cpu_high
+    - binary_sensor.cpu_hot
+    # dsmr
+    - sensor.power_production
+    - sensor.power_production_low
+    - sensor.power_production_normal
+    - sensor.power_tariff
+    - sensor.hourly_gas_consumption
+    # darksky
+    - sensor.dark_sky_apparent_temperature
+    - sensor.dark_sky_cloud_coverage
+    - sensor.dark_sky_dew_point
+    - sensor.dark_sky_icon
+    - sensor.dark_sky_summary
+    - sensor.dark_sky_visibility
+    - sensor.dark_sky_wind_bearing
+    - sensor.dark_sky_precip_type
+    - sensor.dark_sky_precip
+    - sensor.dark_sky_precip_intensity
+    - sensor.dark_sky_precip_probability
