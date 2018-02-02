@@ -1,6 +1,7 @@
 # cannot be split into multiple files, because key can only be used once.
-db_url: !secret mysql
-purge_days: 7 # keep 1 week
+#db_url: !secret mysql
+purge_interval: 1
+purge_keep_days: 7 # keep 1 week
 exclude:
   domains:
     - weblink
