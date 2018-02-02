@@ -8,12 +8,16 @@ now:
     - sensor.time_of_day
     - sun.sun
     - sensor.moon
+health:
+  name: Gezondheid
+  entities:
+    - sensor.waqi_rotterdam
+    - sensor.dark_sky_ozone
 weather:
   name: Weerbericht
   entities:
     - sensor.dark_sky_summary
     - sensor.dark_sky_icon
-    - sensor.waqi_rotterdam
     - sensor.dark_sky_temperature
     - sensor.dark_sky_apparent_temperature
     - sensor.dark_sky_dew_point
@@ -23,7 +27,6 @@ weather:
     - sensor.dark_sky_cloud_coverage
     - sensor.dark_sky_wind_speed
     - sensor.dark_sky_wind_bearing
-    - sensor.dark_sky_ozone
     - sensor.dark_sky_precip_type
     - sensor.dark_sky_precip
     - sensor.dark_sky_precip_intensity

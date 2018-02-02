@@ -44,3 +44,10 @@ light.kaku_wall_switch_right:
 light.living_desk:
   friendly_name: "Staande lamp bureau"
   assumed_state: no
+
+sensor.waqi_rotterdam:
+  friendly_name: 'Luchtkwaliteit'
+  icon: mdi:factory
+sensor.dark_sky_ozone:
+  friendly_name: 'Ozon'
+  icon: 'weather-sunny'
