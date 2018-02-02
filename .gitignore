@@ -10,6 +10,8 @@ deps/
 tts/
 custom_components/
 
+ssh/
+
 # this script contains secrets
 bin/mindergas.py
 
