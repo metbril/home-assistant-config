@@ -1,8 +1,7 @@
 - platform: asuswrt
-  host: !secret router_host
-  username: !secret router_username
-  # password: !secret router_password
-  ssh_key: /config/ssh/id_rsa
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  ssh_key: /config/ssh/id_rsa # restrict permissions to '700' for ssh to work
   track_new_devices: no
   consider_home: 180
   interval_seconds: 12
