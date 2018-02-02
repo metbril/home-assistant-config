@@ -14,6 +14,8 @@
     - type: processor_use
     - type: disk_use_percent
       arg: /
+    - type: disk_free
+      arg: /
     - type: last_boot
     - type: since_last_boot
 - platform: command_line
