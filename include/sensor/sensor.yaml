@@ -27,7 +27,7 @@
     - download
     - upload
 - platform: darksky
-  api_key: !secret darksky_apikey
+  api_key: !secret darksky_api_key
   units: si
   monitored_conditions:
     - temperature

@@ -6,7 +6,7 @@
 # 0b 11 00 310 0bb1362 01 010f60   0bb13621
 
 - platform: hue
-  host: !secret ip_hue
+  host: !secret hue_host
 - platform: rfxtrx
   # automatic_add: True
   devices:

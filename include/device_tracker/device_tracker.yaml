@@ -1,7 +1,8 @@
 - platform: asuswrt
   host: !secret router_host
-  username: !secret router_user
-  password: !secret router_password
+  username: !secret router_username
+  # password: !secret router_password
+  ssh_key: /config/ssh/id_rsa
   track_new_devices: no
   consider_home: 180
   interval_seconds: 12

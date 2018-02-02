@@ -1,8 +1,8 @@
 homeassistant:
   name: Start
-  latitude: !secret home_lat
-  longitude: !secret home_lon
-  elevation: !secret home_ele
+  latitude: !secret home_latitude
+  longitude: !secret home_longitude
+  elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Amsterdam
   customize: !include_dir_merge_named include/customize
