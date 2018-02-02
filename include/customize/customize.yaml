@@ -50,4 +50,4 @@ sensor.waqi_rotterdam:
   icon: mdi:factory
 sensor.dark_sky_ozone:
   friendly_name: 'Ozon'
-  icon: 'weather-sunny'
+  icon: mdi:weather-sunny
