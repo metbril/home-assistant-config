@@ -8,6 +8,14 @@
       arg: /
     - type: last_boot
     - type: since_last_boot
+    - type: network_in
+      arg: 'eth0'
+    - type: network_out
+      arg: 'eth0'
+    - type: packets_in
+      arg: 'eth0'
+    - type: packets_out
+      arg: 'eth0'
 - platform: command_line
   name: CPU Temperature
   command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"

@@ -1,11 +1,11 @@
 sensor.speedtest_download:
-  friendly_name: "Download"
+  friendly_name: "Downloadsnelheid"
   icon: mdi:download
 
 sensor.speedtest_upload:
-  friendly_name: "Upload"
+  friendly_name: "Uploadsnelheid"
   icon: mdi:upload
 
 sensor.speedtest_ping:
-  friendly_name: "Ping"
+  friendly_name: "Reactietijd"
   icon: mdi:timer

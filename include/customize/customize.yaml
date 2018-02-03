@@ -51,3 +51,19 @@ sensor.waqi_rotterdam:
 sensor.dark_sky_ozone:
   friendly_name: 'Ozon'
   icon: mdi:weather-sunny
+  
+# Host
+group.host_network:
+  friendly_name: 'Host netwerk'
+sensor.sent_eth0:
+  friendly_name: 'Bytes verzonden'
+  icon: mdi:upload-network
+sensor.received_eth0:
+  friendly_name: 'Bytes ontvangen'
+  icon: mdi:download-network
+sensor.packets_sent_eth0:
+  friendly_name: 'Pakketten verzonden'
+  icon: mdi:upload-network
+sensor.packets_received_eth0:
+  friendly_name: 'Pakketten ontvangen'
+  icon: mdi:download-network

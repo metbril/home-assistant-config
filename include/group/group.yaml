@@ -44,9 +44,10 @@ system:
   # Systeeminformatie
   name: Systeem
   entities:
-    - sensor.cpu_use
-    - sensor.ram_use
-    - sensor.disk_use_
+    - sensor.cpu_used
+    - sensor.ram_used
+    - sensor.disk_used_
+    - sensor.disk_free_
     - sensor.cpu_temperature
     - binary_sensor.cpu_high
     - binary_sensor.cpu_hot
@@ -54,6 +55,13 @@ system:
     - sensor.since_last_boot
     - updater.updater
     - sensor.bad_login
+host_network:
+  name: Host Network
+  entities:
+    - sensor.sent_eth0
+    - sensor.received_eth0
+    - sensor.packets_sent_eth0
+    - sensor.packets_received_eth0
 speedtest:
   name: Speedtest
   entities:
@@ -119,6 +127,7 @@ view_system:
   entities:
     - sensor.bad_login
     - group.system
+    - group.host_network
     - group.speedtest
 view_automation:
   name: Automatisering
