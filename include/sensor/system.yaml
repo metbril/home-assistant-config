@@ -1,0 +1,20 @@
+- platform: systemmonitor
+  resources:
+    - type: memory_use_percent
+    - type: processor_use
+    - type: disk_use_percent
+      arg: /
+    - type: disk_free
+      arg: /
+    - type: last_boot
+    - type: since_last_boot
+- platform: command_line
+  name: CPU Temperature
+  command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
+  unit_of_measurement: "°C"
+  value_template: '{{ value | multiply(0.001) | round(1) }}'
+- platform: speedtest
+  monitored_conditions:
+    - ping
+    - download
+    - upload
