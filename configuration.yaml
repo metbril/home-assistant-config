@@ -17,6 +17,7 @@ updater:
 frontend:
 discovery:
 conversation:
+map:
 
 history:
 logbook:
