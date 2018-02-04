@@ -35,12 +35,16 @@ light.living_desk:
   friendly_name: "Staande lamp bureau"
   assumed_state: no
 
+# waqi
 sensor.waqi_rotterdam:
-  friendly_name: 'Luchtkwaliteit'
+  friendly_name: 'Luchtkwaliteitsindex'
   icon: mdi:factory
 sensor.dark_sky_ozone:
   friendly_name: 'Ozon'
   icon: mdi:weather-sunny
+sensor.waqi_rotterdam_impact:
+  friendly_name: "Luchtkwaliteit"
+  icon: mdi:factory
   
 # Host
 group.host_network:

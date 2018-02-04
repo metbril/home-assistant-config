@@ -12,6 +12,7 @@ health:
   name: Gezondheid
   entities:
     - sensor.waqi_rotterdam
+    - sensor.waqi_rotterdam_impact
     - sensor.dark_sky_ozone
 weather:
   name: Weerbericht
