@@ -106,6 +106,12 @@ living_lights:
 
 ### VIEWS ###
 
+presence_view:
+  name: Presence
+  view: yes
+  icon: mdi:account
+  entities:
+    - group.family
 living_view:
   name: Woonkamer
   view: yes
