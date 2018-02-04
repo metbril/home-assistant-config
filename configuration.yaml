@@ -46,7 +46,6 @@ shell_command: !include_dir_merge_named include/shell_command
 ### MERGE LIST
 automation: !include_dir_merge_list include/automation
 binary_sensor: !include_dir_merge_list include/binary_sensor
-device_tracker: !include_dir_merge_list include/device_tracker
 light: !include_dir_merge_list include/light
 media_player: !include_dir_merge_list include/media_player
 notify: !include_dir_merge_list include/notify
@@ -56,3 +55,4 @@ switch: !include_dir_merge_list include/switch
 
 ### INDIVIDUAL FILES
 recorder: !include include/recorder.yaml
+device_tracker: !include include/device_tracker
