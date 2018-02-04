@@ -1,13 +1,3 @@
-# not used
-sensor.power_production:
-  hidden: yes
-sensor.power_production_low:
-  hidden: yes
-sensor.power_production_normal:
-  hidden: yes
-sensor.hourly_gas_consumption:
-  hidden: yes
-
 sensor.pws_th_humidity:
   friendly_name: "Luchtvochtigheid"
   icon: mdi:water-percent
@@ -67,3 +57,34 @@ sensor.packets_sent_eth0:
 sensor.packets_received_eth0:
   friendly_name: 'Pakketten ontvangen'
   icon: mdi:download-network
+
+#speedtest
+sensor.speedtest_download:
+  friendly_name: "Downloadsnelheid"
+  icon: mdi:download
+sensor.speedtest_upload:
+  friendly_name: "Uploadsnelheid"
+  icon: mdi:upload
+sensor.speedtest_ping:
+  friendly_name: "Reactietijd"
+  icon: mdi:timer
+
+# dsmr
+sensor.power_consumption:
+  friendly_name: "Actueel verbruik"
+sensor.power_consumption_normal:
+  friendly_name: "Verbruik normaal tarief"
+sensor.power_consumption_low:
+  friendly_name: "Verbruik laag tarief"
+sensor.power_tariff:
+  friendly_name: "Actueel tarief"
+  icon: mdi:currency-eur
+sensor.power_production:
+  hidden: yes
+sensor.power_production_low:
+  hidden: yes
+sensor.power_production_normal:
+  hidden: yes
+sensor.hourly_gas_consumption:
+  hidden: yes
+
