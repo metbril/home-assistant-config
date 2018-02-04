@@ -6,8 +6,10 @@ now:
     - sensor.date
     - sensor.time
     - sensor.time_of_day
+    - binary_sensor.workday_sensor
     - sun.sun
     - sensor.moon
+    - sensor.season
 health:
   name: Gezondheid
   entities:

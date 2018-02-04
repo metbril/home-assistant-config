@@ -1,3 +1,11 @@
+- platform: time_date
+  display_options:
+    - 'date'
+    - 'time'
+- platform: worldclock
+  time_zone: Europe/Amsterdam
+- platform: moon
+- platform: season
 - platform: template
   sensors:
     time_of_day:
