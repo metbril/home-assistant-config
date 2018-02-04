@@ -55,4 +55,4 @@ switch: !include_dir_merge_list include/switch
 
 ### INDIVIDUAL FILES
 recorder: !include include/recorder.yaml
-device_tracker: !include include/device_tracker
+device_tracker: !include include/device_tracker.yaml
