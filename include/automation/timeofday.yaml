@@ -7,5 +7,5 @@
     entity_id: sensor.time_of_day
   action:
     service: notify.pushover
-    data:
-      message: 'Het is nu {{ states.sensor.time_of_day.state }}'
+    data_template:
+      message: 'Het is nu {{ trigger.to_state.state }}'

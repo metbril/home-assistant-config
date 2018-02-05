@@ -1,9 +1,10 @@
 - alias: Notify WAQI status change
   trigger:
-    platform: state
-    entity_id: sensor.waqi_rotterdam_impact
+    - platform: state
+      entity_id: sensor.waqi_rotterdam_impact
   action:
     - service: notify.pushover
-      data:
+      data_template:
         title: "Risico luchtkwaliteit gewijzigd"
         message: "De luchtkwaliteit is nu: {{ trigger.to_state.state }}"
+        # message: "De luchtkwaliteit is nu: {{ sensor.waqi_rotterdam_impact.state }}"
