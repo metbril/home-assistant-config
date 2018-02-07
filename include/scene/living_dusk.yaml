@@ -1,7 +1,16 @@
-- name: Living Dusk
+# scene:
+- name: Living Dusk On
   entities:
     light.living_desk: on
     light.dressoirkast: on
     light.leeslamp: on
     light.tv_meubel: on
     light.hoge_kast: on
+# reverse scene used for vacation
+- name: Living Dusk Off
+  entities:
+    light.living_desk: off
+    light.dressoirkast: off
+    light.leeslamp: off
+    light.tv_meubel: off
+    light.hoge_kast: off

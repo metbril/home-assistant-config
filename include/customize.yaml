@@ -92,3 +92,8 @@ sensor.power_production_normal:
 sensor.hourly_gas_consumption:
   hidden: yes
 
+input_boolean.on_vacation:
+  friendly_name: "Met vakantie"
+  icon: mdi:hotel
+group.vacation:
+  friendly_name: "Vakantie"

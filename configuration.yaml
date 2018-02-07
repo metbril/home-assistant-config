@@ -56,3 +56,4 @@ switch: !include_dir_merge_list include/switch
 device_tracker: !include include/device_tracker.yaml
 media_player: !include include/media_player.yaml
 recorder: !include include/recorder.yaml
+input_boolean: !include include/input_boolean.yaml
