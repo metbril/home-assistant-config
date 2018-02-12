@@ -97,3 +97,13 @@ input_boolean.on_vacation:
   icon: mdi:hotel
 group.vacation:
   friendly_name: "Vakantie"
+
+light.woonkamer:
+  friendly_name: "Woonkamer (Hue)"
+
+group.driveway:
+  friendly_name: "Oprit"
+  icon: mdi:car
+group.garden:
+  friendly_name: "Tuin"
+  icon: mdi:flower

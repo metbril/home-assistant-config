@@ -69,3 +69,9 @@
         {% else %}
             Gevaarlijk
         {% endif %}
+- platform: haveibeenpwned
+  email: 
+    - !secret haveibeenpwned_email_1
+    - !secret haveibeenpwned_email_2
+    - !secret haveibeenpwned_email_3
+    - !secret haveibeenpwned_email_4

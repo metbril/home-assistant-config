@@ -8,7 +8,7 @@ exclude:
     - updater
     - automation
     - alert
-    - device_tracker
+    # - device_tracker
     - group
     - media_player
     - sun

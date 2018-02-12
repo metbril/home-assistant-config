@@ -106,10 +106,31 @@ living_lights:
     - light.kaku_wall_switch_right
     - light.living_desk
     #hue
+    - light.woonkamer # hue group
+    - light.hoge_kast
+    - light.bank
     - light.dressoirkast
     - light.leeslamp
     - light.tv_meubel
+living_dusk_lights: # the lights that are automatically turned on at dusk
+  name: "Schemerverlichting woonkamer"
+  entities:
+    - light.bank
     - light.hoge_kast
+    - light.tv_meubel
+study_lights:
+  name: "Study Lights"
+  entities:
+    - light.bollamp
+
+garden:
+  name: "Garden"
+  entities:
+    - sensor.dark_sky_humidity
+driveway:
+  name: "Driveway"
+  entities:
+    - sensor.dark_sky_temperature
 
 ### VIEWS ###
 
@@ -126,6 +147,7 @@ living_view:
   icon: mdi:sofa
   entities:
     - group.living_lights
+    - group.living_dusk_lights
     - media_player.apple_tv_van_bregt
     - media_player.woonkamer
 garage_view:
@@ -134,6 +156,20 @@ garage_view:
   icon: mdi:garage
   entities:
     - group.garage
+outdoor_view:
+  name: "Buiten"
+  view: yes
+  icon: mdi:tree
+  entities:
+    - group.driveway
+    - group.garden
+utilities_view:
+  name: "Utilities"
+  view: yes
+  icon: mdi:pipe
+  entities:
+    - group.meter_readings
+    - group.speedtest
 view_system:
   name: Systeem
   view: yes
