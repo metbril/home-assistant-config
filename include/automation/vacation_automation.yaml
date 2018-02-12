@@ -12,9 +12,9 @@
     - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
     - service: scene.turn_on
       entity_id: scene.living_dusk_off
-    - service: notify_pushover
+    - service: notify.pushover
       data_template:
         title: 'Vakantieschakeling'
-        message 'Verlichting automatisch uitgeschakeld'
+        message: 'Verlichting automatisch uitgeschakeld'
 
 # TODO: bark the dog when the doorbell rings
