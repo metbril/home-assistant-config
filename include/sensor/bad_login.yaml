@@ -1,4 +1,4 @@
 - platform: command_line
   name: bad_login
-  command: "/bin/grep -c 'Login attempt' /home/homeassistant/.homeassistant/home-assistant.log"
+  command: "grep -c 'Login attempt' /home/homeassistant/.homeassistant/home-assistant.log"
   value_template: '{{ value | int - 1 }}'
