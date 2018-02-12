@@ -2,6 +2,7 @@
 secrets.yaml
 known_devices.yaml
 ip_bans.yaml
+entity_registry.yaml
 
 #folders
 www/
