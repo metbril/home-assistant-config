@@ -6,6 +6,8 @@ homeassistant:
   unit_system: metric
   time_zone: Europe/Amsterdam
   customize: !include include/customize.yaml
+  # packages: !include_dir_merge_named include/pkg
+  packages: !include_dir_named include/pkg
 
 http:
   api_password: !secret http_password

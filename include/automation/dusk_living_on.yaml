@@ -1,7 +1,7 @@
 - alias: 'Inschakelen schemerverlichting'
   trigger:
-    platform: sun
-    event: sunset
-    offset: "-00:30:00"
+    - platform: sun
+      event: sunset
+      offset: "-00:30:00"
   action:
-    service: script.dusk
+    - service: script.dusk

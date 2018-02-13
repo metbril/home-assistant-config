@@ -1,0 +1,43 @@
+# package: speedtest.yaml
+
+# homeassistant:
+#   customize:
+#     sensor.speedtest_download:
+#       friendly_name: "Downloadsnelheid"
+#       icon: mdi:download
+#     sensor.speedtest_upload:
+#       friendly_name: "Uploadsnelheid"
+#       icon: mdi:upload
+#     sensor.speedtest_ping:
+#       friendly_name: "Reactietijd"
+#       icon: mdi:timer
+
+sensor:
+  - platform: speedtest
+    monitored_conditions:
+      - ping
+      - download
+      - upload
+  
+group:
+  speedtest:
+    name: Speedtest
+    entities:
+      - sensor.speedtest_download
+      - sensor.speedtest_upload
+      - sensor.speedtest_ping
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: Download laag
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.speedtest_download
+        below: 30
+    action:
+      - service: notify.pushover
+        data:
+          message: "Waarschuwing: speedtest download onder 30Mbit/s."

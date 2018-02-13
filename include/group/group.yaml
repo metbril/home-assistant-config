@@ -65,12 +65,6 @@ host_network:
     - sensor.network_in_eth0
     - sensor.packets_out_eth0
     - sensor.packets_in_eth0
-speedtest:
-  name: Speedtest
-  entities:
-    - sensor.speedtest_download
-    - sensor.speedtest_upload
-    - sensor.speedtest_ping
 family:
   name: Familie
   entities:

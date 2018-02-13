@@ -2,10 +2,10 @@
 - alias: Verstuur gasverbruik
   hide_entity: no # default no
   trigger:
-    platform: time
-    # run daily at 00:05:00
-    hours: 00
-    minutes: 15
-    seconds: 00
+    - platform: time
+      # run daily at 00:05:00
+      hours: 00
+      minutes: 15
+      seconds: 00
   action:
-    service: script.mindergas
+    - service: script.mindergas

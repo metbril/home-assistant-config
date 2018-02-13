@@ -62,17 +62,6 @@ sensor.packets_in_eth0:
   friendly_name: 'Pakketten ontvangen'
   icon: mdi:download-network
 
-#speedtest
-sensor.speedtest_download:
-  friendly_name: "Downloadsnelheid"
-  icon: mdi:download
-sensor.speedtest_upload:
-  friendly_name: "Uploadsnelheid"
-  icon: mdi:upload
-sensor.speedtest_ping:
-  friendly_name: "Reactietijd"
-  icon: mdi:timer
-
 # dsmr
 sensor.power_consumption:
   friendly_name: "Actueel verbruik"

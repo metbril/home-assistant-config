@@ -1,9 +1,0 @@
-- alias: Download laag
-  trigger:
-    platform: numeric_state
-    entity_id: sensor.speedtest_download
-    below: 30
-  action:
-    service: notify.pushover
-    data:
-      message: "Waarschuwing: speedtest download onder 30Mbit/s."
