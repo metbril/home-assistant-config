@@ -1,3 +1,11 @@
+
+sensor:
+  - platform: command_line
+    name: bad_login
+    command: "grep -c 'Login attempt' /config/home-assistant.log"
+    value_template: '{{ value | int - 1 }}'
+
+automation:
 - alias: "Send notification upon failed login attempt"
   trigger:
     - platform: state
