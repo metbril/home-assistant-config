@@ -47,9 +47,9 @@ system:
   # Systeeminformatie
   name: Systeem
   entities:
-    - sensor.cpu_used
-    - sensor.ram_used
-    - sensor.disk_used_
+    - sensor.processor_use
+    - sensor.memory_use_percent
+    - sensor.disk_use_percent_
     - sensor.disk_free_
     - sensor.cpu_temperature
     - binary_sensor.cpu_high
@@ -61,10 +61,10 @@ system:
 host_network:
   name: Host Network
   entities:
-    - sensor.sent_eth0
-    - sensor.received_eth0
-    - sensor.packets_sent_eth0
-    - sensor.packets_received_eth0
+    - sensor.network_out_eth0
+    - sensor.network_in_eth0
+    - sensor.packets_out_eth0
+    - sensor.packets_in_eth0
 speedtest:
   name: Speedtest
   entities:

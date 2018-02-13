@@ -49,16 +49,16 @@ sensor.waqi_rotterdam_impact:
 # Host
 group.host_network:
   friendly_name: 'Host netwerk'
-sensor.sent_eth0:
+sensor.network_out_eth0:
   friendly_name: 'Bytes verzonden'
   icon: mdi:upload-network
-sensor.received_eth0:
+sensor.network_in_eth0:
   friendly_name: 'Bytes ontvangen'
   icon: mdi:download-network
-sensor.packets_sent_eth0:
+sensor.packets_out_eth0:
   friendly_name: 'Pakketten verzonden'
   icon: mdi:upload-network
-sensor.packets_received_eth0:
+sensor.packets_in_eth0:
   friendly_name: 'Pakketten ontvangen'
   icon: mdi:download-network
 
