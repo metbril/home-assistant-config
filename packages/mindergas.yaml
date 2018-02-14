@@ -13,7 +13,7 @@
 
 script:
   post_mindergas:
-    alias: Verstuur gasverbruik
+    alias: Post Gas Consumption
     sequence:
       - service: shell_command.curl
         data_template:
@@ -42,7 +42,7 @@ script:
 ## gas meter reading usually updated around 0:06
 ## publishing should happen after that
 automation:
-  - alias: Verstuur gasverbruik
+  - alias: Post Gas Consumption
     hide_entity: no # default no
     trigger:
       - platform: time
