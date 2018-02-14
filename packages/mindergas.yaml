@@ -1,0 +1,42 @@
+automation:
+  # gas meter reading usually updated around 0:06
+  - alias: Verstuur gasverbruik
+    hide_entity: no # default no
+    trigger:
+      - platform: time
+        # run daily at 00:05:00
+        hours: 00
+        minutes: 15
+        seconds: 00
+    action:
+      - service: script.mindergas
+
+script:
+  # publish to Mindergas
+  mindergas:
+    alias: Verstuur gasverbruik
+    sequence:
+      - service: shell_command.mindergas
+      - service: logbook.log
+        data:
+          name: Gasverbruik
+          message: is verstuurd
+          entity_id: sensor.gas_consumption
+          domain: sensor
+      - service: notify.telegram
+        data_template:
+          message: "Gasverbruik ({{ states.sensor.gas_consumption.state}} m3) is verstuurd naar mindergas.nl"
+
+sensor:
+  - platform: rest
+    # https://www.mindergas.nl/member/api
+    name: rest_mindergas
+    resource: https://www.mindergas.nl/api/gas_meter_readings
+    method: POST
+    payload: '{ "date": "{{ (as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading": {{ states.sensor.gas_consumption.state }} }'
+    headers:
+      Content-Type: application/json
+      AUTH-TOKEN: !secret mindergas_token
+
+shell_command:
+  mindergas: '/srv/homeassistant/bin/python /home/homeassistant/.homeassistant/bin/mindergas.py >> /home/homeassistant/.homeassistant/mindergas.log'

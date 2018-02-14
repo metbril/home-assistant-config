@@ -1,1 +1,0 @@
-mindergas: '/srv/homeassistant/bin/python /home/homeassistant/.homeassistant/bin/mindergas.py >> /home/homeassistant/.homeassistant/mindergas.log'
