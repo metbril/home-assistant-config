@@ -1,0 +1,85 @@
+############################################################
+## RFXTRX
+############################################################
+
+rfxtrx:
+  device: /dev/ttyRFXCOM
+  debug: yes
+
+############################################################
+## Cover
+############################################################
+cover:
+  - platform: rfxtrx
+    automatic_add: false
+
+############################################################
+## Light
+############################################################
+
+# Prefix:
+# 0b is the length of the datapacket
+# 11 means Lighting2
+# 00 means subtype AC
+
+# 0b 11 00 310 0bb1362 01 010f60   0bb13621
+
+light:
+  - platform: rfxtrx
+    # automatic_add: True
+    devices:
+      0b1100200099acb60b010f70: # 099acb611 kaku wall left
+        name: KAKU Wall Switch Left
+      0b11002c0099acb60c000070: # 099acb612 kaku wall right
+        name: KAKU Wall Switch Right
+      0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
+        name: Living Desk
+
+############################################################
+## Sensor
+############################################################
+
+sensor:
+  - platform: rfxtrx
+    automatic_add: True
+    devices:
+      0a5207023f0e0074380159:
+        name: PWS TH
+        data_type:
+          - Humidity
+          - Temperature
+      0b55030c800c0000000a9569:
+        name: PWS Rain
+        data_type:
+          - Rain rate
+      105604029716013b000b000c0027002059:
+        name: PWS Wind
+        data_type:
+          - Wind direction
+
+############################################################
+## Switch
+############################################################
+
+switch:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0b110010011600020a010f70: # kaku motion
+        name: Motion Garage
+        fire_event: True
+      0b11001000bb136201010f60: # 0bb13621 kaku remote 1
+        name: KAKU Remote 1
+      0b11001000bb136202010f60: # 0bb13622 kaku remote 2
+        name: KAKU Remote 2
+      0b11001000bb136203010f60: # 0bb13623 kaku remote 3
+        name: KAKU Remote 3
+      # not paired yet
+      # 0b1100100f05e8120a010f60:
+      #  name: Diner Ceiling
+      # not paired yet
+      # 0b1100100f05e8120b010f60:
+      #  name: Sofa Ceiling
+      0a140f01000b5501010f60: # lighting5 it 2901.01 On
+        name: Power Garage Door
+

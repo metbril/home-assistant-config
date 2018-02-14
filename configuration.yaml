@@ -31,10 +31,6 @@ logger:
 
 sun:
 
-rfxtrx:
-  device: /dev/ttyRFXCOM
-  debug: yes
-
 tts:
   - platform: google
     language: 'nl'
