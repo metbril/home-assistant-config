@@ -8,6 +8,6 @@ dusk:
       data:
         name: Schemering
         message: is ingetreden
-    - service: notify.pushover
+    - service: notify.telegram
       data_template:
         message: "Schemering is ingetreden"

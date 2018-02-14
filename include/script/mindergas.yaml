@@ -9,6 +9,6 @@ mindergas:
         message: is verstuurd
         entity_id: sensor.gas_consumption
         domain: sensor
-    - service: notify.pushover
+    - service: notify.telegram
       data_template:
         message: "Gasverbruik ({{ states.sensor.gas_consumption.state}} m3) is verstuurd naar mindergas.nl"

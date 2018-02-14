@@ -8,7 +8,7 @@
     - platform: state
       entity_id: sensor.time_of_day
   action:
-    - service: notify.pushover
+    - service: notify.telegram
       data_template:
         message: 'Het is nu {{ trigger.to_state.state }}'
 
@@ -17,7 +17,7 @@
     - platform: time
       at: '06:00:00'
   action:
-    - service: notify.pushover
+    - service: notify.telegram
       data_template:
         message: 'Ochtend'
 
