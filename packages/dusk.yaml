@@ -1,0 +1,41 @@
+scene:
+  # scene:
+  - name: Living Dusk On
+    entities:
+      light.living_desk: on
+      light.dressoirkast: on
+      light.leeslamp: on
+      light.tv_meubel: on
+      light.hoge_kast: on
+  # reverse scene used for vacation
+  - name: Living Dusk Off
+    entities:
+      light.living_desk: off
+      light.dressoirkast: off
+      light.leeslamp: off
+      light.tv_meubel: off
+      light.hoge_kast: off
+
+script:
+  # switch on living lights at dusk
+  dusk:
+    alias: Schemer
+    sequence:
+      - service: scene.turn_on
+        entity_id: scene.living_dusk
+      - service: logbook.log
+        data:
+          name: Schemering
+          message: is ingetreden
+      - service: notify.telegram
+        data_template:
+          message: "Schemering is ingetreden"
+
+automation:
+  - alias: 'Inschakelen schemerverlichting'
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "-00:30:00"
+    action:
+      - service: script.dusk

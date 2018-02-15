@@ -9,6 +9,9 @@ group:
     entities:
       - input_boolean.on_vacation
 
+## Automation
+## Requires package/dusk.yaml
+
 automation:
   # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
   - alias: Schakel verlichting uit als op vakantie
