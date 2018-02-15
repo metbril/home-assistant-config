@@ -1,0 +1,32 @@
+input_boolean:
+  on_vacation:
+    name: "On Vacation"
+    initial: off
+
+group:
+  vacation:
+    name: Vacation
+    entities:
+      - input_boolean.on_vacation
+
+automation:
+  # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
+  - alias: Schakel verlichting uit als op vakantie
+    trigger:
+      - platform: time
+        at: '23:00:00'
+    condition:
+      - condition: state
+        entity_id: input_boolean.on_vacation
+        state: 'on'
+    action:
+      # wacht tussen 0:0:0 en 0:29:59
+      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
+      - service: scene.turn_on
+        entity_id: scene.living_dusk_off
+      - service: notify.telegram
+        data_template:
+          title: 'Vakantieschakeling'
+          message: 'Verlichting automatisch uitgeschakeld'
+
+# TODO: bark the dog when the doorbell rings

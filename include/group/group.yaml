@@ -49,10 +49,6 @@ family:
     - device_tracker.robert_iphone
     - device_tracker.monique_iphone
     - device_tracker.bjorn_iphone
-vacation:
-  name: Vacation
-  entities:
-    - input_boolean.on_vacation
 automation:
   name: Automatisering
   entities:

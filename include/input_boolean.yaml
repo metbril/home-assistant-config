@@ -1,4 +1,0 @@
-# input_boolean:
-on_vacation:
-  name: "On Vacation"
-  initial: off
