@@ -32,23 +32,10 @@ tts:
   - platform: google
     language: 'nl'
 
-### MERGE NAMED
-alert: !include_dir_merge_named include/alert
-group: !include_dir_merge_named include/group
-script: !include_dir_merge_named include/script
-shell_command: !include_dir_merge_named include/shell_command
-
-### MERGE LIST
-automation: !include_dir_merge_list include/automation
-binary_sensor: !include_dir_merge_list include/binary_sensor
-light: !include_dir_merge_list include/light
-notify: !include_dir_merge_list include/notify
-scene: !include_dir_merge_list include/scene
-sensor: !include_dir_merge_list include/sensor
-switch: !include_dir_merge_list include/switch
-
 ### INDIVIDUAL FILES
-device_tracker: !include include/device_tracker.yaml
+group: !include include/group.yaml
+light: !include include/light.yaml
 media_player: !include include/media_player.yaml
 recorder: !include include/recorder.yaml
-input_boolean: !include include/input_boolean.yaml
+script: !include include/script.yaml
+sensor: !include include/sensor.yaml
