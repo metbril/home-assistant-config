@@ -1,0 +1,96 @@
+binary_sensor:
+  - platform: template
+    sensors:
+      cpu_high:
+        value_template: '{{ states.sensor.processor_use.state | float > 80 }}'
+        friendly_name: 'CPU hoog'
+  - platform: template
+    sensors:
+      cpu_hot:
+        value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
+        friendly_name: 'CPU heet'
+
+sensor:
+  - platform: systemmonitor
+    resources:
+      - type: memory_use_percent
+      - type: processor_use
+      - type: disk_use_percent
+        arg: /
+      - type: disk_free
+        arg: /
+      - type: last_boot
+      - type: since_last_boot
+      - type: network_in
+        arg: 'eth0'
+      - type: network_out
+        arg: 'eth0'
+      - type: packets_in
+        arg: 'eth0'
+      - type: packets_out
+        arg: 'eth0'
+  - platform: command_line
+    name: CPU Temperature
+    command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(1) }}'
+
+group:
+  system:
+    # Systeeminformatie
+    name: Systeem
+    entities:
+      - sensor.processor_use
+      - sensor.memory_use_percent
+      - sensor.disk_use_percent_
+      - sensor.disk_free_
+      - sensor.cpu_temperature
+      - binary_sensor.cpu_high
+      - binary_sensor.cpu_hot
+      - sensor.last_boot
+      - sensor.since_last_boot
+      - updater.updater
+      - sensor.bad_login
+  host_network:
+    name: Host Network
+    entities:
+      - sensor.network_out_eth0
+      - sensor.network_in_eth0
+      - sensor.packets_out_eth0
+      - sensor.packets_in_eth0
+
+alert:
+  cpu_high:
+    name: Gebruik CPU is hoog
+    entity_id: binary_sensor.cpu_high
+    state: 'on'
+    repeat: 5 # minutes
+    can_acknowledge: True
+    skip_first: False
+    notifiers:
+      - telegram
+  cpu_hot:
+    name: Temperatuur CPU is hoog
+    entity_id: binary_sensor.cpu_high
+    state: 'on'
+    repeat: 5 # minutes
+    can_acknowledge: True
+    skip_first: False
+    notifiers:
+      - telegram
+
+automation:
+  - alias: 'Update Available Notification'
+    trigger:
+      - platform: state
+        entity_id: updater.updater
+    action:
+      - service: notify.telegram
+        data:
+          message: 'Update voor Home Assistant beschikbaar.'
+
+notify:
+  - name: pushover
+    platform: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key

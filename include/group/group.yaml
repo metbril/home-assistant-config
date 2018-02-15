@@ -43,28 +43,6 @@ meter_readings:
     - sensor.power_consumption_normal
     - sensor.gas_consumption
     - sensor.power_tariff
-system:
-  # Systeeminformatie
-  name: Systeem
-  entities:
-    - sensor.processor_use
-    - sensor.memory_use_percent
-    - sensor.disk_use_percent_
-    - sensor.disk_free_
-    - sensor.cpu_temperature
-    - binary_sensor.cpu_high
-    - binary_sensor.cpu_hot
-    - sensor.last_boot
-    - sensor.since_last_boot
-    - updater.updater
-    - sensor.bad_login
-host_network:
-  name: Host Network
-  entities:
-    - sensor.network_out_eth0
-    - sensor.network_in_eth0
-    - sensor.packets_out_eth0
-    - sensor.packets_in_eth0
 family:
   name: Familie
   entities:
