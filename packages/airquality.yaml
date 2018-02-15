@@ -1,0 +1,37 @@
+sensor:
+  - platform: waqi
+    token: !secret waqi_token
+    locations:
+      - rotterdam
+    stations:
+      - Rotterdam
+  - platform: template
+    sensors:
+      waqi_rotterdam_impact:
+        friendly_name: "Luchtkwaliteit"
+        value_template: >-
+          {% if states.sensor.waqi_rotterdam.state | int <= 50  %}
+              Goed
+          {% elif states.sensor.waqi_rotterdam.state | int <= 100 %}
+              Matig
+          {% elif states.sensor.waqi_rotterdam.state | int <= 150 %}
+              Ongezond voor risicogroepen
+          {% elif states.sensor.waqi_rotterdam.state | int <= 200 %}
+              Ongezond
+          {% elif states.sensor.waqi_rotterdam.state | int <= 300 %}
+              Zeer ongezond
+          {% else %}
+              Gevaarlijk
+          {% endif %}
+
+automation:
+  - alias: Notify WAQI status change
+    trigger:
+      - platform: state
+        entity_id: sensor.waqi_rotterdam_impact
+    action:
+      - service: notify.telegram
+        data_template:
+          title: "Risico luchtkwaliteit gewijzigd"
+          message: "De luchtkwaliteit is nu: {{ trigger.to_state.state }}"
+          # message: "De luchtkwaliteit is nu: {{ sensor.waqi_rotterdam_impact.state }}"
