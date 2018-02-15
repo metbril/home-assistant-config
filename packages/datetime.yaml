@@ -1,0 +1,79 @@
+sun:
+
+binary_sensor:
+  - platform: workday
+    country: NL
+    workdays: [ mon, tue, wed, thu, fri ]
+
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+  - platform: worldclock
+    time_zone: Europe/Amsterdam
+  - platform: moon
+  - platform: season
+  - platform: template
+    sensors:
+      time_of_day:
+        value_template: >
+          {% set now = as_timestamp(now()) %}
+          {% set midnight_start = ((now // (24*3600)) * (24*3600)) %}
+          {% set tomorrow_start = (midnight_start + (24*3600)) %}
+          {% set morning_start  = (midnight_start + (6*3600)) %}
+          {% set next_rising = as_timestamp(states.sun.sun.attributes.next_rising) %}
+          {% set next_setting = as_timestamp(states.sun.sun.attributes.next_setting) %}
+          {% set next_dusk = (next_setting - (30*60)) %}
+          {% set night_start  = (midnight_start + (23*3600)) %}
+          {% if (now >= morning_start) and (now < next_rising) and (next_rising < tomorrow_start)  %}
+            ochtend
+          {% elif (next_rising > tomorrow_start) and (now < next_dusk) and (next_dusk < tomorrow_start) %}
+            dag
+          {% elif (next_dusk > tomorrow_start) and (now < night_start) and (next_setting < tomorrow_start) %}
+            scherming
+          {% elif (next_setting > tomorrow_start) and (now < night_start) %}
+            avond
+          {% elif (now >= night_start) %}
+            nacht
+          {% else %}
+            onbekend
+          {% endif %}
+        friendly_name: "Tijd van de dag"
+        icon_template: mdi:clock
+
+
+automation:
+
+  # sensor.timeofday
+  # this sensor is set based on sunrise, sunset and some specific clock times
+  # in its turn, the sensor can be used for automations
+  - alias: Tijd van de dag melding
+    trigger:
+      - platform: state
+        entity_id: sensor.time_of_day
+    action:
+      - service: notify.telegram
+        data_template:
+          message: 'Het is nu {{ trigger.to_state.state }}'
+
+  - alias: Ochtend
+    trigger:
+      - platform: time
+        at: '06:00:00'
+    action:
+      - service: notify.telegram
+        data_template:
+          message: 'Ochtend'
+
+group:
+  now:
+    name: Nu
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.time_of_day
+      - binary_sensor.workday_sensor
+      - sun.sun
+      - sensor.moon
+      - sensor.season

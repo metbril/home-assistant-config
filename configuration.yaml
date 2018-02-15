@@ -28,8 +28,6 @@ logger:
   # logs:
     # homeassistant.components.rfxtrx: debug
 
-sun:
-
 tts:
   - platform: google
     language: 'nl'
