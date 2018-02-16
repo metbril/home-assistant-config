@@ -12,10 +12,6 @@ sensor.pws_rain_rain_rate:
   icon: mdi:weather-rainy
   unit_of_measurement: "mm/u"
 
-sensor.bad_login:
-  friendly_name: "Mislukte inlogpogingen"
-  icon: mdi:alert
-
 switch.motion_garage:
   friendly_name: "Beweging garage"
   icon: mdi:run-fast
@@ -46,22 +42,6 @@ sensor.waqi_rotterdam_impact:
   friendly_name: "Luchtkwaliteit"
   icon: mdi:factory
   
-# Host
-group.host_network:
-  friendly_name: 'Host netwerk'
-sensor.network_out_eth0:
-  friendly_name: 'Bytes verzonden'
-  icon: mdi:upload-network
-sensor.network_in_eth0:
-  friendly_name: 'Bytes ontvangen'
-  icon: mdi:download-network
-sensor.packets_out_eth0:
-  friendly_name: 'Pakketten verzonden'
-  icon: mdi:upload-network
-sensor.packets_in_eth0:
-  friendly_name: 'Pakketten ontvangen'
-  icon: mdi:download-network
-
 # dsmr
 sensor.power_consumption:
   friendly_name: "Actueel verbruik"

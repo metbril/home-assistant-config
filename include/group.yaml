@@ -98,7 +98,8 @@ view_system:
   icon: mdi:server
   entities:
     - sensor.bad_login
-    - group.system
+    - group.host_performance
+    - group.host_storage
     - group.host_network
     - group.speedtest
 view_automation:
