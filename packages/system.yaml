@@ -18,6 +18,14 @@ homeassistant:
         homebridge_hidden: false
 
     ################################################
+    ## Binary Sensor
+    ################################################
+
+    binary_sensor.db_large:
+      <<: *customize
+      friendly_name: Database groot
+
+    ################################################
     ## Sensor
     ################################################
 
@@ -36,6 +44,14 @@ homeassistant:
     sensor.disk_use_percent_:
       <<: *customize
       friendly_name: Gebruikte opslag
+
+    sensor.homeassistant_v2db:
+      <<: *customize
+      friendly_name: Home Assistant Database
+
+    sensor.homeassistantlog:
+      <<: *customize
+      friendly_name: Home Assistant Logbestand
 
     sensor.cpu_temperature:
       <<: *customize
@@ -108,6 +124,10 @@ binary_sensor:
       cpu_hot:
         value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
         friendly_name: 'CPU heet'
+  - platform: template
+    sensors:
+      db_large:
+        value_template: '{{ states.sensor.homeassistant_v2db.state | float > 100 }}'
 
 ################################################
 ## Sensor
@@ -137,6 +157,10 @@ sensor:
     command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
     unit_of_measurement: "°C"
     value_template: '{{ value | multiply(0.001) | round(1) }}'
+  - platform: filesize
+    file_paths:
+      - /config/home-assistant_v2.db
+      - /config/home-assistant.log
 
 ################################################
 ## Group
@@ -161,6 +185,8 @@ group:
     entities:
       - sensor.disk_use_percent_
       - sensor.disk_free_
+      - sensor.homeassistant_v2db
+      - sensor.homeassistantlog
   host_network:
     name: Host Network
     entities:
@@ -190,6 +216,19 @@ alert:
     repeat: 5 # minutes
     can_acknowledge: True
     skip_first: False
+    notifiers:
+      - telegram
+  db_large:
+    name: Database Large
+    entity_id: binary_sensor.db_large
+    state: 'on'
+    repeat: # minutes
+      - 15
+      - 30
+      - 60
+      - 120
+    can_acknowledge: true
+    skip_first: false
     notifiers:
       - telegram
 

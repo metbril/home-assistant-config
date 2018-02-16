@@ -7,6 +7,9 @@ homeassistant:
   time_zone: Europe/Amsterdam
   customize: !include include/customize.yaml
   packages: !include_dir_named packages
+  whitelist_external_dirs:
+    - /config
+
 
 http:
   api_password: !secret http_password
