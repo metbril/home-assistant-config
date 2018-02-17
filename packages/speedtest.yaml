@@ -14,6 +14,7 @@ homeassistant:
 
 sensor:
   - platform: speedtest
+    server_id: 1208 # Qweb, Alblasserdam
     monitored_conditions:
       - ping
       - download
@@ -26,7 +27,7 @@ group:
       - sensor.speedtest_download
       - sensor.speedtest_upload
       - sensor.speedtest_ping
-
+    
 ################################################
 ## Automation
 ################################################
