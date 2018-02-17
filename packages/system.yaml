@@ -90,10 +90,26 @@ homeassistant:
       friendly_name: Pakketten ontvangen
       icon: mdi:download-network
 
-    ################################################
+    sensor.myipopendnscom:
+      <<: *customize
+      friendly_name: Publiek IP-adres
+      icon: mdi:network
+
+    sensor.ha_uptime:
+      <<: *customize
+      friendly_name: Sinds laatste start HA
+      icon: mdi:clock
+
+  ################################################
     ## Group
     ################################################
 
+    group.host_view:
+      <<: *customize
+      friendly_name: Systeeminformatie
+      icon: mdi:server
+      order: 80
+    
     group.host_performance:
       <<: *customize
       friendly_name: Prestaties
@@ -161,6 +177,48 @@ sensor:
     file_paths:
       - /config/home-assistant_v2.db
       - /config/home-assistant.log
+  - platform: dnsip
+  - platform: command_line
+    # https://home-assistant.io/components/sensor.command_line/
+    name: "HA Uptime"
+    command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
+    scan_interval: 720 # seconds
+    value_template: >-
+      {% set uptime = value | int %}
+      {% set seconds = uptime % 60 %}
+      {% set minutes = ((uptime % 3600) / 60) | int %}
+      {% set hours = ((uptime % 86400) / 3600) | int %}
+      {% set days = (uptime / 86400) | int %}
+      {% if days > 0 %}
+        {% if days == 1 %}
+          1 day
+        {% else %}
+          {{ days }} days
+        {% endif %}
+        {{ ', ' }}
+      {% endif %}
+      {{ '%02d' % hours }}:{{ '%02d' % minutes }}
+  - platform: template
+    sensors:
+      since_last_boot_short:
+        friendly_name: Since last boot
+        value_template: >-
+          {% set slb = states.sensor.since_last_boot.state.split(' ') %}
+          {% set slb_count = slb | length %}
+          {% set hms = slb[slb_count - 1] %}
+          {% set hms_trimmed = hms.split('.')[0] %}
+          {% set hms_split = hms_trimmed.split(':') %}
+          {% set hours = hms_split[0] | int %}
+          {% set minutes = hms_split[1] | int %}
+          {% if slb_count == 3 %}
+            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
+          {% endif %}
+          {{ hms_split[0] ~ ':' ~ hms_split[1] }}
+      since_last_boot_short_nl:
+        friendly_name: Sinds laatste start
+        value_template: >-
+          {% set value = states.sensor.since_last_boot_short.state %}
+          {{ value | replace('days', 'dagen') | replace('day', 'dag') }}
 
 ################################################
 ## Group
@@ -173,13 +231,9 @@ group:
     entities:
       - sensor.processor_use
       - sensor.memory_use_percent
+      - sensor.cpu_temperature
       - binary_sensor.cpu_high
       - binary_sensor.cpu_hot
-      - sensor.cpu_temperature
-      - sensor.last_boot
-      - sensor.since_last_boot
-      - updater.updater
-      - sensor.bad_login
   host_storage:
     name: System Storage
     entities:
@@ -194,6 +248,17 @@ group:
       - sensor.network_in_eth0
       - sensor.packets_out_eth0
       - sensor.packets_in_eth0
+      - sensor.myipopendnscom
+  host_info:
+    name: System Info
+    entities:
+      - sensor.last_boot
+      - sensor.since_last_boot
+      - sensor.since_last_boot_short
+      - sensor.since_last_boot_short_nl
+      - sensor.ha_uptime
+      - updater.updater
+      - sensor.bad_login
 
 ################################################
 ## Alert

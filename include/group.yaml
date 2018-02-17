@@ -92,16 +92,6 @@ garage_view:
   icon: mdi:garage
   entities:
     - group.garage
-view_system:
-  name: Systeem
-  view: yes
-  icon: mdi:server
-  entities:
-    - sensor.bad_login
-    - group.host_performance
-    - group.host_storage
-    - group.host_network
-    - group.speedtest
 view_automation:
   name: Automatisering
   view: yes
