@@ -32,7 +32,7 @@ logbook:
 logger:
   default: warn
   # logs:
-    # homeassistant.components.rfxtrx: debug
+  #   homeassistant.components.rfxtrx: debug
 
 tts:
   - platform: google
