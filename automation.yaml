@@ -5,4 +5,19 @@
 ## Home Assistant
 ##
 ## Some packages also contain automation 
+##
+## Unfortunately this file requires at least
+## one (dummy) automation to have a valid
+## configuration
 ################################################
+
+- alias: dummy
+  hide_entity: true
+  initial_state: off
+  trigger:
+    - platform: state
+      entity_id: sun.sun
+  action:
+    - service: notify.telegram
+      data_template:
+        message: '{{ states.sun.sun.state }}'
