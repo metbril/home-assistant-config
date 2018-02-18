@@ -1,7 +1,54 @@
+################################################
+## Packages Vacation
+##
+## Requires package Lighting
+################################################
+
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'vacation'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Input Boolean
+    ################################################
+
+    input_boolean.on_vacation:
+      <<: *customize
+      friendly_name: "Met vakantie"
+      icon: mdi:hotel
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.vacation:
+      <<: *customize
+      friendly_name: "Vakantie"
+      icon: mdi:hotel
+
+################################################
+## Input Boolean
+################################################
+
 input_boolean:
   on_vacation:
     name: "On Vacation"
     initial: off
+
+################################################
+## Group
+################################################
 
 group:
   vacation:
@@ -9,8 +56,9 @@ group:
     entities:
       - input_boolean.on_vacation
 
+################################################
 ## Automation
-## Requires package/dusk.yaml
+################################################
 
 automation:
   # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
@@ -25,11 +73,11 @@ automation:
     action:
       # wacht tussen 0:0:0 en 0:29:59
       - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
-      - service: scene.turn_on
-        entity_id: scene.living_dusk_off
+      - service: light.turn_off
+        entity_id: group.dusk_living_lights
       - service: notify.telegram
         data_template:
-          title: 'Vakantieschakeling'
-          message: 'Verlichting automatisch uitgeschakeld'
+          title: '**Vakantieschakeling**'
+          message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
 
 # TODO: bark the dog when the doorbell rings

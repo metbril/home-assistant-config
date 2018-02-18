@@ -1,0 +1,62 @@
+################################################
+## Packages Lighting
+################################################
+
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'lighting'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.dusk_living_lights:
+      <<: *customize
+      friendly_name: Schemerverlichting Woonkamer
+
+################################################
+## Group
+################################################
+
+group:
+  dusk_living_lights:
+    name: Dusk Living Lights
+    entities:
+      - light.bank
+      - light.dressoirkast
+      - light.hoge_kast
+      - light.living_desk
+      - light.tv_meubel
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: Turn On Dusk Living Lights
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "-00:30:00"
+    action:
+      - service: light.turn_on
+        entity_id: group.dusk_living_lights
+      - service: logbook.log
+        data:
+          name: Schemerverlichting woonkamer
+          message: is ingeschakeld
+      - service: notify.telegram
+        data_template:
+          title: '**Schermverlichting woonkamer**'
+          message: "Ingeschakeld"
