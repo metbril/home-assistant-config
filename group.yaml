@@ -1,4 +1,11 @@
-### GROUPS ###
+################################################
+## Include Group
+##
+## These can be reloaded without restarting 
+## Home Assistant
+##
+## Some packages also contain groups 
+################################################
 
 health:
   name: Gezondheid

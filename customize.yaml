@@ -1,3 +1,12 @@
+################################################
+## Include Customize
+##
+## These can be reloaded without restarting 
+## Home Assistant (by reloading core)
+##
+## Some packages also contain customization 
+################################################
+
 sensor.pws_th_humidity:
   friendly_name: "Luchtvochtigheid"
   icon: mdi:water-percent

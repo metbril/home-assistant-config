@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Amsterdam
-  customize: !include include/customize.yaml
+  customize: !include customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - /config
@@ -38,10 +38,17 @@ tts:
   - platform: google
     language: 'nl'
 
-### INDIVIDUAL FILES
-group: !include include/group.yaml
+##########################################################
+## Reloadable without restart
+##########################################################
+
+group: !include group.yaml
+automation: !include automation.yaml
+script: !include script.yaml
+
+## TODO: move these to packages
+
 light: !include include/light.yaml
 media_player: !include include/media_player.yaml
 recorder: !include include/recorder.yaml
-script: !include include/script.yaml
 sensor: !include include/sensor.yaml

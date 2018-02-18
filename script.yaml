@@ -1,3 +1,12 @@
+################################################
+## Include Script
+##
+## These can be reloaded without restarting 
+## Home Assistant
+##
+## Some packages also contain scripts 
+################################################
+
 sonos_say:
   alias: Sonos Text To Speach
   sequence:
