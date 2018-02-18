@@ -66,15 +66,11 @@ garage:
 living_lights:
   name: Verlichting Woonkamer
   entities:
-    #kaku
-    - light.kaku_wall_switch_left
-    - light.kaku_wall_switch_right
-    - light.living_desk
-    #hue
-    - light.dressoirkast
-    - light.leeslamp
-    - light.tv_meubel
+    ## clockwise from the door
     - light.hoge_kast
+    - light.bank
+    - light.living_desk
+    - light.tv_meubel
 
 ### VIEWS ###
 
@@ -90,9 +86,11 @@ living_view:
   view: yes
   icon: mdi:sofa
   entities:
-    - group.living_lights
-    - media_player.apple_tv_van_bregt
     - media_player.woonkamer
+    - group.living_lights
+    - group.dusk_living_lights
+    - media_player.apple_tv_van_bregt
+    - remote.apple_tv_van_bregt
 garage_view:
   name: Garage
   view: yes
