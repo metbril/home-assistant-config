@@ -4,7 +4,7 @@ device_tracker:
   - platform: asuswrt
     host: !secret asuswrt_host
     username: !secret asuswrt_username
-    ssh_key: /config/ssh/id_rsa # restrict permissions to '700' for ssh to work
+    ssh_key: /home/homeassistant/.homeassistant/ssh/id_rsa # restrict permissions to '700' for ssh to work
     track_new_devices: yes
     consider_home: 180
     interval_seconds: 12

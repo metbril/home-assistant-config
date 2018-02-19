@@ -8,16 +8,16 @@ homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
-    - /config
+    - /home/homeassistant/.homeassistant
 
 
 http:
   api_password: !secret http_password
   ip_ban_enabled: yes
   login_attempts_threshold: 3
-  base_url: !secret http_base_url
-  ssl_certificate: /ssl/fullchain.pem
-  ssl_key: /ssl/privkey.pem
+  # base_url: !secret http_base_url
+  # ssl_certificate: /ssl/fullchain.pem
+  # ssl_key: /ssl/privkey.pem
 
 config:
 updater:
