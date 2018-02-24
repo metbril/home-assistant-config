@@ -61,7 +61,7 @@ pws:
 garage:
   name: Garage
   entities:
-    - switch.motion_garage
+    - binary_sensor.motion_garage
     - switch.power_garage_door
 living_lights:
   name: Verlichting Woonkamer

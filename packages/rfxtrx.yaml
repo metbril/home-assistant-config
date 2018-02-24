@@ -1,14 +1,58 @@
-############################################################
-## RFXTRX
-############################################################
+################################################
+## Packages RFXTRX
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'rfxtrx'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    # ################################################
+    # ## Binary Sensor
+    # ################################################
+
+    binary_sensor.motion_garage:
+      <<: *customize
+      friendly_name: "Beweging garage"
+      # icon: mdi:run-fast
+
+    # ################################################
+    # ## Switch
+    # ################################################
+
+    switch.power_garage_door:
+      <<: *customize
+      friendly_name: "Spanning garagedeur"
+      # icon: mdi:power-plug
+      # assumed_state: no
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.kaku_remote_living:
+      <<: *customize
+      friendly_name: 'KAKU Afstandsbediening Woonkamer'
 
 rfxtrx:
-  device: /dev/ttyRFXCOM
-  debug: yes
+  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1XQFD94-if00-port0
+  debug: no
 
 ############################################################
 ## Cover
 ############################################################
+
 cover:
   - platform: rfxtrx
     automatic_add: false
@@ -17,16 +61,9 @@ cover:
 ## Light
 ############################################################
 
-# Prefix:
-# 0b is the length of the datapacket
-# 11 means Lighting2
-# 00 means subtype AC
-
-# 0b 11 00 310 0bb1362 01 010f60   0bb13621
-
 light:
   - platform: rfxtrx
-    # automatic_add: True
+    automatic_add: false
     devices:
       0b1100200099acb60b010f70: # 099acb611 kaku wall left
         name: KAKU Wall Switch Left
@@ -36,12 +73,24 @@ light:
         name: Living Desk
 
 ############################################################
+## Binary Sensor
+############################################################
+
+binary_sensor:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0b110010011600020a010f70: # kaku motion
+        name: motion_garage
+        device_class: motion
+
+############################################################
 ## Sensor
 ############################################################
 
 sensor:
   - platform: rfxtrx
-    automatic_add: True
+    automatic_add: false
     devices:
       0a5207023f0e0074380159:
         name: PWS TH
@@ -65,9 +114,6 @@ switch:
   - platform: rfxtrx
     automatic_add: false
     devices:
-      0b110010011600020a010f70: # kaku motion
-        name: Motion Garage
-        fire_event: True
       0b11001000bb136201010f60: # 0bb13621 kaku remote 1
         name: KAKU Remote 1
       0b11001000bb136202010f60: # 0bb13622 kaku remote 2
