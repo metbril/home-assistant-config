@@ -8,7 +8,7 @@ homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
-    - /home/homeassistant/.homeassistant
+    - /config
 
 
 http:
