@@ -42,23 +42,3 @@ sensor.dark_sky_ozone:
 sensor.waqi_rotterdam_impact:
   friendly_name: "Luchtkwaliteit"
   icon: mdi:factory
-  
-# dsmr
-sensor.power_consumption:
-  friendly_name: "Actueel verbruik"
-sensor.power_consumption_normal:
-  friendly_name: "Verbruik normaal tarief"
-sensor.power_consumption_low:
-  friendly_name: "Verbruik laag tarief"
-sensor.power_tariff:
-  friendly_name: "Actueel tarief"
-  icon: mdi:currency-eur
-sensor.power_production:
-  hidden: yes
-sensor.power_production_low:
-  hidden: yes
-sensor.power_production_normal:
-  hidden: yes
-sensor.hourly_gas_consumption:
-  hidden: yes
-

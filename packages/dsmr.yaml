@@ -25,12 +25,37 @@ homeassistant:
     sensor.gas_consumption:
       <<: *customize
       friendly_name: Gasverbruik
+    sensor.power_consumption:
+      <<: *customize
+      friendly_name: "Actueel verbruik"
+    sensor.power_consumption_normal:
+      <<: *customize
+      friendly_name: "Verbruik normaal tarief"
+    sensor.power_consumption_low:
+      <<: *customize
+      friendly_name: "Verbruik laag tarief"
+    sensor.power_tariff:
+      <<: *customize
+      friendly_name: "Actueel tarief"
+      icon: mdi:currency-eur
+    sensor.power_production:
+      <<: *customize
+      hidden: yes
+    sensor.power_production_low:
+      <<: *customize
+      hidden: yes
+    sensor.power_production_normal:
+      <<: *customize
+      hidden: yes
+    sensor.hourly_gas_consumption:
+      <<: *customize
+      hidden: yes
 
     ################################################
     ## Group
     ################################################
 
-    group.template:
+    group.meter_readings:
       <<: *customize
       friendly_name: Meterstanden
 
