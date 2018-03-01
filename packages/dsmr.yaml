@@ -27,16 +27,16 @@ homeassistant:
       friendly_name: Gasverbruik
     sensor.power_consumption:
       <<: *customize
-      friendly_name: "Actueel verbruik"
+      friendly_name: "Eenergieverbruik"
     sensor.power_consumption_normal:
       <<: *customize
-      friendly_name: "Verbruik normaal tarief"
+      friendly_name: "Energieverbruik normaal tarief"
     sensor.power_consumption_low:
       <<: *customize
-      friendly_name: "Verbruik laag tarief"
+      friendly_name: "Energieverbruik laag tarief"
     sensor.power_tariff:
       <<: *customize
-      friendly_name: "Actueel tarief"
+      friendly_name: "Energietarief"
       icon: mdi:currency-eur
     sensor.power_production:
       <<: *customize
