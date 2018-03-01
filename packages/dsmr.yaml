@@ -1,0 +1,58 @@
+################################################
+## Packages DMSR
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'dsmr'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.gas_consumption:
+      <<: *customize
+      friendly_name: Gasverbruik
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.template:
+      <<: *customize
+      friendly_name: Meterstanden
+
+################################################
+## Group
+################################################
+
+group:
+  meter_readings:
+    name: Meter Readings
+    entities:
+      - sensor.power_consumption
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.gas_consumption
+      - sensor.power_tariff
+
+################################################
+## Sensor
+################################################
+
+sensor:
+  - platform: dsmr
+    port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5Z5VJCX-if00-port0
+    dsmr_version: 4

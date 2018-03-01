@@ -31,15 +31,6 @@ weather:
     - sensor.dark_sky_precip
     - sensor.dark_sky_precip_intensity
     - sensor.dark_sky_precip_probability
-meter_readings:
-  # dsmr slimme meter
-  name: Meterstanden
-  entities:
-    - sensor.power_consumption
-    - sensor.power_consumption_low
-    - sensor.power_consumption_normal
-    - sensor.gas_consumption
-    - sensor.power_tariff
 family:
   name: Familie
   entities:
@@ -80,6 +71,7 @@ presence_view:
   icon: mdi:account
   entities:
     - group.family
+    - group.person_robert
     - group.vacation
 living_view:
   name: Woonkamer
