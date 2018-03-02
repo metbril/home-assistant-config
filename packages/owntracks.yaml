@@ -1,0 +1,33 @@
+################################################
+## Packages OwnTracks
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'owntracks'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+mqtt:
+  #broker: core-mosquitto
+  broker: !secret mqtt_cloudmqtt_broker
+  port: !secret mqtt_cloudmqtt_port
+  username: !secret mqtt_cloudmqtt_username
+  password: !secret mqtt_cloudmqtt_password
+
+device_tracker:
+  - platform: owntracks
+
+
+  
+

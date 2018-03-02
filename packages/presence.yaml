@@ -1,0 +1,61 @@
+################################################
+## Packages Test
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'presence'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.people_tracker_robert:
+      <<: *customize
+      friendly_name: Robert
+    group.people_tracker_monique:
+      <<: *customize
+      friendly_name: Monique
+    group.people_tracker_bjorn:
+      <<: *customize
+      friendly_name: Björn
+    group.people_tracker_family:
+      <<: *customize
+      friendly_name: Familie
+
+################################################
+## Group
+################################################
+
+group:
+  people_tracker_robert:
+    name: Robert
+    entities:
+      - device_tracker.robert_iphone
+      - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b
+  people_tracker_monique:
+    name: Monique
+    entities:
+      - device_tracker.monique_iphone
+  people_tracker_bjorn:
+    name: Björn
+    entities:
+      - device_tracker.bjorn_iphone
+  people_tracker_family:
+    name: Familie
+    entities:
+      - group.people_tracker_robert
+      - group.people_tracker_monique
+      - group.people_tracker_bjorn

@@ -31,12 +31,6 @@ weather:
     - sensor.dark_sky_precip
     - sensor.dark_sky_precip_intensity
     - sensor.dark_sky_precip_probability
-family:
-  name: Familie
-  entities:
-    - device_tracker.robert_iphone
-    - device_tracker.monique_iphone
-    - device_tracker.bjorn_iphone
 automation:
   name: Automatisering
   entities:
@@ -70,8 +64,10 @@ presence_view:
   view: yes
   icon: mdi:account
   entities:
-    - group.family
-    - group.person_robert
+    - group.people_tracker_family
+    - group.people_tracker_robert
+    - group.people_tracker_monique
+    - group.people_tracker_bjorn
     - group.vacation
 living_view:
   name: Woonkamer
