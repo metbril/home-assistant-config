@@ -8,9 +8,12 @@ exclude:
     - updater
     - automation
     - alert
+    - script
     - device_tracker
     - group
     - media_player
+    - remote
+    - light
     - sun
     - zone
   entities:
@@ -18,10 +21,27 @@ exclude:
     - sensor.time
     - sensor.worldclock_sensor
     - sensor.moon
+    - sensor.season
     - sensor.last_boot
     - sensor.since_last_boot
+    - sensor.since_last_boot_short
+    - sensor.since_last_boot_short_nl
+    - sensor.ha_uptime
+    - sensor.bad_login
+    - sensor.homeassistant_v2db
+    - sensor.homeassistantlog
+    - sensor.myipopendnscom
+    # host network
+    - sensor.network_in_eth0
+    - sensor.network_out_eth0
+    - sensor.packets_in_eth0
+    - sensor.packets_out_eth0
+    # cpu
+    - sensor.processor_use
+    - sensor.cpu_temperature
     - binary_sensor.cpu_high
     - binary_sensor.cpu_hot
+
     # dsmr
     - sensor.power_production
     - sensor.power_production_low
@@ -40,3 +60,10 @@ exclude:
     - sensor.dark_sky_precip
     - sensor.dark_sky_precip_intensity
     - sensor.dark_sky_precip_probability
+    # waqi
+
+# include only:
+#
+# sensor.power_consumption_low
+# sensor.power_consumption_normal
+# sensor.gas_consumption
