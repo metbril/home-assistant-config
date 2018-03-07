@@ -10,7 +10,6 @@ homeassistant:
   whitelist_external_dirs:
     - /config
 
-
 http:
   api_password: !secret http_password
   ip_ban_enabled: yes
@@ -26,6 +25,7 @@ discovery:
 conversation:
 map:
 
+recorder: !include include/recorder.yaml
 history:
 logbook:
 
@@ -46,9 +46,10 @@ group: !include group.yaml
 automation: !include automation.yaml
 script: !include script.yaml
 
+##########################################################
 ## TODO: move these to packages
+##########################################################
 
 light: !include include/light.yaml
 media_player: !include include/media_player.yaml
-recorder: !include include/recorder.yaml
 sensor: !include include/sensor.yaml
