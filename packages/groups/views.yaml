@@ -1,0 +1,84 @@
+################################################
+## Package / Groups / Views
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'views'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.presence_view:
+      <<: *customize
+      friendly_name: Aanwezigheid
+      icon: mdi:account
+
+    group.living_view:
+      <<: *customize
+      friendly_name: Woonkamer
+      icon: mdi:sofa
+
+    group.garage_view:
+      <<: *customize
+      friendly_name: Garage
+      icon: mdi:garage
+
+    group.automation_view:
+      <<: *customize
+      friendly_name: Automatisering
+      icon: mdi:auto-fix
+
+################################################
+## Group
+################################################
+
+group:
+
+  presence_view:
+    name: Presence
+    view: yes
+    entities:
+      - group.people_tracker_family
+      - group.people_tracker_robert
+      - group.people_tracker_monique
+      - group.people_tracker_bjorn
+      - group.vacation
+
+  living_view:
+    name: Woonkamer
+    view: yes
+    entities:
+      - media_player.woonkamer
+      - group.living_lights
+      - group.dusk_living_lights
+      - media_player.apple_tv_van_bregt
+      - remote.apple_tv_van_bregt
+      - group.benext_molite_8
+      - group.fibaro_wall_plug_7
+
+  garage_view:
+    name: Garage
+    view: yes
+    entities:
+      - group.garage
+
+  automation_view:
+    name: Automation
+    view: yes
+    entities:
+      - group.automation
+      - group.alert
