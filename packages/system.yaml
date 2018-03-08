@@ -53,6 +53,10 @@ homeassistant:
       <<: *customize
       friendly_name: Home Assistant Logbestand
 
+    sensor.ozw_logtxt:
+      <<: *customize
+      friendly_name: OZW Logbestand
+
     sensor.cpu_temperature:
       <<: *customize
       friendly_name: Processortemperatuur
@@ -177,6 +181,7 @@ sensor:
     file_paths:
       - /config/home-assistant_v2.db
       - /config/home-assistant.log
+      - /config/OZW_Log.txt
   - platform: dnsip
   - platform: command_line
     # https://home-assistant.io/components/sensor.command_line/
@@ -219,7 +224,7 @@ sensor:
         value_template: >-
           {% set value = states.sensor.since_last_boot_short.state %}
           {{ value | replace('days', 'dagen') | replace('day', 'dag') }}
-
+  
 ################################################
 ## Group
 ################################################
@@ -251,6 +256,7 @@ group:
       - sensor.disk_free_
       - sensor.homeassistant_v2db
       - sensor.homeassistantlog
+      - sensor.ozw_logtxt
   host_network:
     name: Host Network
     entities:

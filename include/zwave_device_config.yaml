@@ -1,0 +1,6 @@
+sensor.benext_molite_8_temperature:
+  ignored: false
+  polling_intensity: 15
+sensor.benext_molite_8_luminance:
+  ignored: false
+  polling_intensity: 15

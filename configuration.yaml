@@ -38,6 +38,10 @@ tts:
   - platform: google
     language: 'nl'
 
+zwave:
+  usb_path: /dev/ttyACM0
+  device_config: !include include/zwave_device_config.yaml
+
 ##########################################################
 ## Reloadable without restart
 ##########################################################

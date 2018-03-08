@@ -1,16 +1,19 @@
 # home assistant specific
+home-assistant_v2.db
+home-assistant.log
 secrets.yaml
 known_devices.yaml
 ip_bans.yaml
 entity_registry.yaml
 
-#folders
+# home assistant folders
 www/
 lib/
 deps/
 tts/
 custom_components/
 
+# custom folders
 ssh/
 
 # this script contains secrets
@@ -29,19 +32,25 @@ bin/mindergas.py
 *.csr
 *.crt
 *.key
-OZW_Log.txt
-home-assistant.log
-home-assistant_v2.db
-home-assistant_v2.db-shm
-home-assistant_v2.db-wal
 
+# some temporary database files
+*.db-shm
+*.db-wal
 *.db-journal
+*.sqlite-journal
+
 
 *.conf
 plex.conf
 phue.conf
 harmony_media_room.conf
+
+# zwave
+OZW_Log.txt
 pyozw.sqlite
+options.xml
+zwcfg*.xml
+zwscene.xml
 
 .*
 !/.gitignore
