@@ -1,0 +1,96 @@
+################################################
+## Package / Groups / Rooms
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'rooms'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.living:
+      <<: *customize
+      friendly_name: Woonkamer
+      icon: mdi:sofa
+
+################################################
+## Group
+################################################
+
+group:
+  living:
+    control: hidden
+    entities:
+      - light.hoge_kast
+      - light.bank
+      - light.living_desk
+      - light.tv_meubel
+      - media_player.woonkamer
+      - media_player.apple_tv_van_bregt
+      - sensor.benext_molite_8_motion
+      - sensor.benext_molite_8_temperature
+      - sensor.benext_molite_8_luminance
+      - switch.fibaro_wall_plug_7
+  kitchen:
+    control: hidden
+    entities:
+      # - 
+  entry:
+    control: hidden
+    # entities:
+    #   - 
+  garage:
+    control: hidden
+    entities:
+      - binary_sensor.motion_garage
+      - switch.power_garage_door
+  toilet_gf:
+    control: hidden
+    # entities:
+    #   - 
+  master_bedroom:
+    control: hidden
+    # entities:
+    #   - 
+  kidsroom:
+    control: hidden
+    # entities:
+    #   - 
+  clothing_room:
+    control: hidden
+    # entities:
+    #   - 
+  hall:
+    control: hidden
+    # entities:
+    #   - 
+  bathroom:
+    control: hidden
+    # entities:
+    #   - 
+  toilet_ff:
+    control: hidden
+    # entities:
+    #   - 
+  backyard:
+    control: hidden
+    # entities:
+    #   - 
+  driveway:
+    control: hidden
+    # entities:
+    #   - 

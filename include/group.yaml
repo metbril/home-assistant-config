@@ -43,11 +43,6 @@ pws:
     - sensor.pws_th_humidity
     - sensor.pws_rain_rain_rate
     - sensor.pws_wind_wind_direction
-garage:
-  name: Garage
-  entities:
-    - binary_sensor.motion_garage
-    - switch.power_garage_door
 living_lights:
   name: Verlichting Woonkamer
   entities:
