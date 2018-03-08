@@ -42,3 +42,8 @@ sensor.dark_sky_ozone:
 sensor.waqi_rotterdam_impact:
   friendly_name: "Luchtkwaliteit"
   icon: mdi:factory
+
+# group
+group.motion:
+  friendly_name: 'Bewegingsensoren'
+  icon: mdi:run

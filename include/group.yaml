@@ -56,6 +56,12 @@ living_lights:
     - light.bank
     - light.living_desk
     - light.tv_meubel
+motion:
+  name: Motion sensors
+  # view: false
+  entities:
+    - binary_sensor.benext_molite_8_motion
+    - binary_sensor.motion_garage
 
 ### VIEWS ###
 
