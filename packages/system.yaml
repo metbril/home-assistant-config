@@ -224,6 +224,8 @@ sensor:
         value_template: >-
           {% set value = states.sensor.since_last_boot_short.state %}
           {{ value | replace('days', 'dagen') | replace('day', 'dag') }}
+- platform: cert_expiry
+    host: !secret cert_expiry_host
   
 ################################################
 ## Group
@@ -265,6 +267,7 @@ group:
       - sensor.packets_out_eth0
       - sensor.packets_in_eth0
       - sensor.myipopendnscom
+      - sensor.cert_expiry
   host_info:
     name: System Info
     entities:
