@@ -1,5 +1,5 @@
 ################################################
-## Packages Test
+## Package / Groups / People
 ################################################
 
 homeassistant:
@@ -11,7 +11,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'presence'
+        package: 'people'
 
       expose: &expose
         <<: *customize
@@ -22,40 +22,44 @@ homeassistant:
     ## Group
     ################################################
 
-    group.people_tracker_robert:
-      <<: *customize
-      friendly_name: Robert
-    group.people_tracker_monique:
-      <<: *customize
-      friendly_name: Monique
-    group.people_tracker_bjorn:
-      <<: *customize
-      friendly_name: Björn
-    group.people_tracker_family:
+    group.family:
       <<: *customize
       friendly_name: Familie
+      icon: mdi:human-male-female
+    group.person_robert:
+      <<: *customize
+      friendly_name: Robert
+      icon: mdi:human-male
+    group.person_monique:
+      <<: *customize
+      friendly_name: Monique
+      icon: mdi:human-female
+    group.person_bjorn:
+      <<: *customize
+      friendly_name: Björn
+      icon: mdi:human-male
 
 ################################################
 ## Group
 ################################################
 
 group:
-  people_tracker_robert:
-    name: Robert
+  family:
+    control: hidden
+    entities:
+      - group.person_robert
+      - group.person_monique
+      - group.person_bjorn
+  person_robert:
+    control: hidden
     entities:
       - device_tracker.robert_iphone
       - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b
-  people_tracker_monique:
-    name: Monique
+  person_monique:
+    control: hidden
     entities:
       - device_tracker.monique_iphone
-  people_tracker_bjorn:
-    name: Björn
+  person_bjorn:
+    control: hidden
     entities:
       - device_tracker.bjorn_iphone
-  people_tracker_family:
-    name: Familie
-    entities:
-      - group.people_tracker_robert
-      - group.people_tracker_monique
-      - group.people_tracker_bjorn
