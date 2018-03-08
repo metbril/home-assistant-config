@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Amsterdam
-  customize: !include customize.yaml
+  customize: !include include/customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - /config
@@ -46,9 +46,9 @@ zwave:
 ## Reloadable without restart
 ##########################################################
 
-group: !include group.yaml
-automation: !include automation.yaml
-script: !include script.yaml
+group: !include include/group.yaml
+automation: !include include/automation.yaml
+script: !include include/script.yaml
 
 ##########################################################
 ## TODO: move these to packages
