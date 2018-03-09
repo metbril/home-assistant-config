@@ -267,7 +267,7 @@ group:
       - sensor.packets_out_eth0
       - sensor.packets_in_eth0
       - sensor.myipopendnscom
-      - sensor.cert_expiry
+      - sensor.ssl_certificate_expiry
   host_info:
     name: System Info
     entities:
