@@ -16,6 +16,7 @@ exclude:
     - light
     - sun
     - zone
+    - zwave
   entities:
     - sensor.date
     - sensor.time
@@ -41,7 +42,6 @@ exclude:
     - sensor.cpu_temperature
     - binary_sensor.cpu_high
     - binary_sensor.cpu_hot
-
     # dsmr
     - sensor.power_production
     - sensor.power_production_low
@@ -61,6 +61,20 @@ exclude:
     - sensor.dark_sky_precip_intensity
     - sensor.dark_sky_precip_probability
     # waqi
+    # zwave
+    - binary_sensor.benext_molite_8_motion
+    - sensor.benext_molite_8_alarm_level
+    - sensor.benext_molite_8_alarm_type
+    - sensor.benext_molite_8_battery_level
+    # - sensor.benext_molite_8_luminance
+    # - sensor.benext_molite_8_temperature
+    - switch.fibaro_wall_plug_7
+    - sensor.fibaro_wall_plug_7_energy
+    - sensor.fibaro_wall_plug_7_exporting
+    - sensor.fibaro_wall_plug_7_power
+    - sensor.fibaro_wall_plug_7_power_2
+
+
 
 # include only:
 #
