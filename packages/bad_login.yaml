@@ -5,16 +5,18 @@ sensor:
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
 
-automation:
-- alias: "Send notification upon failed login attempt"
-  trigger:
-    - platform: state
-      entity_id: persistent_notification.httplogin
-  condition:
-    - condition: template
-      value_template: "{{ trigger.to_state.state != 'None' }}"
-  action:
-    - service: notify.telegram
-      data_template:
-        title: "Failed Home Assistant login!"
-        message: "{{ trigger.to_state.state }}"
+## This automation is replaced by forwarding all persistent notifications to Telegram
+
+# automation:
+# - alias: "Send notification upon failed login attempt"
+#   trigger:
+#     - platform: state
+#       entity_id: persistent_notification.httplogin
+#   condition:
+#     - condition: template
+#       value_template: "{{ trigger.to_state.state != 'None' }}"
+#   action:
+#     - service: notify.telegram
+#       data_template:
+#         title: "Failed Home Assistant login!"
+#         message: "{{ trigger.to_state.state }}"

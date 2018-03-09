@@ -8,3 +8,27 @@ notify:
   - name: telegram
     platform: telegram
     chat_id: !secret telegram_bot_chat_id_robert
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: forward_persistent_notifications
+    initial_state: 'on'
+    trigger:
+      - platform: event
+        event_type: call_service
+        event_data:
+          domain: persistent_notification
+          service: create
+    action:
+      - service: notify.telegram
+        data_template:
+          message: >-
+            {% set message = trigger.event.data.service_data.message %}
+            {% if 'login attempt' in message|lower %}
+              {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{ message.split('from ')[1] }}
+            {% else %}
+              {{ message }}
+            {% endif %}
