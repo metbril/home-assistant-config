@@ -54,3 +54,4 @@ zwscene.xml
 
 .*
 !/.gitignore
+!/.travis.yml
