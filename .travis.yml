@@ -7,3 +7,8 @@ script:
   - hass -c . --script check_config
 before_install:
   - mv travis_secrets.yaml secrets.yaml
+  - mkdir -p /config/ssh
+  - touch /config/ssh/id_rsa
+  - touch /config/home-assistant_v2.db
+  - touch /config/home-assistant.log
+  - touch /config/OZW_Log.txt
