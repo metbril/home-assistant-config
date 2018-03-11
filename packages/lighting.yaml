@@ -34,6 +34,7 @@ group:
     name: Dusk Living Lights
     entities:
       - light.bank
+      - light.bollamp
       - light.dressoirkast
       - light.hoge_kast
       - light.living_desk
