@@ -35,7 +35,6 @@ group:
     entities:
       - light.bank
       - light.bollamp
-      - light.dressoirkast
       - light.hoge_kast
       - light.living_desk
       - light.tv_meubel
