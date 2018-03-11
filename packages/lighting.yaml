@@ -24,6 +24,9 @@ homeassistant:
     group.dusk_living_lights:
       <<: *customize
       friendly_name: Schemerverlichting Woonkamer
+    group.living_lights:
+      <<: *customize
+      friendly_name: Verlichting Woonkamer
 
 ################################################
 ## Group
@@ -31,7 +34,6 @@ homeassistant:
 
 group:
   dusk_living_lights:
-    name: Dusk Living Lights
     entities:
       - light.bank
       - light.bollamp
@@ -39,7 +41,6 @@ group:
       - light.living_desk
       - light.tv_meubel
   living_lights:
-    name: Verlichting Woonkamer
     entities:
       ## clockwise from the door
       - light.hoge_kast
