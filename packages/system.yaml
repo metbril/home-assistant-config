@@ -292,7 +292,7 @@ alert:
     can_acknowledge: True
     skip_first: False
     notifiers:
-      - telegram
+      - pushover
   cpu_hot:
     name: Temperatuur CPU is hoog
     entity_id: binary_sensor.cpu_high
@@ -301,7 +301,7 @@ alert:
     can_acknowledge: True
     skip_first: False
     notifiers:
-      - telegram
+      - pushover
   db_large:
     name: Database Large
     entity_id: binary_sensor.db_large
@@ -314,7 +314,7 @@ alert:
     can_acknowledge: true
     skip_first: false
     notifiers:
-      - telegram
+      - pushover
 
 ################################################
 ## Automation
@@ -326,7 +326,7 @@ automation:
       - platform: state
         entity_id: updater.updater
     action:
-      - service: notify.telegram
+      - service: notify.pushover
         data:
           message: 'Update voor Home Assistant beschikbaar.'
 
