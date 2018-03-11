@@ -39,6 +39,15 @@ group:
       - light.hoge_kast
       - light.living_desk
       - light.tv_meubel
+  living_lights:
+    name: Verlichting Woonkamer
+    entities:
+      ## clockwise from the door
+      - light.hoge_kast
+      - light.bank
+      - light.bollamp
+      - light.living_desk
+      - light.tv_meubel
 
 ################################################
 ## Automation

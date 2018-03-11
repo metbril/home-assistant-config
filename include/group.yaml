@@ -43,15 +43,6 @@ pws:
     - sensor.pws_th_humidity
     - sensor.pws_rain_rain_rate
     - sensor.pws_wind_wind_direction
-living_lights:
-  name: Verlichting Woonkamer
-  entities:
-    ## clockwise from the door
-    - light.hoge_kast
-    - light.bank
-    - light.bollamp
-    - light.living_desk
-    - light.tv_meubel
 motion:
   name: Motion sensors
   # view: false
