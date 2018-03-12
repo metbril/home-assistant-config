@@ -1,0 +1,60 @@
+################################################
+## Packages / Weather
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'weather'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Sensor
+    ################################################
+
+      <<: *customize
+      friendly_name: 'Verwachte gemiddelde neerslag'
+      unit_of_measurement: 'mm/u'
+
+################################################
+## Sensor
+################################################
+
+sensor:
+  - platform: buienradar
+    name: Buienradar
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    timeframe: 30
+    monitored_conditions:
+      - precipitation_forecast_average
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: Rain Alarm
+    trigger:
+      - platform: state
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        from: '0'
+    condition: 
+      - condition: numeric_state
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        above: '1'
+    action:
+      - service: notify.telegram
+        data_template:
+          title: "Regenalarm"
+          message: "De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement }} neerslag verwacht"
