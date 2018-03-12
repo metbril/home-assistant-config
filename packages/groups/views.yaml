@@ -27,6 +27,11 @@ homeassistant:
       friendly_name: Aanwezigheid
       icon: mdi:account
 
+    group.rooms_view:
+      <<: *customize
+      friendly_name: Ruimtes
+      icon: mdi:floor-plan
+
     group.living_view:
       <<: *customize
       friendly_name: Woonkamer
@@ -57,9 +62,14 @@ group:
       - group.person_monique
       - group.person_bjorn
       - group.vacation
-
+  rooms_view:
+    name: Rooms
+    view: yes
+    entities:
+      - group.living
+      - group.garage
   living_view:
-    name: Woonkamer
+    name: Living
     view: yes
     entities:
       - media_player.woonkamer
@@ -69,13 +79,11 @@ group:
       - remote.apple_tv_van_bregt
       - group.benext_molite_8
       - group.fibaro_wall_plug_7
-
   garage_view:
     name: Garage
     view: yes
     entities:
       - group.garage
-
   automation_view:
     name: Automation
     view: yes
