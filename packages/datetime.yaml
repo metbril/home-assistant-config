@@ -11,7 +11,8 @@ sensor:
       - 'date'
       - 'time'
   - platform: worldclock
-    time_zone: Europe/Amsterdam
+    time_zone: America/Toronto
+    name: Toronto Time
   - platform: moon
   - platform: season
   - platform: template
@@ -77,3 +78,4 @@ group:
       - sun.sun
       - sensor.moon
       - sensor.season
+      - sensor.toronto_time
