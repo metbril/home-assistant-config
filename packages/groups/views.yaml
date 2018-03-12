@@ -52,10 +52,10 @@ group:
     name: Presence
     view: yes
     entities:
-      - group.people_tracker_family
-      - group.people_tracker_robert
-      - group.people_tracker_monique
-      - group.people_tracker_bjorn
+      - group.family 
+      - group.person_robert
+      - group.person_monique
+      - group.person_bjorn
       - group.vacation
 
   living_view:
