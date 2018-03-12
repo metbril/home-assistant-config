@@ -37,6 +37,12 @@ homeassistant:
       # icon: mdi:power-plug
       # assumed_state: no
 
+    switch.mess_call:
+      <<: *customize
+      friendly_name: 'Bel verzamelen'
+      icon: mdi:bell-ring
+      assumed_state: false
+
     ################################################
     ## Group
     ################################################
@@ -47,9 +53,9 @@ homeassistant:
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1XQFD94-if00-port0
-  debug: no
+  debug: yes
 
-############################################################
+  ############################################################
 ## Cover
 ############################################################
 
@@ -128,4 +134,22 @@ switch:
       #  name: Sofa Ceiling
       0a140f01000b5501010f60: # lighting5 it 2901.01 On
         name: Power Garage Door
+      0b110005011afee601040f60: # beldrukker woonkamer
+        name: Mess Call
+        fire_event: true
 
+############################################################
+## Automation
+############################################################
+
+automation:
+  - alias: Mess Call Pressed
+    trigger:
+        - platform: event
+          event_type: button_pressed
+          event_data: {"entity_id": "switch.mess_call"}
+    action:
+      service: notify.telegram
+      data:
+        title: 'Etenstijd'
+        message: 'Etenstijd!'
