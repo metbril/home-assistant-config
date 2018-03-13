@@ -89,6 +89,7 @@ sensor:
 ## Manually posting is possible by using a script
 
 script:
+  ## API documentation at https://www.mindergas.nl/member/api
   post_mindergas:
     alias: Post Gas Consumption
     sequence:
