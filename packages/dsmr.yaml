@@ -1,5 +1,5 @@
 ################################################
-## Packages DMSR
+## Packages / DMSR
 ################################################
 
 homeassistant:
@@ -81,3 +81,51 @@ sensor:
   - platform: dsmr
     port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5Z5VJCX-if00-port0
     dsmr_version: 4
+
+##################################################
+## Script
+##################################################
+
+## Manually posting is possible by using a script
+
+script:
+  post_mindergas:
+    alias: Post Gas Consumption
+    sequence:
+      - service: shell_command.curl
+        data_template:
+          method: post
+          url: https://www.mindergas.nl/api/gas_meter_readings
+          headers:
+            Content-Type: application/json
+            AUTH-TOKEN: !secret mindergas_token 
+          payload:
+            date: "{{ (as_timestamp(now()) - (24*3600)) | timestamp_custom('%Y-%m-%d', True) }}"
+            reading: "{{ states.sensor.gas_consumption.state }}"
+      - service: logbook.log
+        data:
+          name: Gasverbruik
+          message: is verstuurd naar mindergas.nl
+          entity_id: sensor.gas_consumption
+          domain: sensor
+      - service: notify.pushover
+        data_template:
+          message: "Gasverbruik van {{ states.sensor.gas_consumption.state}} m3 is verstuurd naar mindergas.nl"
+
+##################################################
+## Automation
+##################################################
+
+automation:
+  - alias: Post Gas Consumption
+    hide_entity: no # default no
+    trigger:
+      - platform: time
+        ## run daily at 00:15:00
+        ## gas meter reading usually updated around 0:06
+        ## publishing should happen after that
+        hours: 00
+        minutes: 15
+        seconds: 00
+    action:
+      - service: script.post_mindergas
