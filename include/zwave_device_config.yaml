@@ -4,3 +4,7 @@ sensor.benext_molite_8_temperature:
 sensor.benext_molite_8_luminance:
   ignored: false
   polling_intensity: 15
+sensor.fibaro_wall_plug_7_distance:
+  ignored: true
+sensor.fibaro_wall_plug_7_velocity:
+  ignored: true
