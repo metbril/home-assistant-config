@@ -1,8 +1,43 @@
+################################################
+## Packages / Telegram
+################################################
+
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'telegram'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Automation
+    ################################################
+
+    automation.forward_persistent_notifications:
+      <<: *customize
+      friendly_name: Doorsturen permanente meldingen
+
+################################################
+## Telegram Bot
+################################################
+
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_bot_api_key
     allowed_chat_ids:
       - !secret telegram_bot_chat_id_robert
+
+################################################
+## Notify
+################################################
 
 notify:
   - name: telegram
@@ -14,7 +49,7 @@ notify:
 ################################################
 
 automation:
-  - alias: forward_persistent_notifications
+  - alias: Forward Persistent Notifications
     initial_state: 'on'
     trigger:
       - platform: event
