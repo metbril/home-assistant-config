@@ -22,6 +22,7 @@ homeassistant:
     ## Sensor
     ################################################
 
+    sensor.buienradar_precipitation_forecast_average:
       <<: *customize
       friendly_name: 'Verwachte gemiddelde neerslag'
       unit_of_measurement: 'mm/u'
@@ -48,11 +49,6 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.buienradar_precipitation_forecast_average
-        from: '0'
-    condition: 
-      - condition: numeric_state
-        entity_id: sensor.buienradar_precipitation_forecast_average
-        above: '1'
     action:
       - service: notify.telegram
         data_template:
