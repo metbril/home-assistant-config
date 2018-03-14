@@ -259,6 +259,7 @@ group:
       - sensor.homeassistant_v2db
       - sensor.homeassistantlog
       - sensor.ozw_logtxt
+      - sensor.db_large
   host_network:
     name: Host Network
     entities:
