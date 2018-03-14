@@ -9,7 +9,7 @@ This repository contains my configuration for Home Assistant. It is installed on
 I have quickly replaced the default sqlite database with MySQL.
 The default database was growing rapidly and lead to bad performance.
 
-To limit database growth, I limit recording as much as possible and purge the database for values older than 7 days.
+To limit database growth, I limit [recording](https://home-assistant.io/components/recorder/) as much as possible and purge the database daily for values older than 3 days.
 
 ## Devices
 

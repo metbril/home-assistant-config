@@ -23,7 +23,7 @@ homeassistant:
 
     binary_sensor.db_large:
       <<: *customize
-      friendly_name: Database groot
+      friendly_name: Grote database
 
     ################################################
     ## Sensor
@@ -147,7 +147,7 @@ binary_sensor:
   - platform: template
     sensors:
       db_large:
-        value_template: '{{ states.sensor.homeassistant_v2db.state | float > 100 }}'
+        value_template: '{{ states.sensor.homeassistant_v2db.state | float > 300 }}'
 
 ################################################
 ## Sensor
@@ -312,6 +312,7 @@ alert:
       - 30
       - 60
       - 120
+      - 240
     can_acknowledge: true
     skip_first: false
     notifiers:
