@@ -27,6 +27,14 @@ homeassistant:
       friendly_name: 'Verwachte gemiddelde neerslag'
       unit_of_measurement: 'mm/u'
 
+    ################################################
+    ## Automation
+    ################################################
+
+    automation.rain_alarm:
+      <<: *customize
+      friendly_name: 'Buienalarm'
+
 ################################################
 ## Sensor
 ################################################
