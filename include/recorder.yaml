@@ -20,7 +20,7 @@ exclude:
   entities:
     - sensor.date
     - sensor.time
-    - sensor.worldclock_sensor
+    - sensor.toronto_time
     - sensor.moon
     - sensor.season
     - sensor.last_boot
@@ -73,11 +73,3 @@ exclude:
     - sensor.fibaro_wall_plug_7_exporting
     - sensor.fibaro_wall_plug_7_power
     - sensor.fibaro_wall_plug_7_power_2
-
-
-
-# include only:
-#
-# sensor.power_consumption_low
-# sensor.power_consumption_normal
-# sensor.gas_consumption
