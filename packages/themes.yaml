@@ -1,0 +1,24 @@
+input_select:
+  theme:
+    name: Theme
+    options:
+      - default
+      - solarized
+      - solarized-light
+      - darkred
+      - darkcyan
+      - material-dark-green
+      - midnight
+    initial: default
+    icon: mdi:theme-light-dark
+
+automation:
+  - alias: Theme
+    initial_state: 'on'
+    trigger:
+      - platform: state
+        entity_id: input_select.theme
+    action:
+      - service: frontend.set_theme
+        data_template:
+          name: "{{ states.input_select.theme.state }}"

@@ -22,6 +22,7 @@ http:
 config:
 updater:
 frontend:
+  themes: !include_dir_merge_named themes/
 discovery:
 conversation:
 map:
