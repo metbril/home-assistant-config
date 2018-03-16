@@ -76,6 +76,10 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.buienradar_precipitation_forecast_average
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        above: 0
     action:
       - service: notify.telegram
         data_template:
