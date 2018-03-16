@@ -45,16 +45,12 @@ sensor:
     units: si
     monitored_conditions:
       - temperature
-      - apparent_temperature
-      - dew_point
       - humidity
       - pressure
-      - visibility
-      - cloud_cover
       - wind_speed
       - wind_bearing
       - ozone
-      - precip_type
+      - uv_index
       - precip_intensity
       - precip_probability
       - summary
