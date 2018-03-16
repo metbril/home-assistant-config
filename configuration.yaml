@@ -57,4 +57,3 @@ script: !include include/script.yaml
 
 light: !include include/light.yaml
 media_player: !include include/media_player.yaml
-sensor: !include include/sensor.yaml
