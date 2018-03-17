@@ -7,28 +7,14 @@
 ## Some packages also contain groups 
 ################################################
 
-health:
-  name: Gezondheid
-  entities:
-    - sensor.waqi_rotterdam
-    - sensor.waqi_rotterdam_impact
-    - sensor.dark_sky_ozone
 automation:
   name: Automatisering
   entities:
     - automation.download_laag
     - automation.update_available_notification
-pws:
-  name: Weerstation
-  entities:
-    - sensor.pws_th_temperature
-    - sensor.pws_th_humidity
-    - sensor.pws_rain_rain_rate
-    - sensor.pws_wind_wind_direction
 motion:
   name: Motion sensors
   # view: false
   entities:
     - binary_sensor.benext_molite_8_motion
     - binary_sensor.motion_garage
-

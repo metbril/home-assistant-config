@@ -1,0 +1,51 @@
+################################################
+## Packages / Environment
+################################################
+
+## Dependancy: packages airquality, weather, rfxtrx
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'environment'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.health:
+        <<: *customize
+        friendly_name: 'Gezondheid'
+    group.pws:
+        <<: *customize
+        friendly_name: 'Weerstation'
+
+################################################
+## Group
+################################################
+
+group:
+  health:
+    name: Health
+    entities:
+      - sensor.waqi_rotterdam
+      - sensor.waqi_rotterdam_impact
+      - sensor.dark_sky_ozone
+  pws:
+    name: Personal Weather Station
+    entities:
+      - sensor.pws_th_temperature
+      - sensor.pws_th_humidity
+      - sensor.pws_rain_rain_rate
+      - sensor.pws_wind_wind_direction
