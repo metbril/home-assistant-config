@@ -25,7 +25,7 @@ homeassistant:
     binary_sensor.benext_molite_8_motion:
       <<: *customize
       device_class: motion
-      friendly_name: 'Molite Motion'
+      friendly_name: 'Beweging woonkamer'
 
     ################################################
     ## Sensor
@@ -33,7 +33,14 @@ homeassistant:
 
     sensor.benext_molite_8_battery_level:
       <<: *customize
-      friendly_name: 'Batterij'
+      friendly_name: 'Batterij beweging woonkamer'
+    sensor.benext_molite_8_temperature:
+      <<: *customize
+      friendly_name: 'Temperatuur woonkamer'
+    sensor.benext_molite_8_luminance:
+      <<: *customize
+      friendly_name: 'Lichtsterkte woonkamer'
+      icon: mdi:brightness-6
 
     ################################################
     ## Group
