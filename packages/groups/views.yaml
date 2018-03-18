@@ -118,6 +118,7 @@ group:
     view: yes
     entities:
       - sensor.bad_login
+      - input_select.frontend_theme
       - group.host_performance
       - group.host_storage
       - group.host_network

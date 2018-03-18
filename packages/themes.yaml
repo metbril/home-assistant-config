@@ -1,6 +1,6 @@
 input_select:
   theme:
-    name: Theme
+    name: Frontend Theme
     options:
       - default
       - solarized
@@ -17,8 +17,8 @@ automation:
     initial_state: 'on'
     trigger:
       - platform: state
-        entity_id: input_select.theme
+        entity_id: input_select.frontend_theme
     action:
       - service: frontend.set_theme
         data_template:
-          name: "{{ states.input_select.theme.state }}"
+          name: "{{ states.input_select.frontend_theme.state }}"
