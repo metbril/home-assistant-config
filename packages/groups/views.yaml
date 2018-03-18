@@ -51,6 +51,12 @@ homeassistant:
       friendly_name: Automatisering
       icon: mdi:auto-fix
 
+    group.host_view:
+      <<: *customize
+      friendly_name: Systeeminformatie
+      icon: mdi:server
+      order: 999 # always last
+    
     group.all_automations:
       <<: *customize
       hidden: false
@@ -107,3 +113,13 @@ group:
       - group.alert
       - group.all_automations
       - group.all_scripts
+  host_view:
+    name: Host
+    view: yes
+    entities:
+      - sensor.bad_login
+      - group.host_performance
+      - group.host_storage
+      - group.host_network
+      - group.host_info
+      - group.speedtest
