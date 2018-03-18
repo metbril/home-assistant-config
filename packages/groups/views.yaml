@@ -22,6 +22,10 @@ homeassistant:
     ## Group
     ################################################
 
+    group.default_view:
+      <<: *customize
+      friendly_name: Start
+
     group.presence_view:
       <<: *customize
       friendly_name: Aanwezigheid
@@ -53,6 +57,9 @@ homeassistant:
 
 group:
 
+  default_view:
+    name: 'Home'
+    view: yes
   presence_view:
     name: Presence
     view: yes
