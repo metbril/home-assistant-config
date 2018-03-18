@@ -51,6 +51,11 @@ homeassistant:
       friendly_name: Automatisering
       icon: mdi:auto-fix
 
+    group.settings_view:
+      <<: *customize
+      friendly_name: Instellingen
+      icon: mdi:settings
+
     group.host_view:
       <<: *customize
       friendly_name: Systeeminformatie
@@ -113,6 +118,11 @@ group:
       - group.alert
       - group.all_automations
       - group.all_scripts
+  settings_view:
+    name: Settings
+    view: yes
+    entities:
+      - group.frontend_settings
   host_view:
     name: Host
     view: yes

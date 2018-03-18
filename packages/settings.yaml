@@ -1,0 +1,6 @@
+group:
+  frontend_settings:
+    name: Frontend Settings
+    entities:
+      - input_select.frontend_theme
+
