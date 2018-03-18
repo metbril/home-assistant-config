@@ -27,10 +27,6 @@ discovery:
 conversation:
 map:
 
-recorder: !include include/recorder.yaml
-history:
-logbook:
-
 logger:
   default: warn
   # logs:
