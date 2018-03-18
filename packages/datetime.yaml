@@ -123,6 +123,10 @@ sensor:
             onbekend
           {% endif %}
 
+################################################
+## Automation
+################################################
+
 automation:
 
   # sensor.timeofday
@@ -137,6 +141,10 @@ automation:
         data_template:
           message: 'Het is nu {{ trigger.to_state.state }}'
 
+################################################
+## Group
+################################################
+
 group:
   now:
     name: Now
@@ -145,7 +153,7 @@ group:
       - sensor.time
       - sensor.time_of_day
       - sensor.toronto_time
-      - binary_sensor.workday_sensor
+      - binary_sensor.workday
       - sun.sun
       - sensor.moon
       - sensor.season
