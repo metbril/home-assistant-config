@@ -79,6 +79,11 @@ group:
   default_view:
     name: 'Home'
     view: yes
+    entities:
+      - group.now
+      - group.weather
+      - group.health
+      - group.meter_readings
   presence_view:
     name: Presence
     view: yes
