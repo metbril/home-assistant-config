@@ -67,24 +67,25 @@ sensor:
 ## Group
 ################################################
 
-weather:
-  name: Weerbericht
-  entities:
-    - sensor.dark_sky_summary
-    - sensor.dark_sky_icon
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_apparent_temperature
-    - sensor.dark_sky_dew_point
-    - sensor.dark_sky_humidity
-    - sensor.dark_sky_pressure
-    - sensor.dark_sky_visibility
-    - sensor.dark_sky_cloud_coverage
-    - sensor.dark_sky_wind_speed
-    - sensor.dark_sky_wind_bearing
-    - sensor.dark_sky_precip_type
-    - sensor.dark_sky_precip
-    - sensor.dark_sky_precip_intensity
-    - sensor.dark_sky_precip_probability
+group:
+  weather:
+    name: Weerbericht
+    entities:
+      - sensor.dark_sky_summary
+      - sensor.dark_sky_icon
+      - sensor.dark_sky_temperature
+      - sensor.dark_sky_apparent_temperature
+      - sensor.dark_sky_dew_point
+      - sensor.dark_sky_humidity
+      - sensor.dark_sky_pressure
+      - sensor.dark_sky_visibility
+      - sensor.dark_sky_cloud_coverage
+      - sensor.dark_sky_wind_speed
+      - sensor.dark_sky_wind_bearing
+      - sensor.dark_sky_precip_type
+      - sensor.dark_sky_precip
+      - sensor.dark_sky_precip_intensity
+      - sensor.dark_sky_precip_probability
 
 ################################################
 ## Automation
