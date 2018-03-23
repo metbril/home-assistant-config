@@ -1,5 +1,5 @@
 input_select:
-  theme:
+  frontend_theme:
     name: Frontend Theme
     options:
       - default
