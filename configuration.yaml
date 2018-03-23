@@ -45,7 +45,10 @@ zwave:
 ##########################################################
 
 group: !include include/group.yaml
-automation: !include include/automation.yaml
+
+# fixed name and path for use with automation editor
+automation: !include automations.yaml
+
 script: !include include/script.yaml
 
 ##########################################################
