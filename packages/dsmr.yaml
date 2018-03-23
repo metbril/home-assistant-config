@@ -27,7 +27,7 @@ homeassistant:
       friendly_name: Gasverbruik
     sensor.power_consumption:
       <<: *customize
-      friendly_name: "Eenergieverbruik"
+      friendly_name: "Energieverbruik"
     sensor.power_consumption_normal:
       <<: *customize
       friendly_name: "Energieverbruik normaal tarief"
