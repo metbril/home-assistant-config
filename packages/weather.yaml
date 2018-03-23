@@ -22,10 +22,58 @@ homeassistant:
     ## Sensor
     ################################################
 
+    sensor.dark_sky_temperature:
+      <<: *customize
+      friendly_name: 'Temperatuur omgeving'
+
+    sensor.dark_sky_apparent_temperature:
+      <<: *customize
+      friendly_name: 'Gevoelstemperatuur omgeving'
+
+    sensor.dark_sky_humidity:
+      <<: *customize
+      friendly_name: 'Luchtvochtigheid omgeving'
+
+    sensor.dark_sky_pressure:
+      <<: *customize
+      friendly_name: 'Luchtdruk omgeving'
+
+    sensor.dark_sky_wind_speed:
+      <<: *customize
+      friendly_name: 'Windsnelheid omgeving'
+
+    sensor.dark_sky_wind_direction:
+      <<: *customize
+      friendly_name: 'Windrichting omgeving'
+
+    sensor.dark_sky_ozone:
+      <<: *customize
+      friendly_name: 'Ozon'
+
+    sensor.dark_sky_uv_index:
+      <<: *customize
+      friendly_name: 'UV-index'
+
+    sensor.dark_sky_precip_intensity:
+      <<: *customize
+      friendly_name: 'Neerslagintensiteit omgeving'
+
+    sensor.dark_sky_precip_probability:
+      <<: *customize
+      friendly_name: 'Neerslagkans omgeving'
+
     sensor.buienradar_precipitation_forecast_average:
       <<: *customize
-      friendly_name: 'Verwachte gemiddelde neerslag'
+      friendly_name: 'Verwachte neerslag'
       unit_of_measurement: 'mm/u'
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.weather:
+      <<: *customize
+      friendly_name: 'Weerbericht'
 
     ################################################
     ## Automation
@@ -45,6 +93,7 @@ sensor:
     units: si
     monitored_conditions:
       - temperature
+      - apparent_temperature
       - humidity
       - pressure
       - wind_speed
@@ -53,8 +102,6 @@ sensor:
       - uv_index
       - precip_intensity
       - precip_probability
-      - summary
-      - icon
   - platform: buienradar
     name: Buienradar
     latitude: !secret home_latitude
@@ -69,23 +116,17 @@ sensor:
 
 group:
   weather:
-    name: Weerbericht
+    name: Weather
     entities:
-      - sensor.dark_sky_summary
-      - sensor.dark_sky_icon
       - sensor.dark_sky_temperature
       - sensor.dark_sky_apparent_temperature
-      - sensor.dark_sky_dew_point
       - sensor.dark_sky_humidity
       - sensor.dark_sky_pressure
-      - sensor.dark_sky_visibility
-      - sensor.dark_sky_cloud_coverage
       - sensor.dark_sky_wind_speed
       - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_precip_type
-      - sensor.dark_sky_precip
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_precip_probability
+      - sensor.buienradar_precipitation_forecast_average
 
 ################################################
 ## Automation

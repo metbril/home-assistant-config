@@ -42,6 +42,7 @@ group:
       - sensor.waqi_rotterdam
       - sensor.waqi_rotterdam_impact
       - sensor.dark_sky_ozone
+      - sensor.dark_sky_uv_index
   pws:
     name: Personal Weather Station
     entities:
