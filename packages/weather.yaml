@@ -57,6 +57,7 @@ homeassistant:
     sensor.dark_sky_precip_intensity:
       <<: *customize
       friendly_name: 'Neerslagintensiteit omgeving'
+      unit_of_measurement: 'mm/u'
 
     sensor.dark_sky_precip_probability:
       <<: *customize
