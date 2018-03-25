@@ -54,6 +54,7 @@ homeassistant:
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1XQFD94-if00-port0
   debug: no
+
 ############################################################
 ## Cover
 ############################################################
@@ -121,6 +122,7 @@ switch:
     devices:
       0b11001000bb136201010f60: # 0bb13621 kaku remote 1
         name: KAKU Remote 1
+        fire_event: true # to catch 'group off' event
       0b11001000bb136202010f60: # 0bb13622 kaku remote 2
         name: KAKU Remote 2
       0b11001000bb136203010f60: # 0bb13623 kaku remote 3
@@ -144,11 +146,26 @@ switch:
 automation:
   - alias: Mess Call Pressed
     trigger:
-        - platform: event
-          event_type: button_pressed
-          event_data: {"entity_id": "switch.mess_call"}
+      - platform: event
+        event_type: button_pressed
+        event_data: {"entity_id": "switch.mess_call"}
     action:
-      service: notify.telegram
-      data:
-        title: 'Etenstijd'
-        message: 'Etenstijd!'
+      - service: notify.telegram
+        data:
+          title: 'Etenstijd'
+          message: 'Etenstijd!'
+  - alias: KAKU Remote Group Off
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data: {"entity_id": "switch.kaku_remote_1", "state" : "group off"}
+    action:
+      - service: light.turn_off
+        entity_id: group.living_lights
+      - service: logbook.log
+        data:
+          name: Woonkamerverlichting
+          message: uitgeschakeld
+      - service: notify.telegram
+        data:
+          message: 'Woonkamerverlichting uitgeschakeld'
