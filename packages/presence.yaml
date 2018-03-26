@@ -93,3 +93,23 @@ group:
     control: hidden
     entities:
       - device_tracker.bjorn_iphone
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: Family Home
+    trigger:
+      - platform: state
+        entity_id: group.family
+    action:
+      - service: notify.pushover
+        data_template:
+          title: "Familie Thuis"
+          message: >-
+            {% if is_state('trigger.to_state', 'home') -%}
+              Iemand van de familie komt thuis.
+            {%- else -%}
+              Niemand van de familie is meer thuis.
+            {%- endif %}
