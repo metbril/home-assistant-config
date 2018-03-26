@@ -110,6 +110,8 @@ automation:
           message: >-
             {% if is_state('trigger.to_state', 'home') -%}
               Iemand van de familie komt thuis.
-            {%- else -%}
+            {%- elif is_state('trigger.to_state', 'not_home') -%}
               Niemand van de familie is meer thuis.
+            {%- else -%}
+              Onbekend of er iemand van de familie thuis is.            
             {%- endif %}
