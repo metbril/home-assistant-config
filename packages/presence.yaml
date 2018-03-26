@@ -1,0 +1,49 @@
+################################################
+## Packages / Presence
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'presence'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+################################################
+## MQTT
+################################################
+
+mqtt:
+  # broker: core-mosquitto
+  broker: !secret mqtt_cloudmqtt_broker
+  port: !secret mqtt_cloudmqtt_port
+  username: !secret mqtt_cloudmqtt_username
+  password: !secret mqtt_cloudmqtt_password
+
+################################################
+## Device Tracker
+################################################
+
+# https://home-assistant.io/components/device_tracker/
+
+device_tracker:
+  - platform: asuswrt
+    host: !secret asuswrt_host
+    username: !secret asuswrt_username
+    ssh_key: !secret asuswrt_ssh_key
+    track_new_devices: yes
+    consider_home: 180
+    interval_seconds: 12
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
+  - platform: owntracks
