@@ -148,7 +148,8 @@ automation:
     trigger:
       - platform: event
         event_type: button_pressed
-        event_data: {"entity_id": "switch.mess_call"}
+        event_data:
+          entity_id: switch.mess_call
     action:
       - service: notify.telegram
         data:
@@ -158,7 +159,9 @@ automation:
     trigger:
       - platform: event
         event_type: button_pressed
-        event_data: {"entity_id": "switch.kaku_remote_1", "state" : "group off"}
+        event_data: 
+          entity_id: switch.kaku_remote_1
+          state: 'group off'
     action:
       - service: light.turn_off
         entity_id: group.living_lights
