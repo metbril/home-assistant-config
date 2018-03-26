@@ -18,6 +18,27 @@ homeassistant:
         haaska_hidden: false
         homebridge_hidden: false
 
+    ################################################
+    ## Group
+    ################################################
+
+    group.family:
+      <<: *customize
+      friendly_name: Familie
+      icon: mdi:human-male-female
+    group.person_robert:
+      <<: *customize
+      friendly_name: Robert
+      icon: mdi:human-male
+    group.person_monique:
+      <<: *customize
+      friendly_name: Monique
+      icon: mdi:human-female
+    group.person_bjorn:
+      <<: *customize
+      friendly_name: Björn
+      icon: mdi:human-male
+
 ################################################
 ## MQTT
 ################################################
@@ -47,3 +68,28 @@ device_tracker:
       track_new_devices: false
       hide_if_away: false
   - platform: owntracks
+
+################################################
+## Group
+################################################
+
+group:
+  family:
+    control: hidden
+    entities:
+      - group.person_robert
+      - group.person_monique
+      - group.person_bjorn
+  person_robert:
+    control: hidden
+    entities:
+      - device_tracker.robert_iphone
+      - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b
+  person_monique:
+    control: hidden
+    entities:
+      - device_tracker.monique_iphone
+  person_bjorn:
+    control: hidden
+    entities:
+      - device_tracker.bjorn_iphone
