@@ -138,12 +138,26 @@ switch:
       0b110005011afee601040f60: # beldrukker woonkamer
         name: Mess Call
         fire_event: true
+      0b11001601131fb20c010f80: # beldrukker voordeur
+        name: Frontdoor Bell
+        fire_event: true
 
 ############################################################
 ## Automation
 ############################################################
 
 automation:
+  - alias: Frontdoor Bell Pressed
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data:
+          entity_id: switch.frontdoor_bell
+    action:
+      - service: notify.telegram
+        data_template:
+          title: 'Bel voordeur'
+          message: 'Er is aangebeld {{ as_timestamp(now()) | timestamp_custom("op %d-%m om %H:%M", True) }}'
   - alias: Mess Call Pressed
     trigger:
       - platform: event
