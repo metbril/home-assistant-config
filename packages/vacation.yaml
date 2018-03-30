@@ -1,5 +1,5 @@
 ################################################
-## Packages Vacation
+## Packages / Vacation
 ##
 ## Requires package Lighting
 ################################################
@@ -79,5 +79,18 @@ automation:
         data_template:
           title: '**Vakantieschakeling**'
           message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
+  - alias: Notify Vaction Enabled
+    trigger:
+      platform: time
+        at: '9:00:00'
+    condition:
+      - condition: state
+        entity_id: input_boolean.on_vacation
+        state: 'on'
+    action:
+      - service: notify.telegram
+        data_template:
+          title: '**Vakantieschakeling**'
+          message: 'Vakantiemodus nog ingeschakeld.'
 
 # TODO: bark the dog when the doorbell rings
