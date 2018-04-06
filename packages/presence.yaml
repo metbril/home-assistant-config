@@ -105,7 +105,7 @@ automation:
             {% set state = trigger.to_state.state %}
             {% if state == 'home' -%}
               Ik heb gemerkt dat er weer iemand thuis is.
-            {%- elif state == 'not_home') -%}
+            {%- elif state == 'not_home' -%}
               Ik zie dat er niemand meer thuis is.
             {%- else -%}
               Ik weet niet of er iemand thuis is.            
