@@ -106,12 +106,12 @@ automation:
     action:
       - service: notify.pushover
         data_template:
-          title: "Familie Thuis"
           message: >-
-            {% if is_state('trigger.to_state', 'home') -%}
-              Iemand van de familie komt thuis.
-            {%- elif is_state('trigger.to_state', 'not_home') -%}
-              Niemand van de familie is meer thuis.
+            {% set state = trigger.to_state.state %}
+            {% if state == 'home' -%}
+              Ik heb gemerkt dat er weer iemand thuis is.
+            {%- elif state == 'not_home') -%}
+              Ik zie dat er niemand meer thuis is.
             {%- else -%}
-              Onbekend of er iemand van de familie thuis is.            
+              Ik weet niet of er iemand thuis is.            
             {%- endif %}
