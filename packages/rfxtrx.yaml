@@ -13,42 +13,64 @@ homeassistant:
       customize: &customize
         package: 'rfxtrx'
 
-    # ################################################
-    # ## Binary Sensor
-    # ################################################
+    ################################################
+    ## Binary Sensor
+    ################################################
 
     binary_sensor.motion_garage:
       <<: *customize
       friendly_name: "Beweging garage"
       # icon: mdi:run-fast
 
-    # ################################################
-    # ## Sensor
-    # ################################################
+    ################################################
+    ## Sensor
+    ################################################
 
     sensor.frontdoor_bell_presses:
       <<: *customize
       friendly_name: "Bel voorkeur gebruikt"
 
-    # ################################################
-    # ## Switch
-    # ################################################
+    ################################################
+    ## Switch
+    ################################################
 
     switch.frontdoor_bell:
       <<: *customize
       friendly_name: 'Bel voordeur'
       icon: mdi:bell-ring
-      assumed_state: false
+      assumed_state: off
+
     switch.mess_call:
       <<: *customize
       friendly_name: 'Bel verzamelen'
       icon: mdi:bell-ring
-      assumed_state: false
+      assumed_state: off
+
     switch.power_garage_door:
       <<: *customize
       friendly_name: "Spanning garagedeur"
       # icon: mdi:power-plug
-      # assumed_state: no
+      # assumed_state: off
+
+    # ################################################
+    # ## Switch
+    # ################################################
+
+    light.kaku_wall_switch_left:
+      <<: *customize
+      friendly_name: "Plafond eettafel"
+      assumed_state: off
+
+    light.kaku_wall_switch_right:
+      <<: *customize
+      friendly_name: "Plafond sofa"
+      assumed_state: off
+
+    light.living_desk:
+      <<: *customize
+      friendly_name: "Staande lamp bureau"
+      assumed_state: off
+
 
     ################################################
     ## Group
@@ -118,6 +140,7 @@ sensor:
         name: PWS Wind
         data_type:
           - Wind direction
+
   - platform: history_stats
     name: Frontdoor Bell Presses
     entity_id: switch.frontdoor_bell
@@ -175,6 +198,7 @@ automation:
         data_template:
           title: 'Bel voordeur'
           message: 'Er is aangebeld {{ as_timestamp(now()) | timestamp_custom("op %d-%m om %H:%M", True) }}'
+
   - alias: Mess Call Pressed
     trigger:
       - platform: event
@@ -188,6 +212,7 @@ automation:
         data:
           title: 'Etenstijd'
           message: 'Etenstijd!'
+
   - alias: KAKU Remote Group Off
     trigger:
       - platform: event
