@@ -2,6 +2,13 @@
 ## Packages / Workday
 ################################################
 
+# bearing home - work: 205º
+# bearing work - home: 24º
+
+# !!! SECRETS
+# 51.9185046, 4.5645214
+# 51.8791186, 4.5353621
+ 
 homeassistant:
   customize:
 
@@ -26,17 +33,17 @@ homeassistant:
     ## Group
     ################################################
 
-    group.workday:
+    group.commute:
       <<: *customize
-      friendly_name: Werkdag
+      friendly_name: Woon-Werk
 
 ################################################
 ## Group
 ################################################
 
 group:
-  workday:
-    name: Workday
+  commute:
+    name: Commute
     entities:
       - binary_sensor.workday
       - sensor.dark_sky_wind_direction
@@ -48,12 +55,12 @@ group:
 ################################################
 
 automation:
-  - alias: 'Workday Group Visibility'
+  - alias: 'Toggle Commute Information Visibility'
     trigger:
       - platform: state
         entity_id: binary_sensor.workday
     action:
       - service: group.set_visibility
-        entity_id: group.workday
+        entity_id: group.commute
         data_template:
           visible: '{{ trigger.to_state.state }}'
