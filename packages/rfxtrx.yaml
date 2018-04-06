@@ -124,23 +124,6 @@ binary_sensor:
 ############################################################
 
 sensor:
-  - platform: rfxtrx
-    automatic_add: false
-    devices:
-      0a5207023f0e0074380159:
-        name: PWS TH
-        data_type:
-          - Humidity
-          - Temperature
-      0b55030c800c0000000a9569:
-        name: PWS Rain
-        data_type:
-          - Rain rate
-      105604029716013b000b000c0027002059:
-        name: PWS Wind
-        data_type:
-          - Wind direction
-
   - platform: history_stats
     name: Frontdoor Bell Presses
     entity_id: switch.frontdoor_bell
