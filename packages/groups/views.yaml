@@ -81,6 +81,7 @@ group:
     view: yes
     entities:
       - group.now
+      - group.commute
       - group.weather
       - group.health
       - group.meter_readings
