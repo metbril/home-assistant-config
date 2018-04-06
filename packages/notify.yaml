@@ -51,8 +51,8 @@ notify:
   - name: all
     platform: group
     services:
-      - rt
-      - rw
+      - service: rt
+      - service: rw
 
 ################################################
 ## Automation
