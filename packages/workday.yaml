@@ -2,13 +2,6 @@
 ## Packages / Workday
 ################################################
 
-# bearing home - work: 205º
-# bearing work - home: 24º
-
-# !!! SECRETS
-# 51.9185046, 4.5645214
-# 51.8791186, 4.5353621
- 
 homeassistant:
   customize:
 
