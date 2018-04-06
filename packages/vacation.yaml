@@ -79,9 +79,9 @@ automation:
         data_template:
           title: '**Vakantieschakeling**'
           message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
-  - alias: Notify Vaction Enabled
+  - alias: Notify Vacation Enabled
     trigger:
-      platform: time
+      - platform: time
         at: '9:00:00'
     condition:
       - condition: state
