@@ -30,6 +30,7 @@ recorder:
 
       # packages / rfxtrx
       - light.living_desk # restore state after reboot?
+      - switch.frontdoor_bell # for counter
 
       # packages / speedtest
       - sensor.speedtest_download
