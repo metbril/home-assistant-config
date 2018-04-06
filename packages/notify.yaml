@@ -44,10 +44,15 @@ notify:
     platform: telegram
     chat_id: !secret telegram_bot_chat_id_robert
 
+  - name: rw
+    platform: telegram
+    chat_id: !secret telegram_bot_chat_id_robertwerk
+
   - name: all
     platform: group
     services:
       - rt
+      - rw
 
 ################################################
 ## Automation
