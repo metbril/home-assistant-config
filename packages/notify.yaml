@@ -1,5 +1,5 @@
 ################################################
-## Packages / Telegram
+## Packages / Notify
 ################################################
 
 homeassistant:
@@ -10,7 +10,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'telegram'
+        package: 'notify'
 
     ################################################
     ## Automation
@@ -35,9 +35,19 @@ telegram_bot:
 ################################################
 
 notify:
-  - name: telegram
+  - name: admin
+    platform: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+  - name: rt
     platform: telegram
     chat_id: !secret telegram_bot_chat_id_robert
+
+  - name: all
+    platform: group
+    services:
+      - rt
 
 ################################################
 ## Automation
@@ -53,7 +63,7 @@ automation:
           domain: persistent_notification
           service: create
     action:
-      - service: notify.telegram
+      - service: notify.admin
         data_template:
           message: >-
             {% set message = trigger.event.data.service_data.message %}

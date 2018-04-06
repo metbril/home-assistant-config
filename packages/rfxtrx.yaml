@@ -177,7 +177,7 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.frontdoor_bell
-      - service: notify.telegram
+      - service: notify.all
         data_template:
           title: 'Bel voordeur'
           message: 'Er is aangebeld {{ as_timestamp(now()) | timestamp_custom("op %d-%m om %H:%M", True) }}'
@@ -191,7 +191,7 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.mess_call
-      - service: notify.telegram
+      - service: notify.all
         data:
           title: 'Etenstijd'
           message: 'Etenstijd!'
@@ -210,6 +210,3 @@ automation:
         data:
           name: Woonkamerverlichting
           message: uitgeschakeld
-      - service: notify.telegram
-        data:
-          message: 'Woonkamerverlichting uitgeschakeld'

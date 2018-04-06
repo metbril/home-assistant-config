@@ -272,7 +272,7 @@ alert:
     can_acknowledge: True
     skip_first: False
     notifiers:
-      - pushover
+      - admin
   cpu_hot:
     name: Temperatuur CPU is hoog
     entity_id: binary_sensor.cpu_high
@@ -281,7 +281,7 @@ alert:
     can_acknowledge: True
     skip_first: False
     notifiers:
-      - pushover
+      - admin
   db_large:
     name: Database Large
     entity_id: binary_sensor.db_large
@@ -295,7 +295,7 @@ alert:
     can_acknowledge: true
     skip_first: false
     notifiers:
-      - pushover
+      - admin
 
 ################################################
 ## Automation
@@ -307,16 +307,6 @@ automation:
       - platform: state
         entity_id: updater.updater
     action:
-      - service: notify.pushover
+      - service: notify.admin
         data:
           message: 'Update voor Home Assistant beschikbaar.'
-
-################################################
-## Notify
-################################################
-
-notify:
-  - name: pushover
-    platform: pushover
-    api_key: !secret pushover_api_key
-    user_key: !secret pushover_user_key

@@ -16,7 +16,7 @@ sensor:
 #     - condition: template
 #       value_template: "{{ trigger.to_state.state != 'None' }}"
 #   action:
-#     - service: notify.pushover
+#     - service: notify.admin
 #       data_template:
 #         title: "Failed Home Assistant login!"
 #         message: "{{ trigger.to_state.state }}"

@@ -65,7 +65,7 @@ automation:
       - platform: state
         entity_id: sensor.waqi_rotterdam_impact
     action:
-      - service: notify.telegram
+      - service: notify.all
         data_template:
           title: "Risico luchtkwaliteit gewijzigd"
           message: "De luchtkwaliteit is nu: {{ trigger.to_state.state }}"

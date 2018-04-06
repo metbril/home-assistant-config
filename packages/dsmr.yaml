@@ -104,7 +104,7 @@ script:
           message: is verstuurd naar mindergas.nl
           entity_id: sensor.gas_consumption
           domain: sensor
-      - service: notify.pushover
+      - service: notify.admin
         data_template:
           message: "Gasverbruik van {{ states.sensor.gas_consumption.state}} m3 is verstuurd naar mindergas.nl"
 

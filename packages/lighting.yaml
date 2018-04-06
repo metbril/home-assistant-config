@@ -61,10 +61,6 @@ automation:
         data:
           name: Schemerverlichting woonkamer
           message: is ingeschakeld
-      - service: notify.telegram
-        data_template:
-          title: '**Schermverlichting woonkamer**'
-          message: "Ingeschakeld"
 
 ################################################
 ## Scene

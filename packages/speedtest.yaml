@@ -39,6 +39,6 @@ automation:
         entity_id: sensor.speedtest_download
         below: 30
     action:
-      - service: notify.pushover
+      - service: notify.admin
         data:
           message: "Waarschuwing: speedtest download onder 30Mbit/s."

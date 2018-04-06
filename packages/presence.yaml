@@ -99,7 +99,7 @@ automation:
       - platform: state
         entity_id: group.family
     action:
-      - service: notify.pushover
+      - service: notify.admin
         data_template:
           message: >-
             {% set state = trigger.to_state.state %}

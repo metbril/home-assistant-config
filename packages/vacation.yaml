@@ -70,7 +70,7 @@ automation:
       - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
       - service: light.turn_off
         entity_id: group.dusk_living_lights
-      - service: notify.telegram
+      - service: notify.all
         data_template:
           title: '**Vakantieschakeling**'
           message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
@@ -83,7 +83,7 @@ automation:
         entity_id: input_boolean.on_vacation
         state: 'on'
     action:
-      - service: notify.telegram
+      - service: notify.admin
         data_template:
           title: '**Vakantieschakeling**'
           message: 'Vakantiemodus nog ingeschakeld.'
