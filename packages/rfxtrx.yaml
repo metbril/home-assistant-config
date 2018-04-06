@@ -28,20 +28,32 @@ homeassistant:
       # icon: mdi:run-fast
 
     # ################################################
+    # ## Sensor
+    # ################################################
+
+    sensor.frontdoor_bell_presses:
+      <<: *customize
+      friendly_name: "Bel voorkeur gebruikt"
+
+    # ################################################
     # ## Switch
     # ################################################
 
-    switch.power_garage_door:
+    switch.frontdoor_bell:
       <<: *customize
-      friendly_name: "Spanning garagedeur"
-      # icon: mdi:power-plug
-      # assumed_state: no
-
+      friendly_name: 'Bel voordeur'
+      icon: mdi:bell-ring
+      assumed_state: false
     switch.mess_call:
       <<: *customize
       friendly_name: 'Bel verzamelen'
       icon: mdi:bell-ring
       assumed_state: false
+    switch.power_garage_door:
+      <<: *customize
+      friendly_name: "Spanning garagedeur"
+      # icon: mdi:power-plug
+      # assumed_state: no
 
     ################################################
     ## Group
@@ -111,6 +123,14 @@ sensor:
         name: PWS Wind
         data_type:
           - Wind direction
+  - platform: history_stats
+    name: Frontdoor Bell Presses
+    entity_id: switch.frontdoor_bell
+    state: 'on'
+    type: count
+    end: '{{ now() }}'
+    duration:
+      hours: 24
 
 ############################################################
 ## Switch
@@ -127,12 +147,6 @@ switch:
         name: KAKU Remote 2
       0b11001000bb136203010f60: # 0bb13623 kaku remote 3
         name: KAKU Remote 3
-      # not paired yet
-      # 0b1100100f05e8120a010f60:
-      #  name: Diner Ceiling
-      # not paired yet
-      # 0b1100100f05e8120b010f60:
-      #  name: Sofa Ceiling
       0a140f01000b5501010f60: # lighting5 it 2901.01 On
         name: Power Garage Door
       0b110005011afee601040f60: # beldrukker woonkamer
@@ -141,6 +155,12 @@ switch:
       0b11001601131fb20c010f80: # beldrukker voordeur
         name: Frontdoor Bell
         fire_event: true
+      # not paired yet
+      # 0b1100100f05e8120a010f60:
+      #  name: Diner Ceiling
+      # not paired yet
+      # 0b1100100f05e8120b010f60:
+      #  name: Sofa Ceiling
 
 ############################################################
 ## Automation
@@ -154,6 +174,8 @@ automation:
         event_data:
           entity_id: switch.frontdoor_bell
     action:
+      - service: switch.turn_off
+        entity_id: switch.frontdoor_bell
       - service: notify.telegram
         data_template:
           title: 'Bel voordeur'
@@ -165,6 +187,8 @@ automation:
         event_data:
           entity_id: switch.mess_call
     action:
+      - service: switch.turn_off
+        entity_id: switch.mess_call
       - service: notify.telegram
         data:
           title: 'Etenstijd'
