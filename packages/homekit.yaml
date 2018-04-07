@@ -1,0 +1,52 @@
+################################################
+## Packages / HomeKit
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'homekit'
+
+################################################
+## HomeKit
+################################################
+
+homekit:
+  auto_start: false # needed for hue and zwave to come up
+  include_entities:
+    - light.bank
+    - light.bollamp
+    - light.hoge_kast
+    - light.living_desk
+    - light.tv_meubel
+
+    - switch.mess_call
+    - switch.power_garage_door
+
+    - sensor.benext_molite_8_temperature
+    - sensor.dark_sky_apparent_temperature
+    - sensor.dark_sky_humidity
+    - sensor.pws_th_humidity
+    - sensor.pws_th_temperature
+
+################################################
+## Automation
+################################################
+
+automation:
+  - alias: 'Start HomeKit'
+    hide_entity: true # default = false
+    initial_state: on
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      # wait 1 minute for zwave and hue
+      - delay: 00:01
+      - service: homekit.start
