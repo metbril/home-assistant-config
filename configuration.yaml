@@ -27,6 +27,9 @@ discovery:
 conversation:
 map:
 
+# enable ios app
+ios:
+
 logger:
   default: warn
   # logs:
