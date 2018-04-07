@@ -29,6 +29,7 @@ telegram_bot:
     api_key: !secret telegram_bot_api_key
     allowed_chat_ids:
       - !secret telegram_bot_chat_id_robert
+      - !secret telegram_bot_chat_id_robertwerk
 
 ################################################
 ## Notify
