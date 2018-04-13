@@ -12,6 +12,7 @@ lib/
 deps/
 tts/
 custom_components/
+homebridge/
 
 # custom folders
 ssh/
