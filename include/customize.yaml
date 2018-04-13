@@ -11,3 +11,11 @@
 group.motion:
   friendly_name: 'Bewegingsensoren'
   icon: mdi:run
+
+################################################
+## Sun
+################################################
+
+sun.sun:
+  friendly_name: 'Zon'
+

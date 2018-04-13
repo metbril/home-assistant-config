@@ -12,25 +12,6 @@ homeassistant:
       customize: &customize
         package: 'notify'
 
-    ################################################
-    ## Automation
-    ################################################
-
-    automation.forward_persistent_notifications:
-      <<: *customize
-      friendly_name: Doorsturen permanente meldingen
-
-################################################
-## Telegram Bot
-################################################
-
-telegram_bot:
-  - platform: polling
-    api_key: !secret telegram_bot_api_key
-    allowed_chat_ids:
-      - !secret telegram_bot_chat_id_robert
-      - !secret telegram_bot_chat_id_robertwerk
-
 ################################################
 ## Notify
 ################################################
@@ -40,20 +21,6 @@ notify:
     platform: pushover
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
-
-  - name: rt
-    platform: telegram
-    chat_id: !secret telegram_bot_chat_id_robert
-
-  - name: rw
-    platform: telegram
-    chat_id: !secret telegram_bot_chat_id_robertwerk
-
-  - name: all
-    platform: group
-    services:
-      - service: rt
-      - service: rw
 
 ################################################
 ## Automation

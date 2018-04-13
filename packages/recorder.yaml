@@ -18,35 +18,9 @@ recorder:
   include:
     entities:
 
-      # packages / airquality
-      - sensor.waqi_rotterdam
-
-      # packages / dsmr
-      - sensor.gas_consumption
-      - sensor.hourly_gas_consumption
-      - sensor.power_consumption
-      - sensor.power_consumption_low
-      - sensor.power_consumption_normal
-
       # packages / rfxtrx
       - light.living_desk # restore state after reboot?
       - switch.frontdoor_bell # for counter
-
-      # packages / speedtest
-      - sensor.speedtest_download
-
-      # packages / themes
-      - input_select.theme # so can restore state after reboot
-
-      # packages / weather
-      - sensor.buienradar_precipitation_forecast_average
-      - sensor.dark_sky_temperature
-      - sensor.pws_th_temperature
-
-      # packages / zwave
-      - binary_sensor.benext_molite_8_motion
-      - sensor.benext_molite_8_luminance
-      - sensor.benext_molite_8_temperature
 
 ################################################
 ## History
@@ -59,9 +33,6 @@ history:
 
       # packages / rfxtrx
       - light.living_desk # restore state after reboot?
-
-      # packages / themes
-      - input_select.theme # so can restore state after reboot
 
 ################################################
 ## Logbook

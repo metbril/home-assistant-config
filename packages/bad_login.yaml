@@ -5,7 +5,7 @@ sensor:
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
 
-## This automation is replaced by forwarding all persistent notifications to Telegram
+## This automation is replaced by forwarding all persistent notifications
 
 # automation:
 # - alias: "Send notification upon failed login attempt"
