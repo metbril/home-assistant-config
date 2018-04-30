@@ -39,6 +39,10 @@ logger:
 #   usb_path: /dev/ttyACM0
 #   device_config: !include include/zwave_device_config.yaml
 
+hue:
+  bridges:
+    - host: !secret hue_host
+
 ##########################################################
 ## Reloadable without restart
 ##########################################################
