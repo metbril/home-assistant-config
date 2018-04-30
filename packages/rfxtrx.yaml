@@ -41,6 +41,7 @@ homeassistant:
     switch.power_garage_door:
       <<: *customize
       friendly_name: "Spanning garagedeur"
+      assumed_state: on
 
     # ################################################
     # ## Switch
@@ -130,6 +131,7 @@ switch:
 
 automation:
   - alias: Frontdoor Bell Pressed
+    initial_state: on
     trigger:
       - platform: event
         event_type: button_pressed
@@ -144,6 +146,7 @@ automation:
           message: 'Er is aangebeld {{ as_timestamp(now()) | timestamp_custom("op %d-%m om %H:%M", True) }}'
 
   - alias: Mess Call Pressed
+    initial_state: off
     trigger:
       - platform: event
         event_type: button_pressed

@@ -26,6 +26,8 @@ notify:
     platform: group
     services:
       - service: admin
+      - service: ios_phonsine
+      - service: ios_patti
 
 ################################################
 ## Automation

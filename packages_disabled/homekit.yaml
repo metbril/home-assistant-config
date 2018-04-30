@@ -26,14 +26,14 @@ homekit:
     - light.living_desk
     - light.tv_meubel
 
-    - switch.mess_call
-    - switch.power_garage_door
+    # - switch.mess_call
+    # - switch.power_garage_door
 
-    - sensor.benext_molite_8_temperature
-    - sensor.dark_sky_apparent_temperature
-    - sensor.dark_sky_humidity
-    - sensor.pws_th_humidity
-    - sensor.pws_th_temperature
+    # - sensor.benext_molite_8_temperature
+    # - sensor.dark_sky_apparent_temperature
+    # - sensor.dark_sky_humidity
+    # - sensor.pws_th_humidity
+    # - sensor.pws_th_temperature
 
 ################################################
 ## Automation

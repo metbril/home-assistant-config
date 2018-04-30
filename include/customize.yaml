@@ -12,6 +12,12 @@ group.motion:
   friendly_name: 'Bewegingsensoren'
   icon: mdi:run
 
+group.living:
+  friendly_name: 'Woonkamer'
+
+group.garage:
+  friendly_name: 'Garage'
+
 ################################################
 ## Sun
 ################################################
