@@ -22,6 +22,11 @@ notify:
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
 
+  - name: all
+    platform: group
+    services:
+      - service: admin
+
 ################################################
 ## Automation
 ################################################

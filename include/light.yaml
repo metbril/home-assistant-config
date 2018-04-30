@@ -1,2 +1,0 @@
-- platform: hue
-  host: !secret hue_host

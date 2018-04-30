@@ -24,6 +24,14 @@ homeassistant:
       friendly_name: Verlichting Woonkamer
 
 ################################################
+## Light
+################################################
+
+light:
+  - platform: hue
+    host: !secret hue_host
+
+################################################
 ## Group
 ################################################
 
@@ -70,21 +78,3 @@ scene:
   - name: Living Lights Off
     entities:
       group.living_lights: off
-  # - name: Living Lights Max
-  #   # switch on all lights and dimmable lights to 100%
-  #   entities:
-  #     group.living_lights: on
-  #     light.hoge_kast:
-  #       brightness: 255
-  #       # white_value: 255
-  #     light.bank:
-  #       brightness: 255
-  #       # white_value: 255
-  #     light.bollamp:
-  #       brightness: 255
-  #       # white_value: 255
-  #     light.tv_meubel:
-  #       brightness: 255
-  #       # white_value: 255
-  # - name: Living Lights Normal
-  # - name: Living Lights Party Mode

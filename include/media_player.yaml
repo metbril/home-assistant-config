@@ -1,2 +1,0 @@
-- platform: sonos
-  hosts: !secret sonos_hosts

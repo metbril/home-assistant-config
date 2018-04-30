@@ -20,12 +20,6 @@ http:
   use_x_forwarded_for: true # default: false, use for proxied setup
 
 config:
-updater:
-frontend:
-  themes: !include_dir_merge_named themes/
-discovery:
-conversation:
-map:
 
 # enable ios app
 ios:
@@ -36,19 +30,14 @@ ios:
 
 sun:
 
-
 logger:
   default: warn
   # logs:
   #   homeassistant.components.rfxtrx: debug
 
-tts:
-  - platform: google
-    language: 'nl'
-
-zwave:
-  usb_path: /dev/ttyACM0
-  device_config: !include include/zwave_device_config.yaml
+# zwave:
+#   usb_path: /dev/ttyACM0
+#   device_config: !include include/zwave_device_config.yaml
 
 ##########################################################
 ## Reloadable without restart
@@ -60,10 +49,3 @@ group: !include include/group.yaml
 automation: !include automations.yaml
 
 script: !include include/script.yaml
-
-##########################################################
-## TODO: move these to packages
-##########################################################
-
-light: !include include/light.yaml
-media_player: !include include/media_player.yaml

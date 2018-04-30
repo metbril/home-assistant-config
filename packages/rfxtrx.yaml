@@ -23,14 +23,6 @@ homeassistant:
       # icon: mdi:run-fast
 
     ################################################
-    ## Sensor
-    ################################################
-
-    sensor.frontdoor_bell_presses:
-      <<: *customize
-      friendly_name: "Bel voorkeur gebruikt"
-
-    ################################################
     ## Switch
     ################################################
 
@@ -49,8 +41,6 @@ homeassistant:
     switch.power_garage_door:
       <<: *customize
       friendly_name: "Spanning garagedeur"
-      # icon: mdi:power-plug
-      # assumed_state: off
 
     # ################################################
     # ## Switch
@@ -71,14 +61,9 @@ homeassistant:
       friendly_name: "Staande lamp bureau"
       assumed_state: off
 
-
-    ################################################
-    ## Group
-    ################################################
-
-    group.kaku_remote_living:
-      <<: *customize
-      friendly_name: 'KAKU Afstandsbediening Woonkamer'
+############################################################
+## RFXTRX
+############################################################
 
 rfxtrx:
   device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1XQFD94-if00-port0
@@ -100,10 +85,6 @@ light:
   - platform: rfxtrx
     automatic_add: false
     devices:
-      0b1100200099acb60b010f70: # 099acb611 kaku wall left
-        name: KAKU Wall Switch Left
-      0b11002c0099acb60c000070: # 099acb612 kaku wall right
-        name: KAKU Wall Switch Right
       0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
         name: Living Desk
 
@@ -118,20 +99,6 @@ binary_sensor:
       0b110010011600020a010f70: # kaku motion
         name: motion_garage
         device_class: motion
-
-############################################################
-## Sensor
-############################################################
-
-sensor:
-  - platform: history_stats
-    name: Frontdoor Bell Presses
-    entity_id: switch.frontdoor_bell
-    state: 'on'
-    type: count
-    end: '{{ now() }}'
-    duration:
-      hours: 24
 
 ############################################################
 ## Switch
@@ -156,12 +123,6 @@ switch:
       0b11001601131fb20c010f80: # beldrukker voordeur
         name: Frontdoor Bell
         fire_event: true
-      # not paired yet
-      # 0b1100100f05e8120a010f60:
-      #  name: Diner Ceiling
-      # not paired yet
-      # 0b1100100f05e8120b010f60:
-      #  name: Sofa Ceiling
 
 ############################################################
 ## Automation
