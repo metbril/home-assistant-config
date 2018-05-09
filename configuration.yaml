@@ -1,5 +1,5 @@
 homeassistant:
-  name: Start
+  name: HIERO
   latitude: !secret home_latitude
   longitude: !secret home_longitude
   elevation: !secret home_elevation
@@ -10,6 +10,10 @@ homeassistant:
   whitelist_external_dirs:
     - !secret whitelist_dir_config
 
+frontend:
+
+config:
+
 http:
   api_password: !secret http_password
   ip_ban_enabled: yes
@@ -19,44 +23,51 @@ http:
   # ssl_key: /ssl/privkey.pem
   use_x_forwarded_for: true # default: false, use for proxied setup
 
-config:
-
-# enable ios app
-ios:
-
-
-# show hass.io panel
-hassio:
+# updater:
+  # include_used_components: true
 
 # discovery:
 
+# conversation:
 
-################################################
-## Sun
-################################################
+history:
+logbook:
 
-sun:
+# map:
 
 logger:
   default: warn
   # logs:
   #   homeassistant.components.rfxtrx: debug
 
+
+# Track the sun
+sun:
+
+##########
+## Bridges and hubs
+##########
+
 # zwave:
-#   usb_path: /dev/ttyACM0
+#   usb_path: !secret zwave_usb_path
 #   device_config: !include include/zwave_device_config.yaml
 
 hue:
   bridges:
     - host: !secret hue_host
 
-##########################################################
-## Reloadable without restart
-##########################################################
+# tts:
+#   - platform: google
 
-group: !include include/group.yaml
+# cloud:
 
+# enable ios app
+ios:
+
+# show hass.io panel
+hassio:
+
+group: !include groups.yaml
 # fixed name and path for use with automation editor
 automation: !include automations.yaml
-
-script: !include include/script.yaml
+script: !include scripts.yaml

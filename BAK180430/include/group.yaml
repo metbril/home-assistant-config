@@ -7,13 +7,13 @@
 ## Some packages also contain groups 
 ################################################
 
-
 default_view:
   name: 'Home'
   view: yes
   entities:
     - group.living
     - group.garage
+    - group.vacation
 
 living:
   # control: hidden
@@ -35,16 +35,3 @@ garage:
   entities:
     # - binary_sensor.motion_garage
     - switch.power_garage_door
-
-# automation:
-#   name: Automatisering
-#   entities:
-#     - automation.download_laag
-#     - automation.update_available_notification
-
-# motion:
-#   name: Motion sensors
-#   # view: false
-#   entities:
-#     - binary_sensor.benext_molite_8_motion
-#     - binary_sensor.motion_garage

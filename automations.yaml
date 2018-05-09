@@ -1,5 +1,6 @@
 - action: []
   id: DUMMY
-  alias: DUMMY - NIET VERWIJDEREN
+  alias: DUMMY NIET VERWIJDEREN
+  hide_entity: no # default no, hide from UI
   condition: []
   trigger: []
