@@ -25,7 +25,7 @@ notify:
   - name: all
     platform: group
     services:
-      - service: admin
+      # - service: admin
       - service: ios_phonsine
       - service: ios_patti
 
