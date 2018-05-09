@@ -1,0 +1,39 @@
+################################################
+## Include Group
+##
+## These can be reloaded without restarting 
+## Home Assistant
+##
+## Some packages also contain groups 
+##
+## Group in packages are NOT reloaded without
+## a restart
+################################################
+
+default_view:
+  name: 'Home'
+  view: yes
+  entities:
+    - group.living
+    - group.garage
+    # - group.vacation
+
+start:
+  name: 'Start'
+  view: yes
+  entities:
+    - group.vacation
+
+living:
+  # control: hidden
+  entities:
+    - light.hoge_kast
+    - light.bank
+    - light.bollamp
+    - light.living_desk
+    - light.tv_meubel
+
+garage:
+  control: hidden
+  entities:
+    - switch.power_garage_door
