@@ -51,11 +51,11 @@ homeassistant:
       friendly_name: Instellingen
       icon: mdi:settings
 
-    group.host_view:
-      <<: *customize
-      friendly_name: Systeeminformatie
-      icon: mdi:server
-      order: 999 # always last
+    # group.host_view:
+    #   <<: *customize
+    #   friendly_name: Systeeminformatie
+    #   icon: mdi:server
+    #   order: 999 # always last
     
     group.all_automations:
       <<: *customize
@@ -124,14 +124,14 @@ group:
     view: yes
     entities:
       - group.frontend_settings
-  host_view:
-    name: Host
-    view: yes
-    entities:
-      - sensor.bad_login
-      - input_select.frontend_theme
-      - group.host_performance
-      - group.host_storage
-      - group.host_network
-      - group.host_info
-      - group.speedtest
+  # host_view:
+  #   name: Host
+  #   view: yes
+  #   entities:
+  #     - sensor.bad_login
+  #     - input_select.frontend_theme
+  #     - group.host_performance
+  #     - group.host_storage
+  #     - group.host_network
+  #     - group.host_info
+  #     - group.speedtest

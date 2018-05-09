@@ -103,6 +103,12 @@ homeassistant:
   ## Group
   ################################################
 
+    group.host_view:
+      <<: *customize
+      friendly_name: Systeeminformatie
+      icon: mdi:server
+      order: 999 # always last
+    
     group.host_performance:
       <<: *customize
       friendly_name: Prestaties
@@ -221,6 +227,16 @@ sensor:
 ################################################
 
 group:
+  host_view:
+    name: Host
+    view: yes
+    entities:
+      - sensor.bad_login
+      - group.host_performance
+      - group.host_storage
+      - group.host_network
+      - group.host_info
+      - group.speedtest
   host_performance:
     # Systeeminformatie
     name: System Performance
