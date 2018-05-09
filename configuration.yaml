@@ -10,9 +10,14 @@ homeassistant:
   whitelist_external_dirs:
     - !secret whitelist_dir_config
 
-frontend:
+# discovery:
 
+# UI elements
+
+frontend:
 config:
+# conversation:
+# map:
 
 http:
   api_password: !secret http_password
@@ -23,23 +28,18 @@ http:
   # ssl_key: /ssl/privkey.pem
   use_x_forwarded_for: true # default: false, use for proxied setup
 
+# not needed with hassio
+
 # updater:
   # include_used_components: true
 
-# discovery:
-
-# conversation:
-
 history:
 logbook:
-
-# map:
 
 logger:
   default: warn
   # logs:
   #   homeassistant.components.rfxtrx: debug
-
 
 # Track the sun
 sun:
@@ -63,6 +63,7 @@ hue:
 # tts:
 #   - platform: google
 
+# Home Assistant Cloud
 # cloud:
 
 # enable ios app
@@ -72,6 +73,6 @@ ios:
 hassio:
 
 group: !include groups.yaml
-# fixed name and path for use with automation editor
+# fixed name and path required for use with automation editor
 automation: !include automations.yaml
 script: !include scripts.yaml
