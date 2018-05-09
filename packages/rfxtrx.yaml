@@ -43,6 +43,16 @@ homeassistant:
       friendly_name: "Spanning garagedeur"
       assumed_state: on
 
+    switch.living_wallswitch_left:
+      <<: *customize
+      friendly_name: 'Linker wandschakelaar woonkamer'
+      assumed_state: off
+
+    switch.living_wallswitch_right:
+      <<: *customize
+      friendly_name: 'Rechter wandschakelaar woonkamer'
+      assumed_state: off
+
 ############################################################
 ## Binary Sensor
 ############################################################
@@ -77,6 +87,12 @@ switch:
         fire_event: true
       0b11001601131fb20c010f80: # beldrukker voordeur
         name: Frontdoor Bell
+        fire_event: true
+      0b1100190099acb60b010f60: # kaku wandschakelaar links
+        name: Living Wallswitch Left
+        fire_event: true
+      0b1100250099acb60c010f60: # kaku wandschakelaar rechts
+        name: Living Wallswitch Right
         fire_event: true
 
 ############################################################
@@ -122,10 +138,27 @@ automation:
           entity_id: switch.kaku_remote_1
           state: 'group off'
     action:
+      # - service: light.turn_off
+      #   entity_id: group.living_lights
+      # - service: logbook.log
+      #   data:
+      #     name: Woonkamerverlichting
+      #     message: uitgeschakeld
+
+  - alias: Turn Off Living Devices
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data: 
+          entity_id: switch.living_wallswitch_left
+          state: 'on'
+    action:
       - service: light.turn_off
         entity_id: group.living_lights
       - service: logbook.log
         data:
           name: Woonkamerverlichting
           message: uitgeschakeld
-
+      - service: notify.admin
+        data:
+          message: 'Woonkamer uitgeschakeld.'
