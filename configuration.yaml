@@ -48,6 +48,10 @@ sun:
 ## Bridges and hubs
 ##########
 
+rfxtrx:
+  device: !secret rfxtrx_device
+  debug: no
+
 # zwave:
 #   usb_path: !secret zwave_usb_path
 #   device_config: !include include/zwave_device_config.yaml

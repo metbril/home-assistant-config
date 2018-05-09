@@ -43,52 +43,6 @@ homeassistant:
       friendly_name: "Spanning garagedeur"
       assumed_state: on
 
-    # ################################################
-    # ## Switch
-    # ################################################
-
-    light.kaku_wall_switch_left:
-      <<: *customize
-      friendly_name: "Plafond eettafel"
-      assumed_state: off
-
-    light.kaku_wall_switch_right:
-      <<: *customize
-      friendly_name: "Plafond sofa"
-      assumed_state: off
-
-    light.living_desk:
-      <<: *customize
-      friendly_name: "Staande lamp bureau"
-      assumed_state: off
-
-############################################################
-## RFXTRX
-############################################################
-
-rfxtrx:
-  device: /dev/serial/by-id/usb-RFXCOM_RFXtrx433_A1XQFD94-if00-port0
-  debug: no
-
-############################################################
-## Cover
-############################################################
-
-cover:
-  - platform: rfxtrx
-    automatic_add: false
-
-############################################################
-## Light
-############################################################
-
-light:
-  - platform: rfxtrx
-    automatic_add: false
-    devices:
-      0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
-        name: Living Desk
-
 ############################################################
 ## Binary Sensor
 ############################################################
@@ -174,3 +128,4 @@ automation:
         data:
           name: Woonkamerverlichting
           message: uitgeschakeld
+

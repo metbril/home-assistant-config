@@ -12,6 +12,15 @@ homeassistant:
       customize: &customize
         package: 'lighting'
 
+    # ################################################
+    # ## Light
+    # ################################################
+
+    light.living_desk:
+      <<: *customize
+      friendly_name: "Staande lamp bureau"
+      assumed_state: off
+
     ################################################
     ## Group
     ################################################
@@ -23,9 +32,16 @@ homeassistant:
       <<: *customize
       friendly_name: Verlichting Woonkamer
 
-################################################
+############################################################
 ## Light
-################################################
+############################################################
+
+light:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
+        name: Living Desk
 
 ################################################
 ## Group
