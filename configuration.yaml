@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Amsterdam
-  customize: !include include/customize.yaml
+  customize: !include customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - !secret whitelist_dir_config
@@ -73,6 +73,7 @@ ios:
 hassio:
 
 group: !include groups.yaml
+script: !include scripts.yaml
+
 # fixed name and path required for use with automation editor
 automation: !include automations.yaml
-script: !include scripts.yaml
