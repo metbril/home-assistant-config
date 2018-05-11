@@ -20,7 +20,12 @@ homeassistant:
     binary_sensor.motion_garage:
       <<: *customize
       friendly_name: "Beweging garage"
-      # icon: mdi:run-fast
+      device_class: motion
+
+    binary_sensor.flamingo_remote_button_a:
+      <<: *customize
+      friendly_name: "Flamingo Afstandsbediening A"
+      icon: mdi:remote
 
     ################################################
     ## Switch
@@ -41,7 +46,7 @@ homeassistant:
     switch.power_garage_door:
       <<: *customize
       friendly_name: "Spanning garagedeur"
-      assumed_state: on
+      assumed_state: Off
 
     switch.living_wallswitch_left:
       <<: *customize
@@ -63,7 +68,8 @@ binary_sensor:
     devices:
       0b110010011600020a010f70: # kaku motion
         name: motion_garage
-        device_class: motion
+      0b1100090029fc0201010f60: # flamingo remote A
+        name: Flamingo Remote Button A
 
 ############################################################
 ## Switch
@@ -162,3 +168,17 @@ automation:
       - service: notify.admin
         data:
           message: 'Woonkamer uitgeschakeld.'
+
+  - alias: Sync Garage Door Switch With Remote
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.flamingo_remote_button_a
+    action:
+      - service_template: >
+          {% if trigger.to_state.state == "on" %}
+            homeassistant.turn_on
+          {% elif trigger.to_state.state == "off" %}
+            homeassistant.turn_off
+          {% endif %}
+        entity_id:
+          switch.power_garage_door
