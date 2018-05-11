@@ -1,0 +1,27 @@
+################################################
+## Include Customize
+##
+## These can be reloaded without restarting 
+## Home Assistant (by reloading core)
+##
+## Some packages also contain customization 
+################################################
+
+# group
+group.motion:
+  friendly_name: 'Bewegingsensoren'
+  icon: mdi:run
+
+group.living:
+  friendly_name: 'Woonkamer'
+
+group.garage:
+  friendly_name: 'Garage'
+
+################################################
+## Sun
+################################################
+
+sun.sun:
+  friendly_name: 'Zon'
+
