@@ -17,10 +17,10 @@ homeassistant:
     ## Group
     ################################################
 
-    group.living:
-      <<: *customize
-      friendly_name: Woonkamer
-      icon: mdi:sofa
+    # group.living:
+    #   <<: *customize
+    #   friendly_name: Woonkamer
+    #   icon: mdi:sofa
 
 ################################################
 ## Group

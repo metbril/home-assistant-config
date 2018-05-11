@@ -17,9 +17,9 @@ homeassistant:
     ## Group
     ################################################
 
-    group.default_view:
-      <<: *customize
-      friendly_name: Start
+    # group.default_view:
+    #   <<: *customize
+    #   friendly_name: Start
 
     group.presence_view:
       <<: *customize
@@ -71,15 +71,15 @@ homeassistant:
 
 group:
 
-  default_view:
-    name: 'Home'
-    view: yes
-    entities:
-      - group.now
-      - group.commute
-      - group.weather
-      - group.health
-      - group.meter_readings
+  # default_view:
+  #   name: 'Home'
+  #   view: yes
+  #   entities:
+  #     - group.now
+  #     - group.commute
+  #     - group.weather
+  #     - group.health
+  #     - group.meter_readings
   presence_view:
     name: Presence
     view: yes
