@@ -1,5 +1,5 @@
 ################################################
-## Packages / Weather
+## Packages / Environment / Weather
 ################################################
 
 homeassistant:
@@ -98,6 +98,7 @@ sensor:
       - uv_index
       - precip_intensity
       - precip_probability
+
   - platform: buienradar
     name: Buienradar
     latitude: !secret home_latitude

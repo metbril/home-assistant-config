@@ -51,6 +51,11 @@ homeassistant:
       friendly_name: Instellingen
       icon: mdi:settings
 
+    group.environment_view:
+      <<: *customize
+      friendly_name: Leefklimaat
+      icon: mdi:earth
+
     # group.host_view:
     #   <<: *customize
     #   friendly_name: Systeeminformatie
@@ -70,7 +75,6 @@ homeassistant:
 ################################################
 
 group:
-
   # default_view:
   #   name: 'Home'
   #   view: yes
@@ -80,6 +84,7 @@ group:
   #     - group.weather
   #     - group.health
   #     - group.meter_readings
+
   presence_view:
     name: Presence
     view: yes
@@ -89,12 +94,14 @@ group:
       - group.person_monique
       - group.person_bjorn
       - group.vacation
+
   rooms_view:
     name: Rooms
     view: yes
     entities:
       - group.living
       - group.garage
+
   living_view:
     name: Living
     view: yes
@@ -106,11 +113,21 @@ group:
       - remote.apple_tv_van_bregt
       - group.benext_molite_8
       - group.fibaro_wall_plug_7
+
   garage_view:
     name: Garage
     view: yes
     entities:
       - group.garage
+
+  environment_view:
+    name: Environment
+    view: Yes
+    entities:
+      - group.weather
+      - group.pws
+      - group.air_quality
+
   automation_view:
     name: Automation
     view: yes
@@ -119,11 +136,13 @@ group:
       - group.alert
       - group.all_automations
       - group.all_scripts
+
   settings_view:
     name: Settings
     view: yes
     entities:
       - group.frontend_settings
+
   # host_view:
   #   name: Host
   #   view: yes

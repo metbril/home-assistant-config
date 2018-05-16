@@ -1,5 +1,5 @@
 ################################################
-## Packages / Environment
+## Packages / Environment / Environment
 ################################################
 
 ## Dependancy: packages airquality, weather, rfxtrx
@@ -44,9 +44,10 @@ homeassistant:
     ## Group
     ################################################
 
-    group.health:
+    group.air_quality:
       <<: *customize
-      friendly_name: 'Gezondheid'
+      friendly_name: 'Luchtkwaliteit'
+
     group.pws:
       <<: *customize
       friendly_name: 'Weerstation'
@@ -78,13 +79,14 @@ sensor:
 ################################################
 
 group:
-  health:
-    name: Health
+  air_quality:
+    name: Air Quality
     entities:
       - sensor.waqi_rotterdam
       - sensor.waqi_rotterdam_impact
       - sensor.dark_sky_ozone
       - sensor.dark_sky_uv_index
+
   pws:
     name: Personal Weather Station
     entities:

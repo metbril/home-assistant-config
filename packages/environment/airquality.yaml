@@ -1,5 +1,5 @@
 ################################################
-## Packages / Air Quality
+## Packages / Environment / Air Quality
 ################################################
 
 homeassistant:
@@ -12,7 +12,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'weather'
+        package: 'airquality'
 
     ################################################
     ## Sensor
@@ -21,12 +21,14 @@ homeassistant:
     sensor.waqi_rotterdam:
       friendly_name: 'Luchtkwaliteitsindex'
       icon: mdi:factory
-    sensor.dark_sky_ozone:
-      friendly_name: 'Ozon'
-      icon: mdi:weather-sunny
+
     sensor.waqi_rotterdam_impact:
       friendly_name: "Luchtkwaliteit"
       icon: mdi:factory
+
+    sensor.dark_sky_ozone:
+      friendly_name: 'Ozon'
+      icon: mdi:weather-sunny
 
 ################################################
 ## Sensor
@@ -58,6 +60,10 @@ sensor:
           {% else %}
               Gevaarlijk
           {% endif %}
+
+################################################
+## Automation
+################################################
 
 automation:
   - alias: Notify WAQI status change
