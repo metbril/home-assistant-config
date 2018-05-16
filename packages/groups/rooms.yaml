@@ -17,57 +17,139 @@ homeassistant:
     ## Group
     ################################################
 
+    ## Begane grond
+
+    group.downstairs:
+      <<: *customize
+      friendly_name: Begane grond
+      icon: mdi:numeric-0-box-outline
+
     # group.living:
     #   <<: *customize
     #   friendly_name: Woonkamer
     #   icon: mdi:sofa
+
+    group.kitchen:
+      <<: *customize
+      friendly_name: Keuken
+      icon: mdi:stove
+
+    group.toilet_gf:
+      <<: *customize
+      friendly_name: Toilet (BG)
+      icon: mdi:toilet
+
+    group.entry:
+      <<: *customize
+      friendly_name: Entree
+      icon: mdi:door
+
+    group.hall:
+      <<: *customize
+      friendly_name: Hal
+      icon: mdi:stairs
+
+    ## Slaapverdieping
+
+    group.upstairs:
+      <<: *customize
+      friendly_name: Slaapverdieping
+      icon: mdi:numeric-1-box-outline
+
+    group.master_bedroom:
+      <<: *customize
+      friendly_name: Ouderslaapkamer
+      icon: mdi:bed-empty
+
+    group.kidsroom:
+      <<: *customize
+      friendly_name: Kinderslaapkamer
+      icon: mdi:bed-empty
+
+    group.clothingroom:
+      <<: *customize
+      friendly_name: Kledingkamer
+      icon: mdi:hanger
+
+    group.bathroom:
+      <<: *customize
+      friendly_name: Badkamer
+      icon: mdi:shower
+
+    group.toilet_ff:
+      <<: *customize
+      friendly_name: Toilet (1e)
+      icon: mdi:toilet
+
+    ## Zolder
+
+    group.loft:
+      <<: *customize
+      friendly_name: Zolder
+      icon: mdi:numeric-2-box-outline
 
 ################################################
 ## Group
 ################################################
 
 group:
+
+  downstairs:
+    control: hidden
+    entities:
+      - group.living_lights
+
   kitchen:
     control: hidden
     entities:
       # - 
+
   entry:
     control: hidden
-    # entities:
-    #   - 
+    entities:
+      - switch.frontdoor_bell
+
   toilet_gf:
     control: hidden
     # entities:
     #   - 
+
   master_bedroom:
     control: hidden
     # entities:
     #   - 
+
   kidsroom:
     control: hidden
     # entities:
     #   - 
-  clothing_room:
+
+  clothingroom:
     control: hidden
     # entities:
     #   - 
+
   hall:
     control: hidden
     # entities:
     #   - 
+
   bathroom:
     control: hidden
     # entities:
     #   - 
+
   toilet_ff:
     control: hidden
     # entities:
     #   - 
+
   backyard:
     control: hidden
     # entities:
     #   - 
+
   driveway:
     control: hidden
-    # entities:
-    #   - 
+    entities:
+      - switch.frontdoor_bell

@@ -101,6 +101,8 @@ group:
     entities:
       - group.living
       - group.garage
+      - group.driveway
+      - group.entry
 
   living_view:
     name: Living
