@@ -157,7 +157,7 @@ automation:
         event_type: button_pressed
         event_data: 
           entity_id: switch.living_wallswitch_left
-          state: 'on'
+          state: 'off'
     action:
       - service: light.turn_off
         entity_id: group.living_lights
@@ -168,6 +168,24 @@ automation:
       - service: notify.admin
         data:
           message: 'Woonkamer uitgeschakeld.'
+
+  - alias: Turn On Living Dusk Devices
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data: 
+          entity_id: switch.living_wallswitch_left
+          state: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: group.dusk_living_lights
+      - service: logbook.log
+        data:
+          name: Schemerverlichting
+          message: uitgeschakeld
+      - service: notify.admin
+        data:
+          message: 'Schemerverlichting ingeschakeld.'
 
   - alias: Sync Garage Door Switch With Remote
     trigger:
