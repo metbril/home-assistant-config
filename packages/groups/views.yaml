@@ -51,11 +51,6 @@ homeassistant:
       friendly_name: Instellingen
       icon: mdi:settings
 
-    group.environment_view:
-      <<: *customize
-      friendly_name: Leefklimaat
-      icon: mdi:earth
-
     # group.host_view:
     #   <<: *customize
     #   friendly_name: Systeeminformatie
@@ -121,14 +116,6 @@ group:
     view: yes
     entities:
       - group.garage
-
-  environment_view:
-    name: Environment
-    view: Yes
-    entities:
-      - group.weather
-      - group.pws
-      - group.air_quality
 
   automation_view:
     name: Automation
