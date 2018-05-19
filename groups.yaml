@@ -14,26 +14,13 @@ default_view:
   name: 'Home'
   view: yes
   entities:
-    - group.living
-    - group.garage
-    # - group.vacation
+    - group.main
+    - group.living_lights
 
-start:
-  name: 'Start'
-  view: yes
-  entities:
-    - group.vacation
-
-living:
-  # control: hidden
-  entities:
-    - light.hoge_kast
-    - light.bank
-    - light.bollamp
-    - light.living_desk
-    - light.tv_meubel
-
-garage:
+main:
+  name: Main Entities
   control: hidden
   entities:
+    - group.living_lights
     - switch.power_garage_door
+    - input_boolean.on_vacation

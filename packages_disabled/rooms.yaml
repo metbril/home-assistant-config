@@ -39,10 +39,10 @@ homeassistant:
       friendly_name: Begane grond
       icon: mdi:numeric-0-box-outline
 
-    # group.living:
-    #   <<: *customize
-    #   friendly_name: Woonkamer
-    #   icon: mdi:sofa
+    group.living:
+      <<: *customize
+      friendly_name: Woonkamer
+      icon: mdi:sofa
 
     group.kitchen:
       <<: *customize
@@ -113,6 +113,20 @@ group:
     control: hidden
     entities:
       - group.living_lights
+
+  living:
+    # control: hidden
+    entities:
+      - light.hoge_kast
+      - light.bank
+      - light.bollamp
+      - light.living_desk
+      - light.tv_meubel
+
+  garage:
+    control: hidden
+    entities:
+      - switch.power_garage_door
 
   kitchen:
     control: hidden
