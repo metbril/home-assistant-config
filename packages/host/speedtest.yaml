@@ -29,7 +29,7 @@ group:
     name: Speedtest
     entities:
       - sensor.speedtest_download
-      - sensor.fastdotcom_download
+      - sensor.fastcom_download
       # - sensor.speedtest_upload
       # - sensor.speedtest_ping
     
