@@ -17,18 +17,26 @@ homeassistant:
     ## Group
     ################################################
 
+    group.presence_view:
+      <<: *customize
+      friendly_name: Aanwezigheid
+      icon: mdi:account
+
     group.family:
       <<: *customize
       friendly_name: Familie
       icon: mdi:human-male-female
+
     group.person_robert:
       <<: *customize
       friendly_name: Robert
       icon: mdi:human-male
+
     group.person_monique:
       <<: *customize
       friendly_name: Monique
       icon: mdi:human-female
+
     group.person_bjorn:
       <<: *customize
       friendly_name: Björn
@@ -69,21 +77,35 @@ device_tracker:
 ################################################
 
 group:
+
+  presence_view:
+    name: Presence
+    view: yes
+    entities:
+      - group.family 
+      - group.person_robert
+      - group.person_monique
+      - group.person_bjorn
+      - group.vacation
+
   family:
     control: hidden
     entities:
       - group.person_robert
       - group.person_monique
       - group.person_bjorn
+
   person_robert:
     control: hidden
     entities:
       - device_tracker.robert_iphone
       - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b
+
   person_monique:
     control: hidden
     entities:
       - device_tracker.monique_iphone
+
   person_bjorn:
     control: hidden
     entities:

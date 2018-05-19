@@ -21,11 +21,6 @@ homeassistant:
     #   <<: *customize
     #   friendly_name: Start
 
-    group.presence_view:
-      <<: *customize
-      friendly_name: Aanwezigheid
-      icon: mdi:account
-
     group.automation_view:
       <<: *customize
       friendly_name: Automatisering
@@ -64,16 +59,6 @@ group:
   #     - group.weather
   #     - group.health
   #     - group.meter_readings
-
-  presence_view:
-    name: Presence
-    view: yes
-    entities:
-      - group.family 
-      - group.person_robert
-      - group.person_monique
-      - group.person_bjorn
-      - group.vacation
 
   automation_view:
     name: Automation
