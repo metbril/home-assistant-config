@@ -11,7 +11,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'secureity'
+        package: 'security'
 
       expose: &expose
         <<: *customize
