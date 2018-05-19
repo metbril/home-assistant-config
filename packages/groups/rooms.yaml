@@ -17,6 +17,21 @@ homeassistant:
     ## Group
     ################################################
 
+    group.rooms_view:
+      <<: *customize
+      friendly_name: Ruimtes
+      icon: mdi:floor-plan
+
+    group.living_view:
+      <<: *customize
+      friendly_name: Woonkamer
+      icon: mdi:sofa
+
+    group.garage_view:
+      <<: *customize
+      friendly_name: Garage
+      icon: mdi:garage
+
     ## Begane grond
 
     group.downstairs:
@@ -153,3 +168,30 @@ group:
     control: hidden
     entities:
       - switch.frontdoor_bell
+
+  rooms_view:
+    name: Rooms
+    view: yes
+    entities:
+      - group.living
+      - group.garage
+      - group.driveway
+      - group.entry
+
+  living_view:
+    name: Living
+    view: yes
+    entities:
+      - media_player.woonkamer
+      - group.living_lights
+      - group.dusk_living_lights
+      - media_player.apple_tv_van_bregt
+      - remote.apple_tv_van_bregt
+      - group.benext_molite_8
+      - group.fibaro_wall_plug_7
+
+  garage_view:
+    name: Garage
+    view: yes
+    entities:
+      - group.garage
