@@ -136,3 +136,30 @@ automation:
           {% endif %}
         entity_id:
           switch.power_garage_door
+
+  # schakel de spanning van de garagedeur uit tussen 23:00 en 06:00
+  - alias: Power off garage door after 23:00
+    trigger:
+      - platform: time
+        at: '23:00:00'
+    action:
+      - service: homeassistant.turn_off
+        entity_id: switch.power_garage_door
+      - service: notify.admin
+        data_template:
+          message: 'Spanning garagedeur uitgeschakeld.'
+
+  - alias: Power on garage door after 6:00
+    trigger:
+      - platform: time
+        at: '06:00:00'
+    condition:
+      - condition: state
+        entity_id: input_boolean.on_vacation
+        state: 'off'
+    action:
+      - service: homeassistant.turn_on
+        entity_id: switch.power_garage_door
+      - service: notify.admin
+        data_template:
+          message: 'Spanning garagedeur ingeschakeld.'
