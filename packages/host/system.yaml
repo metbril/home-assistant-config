@@ -227,16 +227,24 @@ sensor:
 ################################################
 
 group:
+
   host_view:
     name: Host
     view: yes
     entities:
+
       - sensor.bad_login
+      - binary_sensor.cpu_high
+      - binary_sensor.cpu_hot
+      - binary_sensor.db_large
+      - sensor.ssl_certificate_expiry
+
       - group.host_performance
       - group.host_storage
       - group.host_network
       - group.host_info
       - group.speedtest
+
   host_performance:
     # Systeeminformatie
     name: System Performance
@@ -244,8 +252,7 @@ group:
       - sensor.processor_use
       - sensor.memory_use_percent
       - sensor.cpu_temperature
-      - binary_sensor.cpu_high
-      - binary_sensor.cpu_hot
+
   host_storage:
     name: System Storage
     entities:
@@ -253,27 +260,25 @@ group:
       - sensor.disk_free_
       - sensor.homeassistant_v2db
       - sensor.homeassistantlog
-      - sensor.ozw_logtxt
-      - binary_sensor.db_large
+      # - sensor.ozw_logtxt
+
   host_network:
     name: Host Network
     entities:
-      - sensor.network_out_eth0
-      - sensor.network_in_eth0
-      - sensor.packets_out_eth0
-      - sensor.packets_in_eth0
-      - sensor.myipopendnscom
-      - sensor.ssl_certificate_expiry
+      # - sensor.network_out_eth0
+      # - sensor.network_in_eth0
+      # - sensor.packets_out_eth0
+      # - sensor.packets_in_eth0
+
   host_info:
     name: System Info
     entities:
-      - sensor.last_boot
-      - sensor.since_last_boot
-      - sensor.since_last_boot_short
+      # - sensor.last_boot
+      # - sensor.since_last_boot
+      # - sensor.since_last_boot_short
       - sensor.since_last_boot_short_nl
       - sensor.ha_uptime
-      - updater.updater
-      - sensor.bad_login
+      - sensor.myipopendnscom
 
 ################################################
 ## Alert
