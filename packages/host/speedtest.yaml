@@ -21,11 +21,15 @@ sensor:
       - download
       - upload
   
+  - platform: fastdotcom 
+    minute: 30 # every hour at the half hour
+
 group:
   speedtest:
     name: Speedtest
     entities:
       - sensor.speedtest_download
+      - sensor.fastdotcom_download
       # - sensor.speedtest_upload
       # - sensor.speedtest_ping
     
