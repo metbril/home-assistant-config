@@ -21,6 +21,6 @@ main:
   name: Main Entities
   control: hidden
   entities:
-    - group.living_lights
+    - light.living_lights
     - switch.power_garage_door
     - input_boolean.on_vacation
