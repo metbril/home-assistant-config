@@ -120,9 +120,17 @@ homeassistant:
       friendly_name: Energie
       icon: mdi:flash
       
-    group.meter_readings:
+    group.power_meter_readings:
       <<: *customize
-      friendly_name: Meterstanden
+      friendly_name: Meterstanden Energie
+      icon: mdi:flash
+      control: hidden
+
+    group.gas_meter_readings:
+      <<: *customize
+      friendly_name: Meterstanden Gas
+      icon: mdi:fire
+      control: hidden
 
     ################################################
     ## Script
@@ -157,16 +165,21 @@ group:
     name: Energy View
     view: yes
     entities:
-      - group.meter_readings
+      - group.power_meter_readings
+      - group.gas_meter_readings
 
-  meter_readings:
-    name: Meter Readings
+  power_meter_readings:
+    name: Power Meter Readings
     entities:
       - sensor.power_consumption
       - sensor.power_tariff_nl
       - sensor.power_consumption_low
       - sensor.power_consumption_normal
       - sensor.long_power_failure_count
+
+  gas_meter_readings:
+    name: Gas Meter Readings
+    entities:
       - sensor.gas_consumption
       - script.post_mindergas
 
