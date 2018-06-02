@@ -86,7 +86,7 @@ automation:
           message: uitgeschakeld
       - service: notify.admin
         data:
-          message: 'Woonkamer uitgeschakeld.'
+          message: 'Woonkamerverlichting uitgeschakeld.'
 
   - alias: Turn On Living Dusk Devices
     trigger:
@@ -101,7 +101,7 @@ automation:
       - service: logbook.log
         data:
           name: Schemerverlichting
-          message: uitgeschakeld
+          message: ingeschakeld
       - service: notify.admin
         data:
           message: 'Schemerverlichting ingeschakeld.'
