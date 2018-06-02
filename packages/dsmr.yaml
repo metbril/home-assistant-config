@@ -1,5 +1,5 @@
 ################################################
-## Packages / DMSR
+## Packages / DSMR
 ################################################
 
 homeassistant:
@@ -20,54 +20,118 @@ homeassistant:
     sensor.gas_consumption:
       <<: *customize
       friendly_name: Gasverbruik
+      unit_of_measurement: m³
+
     sensor.power_consumption:
       <<: *customize
       friendly_name: "Energieverbruik"
+
     sensor.power_consumption_normal:
       <<: *customize
       friendly_name: "Energieverbruik normaal tarief"
+
     sensor.power_consumption_low:
       <<: *customize
       friendly_name: "Energieverbruik laag tarief"
-    sensor.power_tariff:
+
+    sensor.power_tariff_nl:
       <<: *customize
       friendly_name: "Energietarief"
       icon: mdi:currency-eur
+
+    sensor.power_tariff:
+      <<: *customize
+      hidden: yes
+
     sensor.power_production:
       <<: *customize
       hidden: yes
+
     sensor.power_production_low:
       <<: *customize
       hidden: yes
+
     sensor.power_production_normal:
       <<: *customize
       hidden: yes
+
+    sensor.power_production_phase_l1:
+      <<: *customize
+      hidden: yes
+
+    sensor.power_production_phase_l2:
+      <<: *customize
+      hidden: yes
+
+    sensor.power_production_phase_l3:
+      <<: *customize
+      hidden: yes
+
+    sensor.power_consumption_phase_l1:
+      <<: *customize
+      hidden: yes
+
+    sensor.power_consumption_phase_l2:
+      <<: *customize
+      hidden: yes
+
+    sensor.power_consumption_phase_l3:
+      <<: *customize
+      hidden: yes
+
+    sensor.voltage_sags_phase_l1:
+      <<: *customize
+      hidden: yes
+    
+    sensor.voltage_sags_phase_l2:
+      <<: *customize
+      hidden: yes
+    
+    sensor.voltage_sags_phase_l3:
+      <<: *customize
+      hidden: yes
+    
     sensor.hourly_gas_consumption:
       <<: *customize
       hidden: yes
+
+    sensor.voltage_swells_phase_l1:
+      <<: *customize
+      hidden: yes
+    
+    sensor.voltage_swells_phase_l2:
+      <<: *customize
+      hidden: yes
+    
+    sensor.voltage_swells_phase_l3:
+      <<: *customize
+      hidden: yes
+
+    sensor.long_power_failure_count:
+      <<: *customize
+      friendly_name: "Aantal langdurige storingen"
 
     ################################################
     ## Group
     ################################################
 
+    group.energy_view:
+      <<: *customize
+      friendly_name: Energie
+      icon: mdi:flash
+      
     group.meter_readings:
       <<: *customize
       friendly_name: Meterstanden
 
-################################################
-## Group
-################################################
+    ################################################
+    ## Script
+    ################################################
 
-group:
-  meter_readings:
-    name: Meter Readings
-    entities:
-      - sensor.power_consumption
-      - sensor.power_consumption_low
-      - sensor.power_consumption_normal
-      - sensor.gas_consumption
-      - sensor.power_tariff
-
+    script.post_mindergas:
+      <<: *customize
+      friendly_name: Verzend naar mindergas.nl
+      
 ################################################
 ## Sensor
 ################################################
@@ -76,6 +140,35 @@ sensor:
   - platform: dsmr
     port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5Z5VJCX-if00-port0
     dsmr_version: 4
+
+  - platform: template
+    sensors:
+      power_tariff_nl: # vertaald in NL
+        value_template: >-
+          {% set value = states.sensor.power_tariff.state %}
+          {{ value | replace('low', 'laag') | replace('normal', 'normaal') }}
+      
+################################################
+## Group
+################################################
+
+group:
+  energy_view:
+    name: Energy View
+    view: yes
+    entities:
+      - group.meter_readings
+
+  meter_readings:
+    name: Meter Readings
+    entities:
+      - sensor.power_consumption
+      - sensor.power_tariff_nl
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.long_power_failure_count
+      - sensor.gas_consumption
+      - script.post_mindergas
 
 ##################################################
 ## Script
@@ -90,8 +183,8 @@ script:
     sequence:
       - service: shell_command.curl
         data_template:
-          method: post
           url: https://www.mindergas.nl/api/gas_meter_readings
+          method: post
           headers:
             Content-Type: application/json
             AUTH-TOKEN: !secret mindergas_token 
@@ -104,9 +197,6 @@ script:
           message: is verstuurd naar mindergas.nl
           entity_id: sensor.gas_consumption
           domain: sensor
-      - service: notify.admin
-        data_template:
-          message: "Gasverbruik van {{ states.sensor.gas_consumption.state}} m3 is verstuurd naar mindergas.nl"
 
 ##################################################
 ## Automation
@@ -124,4 +214,5 @@ automation:
         minutes: 15
         seconds: 00
     action:
+      ## any additional logging is done in the script
       - service: script.post_mindergas

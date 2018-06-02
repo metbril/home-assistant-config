@@ -22,6 +22,12 @@ recorder:
       - light.living_desk # restore state after reboot?
       - switch.frontdoor_bell # for counter
 
+      # packages / dsmr
+      - sensor.power_consumption
+      - sensor.power_consumption_low
+      - sensor.power_consumption_normal
+      - sensor.gas_consumption
+
 ################################################
 ## History
 ## https://home-assistant.io/components/history/
