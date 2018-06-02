@@ -51,6 +51,7 @@ homeassistant:
     switch.power_garage_door:
       <<: *customize
       friendly_name: "Spanning garagedeur"
+      icon: mdi:power
       assumed_state: Off
 
 ################################################
