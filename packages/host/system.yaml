@@ -19,6 +19,17 @@ homeassistant:
     binary_sensor.db_large:
       <<: *customize
       friendly_name: Grote database
+      device_class: safety  
+
+    binary_sensor.cpu_hot:
+      <<: *customize
+      friendly_name: 'CPU heet'
+      device_class: heat
+
+    binary_sensor.cpu_high:
+      <<: *customize
+      friendly_name: 'CPU hoog'
+      device_class: safety
 
     ################################################
     ## Sensor
@@ -92,7 +103,11 @@ homeassistant:
     sensor.myipopendnscom:
       <<: *customize
       friendly_name: Publiek IP-adres
-      icon: mdi:network
+      icon: mdi:wan
+
+    sensor.sensor.ssl_certificate_expiry:
+      <<: *customize
+      friendly_name: Geldigheid SSL-certificaat
 
     sensor.ha_uptime:
       <<: *customize
@@ -133,12 +148,10 @@ binary_sensor:
     sensors:
       cpu_high:
         value_template: '{{ states.sensor.processor_use.state | float > 80 }}'
-        friendly_name: 'CPU hoog'
   - platform: template
     sensors:
       cpu_hot:
         value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
-        friendly_name: 'CPU heet'
   - platform: template
     sensors:
       db_large:
@@ -237,13 +250,12 @@ group:
       - binary_sensor.cpu_high
       - binary_sensor.cpu_hot
       - binary_sensor.db_large
-      - sensor.ssl_certificate_expiry
 
       - group.host_performance
       - group.host_storage
       - group.host_network
+      - group.speedtest # speedtest package
       - group.host_info
-      - group.speedtest
 
   host_performance:
     # Systeeminformatie
@@ -265,6 +277,9 @@ group:
   host_network:
     name: Host Network
     entities:
+      - sensor.ssl_certificate_expiry
+      - sensor.myipopendnscom
+
       # - sensor.network_out_eth0
       # - sensor.network_in_eth0
       # - sensor.packets_out_eth0
@@ -278,7 +293,6 @@ group:
       # - sensor.since_last_boot_short
       - sensor.since_last_boot_short_nl
       - sensor.ha_uptime
-      - sensor.myipopendnscom
 
 ################################################
 ## Alert
@@ -317,17 +331,3 @@ alert:
     skip_first: false
     notifiers:
       - admin
-
-################################################
-## Automation
-################################################
-
-automation:
-  - alias: 'Update Available Notification'
-    trigger:
-      - platform: state
-        entity_id: updater.updater
-    action:
-      - service: notify.admin
-        data:
-          message: 'Update voor Home Assistant beschikbaar.'
