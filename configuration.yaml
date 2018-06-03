@@ -16,8 +16,8 @@ homeassistant:
 
 frontend:
 config:
+map:
 # conversation:
-# map:
 
 http:
   api_password: !secret http_password

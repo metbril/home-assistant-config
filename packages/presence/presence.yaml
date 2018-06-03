@@ -1,5 +1,5 @@
 ################################################
-## Packages / Presence
+## Packages / Presence / Presence
 ################################################
 
 homeassistant:
@@ -64,12 +64,12 @@ device_tracker:
     host: !secret asuswrt_host
     username: !secret asuswrt_username
     ssh_key: !secret asuswrt_ssh_key
-    track_new_devices: yes
     consider_home: 180
-    interval_seconds: 12
+    interval_seconds: 60 # Seconds between each scan for new devices
     new_device_defaults:
       track_new_devices: false
       hide_if_away: false
+
   - platform: owntracks
 
 ################################################
@@ -99,7 +99,8 @@ group:
     control: hidden
     entities:
       - device_tracker.robert_iphone
-      - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b
+      - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b # oud
+      - device_tracker.robert_49d43599422f4a978792ad3eebfde074
 
   person_monique:
     control: hidden
@@ -116,7 +117,7 @@ group:
 ################################################
 
 automation:
-  - alias: Family Home
+  - alias: "Familie thuis"
     trigger:
       - platform: state
         entity_id: group.family
@@ -130,5 +131,19 @@ automation:
             {%- elif state == 'not_home' -%}
               Ik zie dat er niemand meer thuis is.
             {%- else -%}
-              Ik weet niet of er iemand thuis is.            
+              Ik weet even niet of er iemand thuis is.            
             {%- endif %}
+
+  - alias: "Notify New Device Detected"
+    trigger:
+      - platform: event
+        event_type: device_tracker_new_device
+    action:
+      - service: persistent_notification.create
+        data:
+          message: "Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor details."
+          title: "Nieuw apparaat"
+      # - service: notify.admin
+      #   data_template:
+      #     message: "Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor details."
+      #     title: "Nieuw apparaat"
