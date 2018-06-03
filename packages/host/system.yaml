@@ -243,6 +243,7 @@ group:
       - group.host_storage
       - group.host_network
       - group.host_info
+      - group.host_updates
       - group.speedtest
 
   host_performance:
