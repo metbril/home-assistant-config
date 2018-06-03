@@ -10,8 +10,7 @@ This repository contains my configuration for Home Assistant. It is installed on
 
 Using the automation editor is an easy way to test automations or to create temporary automations for debugging.
 
-To use the automation editor in combination with packages, there needs to be a separate [`automations.yaml` file in the root of the config directory](./automations.yaml), with a least one properly formatted automation. My config has a dummy automation to prevent that the configuration becomes invalid.
-
+To use the automation editor in combination with packages, there needs to be [a separate `automations.yaml` file in the root of the config directory](./automations.yaml), with a least one properly formatted automation. My config has a dummy automation to prevent that the configuration becomes invalid.
 
 ## Database
 
