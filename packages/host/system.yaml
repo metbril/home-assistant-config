@@ -255,6 +255,7 @@ group:
       - group.host_storage
       - group.host_network
       - group.speedtest # speedtest package
+      - group.host_updates # updates package
       - group.host_info
 
   host_performance:

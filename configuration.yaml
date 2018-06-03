@@ -28,11 +28,6 @@ http:
   # ssl_key: /ssl/privkey.pem
   use_x_forwarded_for: true # default: false, use for proxied setup
 
-# not needed with hassio
-
-# updater:
-  # include_used_components: true
-
 history:
 logbook:
 
