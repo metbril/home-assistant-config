@@ -19,17 +19,17 @@ homeassistant:
     binary_sensor.db_large:
       <<: *customize
       friendly_name: Grote database
-      device_class: safety  
-
-    binary_sensor.cpu_hot:
-      <<: *customize
-      friendly_name: 'CPU heet'
-      device_class: heat
+      device_class: problem
 
     binary_sensor.cpu_high:
       <<: *customize
-      friendly_name: 'CPU hoog'
-      device_class: safety
+      friendly_name: CPU Hoog
+      device_class: problem
+
+    binary_sensor.cpu_hot:
+      <<: *customize
+      friendly_name: CPU Heet
+      device_class: heat
 
     ################################################
     ## Sensor
@@ -105,10 +105,6 @@ homeassistant:
       friendly_name: Publiek IP-adres
       icon: mdi:wan
 
-    sensor.sensor.ssl_certificate_expiry:
-      <<: *customize
-      friendly_name: Geldigheid SSL-certificaat
-
     sensor.ha_uptime:
       <<: *customize
       friendly_name: Sinds laatste start HA
@@ -148,12 +144,10 @@ binary_sensor:
     sensors:
       cpu_high:
         value_template: '{{ states.sensor.processor_use.state | float > 80 }}'
-  - platform: template
-    sensors:
+
       cpu_hot:
         value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
-  - platform: template
-    sensors:
+
       db_large:
         value_template: '{{ states.sensor.homeassistant_v2db.state | float > 300 }}'
 
@@ -254,8 +248,8 @@ group:
       - group.host_performance
       - group.host_storage
       - group.host_network
-      - group.speedtest # speedtest package
-      - group.host_updates # updates package
+      - group.speedtest
+      - group.host_updates
       - group.host_info
 
   host_performance:
@@ -280,7 +274,6 @@ group:
     entities:
       - sensor.ssl_certificate_expiry
       - sensor.myipopendnscom
-
       # - sensor.network_out_eth0
       # - sensor.network_in_eth0
       # - sensor.packets_out_eth0
