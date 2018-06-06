@@ -40,6 +40,38 @@ homeassistant:
       friendly_name: 'Huidige beta versie HA'
       icon: mdi:beta
 
+    ########################################################################
+    ## Group
+    ########################################################################
+
+    group.host_updates:
+      <<: *customize
+      friendly_name: 'HA Host Updates'
+      icon: mdi:sync
+
+    ########################################################################
+    ## Updater
+    ########################################################################
+
+    updater.updater:
+      <<: *customize
+      friendly_name: 'HA Update Beschikbaar'
+      icon: mdi:sync
+
+    ########################################################################
+    ## Automation
+    ########################################################################
+
+    automation.ha_update_available_notification:
+      <<: *customize
+      friendly_name: 'HA Update Beschikbaar Melding'
+      icon: mdi:sync
+
+    automation.ha_update_available_for_hassio_notification:
+      <<: *customize
+      friendly_name: 'HA Update Beschikbaar Melding'
+      icon: mdi:sync
+
 ############################################################################
 ## Updater
 ## https://www.home-assistant.io/components/updater/
@@ -49,6 +81,18 @@ homeassistant:
 updater:
   reporting: true # collect basic information about this instance and its environment
   include_used_components: true # report components to developers
+
+############################################################################
+## Binary Sensor
+############################################################################
+
+binary_sensor:
+  - platform: template
+    sensors:
+      ha_update_available:
+        value_template: >-
+          {{ states.sensor.ha_current_stable_version.state != states.sensor.ha_installed_version.state and
+             states.sensor.ha_current_stable_version.state != 'unavailable' }}
 
 ############################################################################
 ## Sensor
@@ -67,18 +111,6 @@ sensor:
     resource: https://s3.amazonaws.com/hassio-version/beta.json
     name: HA Current Beta Version
     value_template: '{{ value_json.homeassistant.default }}'
-
-############################################################################
-## Binary Sensor
-############################################################################
-
-binary_sensor:
-  - platform: template
-    sensors:
-      ha_update_available:
-        value_template: >-
-          {{ states.sensor.ha_current_stable_version.state != states.sensor.ha_installed_version.state and
-             states.sensor.ha_current_stable_version.state != 'unavailable' }}
 
 ############################################################################
 ## Group
