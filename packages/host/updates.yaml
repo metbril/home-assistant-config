@@ -40,6 +40,11 @@ homeassistant:
       friendly_name: 'Huidige beta versie HA'
       icon: mdi:beta
 
+    sensor.ha_current_development_version:
+      <<: *customize
+      friendly_name: 'Huidige ontwikkelversie HA'
+      icon: mdi:alpha
+
     ########################################################################
     ## Group
     ########################################################################
@@ -110,6 +115,11 @@ sensor:
     name: HA Current Beta Version
     value_template: '{{ value_json.homeassistant.default }}'
 
+  - platform: rest
+    resource: https://s3.amazonaws.com/hassio-version/dev.json
+    name: HA Current Development Version
+    value_template: '{{ value_json.homeassistant.default }}'
+
 ############################################################################
 ## Group
 ############################################################################
@@ -118,12 +128,12 @@ group:
   host_updates:
     name: 'Updates'
     entities:
-      - updater.updater
-      - sensor.ha_current_beta_version
-      - sensor.ha_current_stable_version
       - sensor.ha_installed_version
+      - sensor.ha_current_stable_version
+      - sensor.ha_current_beta_version
+      - sensor.ha_current_development_version
+      - updater.updater
       - binary_sensor.ha_update_available
-      - sensor.ha_update_available
 
 ############################################################################
 ## Automation
