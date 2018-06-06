@@ -65,12 +65,10 @@ homeassistant:
     automation.ha_update_available_notification:
       <<: *customize
       friendly_name: 'HA Update Beschikbaar Melding'
-      icon: mdi:sync
 
     automation.ha_update_available_for_hassio_notification:
       <<: *customize
       friendly_name: 'HA Update Beschikbaar Melding'
-      icon: mdi:sync
 
 ############################################################################
 ## Updater
