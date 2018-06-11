@@ -67,5 +67,5 @@ group:
   garage:
     control: hidden
     entities:
-      # - binary_sensor.motion_garage
+      - binary_sensor.motion_garage
       - switch.power_garage_door
