@@ -50,7 +50,8 @@ group:
   living:
     control: hidden
     entities:
-      # lights clockwise from the door
+      - light.living_lights
+      # individual lights clockwise from the door
       - light.hoge_kast
       - light.bank
       - light.living_desk
