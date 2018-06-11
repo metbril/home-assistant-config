@@ -1,0 +1,69 @@
+############################################################################
+## Packages / Rooms
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'template'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ########################################################################
+    ## Group
+    ########################################################################
+    group.rooms_view:
+      <<: *customize
+      friendly_name: 'Kamers'
+      icon: mdi:home
+      order: 1 # alway next to default view
+
+    group.living:
+      <<: *customize
+      friendly_name: 'Woonkamer'
+
+    group.garage:
+      <<: *customize
+      friendly_name: 'Garage'
+
+############################################################################
+## Group
+############################################################################
+
+group:
+  rooms_view:
+    view: yes
+    control: hidden
+    entities:
+      - group.living
+      - group.garage
+
+  living:
+    control: hidden
+    entities:
+      - light.hoge_kast
+      - light.bank
+      - light.bollamp
+      - light.living_desk
+      - light.tv_meubel
+      # - media_player.woonkamer
+      # - media_player.apple_tv_van_bregt
+      # - binary_sensor.benext_molite_8_motion
+      # - sensor.benext_molite_8_temperature
+      # - sensor.benext_molite_8_luminance
+      # - switch.fibaro_wall_plug_7
+
+  garage:
+    control: hidden
+    entities:
+      # - binary_sensor.motion_garage
+      - switch.power_garage_door
