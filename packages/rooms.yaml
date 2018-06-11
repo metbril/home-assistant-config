@@ -50,10 +50,11 @@ group:
   living:
     control: hidden
     entities:
+      # lights clockwise from the door
       - light.hoge_kast
       - light.bank
-      - light.bollamp
       - light.living_desk
+      - light.bollamp
       - light.tv_meubel
       # - media_player.woonkamer
       # - media_player.apple_tv_van_bregt
