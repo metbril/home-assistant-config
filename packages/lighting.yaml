@@ -36,25 +36,6 @@ homeassistant:
       <<: *customize
       friendly_name: Verlichting Woonkamer
 
-############################################################
-## Light
-############################################################
-
-light:
-  - platform: rfxtrx
-    automatic_add: false
-    devices:
-      0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
-        name: Living Desk
-  - platform: group
-    name: Living Lights
-    entities:
-      - light.hoge_kast
-      - light.bank
-      - light.living_desk
-      - light.bollamp
-      - light.tv_meubel
-    
 ################################################
 ## Group
 ################################################

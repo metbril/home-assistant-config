@@ -59,36 +59,6 @@ homeassistant:
 ################################################
 
 ############################################################
-## Binary Sensor
-############################################################
-
-binary_sensor:
-  - platform: rfxtrx
-    automatic_add: false
-    devices:
-      0b110010011600020a010f70: # kaku motion
-        name: motion_garage
-      0b1100090029fc0201010f60: # flamingo remote A
-        name: Flamingo Remote Button A
-
-############################################################
-## Switch
-############################################################
-
-switch:
-  - platform: rfxtrx
-    automatic_add: false
-    devices:
-      0a140f01000b5501010f60: # lighting5 it 2901.01 On
-        name: Power Garage Door
-      0b110005011afee601040f60: # beldrukker woonkamer
-        name: Mess Call
-        fire_event: true
-      0b11001601131fb20c010f80: # beldrukker voordeur
-        name: Frontdoor Bell
-        fire_event: true
-
-############################################################
 ## Automation
 ############################################################
 

@@ -39,7 +39,7 @@ switch:
         name: KAKU Remote 1
         fire_event: true # to catch 'group off' event
       0b11001000bb136202010f60: # 0bb13622 kaku remote 2
-        name: KAKU Remote 2
+        name: KAKU Remote 2             
       0b11001000bb136203010f60: # 0bb13623 kaku remote 3
         name: KAKU Remote 3
       0b1100190099acb60b010f60: # kaku wandschakelaar links
@@ -48,6 +48,68 @@ switch:
       0b1100250099acb60c010f60: # kaku wandschakelaar rechts
         name: Living Wallswitch Right
         fire_event: true
+      0a140f01000b5501010f60: # lighting5 it 2901.01 On
+        name: Power Garage Door
+      0b110005011afee601040f60: # beldrukker woonkamer
+        name: Mess Call
+        fire_event: true
+      0b11001601131fb20c010f80: # beldrukker voordeur
+        name: Frontdoor Bell
+        fire_event: true
+
+############################################################
+## Sensor
+############################################################
+
+sensor:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0a5207023f0e0074380159:
+        name: PWS TH
+        data_type:
+          - Humidity
+          - Temperature
+      0b55030c800c0000000a9569:
+        name: PWS Rain
+        data_type:
+          - Rain rate
+      105604029716013b000b000c0027002059:
+        name: PWS Wind
+        data_type:
+          - Wind direction
+
+############################################################
+## Light
+############################################################
+
+light:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
+        name: Living Desk
+  - platform: group
+    name: Living Lights
+    entities:
+      - light.hoge_kast
+      - light.bank
+      - light.living_desk
+      - light.bollamp
+      - light.tv_meubel
+    
+############################################################
+## Binary Sensor
+############################################################
+
+binary_sensor:
+  - platform: rfxtrx
+    automatic_add: false
+    devices:
+      0b110010011600020a010f70: # kaku motion
+        name: motion_garage
+      0b1100090029fc0201010f60: # flamingo remote A
+        name: Flamingo Remote Button A
 
 ############################################################
 ## Automation
