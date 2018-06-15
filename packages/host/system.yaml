@@ -61,7 +61,7 @@ homeassistant:
 
     sensor.ozw_logtxt:
       <<: *customize
-      friendly_name: Ombang logbestand Z-Wave
+      friendly_name: Omvang logbestand Z-Wave
 
     sensor.cpu_temperature:
       <<: *customize
