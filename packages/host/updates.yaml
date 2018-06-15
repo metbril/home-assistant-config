@@ -27,12 +27,12 @@ homeassistant:
 
     sensor.ha_installed_version:
       <<: *customize
-      friendly_name: 'Geïnstalleerde versie HA'
+      friendly_name: 'Geïnstalleerde versie'
       icon: mdi:approval
 
     sensor.ha_current_stable_version:
       <<: *customize
-      friendly_name: 'Huidige stabiele versie HA'
+      friendly_name: 'Laatste versie'
       icon: mdi:approval
 
     sensor.ha_current_beta_version:
@@ -130,9 +130,9 @@ group:
     entities:
       - sensor.ha_installed_version
       - sensor.ha_current_stable_version
-      - sensor.ha_current_beta_version
-      - sensor.ha_current_development_version
-      - updater.updater
+      # - sensor.ha_current_beta_version
+      # - sensor.ha_current_development_version
+      # - updater.updater
       - binary_sensor.ha_update_available
 
 ############################################################################
