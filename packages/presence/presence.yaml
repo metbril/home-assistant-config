@@ -99,8 +99,8 @@ group:
     control: hidden
     entities:
       - device_tracker.robert_iphone
-      - device_tracker.robert_5384d5485cff48a9afe7596b7cd92b5b # oud
-      - device_tracker.robert_49d43599422f4a978792ad3eebfde074
+      - device_tracker.robert_owntracks
+      # - device_tracker.robert_iphone_app
 
   person_monique:
     control: hidden
