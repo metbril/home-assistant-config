@@ -54,7 +54,7 @@ group:
       # individual lights clockwise from the door
       - light.hoge_kast
       - light.bank
-      - light.living_desk
+      - light.standing_ikea_vaster
       - light.bollamp
       - light.tv_meubel
       # - media_player.woonkamer

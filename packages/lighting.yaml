@@ -16,7 +16,7 @@ homeassistant:
     # ## Light
     # ################################################
 
-    light.living_desk:
+    light.standing_ikea_vaster:
       <<: *customize
       friendly_name: "Staande lamp bureau"
       assumed_state: off
@@ -46,7 +46,7 @@ group:
       - light.bank
       - light.bollamp
       - light.hoge_kast
-      - light.living_desk
+      - light.standing_ikea_vaster
       - light.tv_meubel
   living_lights:
     entities:
@@ -54,7 +54,7 @@ group:
       - light.hoge_kast
       - light.bank
       - light.bollamp
-      - light.living_desk
+      - light.standing_ikea_vaster
       - light.tv_meubel
 
 ################################################

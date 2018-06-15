@@ -88,13 +88,14 @@ light:
     automatic_add: false
     devices:
       0b1100100f05e81202010f70: # KAKU APA3-1500R (2)
-        name: Living Desk
+        name: Standing IKEA Vaster # light.standing_ikea_vaster
+
   - platform: group
     name: Living Lights
     entities:
       - light.hoge_kast
       - light.bank
-      - light.living_desk
+      - light.standing_ikea_vaster
       - light.bollamp
       - light.tv_meubel
     

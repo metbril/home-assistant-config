@@ -120,7 +120,7 @@ group:
       - light.hoge_kast
       - light.bank
       - light.bollamp
-      - light.living_desk
+      - light.standing_ikea_vaster
       - light.tv_meubel
 
   garage:

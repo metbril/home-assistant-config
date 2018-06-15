@@ -23,7 +23,7 @@ homekit:
     - light.bank
     - light.bollamp
     - light.hoge_kast
-    - light.living_desk
+    - light.standing_ikea_vaster
     - light.tv_meubel
 
     # - switch.mess_call

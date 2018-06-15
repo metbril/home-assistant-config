@@ -19,7 +19,7 @@ recorder:
     entities:
 
       # packages / rfxtrx
-      - light.living_desk # restore state after reboot?
+      - light.standing_ikea_vaster # restore state after reboot?
       - switch.frontdoor_bell # for counter
 
       # packages / dsmr
@@ -38,7 +38,7 @@ history:
     entities:
 
       # packages / rfxtrx
-      - light.living_desk # restore state after reboot?
+      - light.standing_ikea_vaster # restore state after reboot?
       - switch.frontdoor_bell # for counter
 
 ################################################
