@@ -188,32 +188,18 @@ group:
       - script.post_mindergas
 
 ##################################################
-## Script
+## REST Command
 ##################################################
 
-## Manually posting is possible by using a script
-
-script:
+rest_command:
   ## API documentation at https://www.mindergas.nl/member/api
   post_mindergas:
-    alias: Post Gas Consumption
-    sequence:
-      - service: shell_command.curl
-        data_template:
-          url: https://www.mindergas.nl/api/gas_meter_readings
-          method: post
-          headers:
-            Content-Type: application/json
-            AUTH-TOKEN: !secret mindergas_token 
-          payload:
-            date: "{{ (as_timestamp(now()) - (24*3600)) | timestamp_custom('%Y-%m-%d', True) }}"
-            reading: "{{ states.sensor.gas_consumption.state }}"
-      - service: logbook.log
-        data:
-          name: Gasverbruik
-          message: is verstuurd naar mindergas.nl
-          entity_id: sensor.gas_consumption
-          domain: sensor
+    url: https://www.mindergas.nl/api/gas_meter_readings
+    method: post
+    headers:
+      Content-Type: application/json
+      AUTH-TOKEN: !secret mindergas_token 
+    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{states.sensor.gas_consumption.state }}" }'
 
 ##################################################
 ## Automation
@@ -231,5 +217,11 @@ automation:
         minutes: 15
         seconds: 00
     action:
-      ## any additional logging is done in the script
-      - service: script.post_mindergas
+      - service: rest_command.post_mindergas
+
+      - service: logbook.log
+        data:
+          name: Gasverbruik
+          message: is verstuurd naar mindergas.nl
+          entity_id: sensor.gas_consumption
+          domain: sensor
