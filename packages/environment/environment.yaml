@@ -16,31 +16,6 @@ homeassistant:
         package: 'environment'
 
     ################################################
-    ## Sensor
-    ################################################
-
-    sensor.pws_th_humidity:
-      <<: *customize
-      friendly_name: "Luchtvochtigheid"
-      icon: mdi:water-percent
-
-    sensor.pws_th_temperature:
-      <<: *customize
-      friendly_name: "Temperatuur"
-
-    sensor.pws_wind_wind_direction:
-      <<: *customize
-      friendly_name: "Windrichting"
-      icon: mdi:compass
-      unit_of_measurement: "˚"
-
-    sensor.pws_rain_rain_rate:
-      <<: *customize
-      friendly_name: "Neerslag"
-      icon: mdi:weather-rainy
-      unit_of_measurement: "mm/u"
-
-    ################################################
     ## Group
     ################################################
 
@@ -52,10 +27,6 @@ homeassistant:
     group.air_quality:
       <<: *customize
       friendly_name: 'Luchtkwaliteit'
-
-    group.pws:
-      <<: *customize
-      friendly_name: 'Weerstation'
 
 ################################################
 ## Group
@@ -79,10 +50,3 @@ group:
       - sensor.dark_sky_ozone
       - sensor.dark_sky_uv_index
 
-  pws:
-    name: Personal Weather Station
-    entities:
-      - sensor.pws_th_temperature
-      - sensor.pws_th_humidity
-      - sensor.pws_rain_rain_rate
-      - sensor.pws_wind_wind_direction

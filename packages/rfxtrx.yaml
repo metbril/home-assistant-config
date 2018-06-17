@@ -1,5 +1,5 @@
 ################################################
-## Packages RFXTRX
+## Packages / RFXTRX
 ################################################
 
 homeassistant:
@@ -14,6 +14,31 @@ homeassistant:
         package: 'rfxtrx'
 
     ################################################
+    ## Sensor
+    ################################################
+
+    sensor.pws_th_humidity:
+      <<: *customize
+      friendly_name: "Luchtvochtigheid"
+      icon: mdi:water-percent
+
+    sensor.pws_th_temperature:
+      <<: *customize
+      friendly_name: "Temperatuur"
+
+    sensor.pws_wind_wind_direction:
+      <<: *customize
+      friendly_name: "Windrichting"
+      icon: mdi:compass
+      unit_of_measurement: "˚"
+
+    sensor.pws_rain_rain_rate:
+      <<: *customize
+      friendly_name: "Neerslag"
+      icon: mdi:weather-rainy
+      unit_of_measurement: "mm/u"
+
+    ################################################
     ## Switch
     ################################################
 
@@ -26,6 +51,14 @@ homeassistant:
       <<: *customize
       friendly_name: 'Rechter wandschakelaar woonkamer'
       assumed_state: off
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.pws:
+      <<: *customize
+      friendly_name: 'Weerstation'
 
 ############################################################
 ## Switch
@@ -111,6 +144,19 @@ binary_sensor:
         name: motion_garage
       0b1100090029fc0201010f60: # flamingo remote A
         name: Flamingo Remote Button A
+
+############################################################
+## Group
+############################################################
+
+group:
+  pws:
+    name: Personal Weather Station
+    entities:
+      - sensor.pws_th_temperature
+      - sensor.pws_th_humidity
+      - sensor.pws_rain_rain_rate
+      - sensor.pws_wind_wind_direction
 
 ############################################################
 ## Automation
