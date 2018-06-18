@@ -82,6 +82,9 @@ group:
     name: Presence
     view: yes
     entities:
+      ## badges
+      - alarm_control_panel.home
+      ## cards
       - group.family 
       - group.person_robert
       - group.person_monique

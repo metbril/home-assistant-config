@@ -19,21 +19,28 @@ homeassistant:
 
 homekit:
   auto_start: false # needed for hue and zwave to come up
-  include_entities:
-    - light.bank
-    - light.bollamp
-    - light.hoge_kast
-    - light.standing_ikea_vaster
-    - light.tv_meubel
+  filter:
+    include_entities:
+    
+      - alarm_control_panel.home
 
-    # - switch.mess_call
-    # - switch.power_garage_door
+      - light.bank
+      - light.bollamp
+      - light.hoge_kast
+      - light.standing_ikea_vaster
+      - light.tv_meubel
 
-    # - sensor.benext_molite_8_temperature
-    # - sensor.dark_sky_apparent_temperature
-    # - sensor.dark_sky_humidity
-    # - sensor.pws_th_humidity
-    # - sensor.pws_th_temperature
+      # - switch.mess_call
+      # - switch.power_garage_door
+
+      # - sensor.benext_molite_8_temperature
+      # - sensor.dark_sky_apparent_temperature
+      # - sensor.dark_sky_humidity
+      # - sensor.pws_th_humidity
+      # - sensor.pws_th_temperature
+  entity_config:
+    alarm_control_panel.home:
+      code: !secret alarm_home_code
 
 ################################################
 ## Automation

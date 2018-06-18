@@ -44,6 +44,9 @@ group:
     view: yes
     control: hidden
     entities:
+      ## badges
+      - alarm_control_panel.home
+      ## cards
       - group.living
       - group.garage
 

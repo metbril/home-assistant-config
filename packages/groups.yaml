@@ -3,6 +3,9 @@ group:
     name: 'Home'
     view: yes
     entities:
+      ## badges
+      - alarm_control_panel.home
+      ## cards
       - group.main
       - group.living_lights
 

@@ -1,0 +1,68 @@
+############################################################################
+## Packages / Alarm
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'alarm'
+
+      expose: &expose
+        <<: *customize
+
+    ########################################################################
+    ## Alarm Code Panel
+    ########################################################################
+
+    alarm_control_panel.home:
+      <<: *customize
+      friendly_name: Huisalarm
+
+############################################################################
+## Alarm Control Panel
+############################################################################
+
+alarm_control_panel:
+  - platform: manual
+    name: Home
+    code: !secret alarm_home_code
+
+############################################################################
+## Automation
+############################################################################
+
+automation:
+  - alias: Presence Based Alarm
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: device_tracker.robert_iphone # group.family
+    action:
+      - service: notify.admin
+        data_template:
+          message: "Device Tracker Status: {{ trigger.to_state.state }}"
+      - service_template: "alarm_control_panel.alarm_{% if trigger.to_state.state == 'home' %}disarm{% else %}arm_away{% endif %}"
+        entity_id: alarm_control_panel.home
+      - service: logbook.log
+        data_template:
+          name: Huisalarm
+          message: "automatisch {% if trigger.to_state.state == 'home' %}uitgeschakeld{% else %}ingeschakeld{% endif %} op basis van aanwezigheid"
+#           automatisch ingesteld op basis van aanwezigheid
+          entity_id: alarm_control_panel.home
+          domain: alarm_control_panel
+
+  - alias: Notify Alarm State Change
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.home
+    action:
+      - service: notify.admin
+        data_template:
+          message: "Alarm status: {{ trigger.to_state.state }}"
