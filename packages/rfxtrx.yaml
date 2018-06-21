@@ -214,3 +214,14 @@ automation:
       - service: notify.admin
         data:
           message: 'Schemerverlichting ingeschakeld.'
+
+  - id: '1525863990560'
+    alias: Bij opstarten schakelaars aan
+    trigger:
+    - event: start
+      platform: homeassistant
+    condition: []
+    action:
+    - data:
+        entity_id: switch.power_garage_door
+      service: homeassistant.turn_on
