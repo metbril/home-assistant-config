@@ -7,23 +7,6 @@
 ## Some packages also contain customization 
 ################################################
 
-group.default_view:
-  friendly_name: Start
-  icon: mdi:rocket
-
-group.motion:
-  friendly_name: 'Bewegingsensoren'
-  icon: mdi:run
-
-group.automation_view:
-  order: 990 # at the end
-
-group.all_automations:
-  hidden: false
-
-group.all_scripts:
-  hidden: false
-
 ################################################
 ## Sun
 ################################################

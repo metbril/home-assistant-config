@@ -1,3 +1,48 @@
+################################################
+## Packages / Group
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'group'
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.default_view:
+      <<: *customize
+      friendly_name: Start
+      icon: mdi:rocket
+
+    group.motion:
+      <<: *customize
+      friendly_name: 'Bewegingsensoren'
+      icon: mdi:run
+
+    group.automation_view:
+      <<: *customize
+      order: 990 # at the end
+
+    group.all_automations:
+      <<: *customize
+      hidden: false
+
+    group.all_scripts:
+      <<: *customize
+      hidden: false
+
+################################################
+## Group
+################################################
+
 group:
   default_view:
     name: 'Home'
