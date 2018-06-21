@@ -28,6 +28,9 @@ recorder:
       - sensor.power_consumption_normal
       - sensor.gas_consumption
 
+      # energy meters
+      - sensor.fibaro_wall_plug_7_power
+
 ################################################
 ## History
 ## https://home-assistant.io/components/history/

@@ -171,6 +171,7 @@ group:
     entities:
       - group.power_meter_readings
       - group.gas_meter_readings
+      - group.energy_consumption
 
   power_meter_readings:
     name: Power Meter Readings
@@ -186,6 +187,12 @@ group:
     entities:
       - sensor.gas_consumption
       - script.post_mindergas
+
+  energy_consumption:
+    name: Energy Consumption
+    entities:
+      - sensor.power_consumption
+      - sensor.fibaro_wall_plug_7_power
 
 ##################################################
 ## REST Command
