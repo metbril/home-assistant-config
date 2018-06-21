@@ -8,3 +8,7 @@ sensor.fibaro_wall_plug_7_distance:
   ignored: true
 sensor.fibaro_wall_plug_7_velocity:
   ignored: true
+sensor.fibaro_wall_plug_7_rain_rate:
+  ignored: true
+sensor.fibaro_wall_plug_7_relative_humidity:
+  ignored: true
