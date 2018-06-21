@@ -29,18 +29,23 @@ homeassistant:
     sensor.moon:
       <<: *customize
       friendly_name: 'Maan'
+
     sensor.season:
       <<: *customize
       friendly_name: 'Seizoen'
+
     sensor.date:
       <<: *customize
       friendly_name: 'Datum'
+
     sensor.time:
       <<: *customize
       friendly_name: 'Tijd'
+
     sensor.toronto_time:
       <<: *customize
       friendly_name: 'Tijd in Toronto'
+
     sensor.time_of_day:
       <<: *customize
       friendly_name: "Tijd van de dag"
@@ -53,6 +58,20 @@ homeassistant:
     group.now:
       <<: *customize
       friendly_name: 'Nu'
+
+    ################################################
+    ## Sun
+    ################################################
+
+    sun.sun:
+      <<: *customize
+      friendly_name: 'Zon'
+
+################################################
+## Sun
+################################################
+
+sun:
 
 ################################################
 ## Binary Sensor
