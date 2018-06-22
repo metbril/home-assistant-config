@@ -262,6 +262,7 @@ group:
       - group.speedtest
       - group.host_updates
       - group.host_info
+      - group.batteries
 
   host_performance:
     # Systeeminformatie

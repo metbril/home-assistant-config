@@ -1,0 +1,41 @@
+homeassistant:
+  customize:
+    sensor.robert_owntracks_battery_level:
+      friendly_name: Robert Owntracks
+      unit_of_measurement: "%"
+      device_class: battery
+    sensor.pws_th_battery_level:
+      friendly_name: PWS TH Sensor
+      unit_of_measurement: "%"
+      device_class: battery
+    group.batteries:
+      friendly_name: Batterijen
+
+sensor:
+  - platform: template
+    sensors:
+      robert_owntracks_battery_level:
+        entity_id: device_tracker.robert_owntracks
+        value_template: >-
+          {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
+      pws_th_battery_level:
+        entity_id: sensor.pws_th_temperature
+        value_template: >-
+          {% set battery_numeric = states.sensor.pws_th_temperature.attributes['Battery numeric'] | int('unknown') %}
+          {% set battery_level = battery_numeric * 10 | int('unknown') %}
+          {% if (battery_level == 90) %}
+            100
+          {% else %}
+            {{battery_level}}
+          {% endif %}
+
+group:
+  batteries:
+    name: Batteries
+    entities:
+      - sensor.robert_owntracks_battery_level
+      - sensor.robert_iphone_app_battery_level
+      - sensor.robertipad_battery_level
+      - sensor.benext_molite_8_battery_level
+      - sensor.pws_th_battery_level
+
