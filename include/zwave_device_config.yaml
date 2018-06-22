@@ -6,9 +6,11 @@ sensor.benext_molite_8_luminance:
   polling_intensity: 15
 sensor.fibaro_wall_plug_7_distance:
   ignored: true
-sensor.fibaro_wall_plug_7_velocity:
+sensor.fibaro_wall_plug_7_general:
   ignored: true
 sensor.fibaro_wall_plug_7_rain_rate:
   ignored: true
 sensor.fibaro_wall_plug_7_relative_humidity:
+  ignored: true
+sensor.fibaro_wall_plug_7_velocity:
   ignored: true
