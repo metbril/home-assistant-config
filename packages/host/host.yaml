@@ -151,7 +151,7 @@ binary_sensor:
         value_template: '{{ states.sensor.processor_use.state | float > 80 }}'
 
       cpu_hot:
-        value_template: '{{ states.sensor.cpu_temperature.state | float > 60 }}'
+        value_template: '{{ states.sensor.cpu_temperature.state | float > 80 }}'
 
       db_large:
         value_template: '{{ states.sensor.homeassistant_v2db.state | float > 300 }}'
