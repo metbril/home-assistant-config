@@ -26,18 +26,6 @@ homeassistant:
       <<: *customize
       friendly_name: "Temperatuur"
 
-    sensor.pws_wind_wind_direction:
-      <<: *customize
-      friendly_name: "Windrichting"
-      icon: mdi:compass
-      unit_of_measurement: "˚"
-
-    sensor.pws_rain_rain_rate:
-      <<: *customize
-      friendly_name: "Neerslag"
-      icon: mdi:weather-rainy
-      unit_of_measurement: "mm/u"
-
     ################################################
     ## Switch
     ################################################
@@ -103,14 +91,6 @@ sensor:
         data_type:
           - Humidity
           - Temperature
-      0b55030c800c0000000a9569:
-        name: PWS Rain
-        data_type:
-          - Rain rate
-      105604029716013b000b000c0027002059:
-        name: PWS Wind
-        data_type:
-          - Wind direction
 
 ############################################################
 ## Light
@@ -155,8 +135,6 @@ group:
     entities:
       - sensor.pws_th_temperature
       - sensor.pws_th_humidity
-      - sensor.pws_rain_rain_rate
-      - sensor.pws_wind_wind_direction
 
 ############################################################
 ## Automation
