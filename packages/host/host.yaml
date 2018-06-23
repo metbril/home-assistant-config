@@ -279,7 +279,7 @@ group:
       - sensor.disk_free_
       - sensor.homeassistant_v2db
       - sensor.homeassistantlog
-      # - sensor.ozw_logtxt
+      - sensor.ozw_logtxt
 
   host_network:
     name: Host Network
