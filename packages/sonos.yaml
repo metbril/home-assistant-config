@@ -1,3 +1,6 @@
+media_player:
+  - platform: sonos
+
 script:
   sonos_say:
     alias: Sonos Text To Speach
