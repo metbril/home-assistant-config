@@ -108,17 +108,17 @@ sensor:
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/stable.json
     name: HA Current Stable Version
-    value_template: '{{ value_json.homeassistant.default }}'
+    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/beta.json
     name: HA Current Beta Version
-    value_template: '{{ value_json.homeassistant.default }}'
+    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/dev.json
     name: HA Current Development Version
-    value_template: '{{ value_json.homeassistant.default }}'
+    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
 
 ############################################################################
 ## Group
