@@ -34,8 +34,6 @@ group:
     name: Batteries
     entities:
       - sensor.robert_owntracks_battery_level
-      - sensor.robert_iphone_app_battery_level
-      - sensor.robertipad_battery_level
       - sensor.benext_molite_8_battery_level
       - sensor.pws_th_battery_level
 
