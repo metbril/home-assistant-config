@@ -14,30 +14,6 @@ homeassistant:
         package: 'zwave'
 
     ################################################
-    ## Binary Sensor
-    ################################################
-
-    binary_sensor.benext_molite_8_motion:
-      <<: *customize
-      device_class: motion
-      friendly_name: 'Beweging woonkamer'
-
-    ################################################
-    ## Sensor
-    ################################################
-
-    sensor.benext_molite_8_battery_level:
-      <<: *customize
-      friendly_name: 'Batterij beweging woonkamer'
-    sensor.benext_molite_8_temperature:
-      <<: *customize
-      friendly_name: 'Temperatuur woonkamer'
-    sensor.benext_molite_8_luminance:
-      <<: *customize
-      friendly_name: 'Lichtsterkte woonkamer'
-      icon: mdi:brightness-6
-
-    ################################################
     ## Group
     ################################################
 
@@ -54,30 +30,6 @@ homeassistant:
       friendly_name: 'Opnieuw instellen Z-Wave Energiemeters'
 
 ################################################
-## Sensor
-################################################
-
-sensor:
-  - platform: template
-    sensors:
-      benext_molite_8_battery_level:
-        value_template: "{{ states.zwave.benext_molite_8.attributes.battery_level }}"
-        # value_template:  "states('zwave.benext_molite_8.attributes.battery_level')|int('unknown')"
-        icon_template: >-
-          {% set battery_level = states('sensor.benext_molite_8_battery_level')|int('unknown') %}
-          {% set battery_round = (battery_level|int / 10)|int * 10 %}
-          {% if battery_level == unknown -%}
-            mdi:battery-unknown
-          {% elif battery_round >= 100 -%}
-            mdi:battery
-          {% elif battery_round > 0 -%}
-            mdi:battery-{{ battery_round }}
-          {% else -%}
-            mdi:battery-alert
-          {% endif %}
-        unit_of_measurement: "%"
-
-################################################
 ## Group
 ################################################
 
@@ -91,16 +43,6 @@ group:
       - sensor.fibaro_wall_plug_7_power_2
       - sensor.fibaro_wall_plug_7_exporting
       - zwave.fibaro_wall_plug_7
-  benext_molite_8:
-    name: BeNext Molite (Node 8)
-    entities:
-      - binary_sensor.benext_molite_8_motion
-      - sensor.benext_molite_8_temperature
-      - sensor.benext_molite_8_luminance
-      - sensor.benext_molite_8_battery_level
-      - sensor.benext_molite_8_alarm_level
-      - sensor.benext_molite_8_alarm_type
-      - zwave.benext_molite_8
 
 ################################################
 ## Script
