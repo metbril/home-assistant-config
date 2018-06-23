@@ -137,7 +137,7 @@ automation:
       - platform: state
         entity_id: sensor.time_of_day
     action:
-      - service: notify.rt
+      - service: notify.admin
         data_template:
           message: 'Het is nu {{ trigger.to_state.state }}'
 
