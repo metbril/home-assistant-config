@@ -37,7 +37,7 @@ homeassistant:
       <<: *customize
       friendly_name: 'Windsnelheid omgeving'
 
-    sensor.dark_sky_wind_direction:
+    sensor.dark_sky_wind_bearing:
       <<: *customize
       friendly_name: 'Windrichting omgeving'
 
