@@ -22,7 +22,7 @@ homeassistant:
     ## Group
     ########################################################################
 
-    group.test:
+    group.test_view:
       <<: *customize
       friendly_name: "Test"
       icon: mdi:bug
@@ -42,4 +42,6 @@ group:
     view: yes
     entities:
       - sensor.postnl
+      - sensor.system_number_of_undervoltage_messages
+
       - group.master_bedroom_climate
