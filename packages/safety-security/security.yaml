@@ -74,6 +74,7 @@ group:
     entities:
       - alarm_control_panel.home
       - group.motion
+      - group.contact
 
 ############################################################################
 ## Automation

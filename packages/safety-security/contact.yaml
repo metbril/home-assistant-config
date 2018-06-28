@@ -1,0 +1,27 @@
+## contact sensors
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'contact'
+
+    binary_sensor.master_bedroom_outside_door_sensor:
+      <<: *customize
+      device_class: door
+      friendly_name: Balkondeur Ouderslaapkamer
+
+    group.contact:
+      <<: *customize
+      friendly_name: Contactsensoren
+
+group:
+  contact:
+    name: Contact Sensors
+    entities:
+      - binary_sensor.master_bedroom_outside_door_sensor

@@ -35,6 +35,10 @@ homeassistant:
       <<: *customize
       friendly_name: 'Garage'
 
+    group.master_bedroom:
+      <<: *customize
+      friendly_name: 'Ouderslaapkamer'
+
 ############################################################################
 ## Group
 ############################################################################
@@ -49,6 +53,7 @@ group:
       ## cards
       - group.living
       - group.garage
+      - group.master_bedroom
 
   living:
     control: hidden
@@ -72,3 +77,8 @@ group:
     entities:
       - binary_sensor.motion_garage
       - switch.power_garage_door
+
+  master_bedroom:
+    control: hidden
+    entities:
+      - binary_sensor.master_bedroom_outside_door_sensor
