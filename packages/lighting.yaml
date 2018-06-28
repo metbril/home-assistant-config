@@ -16,14 +16,31 @@ homeassistant:
     # ## Light
     # ################################################
 
-    light.standing_ikea_vaster:
+    light.bank:
       <<: *customize
-      friendly_name: "Staande lamp bureau"
-      assumed_state: off
+      icon: mdi:floor-lamp
+    
+    light.bollamp:
+      <<: *customize
+      icon: mdi:lamp
+    
+    light.hoge_kast:
+      <<: *customize
+      icon: mdi:lamp
     
     light.living_lights:
       <<: *customize
       friendly_name: "Woonkamerverlichting"
+    
+    light.standing_ikea_vaster:
+      <<: *customize
+      friendly_name: "Steellamp"
+      assumed_state: off
+      icon: mdi:floor-lamp
+    
+    light.tv_meubel:
+      <<: *customize
+      icon: mdi:lamp
     
     ################################################
     ## Group
@@ -32,6 +49,7 @@ homeassistant:
     group.dusk_living_lights:
       <<: *customize
       friendly_name: Schemerverlichting Woonkamer
+
     group.living_lights:
       <<: *customize
       friendly_name: Verlichting Woonkamer
@@ -53,8 +71,8 @@ group:
       ## clockwise from the door
       - light.hoge_kast
       - light.bank
-      - light.bollamp
       - light.standing_ikea_vaster
+      - light.bollamp
       - light.tv_meubel
 
 ################################################
@@ -74,12 +92,3 @@ automation:
         data:
           name: Schemerverlichting woonkamer
           message: is ingeschakeld
-
-################################################
-## Scene
-################################################
-
-scene:
-  - name: Living Lights Off
-    entities:
-      group.living_lights: off
