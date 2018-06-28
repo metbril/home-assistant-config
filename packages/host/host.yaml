@@ -337,3 +337,18 @@ alert:
     skip_first: false
     notifiers:
       - admin
+
+automation:
+  - alias: "SSL Certificate Renewed"
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: sensor.ssl_certificate_expiry
+    condition: 
+      - condition: template
+        value_template: '{{ (trigger.to_state.state > trigger.from_state.state) }}'
+    action:
+      - service: notify.admin
+        data_template:
+          message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{trigger.from_state.state}} naar {{trigger.to_state.state}}'
+
