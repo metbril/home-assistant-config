@@ -42,3 +42,4 @@ group:
     view: yes
     entities:
       - sensor.postnl
+      - group.master_bedroom_climate
