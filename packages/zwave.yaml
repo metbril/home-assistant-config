@@ -76,3 +76,22 @@ automation:
         value_template: "{{ now().date().day == 1 }}"
     action:
       - service: script.reset_energy_meters
+
+  ## Charging is done when consumption is below 5W for 1 minute
+  - alias: Switch Off Phone Chargers Socket 
+    initial_state: off
+    trigger:
+      platform: numeric_state
+      entity_id: sensor.fibaro_wall_plug_7_power
+      below: 5
+      for:
+        minutes: 1
+    action:
+      - service: switch.turn_off
+        entity_id: switch.fibaro_wall_plug_7
+      - service: logbook.log
+        data:
+          entity_id: switch.fibaro_wall_plug_7
+          name: Telefoonladers
+          message: automatisch uitgeschakeld door inactiviteit
+          domain: switch
