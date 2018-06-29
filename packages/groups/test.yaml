@@ -42,6 +42,9 @@ group:
     view: yes
     entities:
       - sensor.postnl
+
+      - sensor.system_undervoltage_status
       - sensor.system_number_of_undervoltage_messages
+      - sensor.check_charger
 
       - group.master_bedroom_climate
