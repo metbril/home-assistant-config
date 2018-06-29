@@ -20,6 +20,7 @@ homeassistant:
     group.zwave:
       <<: *customize
       friendly_name: Z-Wave
+      icon: mdi:nfc
 
     ################################################
     ## Script
@@ -34,6 +35,14 @@ homeassistant:
 ################################################
 
 group:
+  zwave:
+    name: 'Z-Wave Devices'
+    entities:
+      - zwave.zwave.controller_1
+      - zwave.fibaro_wall_plug_7
+      - zwave.benext_molite_8
+      - zwave.master_bedroom_outside_door
+
   fibaro_wall_plug_7:
     name: 'Fibaro Wall Plug (Node 7)'
     entities:
