@@ -8,6 +8,7 @@ homeassistant:
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - !secret whitelist_dir_config
+    - !secret whitelist_dir_ssl
 
 # discovery:
 
@@ -46,6 +47,7 @@ rfxtrx:
 zwave:
   usb_path: !secret zwave_usb_path
   device_config: !include include/zwave_device_config.yaml
+  network_key: !secret zwave_network_key
 
 hue:
   bridges:

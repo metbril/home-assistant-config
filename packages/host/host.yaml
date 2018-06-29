@@ -191,6 +191,7 @@ sensor:
       - !secret filesize_homeassistant_db
       - !secret filesize_homeassistant_log
       - !secret filesize_ozw_log
+      - !secret filesize_ssl_cert
 
   - platform: dnsip
 
@@ -231,11 +232,16 @@ sensor:
             {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
           {% endif %}
           {{ hms_split[0] ~ ':' ~ hms_split[1] }}
+
       since_last_boot_short_nl:
         friendly_name: Sinds laatste start
         value_template: >-
           {% set value = states.sensor.since_last_boot_short.state %}
           {{ value | replace('days', 'dagen') | replace('day', 'dag') }}
+
+      certpem_last_updated:
+        entity_id: sensor.certpem
+        value_template: "{{ state_attr('sensor.certpem', 'last_updated') }}"
 
   - platform: cert_expiry
     host: !secret cert_expiry_host
@@ -352,3 +358,18 @@ automation:
         data_template:
           message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{trigger.from_state.state}} naar {{trigger.to_state.state}}'
 
+  - alias: "Timestamp SSL cert changed"
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: sensor.certpem_last_updated
+    condition: 
+      - condition: template
+        value_template: "{{ (trigger.from_state.state != 'None') }}"
+    action:
+      - service: hassio.addon_restart
+        data:
+          addon: "53caca22_nginx_proxy"
+      - service: notify.admin
+        data_template:
+          message: 'NGinx proxy is herstart om een nieuw SSL-certificaat te activeren'
