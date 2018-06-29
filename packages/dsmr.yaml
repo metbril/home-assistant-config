@@ -193,6 +193,7 @@ group:
     entities:
       - sensor.power_consumption
       - sensor.fibaro_wall_plug_7_power
+      - sensor.charging_station_plug_power
 
 ##################################################
 ## REST Command

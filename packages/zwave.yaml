@@ -14,6 +14,32 @@ homeassistant:
         package: 'zwave'
 
     ################################################
+    ## Zwave
+    ################################################
+
+    zwave.charging_station_plug:
+      <<: *customize
+      friendly_name: Oplaadstation
+
+    ################################################
+    ## Switch
+    ################################################
+
+    sensor.charging_station_plug_power:
+      <<: *customize
+      friendly_name: Verbruik oplaadstation
+      icon: mdi:flash
+
+    ################################################
+    ## Switch
+    ################################################
+
+    switch.charging_station_plug_switch:
+      <<: *customize
+      friendly_name: Oplaadstation
+      icon: mdi:power
+
+    ################################################
     ## Group
     ################################################
 
@@ -38,8 +64,9 @@ group:
   zwave:
     name: 'Z-Wave Devices'
     entities:
-      - zwave.zwave.controller_1
+      - zwave.controller_1
       - zwave.fibaro_wall_plug_7
+      - zwave.charging_station_plug
       - zwave.benext_molite_8
       - zwave.master_bedroom_outside_door
 
@@ -86,21 +113,21 @@ automation:
     action:
       - service: script.reset_energy_meters
 
-  ## Charging is done when consumption is below 5W for 1 minute
-  - alias: Switch Off Phone Chargers Socket 
-    initial_state: off
+  - alias: Switch Off Charging Station 
+    initial_state: on
     trigger:
-      platform: numeric_state
-      entity_id: sensor.fibaro_wall_plug_7_power
-      below: 5
-      for:
-        minutes: 1
+      ## Charging is done when consumption is below 5W for 1 minute
+      - platform: numeric_state
+        entity_id: sensor.charging_station_plug_power
+        below: 5
+        for:
+          minutes: 1
     action:
       - service: switch.turn_off
-        entity_id: switch.fibaro_wall_plug_7
+        entity_id: switch.charging_station_plug_switch
       - service: logbook.log
         data:
-          entity_id: switch.fibaro_wall_plug_7
-          name: Telefoonladers
+          name: Oplaadstation
           message: automatisch uitgeschakeld door inactiviteit
+          entity_id: switch.charging_station_plug_switch
           domain: switch
