@@ -47,4 +47,12 @@ group:
       - sensor.system_number_of_undervoltage_messages
       - sensor.check_charger
 
+      - group.test
+
       - group.master_bedroom_climate
+      - group.pi_hole
+
+  test:
+    name: Test
+    entities:
+      - input_select.log_level

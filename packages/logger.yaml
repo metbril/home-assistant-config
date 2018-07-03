@@ -1,0 +1,86 @@
+############################################################################
+## Packages / Logger
+## Realtime Debugging
+############################################################################
+
+homeassistant:
+  customize_glob:
+    "input_select.log_*":
+      icon: mdi:bug
+      hidden: False
+
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'logger'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ########################################################################
+    ## Input Select
+    ########################################################################
+
+    input_select.log_level:
+      <<: *customize
+
+    ########################################################################
+    ## Automation
+    ########################################################################
+
+    automation.log_level:
+      <<: *customize
+
+############################################################################
+## Logger
+############################################################################
+
+logger:
+  default: warn
+  # logs:
+  #   homeassistant.components.rfxtrx: debug
+
+############################################################################
+## Input Select
+############################################################################
+
+input_select:
+  log_level:
+    name: Log Level
+    initial: warn
+    options:
+      - critical
+      - fatal
+      - error
+      - warning
+      - warn
+      - info
+      - debug
+      - notset
+
+############################################################################
+## Automation
+############################################################################
+
+automation:
+  ##  Dynamically set log level without editing configuration and restart
+  - alias: Log Level
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.log_level
+    action:
+      - service: logger.set_level
+        data_template:
+          homeassistant.components: "{{ states.input_select.log_level.state }}"
+
+      - service: notify.twitter
+        data_template:
+          message: 'Mijn niveau van logging is zojuist ingesteld op "{{ states.input_select.log_level.state }}" (https://www.home-assistant.io/components/logger/#log-levels) #HomeAssistant'

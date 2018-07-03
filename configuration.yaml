@@ -32,11 +32,6 @@ http:
 # history:
 # logbook:
 
-logger:
-  default: warn
-  # logs:
-  #   homeassistant.components.rfxtrx: debug
-
 ##########
 ## Bridges and hubs
 ##########
