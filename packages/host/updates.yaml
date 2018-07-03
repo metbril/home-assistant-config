@@ -109,16 +109,19 @@ sensor:
     resource: https://s3.amazonaws.com/hassio-version/stable.json
     name: HA Current Stable Version
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
+    scan_interval: 3600
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/beta.json
     name: HA Current Beta Version
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
+    scan_interval: 3600
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/dev.json
     name: HA Current Development Version
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
+    scan_interval: 3600
 
 ############################################################################
 ## Group
