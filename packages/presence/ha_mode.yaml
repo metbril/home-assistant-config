@@ -2,7 +2,7 @@
 ## Packages / Presence / HA Mode
 ##
 ## Inspired by a post by @Tomahawk in the community thread:
-## https://community.home-assistant.io/t/mode-switch-input-select-button-redering/55934/8
+## https://community.home-assistant.io/t/55934/8
 ############################################################################
 
 homeassistant:
@@ -161,6 +161,7 @@ binary_sensor:
 group:
   ha_mode:
     name: 'HA Mode'
+    control: hidden
     entities:
       - input_boolean.ha_mode_home
       - input_boolean.ha_mode_away
