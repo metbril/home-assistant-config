@@ -58,6 +58,7 @@ group:
       - group.living
       - group.garage
       - group.master_bedroom
+      - group.entry
 
   living:
     control: hidden
