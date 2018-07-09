@@ -49,6 +49,8 @@ group:
 
       - group.test
 
+      - group.now
+
       - group.master_bedroom_climate
       - group.pi_hole
 
