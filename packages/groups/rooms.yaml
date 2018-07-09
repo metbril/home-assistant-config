@@ -39,6 +39,10 @@ homeassistant:
       <<: *customize
       friendly_name: 'Ouderslaapkamer'
 
+    group.entry:
+      <<: *customize
+      friendly_name: 'Entree'
+
 ############################################################################
 ## Group
 ############################################################################
@@ -82,3 +86,8 @@ group:
     control: hidden
     entities:
       - binary_sensor.master_bedroom_outside_door_sensor
+
+  entry:
+    control: hidden
+    entities:
+      - binary_sensor.frontdoor_contact_sensor
