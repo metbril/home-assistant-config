@@ -17,15 +17,6 @@ homeassistant:
     ## Group
     ################################################
 
-    group.default_view:
-      <<: *customize
-      friendly_name: Start
-      icon: mdi:rocket
-
-    group.automation_view:
-      <<: *customize
-      order: 990 # at the end
-
     group.all_automations:
       <<: *customize
       hidden: false
@@ -33,6 +24,26 @@ homeassistant:
     group.all_scripts:
       <<: *customize
       hidden: false
+
+    group.automation_view:
+      <<: *customize
+      order: 990 # at the end
+      icon: mdi:auto-fix
+
+    group.default_view:
+      <<: *customize
+      friendly_name: Start
+      icon: mdi:rocket
+
+    group.main:
+      <<: *customize
+      friendly_name: Hoofdentiteiten
+
+    group.settings_view:
+      <<: *customize
+      friendly_name: Instellingen
+      icon: mdi:settings
+
 
 ################################################
 ## Group
@@ -49,6 +60,19 @@ group:
       - group.main
       - group.living_lights
 
+  automation_view:
+    name: Automation
+    view: yes
+    entities:
+      - group.all_automations
+      - group.all_scripts
+
+  settings_view:
+    name: Settings
+    view: yes
+    entities:
+      - input_select.log_level
+
   main:
     name: Main Entities
     control: hidden
@@ -57,10 +81,3 @@ group:
       - switch.power_garage_door
       - input_boolean.on_vacation
 
-  automation_view:
-    name: Automation
-    icon: mdi:auto-fix
-    view: yes
-    entities:
-      - group.all_automations
-      - group.all_scripts
