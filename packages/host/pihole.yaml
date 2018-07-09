@@ -1,0 +1,60 @@
+############################################################################
+## Packages / Host / Pi-Hole
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'pihole'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ########################################################################
+    ## Sensor
+    ########################################################################
+
+    sensor.pihole_ads_blocked_today:
+      <<: *customize
+      friendly_name: 'Geblokkeerde advertenties'
+
+    sensor.pihole_ads_percentage_blocked_today:
+      <<: *customize
+      friendly_name: 'Percentage geblokkeerde advertenties'
+
+############################################################################
+## Sensor
+############################################################################
+
+sensor:
+  - platform: pi_hole
+    host: localhost:8880
+    ssl: false
+    monitored_conditions:
+      - ads_blocked_today
+      - ads_percentage_today
+
+weblink:
+  entities:
+    - name: Pi-Hole
+      url: http://hassio.local:8880/
+
+############################################################################
+## Group
+############################################################################
+
+group:
+  pihole:
+    name: "Pi-hole"
+    entities:
+      - sensor.pihole_ads_blocked_today
+      - sensor.pihole_ads_percentage_blocked_today
+      - weblink.pihole
