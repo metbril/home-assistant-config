@@ -84,7 +84,11 @@ group:
     entities:
       ## badges
       - alarm_control_panel.home
+      - binary_sensor.ha_mode
+      - sensor.ha_mode
+      
       ## cards
+      - group.ha_mode
       - group.family 
       - group.person_robert
       - group.person_monique

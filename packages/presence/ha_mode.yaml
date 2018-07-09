@@ -1,0 +1,189 @@
+############################################################################
+## Packages / Presence / HA Mode
+##
+## Inspired by a post by @Tomahawk in the community thread:
+## https://community.home-assistant.io/t/mode-switch-input-select-button-redering/55934/8
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'ha_mode'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ########################################################################
+    ## Input Boolean
+    ########################################################################
+
+    input_boolean.ha_mode_home:
+      <<: *customize
+      friendly_name: 'Thuis'
+
+    input_boolean.ha_mode_away:
+      <<: *customize
+      friendly_name: 'Weg'
+
+    input_boolean.ha_mode_night:
+      <<: *customize
+      friendly_name: 'Nacht'
+
+    input_boolean.ha_mode_holiday:
+      <<: *customize
+      friendly_name: 'Vakantie'
+
+    ########################################################################
+    ## Sensor
+    ########################################################################
+
+    sensor.ha_mode:
+      <<: *customize
+      friendly_name: 'HA-mode'
+
+    ########################################################################
+    ## Binary Sensor
+    ########################################################################
+
+    binary_sensor.ha_mode:
+      <<: *customize
+      friendly_name: 'HA-mode'
+
+    ########################################################################
+    ## Group
+    ########################################################################
+
+    group.ha_mode:
+      <<: *customize
+      friendly_name: 'HA-mode'
+
+    ########################################################################
+    ## Automation
+    ########################################################################
+
+    automation.ha_mode_sync:
+      <<: *customize
+
+############################################################################
+## Input Boolean
+############################################################################
+
+input_boolean:
+  ha_mode_home:
+    name: Home
+    icon: mdi:home-account
+
+  ha_mode_away:
+    name: Away
+    icon: mdi:walk
+
+  ha_mode_night:
+    name: Night
+    icon: mdi:weather-night
+
+  ha_mode_holiday:
+    name: Holiday 
+    icon: mdi:airplane-takeoff
+
+############################################################################
+## Sensor
+############################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      ha_mode:
+        friendly_name: 'HA Mode'
+        entity_id: 
+          - input_boolean.ha_mode_home
+          - input_boolean.ha_mode_away
+          - input_boolean.ha_mode_holiday
+          - input_boolean.ha_mode_night
+        value_template: >-
+          {% if is_state('input_boolean.ha_mode_home', 'on') %}
+              home
+          {% elif is_state('input_boolean.ha_mode_away', 'on') %}
+              away
+          {% elif is_state('input_boolean.ha_mode_night', 'on') %}
+            night
+          {% elif is_state('input_boolean.ha_mode_holiday', 'on') %}
+            holiday
+          {% endif %}
+        icon_template: >-
+          {% if is_state('input_boolean.ha_mode_home', 'on') %}
+            mdi:home-account
+          {% elif is_state('input_boolean.ha_mode_away', 'on') %}
+            mdi:walk
+          {% elif is_state('input_boolean.ha_mode_night', 'on') %}
+            mdi:weather-night
+          {% elif is_state('input_boolean.ha_mode_holiday', 'on') %}
+            mdi:airplane-takeoff
+          {% endif %}
+
+############################################################################
+## Binary Sensor
+############################################################################
+
+binary_sensor:
+  - platform: template
+    sensors:
+      ha_mode:
+        friendly_name: "HA Mode"
+        entity_id: sensor.ha_mode
+        value_template: >-
+          {{ is_state('sensor.ha_mode', 'home') 
+            or is_state('sensor.ha_mode', 'away')
+            or is_state('sensor.ha_mode', 'night')
+            or is_state('sensor.ha_mode', 'holiday') }}
+        icon_template: >-
+          {% if is_state('sensor.ha_mode', 'home') %}
+            mdi:home-account
+          {% elif is_state('sensor.ha_mode', 'away') %}
+            mdi:walk
+          {% elif is_state('sensor.ha_mode', 'night') %}
+            mdi:weather-night
+          {% elif is_state('sensor.ha_mode', 'holiday') %}
+            mdi:airplane-takeoff
+          {% endif %}
+
+############################################################################
+## Group
+############################################################################
+
+group:
+  ha_mode:
+    name: 'HA Mode'
+    entities:
+      - input_boolean.ha_mode_home
+      - input_boolean.ha_mode_away
+      - input_boolean.ha_mode_night
+      - input_boolean.ha_mode_holiday
+
+############################################################################
+## Automation
+############################################################################
+
+automation:
+  - alias: HA Mode Sync
+    trigger:
+      - platform: state
+        entity_id: 
+          - input_boolean.ha_mode_home
+          - input_boolean.ha_mode_away
+          - input_boolean.ha_mode_holiday
+          - input_boolean.ha_mode_night
+        to: 'on'
+    action:
+      - service: input_boolean.turn_off
+        data_template:
+          entity_id: >
+            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_holiday', 'input_boolean.ha_mode_night' ] | reject('equalto', trigger.entity_id) %}
+            {{ booleans | list | join(', ') }}
