@@ -120,9 +120,8 @@ automation:
       - platform: time
         at: '06:00:00'
     condition:
-      - condition: state
-        entity_id: input_boolean.on_vacation
-        state: 'off'
+      - condition: template
+        value_template: "{{ states.sensor.ha_mode.state != 'vacation' }}"
     action:
       - service: switch.turn_on
         entity_id: switch.garage_door_plug_switch
@@ -147,8 +146,8 @@ automation:
         at: '23:00:00'
     condition:
       - condition: state
-        entity_id: input_boolean.on_vacation
-        state: 'on'
+        entity_id: sensor.ha_mode
+        state: 'vacation'
     action:
       # wacht tussen 0:0:0 en 0:29:59
       - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
@@ -158,16 +157,19 @@ automation:
         data_template:
           title: 'Vakantieschakeling.'
           message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
+
   - alias: Notify Vacation Enabled
     trigger:
       - platform: time
         at: '9:00:00'
     condition:
       - condition: state
-        entity_id: input_boolean.on_vacation
-        state: 'on'
+        entity_id: sensor.ha_mode
+        state: 'vacation'
     action:
       - service: notify.admin
         data_template:
           title: '**Vakantieschakeling**'
           message: 'Vakantiemodus nog ingeschakeld.'
+
+# TODO: bark the dog when the doorbell rings

@@ -79,5 +79,4 @@ group:
     entities:
       - light.living_lights
       - switch.garage_door_plug_switch
-      - input_boolean.on_vacation
 

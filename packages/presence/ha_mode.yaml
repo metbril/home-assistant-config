@@ -37,7 +37,7 @@ homeassistant:
       <<: *customize
       friendly_name: 'Nacht'
 
-    input_boolean.ha_mode_holiday:
+    input_boolean.ha_mode_vacation:
       <<: *customize
       friendly_name: 'Vakantie'
 
@@ -89,8 +89,8 @@ input_boolean:
     name: Night
     icon: mdi:weather-night
 
-  ha_mode_holiday:
-    name: Holiday 
+  ha_mode_vacation:
+    name: Vacation 
     icon: mdi:airplane-takeoff
 
 ############################################################################
@@ -105,7 +105,7 @@ sensor:
         entity_id: 
           - input_boolean.ha_mode_home
           - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_holiday
+          - input_boolean.ha_mode_vacation
           - input_boolean.ha_mode_night
         value_template: >-
           {% if is_state('input_boolean.ha_mode_home', 'on') %}
@@ -114,8 +114,8 @@ sensor:
               away
           {% elif is_state('input_boolean.ha_mode_night', 'on') %}
             night
-          {% elif is_state('input_boolean.ha_mode_holiday', 'on') %}
-            holiday
+          {% elif is_state('input_boolean.ha_mode_vacation', 'on') %}
+            vacation
           {% endif %}
         icon_template: >-
           {% if is_state('input_boolean.ha_mode_home', 'on') %}
@@ -124,7 +124,7 @@ sensor:
             mdi:walk
           {% elif is_state('input_boolean.ha_mode_night', 'on') %}
             mdi:weather-night
-          {% elif is_state('input_boolean.ha_mode_holiday', 'on') %}
+          {% elif is_state('input_boolean.ha_mode_vacation', 'on') %}
             mdi:airplane-takeoff
           {% endif %}
 
@@ -142,7 +142,7 @@ binary_sensor:
           {{ is_state('sensor.ha_mode', 'home') 
             or is_state('sensor.ha_mode', 'away')
             or is_state('sensor.ha_mode', 'night')
-            or is_state('sensor.ha_mode', 'holiday') }}
+            or is_state('sensor.ha_mode', 'vacation') }}
         icon_template: >-
           {% if is_state('sensor.ha_mode', 'home') %}
             mdi:home-account
@@ -150,7 +150,7 @@ binary_sensor:
             mdi:walk
           {% elif is_state('sensor.ha_mode', 'night') %}
             mdi:weather-night
-          {% elif is_state('sensor.ha_mode', 'holiday') %}
+          {% elif is_state('sensor.ha_mode', 'vacation') %}
             mdi:airplane-takeoff
           {% endif %}
 
@@ -166,7 +166,7 @@ group:
       - input_boolean.ha_mode_home
       - input_boolean.ha_mode_away
       - input_boolean.ha_mode_night
-      - input_boolean.ha_mode_holiday
+      - input_boolean.ha_mode_vacation
 
 ############################################################################
 ## Automation
@@ -179,12 +179,12 @@ automation:
         entity_id: 
           - input_boolean.ha_mode_home
           - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_holiday
+          - input_boolean.ha_mode_vacation
           - input_boolean.ha_mode_night
         to: 'on'
     action:
       - service: input_boolean.turn_off
         data_template:
           entity_id: >
-            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_holiday', 'input_boolean.ha_mode_night' ] | reject('equalto', trigger.entity_id) %}
+            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_vacation', 'input_boolean.ha_mode_night' ] | reject('equalto', trigger.entity_id) %}
             {{ booleans | list | join(', ') }}
