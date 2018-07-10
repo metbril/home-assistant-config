@@ -114,6 +114,10 @@ automation:
     action:
       - service: switch.turn_off
         entity_id: switch.garage_door_plug_switch
+      - service: logbook.log
+        data:
+          name: Schakelaar garagedeur
+          message: is uitgeschakeld
 
   - alias: Power on garage door after 6:00
     trigger:
@@ -125,6 +129,10 @@ automation:
     action:
       - service: switch.turn_on
         entity_id: switch.garage_door_plug_switch
+      - service: logbook.log
+        data:
+          name: Schakelaar garagedeur
+          message: is ingeschakeld
 
   - alias: Turn On Dusk Living Lights
     trigger:
@@ -149,19 +157,22 @@ automation:
         entity_id: sensor.ha_mode
         state: 'vacation'
     action:
-      # wacht tussen 0:0:0 en 0:29:59
-      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":" ~ ((range(0,59)|random)|int) }}'
+      # wacht tussen 0:0:0 en 0:29:0
+      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
       - service: light.turn_off
         entity_id: group.dusk_living_lights
-      - service: notify.all
+      - service: notify.admin
         data_template:
-          title: 'Vakantieschakeling.'
+          title: 'Vakantiemodus'
           message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
 
   - alias: Notify Vacation Enabled
     trigger:
       - platform: time
         at: '9:00:00'
+      - platform: state
+        entity_id: sensor.ha_mode
+        to: 'vacation'
     condition:
       - condition: state
         entity_id: sensor.ha_mode
@@ -169,7 +180,5 @@ automation:
     action:
       - service: notify.admin
         data_template:
-          title: '**Vakantieschakeling**'
-          message: 'Vakantiemodus nog ingeschakeld.'
-
-# TODO: bark the dog when the doorbell rings
+          title: 'Vakantiemodus'
+          message: 'Vakantiemodus is ingeschakeld'
