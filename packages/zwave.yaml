@@ -21,6 +21,10 @@ homeassistant:
       <<: *customize
       friendly_name: Oplaadstation
 
+    zwave.garage_door_plug:
+      <<: *customize
+      friendly_name: Garagedeur
+
     ################################################
     ## Switch
     ################################################
@@ -30,6 +34,11 @@ homeassistant:
       friendly_name: Verbruik oplaadstation
       icon: mdi:flash
 
+    sensor.garage_door_plug_power:
+      <<: *customize
+      friendly_name: Verbruik garagedeur
+      icon: mdi:flash
+
     ################################################
     ## Switch
     ################################################
@@ -37,6 +46,11 @@ homeassistant:
     switch.charging_station_plug_switch:
       <<: *customize
       friendly_name: Oplaadstation
+      icon: mdi:power
+
+    switch.garage_door_plug_switch:
+      <<: *customize
+      friendly_name: Garagedeur
       icon: mdi:power
 
     ################################################
@@ -88,7 +102,7 @@ script:
   reset_energy_meters:
     sequence:
       - service: zwave.reset_node_meters
-        data: {"node_id":7,"instance":1}
+        data: { "node_id": "7", "instance":"1" }
       - service: logbook.log
         data:
           name: Energiemeters
@@ -112,6 +126,10 @@ automation:
         value_template: "{{ now().date().day == 1 }}"
     action:
       - service: script.reset_energy_meters
+      - service: logbook.log
+        data:
+          name: Energiemeters
+          message: automatisch gereset voor start maand
 
   - alias: Switch Off Charging Station 
     initial_state: on
