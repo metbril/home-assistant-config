@@ -42,7 +42,7 @@ rfxtrx:
 
 zwave:
   usb_path: !secret zwave_usb_path
-  device_config: !include include/zwave_device_config.yaml
+  device_config: zwave_device_config.yaml
   network_key: !secret zwave_network_key
 
 hue:
