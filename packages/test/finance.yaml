@@ -1,5 +1,5 @@
 ############################################################################
-## Packages / Test
+## Packages / Finance
 ############################################################################
 
 homeassistant:
@@ -11,7 +11,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'test'
+        package: 'finance'
 
       expose: &expose
         <<: *customize
@@ -19,40 +19,42 @@ homeassistant:
         homebridge_hidden: false
 
     ########################################################################
-    ## Group
+    ## 
     ########################################################################
 
-    group.test_view:
-      <<: *customize
-      friendly_name: "Test"
-      icon: mdi:bug
-      hidden: yes
+############################################################################
+## Sensor
+############################################################################
 
-############################################################################
-## 
-############################################################################
+sensor:
+
+  - platform: coinmarketcap
+    currency_id: 1 # BTC
+
+  - platform: coinmarketcap
+    currency_id: 1027 # ETH
+
+  - platform: coinmarketcap
+    currency_id: 52 # XRP
+
+  - platform: coinmarketcap
+    currency_id: 1831 # BCH
+
+  - platform: coinmarketcap
+    currency_id: 2 # LTC
 
 ############################################################################
 ## Group
 ############################################################################
 
 group:
-  test_view:
-    name: Test
-    view: yes
+  finance:
+    name: Finance
+    icon: mdi:finance
     entities:
-      - sensor.postnl
-
-      - sensor.system_undervoltage_status
-      - sensor.system_number_of_undervoltage_messages
-      - sensor.check_charger
-
-      - group.test
-
-      - group.now
-      - group.master_bedroom_climate
-      - group.finance
-
-  test:
-    name: Test
-    entities:
+      ## from coinmarketcap:
+      - sensor.bitcoin
+      - sensor.ethereum
+      - sensor.xrp
+      - sensor.bitcoin_cash
+      - sensor.litecoin
