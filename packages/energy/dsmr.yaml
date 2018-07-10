@@ -211,7 +211,6 @@ automation:
         seconds: 00
     action:
       - service: rest_command.post_mindergas
-
       - service: logbook.log
         data:
           name: Gasverbruik
