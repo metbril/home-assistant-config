@@ -40,6 +40,12 @@ homeassistant:
       friendly_name: 'Rechter wandschakelaar woonkamer'
       assumed_state: off
 
+    switch.flamingo_plug_1:
+      <<: *customize
+      friendly_name: "Flamingo Plug 1"
+      icon: mdi:power
+      assumed_state: Off
+
     ################################################
     ## Group
     ################################################
@@ -70,7 +76,7 @@ switch:
         name: Living Wallswitch Right
         fire_event: true
       0a140f01000b5501010f60: # lighting5 it 2901.01 On
-        name: Power Garage Door
+        name: Flamingo Plug 1
       0b110005011afee601040f60: # beldrukker woonkamer
         name: Mess Call
         fire_event: true
@@ -157,49 +163,17 @@ automation:
       #     name: Woonkamerverlichting
       #     message: uitgeschakeld
 
-  - alias: Turn Off Living Devices
+  - alias: Sync Garage Door Switch With Remote
     trigger:
-      - platform: event
-        event_type: button_pressed
-        event_data: 
-          entity_id: switch.living_wallswitch_left
-          state: 'off'
+      - platform: state
+        entity_id: binary_sensor.flamingo_remote_button_a
     action:
-      - service: light.turn_off
-        entity_id: group.living_lights
-      - service: logbook.log
-        data:
-          name: Woonkamerverlichting
-          message: uitgeschakeld
-      - service: notify.admin
-        data:
-          message: 'Woonkamerverlichting uitgeschakeld.'
+      - service_template: >
+          {% if trigger.to_state.state == "on" %}
+            homeassistant.turn_on
+          {% elif trigger.to_state.state == "off" %}
+            homeassistant.turn_off
+          {% endif %}
+        entity_id:
+          switch.flamingo_plug_1
 
-  - alias: Turn On Living Dusk Devices
-    trigger:
-      - platform: event
-        event_type: button_pressed
-        event_data: 
-          entity_id: switch.living_wallswitch_left
-          state: 'on'
-    action:
-      - service: light.turn_on
-        entity_id: group.dusk_living_lights
-      - service: logbook.log
-        data:
-          name: Schemerverlichting
-          message: ingeschakeld
-      - service: notify.admin
-        data:
-          message: 'Schemerverlichting ingeschakeld.'
-
-  - id: '1525863990560'
-    alias: Bij opstarten schakelaars aan
-    trigger:
-    - event: start
-      platform: homeassistant
-    condition: []
-    action:
-    - data:
-        entity_id: switch.power_garage_door
-      service: homeassistant.turn_on

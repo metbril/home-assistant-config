@@ -78,6 +78,6 @@ group:
     control: hidden
     entities:
       - light.living_lights
-      - switch.power_garage_door
+      - switch.garage_door_plug_switch
       - input_boolean.on_vacation
 

@@ -126,7 +126,7 @@ group:
   garage:
     control: hidden
     entities:
-      - switch.power_garage_door
+      - switch.garage_door_plug_switch
 
   kitchen:
     control: hidden

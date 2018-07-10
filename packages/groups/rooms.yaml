@@ -81,7 +81,7 @@ group:
     control: hidden
     entities:
       - binary_sensor.motion_garage
-      - switch.power_garage_door
+      - switch.garage_door_plug_switch
 
   master_bedroom:
     control: hidden

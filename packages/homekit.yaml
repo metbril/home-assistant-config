@@ -33,7 +33,7 @@ homekit:
       - light.tv_meubel
 
       # - switch.mess_call
-      # - switch.power_garage_door
+      # - switch.garage_door_plug_switch
 
       # - sensor.benext_molite_8_temperature
       # - sensor.dark_sky_apparent_temperature
