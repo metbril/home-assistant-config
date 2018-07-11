@@ -35,6 +35,11 @@ homeassistant:
       friendly_name: Start
       icon: mdi:rocket
 
+    group.finance_view:
+      <<: *customize
+      friendly_name: Financiën
+      icon: mdi:finance
+
     group.main:
       <<: *customize
       friendly_name: Hoofdentiteiten
@@ -59,6 +64,13 @@ group:
       ## cards
       - group.main
       - group.living_lights
+
+  finance_view:
+    name: Finance
+    view: yes
+    entities:
+      - group.fuel
+      - group.finance
 
   automation_view:
     name: Automation

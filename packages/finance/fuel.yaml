@@ -1,0 +1,56 @@
+homeassistant:
+  customize:
+    sensor.diesel:
+      friendly_name: "Diesel"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
+    sensor.euro95:
+      friendly_name: "Euro 95"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
+    sensor.euro95_bermweg:
+      friendly_name: "Euro 95 (Bermweg)"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
+    sensor.lpg:
+      friendly_name: "LPG"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
+
+sensor:
+  - platform: scrape
+    name: Euro95
+    resource: "https://www.unitedconsumers.com/brandstofprijzen"
+    select: ".table div:nth-of-type(8)"
+    value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
+  - platform: scrape
+    name: Diesel
+    resource: "https://www.unitedconsumers.com/brandstofprijzen"
+    select: ".table div:nth-of-type(14)"
+    value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
+  - platform: scrape
+    name: LPG
+    resource: "https://www.unitedconsumers.com/brandstofprijzen"
+    select: ".table div:nth-of-type(20)"
+    value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
+  - platform: scrape
+    name: Euro95 Bermweg
+    resource: "http://www.tinq.nl/tankstation?id=251"
+    select: "#station-prijzen tr:nth-of-type(3) td:nth-of-type(2)"
+    value_template: "{{ value.split('\xa0')[1].replace('&nbsp;','').replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
+group:
+  fuel:
+    name: Fuel
+    entities:
+      - sensor.euro95_bermweg
+      - sensor.euro95
+      - sensor.diesel
+      - sensor.lpg
