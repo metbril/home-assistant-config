@@ -12,6 +12,10 @@ homeassistant:
       friendly_name: "Euro 95 (Bermweg)"
       unit_of_measurement: "€/l"
       icon: mdi:gas-station
+    sensor.euro95_nieuwerkerk:
+      friendly_name: "Euro 95 (Nieuwerkerk)"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
     sensor.lpg:
       friendly_name: "LPG"
       unit_of_measurement: "€/l"
@@ -46,11 +50,19 @@ sensor:
     value_template: "{{ value.split('\xa0')[1].replace('&nbsp;','').replace(',', '.') | float }}"
     scan_interval: 3600 # be nice; once per hour only
 
+  - platform: scrape
+    resource: https://www.shellexpress.nl/nl_nl/station/se-nieuwerkerk-aan-den-ijssel
+    name: Euro95 Nieuwerkerk
+    select: ".price-actual"
+    value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
 group:
   fuel:
     name: Fuel
     entities:
       - sensor.euro95_bermweg
+      - sensor.euro95_nieuwerkerk
       - sensor.euro95
       - sensor.diesel
       - sensor.lpg
