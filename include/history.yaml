@@ -2,6 +2,11 @@
 ## https://home-assistant.io/components/history/
 ################################################
 
+exclude:
+  domains:
+    - input_boolean
+    - input_select
+
 # exclude:
 #   entities:
 
