@@ -16,6 +16,10 @@ homeassistant:
       friendly_name: "Euro 95 (Nieuwerkerk)"
       unit_of_measurement: "€/l"
       icon: mdi:gas-station
+    sensor.euro95_schermerhoek:
+      friendly_name: "Euro 95 (Schermerhoek)"
+      unit_of_measurement: "€/l"
+      icon: mdi:gas-station
     sensor.lpg:
       friendly_name: "LPG"
       unit_of_measurement: "€/l"
@@ -57,11 +61,19 @@ sensor:
     value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
     scan_interval: 3600 # be nice; once per hour only
 
+  - platform: scrape
+    resource: "http://lukoil.nl/go/lukoil_station.cfm?id=465"
+    name: Euro95 Schermerhoek
+    select: "#tabbedInfoContent div:nth-of-type(14)"
+    value_template: "{{ value.split('\x0D')[2].replace('EUR/L', '').replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
 group:
   fuel:
     name: Fuel
     entities:
       - sensor.euro95_bermweg
+      - sensor.euro95_schermerhoek
       - sensor.euro95_nieuwerkerk
       - sensor.euro95
       - sensor.diesel
