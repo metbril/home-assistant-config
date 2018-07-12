@@ -5,8 +5,15 @@ purge_interval: 1
 purge_keep_days: 3
 exclude:
   domains:
+    - alert
     - automation
+    - group
+    - history_graph
+    - media_player
     - script
     - sun
     - updater
     - weblink
+    - zone
+    - zwave
+
