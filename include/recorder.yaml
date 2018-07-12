@@ -1,0 +1,20 @@
+## recorder:
+## https://home-assistant.io/components/recorder/
+
+purge_interval: 1
+purge_keep_days: 3
+# include:
+#   entities:
+
+#     # packages / rfxtrx
+#     - light.standing_ikea_vaster # restore state after reboot?
+#     - switch.frontdoor_bell # for counter
+
+#     # packages / dsmr
+#     - sensor.power_consumption
+#     - sensor.power_consumption_low
+#     - sensor.power_consumption_normal
+#     - sensor.gas_consumption
+
+#     # energy meters
+#     - sensor.fibaro_wall_plug_7_power

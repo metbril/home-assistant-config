@@ -28,9 +28,9 @@ http:
   # ssl_key: /ssl/privkey.pem
   use_x_forwarded_for: true # default: false, use for proxied setup
 
-# recorder:
-# history:
-# logbook:
+recorder: !include include/recorder.yaml
+history: !include include/history.yaml
+logbook: !include include/logbook.yaml
 
 ##########
 ## Bridges and hubs

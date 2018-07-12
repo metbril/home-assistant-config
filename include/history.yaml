@@ -1,0 +1,10 @@
+## history:
+## https://home-assistant.io/components/history/
+################################################
+
+# exclude:
+#   entities:
+
+#     # packages / rfxtrx
+#     - light.standing_ikea_vaster # restore state after reboot?
+#     - switch.frontdoor_bell # for counter
