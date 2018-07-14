@@ -1,72 +1,79 @@
 homeassistant:
+  customize_glob:
+    sensor.diesel*:
+      unit_of_measurement: "€/L"
+      icon: mdi:gas-station
+    sensor.euro95*:
+      unit_of_measurement: "€/L"
+      icon: mdi:gas-station
+    sensor.lpg*:
+      unit_of_measurement: "€/L"
+      icon: mdi:gas-station
   customize:
-    sensor.diesel:
+    sensor.diesel_advies:
       friendly_name: "Diesel"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
-    sensor.euro95:
-      friendly_name: "Euro 95"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
+    sensor.euro95_advies:
+      friendly_name: "Euro 95 (Advies)"
     sensor.euro95_bermweg:
       friendly_name: "Euro 95 (Bermweg)"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
+    sensor.euro95_hoofdweg:
+      friendly_name: "Euro 95 (Hoofdweg)"
     sensor.euro95_nieuwerkerk:
       friendly_name: "Euro 95 (Nieuwerkerk)"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
     sensor.euro95_schermerhoek:
       friendly_name: "Euro 95 (Schermerhoek)"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
-    sensor.lpg:
+    sensor.lpg_advies:
       friendly_name: "LPG"
-      unit_of_measurement: "€/l"
-      icon: mdi:gas-station
 
 sensor:
   - platform: scrape
-    name: Euro95
+    name: Euro95 Advies
     resource: "https://www.unitedconsumers.com/brandstofprijzen"
     select: ".table div:nth-of-type(8)"
     value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
-    scan_interval: 900 # be nice; once per hour only
+    # scan_interval: 900 # be nice; once per hour only
 
   - platform: scrape
-    name: Diesel
+    name: Diesel Advies
     resource: "https://www.unitedconsumers.com/brandstofprijzen"
     select: ".table div:nth-of-type(14)"
     value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
-    scan_interval: 900 # be nice; once per hour only
+    # scan_interval: 900 # be nice; once per hour only
 
   - platform: scrape
-    name: LPG
+    name: LPG Advies
     resource: "https://www.unitedconsumers.com/brandstofprijzen"
     select: ".table div:nth-of-type(20)"
     value_template: "{{ value.split(' ')[1].replace(',', '.') | float }}"
-    scan_interval: 900 # be nice; once per hour only
+    # scan_interval: 900 # be nice; once per hour only
 
   - platform: scrape
     name: Euro95 Bermweg
     resource: "http://www.tinq.nl/tankstation?id=251"
     select: "#station-prijzen tr:nth-of-type(3) td:nth-of-type(2)"
     value_template: "{{ value.split('\xa0')[1].replace('&nbsp;','').replace(',', '.') | float }}"
-    scan_interval: 900 # be nice; once per hour only
+    # scan_interval: 900 # be nice; once per hour only
 
   - platform: scrape
     resource: https://www.shellexpress.nl/nl_nl/station/se-nieuwerkerk-aan-den-ijssel
     name: Euro95 Nieuwerkerk
     select: ".price-actual"
     value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
-    scan_interval: 900 # be nice; once per hour only
+    # scan_interval: 900 # be nice; once per hour only
 
   - platform: scrape
     resource: "http://lukoil.nl/go/lukoil_station.cfm?id=465"
     name: Euro95 Schermerhoek
     select: "#tabbedInfoContent div:nth-of-type(14)"
     value_template: "{{ value.split('\x0D')[2].replace('EUR/L', '').replace(',', '.') | float }}"
-    scan_interval: 3600 # be nice; once per hour only
+    # scan_interval: 3600 # be nice; once per hour only
+
+  - platform: scrape
+    resource: "https://www.tango.nl/stations/tango-capelle-aan-den-ijssel-hoofdweg"
+    name: Euro95 Hoofdweg
+    select: “#euro95 .pump_price span.price”
+    # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
+    # scan_interval: 900 # be nice; once per hour only
 
 group:
   fuel:
@@ -75,6 +82,7 @@ group:
       - sensor.euro95_bermweg
       - sensor.euro95_schermerhoek
       - sensor.euro95_nieuwerkerk
-      - sensor.euro95
-      - sensor.diesel
-      - sensor.lpg
+      - sensor.euro95_hoofdweg
+      - sensor.euro95_advies
+      - sensor.diesel_advies
+      - sensor.lpg_advies
