@@ -1,0 +1,105 @@
+############################################################################
+## Packages / Finance
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'finance'
+
+      expose: &expose
+        <<: *customize
+        haaska_hidden: false
+        homebridge_hidden: false
+
+    ########################################################################
+    ## 
+    ########################################################################
+
+############################################################################
+## Sensor
+############################################################################
+
+sensor:
+
+  # - platform: iex
+  #   symbols:
+  #     - symbol: TSLA
+
+  - platform: alpha_vantage
+    ## https://www.home-assistant.io/components/sensor.alpha_vantage/
+    api_key: !secret alpha_vantage_api_key
+    symbols:
+    - symbol: AEX
+      name: Stocks AEX
+    - symbol: INGA
+    - symbol: GOOGL
+    - symbol: GOOG
+    - symbol: AAPL
+    - symbol: AMZN
+    - symbol: MSFT
+    - symbol: FB
+    - symbol: TSLA
+    - symbol: NYT
+
+    scan_interval: 600 # 10 minutes
+
+  # https://github.com/home-assistant/home-assistant/issues/15300
+  # - platform: fixer
+  #   ## https://www.home-assistant.io/components/sensor.fixer/
+  #   target: USD
+  #   base: EUR
+  #   name: Exchange Rate USD
+
+  - platform: coinmarketcap
+    currency_id: 1 # BTC
+
+  - platform: coinmarketcap
+    currency_id: 1027 # ETH
+
+  - platform: coinmarketcap
+    currency_id: 52 # XRP
+
+  - platform: coinmarketcap
+    currency_id: 1831 # BCH
+
+  - platform: coinmarketcap
+    currency_id: 2 # LTC
+
+
+  ## it would be awesome if this was possible:
+  # - platform: coinmarketcap
+  #   currency_id: 
+  #     - 1 # BTC
+  #     - 1027 # ETH
+  #     - 52 # XRP
+  #     - 1831 # BCH
+  #     - 2 # LTC
+
+############################################################################
+## Group
+############################################################################
+
+group:
+  finance:
+    name: Finance
+    icon: mdi:finance
+    entities:
+      - sensor.stocks_aex
+      - sensor.stocks_google
+      - sensor.stocks_apple
+      - sensor.usd_eur
+      - sensor.exchange_rate_usd
+      ## by coinmarketcap:
+      - sensor.bitcoin
+      - sensor.ethereum
+      - sensor.xrp
+      - sensor.bitcoin_cash
+      - sensor.litecoin
+
