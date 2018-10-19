@@ -90,6 +90,32 @@ automation:
         data_template:
           title: 'Bel voordeur'
           message: 'Er is aangebeld {{ as_timestamp(now()) | timestamp_custom("op %d-%m om %H:%M", True) }}'
+      - service: notify.twitter
+        data_template:
+          message: >-
+            {{ [
+            "Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.",
+            "Au! Dat deed pijn. Wie raakte de deurbel aan?",
+            "Dat deed een belletje bij me rinkelen.",
+            "Klop, klop. Wie is daar? Isabel. Isabel wie? Isabel kapot. Daarom klop ik.",
+            "Klop, klop. Wie is daar? Wil. Wil wie? Wil naar binnen.",
+            "De bel gaat. Ja, ja, ik kom er aan.",
+            "Doe even open @metbril. Er staat iemand aan de deur."
+            ] | random + " #HomeAssistant" + [
+            " #Security",
+            " #Alarm",
+            " #SmartHome",
+            " #HomeAutomation"
+            ] | random }}
+          data:
+            media: >-
+              {% set pictures = [
+                "/config/www/img/klopklop.jpg",
+                "/config/www/img/deurklopper.png",
+                "/config/www/img/aankloppen.jpg",
+                "/config/www/img/deurbel.jpg",
+              ] %}
+              {{ pictures|random }}
 
   - alias: Mess Call Pressed
     initial_state: off
@@ -146,6 +172,32 @@ automation:
         data:
           name: Schemerverlichting woonkamer
           message: is ingeschakeld
+      - service: notify.twitter
+        data_template:
+          message: >-
+            {{ [
+            "Vlak voor zonsondergang doe ik de binnenverlichting aan.",
+            "Ik doe de lampen aan, omdat het binnen donker gaat worden.",
+            "Zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.",
+            "De hoogste tijd om de verlichting in te schakelen."
+            ] | random + " #HomeAssistant" + [
+            " #Beveiliging",
+            " #Zonsondergang",
+            " #Verlichting",
+            " #Hue",
+            " #SmartLighting",
+            " #SmartHome",
+            " #HomeAutomation"
+            ] | random }}
+          # data:
+          #   media: >-
+          #     {% set pictures = [
+          #       "/config/www/img/klopklop.jpg",
+          #       "/config/www/img/deurklopper.png",
+          #       "/config/www/img/aankloppen.jpg",
+          #       "/config/www/img/deurbel.jpg",
+          #     ] %}
+          #     {{ pictures|random }}
 
   # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
   - alias: Schakel verlichting uit als op vakantie
