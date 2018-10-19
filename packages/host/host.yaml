@@ -105,7 +105,7 @@ homeassistant:
       friendly_name: Geldigheidsduur SSL-certificaat
       unit_of_measurement: dagen
 
-    sensor.myipopendnscom:
+    sensor.myip:
       <<: *customize
       friendly_name: Publiek IP-adres
       icon: mdi:wan
@@ -297,7 +297,7 @@ group:
     name: Host Network
     entities:
       - sensor.ssl_certificate_expiry
-      - sensor.myipopendnscom
+      - sensor.myip
       # - sensor.network_out_eth0
       # - sensor.network_in_eth0
       # - sensor.packets_out_eth0
