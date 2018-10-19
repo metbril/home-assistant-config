@@ -1,0 +1,14 @@
+media_player:
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret living_tv_mac
+
+notify:
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
+

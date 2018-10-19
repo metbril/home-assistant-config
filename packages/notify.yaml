@@ -28,6 +28,7 @@ notify:
       # - service: admin
       - service: ios_phonsine
       - service: ios_patti
+      - service: living_tv
 
   - name: Twitter
     platform: twitter
