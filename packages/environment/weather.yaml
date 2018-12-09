@@ -79,6 +79,11 @@ homeassistant:
       <<: *customize
       friendly_name: 'Buienalarm'
 
+
+weather:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+
 ################################################
 ## Sensor
 ################################################
