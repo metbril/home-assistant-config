@@ -43,3 +43,18 @@ group:
     entities:
       - binary_sensor.master_bedroom_outside_door_sensor
       - binary_sensor.frontdoor_contact_sensor
+
+###############################################
+# Alert
+###############################################
+
+alert:
+ frontdoor_open:
+   name: Voordeur staat nog open
+   done_message: Voordeur is weer gesloten
+   entity_id: binary_sensor.frontdoor_contact_sensor
+   state: 'on'
+   repeat: 5 # minutes
+   skip_first: True
+   notifiers:
+     - all
