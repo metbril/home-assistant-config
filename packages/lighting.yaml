@@ -42,6 +42,10 @@ homeassistant:
       <<: *customize
       icon: mdi:lamp
     
+    light.willner:
+      <<: *customize
+      icon: mdi:lamp
+
     ################################################
     ## Group
     ################################################
@@ -54,6 +58,21 @@ homeassistant:
       <<: *customize
       friendly_name: Verlichting Woonkamer
 
+############################################################
+## Light
+############################################################
+
+light:
+  - platform: group
+    name: Living Lights
+    entities:
+      - light.bank
+      - light.bollamp
+      - light.hoge_kast
+      # - light.standing_ikea_vaster # kaputt
+      - light.tv_meubel
+      - light.willner
+    
 ################################################
 ## Group
 ################################################
@@ -64,16 +83,18 @@ group:
       - light.bank
       - light.bollamp
       - light.hoge_kast
-      - light.standing_ikea_vaster
+      # - light.standing_ikea_vaster # kaputt
       - light.tv_meubel
+      - light.willner
   living_lights:
     entities:
       ## clockwise from the door
       - light.hoge_kast
       - light.bank
-      - light.standing_ikea_vaster
-      - light.bollamp
       - light.tv_meubel
+      # - light.standing_ikea_vaster # kaputt
+      - light.willner
+      - light.bollamp
 
 ################################################
 ## Automation
@@ -115,4 +136,3 @@ automation:
       - service: notify.admin
         data:
           message: 'Woonkamerverlichting uitgeschakeld.'
-
