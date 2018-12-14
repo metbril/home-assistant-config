@@ -170,7 +170,6 @@ sensor:
       - type: disk_free
         arg: /
       - type: last_boot
-      - type: since_last_boot
       - type: network_in
         arg: 'eth0'
       - type: network_out
@@ -218,27 +217,6 @@ sensor:
 
   - platform: template
     sensors:
-      since_last_boot_short:
-        friendly_name: Since last boot
-        value_template: >-
-          {% set slb = states.sensor.since_last_boot.state.split(' ') %}
-          {% set slb_count = slb | length %}
-          {% set hms = slb[slb_count - 1] %}
-          {% set hms_trimmed = hms.split('.')[0] %}
-          {% set hms_split = hms_trimmed.split(':') %}
-          {% set hours = hms_split[0] | int %}
-          {% set minutes = hms_split[1] | int %}
-          {% if slb_count == 3 %}
-            {{ slb[0] ~ ' ' ~ slb[1] ~ ' ' }}
-          {% endif %}
-          {{ hms_split[0] ~ ':' ~ hms_split[1] }}
-
-      since_last_boot_short_nl:
-        friendly_name: Sinds laatste start
-        value_template: >-
-          {% set value = states.sensor.since_last_boot_short.state %}
-          {{ value | replace('days', 'dagen') | replace('day', 'dag') }}
-
       certpem_last_updated:
         entity_id: sensor.certpem
         value_template: "{{ state_attr('sensor.certpem', 'last_updated') }}"
