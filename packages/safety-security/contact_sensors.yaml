@@ -9,7 +9,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'contact'
+        package: 'contact_sensors'
 
     ################################################
     ## Binary Sensor
