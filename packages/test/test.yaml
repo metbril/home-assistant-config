@@ -24,8 +24,8 @@ homeassistant:
 
     group.test_view:
       <<: *customize
-      friendly_name: "Test"
-      icon: mdi:bug
+      friendly_name: "TEST"
+      # icon: mdi:bug
       hidden: yes
 
 ############################################################################
