@@ -43,6 +43,18 @@ homeassistant:
       icon: mdi:human-male
 
 ################################################
+## ASUSWRT
+################################################
+
+asuswrt:
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  ssh_key: !secret asuswrt_ssh_key
+  protocol: ssh
+  port: 22
+  mode: router
+
+################################################
 ## MQTT
 ################################################
 
@@ -52,6 +64,13 @@ mqtt:
   port: !secret mqtt_cloudmqtt_port
   username: !secret mqtt_cloudmqtt_username
   password: !secret mqtt_cloudmqtt_password
+  certificate: auto
+
+################################################
+## OwnTracks
+################################################
+
+owntracks:
 
 ################################################
 ## Device Tracker
@@ -61,16 +80,11 @@ mqtt:
 
 device_tracker:
   - platform: asuswrt
-    host: !secret asuswrt_host
-    username: !secret asuswrt_username
-    ssh_key: !secret asuswrt_ssh_key
     consider_home: 180
     interval_seconds: 60 # Seconds between each scan for new devices
     new_device_defaults:
       track_new_devices: false
       hide_if_away: false
-
-  - platform: owntracks
 
 ################################################
 ## Group
