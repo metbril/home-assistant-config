@@ -20,7 +20,6 @@ map:
 # conversation:
 
 http:
-  api_password: !secret http_password
   ip_ban_enabled: yes
   login_attempts_threshold: 3
   # base_url: !secret http_base_url
