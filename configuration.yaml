@@ -19,6 +19,12 @@ config:
 map:
 # conversation:
 
+panel_iframe:
+  configurator:
+    title: Configurator
+    icon: mdi:wrench
+    url: http://hassio.local:3218
+
 http:
   ip_ban_enabled: yes
   login_attempts_threshold: 3
