@@ -9,6 +9,10 @@ homeassistant:
   whitelist_external_dirs:
     - !secret whitelist_dir_config
     - !secret whitelist_dir_ssl
+  auth_providers:
+    - type: homeassistant
+    - type: legacy_api_password # still required for iOS app
+      api_password: !secret http_password # required since 0.90
 
 # discovery:
 
@@ -26,6 +30,7 @@ panel_iframe:
     url: http://hassio.local:3218
 
 http:
+  # api_password: !secret http_password # deprecated as of 0.90
   ip_ban_enabled: yes
   login_attempts_threshold: 3
   # base_url: !secret http_base_url

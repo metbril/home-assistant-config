@@ -43,11 +43,11 @@ homeassistant:
       <<: *customize
       friendly_name: Geheugengebruik
 
-    sensor.disk_free_:
+    sensor.disk_free:
       <<: *customize
       friendly_name: Beschikbare opslag
 
-    sensor.disk_use_percent_:
+    sensor.disk_use_percent:
       <<: *customize
       friendly_name: Gebruikte opslag
 
@@ -265,8 +265,8 @@ group:
   host_storage:
     name: System Storage
     entities:
-      - sensor.disk_use_percent_
-      - sensor.disk_free_
+      - sensor.disk_use_percent
+      - sensor.disk_free
       - sensor.homeassistant_v2db
       - sensor.homeassistantlog
       - sensor.ozw_logtxt
