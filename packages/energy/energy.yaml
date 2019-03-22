@@ -60,3 +60,27 @@ group:
 
       - history_graph.power_consumption_plugs
 
+############################################################################
+## Utility Meter
+## https://www.home-assistant.io/components/utility_meter/
+############################################################################
+
+utility_meter:
+  daily_power_offpeak:
+    source: sensor.power_consumption_low
+    cycle: daily
+  daily_power_peak:
+    source: sensor.power_consumption_normal
+    cycle: daily
+  daily_gas:
+    source: sensor.gas_consumption
+    cycle: daily
+  monthly_power_offpeak:
+    source: sensor.power_consumption_low
+    cycle: monthly
+  monthly_power_peak:
+    source: sensor.power_consumption_normal
+    cycle: monthly
+  monthly_gas:
+    source: sensor.gas_consumption
+    cycle: monthly
