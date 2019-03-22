@@ -22,6 +22,26 @@ homeassistant:
       friendly_name: 'Werkdag'
       icon: mdi:briefcase
 
+    binary_sensor.morning:
+      <<: *customize
+      friendly_name: 'Ochtend'
+      icon: mdi:timetable
+
+    binary_sensor.daytime:
+      <<: *customize
+      friendly_name: 'Overdag'
+      icon: mdi:timetable
+
+    binary_sensor.evening:
+      <<: *customize
+      friendly_name: 'Avond'
+      icon: mdi:timetable
+
+    binary_sensor.night:
+      <<: *customize
+      friendly_name: 'Nacht'
+      icon: mdi:timetable
+
     ################################################
     ## Sensor
     ################################################
@@ -82,6 +102,22 @@ binary_sensor:
     name: Workday
     country: NL
     workdays: [ mon, tue, wed, thu, fri ]
+  - platform: tod
+    name: Morning
+    after: 06:00
+    before: sunrise
+  - platform: tod
+    name: Daytime
+    after: sunrise
+    before: sunset
+  - platform: tod
+    name: Evening
+    after: sunset
+    before: '23:00'
+  - platform: tod
+    name: Night
+    after: '23:00'
+    before: '06:00'
 
 ################################################
 ## Sensor
@@ -157,3 +193,4 @@ group:
       - sun.sun
       - sensor.moon
       - sensor.season
+
