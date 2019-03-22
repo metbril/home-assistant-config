@@ -15,6 +15,7 @@ homeassistant:
       api_password: !secret http_password # required since 0.90
 
 # discovery:
+system_health:
 
 # UI elements
 
