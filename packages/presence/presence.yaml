@@ -129,33 +129,14 @@ group:
       ## cards
       - group.ha_mode
       - group.family 
-      - group.person_robert
-      - group.person_monique
-      - group.person_bjorn
       - group.vacation
 
   family:
     control: hidden
     entities:
-      - group.person_robert
-      - group.person_monique
-      - group.person_bjorn
-
-  person_robert:
-    control: hidden
-    entities:
-      - device_tracker.robert_iphone
-      - device_tracker.robert_owntracks
-
-  person_monique:
-    control: hidden
-    entities:
-      - device_tracker.monique_iphone
-
-  person_bjorn:
-    control: hidden
-    entities:
-      - device_tracker.bjorn_iphone
+      - person.robert
+      - person.monique
+      - person.bjorn
 
 ################################################
 ## Automation
