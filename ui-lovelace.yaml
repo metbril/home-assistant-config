@@ -1,0 +1,316 @@
+title: HIERO YAML
+views:
+  ## Start
+  - title: Start
+    icon: mdi:rocket
+    path: start
+    cards:
+
+      - type: weather-forecast
+        entity: weather.dark_sky
+        name: Het weer hiero
+        
+      - type: alarm-panel
+        entity: alarm_control_panel.home
+        name: Woonhuis
+        states:
+          - arm_home
+          - arm_away
+          - arm_night
+        
+      - type: entities
+        entities:
+          - light.bank
+          - light.tv_meubel
+          - light.hoge_kast
+          - light.bollamp
+          - light.willner
+          - light.woonkamert
+        title: Licht
+        
+      - type: entities
+        entities:
+          - switch.fibaro_wall_plug_7
+          - switch.charging_station_plug_switch
+          - switch.garage_door_plug_switch
+        title: Schakelaar
+        
+      - type: entity-filter
+        entities:
+        - entity: binary_sensor.frontdoor_contact_sensor
+        - entity: binary_sensor.master_bedroom_outside_door_sensor
+          name: Balkondeur
+        state_filter:
+          - 'on'
+        show_empty: false
+        card:
+          show_state: false
+          title: open contacten
+          type: glance
+
+  - title: Woonkamer
+    icon: mdi:sofa
+    path: woonkamer
+    badges:
+      - binary_sensor.benext_molite_8_motion
+      - sensor.benext_molite_8_temperature
+      - media_player.living_tv
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: light
+            entity: light.living_lights
+          - type: glance
+            entities:
+              - entity: light.hoge_kast
+                tap_action:
+                  action: toggle
+              - entity: light.bank
+                tap_action:
+                  action: toggle
+              - entity: light.bollamp
+                tap_action:
+                  action: toggle
+              - entity: light.willner
+                tap_action:
+                  action: toggle
+              - entity: light.tv_meubel
+                tap_action:
+                  action: toggle
+      
+      - type: glance
+        title: Oplaadstation
+        entities:
+        - entity: switch.charging_station_plug_switch
+          tap_action:
+            action: toggle
+        - entity: sensor.charging_station_plug_power
+        - entity: automation.switch_off_charging_station
+          icon: mdi:tune
+          name: Auto uit
+        
+      - type: media-control
+        entity: media_player.living_tv
+        
+      - type: media-control
+        entity: media_player.woonkamer
+        
+      - type: entity-button
+        icon: mdi:sleep
+        name: Welterusten
+        entity: scene.goodnight
+        hold_action:
+          action: more-info
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.goodnight
+
+  - badges:
+    - binary_sensor.frontdoor_contact_sensor
+    - binary_sensor.motion_garage
+    - switch.garage_door_plug_switch
+    - automation.frontdoor_bell_pressed
+    - sensor.doorbell_presses
+    - switch.frontdoor_bell
+    - zwave.frontdoor_contact
+    - binary_sensor.frontdoor_contact_sensor
+    - switch.frontdoor_bell
+    cards:
+    - entities:
+      - entity: switch.frontdoor_bell
+      - entity: binary_sensor.motion_garage
+      title: Entree
+      type: glance
+    - entities:
+      - entity: binary_sensor.motion_garage
+      - entity: switch.garage_door_plug_switch
+      title: Garage
+      type: glance
+    path: beneden
+    title: Beneden
+  - badges:
+    - person.robert
+    - person.monique
+    - person.bjorn
+    cards:
+    - columns: 4
+      entities:
+      - entity: device_tracker.robert_iphone
+      - entity: device_tracker.robert_owntracks
+      - entity: sensor.robert_owntracks_battery_level
+      - entity: sensor.pontius_battery_level
+      - entity: sensor.pontius_battery_state
+      title: iPhone Robert
+      type: glance
+    - entities:
+      - entity: sensor.iphone_van_robert_battery_level
+      - entity: sensor.iphone_van_robert_battery_state
+      - entity: sensor.robert_iphone_app_battery_state
+      title: iPhone Robert
+      type: entities
+    - entities:
+      - entity: device_tracker.robert_owntracks
+      - entity: device_tracker.robert_iphone
+      title: Waar is Robert nu?
+      type: map
+    - entities:
+      - entity: input_boolean.ha_mode_home
+        tap_action:
+          action: toggle
+      - entity: input_boolean.ha_mode_away
+        tap_action:
+          action: toggle
+      - entity: input_boolean.ha_mode_night
+        tap_action:
+          action: toggle
+      - entity: input_boolean.ha_mode_vacation
+        tap_action:
+          action: toggle
+      show_name: false
+      show_state: true
+      type: glance
+    - entities:
+      - entity: person.robert
+      - entity: device_tracker.robert_iphone
+      - entity: device_tracker.robert_owntracks
+      - entity: device_tracker.pontius
+      title: Robert
+      type: glance
+    icon: mdi:account
+    title: Presence
+  - badges: []
+    cards:
+    - entity: media_player.woonkamer
+      type: media-control
+    - entity: media_player.living_tv
+      type: media-control
+    icon: mdi:play-network
+    path: play
+    title: Media
+  - badges: []
+    cards:
+    - entities:
+      - sensor.buienradar_precipitation_forecast_average
+      - automation.rain_alarm
+      type: glance
+    icon: mdi:weather-partlycloudy
+    title: Weer
+  - badges: []
+    cards:
+    - entity: sensor.power_consumption
+      max: 5
+      min: 0
+      severity:
+        green: 0
+        red: 4
+        yellow: 2
+      theme: default
+      type: gauge
+    - entity: sensor.power_consumption
+      graph: line
+      type: sensor
+    - columns: 3
+      entities:
+      - entity: sensor.daily_power_peak
+      - entity: sensor.daily_power_offpeak
+      - entity: sensor.daily_gas
+      - entity: sensor.monthly_power_peak
+      - entity: sensor.monthly_power_offpeak
+      - entity: sensor.monthly_gas
+      type: glance
+    icon: mdi:flash
+    path: nutsvoorzieningen
+    title: Nutsvoorzieningen
+  - badges: []
+    cards:
+    - entities:
+      - entity: sensor.asuswrt_download
+      - entity: sensor.asuswrt_upload
+      - entity: sensor.asuswrt_download_speed
+      - entity: sensor.asuswrt_upload_speed
+      show_icon: true
+      show_name: true
+      show_state: true
+      title: ASUSWRT
+      type: glance
+    - entities:
+      - entity: sensor.pi_hole_ads_blocked_today
+      - entity: sensor.pi_hole_ads_percentage_blocked_today
+      title: pi Hole
+      type: glance
+    icon: mdi:ethernet
+    title: Netwerk
+  - badges: []
+    cards:
+    - entities:
+      - entity: binary_sensor.benext_molite_8_motion
+      - entity: binary_sensor.motion_garage
+      title: Beweging
+      type: glance
+    - entities:
+      - entity: binary_sensor.frontdoor_contact_sensor
+      - entity: binary_sensor.master_bedroom_outside_door_sensor
+      title: Contactsensoren
+      type: glance
+    - cards: 
+      type: vertical-stack
+    - cards:
+      - entity: input_boolean.ha_mode_home
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_away
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_night
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_vacation
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      type: horizontal-stack
+    - entities:
+      - entity: binary_sensor.ha_mode
+      type: glance
+    - entities:
+      - entity: binary_sensor.ha_mode
+      - entity: sensor.ha_mode
+      type: glance
+    - entity: input_boolean.ha_mode_home
+      hold_action:
+        action: more-info
+      tap_action:
+        action: toggle
+      type: entity-button
+    icon: mdi:shield
+    path: beveiliging
+    title: Beveiliging
+  - badges: []
+    cards:
+    - entities:
+      - entity: sensor.moon
+      - entity: sensor.season
+      - entity: binary_sensor.workday
+      - entity: sun.sun
+      type: glance
+    - entities:
+      - entity: binary_sensor.morning
+      - entity: binary_sensor.daytime
+      - entity: binary_sensor.evening
+      - entity: binary_sensor.night
+      - entity: sensor.time_of_day
+      type: glance
+    title: Time and Date
