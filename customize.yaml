@@ -1,2 +1,12 @@
+###############
+## Person
+###############
+person.robert:
+  entity_picture: /local/img/uil.png
+person.monique:
+  entity_picture: /local/img/golf.png
+person.bjorn:
+  entity_picture: /local/img/wasd.png
+
 device_tracker.pontius:
   icon: mdi:apple-ios
