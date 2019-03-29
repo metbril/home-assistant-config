@@ -13,16 +13,8 @@ homeassistant:
     - type: homeassistant
     - type: legacy_api_password # still required for iOS app
       api_password: !secret http_password # required since 0.90
-  customize:
-    ###############
-    ## Person
-    ###############
-    person.robert:
-      entity_picture: /local/img/uil.png
-    person.monique:
-      entity_picture: /local/img/golf.png
-    person.bjorn:
-      entity_picture: /local/img/wasd.png
+  customize: !include customize.yaml
+
 
 # discovery:
 system_health:
