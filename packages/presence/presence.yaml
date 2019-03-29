@@ -42,6 +42,26 @@ homeassistant:
       friendly_name: Björn
       icon: mdi:human-male
 
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.asuswrt_download:
+      <<: *customize
+      icon: mdi:cloud-download
+
+    sensor.asuswrt_download_speed:
+      <<: *customize
+      icon: mdi:download-network
+
+    sensor.asuswrt_upload:
+      <<: *customize
+      icon: mdi:cloud-upload
+
+    sensor.asuswrt_upload_speed:
+      <<: *customize
+      icon: mdi:upload-network
+
 ################################################
 ## ASUSWRT
 ################################################
@@ -53,6 +73,11 @@ asuswrt:
   protocol: ssh
   port: 22
   mode: router
+  sensors:
+      - upload
+      - download
+      - upload_speed
+      - download_speed
 
 ################################################
 ## MQTT
@@ -167,3 +192,29 @@ automation:
       #   data_template:
       #     message: "Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor details."
       #     title: "Nieuw apparaat"
+
+################################################
+## Script
+## https://www.home-assistant.io/components/script
+################################################
+
+# script:
+#   goodnight:
+    # turn of the lights, turn off media
+    # sequence:
+    #   - alias: Turn Off Living Lights
+        
+
+
+################################################
+## Scene
+## https://www.home-assistant.io/components/scene
+################################################
+
+scene:
+  - name: Goodnight
+    entities:
+      light.living_lights: off
+      media_player.woonkamer: paused
+      media_player.living_tv: off
+
