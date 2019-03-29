@@ -26,7 +26,7 @@ notify:
     platform: group
     services:
       # - service: admin
-      - service: ios_phonsine
+      - service: ios_pontius
       - service: ios_patti
       - service: living_tv
 
