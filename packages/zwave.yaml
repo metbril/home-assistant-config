@@ -69,6 +69,14 @@ homeassistant:
     script.reset_energy_meters:
       <<: *customize
       friendly_name: 'Opnieuw instellen Z-Wave Energiemeters'
+    
+    ################################################
+    ## Automation
+    ################################################
+
+    automation.switch_off_charging_station:
+      <<: *customize
+      friendly_name: 'Uitschakelen oplaadstation'
 
 ################################################
 ## Group
@@ -118,9 +126,11 @@ automation:
     initial_state: on
     trigger:
       - platform: time
-        hours: 00
-        minutes: 00
-        seconds: 00
+        # upgrade to 0.90
+        # hours: 00
+        # minutes: 00
+        # seconds: 00
+        at: '00:00:00'
     condition:
       - condition: template
         value_template: "{{ now().date().day == 1 }}"
@@ -132,14 +142,14 @@ automation:
           message: automatisch gereset voor start maand
 
   - alias: Switch Off Charging Station 
-    initial_state: on
+    initial_state: off
     trigger:
       ## Charging is done when consumption is below 5W for 1 minute
       - platform: numeric_state
         entity_id: sensor.charging_station_plug_power
         below: 5
         for:
-          minutes: 1
+          minutes: 10
     action:
       - service: switch.turn_off
         entity_id: switch.charging_station_plug_switch
