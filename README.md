@@ -6,6 +6,14 @@ This repository contains my configuration for Home Assistant. It is installed on
 
 ## Editing
 
+### Lovelace
+
+To start tracking the lovelace UI file `.storage/lovelace`, you need to force-add it to git:
+
+```bash
+git add -f .storage/lovelace
+```
+
 ### Automation Editor
 
 Using the automation editor is an easy way to test automations or to create temporary automations for debugging.
