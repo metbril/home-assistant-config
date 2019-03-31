@@ -11,35 +11,14 @@
                             "type": "weather-forecast"
                         },
                         {
-                            "entity": "alarm_control_panel.home",
-                            "name": "Woonhuis",
-                            "states": [
-                                "arm_home",
-                                "arm_away",
-                                "arm_night"
-                            ],
-                            "type": "alarm-panel"
-                        },
-                        {
-                            "entities": [
-                                "light.bank",
-                                "light.tv_meubel",
-                                "light.hoge_kast",
-                                "light.bollamp",
-                                "light.willner",
-                                "light.woonkamert"
-                            ],
-                            "title": "Licht",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                "switch.fibaro_wall_plug_7",
-                                "switch.charging_station_plug_switch",
-                                "switch.garage_door_plug_switch"
-                            ],
-                            "title": "Schakelaar",
-                            "type": "entities"
+                            "entity": "light.living_lights",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "tap_action": {
+                                "action": "toggle"
+                            },
+                            "type": "entity-button"
                         },
                         {
                             "card": {
@@ -588,6 +567,23 @@
                         }
                     ],
                     "title": "Time and Date"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "switch.fibaro_wall_plug_7",
+                                "switch.charging_station_plug_switch",
+                                "switch.garage_door_plug_switch"
+                            ],
+                            "title": "Schakelaar",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:bug",
+                    "path": "debug",
+                    "title": "Debug"
                 }
             ]
         }
