@@ -18,7 +18,7 @@
                             "tap_action": {
                                 "action": "toggle"
                             },
-                            "type": "entity-button"
+                            "type": "light"
                         },
                         {
                             "card": {
@@ -219,21 +219,6 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.iphone_van_robert_battery_level"
-                                },
-                                {
-                                    "entity": "sensor.iphone_van_robert_battery_state"
-                                },
-                                {
-                                    "entity": "sensor.robert_iphone_app_battery_state"
-                                }
-                            ],
-                            "title": "iPhone Robert",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
                                     "entity": "device_tracker.robert_owntracks"
                                 },
                                 {
@@ -330,6 +315,55 @@
                     "badges": [],
                     "cards": [
                         {
+                            "cards": [
+                                {
+                                    "columns": 3,
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.daily_power_peak",
+                                            "name": "Piek Dag"
+                                        },
+                                        {
+                                            "entity": "sensor.daily_power_offpeak",
+                                            "name": "Dal Dag"
+                                        },
+                                        {
+                                            "entity": "sensor.daily_gas",
+                                            "name": "Gas Dag"
+                                        }
+                                    ],
+                                    "title": "Energieverbruik (dag)",
+                                    "type": "glance"
+                                },
+                                {
+                                    "columns": 3,
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.monthly_power_peak",
+                                            "name": "Piek"
+                                        },
+                                        {
+                                            "entity": "sensor.monthly_power_offpeak",
+                                            "name": "Dal"
+                                        },
+                                        {
+                                            "entity": "sensor.monthly_gas",
+                                            "name": "Gas"
+                                        }
+                                    ],
+                                    "title": "Energieverbruik (maand)",
+                                    "type": "glance"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.power_consumption"
+                                    ],
+                                    "type": "history-graph"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        },
+                        {
                             "entity": "sensor.power_consumption",
                             "max": 5,
                             "min": 0,
@@ -343,32 +377,7 @@
                         },
                         {
                             "entity": "sensor.power_consumption",
-                            "graph": "line",
                             "type": "sensor"
-                        },
-                        {
-                            "columns": 3,
-                            "entities": [
-                                {
-                                    "entity": "sensor.daily_power_peak"
-                                },
-                                {
-                                    "entity": "sensor.daily_power_offpeak"
-                                },
-                                {
-                                    "entity": "sensor.daily_gas"
-                                },
-                                {
-                                    "entity": "sensor.monthly_power_peak"
-                                },
-                                {
-                                    "entity": "sensor.monthly_power_offpeak"
-                                },
-                                {
-                                    "entity": "sensor.monthly_gas"
-                                }
-                            ],
-                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:flash",
@@ -584,6 +593,12 @@
                     "icon": "mdi:bug",
                     "path": "debug",
                     "title": "Debug"
+                },
+                {
+                    "badges": [],
+                    "cards": [],
+                    "icon": "mdi:trash-can",
+                    "title": "Trash"
                 }
             ]
         }
