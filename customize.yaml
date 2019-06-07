@@ -142,6 +142,9 @@ sensor.benext_molite_8_temperature:
 sensor.buienradar_precipitation_forecast_average:
   friendly_name: Verwachte neerslag
   unit_of_measurement: mm/u
+sensor.charging_station_plug_energy:
+  friendly_name: Verbruik oplaadstation
+  icon: mdi:counter
 sensor.charging_station_plug_power:
   friendly_name: Verbruik oplaadstation
   icon: mdi:flash
@@ -193,6 +196,12 @@ sensor.euro95_shell_nieuwerkerk:
   friendly_name: Euro 95 (Shell Nieuwerkerk)
 sensor.euro95_tinq_bermweg:
   friendly_name: Euro 95 (Tinq Bermweg)
+sensor.fibaro_wall_plug_7_energy:
+  friendly_name: Verbruik FIBARO
+  icon: mdi:counter
+sensor.garage_door_plug_energy:
+  friendly_name: Verbruik garagedeur
+  icon: mdi:counter
 sensor.garage_door_plug_power:
   friendly_name: Verbruik garagedeur
   icon: mdi:flash
