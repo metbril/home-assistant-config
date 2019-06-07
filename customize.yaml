@@ -58,77 +58,21 @@ device_tracker.pontius:
   icon: 'mdi:apple-ios'
 fan.master_bedroom:
   friendly_name: Ouderslaapkamer
-group.air_quality:
-  friendly_name: Luchtkwaliteit
 group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
-group.automation_view:
-  icon: 'mdi:auto-fix'
-  order: 990
 group.batteries:
   friendly_name: Batterijen
-group.commute:
-  friendly_name: Woon-Werk
 group.contact:
   friendly_name: Contactsensoren
-group.default_view:
-  friendly_name: Start
-  icon: 'mdi:rocket'
 group.dusk_living_lights:
   friendly_name: Schemerverlichting Woonkamer
-group.energy_view:
-  friendly_name: Energie
-  icon: 'mdi:flash'
-group.entry:
-  friendly_name: Entree
-group.environment_view:
-  friendly_name: Leefklimaat
-  icon: 'mdi:earth'
-group.family:
-  friendly_name: Familie
-  icon: 'mdi:human-male-female'
-group.finance_view:
-  friendly_name: Financiën
-  icon: 'mdi:finance'
-group.garage:
-  friendly_name: Garage
-group.gas_meter_readings:
-  control: hidden
-  friendly_name: Meterstanden Gas
-  icon: 'mdi:fire'
-group.ha_mode:
-  friendly_name: HA-mode
-group.host_network:
-  friendly_name: Netwerk
-  icon: 'mdi:network'
-group.host_performance:
-  friendly_name: Prestaties
-  icon: 'mdi:memory'
-group.host_storage:
-  friendly_name: Opslag
-  icon: 'mdi:harddisk'
-group.host_updates:
-  friendly_name: HA Host Updates
-  icon: 'mdi:sync'
-group.host_view:
-  friendly_name: Systeeminformatie
-  icon: 'mdi:server'
-  order: 999
-group.living:
-  friendly_name: Woonkamer
 group.living_lights:
   friendly_name: Verlichting Woonkamer
-group.main:
-  friendly_name: Hoofdentiteiten
-group.master_bedroom:
-  friendly_name: Ouderslaapkamer
 group.motion:
   friendly_name: Bewegingsensoren
   icon: 'mdi:run'
-group.now:
-  friendly_name: Nu
 group.person_bjorn:
   friendly_name: Björn
   icon: 'mdi:human-male'
@@ -138,30 +82,6 @@ group.person_monique:
 group.person_robert:
   friendly_name: Robert
   icon: 'mdi:human-male'
-group.power_meter_readings:
-  control: hidden
-  friendly_name: Meterstanden Energie
-  icon: 'mdi:flash'
-group.presence_view:
-  friendly_name: Aanwezigheid
-  icon: 'mdi:account'
-group.pws:
-  friendly_name: Weerstation
-group.rooms_view:
-  friendly_name: Kamers
-  icon: 'mdi:home'
-  order: 1
-group.security:
-  friendly_name: Beveiliging
-  icon: 'mdi:security'
-group.settings_view:
-  friendly_name: Instellingen
-  icon: 'mdi:settings'
-group.weather:
-  friendly_name: Weerbericht
-group.zwave:
-  friendly_name: Z-Wave
-  icon: 'mdi:nfc'
 input_boolean.ha_mode_away:
   friendly_name: Weg
 input_boolean.ha_mode_home:
