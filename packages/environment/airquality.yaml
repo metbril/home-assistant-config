@@ -14,22 +14,6 @@ homeassistant:
       customize: &customize
         package: 'airquality'
 
-    ################################################
-    ## Sensor
-    ################################################
-
-    sensor.waqi_rotterdam:
-      friendly_name: 'Luchtkwaliteitsindex'
-      icon: mdi:factory
-
-    sensor.waqi_rotterdam_impact:
-      friendly_name: "Luchtkwaliteit"
-      icon: mdi:factory
-
-    sensor.dark_sky_ozone:
-      friendly_name: 'Ozon'
-      icon: mdi:weather-sunny
-
 ################################################
 ## Sensor
 ################################################

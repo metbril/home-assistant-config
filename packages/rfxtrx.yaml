@@ -13,46 +13,6 @@ homeassistant:
       customize: &customize
         package: 'rfxtrx'
 
-    ################################################
-    ## Sensor
-    ################################################
-
-    sensor.pws_th_humidity:
-      <<: *customize
-      friendly_name: "Luchtvochtigheid"
-      icon: mdi:water-percent
-
-    sensor.pws_th_temperature:
-      <<: *customize
-      friendly_name: "Temperatuur"
-
-    ################################################
-    ## Switch
-    ################################################
-
-    switch.living_wallswitch_left:
-      <<: *customize
-      friendly_name: 'Linker wandschakelaar woonkamer'
-      assumed_state: off
-
-    switch.living_wallswitch_right:
-      <<: *customize
-      friendly_name: 'Rechter wandschakelaar woonkamer'
-      assumed_state: off
-
-    switch.flamingo_plug_1:
-      <<: *customize
-      friendly_name: "Flamingo Plug 1"
-      icon: mdi:power
-      assumed_state: Off
-
-    ################################################
-    ## Group
-    ################################################
-
-    group.pws:
-      <<: *customize
-      friendly_name: 'Weerstation'
 
 ############################################################
 ## Switch
@@ -146,7 +106,7 @@ automation:
         event_data: 
           entity_id: switch.kaku_remote_1
           state: 'group off'
-    action:
+    action: []
       # - service: light.turn_off
       #   entity_id: group.living_lights
       # - service: logbook.log

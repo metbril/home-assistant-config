@@ -1,20 +1,452 @@
-person.robert:
-  entity_picture: /local/img/uil.png
-person.monique:
-  entity_picture: /local/img/golf.png
+alarm_control_panel.home:
+  friendly_name: Huisalarm
+automation.ha_update_available_for_hassio_notification:
+  friendly_name: HA Update Beschikbaar Melding
+automation.ha_update_available_notification:
+  friendly_name: HA Update Beschikbaar Melding
+automation.rain_alarm:
+  friendly_name: Buienalarm
+automation.switch_off_charging_station:
+  friendly_name: Uitschakelen oplaadstation
+binary_sensor.benext_molite_8_motion:
+  device_class: motion
+  friendly_name: Beweging woonkamer
+binary_sensor.cpu_high:
+  device_class: problem
+  friendly_name: CPU Hoog
+binary_sensor.cpu_hot:
+  device_class: heat
+  friendly_name: CPU Heet
+binary_sensor.daytime:
+  friendly_name: Overdag
+  icon: 'mdi:timetable'
+binary_sensor.db_large:
+  device_class: problem
+  friendly_name: Grote database
+binary_sensor.evening:
+  friendly_name: Avond
+  icon: 'mdi:timetable'
+binary_sensor.flamingo_remote_button_a:
+  friendly_name: Flamingo Afstandsbediening A
+  icon: 'mdi:remote'
+binary_sensor.frontdoor_contact_sensor:
+  device_class: door
+  friendly_name: Voordeur
+binary_sensor.ha_mode:
+  friendly_name: HA-mode
+binary_sensor.ha_update_available:
+  device_class: safety
+  friendly_name: Update Beschikbaar voor HA
+binary_sensor.master_bedroom_outside_door_sensor:
+  device_class: door
+  friendly_name: Balkondeur Ouderslaapkamer
+binary_sensor.morning:
+  friendly_name: Ochtend
+  icon: 'mdi:timetable'
+binary_sensor.motion_garage:
+  device_class: motion
+  friendly_name: Beweging garage
+binary_sensor.night:
+  friendly_name: Nacht
+  icon: 'mdi:timetable'
+binary_sensor.workday:
+  friendly_name: Werkdag
+  icon: 'mdi:briefcase'
+climate.master_bedroom:
+  friendly_name: Ouderslaapkamer
+device_tracker.pontius:
+  icon: 'mdi:apple-ios'
+fan.master_bedroom:
+  friendly_name: Ouderslaapkamer
+group.air_quality:
+  friendly_name: Luchtkwaliteit
+group.all_automations:
+  hidden: false
+group.all_scripts:
+  hidden: false
+group.automation_view:
+  icon: 'mdi:auto-fix'
+  order: 990
+group.batteries:
+  friendly_name: Batterijen
+group.commute:
+  friendly_name: Woon-Werk
+group.contact:
+  friendly_name: Contactsensoren
+group.default_view:
+  friendly_name: Start
+  icon: 'mdi:rocket'
+group.dusk_living_lights:
+  friendly_name: Schemerverlichting Woonkamer
+group.energy_view:
+  friendly_name: Energie
+  icon: 'mdi:flash'
+group.entry:
+  friendly_name: Entree
+group.environment_view:
+  friendly_name: Leefklimaat
+  icon: 'mdi:earth'
+group.family:
+  friendly_name: Familie
+  icon: 'mdi:human-male-female'
+group.finance_view:
+  friendly_name: Financiën
+  icon: 'mdi:finance'
+group.garage:
+  friendly_name: Garage
+group.gas_meter_readings:
+  control: hidden
+  friendly_name: Meterstanden Gas
+  icon: 'mdi:fire'
+group.ha_mode:
+  friendly_name: HA-mode
+group.host_network:
+  friendly_name: Netwerk
+  icon: 'mdi:network'
+group.host_performance:
+  friendly_name: Prestaties
+  icon: 'mdi:memory'
+group.host_storage:
+  friendly_name: Opslag
+  icon: 'mdi:harddisk'
+group.host_updates:
+  friendly_name: HA Host Updates
+  icon: 'mdi:sync'
+group.host_view:
+  friendly_name: Systeeminformatie
+  icon: 'mdi:server'
+  order: 999
+group.living:
+  friendly_name: Woonkamer
+group.living_lights:
+  friendly_name: Verlichting Woonkamer
+group.main:
+  friendly_name: Hoofdentiteiten
+group.master_bedroom:
+  friendly_name: Ouderslaapkamer
+group.motion:
+  friendly_name: Bewegingsensoren
+  icon: 'mdi:run'
+group.now:
+  friendly_name: Nu
+group.person_bjorn:
+  friendly_name: Björn
+  icon: 'mdi:human-male'
+group.person_monique:
+  friendly_name: Monique
+  icon: 'mdi:human-female'
+group.person_robert:
+  friendly_name: Robert
+  icon: 'mdi:human-male'
+group.power_meter_readings:
+  control: hidden
+  friendly_name: Meterstanden Energie
+  icon: 'mdi:flash'
+group.presence_view:
+  friendly_name: Aanwezigheid
+  icon: 'mdi:account'
+group.pws:
+  friendly_name: Weerstation
+group.rooms_view:
+  friendly_name: Kamers
+  icon: 'mdi:home'
+  order: 1
+group.security:
+  friendly_name: Beveiliging
+  icon: 'mdi:security'
+group.settings_view:
+  friendly_name: Instellingen
+  icon: 'mdi:settings'
+group.weather:
+  friendly_name: Weerbericht
+group.zwave:
+  friendly_name: Z-Wave
+  icon: 'mdi:nfc'
+input_boolean.ha_mode_away:
+  friendly_name: Weg
+input_boolean.ha_mode_home:
+  friendly_name: Thuis
+input_boolean.ha_mode_night:
+  friendly_name: Nacht
+input_boolean.ha_mode_vacation:
+  friendly_name: Vakantie
+input_boolean.master_bedroom_fan:
+  friendly_name: Ouderslaapkamer
+  icon: 'mdi:fan'
+light.bank:
+  icon: 'mdi:floor-lamp'
+light.bollamp:
+  icon: 'mdi:lamp'
+light.hoge_kast:
+  icon: 'mdi:lamp'
+light.living_lights:
+  friendly_name: Woonkamerverlichting
+light.standing_ikea_vaster:
+  assumed_state: false
+  friendly_name: Steellamp
+  icon: 'mdi:floor-lamp'
+light.tv_meubel:
+  icon: 'mdi:lamp'
+light.willner:
+  icon: 'mdi:lamp'
 person.bjorn:
   entity_picture: /local/img/wasd.png
-device_tracker.pontius:
-  icon: mdi:apple-ios
+person.monique:
+  entity_picture: /local/img/golf.png
+person.robert:
+  entity_picture: /local/img/uil.png
+script.post_mindergas:
+  friendly_name: Verzend naar mindergas.nl
+script.reset_energy_meters:
+  friendly_name: Opnieuw instellen Z-Wave Energiemeters
+sensor.asuswrt_download:
+  icon: 'mdi:cloud-download'
+sensor.asuswrt_download_speed:
+  icon: 'mdi:download-network'
+sensor.asuswrt_upload:
+  icon: 'mdi:cloud-upload'
+sensor.asuswrt_upload_speed:
+  icon: 'mdi:upload-network'
+sensor.bad_login:
+  friendly_name: Mislukte inlogpogingen
+  icon: 'mdi:alert'
+sensor.benext_molite_8_battery_level:
+  device_class: battery
+  friendly_name: Batterij beweging woonkamer
+  unit_of_measurement: '%'
+sensor.benext_molite_8_luminance:
+  friendly_name: Lichtsterkte woonkamer
+  icon: 'mdi:brightness-6'
+sensor.benext_molite_8_temperature:
+  friendly_name: Temperatuur woonkamer
+sensor.buienradar_precipitation_forecast_average:
+  friendly_name: Verwachte neerslag
+  unit_of_measurement: mm/u
+sensor.charging_station_plug_power:
+  friendly_name: Verbruik oplaadstation
+  icon: 'mdi:flash'
+sensor.cpu_temperature:
+  friendly_name: Processortemperatuur
 sensor.daily_gas:
   friendly_name: Dagelijks gasverbruik
 sensor.daily_power_offpeak:
   friendly_name: Dagelijks energieverbruik dal
 sensor.daily_power_peak:
   friendly_name: Dagelijks energieverbruik piek
+sensor.dark_sky_apparent_temperature:
+  friendly_name: Gevoelstemperatuur omgeving
+sensor.dark_sky_humidity:
+  friendly_name: Luchtvochtigheid omgeving
+sensor.dark_sky_ozone:
+  friendly_name: Ozon
+  icon: 'mdi:weather-sunny'
+sensor.dark_sky_precip_intensity:
+  friendly_name: Neerslagintensiteit omgeving
+  unit_of_measurement: mm/u
+sensor.dark_sky_precip_probability:
+  friendly_name: Neerslagkans omgeving
+sensor.dark_sky_pressure:
+  friendly_name: Luchtdruk omgeving
+sensor.dark_sky_temperature:
+  friendly_name: Temperatuur omgeving
+sensor.dark_sky_uv_index:
+  friendly_name: UV-index
+sensor.dark_sky_wind_bearing:
+  friendly_name: Windrichting omgeving
+sensor.dark_sky_wind_speed:
+  friendly_name: Windsnelheid omgeving
+sensor.date:
+  friendly_name: Datum
+sensor.diesel_advies:
+  friendly_name: Diesel
+sensor.disk_free:
+  friendly_name: Beschikbare opslag
+sensor.disk_use_percent:
+  friendly_name: Gebruikte opslag
+sensor.euro95_advies:
+  friendly_name: Euro 95 (Advies)
+sensor.euro95_hoofdweg:
+  friendly_name: Euro 95 (Hoofdweg)
+sensor.euro95_lukoil_schermerhoek:
+  friendly_name: Euro 95 (Lukoil Schermerhoek)
+sensor.euro95_shell_nieuwerkerk:
+  friendly_name: Euro 95 (Shell Nieuwerkerk)
+sensor.euro95_tinq_bermweg:
+  friendly_name: Euro 95 (Tinq Bermweg)
+sensor.garage_door_plug_power:
+  friendly_name: Verbruik garagedeur
+  icon: 'mdi:flash'
+sensor.gas_consumption:
+  friendly_name: Gasverbruik
+  unit_of_measurement: m³
+sensor.ha_current_beta_version:
+  friendly_name: Huidige beta versie HA
+  icon: 'mdi:beta'
+sensor.ha_current_development_version:
+  friendly_name: Huidige ontwikkelversie HA
+  icon: 'mdi:alpha'
+sensor.ha_current_stable_version:
+  friendly_name: Laatste versie
+  icon: 'mdi:approval'
+sensor.ha_installed_version:
+  friendly_name: Geïnstalleerde versie
+  icon: 'mdi:approval'
+sensor.ha_mode:
+  friendly_name: HA-mode
+sensor.ha_uptime:
+  friendly_name: Sinds laatste start HA
+  icon: 'mdi:clock'
+sensor.homeassistant_v2db:
+  friendly_name: Omvang database
+sensor.homeassistantlog:
+  friendly_name: Omvang logbestand
+sensor.hourly_gas_consumption:
+  hidden: true
+sensor.last_boot:
+  friendly_name: Laatste herstart
+sensor.long_power_failure_count:
+  friendly_name: Aantal langdurige storingen
+sensor.lpg_advies:
+  friendly_name: LPG
+sensor.memory_use_percent:
+  friendly_name: Geheugengebruik
 sensor.monthly_gas:
   friendly_name: Maandelijks gasverbruik
 sensor.monthly_power_offpeak:
   friendly_name: Maandelijks energieverbruik dal
 sensor.monthly_power_peak:
   friendly_name: Maandelijks energieverbruik piek
+sensor.moon:
+  friendly_name: Maan
+sensor.myip:
+  friendly_name: Publiek IP-adres
+  icon: 'mdi:wan'
+sensor.network_in_eth0:
+  friendly_name: Bytes ontvangen
+  icon: 'mdi:download-network'
+sensor.network_out_eth0:
+  friendly_name: Bytes verzonden
+  icon: 'mdi:upload-network'
+sensor.ozw_logtxt:
+  friendly_name: Omvang logbestand Z-Wave
+sensor.packets_in_eth0:
+  friendly_name: Pakketten ontvangen
+  icon: 'mdi:download-network'
+sensor.packets_out_eth0:
+  friendly_name: Pakketten verzonden
+  icon: 'mdi:upload-network'
+sensor.pihole_ads_blocked_today:
+  friendly_name: Geblokkeerde advertenties
+sensor.pihole_ads_percentage_blocked_today:
+  friendly_name: Percentage geblokkeerde advertenties
+sensor.power_consumption:
+  friendly_name: Energieverbruik
+sensor.power_consumption_low:
+  friendly_name: Energieverbruik laag tarief
+  unit_of_measurement: kWu
+sensor.power_consumption_normal:
+  friendly_name: Energieverbruik normaal tarief
+  unit_of_measurement: kWu
+sensor.power_consumption_phase_l1:
+  hidden: true
+sensor.power_consumption_phase_l2:
+  hidden: true
+sensor.power_consumption_phase_l3:
+  hidden: true
+sensor.power_production:
+  hidden: true
+sensor.power_production_low:
+  hidden: true
+sensor.power_production_normal:
+  hidden: true
+sensor.power_production_phase_l1:
+  hidden: true
+sensor.power_production_phase_l2:
+  hidden: true
+sensor.power_production_phase_l3:
+  hidden: true
+sensor.power_tariff:
+  hidden: true
+sensor.power_tariff_nl:
+  friendly_name: Energietarief
+  icon: 'mdi:currency-eur'
+sensor.processor_use:
+  friendly_name: Processorgebruik
+sensor.pws_th_battery_level:
+  device_class: battery
+  friendly_name: PWS TH Sensor
+  unit_of_measurement: '%'
+sensor.pws_th_humidity:
+  friendly_name: Luchtvochtigheid
+  icon: 'mdi:water-percent'
+sensor.pws_th_temperature:
+  friendly_name: Temperatuur
+sensor.robert_owntracks_battery_level:
+  device_class: battery
+  friendly_name: Robert Owntracks
+  unit_of_measurement: '%'
+sensor.season:
+  friendly_name: Seizoen
+sensor.since_last_boot:
+  friendly_name: Sinds laatste herstart
+sensor.ssl_certificate_expiry:
+  friendly_name: Geldigheidsduur SSL-certificaat
+  unit_of_measurement: dagen
+sensor.time:
+  friendly_name: Tijd
+sensor.time_of_day:
+  friendly_name: Tijd van de dag
+  icon_template: 'mdi:clock'
+sensor.toronto_time:
+  friendly_name: Tijd in Toronto
+sensor.voltage_sags_phase_l1:
+  hidden: true
+sensor.voltage_sags_phase_l2:
+  hidden: true
+sensor.voltage_sags_phase_l3:
+  hidden: true
+sensor.voltage_swells_phase_l1:
+  hidden: true
+sensor.voltage_swells_phase_l2:
+  hidden: true
+sensor.voltage_swells_phase_l3:
+  hidden: true
+sensor.waqi_rotterdam:
+  friendly_name: Luchtkwaliteitsindex
+  icon: 'mdi:factory'
+sensor.waqi_rotterdam_impact:
+  friendly_name: Luchtkwaliteit
+  icon: 'mdi:factory'
+sun.sun:
+  friendly_name: Zon
+switch.charging_station_plug_switch:
+  friendly_name: Oplaadstation
+  icon: 'mdi:power'
+switch.flamingo_plug_1:
+  assumed_state: false
+  friendly_name: Flamingo Plug 1
+  icon: 'mdi:power'
+switch.frontdoor_bell:
+  assumed_state: false
+  friendly_name: Bel voordeur
+  icon: 'mdi:bell-ring'
+switch.garage_door_plug_switch:
+  friendly_name: Garagedeur
+  icon: 'mdi:power'
+switch.living_wallswitch_left:
+  assumed_state: false
+  friendly_name: Linker wandschakelaar woonkamer
+switch.living_wallswitch_right:
+  assumed_state: false
+  friendly_name: Rechter wandschakelaar woonkamer
+switch.mess_call:
+  assumed_state: false
+  friendly_name: Bel verzamelen
+  icon: 'mdi:bell-ring'
+updater.updater:
+  friendly_name: HA Update Beschikbaar
+  icon: 'mdi:sync'
+zwave.charging_station_plug:
+  friendly_name: Oplaadstation
+zwave.garage_door_plug:
+  friendly_name: Garagedeur

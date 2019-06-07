@@ -12,52 +12,6 @@ homeassistant:
       customize: &customize
         package: 'lighting'
 
-    # ################################################
-    # ## Light
-    # ################################################
-
-    light.bank:
-      <<: *customize
-      icon: mdi:floor-lamp
-    
-    light.bollamp:
-      <<: *customize
-      icon: mdi:lamp
-    
-    light.hoge_kast:
-      <<: *customize
-      icon: mdi:lamp
-    
-    light.living_lights:
-      <<: *customize
-      friendly_name: "Woonkamerverlichting"
-    
-    light.standing_ikea_vaster:
-      <<: *customize
-      friendly_name: "Steellamp"
-      assumed_state: off
-      icon: mdi:floor-lamp
-    
-    light.tv_meubel:
-      <<: *customize
-      icon: mdi:lamp
-    
-    light.willner:
-      <<: *customize
-      icon: mdi:lamp
-
-    ################################################
-    ## Group
-    ################################################
-
-    group.dusk_living_lights:
-      <<: *customize
-      friendly_name: Schemerverlichting Woonkamer
-
-    group.living_lights:
-      <<: *customize
-      friendly_name: Verlichting Woonkamer
-
 ############################################################
 ## Light
 ############################################################

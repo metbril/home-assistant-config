@@ -12,69 +12,6 @@ homeassistant:
       customize: &customize
         package: 'updates'
 
-    ########################################################################
-    ## Binary Sensor
-    ########################################################################
-
-    binary_sensor.ha_update_available:
-      <<: *customize
-      friendly_name: 'Update Beschikbaar voor HA'
-      device_class: safety
-
-    ########################################################################
-    ## Sensor
-    ########################################################################
-
-    sensor.ha_installed_version:
-      <<: *customize
-      friendly_name: 'Geïnstalleerde versie'
-      icon: mdi:approval
-
-    sensor.ha_current_stable_version:
-      <<: *customize
-      friendly_name: 'Laatste versie'
-      icon: mdi:approval
-
-    sensor.ha_current_beta_version:
-      <<: *customize
-      friendly_name: 'Huidige beta versie HA'
-      icon: mdi:beta
-
-    sensor.ha_current_development_version:
-      <<: *customize
-      friendly_name: 'Huidige ontwikkelversie HA'
-      icon: mdi:alpha
-
-    ########################################################################
-    ## Group
-    ########################################################################
-
-    group.host_updates:
-      <<: *customize
-      friendly_name: 'HA Host Updates'
-      icon: mdi:sync
-
-    ########################################################################
-    ## Updater
-    ########################################################################
-
-    updater.updater:
-      <<: *customize
-      friendly_name: 'HA Update Beschikbaar'
-      icon: mdi:sync
-
-    ########################################################################
-    ## Automation
-    ########################################################################
-
-    automation.ha_update_available_notification:
-      <<: *customize
-      friendly_name: 'HA Update Beschikbaar Melding'
-
-    automation.ha_update_available_for_hassio_notification:
-      <<: *customize
-      friendly_name: 'HA Update Beschikbaar Melding'
-
 ############################################################################
 ## Updater
 ## https://www.home-assistant.io/components/updater/

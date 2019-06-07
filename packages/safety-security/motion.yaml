@@ -13,47 +13,6 @@ homeassistant:
       customize: &customize
         package: 'motion'
 
-      expose: &expose
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
-    ########################################################################
-    ## Binary Sensor
-    ########################################################################
-
-    binary_sensor.benext_molite_8_motion:
-      <<: *customize
-      device_class: motion
-      friendly_name: 'Beweging woonkamer'
-
-    ################################################
-    ## Sensor
-    ################################################
-
-    sensor.benext_molite_8_battery_level:
-      <<: *customize
-      friendly_name: 'Batterij beweging woonkamer'
-      device_class: battery
-      unit_of_measurement: "%"
-
-    sensor.benext_molite_8_temperature:
-      <<: *customize
-      friendly_name: 'Temperatuur woonkamer'
-
-    sensor.benext_molite_8_luminance:
-      <<: *customize
-      friendly_name: 'Lichtsterkte woonkamer'
-      icon: mdi:brightness-6
-
-    ########################################################################
-    ## Group
-    ########################################################################
-
-    group.motion:
-      <<: *customize
-      friendly_name: 'Bewegingsensoren'
-      icon: mdi:run
 
 ################################################
 ## Sensor

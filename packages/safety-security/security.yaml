@@ -13,49 +13,6 @@ homeassistant:
       customize: &customize
         package: 'security'
 
-      expose: &expose
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
-    ########################################################################
-    ## Binary Sensor
-    ########################################################################
-
-    binary_sensor.motion_garage:
-      <<: *customize
-      friendly_name: "Beweging garage"
-      device_class: motion
-
-    binary_sensor.flamingo_remote_button_a:
-      <<: *customize
-      friendly_name: "Flamingo Afstandsbediening A"
-      icon: mdi:remote
-
-    ########################################################################
-    ## Switch
-    ########################################################################
-
-    switch.frontdoor_bell:
-      <<: *customize
-      friendly_name: 'Bel voordeur'
-      icon: mdi:bell-ring
-      assumed_state: off
-
-    switch.mess_call:
-      <<: *customize
-      friendly_name: 'Bel verzamelen'
-      icon: mdi:bell-ring
-      assumed_state: off
-
-    ########################################################################
-    ## Group
-    ########################################################################
-
-    group.security:
-      <<: *customize
-      friendly_name: 'Beveiliging'
-      icon: mdi:security
 
 ############################################################################
 ## Group

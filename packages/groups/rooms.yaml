@@ -13,36 +13,6 @@ homeassistant:
       customize: &customize
         package: 'template'
 
-      expose: &expose
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
-    ########################################################################
-    ## Group
-    ########################################################################
-    group.rooms_view:
-      <<: *customize
-      friendly_name: 'Kamers'
-      icon: mdi:home
-      order: 1 # alway next to default view
-
-    group.living:
-      <<: *customize
-      friendly_name: 'Woonkamer'
-
-    group.garage:
-      <<: *customize
-      friendly_name: 'Garage'
-
-    group.master_bedroom:
-      <<: *customize
-      friendly_name: 'Ouderslaapkamer'
-
-    group.entry:
-      <<: *customize
-      friendly_name: 'Entree'
-
 ############################################################################
 ## Group
 ############################################################################

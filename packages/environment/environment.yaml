@@ -15,19 +15,6 @@ homeassistant:
       customize: &customize
         package: 'environment'
 
-    ################################################
-    ## Group
-    ################################################
-
-    group.environment_view:
-      <<: *customize
-      friendly_name: Leefklimaat
-      icon: mdi:earth
-
-    group.air_quality:
-      <<: *customize
-      friendly_name: 'Luchtkwaliteit'
-
 ################################################
 ## Group
 ################################################

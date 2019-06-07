@@ -13,42 +13,6 @@ homeassistant:
       customize: &customize
         package: 'group'
 
-    ################################################
-    ## Group
-    ################################################
-
-    group.all_automations:
-      <<: *customize
-      hidden: false
-
-    group.all_scripts:
-      <<: *customize
-      hidden: false
-
-    group.automation_view:
-      <<: *customize
-      order: 990 # at the end
-      icon: mdi:auto-fix
-
-    group.default_view:
-      <<: *customize
-      friendly_name: Start
-      icon: mdi:rocket
-
-    group.finance_view:
-      <<: *customize
-      friendly_name: Financiën
-      icon: mdi:finance
-
-    group.main:
-      <<: *customize
-      friendly_name: Hoofdentiteiten
-
-    group.settings_view:
-      <<: *customize
-      friendly_name: Instellingen
-      icon: mdi:settings
-
 
 ################################################
 ## Group

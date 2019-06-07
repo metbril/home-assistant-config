@@ -55,4 +55,4 @@ group:
 
   test:
     name: Test
-    entities:
+    entities: []

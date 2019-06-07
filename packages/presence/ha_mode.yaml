@@ -16,62 +16,6 @@ homeassistant:
       customize: &customize
         package: 'ha_mode'
 
-      expose: &expose
-        <<: *customize
-        haaska_hidden: false
-        homebridge_hidden: false
-
-    ########################################################################
-    ## Input Boolean
-    ########################################################################
-
-    input_boolean.ha_mode_home:
-      <<: *customize
-      friendly_name: 'Thuis'
-
-    input_boolean.ha_mode_away:
-      <<: *customize
-      friendly_name: 'Weg'
-
-    input_boolean.ha_mode_night:
-      <<: *customize
-      friendly_name: 'Nacht'
-
-    input_boolean.ha_mode_vacation:
-      <<: *customize
-      friendly_name: 'Vakantie'
-
-    ########################################################################
-    ## Sensor
-    ########################################################################
-
-    sensor.ha_mode:
-      <<: *customize
-      friendly_name: 'HA-mode'
-
-    ########################################################################
-    ## Binary Sensor
-    ########################################################################
-
-    binary_sensor.ha_mode:
-      <<: *customize
-      friendly_name: 'HA-mode'
-
-    ########################################################################
-    ## Group
-    ########################################################################
-
-    group.ha_mode:
-      <<: *customize
-      friendly_name: 'HA-mode'
-
-    ########################################################################
-    ## Automation
-    ########################################################################
-
-    automation.ha_mode_sync:
-      <<: *customize
-
 ############################################################################
 ## Input Boolean
 ############################################################################
