@@ -29,26 +29,6 @@ sensor:
           {% set value = states.sensor.power_tariff.state %}
           {{ value | replace('low', 'laag') | replace('normal', 'normaal') }}
       
-################################################
-## Group
-################################################
-
-group:
-  power_meter_readings:
-    name: Power Meter Readings
-    entities:
-      - sensor.power_consumption
-      - sensor.power_tariff_nl
-      - sensor.power_consumption_low
-      - sensor.power_consumption_normal
-      - sensor.long_power_failure_count
-
-  gas_meter_readings:
-    name: Gas Meter Readings
-    entities:
-      - sensor.gas_consumption
-      - script.post_mindergas
-
 ##################################################
 ## REST Command
 ##################################################

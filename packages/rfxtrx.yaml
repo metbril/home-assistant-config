@@ -81,15 +81,3 @@ binary_sensor:
         name: motion_garage
       0b1100090029fc0201010f60: # flamingo remote A
         name: Flamingo Remote Button A
-
-############################################################
-## Group
-############################################################
-
-group:
-  pws:
-    name: Personal Weather Station
-    entities:
-      - sensor.pws_th_temperature
-      - sensor.pws_th_humidity
-

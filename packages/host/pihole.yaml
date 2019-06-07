@@ -29,15 +29,3 @@ weblink:
   entities:
     - name: Pi-Hole
       url: http://hassio.local:8880/
-
-############################################################################
-## Group
-############################################################################
-
-group:
-  pihole:
-    name: "Pi-hole"
-    entities:
-      - sensor.pihole_ads_blocked_today
-      - sensor.pihole_ads_percentage_blocked_today
-      - weblink.pihole

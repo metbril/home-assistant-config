@@ -63,33 +63,6 @@ device_tracker:
       hide_if_away: false
 
 ################################################
-## Group
-################################################
-
-group:
-
-  presence_view:
-    name: Presence
-    view: yes
-    entities:
-      ## badges
-      - alarm_control_panel.home
-      - binary_sensor.ha_mode
-      - sensor.ha_mode
-      
-      ## cards
-      - group.ha_mode
-      - group.family 
-      - group.vacation
-
-  family:
-    control: hidden
-    entities:
-      - person.robert
-      - person.monique
-      - person.bjorn
-
-################################################
 ## Script
 ## https://www.home-assistant.io/components/script
 ################################################
@@ -99,8 +72,6 @@ group:
     # turn of the lights, turn off media
     # sequence:
     #   - alias: Turn Off Living Lights
-        
-
 
 ################################################
 ## Scene

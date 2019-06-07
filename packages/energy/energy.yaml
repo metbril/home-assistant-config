@@ -28,30 +28,6 @@ history_graph:
     refresh: 60
 
 ############################################################################
-## Group
-############################################################################
-
-group:
-  energy_view:
-    name: Energy View
-    view: yes
-    entities:
-      - group.power_meter_readings
-      - group.gas_meter_readings
-      - group.energy_consumption
-
-  energy_consumption:
-    name: Energy Consumption
-    entities:
-      - sensor.power_consumption
-
-      - sensor.charging_station_plug_power
-      - sensor.garage_door_plug_power
-      - sensor.fibaro_wall_plug_7_power
-
-      - history_graph.power_consumption_plugs
-
-############################################################################
 ## Utility Meter
 ## https://www.home-assistant.io/components/utility_meter/
 ############################################################################

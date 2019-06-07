@@ -97,17 +97,3 @@ binary_sensor:
           {% elif is_state('sensor.ha_mode', 'vacation') %}
             mdi:airplane-takeoff
           {% endif %}
-
-############################################################################
-## Group
-############################################################################
-
-group:
-  ha_mode:
-    name: 'HA Mode'
-    control: hidden
-    entities:
-      - input_boolean.ha_mode_home
-      - input_boolean.ha_mode_away
-      - input_boolean.ha_mode_night
-      - input_boolean.ha_mode_vacation

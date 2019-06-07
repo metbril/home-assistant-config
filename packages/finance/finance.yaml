@@ -38,19 +38,3 @@ sensor:
 
   - platform: coinmarketcap
     currency_id: 2 # LTC
-
-############################################################################
-## Group
-############################################################################
-
-group:
-  finance:
-    name: Finance
-    icon: mdi:finance
-    entities:
-      ## from coinmarketcap:
-      - sensor.bitcoin
-      - sensor.ethereum
-      - sensor.xrp
-      - sensor.bitcoin_cash
-      - sensor.litecoin

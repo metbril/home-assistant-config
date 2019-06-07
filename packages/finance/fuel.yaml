@@ -59,15 +59,3 @@ sensor:
   #   select: “#euro95 .pump_price span.price”
   #   # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
   #   scan_interval: 3600 # be nice; once per hour only
-
-group:
-  fuel:
-    name: Fuel
-    entities:
-      - sensor.euro95_tinq_bermweg
-      - sensor.euro95_lukoil_schermerhoek
-      - sensor.euro95_shell_nieuwerkerk
-      - sensor.euro95_hoofdweg
-      - sensor.euro95_advies
-      - sensor.diesel_advies
-      - sensor.lpg_advies

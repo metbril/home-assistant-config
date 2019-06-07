@@ -13,31 +13,6 @@ homeassistant:
       customize: &customize
         package: 'zwave'
 
-
-################################################
-## Group
-################################################
-
-group:
-  zwave:
-    name: 'Z-Wave Devices'
-    entities:
-      - zwave.controller_1
-      - zwave.fibaro_wall_plug_7
-      - zwave.charging_station_plug
-      - zwave.benext_molite_8
-      - zwave.master_bedroom_outside_door
-
-  fibaro_wall_plug_7:
-    name: 'Fibaro Wall Plug (Node 7)'
-    entities:
-      - switch.fibaro_wall_plug_7
-      - sensor.fibaro_wall_plug_7_energy
-      - sensor.fibaro_wall_plug_7_power
-      - sensor.fibaro_wall_plug_7_power_2
-      - sensor.fibaro_wall_plug_7_exporting
-      - zwave.fibaro_wall_plug_7
-
 ################################################
 ## Script
 ################################################

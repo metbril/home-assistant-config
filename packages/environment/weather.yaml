@@ -44,21 +44,3 @@ sensor:
     timeframe: 30
     monitored_conditions:
       - precipitation_forecast_average
-
-################################################
-## Group
-################################################
-
-group:
-  weather:
-    name: Weather
-    entities:
-      - sensor.dark_sky_temperature
-      - sensor.dark_sky_apparent_temperature
-      - sensor.dark_sky_humidity
-      - sensor.dark_sky_pressure
-      - sensor.dark_sky_wind_speed
-      - sensor.dark_sky_wind_bearing
-      - sensor.dark_sky_precip_intensity
-      - sensor.dark_sky_precip_probability
-      - sensor.buienradar_precipitation_forecast_average

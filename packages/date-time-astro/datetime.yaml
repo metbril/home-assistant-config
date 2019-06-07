@@ -85,21 +85,3 @@ sensor:
           {% else %}
             onbekend
           {% endif %}
-
-################################################
-## Group
-################################################
-
-group:
-  now:
-    name: Now
-    entities:
-      - sensor.date
-      - sensor.time
-      - sensor.time_of_day
-      - sensor.toronto_time
-      - binary_sensor.workday
-      - sun.sun
-      - sensor.moon
-      - sensor.season
-

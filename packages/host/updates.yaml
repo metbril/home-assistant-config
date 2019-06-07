@@ -59,18 +59,3 @@ sensor:
     name: HA Current Development Version
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
     scan_interval: 3600
-
-############################################################################
-## Group
-############################################################################
-
-group:
-  host_updates:
-    name: 'Updates'
-    entities:
-      - sensor.ha_installed_version
-      - sensor.ha_current_stable_version
-      # - sensor.ha_current_beta_version
-      # - sensor.ha_current_development_version
-      # - updater.updater
-      - binary_sensor.ha_update_available
