@@ -379,3 +379,5 @@ zwave.charging_station_plug:
   friendly_name: Oplaadstation
 zwave.garage_door_plug:
   friendly_name: Garagedeur
+zwave.turbine_light_plug:
+  friendly_name: Turbine Lamp Schakelaar

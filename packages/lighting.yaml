@@ -23,10 +23,12 @@ light:
       - light.bank
       - light.bollamp
       - light.hoge_kast
-      # - light.standing_ikea_vaster # kaputt
-      - light.tv_meubel
+      - light.turbine_lamp
       - light.willner
-    
+  - platform: switch
+    name: Turbine Lamp
+    entity_id: switch.turbine_light_plug_switch
+
 ################################################
 ## Group
 ################################################
@@ -37,16 +39,13 @@ group:
       - light.bank
       - light.bollamp
       - light.hoge_kast
-      # - light.standing_ikea_vaster # kaputt
-      - light.tv_meubel
       - light.willner
+      - light.turbine_lamp
   living_lights:
     entities:
       ## clockwise from the door
       - light.hoge_kast
       - light.bank
-      - light.tv_meubel
-      # - light.standing_ikea_vaster # kaputt
-      - light.willner
       - light.bollamp
-
+      - light.willner
+      - light.turbine_lamp
