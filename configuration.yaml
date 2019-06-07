@@ -95,7 +95,7 @@ wake_on_lan:
 person:
   - name: Robert
     id: robert1
-    user_id: d5d25dfa45ce4cb3b986bbd93d66b302
+    user_id: !secret person1_user_id
     device_trackers:
       - device_tracker.robert_iphone     # asuswrt
       - device_tracker.robert_owntracks  # owntracks
