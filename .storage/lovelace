@@ -474,7 +474,7 @@
                                     "entity": "sensor.pi_hole_ads_percentage_blocked_today"
                                 }
                             ],
-                            "title": "Pi-Hole",
+                            "title": "pi Hole",
                             "type": "glance"
                         },
                         {
@@ -507,28 +507,8 @@
                                     "entity": "sensor.asuswrt_upload_speed"
                                 }
                             ],
-                            "show_header_toggle": false,
                             "title": "ASUS",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.network_in_eth0"
-                                },
-                                {
-                                    "entity": "sensor.network_out_eth0"
-                                },
-                                {
-                                    "entity": "sensor.packets_in_eth0"
-                                },
-                                {
-                                    "entity": "sensor.packets_out_eth0"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Host Netwerk",
-                            "type": "entities"
+                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:ethernet",
@@ -554,7 +534,7 @@
                                     "entity": "sensor.disk_use_percent"
                                 }
                             ],
-                            "title": "Host Performance",
+                            "title": "Systeemperformance",
                             "type": "glance"
                         },
                         {
@@ -582,13 +562,10 @@
                                 },
                                 {
                                     "entity": "sensor.ozw_log_txt"
-                                },
-                                {
-                                    "entity": "sensor.cert_pem"
                                 }
                             ],
                             "show_header_toggle": false,
-                            "title": "Host Storage",
+                            "title": "Systeemopslag",
                             "type": "entities"
                         },
                         {
@@ -610,7 +587,7 @@
                                 }
                             ],
                             "show_header_toggle": false,
-                            "title": "Host Software",
+                            "title": "Systeemsoftware",
                             "type": "entities"
                         }
                     ],
