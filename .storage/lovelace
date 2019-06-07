@@ -40,6 +40,26 @@
                                 "on"
                             ],
                             "type": "entity-filter"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "alert.frontdoor_open"
+                                }
+                            ],
+                            "title": "Voordeur alert",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.pws_th_temperature"
+                                },
+                                {
+                                    "entity": "sensor.power_consumption"
+                                }
+                            ],
+                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:rocket",
@@ -302,8 +322,18 @@
                     "cards": [
                         {
                             "entities": [
-                                "sensor.buienradar_precipitation_forecast_average",
-                                "automation.rain_alarm"
+                                {
+                                    "entity": "sensor.buienradar_precipitation_forecast_average"
+                                },
+                                {
+                                    "entity": "automation.rain_alarm"
+                                },
+                                {
+                                    "entity": "sensor.pws_th_temperature"
+                                },
+                                {
+                                    "entity": "sensor.pws_th_humidity"
+                                }
                             ],
                             "type": "glance"
                         }
@@ -376,8 +406,35 @@
                             "type": "gauge"
                         },
                         {
+                            "detail": 5,
                             "entity": "sensor.power_consumption",
+                            "graph": "line",
                             "type": "sensor"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.garage_door_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.charging_station_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.power_consumption"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.power_tariff"
+                                },
+                                {
+                                    "entity": "sensor.power_tariff_nl"
+                                }
+                            ],
+                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:flash",
@@ -417,12 +474,149 @@
                                     "entity": "sensor.pi_hole_ads_percentage_blocked_today"
                                 }
                             ],
-                            "title": "pi Hole",
+                            "title": "Pi-Hole",
                             "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.ssl_certificate_expiry"
+                                },
+                                {
+                                    "entity": "sensor.myip"
+                                },
+                                {
+                                    "entity": "sensor.certpem_last_updated"
+                                }
+                            ],
+                            "title": "WAN",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.asuswrt_download"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_upload"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_download_speed"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_upload_speed"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "ASUS",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.network_in_eth0"
+                                },
+                                {
+                                    "entity": "sensor.network_out_eth0"
+                                },
+                                {
+                                    "entity": "sensor.packets_in_eth0"
+                                },
+                                {
+                                    "entity": "sensor.packets_out_eth0"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Host Netwerk",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:ethernet",
                     "title": "Netwerk"
+                },
+                {
+                    "badges": [
+                        "binary_sensor.cpu_high",
+                        "binary_sensor.cpu_hot",
+                        "binary_sensor.db_large",
+                        "binary_sensor.ha_update_available"
+                    ],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.memory_use_percent"
+                                },
+                                {
+                                    "entity": "sensor.processor_use"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent"
+                                }
+                            ],
+                            "title": "Host Performance",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.network_in_eth0"
+                                },
+                                {
+                                    "entity": "sensor.network_out_eth0"
+                                }
+                            ],
+                            "title": "Host Netwerk",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.disk_free"
+                                },
+                                {
+                                    "entity": "sensor.home_assistant_v2_db"
+                                },
+                                {
+                                    "entity": "sensor.home_assistant_log"
+                                },
+                                {
+                                    "entity": "sensor.ozw_log_txt"
+                                },
+                                {
+                                    "entity": "sensor.cert_pem"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Host Storage",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.ha_update_available"
+                                },
+                                {
+                                    "entity": "sensor.ha_installed_version"
+                                },
+                                {
+                                    "entity": "sensor.ha_current_stable_version"
+                                },
+                                {
+                                    "entity": "sensor.ha_current_beta_version"
+                                },
+                                {
+                                    "entity": "sensor.ha_current_development_version"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Host Software",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:server",
+                    "path": "host",
+                    "title": "Host"
                 },
                 {
                     "badges": [],
@@ -588,6 +782,41 @@
                             ],
                             "title": "Schakelaar",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.log_level"
+                                },
+                                {
+                                    "entity": "input_select.log_level"
+                                }
+                            ],
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "zwave.controller_1"
+                                },
+                                {
+                                    "entity": "zwave.fibaro_wall_plug_7"
+                                },
+                                {
+                                    "entity": "zwave.unknown_node_8"
+                                },
+                                {
+                                    "entity": "zwave.charging_station_plug"
+                                },
+                                {
+                                    "entity": "zwave.garage_door_plug"
+                                },
+                                {
+                                    "entity": "zwave.master_bedroom_outside_door"
+                                }
+                            ],
+                            "title": "Zwave",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:bug",
@@ -599,6 +828,50 @@
                     "cards": [],
                     "icon": "mdi:trash-can",
                     "title": "Trash"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.familie_thuis"
+                                },
+                                {
+                                    "entity": "automation.forward_persistent_notifications"
+                                },
+                                {
+                                    "entity": "automation.frontdoor_bell_pressed"
+                                },
+                                {
+                                    "entity": "automation.ha_mode_sync"
+                                },
+                                {
+                                    "entity": "automation.ha_update_available_for_hass_io_notification"
+                                },
+                                {
+                                    "entity": "automation.ha_update_available_notification"
+                                },
+                                {
+                                    "entity": "automation.kaku_remote_group_off"
+                                },
+                                {
+                                    "entity": "automation.log_level"
+                                },
+                                {
+                                    "entity": "automation.mess_call_pressed"
+                                },
+                                {
+                                    "entity": "automation.notify_alarm_state_change"
+                                },
+                                {
+                                    "entity": "group.all_automations"
+                                }
+                            ],
+                            "type": "entities"
+                        }
+                    ],
+                    "title": "Automatisering"
                 }
             ]
         }
