@@ -19,16 +19,16 @@ binary_sensor.cpu_hot:
   friendly_name: CPU Heet
 binary_sensor.daytime:
   friendly_name: Overdag
-  icon: 'mdi:timetable'
+  icon: mdi:timetable
 binary_sensor.db_large:
   device_class: problem
   friendly_name: Grote database
 binary_sensor.evening:
   friendly_name: Avond
-  icon: 'mdi:timetable'
+  icon: mdi:timetable
 binary_sensor.flamingo_remote_button_a:
   friendly_name: Flamingo Afstandsbediening A
-  icon: 'mdi:remote'
+  icon: mdi:remote
 binary_sensor.frontdoor_contact_sensor:
   device_class: door
   friendly_name: Voordeur
@@ -42,20 +42,20 @@ binary_sensor.master_bedroom_outside_door_sensor:
   friendly_name: Balkondeur Ouderslaapkamer
 binary_sensor.morning:
   friendly_name: Ochtend
-  icon: 'mdi:timetable'
+  icon: mdi:timetable
 binary_sensor.motion_garage:
   device_class: motion
   friendly_name: Beweging garage
 binary_sensor.night:
   friendly_name: Nacht
-  icon: 'mdi:timetable'
+  icon: mdi:timetable
 binary_sensor.workday:
   friendly_name: Werkdag
-  icon: 'mdi:briefcase'
+  icon: mdi:briefcase
 climate.master_bedroom:
   friendly_name: Ouderslaapkamer
 device_tracker.pontius:
-  icon: 'mdi:apple-ios'
+  icon: mdi:apple-ios
 fan.master_bedroom:
   friendly_name: Ouderslaapkamer
 group.all_automations:
@@ -72,16 +72,16 @@ group.living_lights:
   friendly_name: Verlichting Woonkamer
 group.motion:
   friendly_name: Bewegingsensoren
-  icon: 'mdi:run'
+  icon: mdi:run
 group.person_bjorn:
   friendly_name: Björn
-  icon: 'mdi:human-male'
+  icon: mdi:human-male
 group.person_monique:
   friendly_name: Monique
-  icon: 'mdi:human-female'
+  icon: mdi:human-female
 group.person_robert:
   friendly_name: Robert
-  icon: 'mdi:human-male'
+  icon: mdi:human-male
 input_boolean.ha_mode_away:
   friendly_name: Weg
 input_boolean.ha_mode_home:
@@ -92,23 +92,23 @@ input_boolean.ha_mode_vacation:
   friendly_name: Vakantie
 input_boolean.master_bedroom_fan:
   friendly_name: Ouderslaapkamer
-  icon: 'mdi:fan'
+  icon: mdi:fan
 light.bank:
-  icon: 'mdi:floor-lamp'
+  icon: mdi:floor-lamp
 light.bollamp:
-  icon: 'mdi:lamp'
+  icon: mdi:lamp
 light.hoge_kast:
-  icon: 'mdi:lamp'
+  icon: mdi:lamp
 light.living_lights:
   friendly_name: Woonkamerverlichting
 light.standing_ikea_vaster:
   assumed_state: false
   friendly_name: Steellamp
-  icon: 'mdi:floor-lamp'
+  icon: mdi:floor-lamp
 light.tv_meubel:
-  icon: 'mdi:lamp'
+  icon: mdi:lamp
 light.willner:
-  icon: 'mdi:lamp'
+  icon: mdi:lamp
 person.bjorn:
   entity_picture: /local/img/wasd.png
 person.monique:
@@ -120,23 +120,23 @@ script.post_mindergas:
 script.reset_energy_meters:
   friendly_name: Opnieuw instellen Z-Wave Energiemeters
 sensor.asuswrt_download:
-  icon: 'mdi:cloud-download'
+  icon: mdi:cloud-download
 sensor.asuswrt_download_speed:
-  icon: 'mdi:download-network'
+  icon: mdi:download-network
 sensor.asuswrt_upload:
-  icon: 'mdi:cloud-upload'
+  icon: mdi:cloud-upload
 sensor.asuswrt_upload_speed:
-  icon: 'mdi:upload-network'
+  icon: mdi:upload-network
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
-  icon: 'mdi:alert'
+  icon: mdi:alert
 sensor.benext_molite_8_battery_level:
   device_class: battery
   friendly_name: Batterij beweging woonkamer
   unit_of_measurement: '%'
 sensor.benext_molite_8_luminance:
   friendly_name: Lichtsterkte woonkamer
-  icon: 'mdi:brightness-6'
+  icon: mdi:brightness-6
 sensor.benext_molite_8_temperature:
   friendly_name: Temperatuur woonkamer
 sensor.buienradar_precipitation_forecast_average:
@@ -144,7 +144,7 @@ sensor.buienradar_precipitation_forecast_average:
   unit_of_measurement: mm/u
 sensor.charging_station_plug_power:
   friendly_name: Verbruik oplaadstation
-  icon: 'mdi:flash'
+  icon: mdi:flash
 sensor.cpu_temperature:
   friendly_name: Processortemperatuur
 sensor.daily_gas:
@@ -159,7 +159,7 @@ sensor.dark_sky_humidity:
   friendly_name: Luchtvochtigheid omgeving
 sensor.dark_sky_ozone:
   friendly_name: Ozon
-  icon: 'mdi:weather-sunny'
+  icon: mdi:weather-sunny
 sensor.dark_sky_precip_intensity:
   friendly_name: Neerslagintensiteit omgeving
   unit_of_measurement: mm/u
@@ -195,27 +195,27 @@ sensor.euro95_tinq_bermweg:
   friendly_name: Euro 95 (Tinq Bermweg)
 sensor.garage_door_plug_power:
   friendly_name: Verbruik garagedeur
-  icon: 'mdi:flash'
+  icon: mdi:flash
 sensor.gas_consumption:
   friendly_name: Gasverbruik
   unit_of_measurement: m³
 sensor.ha_current_beta_version:
   friendly_name: Huidige beta versie HA
-  icon: 'mdi:beta'
+  icon: mdi:beta
 sensor.ha_current_development_version:
   friendly_name: Huidige ontwikkelversie HA
-  icon: 'mdi:alpha'
+  icon: mdi:alpha
 sensor.ha_current_stable_version:
   friendly_name: Laatste versie
-  icon: 'mdi:approval'
+  icon: mdi:approval
 sensor.ha_installed_version:
   friendly_name: Geïnstalleerde versie
-  icon: 'mdi:approval'
+  icon: mdi:approval
 sensor.ha_mode:
   friendly_name: HA-mode
 sensor.ha_uptime:
   friendly_name: Sinds laatste start HA
-  icon: 'mdi:clock'
+  icon: mdi:clock
 sensor.homeassistant_v2db:
   friendly_name: Omvang database
 sensor.homeassistantlog:
@@ -240,21 +240,21 @@ sensor.moon:
   friendly_name: Maan
 sensor.myip:
   friendly_name: Publiek IP-adres
-  icon: 'mdi:wan'
+  icon: mdi:wan
 sensor.network_in_eth0:
   friendly_name: Bytes ontvangen
-  icon: 'mdi:download-network'
+  icon: mdi:download-network
 sensor.network_out_eth0:
   friendly_name: Bytes verzonden
-  icon: 'mdi:upload-network'
+  icon: mdi:upload-network
 sensor.ozw_logtxt:
   friendly_name: Omvang logbestand Z-Wave
 sensor.packets_in_eth0:
   friendly_name: Pakketten ontvangen
-  icon: 'mdi:download-network'
+  icon: mdi:download-network
 sensor.packets_out_eth0:
   friendly_name: Pakketten verzonden
-  icon: 'mdi:upload-network'
+  icon: mdi:upload-network
 sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
@@ -289,7 +289,7 @@ sensor.power_tariff:
   hidden: true
 sensor.power_tariff_nl:
   friendly_name: Energietarief
-  icon: 'mdi:currency-eur'
+  icon: mdi:currency-eur
 sensor.processor_use:
   friendly_name: Processorgebruik
 sensor.pws_th_battery_level:
@@ -298,7 +298,7 @@ sensor.pws_th_battery_level:
   unit_of_measurement: '%'
 sensor.pws_th_humidity:
   friendly_name: Luchtvochtigheid
-  icon: 'mdi:water-percent'
+  icon: mdi:water-percent
 sensor.pws_th_temperature:
   friendly_name: Temperatuur
 sensor.robert_owntracks_battery_level:
@@ -316,7 +316,7 @@ sensor.time:
   friendly_name: Tijd
 sensor.time_of_day:
   friendly_name: Tijd van de dag
-  icon_template: 'mdi:clock'
+  icon_template: mdi:clock
 sensor.toronto_time:
   friendly_name: Tijd in Toronto
 sensor.voltage_sags_phase_l1:
@@ -333,26 +333,26 @@ sensor.voltage_swells_phase_l3:
   hidden: true
 sensor.waqi_rotterdam:
   friendly_name: Luchtkwaliteitsindex
-  icon: 'mdi:factory'
+  icon: mdi:factory
 sensor.waqi_rotterdam_impact:
   friendly_name: Luchtkwaliteit
-  icon: 'mdi:factory'
+  icon: mdi:factory
 sun.sun:
   friendly_name: Zon
 switch.charging_station_plug_switch:
   friendly_name: Oplaadstation
-  icon: 'mdi:power'
+  icon: mdi:power
 switch.flamingo_plug_1:
   assumed_state: false
   friendly_name: Flamingo Plug 1
-  icon: 'mdi:power'
+  icon: mdi:power
 switch.frontdoor_bell:
   assumed_state: false
   friendly_name: Bel voordeur
-  icon: 'mdi:bell-ring'
+  icon: mdi:bell-ring
 switch.garage_door_plug_switch:
   friendly_name: Garagedeur
-  icon: 'mdi:power'
+  icon: mdi:power
 switch.living_wallswitch_left:
   assumed_state: false
   friendly_name: Linker wandschakelaar woonkamer
@@ -362,10 +362,10 @@ switch.living_wallswitch_right:
 switch.mess_call:
   assumed_state: false
   friendly_name: Bel verzamelen
-  icon: 'mdi:bell-ring'
+  icon: mdi:bell-ring
 updater.updater:
   friendly_name: HA Update Beschikbaar
-  icon: 'mdi:sync'
+  icon: mdi:sync
 zwave.charging_station_plug:
   friendly_name: Oplaadstation
 zwave.garage_door_plug:
