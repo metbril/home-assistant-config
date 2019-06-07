@@ -37,26 +37,3 @@ notify:
     access_token: !secret twitter_access_token
     access_token_secret: !secret twitter_access_token_secret
 
-################################################
-## Automation
-################################################
-
-automation:
-  - alias: Forward Persistent Notifications
-    initial_state: 'on'
-    trigger:
-      - platform: event
-        event_type: call_service
-        event_data:
-          domain: persistent_notification
-          service: create
-    action:
-      - service: notify.admin
-        data_template:
-          message: >-
-            {% set message = trigger.event.data.service_data.message %}
-            {% if 'login attempt' in message|lower %}
-              {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{ message.split('from ')[1] }}
-            {% else %}
-              {{ message }}
-            {% endif %}

@@ -1,0 +1,35 @@
+- alias: Turn On Living Dusk Devices
+  trigger:
+    - platform: event
+      event_type: button_pressed
+      event_data: 
+        entity_id: switch.living_wallswitch_left
+        state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.dusk_living_lights
+    - service: logbook.log
+      data:
+        name: Schemerverlichting
+        message: ingeschakeld
+    - service: notify.admin
+      data:
+        message: 'Schemerverlichting ingeschakeld.'
+
+- alias: Turn Off Living Devices
+  trigger:
+    - platform: event
+      event_type: button_pressed
+      event_data: 
+        entity_id: switch.living_wallswitch_left
+        state: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: group.living_lights
+    - service: logbook.log
+      data:
+        name: Woonkamerverlichting
+        message: uitgeschakeld
+    - service: notify.admin
+      data:
+        message: 'Woonkamerverlichting uitgeschakeld.'

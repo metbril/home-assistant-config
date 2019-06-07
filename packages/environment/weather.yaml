@@ -13,8 +13,6 @@ homeassistant:
       customize: &customize
         package: 'weather'
 
-
-
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
@@ -64,19 +62,3 @@ group:
       - sensor.dark_sky_precip_intensity
       - sensor.dark_sky_precip_probability
       - sensor.buienradar_precipitation_forecast_average
-
-################################################
-## Automation
-################################################
-
-automation:
-  - alias: Rain Alarm
-    trigger:
-      - platform: numeric_state
-        entity_id: sensor.buienradar_precipitation_forecast_average
-        above: 0
-    action:
-      - service: notify.all
-        data_template:
-          title: "Regenalarm"
-          message: "De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement }} neerslag verwacht"

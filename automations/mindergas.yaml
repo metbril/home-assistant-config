@@ -1,0 +1,16 @@
+- alias: Post Gas Consumption
+  hide_entity: no # default no
+  trigger:
+    - platform: time
+      ## run daily at 00:15:00
+      ## gas meter reading usually updated around 0:06
+      ## publishing should happen after that
+      at: '00:15:00'
+  action:
+    - service: rest_command.post_mindergas
+    - service: logbook.log
+      data:
+        name: Gasverbruik
+        message: is verstuurd naar mindergas.nl
+        entity_id: sensor.gas_consumption
+        domain: sensor

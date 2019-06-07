@@ -1,0 +1,12 @@
+# sensor.timeofday
+# this sensor is set based on sunrise, sunset and some specific clock times
+# in its turn, the sensor can be used for automations
+- alias: Tijd van de dag melding
+  trigger:
+    - platform: state
+      entity_id: sensor.time_of_day
+  action:
+    - service: notify.admin
+      data_template:
+        message: 'Het is nu {{ trigger.to_state.state }}'
+

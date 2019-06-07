@@ -45,18 +45,3 @@ homekit:
     alarm_control_panel.home:
       code: !secret alarm_home_code
 
-################################################
-## Automation
-################################################
-
-automation:
-  - alias: 'Start HomeKit'
-    hide_entity: true # default = false
-    initial_state: on
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      # wait 1 minute for zwave and hue
-      - delay: 00:01
-      - service: homekit.start

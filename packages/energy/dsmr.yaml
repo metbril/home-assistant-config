@@ -62,29 +62,3 @@ rest_command:
       Content-Type: application/json
       AUTH-TOKEN: !secret mindergas_token 
     payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{states.sensor.gas_consumption.state }}" }'
-
-##################################################
-## Automation
-##################################################
-
-automation:
-  - alias: Post Gas Consumption
-    hide_entity: no # default no
-    trigger:
-      - platform: time
-        ## run daily at 00:15:00
-        ## gas meter reading usually updated around 0:06
-        ## publishing should happen after that
-        ## upgrade to 0.90
-        # hours: 00
-        # minutes: 15
-        # seconds: 00
-        at: '00:15:00'
-    action:
-      - service: rest_command.post_mindergas
-      - service: logbook.log
-        data:
-          name: Gasverbruik
-          message: is verstuurd naar mindergas.nl
-          entity_id: sensor.gas_consumption
-          domain: sensor
