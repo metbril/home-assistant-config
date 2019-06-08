@@ -55,6 +55,7 @@ logbook: !include include/logbook.yaml
 # Combine automation editor and manual automations
 automation: !include automations.yaml
 automation old: !include_dir_merge_list automations
+script: !include scripts.yaml
 
 ##########
 ## Bridges and hubs
