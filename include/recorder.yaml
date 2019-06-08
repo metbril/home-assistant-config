@@ -13,6 +13,7 @@ exclude:
     - script
     - sun
     - updater
+    - weather
     - weblink
     - zone
     - zwave
