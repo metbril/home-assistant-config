@@ -48,10 +48,6 @@ http:
     - 192.168.1.0/24
     - fd00::/8
 
-recorder: !include include/recorder.yaml
-history: !include include/history.yaml
-logbook: !include include/logbook.yaml
-
 # Combine automation editor and manual automations
 automation: !include automations.yaml
 automation old: !include_dir_merge_list automations
