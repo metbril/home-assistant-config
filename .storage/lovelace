@@ -880,6 +880,14 @@
                                 }
                             ],
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "script.1560003166399"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:auto-fix",
@@ -1013,8 +1021,9 @@
                                             "entity": "sensor.litecoin"
                                         }
                                     ],
+                                    "show_header_toggle": false,
                                     "title": "Cryptovaluta",
-                                    "type": "glance"
+                                    "type": "entities"
                                 },
                                 {
                                     "entities": [
