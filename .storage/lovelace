@@ -60,6 +60,26 @@
                                 }
                             ],
                             "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.postnl"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "sensor.time",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "none"
+                            },
+                            "type": "entity-button"
                         }
                     ],
                     "icon": "mdi:rocket",
@@ -73,50 +93,6 @@
                         "media_player.living_tv"
                     ],
                     "cards": [
-                        {
-                            "cards": [
-                                {
-                                    "entity": "light.living_lights",
-                                    "type": "light"
-                                },
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "light.hoge_kast",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        },
-                                        {
-                                            "entity": "light.bank",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        },
-                                        {
-                                            "entity": "light.bollamp",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        },
-                                        {
-                                            "entity": "light.willner",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        },
-                                        {
-                                            "entity": "light.tv_meubel",
-                                            "tap_action": {
-                                                "action": "toggle"
-                                            }
-                                        }
-                                    ],
-                                    "type": "glance"
-                                }
-                            ],
-                            "type": "vertical-stack"
-                        },
                         {
                             "entities": [
                                 {
@@ -146,6 +122,14 @@
                             "type": "media-control"
                         },
                         {
+                            "entities": [
+                                {
+                                    "entity": "light.turbine_lamp"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
                             "entity": "scene.goodnight",
                             "hold_action": {
                                 "action": "more-info"
@@ -160,6 +144,25 @@
                                 }
                             },
                             "type": "entity-button"
+                        },
+                        {
+                            "entity": "light.living_lights",
+                            "type": "light"
+                        },
+                        {
+                            "entity": "light.turbine_lamp",
+                            "type": "light"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.turbine_light_plug_switch"
+                                },
+                                {
+                                    "entity": "light.turbine_lamp"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:sofa",
@@ -321,6 +324,11 @@
                     "badges": [],
                     "cards": [
                         {
+                            "entity": "weather.dark_sky",
+                            "name": "Thuis",
+                            "type": "weather-forecast"
+                        },
+                        {
                             "entities": [
                                 {
                                     "entity": "sensor.buienradar_precipitation_forecast_average"
@@ -336,9 +344,35 @@
                                 }
                             ],
                             "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.pws_th_temperature"
+                                },
+                                {
+                                    "entity": "sensor.pws_th_humidity"
+                                },
+                                {
+                                    "entity": "sensor.pws_th_battery_level"
+                                }
+                            ],
+                            "title": "Weerstation",
+                            "type": "glance"
+                        },
+                        {
+                            "hold_action": {
+                                "action": "none"
+                            },
+                            "image": "https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512",
+                            "tap_action": {
+                                "action": "none"
+                            },
+                            "type": "picture"
                         }
                     ],
                     "icon": "mdi:weather-partlycloudy",
+                    "path": "weer",
                     "title": "Weer"
                 },
                 {
@@ -848,7 +882,154 @@
                             "type": "entities"
                         }
                     ],
+                    "icon": "mdi:auto-fix",
+                    "path": "automatisering",
                     "title": "Automatisering"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "zwave.controller_1"
+                                },
+                                {
+                                    "entity": "zwave.fibaro_wall_plug_7"
+                                },
+                                {
+                                    "entity": "zwave.unknown_node_8"
+                                },
+                                {
+                                    "entity": "zwave.charging_station_plug"
+                                },
+                                {
+                                    "entity": "zwave.garage_door_plug"
+                                },
+                                {
+                                    "entity": "zwave.frontdoor_contact"
+                                },
+                                {
+                                    "entity": "zwave.master_bedroom_outside_door"
+                                },
+                                {
+                                    "entity": "zwave.turbine_light_plug"
+                                },
+                                {
+                                    "entity": "zwave.shenzhen_neo_electronics_co_ltd_siren_alarm"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Nodes",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.garage_door_plug_switch"
+                                },
+                                {
+                                    "entity": "switch.charging_station_plug_switch"
+                                }
+                            ],
+                            "title": "Schakelaars",
+                            "type": "glance"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sensor.charging_station_plug_energy"
+                                },
+                                {
+                                    "entity": "sensor.garage_door_plug_energy"
+                                },
+                                {
+                                    "entity": "sensor.fibaro_wall_plug_7_energy"
+                                },
+                                {
+                                    "entity": "sensor.charging_station_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.garage_door_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.fibaro_wall_plug_7_power"
+                                }
+                            ],
+                            "title": "Verbruik",
+                            "type": "glance"
+                        }
+                    ],
+                    "icon": "mdi:z-wave",
+                    "path": "zwave",
+                    "title": "Z-Wave"
+                },
+                {
+                    "badges": [
+                        "sensor.postnl"
+                    ],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.euro95_advies",
+                                    "name": "Advies"
+                                },
+                                {
+                                    "entity": "sensor.euro95_lukoil_schermerhoek",
+                                    "name": "Schermerhoek"
+                                },
+                                {
+                                    "entity": "sensor.euro95_shell_nieuwerkerk",
+                                    "name": "Nieuwerkerk"
+                                },
+                                {
+                                    "entity": "sensor.euro95_tinq_bermweg",
+                                    "name": "Bermweg"
+                                }
+                            ],
+                            "show_icon": true,
+                            "title": "Euro 95",
+                            "type": "glance"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.bitcoin"
+                                        },
+                                        {
+                                            "entity": "sensor.bitcoin_cash"
+                                        },
+                                        {
+                                            "entity": "sensor.xrp"
+                                        },
+                                        {
+                                            "entity": "sensor.ethereum"
+                                        },
+                                        {
+                                            "entity": "sensor.litecoin"
+                                        }
+                                    ],
+                                    "title": "Cryptovaluta",
+                                    "type": "glance"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.bitcoin"
+                                    ],
+                                    "title": "Bitcoin",
+                                    "type": "history-graph"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:information",
+                    "path": "info",
+                    "title": "Information"
                 }
             ]
         }
