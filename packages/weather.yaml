@@ -44,3 +44,12 @@ sensor:
     timeframe: 30
     monitored_conditions:
       - precipitation_forecast_average
+
+################################################
+## Binary Sensor
+################################################
+
+binary_sensor:
+  - platform: meteoalarm
+    country: 'NL'
+    province: 'Zuid-Holland'
