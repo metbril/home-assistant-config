@@ -8,3 +8,14 @@
       data_template:
         title: "Regenalarm"
         message: "De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement }} neerslag verwacht"
+
+- alias: Alert me about weather warnings
+  trigger:
+    platform: state
+    entity_id: binary_sensor.meteoalarm
+    from: ‘off’
+  action:
+    - service: notify.all
+      data_template:
+        title: "{{state_attr('binary_sensor.meteoalarm', 'headline')}}"
+        message: "{{state_attr('binary_sensor.meteoalarm', 'description')}} is effectief op {{state_attr('binary_sensor.meteoalarm', 'effective')}}"
