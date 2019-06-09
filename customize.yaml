@@ -328,6 +328,9 @@ sensor.time_of_day:
   icon_template: mdi:clock
 sensor.toronto_time:
   friendly_name: Tijd in Toronto
+sensor.turbine_light_plug_power:
+  device_class: power
+  friendly_name: Verbruik Turbine Lamp
 sensor.voltage_sags_phase_l1:
   hidden: true
 sensor.voltage_sags_phase_l2:
@@ -372,6 +375,9 @@ switch.mess_call:
   assumed_state: false
   friendly_name: Bel verzamelen
   icon: mdi:bell-ring
+switch.turbine_light_plug_switch:
+  friendly_name: Turbine Lamp
+  icon: mdi:power
 updater.updater:
   friendly_name: HA Update Beschikbaar
   icon: mdi:sync
