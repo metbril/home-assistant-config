@@ -142,9 +142,9 @@ sensor:
 ## https://github.com/home-assistant/hassio-build/issues/129
 ###############################################
 
-folder_watcher:
-  - folder: /backup
-    patterns: '*.tar'
+# folder_watcher:
+#   - folder: /backup
+#     patterns: '*.tar'
 
 ################################################
 ## Alert
