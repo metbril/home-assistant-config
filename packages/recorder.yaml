@@ -51,6 +51,13 @@ recorder:
       - sensor.dark_sky_uv_index
       - sensor.dark_sky_wind_bearing
       - sensor.dark_sky_wind_speed
+      - sensor.daily_power
+      - sensor.daily_power_offpeak
+      - sensor.daily_power_peak
+      - sensor.daily_gas
+      - sensor.monthly_gas
+      - sensor.monthly_power_offpeak
+      - sensor.monthly_power_peak
 
 ################################################
 ## History

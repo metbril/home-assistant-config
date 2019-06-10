@@ -24,6 +24,16 @@ homeassistant:
     sensor.daily_power_peak:
       friendly_name: Dagelijks energieverbruik piek
 
+    sensor.daily_power:
+      friendly_name: Dagelijks energieverbruik
+      icon: mdi:counter
+      unit_of_measurement: kWu
+
+    sensor.monthly_power:
+      friendly_name: Maandelijks energieverbruik
+      icon: mdi:counter
+      unit_of_measurement: kWu
+
     sensor.long_power_failure_count:
       friendly_name: Aantal langdurige storingen
 
@@ -94,7 +104,17 @@ sensor:
         value_template: >-
           {% set value = states.sensor.power_tariff.state %}
           {{ value | replace('low', 'laag') | replace('normal', 'normaal') }}
-      
+
+      daily_power:
+        value_template: >-
+          {{ states('sensor.daily_power_offpeak')|float +  
+             states('sensor.daily_power_peak')|float }}
+
+      monthly_power:
+        value_template: >-
+          {{ states('sensor.monthly_power_offpeak')|float +  
+             states('sensor.monthly_power_peak')|float }}
+
 ##################################################
 ## REST Command
 ##################################################
