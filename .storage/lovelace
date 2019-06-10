@@ -5,11 +5,18 @@
                 {
                     "type": "js",
                     "url": "/local/bignumber-card.js"
+                },
+                {
+                    "type": "js",
+                    "url": "/local/ext-weblink.js?v=0"
                 }
             ],
             "title": "HIERO",
             "views": [
                 {
+                    "badges": [
+                        "binary_sensor.ha_mode"
+                    ],
                     "cards": [
                         {
                             "entity": "sensor.time",
@@ -78,18 +85,6 @@
                                 }
                             ],
                             "type": "glance"
-                        },
-                        {
-                            "entity": "sensor.time",
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "show_icon": true,
-                            "show_name": true,
-                            "tap_action": {
-                                "action": "none"
-                            },
-                            "type": "entity-button"
                         }
                     ],
                     "icon": "mdi:rocket",
@@ -97,87 +92,63 @@
                     "title": "Start"
                 },
                 {
-                    "badges": [
-                        "binary_sensor.benext_molite_8_motion",
-                        "sensor.benext_molite_8_temperature",
-                        "media_player.living_tv"
-                    ],
+                    "badges": [],
                     "cards": [
                         {
                             "entities": [
                                 {
-                                    "entity": "switch.charging_station_plug_switch",
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    }
+                                    "entity": "light.living_lights"
                                 },
                                 {
-                                    "entity": "sensor.charging_station_plug_power"
+                                    "entity": "media_player.living_tv"
                                 },
                                 {
-                                    "entity": "automation.switch_off_charging_station",
-                                    "icon": "mdi:tune",
-                                    "name": "Auto uit"
+                                    "entity": "media_player.woonkamer"
+                                },
+                                {
+                                    "entity": "switch.charging_station_plug_switch"
+                                },
+                                {
+                                    "entity": "switch.fibaro_wall_plug_7"
+                                },
+                                {
+                                    "entity": "switch.mess_call"
                                 }
                             ],
-                            "title": "Oplaadstation",
-                            "type": "glance"
-                        },
-                        {
-                            "entity": "media_player.living_tv",
-                            "type": "media-control"
-                        },
-                        {
-                            "entity": "media_player.woonkamer",
-                            "type": "media-control"
+                            "show_header_toggle": false,
+                            "title": "Woonkamer",
+                            "type": "entities"
                         },
                         {
                             "entities": [
                                 {
-                                    "entity": "light.turbine_lamp"
+                                    "entity": "switch.garage_door_plug_switch"
                                 }
                             ],
-                            "type": "glance"
-                        },
-                        {
-                            "entity": "scene.goodnight",
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "icon": "mdi:sleep",
-                            "name": "Welterusten",
-                            "tap_action": {
-                                "action": "call-service",
-                                "service": "scene.turn_on",
-                                "service_data": {
-                                    "entity_id": "scene.goodnight"
-                                }
-                            },
-                            "type": "entity-button"
-                        },
-                        {
-                            "entity": "light.living_lights",
-                            "type": "light"
-                        },
-                        {
-                            "entity": "light.turbine_lamp",
-                            "type": "light"
+                            "show_header_toggle": false,
+                            "title": "Garage",
+                            "type": "entities"
                         },
                         {
                             "entities": [
                                 {
-                                    "entity": "switch.turbine_light_plug_switch"
-                                },
-                                {
-                                    "entity": "light.turbine_lamp"
+                                    "entity": "switch.frontdoor_bell"
                                 }
                             ],
+                            "show_header_toggle": false,
+                            "title": "Entree",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [],
+                            "show_header_toggle": false,
+                            "title": "Ouderslaapkamer",
                             "type": "entities"
                         }
                     ],
-                    "icon": "mdi:sofa",
-                    "path": "woonkamer",
-                    "title": "Woonkamer"
+                    "icon": "mdi:home",
+                    "path": "huis",
+                    "title": "Huis"
                 },
                 {
                     "badges": [
@@ -217,8 +188,109 @@
                             "type": "glance"
                         }
                     ],
+                    "icon": "mdi:home-floor-0",
                     "path": "beneden",
                     "title": "Beneden"
+                },
+                {
+                    "badges": [
+                        "binary_sensor.benext_molite_8_motion",
+                        "sensor.benext_molite_8_temperature",
+                        "media_player.living_tv"
+                    ],
+                    "cards": [
+                        {
+                            "entity": "light.living_lights",
+                            "type": "light"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "light.hoge_kast"
+                                },
+                                {
+                                    "entity": "light.bank"
+                                },
+                                {
+                                    "entity": "light.bollamp"
+                                },
+                                {
+                                    "entity": "light.willner"
+                                },
+                                {
+                                    "entity": "light.turbine_lamp"
+                                }
+                            ],
+                            "title": "Verlichting",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.charging_station_plug_switch",
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    }
+                                },
+                                {
+                                    "entity": "sensor.charging_station_plug_power"
+                                },
+                                {
+                                    "entity": "automation.switch_off_charging_station",
+                                    "icon": "mdi:tune",
+                                    "name": "Auto uit"
+                                }
+                            ],
+                            "title": "Oplaadstation",
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "media_player.living_tv",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "media_player.woonkamer",
+                            "type": "media-control"
+                        },
+                        {
+                            "entity": "scene.goodnight",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "icon": "mdi:sleep",
+                            "name": "Welterusten",
+                            "show_name": false,
+                            "tap_action": {
+                                "action": "call-service",
+                                "data": [
+                                    {
+                                        "entity_id": "scene.goodnight"
+                                    }
+                                ],
+                                "service": "scene.turn_on"
+                            },
+                            "type": "entity-button"
+                        },
+                        {
+                            "entity": "scene.goodnight",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "show_icon": true,
+                            "show_name": true,
+                            "tap_action": {
+                                "action": "call-service",
+                                "data": {
+                                    "entity_id": "scene.goodnight"
+                                },
+                                "service": "scene.turn_on"
+                            },
+                            "type": "entity-button"
+                        }
+                    ],
+                    "icon": "mdi:sofa",
+                    "path": "woonkamer",
+                    "title": "Woonkamer"
                 },
                 {
                     "badges": [
@@ -315,6 +387,128 @@
                     "title": "Presence"
                 },
                 {
+                    "badges": [
+                        "binary_sensor.ha_mode",
+                        "group.motion",
+                        "group.contact"
+                    ],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entity": "input_boolean.ha_mode_home",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "input_boolean.ha_mode_away",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "input_boolean.ha_mode_night",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "input_boolean.ha_mode_vacation",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.benext_molite_8_motion"
+                                },
+                                {
+                                    "entity": "binary_sensor.motion_garage"
+                                }
+                            ],
+                            "title": "Beweging",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.frontdoor_contact_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.master_bedroom_outside_door_sensor"
+                                }
+                            ],
+                            "title": "Contactsensoren",
+                            "type": "glance"
+                        },
+                        {
+                            "card": {
+                                "show_state": false,
+                                "title": "Open contacten",
+                                "type": "glance"
+                            },
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.frontdoor_contact_sensor"
+                                },
+                                {
+                                    "entity": "binary_sensor.master_bedroom_outside_door_sensor",
+                                    "name": "Balkondeur"
+                                }
+                            ],
+                            "show_empty": false,
+                            "state_filter": [
+                                "on"
+                            ],
+                            "type": "entity-filter"
+                        },
+                        {
+                            "card": {
+                                "show_state": false,
+                                "title": "Beweging",
+                                "type": "glance"
+                            },
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.motion_garage"
+                                },
+                                {
+                                    "entity": "binary_sensor.benext_molite_8_motion"
+                                }
+                            ],
+                            "show_empty": false,
+                            "state_filter": [
+                                "on"
+                            ],
+                            "type": "entity-filter"
+                        }
+                    ],
+                    "icon": "mdi:shield",
+                    "path": "beveiliging",
+                    "title": "Beveiliging"
+                },
+                {
                     "badges": [],
                     "cards": [
                         {
@@ -331,7 +525,9 @@
                     "title": "Media"
                 },
                 {
-                    "badges": [],
+                    "badges": [
+                        "binary_sensor.meteoalarm"
+                    ],
                     "cards": [
                         {
                             "entity": "weather.dark_sky",
@@ -386,20 +582,146 @@
                     "title": "Weer"
                 },
                 {
-                    "badges": [],
+                    "badges": [
+                        "sensor.postnl"
+                    ],
                     "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.euro95_advies",
+                                    "name": "Advies"
+                                },
+                                {
+                                    "entity": "sensor.euro95_lukoil_schermerhoek",
+                                    "name": "Schermerhoek"
+                                },
+                                {
+                                    "entity": "sensor.euro95_shell_nieuwerkerk",
+                                    "name": "Nieuwerkerk"
+                                },
+                                {
+                                    "entity": "sensor.euro95_tinq_bermweg",
+                                    "name": "Bermweg"
+                                }
+                            ],
+                            "show_icon": true,
+                            "title": "Euro 95",
+                            "type": "glance"
+                        },
                         {
                             "cards": [
                                 {
-                                    "columns": 3,
                                     "entities": [
                                         {
+                                            "entity": "sensor.bitcoin"
+                                        },
+                                        {
+                                            "entity": "sensor.bitcoin_cash"
+                                        },
+                                        {
+                                            "entity": "sensor.xrp"
+                                        },
+                                        {
+                                            "entity": "sensor.ethereum"
+                                        },
+                                        {
+                                            "entity": "sensor.litecoin"
+                                        }
+                                    ],
+                                    "show_header_toggle": false,
+                                    "title": "Cryptovaluta",
+                                    "type": "entities"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.bitcoin"
+                                    ],
+                                    "title": "Bitcoin",
+                                    "type": "history-graph"
+                                }
+                            ],
+                            "type": "vertical-stack"
+                        }
+                    ],
+                    "icon": "mdi:information",
+                    "path": "info",
+                    "title": "Information"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "sensor.power_consumption",
+                            "from": "bottom",
+                            "max": 10,
+                            "min": 0,
+                            "severity": [
+                                {
+                                    "style": "var(--label-badge-green)",
+                                    "value": 1
+                                },
+                                {
+                                    "style": "var(--label-badge-yellow)",
+                                    "value": 2
+                                },
+                                {
+                                    "style": "var(--label-badge-red)",
+                                    "value": 4
+                                }
+                            ],
+                            "title": "Totaalgebruik",
+                            "type": "custom:bignumber-card"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.charging_station_plug_power",
+                                    "name": "Oplaadstation"
+                                },
+                                {
+                                    "entity": "sensor.garage_door_plug_power",
+                                    "name": "Garagedeur"
+                                },
+                                {
+                                    "entity": "sensor.turbine_light_plug_power",
+                                    "name": "Turbinelamp"
+                                },
+                                {
+                                    "entity": "sensor.fibaro_wall_plug_7_power"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Gebruik per apparaat",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.power_tariff"
+                                },
+                                {
+                                    "entity": "sensor.power_tariff_nl"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "columns": 4,
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.daily_power",
+                                            "name": "Totaal dag"
+                                        },
+                                        {
                                             "entity": "sensor.daily_power_peak",
-                                            "name": "Piek Dag"
+                                            "name": "Piek dag"
                                         },
                                         {
                                             "entity": "sensor.daily_power_offpeak",
-                                            "name": "Dal Dag"
+                                            "name": "Dal dag"
                                         },
                                         {
                                             "entity": "sensor.daily_gas",
@@ -410,8 +732,12 @@
                                     "type": "glance"
                                 },
                                 {
-                                    "columns": 3,
+                                    "columns": 4,
                                     "entities": [
+                                        {
+                                            "entity": "sensor.monthly_power",
+                                            "name": "Totaal"
+                                        },
                                         {
                                             "entity": "sensor.monthly_power_peak",
                                             "name": "Piek"
@@ -432,58 +758,70 @@
                                     "entities": [
                                         "sensor.power_consumption"
                                     ],
+                                    "title": "Totaalgebruik",
+                                    "type": "history-graph"
+                                },
+                                {
+                                    "entities": [
+                                        "sensor.charging_station_plug_power",
+                                        "sensor.garage_door_plug_power",
+                                        "sensor.fibaro_wall_plug_7_power"
+                                    ],
+                                    "title": "Gebruik stekkers",
                                     "type": "history-graph"
                                 }
                             ],
                             "type": "vertical-stack"
-                        },
-                        {
-                            "entity": "sensor.power_consumption",
-                            "max": 5,
-                            "min": 0,
-                            "severity": {
-                                "green": 0,
-                                "red": 4,
-                                "yellow": 2
-                            },
-                            "theme": "default",
-                            "type": "gauge"
-                        },
-                        {
-                            "detail": 5,
-                            "entity": "sensor.power_consumption",
-                            "graph": "line",
-                            "type": "sensor"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.garage_door_plug_power"
-                                },
-                                {
-                                    "entity": "sensor.charging_station_plug_power"
-                                },
-                                {
-                                    "entity": "sensor.power_consumption"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.power_tariff"
-                                },
-                                {
-                                    "entity": "sensor.power_tariff_nl"
-                                }
-                            ],
-                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:flash",
                     "path": "nutsvoorzieningen",
                     "title": "Nutsvoorzieningen"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.moon"
+                                },
+                                {
+                                    "entity": "sensor.season"
+                                },
+                                {
+                                    "entity": "binary_sensor.workday"
+                                },
+                                {
+                                    "entity": "sun.sun"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.morning"
+                                },
+                                {
+                                    "entity": "binary_sensor.daytime"
+                                },
+                                {
+                                    "entity": "binary_sensor.evening"
+                                },
+                                {
+                                    "entity": "binary_sensor.night"
+                                },
+                                {
+                                    "entity": "sensor.time_of_day"
+                                }
+                            ],
+                            "type": "glance"
+                        }
+                    ],
+                    "icon": "mdi:timetable",
+                    "path": "datumtijd",
+                    "title": "Time and Date"
                 },
                 {
                     "badges": [],
@@ -506,8 +844,8 @@
                             "show_icon": true,
                             "show_name": true,
                             "show_state": true,
-                            "title": "ASUSWRT",
-                            "type": "glance"
+                            "title": "Router",
+                            "type": "entities"
                         },
                         {
                             "entities": [
@@ -518,8 +856,9 @@
                                     "entity": "sensor.pi_hole_ads_percentage_blocked_today"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "pi Hole",
-                            "type": "glance"
+                            "type": "entities"
                         },
                         {
                             "entities": [
@@ -528,29 +867,14 @@
                                 },
                                 {
                                     "entity": "sensor.myip"
-                                },
-                                {
-                                    "entity": "sensor.certpem_last_updated"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "WAN",
-                            "type": "glance"
+                            "type": "entities"
                         },
                         {
-                            "entities": [
-                                {
-                                    "entity": "sensor.asuswrt_download"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_upload"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_download_speed"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_upload_speed"
-                                }
-                            ],
+                            "entities": [],
                             "title": "ASUS",
                             "type": "glance"
                         }
@@ -560,22 +884,25 @@
                 },
                 {
                     "badges": [
-                        "binary_sensor.cpu_high",
-                        "binary_sensor.cpu_hot",
+                        "binary_sensor.ha_update_available",
                         "binary_sensor.db_large",
-                        "binary_sensor.ha_update_available"
+                        "binary_sensor.cpu_high",
+                        "binary_sensor.cpu_hot"
                     ],
                     "cards": [
                         {
                             "entities": [
                                 {
-                                    "entity": "sensor.memory_use_percent"
+                                    "entity": "sensor.memory_use_percent",
+                                    "name": "Geheugen"
                                 },
                                 {
-                                    "entity": "sensor.processor_use"
+                                    "entity": "sensor.processor_use",
+                                    "name": "Processor"
                                 },
                                 {
-                                    "entity": "sensor.disk_use_percent"
+                                    "entity": "sensor.disk_use_percent",
+                                    "name": "Opslag"
                                 }
                             ],
                             "title": "Systeemperformance",
@@ -633,164 +960,22 @@
                             "show_header_toggle": false,
                             "title": "Systeemsoftware",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.last_boot"
+                                },
+                                {
+                                    "entity": "sensor.ha_uptime"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:server",
                     "path": "host",
                     "title": "Host"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.benext_molite_8_motion"
-                                },
-                                {
-                                    "entity": "binary_sensor.motion_garage"
-                                }
-                            ],
-                            "title": "Beweging",
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.frontdoor_contact_sensor"
-                                },
-                                {
-                                    "entity": "binary_sensor.master_bedroom_outside_door_sensor"
-                                }
-                            ],
-                            "title": "Contactsensoren",
-                            "type": "glance"
-                        },
-                        {
-                            "cards": null,
-                            "type": "vertical-stack"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entity": "input_boolean.ha_mode_home",
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "entity-button"
-                                },
-                                {
-                                    "entity": "input_boolean.ha_mode_away",
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "entity-button"
-                                },
-                                {
-                                    "entity": "input_boolean.ha_mode_night",
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "entity-button"
-                                },
-                                {
-                                    "entity": "input_boolean.ha_mode_vacation",
-                                    "hold_action": {
-                                        "action": "more-info"
-                                    },
-                                    "tap_action": {
-                                        "action": "toggle"
-                                    },
-                                    "type": "entity-button"
-                                }
-                            ],
-                            "type": "horizontal-stack"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.ha_mode"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.ha_mode"
-                                },
-                                {
-                                    "entity": "sensor.ha_mode"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entity": "input_boolean.ha_mode_home",
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "tap_action": {
-                                "action": "toggle"
-                            },
-                            "type": "entity-button"
-                        }
-                    ],
-                    "icon": "mdi:shield",
-                    "path": "beveiliging",
-                    "title": "Beveiliging"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.moon"
-                                },
-                                {
-                                    "entity": "sensor.season"
-                                },
-                                {
-                                    "entity": "binary_sensor.workday"
-                                },
-                                {
-                                    "entity": "sun.sun"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.morning"
-                                },
-                                {
-                                    "entity": "binary_sensor.daytime"
-                                },
-                                {
-                                    "entity": "binary_sensor.evening"
-                                },
-                                {
-                                    "entity": "binary_sensor.night"
-                                },
-                                {
-                                    "entity": "sensor.time_of_day"
-                                }
-                            ],
-                            "type": "glance"
-                        }
-                    ],
-                    "title": "Time and Date"
                 },
                 {
                     "badges": [],
@@ -934,7 +1119,7 @@
                                     "entity": "zwave.turbine_light_plug"
                                 },
                                 {
-                                    "entity": "zwave.shenzhen_neo_electronics_co_ltd_siren_alarm"
+                                    "entity": "zwave.living_siren_alarm"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -948,6 +1133,9 @@
                                 },
                                 {
                                     "entity": "switch.charging_station_plug_switch"
+                                },
+                                {
+                                    "entity": "switch.turbine_light_plug_switch"
                                 }
                             ],
                             "title": "Schakelaars",
@@ -973,6 +1161,12 @@
                                 },
                                 {
                                     "entity": "sensor.fibaro_wall_plug_7_power"
+                                },
+                                {
+                                    "entity": "sensor.turbine_light_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.turbine_light_plug_energy"
                                 }
                             ],
                             "title": "Verbruik",
@@ -982,73 +1176,6 @@
                     "icon": "mdi:z-wave",
                     "path": "zwave",
                     "title": "Z-Wave"
-                },
-                {
-                    "badges": [
-                        "sensor.postnl"
-                    ],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.euro95_advies",
-                                    "name": "Advies"
-                                },
-                                {
-                                    "entity": "sensor.euro95_lukoil_schermerhoek",
-                                    "name": "Schermerhoek"
-                                },
-                                {
-                                    "entity": "sensor.euro95_shell_nieuwerkerk",
-                                    "name": "Nieuwerkerk"
-                                },
-                                {
-                                    "entity": "sensor.euro95_tinq_bermweg",
-                                    "name": "Bermweg"
-                                }
-                            ],
-                            "show_icon": true,
-                            "title": "Euro 95",
-                            "type": "glance"
-                        },
-                        {
-                            "cards": [
-                                {
-                                    "entities": [
-                                        {
-                                            "entity": "sensor.bitcoin"
-                                        },
-                                        {
-                                            "entity": "sensor.bitcoin_cash"
-                                        },
-                                        {
-                                            "entity": "sensor.xrp"
-                                        },
-                                        {
-                                            "entity": "sensor.ethereum"
-                                        },
-                                        {
-                                            "entity": "sensor.litecoin"
-                                        }
-                                    ],
-                                    "show_header_toggle": false,
-                                    "title": "Cryptovaluta",
-                                    "type": "entities"
-                                },
-                                {
-                                    "entities": [
-                                        "sensor.bitcoin"
-                                    ],
-                                    "title": "Bitcoin",
-                                    "type": "history-graph"
-                                }
-                            ],
-                            "type": "vertical-stack"
-                        }
-                    ],
-                    "icon": "mdi:information",
-                    "path": "info",
-                    "title": "Information"
                 }
             ]
         }
