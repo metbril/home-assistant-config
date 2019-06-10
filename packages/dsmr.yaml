@@ -42,3 +42,28 @@ rest_command:
       Content-Type: application/json
       AUTH-TOKEN: !secret mindergas_token 
     payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{states.sensor.gas_consumption.state }}" }'
+
+############################################################################
+## Utility Meter
+## https://www.home-assistant.io/components/utility_meter/
+############################################################################
+
+utility_meter:
+  daily_power_offpeak:
+    source: sensor.power_consumption_low
+    cycle: daily
+  daily_power_peak:
+    source: sensor.power_consumption_normal
+    cycle: daily
+  daily_gas:
+    source: sensor.gas_consumption
+    cycle: daily
+  monthly_power_offpeak:
+    source: sensor.power_consumption_low
+    cycle: monthly
+  monthly_power_peak:
+    source: sensor.power_consumption_normal
+    cycle: monthly
+  monthly_gas:
+    source: sensor.gas_consumption
+    cycle: monthly
