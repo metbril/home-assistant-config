@@ -9,6 +9,7 @@ homeassistant:
   whitelist_external_dirs:
     - !secret whitelist_dir_config
     - !secret whitelist_dir_ssl
+    # - /backup # for folder watcher (not working yet)
   auth_providers:
     - type: homeassistant
     - type: legacy_api_password # still required for iOS app

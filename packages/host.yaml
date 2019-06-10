@@ -132,7 +132,20 @@ sensor:
   #           {% else -%}
   #             There is a problem with your power supply or system, state {{ states("sensor.system_undervoltage_status") }} reported
   #           {%- endif %}
-  
+
+################################################
+## Folder Watcher
+## https://www.home-assistant.io/components/folder_watcher/
+##
+## Currently not yet working, error on startup
+## Whitelisting '/backup' is not yet possible with hassio
+## https://github.com/home-assistant/hassio-build/issues/129
+###############################################
+
+folder_watcher:
+  - folder: /backup
+    patterns: '*.tar'
+
 ################################################
 ## Alert
 ################################################
@@ -170,4 +183,3 @@ alert:
     skip_first: false
     notifiers:
       - admin
-

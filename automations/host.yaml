@@ -28,3 +28,16 @@
     - service: notify.admin
       data_template:
         message: 'NGinx proxy is herstart om een nieuw SSL-certificaat te activeren'
+
+## Send notification for new hassio backup
+- alias: New file alert
+  trigger:
+    platform: event
+    event_type: folder_watcher
+    event_data:
+      event_type: created
+  action:
+    service: notify.admin
+    data_template:
+      title: New backup
+      message: "Created {{ trigger.event.data.file }} in {{ trigger.event.data.folder }}"
