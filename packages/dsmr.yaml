@@ -12,7 +12,73 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'dsmr'
-     
+
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.daily_gas:
+      friendly_name: Dagelijks gasverbruik
+    sensor.daily_power_offpeak:
+      friendly_name: Dagelijks energieverbruik dal
+    sensor.daily_power_peak:
+      friendly_name: Dagelijks energieverbruik piek
+
+    sensor.long_power_failure_count:
+      friendly_name: Aantal langdurige storingen
+
+    sensor.monthly_gas:
+      friendly_name: Maandelijks gasverbruik
+    sensor.monthly_power_offpeak:
+      friendly_name: Maandelijks energieverbruik dal
+    sensor.monthly_power_peak:
+      friendly_name: Maandelijks energieverbruik piek
+
+    sensor.power_consumption:
+      friendly_name: Energieverbruik
+    sensor.power_consumption_low:
+      friendly_name: Energieverbruik laag tarief
+      unit_of_measurement: kWu
+    sensor.power_consumption_normal:
+      friendly_name: Energieverbruik normaal tarief
+      unit_of_measurement: kWu
+    sensor.power_consumption_phase_l1:
+      hidden: true
+    sensor.power_consumption_phase_l2:
+      hidden: true
+    sensor.power_consumption_phase_l3:
+      hidden: true
+    sensor.power_production:
+      hidden: true
+    sensor.power_production_low:
+      hidden: true
+    sensor.power_production_normal:
+      hidden: true
+    sensor.power_production_phase_l1:
+      hidden: true
+    sensor.power_production_phase_l2:
+      hidden: true
+    sensor.power_production_phase_l3:
+      hidden: true
+    sensor.power_tariff:
+      hidden: true
+    sensor.power_tariff_nl:
+      friendly_name: Energietarief
+      icon: mdi:currency-eur
+
+    sensor.voltage_sags_phase_l1:
+      hidden: true
+    sensor.voltage_sags_phase_l2:
+      hidden: true
+    sensor.voltage_sags_phase_l3:
+      hidden: true
+    sensor.voltage_swells_phase_l1:
+      hidden: true
+    sensor.voltage_swells_phase_l2:
+      hidden: true
+    sensor.voltage_swells_phase_l3:
+      hidden: true
+
 ################################################
 ## Sensor
 ################################################
@@ -67,3 +133,26 @@ utility_meter:
   monthly_gas:
     source: sensor.gas_consumption
     cycle: monthly
+
+############################################################################
+## Automation
+## https://www.home-assistant.io/components/automation/
+############################################################################
+
+automation:
+- alias: Post Gas Consumption
+  hide_entity: no # default no
+  trigger:
+    - platform: time
+      ## run daily at 00:15:00
+      ## gas meter reading usually updated around 0:06
+      ## publishing should happen after that
+      at: '00:15:00'
+  action:
+    - service: rest_command.post_mindergas
+    - service: logbook.log
+      data:
+        name: Gasverbruik
+        message: is verstuurd naar mindergas.nl
+        entity_id: sensor.gas_consumption
+        domain: sensor

@@ -115,8 +115,6 @@ person.monique:
   entity_picture: /local/img/golf.png
 person.robert:
   entity_picture: /local/img/uil.png
-script.post_mindergas:
-  friendly_name: Verzend naar mindergas.nl
 script.reset_energy_meters:
   friendly_name: Opnieuw instellen Z-Wave Energiemeters
 sensor.asuswrt_download:
@@ -150,12 +148,6 @@ sensor.charging_station_plug_power:
   icon: mdi:flash
 sensor.cpu_temperature:
   friendly_name: Processortemperatuur
-sensor.daily_gas:
-  friendly_name: Dagelijks gasverbruik
-sensor.daily_power_offpeak:
-  friendly_name: Dagelijks energieverbruik dal
-sensor.daily_power_peak:
-  friendly_name: Dagelijks energieverbruik piek
 sensor.dark_sky_apparent_temperature:
   friendly_name: Gevoelstemperatuur omgeving
 sensor.dark_sky_humidity:
@@ -233,18 +225,10 @@ sensor.hourly_gas_consumption:
   hidden: true
 sensor.last_boot:
   friendly_name: Laatste herstart
-sensor.long_power_failure_count:
-  friendly_name: Aantal langdurige storingen
 sensor.lpg_advies:
   friendly_name: LPG
 sensor.memory_use_percent:
   friendly_name: Geheugengebruik
-sensor.monthly_gas:
-  friendly_name: Maandelijks gasverbruik
-sensor.monthly_power_offpeak:
-  friendly_name: Maandelijks energieverbruik dal
-sensor.monthly_power_peak:
-  friendly_name: Maandelijks energieverbruik piek
 sensor.moon:
   friendly_name: Maan
 sensor.myip:
@@ -268,37 +252,6 @@ sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
   friendly_name: Percentage geblokkeerde advertenties
-sensor.power_consumption:
-  friendly_name: Energieverbruik
-sensor.power_consumption_low:
-  friendly_name: Energieverbruik laag tarief
-  unit_of_measurement: kWu
-sensor.power_consumption_normal:
-  friendly_name: Energieverbruik normaal tarief
-  unit_of_measurement: kWu
-sensor.power_consumption_phase_l1:
-  hidden: true
-sensor.power_consumption_phase_l2:
-  hidden: true
-sensor.power_consumption_phase_l3:
-  hidden: true
-sensor.power_production:
-  hidden: true
-sensor.power_production_low:
-  hidden: true
-sensor.power_production_normal:
-  hidden: true
-sensor.power_production_phase_l1:
-  hidden: true
-sensor.power_production_phase_l2:
-  hidden: true
-sensor.power_production_phase_l3:
-  hidden: true
-sensor.power_tariff:
-  hidden: true
-sensor.power_tariff_nl:
-  friendly_name: Energietarief
-  icon: mdi:currency-eur
 sensor.processor_use:
   friendly_name: Processorgebruik
 sensor.pws_th_battery_level:
@@ -331,18 +284,6 @@ sensor.toronto_time:
 sensor.turbine_light_plug_power:
   device_class: power
   friendly_name: Verbruik Turbine Lamp
-sensor.voltage_sags_phase_l1:
-  hidden: true
-sensor.voltage_sags_phase_l2:
-  hidden: true
-sensor.voltage_sags_phase_l3:
-  hidden: true
-sensor.voltage_swells_phase_l1:
-  hidden: true
-sensor.voltage_swells_phase_l2:
-  hidden: true
-sensor.voltage_swells_phase_l3:
-  hidden: true
 sensor.waqi_rotterdam:
   friendly_name: Luchtkwaliteitsindex
   icon: mdi:factory
