@@ -26,17 +26,17 @@ group:
 # Alert
 ###############################################
 
-alert:
-  frontdoor_open:
-    name: Voordeur staat nog open
-    done_message: Voordeur is weer gesloten
-    entity_id: binary_sensor.frontdoor_contact_sensor
-    state: 'on'
-    repeat: 
-      - 5 # minutes
-      - 15
-      - 30
-      - 60
-    skip_first: True
-    notifiers:
-      - all
+# alert:
+#   frontdoor_open:
+#     name: Voordeur staat nog open
+#     done_message: Voordeur is weer gesloten
+#     entity_id: binary_sensor.frontdoor_contact_sensor
+#     state: 'on'
+#     repeat: 
+#       - 5 # minutes
+#       - 15
+#       - 30
+#       - 60
+#     skip_first: True
+#     notifiers:
+#       - all
