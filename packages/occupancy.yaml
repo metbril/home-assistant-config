@@ -59,15 +59,14 @@ homeassistant:
 
 ############################################################################
 ## Input Boolean
+## https://www.home-assistant.io/components/input_boolean/
+## State is restored when no initial value is set
 ############################################################################
 
 input_boolean:
   ha_mode_home:
-
   ha_mode_away:
-
   ha_mode_night:
-
   ha_mode_vacation:
 
 ############################################################################
