@@ -206,9 +206,9 @@ sensor.ha_uptime:
   friendly_name: Sinds laatste start HA
   icon: mdi:clock
 sensor.homeassistant_v2db:
-  friendly_name: Omvang database
+  friendly_name: Grootte database
 sensor.homeassistantlog:
-  friendly_name: Omvang logbestand
+  friendly_name: Grootte logbestand
 sensor.hourly_gas_consumption:
   hidden: true
 sensor.last_boot:
@@ -226,7 +226,7 @@ sensor.network_out_eth0:
   friendly_name: Bytes verzonden
   icon: mdi:upload-network
 sensor.ozw_logtxt:
-  friendly_name: Omvang logbestand Z-Wave
+  friendly_name: Grootte logbestand Z-Wave
 sensor.packets_in_eth0:
   friendly_name: Pakketten ontvangen
   icon: mdi:download-network
