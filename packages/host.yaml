@@ -183,3 +183,60 @@ alert:
     skip_first: false
     notifiers:
       - admin
+
+################################################
+## Script
+################################################
+script:
+  restart_home_assistant:
+    sequence:
+    - service: homeassistant.restart
+
+################################################
+## Automation
+################################################
+automation:
+
+  ## Notify when SSL certificate has been renewed
+  - alias: "SSL Certificate Renewed"
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: sensor.ssl_certificate_expiry
+    condition: 
+      - condition: template
+        value_template: '{{ (trigger.to_state.state > trigger.from_state.state) }}'
+    action:
+      - service: notify.admin
+        data_template:
+          message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{trigger.from_state.state}} naar {{trigger.to_state.state}}'
+
+  ## Restart NGinx addon when SSL certificate has changed (to load new cert)
+  - alias: "Timestamp SSL cert changed"
+    initial_state: on
+    trigger:
+      - platform: state
+        entity_id: sensor.certpem_last_updated
+    condition: 
+      - condition: template
+        value_template: "{{ (trigger.from_state.state != 'None') }}"
+    action:
+      - service: hassio.addon_restart
+        data:
+          addon: "53caca22_nginx_proxy"
+      - service: notify.admin
+        data_template:
+          message: 'NGinx proxy is herstart om een nieuw SSL-certificaat te activeren'
+
+  ## Send notification for new hassio backup
+  - alias: New file alert
+    trigger:
+      platform: event
+      event_type: folder_watcher
+      event_data:
+        event_type: created
+    action:
+      service: notify.admin
+      data_template:
+        title: New backup
+        message: "Created {{ trigger.event.data.file }} in {{ trigger.event.data.folder }}"
