@@ -12,6 +12,48 @@ homeassistant:
       customize: &customize
         package: 'updates'
 
+    ########################################################################
+    ## Updater
+    ########################################################################
+
+    updater.updater:
+      friendly_name: HA Update Beschikbaar
+      icon: mdi:sync
+
+    ########################################################################
+    ## Binary Sensor
+    ########################################################################
+
+    binary_sensor.hassio_update_available:
+      device_class: safety
+      friendly_name: Update Beschikbaar voor HA
+
+    ########################################################################
+    ## Sensor
+    ########################################################################
+
+    sensor.hassio_version_installed:
+      friendly_name: Geïnstalleerde versie Hassio
+      icon: mdi:application
+    sensor.hassio_version_stable:
+      friendly_name: Stabiele versie Hassio
+      icon: mdi:check-decagram
+    sensor.hassio_version_beta:
+      friendly_name: Beta versie Hassio
+      icon: mdi:beta
+    sensor.hassio_version_development:
+      friendly_name: Ontwikkelversie Hassio
+      icon: mdi:alpha
+
+    ########################################################################
+    ## Automation
+    ########################################################################
+
+    automation.hassio_update_available_notification:
+      friendly_name: Hassio Update Beschikbaar Melding
+    automation.ha_update_available_notification:
+      friendly_name: HA Update Beschikbaar Melding
+
 ############################################################################
 ## Updater
 ## https://www.home-assistant.io/components/updater/
@@ -29,10 +71,10 @@ updater:
 binary_sensor:
   - platform: template
     sensors:
-      ha_update_available:
+      hassio_update_available:
         value_template: >-
-          {{ states.sensor.ha_current_stable_version.state != states.sensor.ha_installed_version.state and
-             states.sensor.ha_current_stable_version.state != 'unavailable' }}
+          {{ states.sensor.hassio_version_stable.state != states.sensor.hassio_version_installed.state and
+             states.sensor.hassio_version_stable.state != 'unavailable' }}
 
 ############################################################################
 ## Sensor
@@ -40,22 +82,47 @@ binary_sensor:
 
 sensor:
   - platform: version
-    name: HA Installed Version
+    name: Hassio Version Installed
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/stable.json
-    name: HA Current Stable Version
+    name: Hassio Version Stable
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
     scan_interval: 3600
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/beta.json
-    name: HA Current Beta Version
+    name: Hassio Version Beta
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
     scan_interval: 3600
 
   - platform: rest
     resource: https://s3.amazonaws.com/hassio-version/dev.json
-    name: HA Current Development Version
+    name: Hassio Version Development
     value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
     scan_interval: 3600
+
+############################################################################
+## Automation
+############################################################################
+
+automation:
+
+  - alias: 'HA Update Available Notification'
+    trigger:
+      - platform: state
+        entity_id: updater.updater
+    action:
+      - service: notify.admin
+        data:
+          message: 'Update voor Home Assistant beschikbaar.'
+
+  - alias: 'Hassio Update Available Notification'
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.hassio_update_available
+    action:
+      - service: notify.admin
+        data:
+          message: 'Hassio versie {{ states.sensor.hassio_version_stable.state }} is nu beschikbaar.'
+          title: Home Assistant Update

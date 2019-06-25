@@ -1,9 +1,5 @@
 alarm_control_panel.home:
   friendly_name: Huisalarm
-automation.ha_update_available_for_hassio_notification:
-  friendly_name: HA Update Beschikbaar Melding
-automation.ha_update_available_notification:
-  friendly_name: HA Update Beschikbaar Melding
 automation.rain_alarm:
   friendly_name: Buienalarm
 automation.switch_off_charging_station:
@@ -32,9 +28,6 @@ binary_sensor.flamingo_remote_button_a:
 binary_sensor.frontdoor_contact_sensor:
   device_class: door
   friendly_name: Voordeur
-binary_sensor.ha_update_available:
-  device_class: safety
-  friendly_name: Update Beschikbaar voor HA
 binary_sensor.master_bedroom_outside_door_sensor:
   device_class: door
   friendly_name: Balkondeur Ouderslaapkamer
@@ -190,18 +183,6 @@ sensor.garage_door_plug_power:
 sensor.gas_consumption:
   friendly_name: Gasverbruik
   unit_of_measurement: m³
-sensor.ha_current_beta_version:
-  friendly_name: Huidige beta versie HA
-  icon: mdi:beta
-sensor.ha_current_development_version:
-  friendly_name: Huidige ontwikkelversie HA
-  icon: mdi:alpha
-sensor.ha_current_stable_version:
-  friendly_name: Laatste versie
-  icon: mdi:approval
-sensor.ha_installed_version:
-  friendly_name: Geïnstalleerde versie
-  icon: mdi:approval
 sensor.ha_uptime:
   friendly_name: Sinds laatste start HA
   icon: mdi:clock
@@ -301,9 +282,6 @@ switch.mess_call:
 switch.turbine_light_plug_switch:
   friendly_name: Turbine Lamp
   icon: mdi:power
-updater.updater:
-  friendly_name: HA Update Beschikbaar
-  icon: mdi:sync
 zwave.charging_station_plug:
   friendly_name: Oplaadstation
 zwave.garage_door_plug:
