@@ -29,15 +29,19 @@ homeassistant:
 
     input_boolean.ha_mode_away:
       friendly_name: Weg
+      icon: mdi:walk
 
     input_boolean.ha_mode_home:
       friendly_name: Thuis
+      icon: mdi:home-account
 
     input_boolean.ha_mode_night:
       friendly_name: Nacht
+      icon: mdi:weather-night
 
     input_boolean.ha_mode_vacation:
       friendly_name: Vakantie
+      icon: mdi:airplane-takeoff
 
     ########################################################################
     ## Sensor
@@ -59,20 +63,12 @@ homeassistant:
 
 input_boolean:
   ha_mode_home:
-    name: Home
-    icon: mdi:home-account
 
   ha_mode_away:
-    name: Away
-    icon: mdi:walk
 
   ha_mode_night:
-    name: Night
-    icon: mdi:weather-night
 
   ha_mode_vacation:
-    name: Vacation 
-    icon: mdi:airplane-takeoff
 
 ############################################################################
 ## Sensor
