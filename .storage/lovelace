@@ -77,14 +77,6 @@
                                 }
                             ],
                             "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.postnl"
-                                }
-                            ],
-                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:rocket",
@@ -94,6 +86,10 @@
                 {
                     "badges": [],
                     "cards": [
+                        {
+                            "content": " De belangrijkste entiteiten in huis, gegroepeerd per ruimte.",
+                            "type": "markdown"
+                        },
                         {
                             "entities": [
                                 {
@@ -144,6 +140,21 @@
                             "show_header_toggle": false,
                             "title": "Ouderslaapkamer",
                             "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.garage_door_plug_switch"
+                                },
+                                {
+                                    "entity": "switch.charging_station_plug_switch"
+                                },
+                                {
+                                    "entity": "switch.turbine_light_plug_switch"
+                                }
+                            ],
+                            "title": "Schakelaars",
+                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:home",
@@ -163,6 +174,10 @@
                         "switch.frontdoor_bell"
                     ],
                     "cards": [
+                        {
+                            "content": " Alle entiteiten per vertrek van de begane grond.",
+                            "type": "markdown"
+                        },
                         {
                             "entities": [
                                 {
@@ -202,6 +217,10 @@
                         {
                             "entity": "light.living_lights",
                             "type": "light"
+                        },
+                        {
+                            "content": " De meest uitgebreide entiteiten van de woonkamer. Want dat is waar het allemaal gebeurt.",
+                            "type": "markdown"
                         },
                         {
                             "entities": [
@@ -267,22 +286,6 @@
                                         "entity_id": "scene.goodnight"
                                     }
                                 ],
-                                "service": "scene.turn_on"
-                            },
-                            "type": "entity-button"
-                        },
-                        {
-                            "entity": "scene.goodnight",
-                            "hold_action": {
-                                "action": "more-info"
-                            },
-                            "show_icon": true,
-                            "show_name": true,
-                            "tap_action": {
-                                "action": "call-service",
-                                "data": {
-                                    "entity_id": "scene.goodnight"
-                                },
                                 "service": "scene.turn_on"
                             },
                             "type": "entity-button"
@@ -410,6 +413,7 @@
                                     "hold_action": {
                                         "action": "more-info"
                                     },
+                                    "icon": "mdi:exit-run",
                                     "tap_action": {
                                         "action": "toggle"
                                     },
@@ -575,6 +579,62 @@
                                 "action": "none"
                             },
                             "type": "picture"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "sensor.waqi_rotterdam",
+                                    "max": 500,
+                                    "min": 0,
+                                    "scale": "28px",
+                                    "severity": [
+                                        {
+                                            "style": "green",
+                                            "value": 50
+                                        },
+                                        {
+                                            "style": "gold",
+                                            "value": 100
+                                        },
+                                        {
+                                            "style": "orange",
+                                            "value": 150
+                                        },
+                                        {
+                                            "style": "crimson",
+                                            "value": 200
+                                        },
+                                        {
+                                            "style": "indigo",
+                                            "value": 300
+                                        },
+                                        {
+                                            "style": "black",
+                                            "value": 500
+                                        }
+                                    ],
+                                    "title": "Luchtkwaliteit",
+                                    "type": "custom:bignumber-card"
+                                },
+                                {
+                                    "entities": [
+                                        {
+                                            "entity": "sensor.waqi_rotterdam"
+                                        },
+                                        {
+                                            "entity": "sensor.waqi_rotterdam_impact"
+                                        },
+                                        {
+                                            "entity": "sensor.dark_sky_ozone"
+                                        },
+                                        {
+                                            "entity": "sensor.dark_sky_uv_index"
+                                        }
+                                    ],
+                                    "type": "entities"
+                                }
+                            ],
+                            "type": "vertical-stack"
                         }
                     ],
                     "icon": "mdi:weather-partlycloudy",
@@ -642,6 +702,66 @@
                                 }
                             ],
                             "type": "vertical-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.morning"
+                                },
+                                {
+                                    "entity": "binary_sensor.daytime"
+                                },
+                                {
+                                    "entity": "binary_sensor.evening"
+                                },
+                                {
+                                    "entity": "binary_sensor.night"
+                                },
+                                {
+                                    "entity": "sensor.time_of_day"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.moon"
+                                },
+                                {
+                                    "entity": "sensor.season"
+                                },
+                                {
+                                    "entity": "binary_sensor.workday"
+                                },
+                                {
+                                    "entity": "sun.sun"
+                                }
+                            ],
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.date"
+                                },
+                                {
+                                    "entity": "sensor.time"
+                                }
+                            ],
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.log_level"
+                                },
+                                {
+                                    "entity": "input_select.log_level",
+                                    "icon": "mdi:home"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:information",
@@ -767,11 +887,43 @@
                                         "sensor.garage_door_plug_power",
                                         "sensor.fibaro_wall_plug_7_power"
                                     ],
+                                    "hours_to_show": 8,
                                     "title": "Gebruik stekkers",
                                     "type": "history-graph"
                                 }
                             ],
                             "type": "vertical-stack"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sensor.charging_station_plug_energy"
+                                },
+                                {
+                                    "entity": "sensor.garage_door_plug_energy"
+                                },
+                                {
+                                    "entity": "sensor.fibaro_wall_plug_7_energy"
+                                },
+                                {
+                                    "entity": "sensor.charging_station_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.garage_door_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.fibaro_wall_plug_7_power"
+                                },
+                                {
+                                    "entity": "sensor.turbine_light_plug_power"
+                                },
+                                {
+                                    "entity": "sensor.turbine_light_plug_energy"
+                                }
+                            ],
+                            "title": "Verbruik",
+                            "type": "glance"
                         }
                     ],
                     "icon": "mdi:flash",
@@ -779,112 +931,8 @@
                     "title": "Nutsvoorzieningen"
                 },
                 {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.moon"
-                                },
-                                {
-                                    "entity": "sensor.season"
-                                },
-                                {
-                                    "entity": "binary_sensor.workday"
-                                },
-                                {
-                                    "entity": "sun.sun"
-                                }
-                            ],
-                            "type": "glance"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "binary_sensor.morning"
-                                },
-                                {
-                                    "entity": "binary_sensor.daytime"
-                                },
-                                {
-                                    "entity": "binary_sensor.evening"
-                                },
-                                {
-                                    "entity": "binary_sensor.night"
-                                },
-                                {
-                                    "entity": "sensor.time_of_day"
-                                }
-                            ],
-                            "type": "glance"
-                        }
-                    ],
-                    "icon": "mdi:timetable",
-                    "path": "datumtijd",
-                    "title": "Time and Date"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.asuswrt_download"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_upload"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_download_speed"
-                                },
-                                {
-                                    "entity": "sensor.asuswrt_upload_speed"
-                                }
-                            ],
-                            "show_icon": true,
-                            "show_name": true,
-                            "show_state": true,
-                            "title": "Router",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.pi_hole_ads_blocked_today"
-                                },
-                                {
-                                    "entity": "sensor.pi_hole_ads_percentage_blocked_today"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "pi Hole",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "sensor.ssl_certificate_expiry"
-                                },
-                                {
-                                    "entity": "sensor.myip"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "WAN",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [],
-                            "title": "ASUS",
-                            "type": "glance"
-                        }
-                    ],
-                    "icon": "mdi:ethernet",
-                    "title": "Netwerk"
-                },
-                {
                     "badges": [
-                        "binary_sensor.ha_update_available",
+                        "binary_sensor.hassio_update_available",
                         "binary_sensor.db_large",
                         "binary_sensor.cpu_high",
                         "binary_sensor.cpu_hot"
@@ -942,19 +990,25 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "binary_sensor.ha_update_available"
+                                    "entity": "binary_sensor.hassio_update_available"
                                 },
                                 {
-                                    "entity": "sensor.ha_installed_version"
+                                    "entity": "sensor.hassio_version_installed"
                                 },
                                 {
-                                    "entity": "sensor.ha_current_stable_version"
+                                    "entity": "sensor.hassio_version_stable"
                                 },
                                 {
-                                    "entity": "sensor.ha_current_beta_version"
+                                    "entity": "sensor.hassio_version_beta"
                                 },
                                 {
-                                    "entity": "sensor.ha_current_development_version"
+                                    "entity": "sensor.hassio_version_development"
+                                },
+                                {
+                                    "entity": "automation.ha_update_available_notification"
+                                },
+                                {
+                                    "entity": "automation.hassio_update_available_notification"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -971,33 +1025,59 @@
                                 }
                             ],
                             "type": "entities"
-                        }
-                    ],
-                    "icon": "mdi:server",
-                    "path": "host",
-                    "title": "Host"
-                },
-                {
-                    "badges": [],
-                    "cards": [
+                        },
                         {
                             "entities": [
-                                "switch.fibaro_wall_plug_7",
-                                "switch.charging_station_plug_switch",
-                                "switch.garage_door_plug_switch"
+                                {
+                                    "entity": "sensor.asuswrt_download"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_upload"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_download_speed"
+                                },
+                                {
+                                    "entity": "sensor.asuswrt_upload_speed"
+                                }
                             ],
-                            "title": "Schakelaar",
+                            "show_header_toggle": false,
+                            "title": "Router",
                             "type": "entities"
                         },
                         {
                             "entities": [
                                 {
-                                    "entity": "automation.log_level"
+                                    "entity": "sensor.pi_hole_ads_blocked_today"
                                 },
                                 {
-                                    "entity": "input_select.log_level"
+                                    "entity": "sensor.pi_hole_ads_percentage_blocked_today"
+                                },
+                                {
+                                    "entity": "weblink.pi_hole"
                                 }
                             ],
+                            "show_header_toggle": false,
+                            "title": "pi Hole",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.ssl_certificate_expiry"
+                                },
+                                {
+                                    "entity": "sensor.cert_pem_last_updated"
+                                },
+                                {
+                                    "entity": "sensor.myip"
+                                },
+                                {
+                                    "entity": "sensor.cert_pem"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "WAN",
                             "type": "entities"
                         },
                         {
@@ -1018,22 +1098,26 @@
                                     "entity": "zwave.garage_door_plug"
                                 },
                                 {
+                                    "entity": "zwave.frontdoor_contact"
+                                },
+                                {
                                     "entity": "zwave.master_bedroom_outside_door"
+                                },
+                                {
+                                    "entity": "zwave.turbine_light_plug"
+                                },
+                                {
+                                    "entity": "zwave.living_siren_alarm"
                                 }
                             ],
-                            "title": "Zwave",
+                            "show_header_toggle": false,
+                            "title": "Nodes",
                             "type": "entities"
                         }
                     ],
-                    "icon": "mdi:bug",
-                    "path": "debug",
-                    "title": "Debug"
-                },
-                {
-                    "badges": [],
-                    "cards": [],
-                    "icon": "mdi:trash-can",
-                    "title": "Trash"
+                    "icon": "mdi:server",
+                    "path": "host",
+                    "title": "Host"
                 },
                 {
                     "badges": [],
@@ -1082,100 +1166,42 @@
                                     "entity": "script.1560003166399"
                                 }
                             ],
+                            "title": "Scripts",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.dagelijkse_backup"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Automatisering",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.notify_alarm_state_change"
+                                },
+                                {
+                                    "entity": "automation.notify_new_device_detected"
+                                },
+                                {
+                                    "entity": "automation.notify_vacation_enabled"
+                                },
+                                {
+                                    "entity": "automation.notify_waqi_status_change"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Notificaties",
                             "type": "entities"
                         }
                     ],
                     "icon": "mdi:auto-fix",
                     "path": "automatisering",
                     "title": "Automatisering"
-                },
-                {
-                    "badges": [],
-                    "cards": [
-                        {
-                            "entities": [
-                                {
-                                    "entity": "zwave.controller_1"
-                                },
-                                {
-                                    "entity": "zwave.fibaro_wall_plug_7"
-                                },
-                                {
-                                    "entity": "zwave.unknown_node_8"
-                                },
-                                {
-                                    "entity": "zwave.charging_station_plug"
-                                },
-                                {
-                                    "entity": "zwave.garage_door_plug"
-                                },
-                                {
-                                    "entity": "zwave.frontdoor_contact"
-                                },
-                                {
-                                    "entity": "zwave.master_bedroom_outside_door"
-                                },
-                                {
-                                    "entity": "zwave.turbine_light_plug"
-                                },
-                                {
-                                    "entity": "zwave.living_siren_alarm"
-                                }
-                            ],
-                            "show_header_toggle": false,
-                            "title": "Nodes",
-                            "type": "entities"
-                        },
-                        {
-                            "entities": [
-                                {
-                                    "entity": "switch.garage_door_plug_switch"
-                                },
-                                {
-                                    "entity": "switch.charging_station_plug_switch"
-                                },
-                                {
-                                    "entity": "switch.turbine_light_plug_switch"
-                                }
-                            ],
-                            "title": "Schakelaars",
-                            "type": "glance"
-                        },
-                        {
-                            "columns": 3,
-                            "entities": [
-                                {
-                                    "entity": "sensor.charging_station_plug_energy"
-                                },
-                                {
-                                    "entity": "sensor.garage_door_plug_energy"
-                                },
-                                {
-                                    "entity": "sensor.fibaro_wall_plug_7_energy"
-                                },
-                                {
-                                    "entity": "sensor.charging_station_plug_power"
-                                },
-                                {
-                                    "entity": "sensor.garage_door_plug_power"
-                                },
-                                {
-                                    "entity": "sensor.fibaro_wall_plug_7_power"
-                                },
-                                {
-                                    "entity": "sensor.turbine_light_plug_power"
-                                },
-                                {
-                                    "entity": "sensor.turbine_light_plug_energy"
-                                }
-                            ],
-                            "title": "Verbruik",
-                            "type": "glance"
-                        }
-                    ],
-                    "icon": "mdi:z-wave",
-                    "path": "zwave",
-                    "title": "Z-Wave"
                 }
             ]
         }
