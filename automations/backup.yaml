@@ -1,0 +1,14 @@
+- alias: Daily Full Backup
+  trigger:
+    platform: time
+    at: '02:00:00'
+  action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Automatische Backup {{ now().strftime('%Y-%m-%d') }}
+        # password: YOUR PASSWORD
+    # - delay: '02:00:00'
+    # - service: hassio.addon_stdin
+    #   data_template:
+    #     addon: "7be23ff5_dropbox_sync"
+    #     input: {"command":"upload"}
