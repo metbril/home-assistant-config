@@ -219,9 +219,6 @@ sensor.memory_use_percent:
   friendly_name: Geheugengebruik
 sensor.moon:
   friendly_name: Maan
-sensor.myip:
-  friendly_name: Publiek IP-adres
-  icon: mdi:wan
 sensor.network_in_eth0:
   friendly_name: Bytes ontvangen
   icon: mdi:download-network
@@ -259,9 +256,6 @@ sensor.season:
   friendly_name: Seizoen
 sensor.since_last_boot:
   friendly_name: Sinds laatste herstart
-sensor.ssl_certificate_expiry:
-  friendly_name: Geldigheidsduur SSL-certificaat
-  unit_of_measurement: dagen
 sensor.time:
   friendly_name: Tijd
 sensor.time_of_day:

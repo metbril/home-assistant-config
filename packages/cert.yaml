@@ -17,6 +17,25 @@ homeassistant:
       customize: &customize
         package: 'cert'
 
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.myip:
+      friendly_name: Publiek IP-adres
+      icon: mdi:wan
+
+    sensor.ssl_certificate_expiry:
+      friendly_name: Geldigheidsduur SSL-certificaat
+      unit_of_measurement: dagen
+
+    sensor.certpem:
+      friendly_name: SSL-certificaat
+      unit_of_measurement: dagen
+
+    sensor.certpem_last_updated:
+      friendly_name: Laatste wijziging SSL-certificaat
+
 ################################################
 ## Sensor
 ################################################
