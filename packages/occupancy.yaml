@@ -14,7 +14,7 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'ha_mode'
+        package: 'occupancy'
 
     ########################################################################
     ## Binary Sensor
@@ -27,13 +27,13 @@ homeassistant:
     ## Input Boolean
     ########################################################################
 
-    input_boolean.ha_mode_away:
-      friendly_name: Weg
-      icon: mdi:walk
-
     input_boolean.ha_mode_home:
       friendly_name: Thuis
       icon: mdi:home-account
+
+    input_boolean.ha_mode_away:
+      friendly_name: Weg
+      icon: mdi:exit-run
 
     input_boolean.ha_mode_night:
       friendly_name: Nacht
@@ -81,8 +81,8 @@ sensor:
         entity_id: 
           - input_boolean.ha_mode_home
           - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_vacation
           - input_boolean.ha_mode_night
+          - input_boolean.ha_mode_vacation
         value_template: >-
           {% if is_state('input_boolean.ha_mode_home', 'on') %}
               home
@@ -97,7 +97,7 @@ sensor:
           {% if is_state('input_boolean.ha_mode_home', 'on') %}
             mdi:home-account
           {% elif is_state('input_boolean.ha_mode_away', 'on') %}
-            mdi:walk
+            mdi:exit-run
           {% elif is_state('input_boolean.ha_mode_night', 'on') %}
             mdi:weather-night
           {% elif is_state('input_boolean.ha_mode_vacation', 'on') %}
@@ -123,7 +123,7 @@ binary_sensor:
           {% if is_state('sensor.ha_mode', 'home') %}
             mdi:home-account
           {% elif is_state('sensor.ha_mode', 'away') %}
-            mdi:walk
+            mdi:exit-run
           {% elif is_state('sensor.ha_mode', 'night') %}
             mdi:weather-night
           {% elif is_state('sensor.ha_mode', 'vacation') %}
@@ -141,12 +141,12 @@ automation:
         entity_id: 
           - input_boolean.ha_mode_home
           - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_vacation
           - input_boolean.ha_mode_night
+          - input_boolean.ha_mode_vacation
         to: 'on'
     action:
       - service: input_boolean.turn_off
         data_template:
           entity_id: >
-            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_vacation', 'input_boolean.ha_mode_night' ] | reject('equalto', trigger.entity_id) %}
+            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_night', 'input_boolean.ha_mode_vacation' ] | reject('equalto', trigger.entity_id) %}
             {{ booleans | list | join(', ') }}
