@@ -10,8 +10,55 @@ homeassistant:
 
     package.node_anchors:
       customize: &customize
-        package: 'system'
+        package: 'host'
 
+    binary_sensor.cpu_high:
+      device_class: problem
+      friendly_name: CPU Hoog
+    binary_sensor.cpu_hot:
+      device_class: heat
+      friendly_name: CPU Heet
+    binary_sensor.db_large:
+      device_class: problem
+      friendly_name: Grote database
+
+    sensor.cpu_temperature:
+      friendly_name: Processortemperatuur
+    sensor.disk_free:
+      friendly_name: Beschikbare opslag
+      icon: mdi:sd
+    sensor.disk_use_percent:
+      friendly_name: Gebruikte opslag
+      icon: mdi:sd
+    sensor.ha_uptime:
+      friendly_name: Sinds laatste start HA
+      icon: mdi:clock
+    sensor.homeassistant_v2db:
+      friendly_name: Grootte database
+    sensor.homeassistantlog:
+      friendly_name: Grootte logbestand
+    sensor.last_boot:
+      friendly_name: Laatste herstart
+    sensor.memory_use_percent:
+      friendly_name: Geheugengebruik
+    sensor.network_in_eth0:
+      friendly_name: Bytes ontvangen
+      icon: mdi:download-network
+    sensor.network_out_eth0:
+      friendly_name: Bytes verzonden
+      icon: mdi:upload-network
+    sensor.ozw_logtxt:
+      friendly_name: Grootte logbestand Z-Wave
+    sensor.packets_in_eth0:
+      friendly_name: Pakketten ontvangen
+      icon: mdi:download-network
+    sensor.packets_out_eth0:
+      friendly_name: Pakketten verzonden
+      icon: mdi:upload-network
+    sensor.processor_use:
+      friendly_name: Processorgebruik
+    sensor.since_last_boot:
+      friendly_name: Sinds laatste herstart
 
 ################################################
 ## Binary Sensor
@@ -148,6 +195,7 @@ alert:
     skip_first: False
     notifiers:
       - admin
+
   cpu_hot:
     name: Temperatuur CPU is hoog
     entity_id: binary_sensor.cpu_high
@@ -157,6 +205,7 @@ alert:
     skip_first: False
     notifiers:
       - admin
+
   db_large:
     name: Database Large
     entity_id: binary_sensor.db_large

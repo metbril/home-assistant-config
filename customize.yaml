@@ -7,18 +7,9 @@ automation.switch_off_charging_station:
 binary_sensor.benext_molite_8_motion:
   device_class: motion
   friendly_name: Beweging woonkamer
-binary_sensor.cpu_high:
-  device_class: problem
-  friendly_name: CPU Hoog
-binary_sensor.cpu_hot:
-  device_class: heat
-  friendly_name: CPU Heet
 binary_sensor.daytime:
   friendly_name: Overdag
   icon: mdi:timetable
-binary_sensor.db_large:
-  device_class: problem
-  friendly_name: Grote database
 binary_sensor.evening:
   friendly_name: Avond
   icon: mdi:timetable
@@ -129,8 +120,6 @@ sensor.charging_station_plug_energy:
 sensor.charging_station_plug_power:
   friendly_name: Verbruik oplaadstation
   icon: mdi:flash
-sensor.cpu_temperature:
-  friendly_name: Processortemperatuur
 sensor.dark_sky_apparent_temperature:
   friendly_name: Gevoelstemperatuur omgeving
 sensor.dark_sky_humidity:
@@ -157,10 +146,6 @@ sensor.date:
   friendly_name: Datum
 sensor.diesel_advies:
   friendly_name: Diesel
-sensor.disk_free:
-  friendly_name: Beschikbare opslag
-sensor.disk_use_percent:
-  friendly_name: Gebruikte opslag
 sensor.euro95_advies:
   friendly_name: Euro 95 (Advies)
 sensor.euro95_hoofdweg:
@@ -183,43 +168,16 @@ sensor.garage_door_plug_power:
 sensor.gas_consumption:
   friendly_name: Gasverbruik
   unit_of_measurement: m³
-sensor.ha_uptime:
-  friendly_name: Sinds laatste start HA
-  icon: mdi:clock
-sensor.homeassistant_v2db:
-  friendly_name: Grootte database
-sensor.homeassistantlog:
-  friendly_name: Grootte logbestand
 sensor.hourly_gas_consumption:
   hidden: true
-sensor.last_boot:
-  friendly_name: Laatste herstart
 sensor.lpg_advies:
   friendly_name: LPG
-sensor.memory_use_percent:
-  friendly_name: Geheugengebruik
 sensor.moon:
   friendly_name: Maan
-sensor.network_in_eth0:
-  friendly_name: Bytes ontvangen
-  icon: mdi:download-network
-sensor.network_out_eth0:
-  friendly_name: Bytes verzonden
-  icon: mdi:upload-network
-sensor.ozw_logtxt:
-  friendly_name: Grootte logbestand Z-Wave
-sensor.packets_in_eth0:
-  friendly_name: Pakketten ontvangen
-  icon: mdi:download-network
-sensor.packets_out_eth0:
-  friendly_name: Pakketten verzonden
-  icon: mdi:upload-network
 sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
   friendly_name: Percentage geblokkeerde advertenties
-sensor.processor_use:
-  friendly_name: Processorgebruik
 sensor.pws_th_battery_level:
   device_class: battery
   friendly_name: PWS TH Sensor
@@ -235,8 +193,6 @@ sensor.robert_owntracks_battery_level:
   unit_of_measurement: '%'
 sensor.season:
   friendly_name: Seizoen
-sensor.since_last_boot:
-  friendly_name: Sinds laatste herstart
 sensor.time:
   friendly_name: Tijd
 sensor.time_of_day:
