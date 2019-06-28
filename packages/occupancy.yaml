@@ -136,6 +136,7 @@ binary_sensor:
 
 automation:
   - alias: HA Mode Sync
+    initial_state: true
     trigger:
       - platform: state
         entity_id: 
