@@ -77,6 +77,19 @@
                                 }
                             ],
                             "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.rpi_power_status"
+                                },
+                                {
+                                    "entity": "automation.power_supply_issue"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Voeding",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:rocket",
@@ -951,6 +964,9 @@
                                 {
                                     "entity": "sensor.disk_use_percent",
                                     "name": "Opslag"
+                                },
+                                {
+                                    "entity": "sensor.cpu_temperature"
                                 }
                             ],
                             "title": "Systeemperformance",
@@ -971,16 +987,19 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "binary_sensor.db_large"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent"
+                                },
+                                {
                                     "entity": "sensor.disk_free"
                                 },
                                 {
                                     "entity": "sensor.home_assistant_v2_db"
                                 },
                                 {
-                                    "entity": "sensor.home_assistant_log"
-                                },
-                                {
-                                    "entity": "sensor.ozw_log_txt"
+                                    "entity": "alert.db_large"
                                 }
                             ],
                             "show_header_toggle": false,
@@ -997,15 +1016,6 @@
                                 },
                                 {
                                     "entity": "sensor.hassio_version_stable"
-                                },
-                                {
-                                    "entity": "sensor.hassio_version_beta"
-                                },
-                                {
-                                    "entity": "sensor.hassio_version_development"
-                                },
-                                {
-                                    "entity": "automation.ha_update_available_notification"
                                 },
                                 {
                                     "entity": "automation.hassio_update_available_notification"
@@ -1067,13 +1077,11 @@
                                     "entity": "sensor.ssl_certificate_expiry"
                                 },
                                 {
-                                    "entity": "sensor.cert_pem_last_updated"
+                                    "entity": "sensor.cert_pem_last_updated",
+                                    "icon": "mdi:calendar-clock"
                                 },
                                 {
                                     "entity": "sensor.myip"
-                                },
-                                {
-                                    "entity": "sensor.cert_pem"
                                 }
                             ],
                             "show_header_toggle": false,
