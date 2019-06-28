@@ -73,7 +73,7 @@
       at: '06:00:00'
   condition:
     - condition: template
-      value_template: "{{ states.sensor.ha_mode.state != 'vacation' }}"
+      value_template: "{{ states.sensor.occupancy.state != 'vacation' }}"
   action:
     - service: switch.turn_on
       entity_id: switch.garage_door_plug_switch
@@ -128,7 +128,7 @@
       at: '23:00:00'
   condition:
     - condition: state
-      entity_id: sensor.ha_mode
+      entity_id: sensor.occupancy
       state: 'vacation'
   action:
     # wacht tussen 0:0:0 en 0:29:0
@@ -145,11 +145,11 @@
     - platform: time
       at: '9:00:00'
     - platform: state
-      entity_id: sensor.ha_mode
+      entity_id: sensor.occupancy
       to: 'vacation'
   condition:
     - condition: state
-      entity_id: sensor.ha_mode
+      entity_id: sensor.occupancy
       state: 'vacation'
   action:
     - service: notify.admin

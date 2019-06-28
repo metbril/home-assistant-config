@@ -20,26 +20,26 @@ homeassistant:
     ## Binary Sensor
     ########################################################################
 
-    binary_sensor.ha_mode:
+    binary_sensor.occupancy:
       friendly_name: HA-mode
 
     ########################################################################
     ## Input Boolean
     ########################################################################
 
-    input_boolean.ha_mode_home:
+    input_boolean.occupancy_home:
       friendly_name: Thuis
       icon: mdi:home-account
 
-    input_boolean.ha_mode_away:
+    input_boolean.occupancy_away:
       friendly_name: Weg
       icon: mdi:exit-run
 
-    input_boolean.ha_mode_night:
+    input_boolean.occupancy_night:
       friendly_name: Nacht
       icon: mdi:weather-night
 
-    input_boolean.ha_mode_vacation:
+    input_boolean.occupancy_vacation:
       friendly_name: Vakantie
       icon: mdi:airplane-takeoff
 
@@ -47,14 +47,14 @@ homeassistant:
     ## Sensor
     ########################################################################
 
-    sensor.ha_mode:
+    sensor.occupancy:
       friendly_name: HA-mode
 
     ########################################################################
     ## Automation
     ########################################################################
 
-    automation.ha_mode_sync:
+    automation.occupancy_sync:
       friendly_name: Synchroniseer HA Mode
 
 ############################################################################
@@ -64,10 +64,10 @@ homeassistant:
 ############################################################################
 
 input_boolean:
-  ha_mode_home:
-  ha_mode_away:
-  ha_mode_night:
-  ha_mode_vacation:
+  occupancy_home:
+  occupancy_away:
+  occupancy_night:
+  occupancy_vacation:
 
 ############################################################################
 ## Sensor
@@ -76,31 +76,31 @@ input_boolean:
 sensor:
   - platform: template
     sensors:
-      ha_mode:
+      occupancy:
         friendly_name: 'HA Mode'
         entity_id: 
-          - input_boolean.ha_mode_home
-          - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_night
-          - input_boolean.ha_mode_vacation
+          - input_boolean.occupancy_home
+          - input_boolean.occupancy_away
+          - input_boolean.occupancy_night
+          - input_boolean.occupancy_vacation
         value_template: >-
-          {% if is_state('input_boolean.ha_mode_home', 'on') %}
+          {% if is_state('input_boolean.occupancy_home', 'on') %}
               home
-          {% elif is_state('input_boolean.ha_mode_away', 'on') %}
+          {% elif is_state('input_boolean.occupancy_away', 'on') %}
               away
-          {% elif is_state('input_boolean.ha_mode_night', 'on') %}
+          {% elif is_state('input_boolean.occupancy_night', 'on') %}
             night
-          {% elif is_state('input_boolean.ha_mode_vacation', 'on') %}
+          {% elif is_state('input_boolean.occupancy_vacation', 'on') %}
             vacation
           {% endif %}
         icon_template: >-
-          {% if is_state('input_boolean.ha_mode_home', 'on') %}
+          {% if is_state('input_boolean.occupancy_home', 'on') %}
             mdi:home-account
-          {% elif is_state('input_boolean.ha_mode_away', 'on') %}
+          {% elif is_state('input_boolean.occupancy_away', 'on') %}
             mdi:exit-run
-          {% elif is_state('input_boolean.ha_mode_night', 'on') %}
+          {% elif is_state('input_boolean.occupancy_night', 'on') %}
             mdi:weather-night
-          {% elif is_state('input_boolean.ha_mode_vacation', 'on') %}
+          {% elif is_state('input_boolean.occupancy_vacation', 'on') %}
             mdi:airplane-takeoff
           {% endif %}
 
@@ -111,22 +111,22 @@ sensor:
 binary_sensor:
   - platform: template
     sensors:
-      ha_mode:
+      occupancy:
         friendly_name: "HA Mode"
-        entity_id: sensor.ha_mode
+        entity_id: sensor.occupancy
         value_template: >-
-          {{ is_state('sensor.ha_mode', 'home') 
-            or is_state('sensor.ha_mode', 'away')
-            or is_state('sensor.ha_mode', 'night')
-            or is_state('sensor.ha_mode', 'vacation') }}
+          {{ is_state('sensor.occupancy', 'home') 
+            or is_state('sensor.occupancy', 'away')
+            or is_state('sensor.occupancy', 'night')
+            or is_state('sensor.occupancy', 'vacation') }}
         icon_template: >-
-          {% if is_state('sensor.ha_mode', 'home') %}
+          {% if is_state('sensor.occupancy', 'home') %}
             mdi:home-account
-          {% elif is_state('sensor.ha_mode', 'away') %}
+          {% elif is_state('sensor.occupancy', 'away') %}
             mdi:exit-run
-          {% elif is_state('sensor.ha_mode', 'night') %}
+          {% elif is_state('sensor.occupancy', 'night') %}
             mdi:weather-night
-          {% elif is_state('sensor.ha_mode', 'vacation') %}
+          {% elif is_state('sensor.occupancy', 'vacation') %}
             mdi:airplane-takeoff
           {% endif %}
 
@@ -140,14 +140,14 @@ automation:
     trigger:
       - platform: state
         entity_id: 
-          - input_boolean.ha_mode_home
-          - input_boolean.ha_mode_away
-          - input_boolean.ha_mode_night
-          - input_boolean.ha_mode_vacation
+          - input_boolean.occupancy_home
+          - input_boolean.occupancy_away
+          - input_boolean.occupancy_night
+          - input_boolean.occupancy_vacation
         to: 'on'
     action:
       - service: input_boolean.turn_off
         data_template:
           entity_id: >
-            {% set booleans = [ 'input_boolean.ha_mode_home', 'input_boolean.ha_mode_away', 'input_boolean.ha_mode_night', 'input_boolean.ha_mode_vacation' ] | reject('equalto', trigger.entity_id) %}
+            {% set booleans = [ 'input_boolean.occupancy_home', 'input_boolean.occupancy_away', 'input_boolean.occupancy_night', 'input_boolean.occupancy_vacation' ] | reject('equalto', trigger.entity_id) %}
             {{ booleans | list | join(', ') }}

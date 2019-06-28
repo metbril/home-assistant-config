@@ -15,12 +15,24 @@
             "views": [
                 {
                     "badges": [
-                        "binary_sensor.ha_mode"
+                        "binary_sensor.occupancy"
                     ],
                     "cards": [
                         {
                             "entity": "sensor.time",
                             "type": "custom:bignumber-card"
+                        },
+                        {
+                            "entity": "binary_sensor.occupancy",
+                            "hold_action": {
+                                "action": "more-info"
+                            },
+                            "show_icon": true,
+                            "show_name": false,
+                            "tap_action": {
+                                "action": "more-info"
+                            },
+                            "type": "entity-button"
                         },
                         {
                             "entity": "weather.dark_sky",
@@ -312,7 +324,8 @@
                     "badges": [
                         "person.robert",
                         "person.monique",
-                        "person.bjorn"
+                        "person.bjorn",
+                        "binary_sensor.occupancy"
                     ],
                     "cards": [
                         {
@@ -352,25 +365,25 @@
                         {
                             "entities": [
                                 {
-                                    "entity": "input_boolean.ha_mode_home",
+                                    "entity": "input_boolean.occupancy_home",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
                                 },
                                 {
-                                    "entity": "input_boolean.ha_mode_away",
+                                    "entity": "input_boolean.occupancy_away",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
                                 },
                                 {
-                                    "entity": "input_boolean.ha_mode_night",
+                                    "entity": "input_boolean.occupancy_night",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
                                 },
                                 {
-                                    "entity": "input_boolean.ha_mode_vacation",
+                                    "entity": "input_boolean.occupancy_vacation",
                                     "tap_action": {
                                         "action": "toggle"
                                     }
