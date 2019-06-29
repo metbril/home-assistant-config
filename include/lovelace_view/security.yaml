@@ -20,7 +20,7 @@ cards:
         tap_action:
           action: toggle
         type: entity-button
-      - entity: input_boolean.occupancy_night
+      - entity: input_boolean.occupancy_asleep
         hold_action:
           action: more-info
         tap_action:

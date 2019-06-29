@@ -28,7 +28,7 @@ cards:
       - entity: input_boolean.occupancy_away
         tap_action:
           action: toggle
-      - entity: input_boolean.occupancy_night
+      - entity: input_boolean.occupancy_asleep
         tap_action:
           action: toggle
       - entity: input_boolean.occupancy_vacation
