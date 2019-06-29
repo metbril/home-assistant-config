@@ -1,3 +1,6 @@
+title: Aanwezigheid
+path: aanwezigheid
+icon: 'mdi:account'
 badges:
   - person.robert
   - person.monique
@@ -47,5 +50,3 @@ cards:
       - entity: device_tracker.pontius
     title: Robert
     type: glance
-icon: 'mdi:account'
-title: Presence

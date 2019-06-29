@@ -1,9 +1,11 @@
+title: HIERO
+
 resources:
   - type: js
     url: /local/bignumber-card.js
   - type: js
     url: /local/ext-weblink.js?v=0
-title: HIERO
+
 views:
   - !include include/lovelace_view/start.yaml
   - !include include/lovelace_view/home.yaml

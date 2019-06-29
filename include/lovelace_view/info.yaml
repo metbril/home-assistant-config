@@ -1,3 +1,6 @@
+title: Information
+path: info
+icon: 'mdi:information'
 badges:
   - sensor.postnl
 cards:
@@ -50,6 +53,3 @@ cards:
       - entity: input_select.log_level
         icon: 'mdi:home'
     type: entities
-icon: 'mdi:information'
-path: info
-title: Information

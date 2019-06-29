@@ -1,9 +1,9 @@
+title: Media
+path: play
+icon: 'mdi:play-network'
 badges: []
 cards:
   - entity: media_player.woonkamer
     type: media-control
   - entity: media_player.living_tv
     type: media-control
-icon: 'mdi:play-network'
-path: play
-title: Media

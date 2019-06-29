@@ -1,3 +1,6 @@
+title: Nutsvoorzieningen
+path: nutsvoorzieningen
+icon: 'mdi:flash'
 badges: []
 cards:
   - entity: sensor.power_consumption
@@ -77,6 +80,3 @@ cards:
       - entity: sensor.turbine_light_plug_energy
     title: Verbruik
     type: glance
-icon: 'mdi:flash'
-path: nutsvoorzieningen
-title: Nutsvoorzieningen

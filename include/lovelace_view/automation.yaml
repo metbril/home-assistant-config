@@ -1,3 +1,6 @@
+title: Automatisering
+path: automatisering
+icon: 'mdi:auto-fix'
 badges: []
 cards:
   - entities:
@@ -30,6 +33,3 @@ cards:
     show_header_toggle: false
     title: Notificaties
     type: entities
-icon: 'mdi:auto-fix'
-path: automatisering
-title: Automatisering

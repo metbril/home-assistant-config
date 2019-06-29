@@ -1,3 +1,6 @@
+title: Start
+path: start
+icon: 'mdi:rocket'
 badges:
   - binary_sensor.occupancy
 cards:
@@ -46,6 +49,3 @@ cards:
     show_header_toggle: false
     title: Voeding
     type: entities
-icon: 'mdi:rocket'
-path: start
-title: Start

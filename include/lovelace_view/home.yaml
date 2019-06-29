@@ -1,3 +1,6 @@
+title: Huis
+path: huis
+icon: 'mdi:home'
 badges: []
 cards:
   - content: 'De belangrijkste entiteiten in huis, gegroepeerd per ruimte.'
@@ -32,6 +35,3 @@ cards:
       - entity: switch.turbine_light_plug_switch
     title: Schakelaars
     type: glance
-icon: 'mdi:home'
-path: huis
-title: Huis

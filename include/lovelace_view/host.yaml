@@ -1,3 +1,6 @@
+title: Host
+path: host
+icon: 'mdi:server'
 badges:
   - binary_sensor.hassio_update_available
   - binary_sensor.db_large
@@ -71,6 +74,3 @@ cards:
     show_header_toggle: false
     title: Nodes
     type: entities
-icon: 'mdi:server'
-path: host
-title: Host
