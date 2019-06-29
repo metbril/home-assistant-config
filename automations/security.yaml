@@ -98,9 +98,9 @@
       data_template:
         message: >-
           {{ [
-          "Vlak voor zonsondergang doe ik de binnenverlichting aan.",
-          "Ik doe de lampen aan, omdat het binnen donker gaat worden.",
-          "Zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.",
+          "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+          "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.",
+          "Steeds zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.",
           "De hoogste tijd om de verlichting in te schakelen."
           ] | random + " #HomeAssistant" + [
           " #Beveiliging",
