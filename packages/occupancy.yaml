@@ -21,7 +21,7 @@ homeassistant:
     ########################################################################
 
     binary_sensor.occupancy:
-      friendly_name: HA-mode
+      friendly_name: Bezetting
 
     ########################################################################
     ## Input Boolean
@@ -48,14 +48,14 @@ homeassistant:
     ########################################################################
 
     sensor.occupancy:
-      friendly_name: HA-mode
+      friendly_name: Bezetting
 
     ########################################################################
     ## Automation
     ########################################################################
 
     automation.occupancy_sync:
-      friendly_name: Synchroniseer HA Mode
+      friendly_name: Synchroniseer Bezetting
 
 ############################################################################
 ## Input Boolean
@@ -77,7 +77,7 @@ sensor:
   - platform: template
     sensors:
       occupancy:
-        friendly_name: 'HA Mode'
+        friendly_name: "Occupancy"
         entity_id: 
           - input_boolean.occupancy_home
           - input_boolean.occupancy_away
@@ -112,7 +112,7 @@ binary_sensor:
   - platform: template
     sensors:
       occupancy:
-        friendly_name: "HA Mode"
+        friendly_name: "Occupancy"
         entity_id: sensor.occupancy
         value_template: >-
           {{ is_state('sensor.occupancy', 'home') 
@@ -135,7 +135,7 @@ binary_sensor:
 ############################################################################
 
 automation:
-  - alias: HA Mode Sync
+  - alias: Occupancy Sync
     initial_state: true
     trigger:
       - platform: state
