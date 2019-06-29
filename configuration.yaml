@@ -16,6 +16,9 @@ homeassistant:
       api_password: !secret http_password # required since 0.90
   customize: !include customize.yaml
 
+lovelace:
+  mode: yaml
+
 # discovery:
 system_health:
 
