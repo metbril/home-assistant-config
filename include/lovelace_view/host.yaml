@@ -1,0 +1,76 @@
+badges:
+  - binary_sensor.hassio_update_available
+  - binary_sensor.db_large
+  - binary_sensor.cpu_high
+  - binary_sensor.cpu_hot
+cards:
+  - entities:
+      - entity: sensor.memory_use_percent
+        name: Geheugen
+      - entity: sensor.processor_use
+        name: Processor
+      - entity: sensor.disk_use_percent
+        name: Opslag
+      - entity: sensor.cpu_temperature
+    title: Systeemperformance
+    type: glance
+  - entities:
+      - entity: binary_sensor.db_large
+      - entity: sensor.disk_use_percent
+      - entity: sensor.disk_free
+      - entity: sensor.home_assistant_v2_db
+      - entity: alert.db_large
+    show_header_toggle: false
+    title: Systeemopslag
+    type: entities
+  - entities:
+      - entity: binary_sensor.hassio_update_available
+      - entity: sensor.hassio_version_installed
+      - entity: sensor.hassio_version_stable
+      - entity: automation.hassio_update_available_notification
+    show_header_toggle: false
+    title: Systeemsoftware
+    type: entities
+  - entities:
+      - entity: sensor.last_boot
+      - entity: sensor.ha_uptime
+    type: entities
+  - entities:
+      - entity: sensor.asuswrt_download
+      - entity: sensor.asuswrt_upload
+      - entity: sensor.asuswrt_download_speed
+      - entity: sensor.asuswrt_upload_speed
+    show_header_toggle: false
+    title: Router
+    type: entities
+  - entities:
+      - entity: sensor.pi_hole_ads_blocked_today
+      - entity: sensor.pi_hole_ads_percentage_blocked_today
+      - entity: weblink.pi_hole
+    show_header_toggle: false
+    title: pi Hole
+    type: entities
+  - entities:
+      - entity: sensor.ssl_certificate_expiry
+      - entity: sensor.cert_pem_last_updated
+        icon: 'mdi:calendar-clock'
+      - entity: sensor.myip
+    show_header_toggle: false
+    title: WAN
+    type: entities
+  - entities:
+      - entity: zwave.controller_1
+      - entity: zwave.fibaro_wall_plug_7
+      - entity: zwave.unknown_node_8
+      - entity: zwave.charging_station_plug
+      - entity: zwave.garage_door_plug
+      - entity: zwave.frontdoor_contact
+      - entity: zwave.master_bedroom_outside_door
+      - entity: zwave.turbine_light_plug
+      - entity: zwave.living_siren_alarm
+    show_header_toggle: false
+    title: Nodes
+    type: entities
+icon: 'mdi:server'
+path: host
+title: Host

@@ -1,0 +1,54 @@
+badges:
+  - binary_sensor.meteoalarm
+cards:
+  - entity: weather.dark_sky
+    name: Thuis
+    type: weather-forecast
+  - entities:
+      - entity: sensor.buienradar_precipitation_forecast_average
+      - entity: automation.rain_alarm
+      - entity: sensor.pws_th_temperature
+      - entity: sensor.pws_th_humidity
+    type: glance
+  - entities:
+      - entity: sensor.pws_th_temperature
+      - entity: sensor.pws_th_humidity
+      - entity: sensor.pws_th_battery_level
+    title: Weerstation
+    type: glance
+  - hold_action:
+      action: none
+    image: 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512'
+    tap_action:
+      action: none
+    type: picture
+  - cards:
+      - entity: sensor.waqi_rotterdam
+        max: 500
+        min: 0
+        scale: 28px
+        severity:
+          - style: green
+            value: 50
+          - style: gold
+            value: 100
+          - style: orange
+            value: 150
+          - style: crimson
+            value: 200
+          - style: indigo
+            value: 300
+          - style: black
+            value: 500
+        title: Luchtkwaliteit
+        type: 'custom:bignumber-card'
+      - entities:
+          - entity: sensor.waqi_rotterdam
+          - entity: sensor.waqi_rotterdam_impact
+          - entity: sensor.dark_sky_ozone
+          - entity: sensor.dark_sky_uv_index
+        type: entities
+    type: vertical-stack
+icon: 'mdi:weather-partlycloudy'
+path: weer
+title: Weer

@@ -1,0 +1,55 @@
+badges:
+  - sensor.postnl
+cards:
+  - entities:
+      - entity: sensor.euro95_advies
+        name: Advies
+      - entity: sensor.euro95_lukoil_schermerhoek
+        name: Schermerhoek
+      - entity: sensor.euro95_shell_nieuwerkerk
+        name: Nieuwerkerk
+      - entity: sensor.euro95_tinq_bermweg
+        name: Bermweg
+    show_icon: true
+    title: Euro 95
+    type: glance
+  - cards:
+      - entities:
+          - entity: sensor.bitcoin
+          - entity: sensor.bitcoin_cash
+          - entity: sensor.xrp
+          - entity: sensor.ethereum
+          - entity: sensor.litecoin
+        show_header_toggle: false
+        title: Cryptovaluta
+        type: entities
+      - entities:
+          - sensor.bitcoin
+        title: Bitcoin
+        type: history-graph
+    type: vertical-stack
+  - entities:
+      - entity: binary_sensor.morning
+      - entity: binary_sensor.daytime
+      - entity: binary_sensor.evening
+      - entity: binary_sensor.night
+      - entity: sensor.time_of_day
+    type: glance
+  - entities:
+      - entity: sensor.moon
+      - entity: sensor.season
+      - entity: binary_sensor.workday
+      - entity: sun.sun
+    type: glance
+  - entities:
+      - entity: sensor.date
+      - entity: sensor.time
+    type: entities
+  - entities:
+      - entity: automation.log_level
+      - entity: input_select.log_level
+        icon: 'mdi:home'
+    type: entities
+icon: 'mdi:information'
+path: info
+title: Information

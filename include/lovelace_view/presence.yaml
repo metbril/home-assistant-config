@@ -1,0 +1,51 @@
+badges:
+  - person.robert
+  - person.monique
+  - person.bjorn
+  - binary_sensor.occupancy
+cards:
+  - columns: 4
+    entities:
+      - entity: device_tracker.robert_iphone
+      - entity: device_tracker.robert_owntracks
+      - entity: sensor.robert_owntracks_battery_level
+      - entity: sensor.pontius_battery_level
+      - entity: sensor.pontius_battery_state
+    title: iPhone Robert
+    type: glance
+  - entities:
+      - entity: device_tracker.robert_owntracks
+      - entity: device_tracker.robert_iphone
+    title: Waar is Robert nu?
+    type: map
+  - entities:
+      - entity: input_boolean.occupancy_home
+        tap_action:
+          action: toggle
+      - entity: input_boolean.occupancy_away
+        tap_action:
+          action: toggle
+      - entity: input_boolean.occupancy_night
+        tap_action:
+          action: toggle
+      - entity: input_boolean.occupancy_vacation
+        tap_action:
+          action: toggle
+    show_name: false
+    show_state: false
+    title: Bezetting instellen
+    type: glance
+  - entities:
+      - entity: binary_sensor.occupancy
+      - entity: sensor.occupancy
+    show_header_toggle: false
+    type: entities
+  - entities:
+      - entity: person.robert
+      - entity: device_tracker.robert_iphone
+      - entity: device_tracker.robert_owntracks
+      - entity: device_tracker.pontius
+    title: Robert
+    type: glance
+icon: 'mdi:account'
+title: Presence

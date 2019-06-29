@@ -1,0 +1,26 @@
+badges:
+  - binary_sensor.frontdoor_contact_sensor
+  - binary_sensor.motion_garage
+  - switch.garage_door_plug_switch
+  - automation.frontdoor_bell_pressed
+  - sensor.doorbell_presses
+  - switch.frontdoor_bell
+  - zwave.frontdoor_contact
+  - binary_sensor.frontdoor_contact_sensor
+  - switch.frontdoor_bell
+cards:
+  - content: 'Alle entiteiten per vertrek van de begane grond.'
+    type: markdown
+  - entities:
+      - entity: switch.frontdoor_bell
+      - entity: binary_sensor.motion_garage
+    title: Entree
+    type: glance
+  - entities:
+      - entity: binary_sensor.motion_garage
+      - entity: switch.garage_door_plug_switch
+    title: Garage
+    type: glance
+icon: 'mdi:home-floor-0'
+path: beneden
+title: Beneden

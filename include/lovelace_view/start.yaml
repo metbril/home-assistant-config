@@ -1,0 +1,51 @@
+badges:
+  - binary_sensor.occupancy
+cards:
+  - entity: sensor.time
+    type: 'custom:bignumber-card'
+  - entity: binary_sensor.occupancy
+    hold_action:
+      action: more-info
+    show_icon: true
+    show_name: false
+    tap_action:
+      action: more-info
+    type: entity-button
+  - entity: weather.dark_sky
+    name: Het weer hiero
+    type: weather-forecast
+  - entity: light.living_lights
+    hold_action:
+      action: more-info
+    tap_action:
+      action: toggle
+    type: light
+  - card:
+      show_state: false
+      title: open contacten
+      type: glance
+    entities:
+      - entity: binary_sensor.frontdoor_contact_sensor
+      - entity: binary_sensor.master_bedroom_outside_door_sensor
+        name: Balkondeur
+    show_empty: false
+    state_filter:
+      - 'on'
+    type: entity-filter
+  - entities:
+      - entity: alert.frontdoor_open
+    title: Voordeur alert
+    type: glance
+  - entities:
+      - entity: sensor.pws_th_temperature
+      - entity: sensor.power_consumption
+    type: glance
+  - entities:
+      - entity: sensor.rpi_power_status
+      - entity: automation.power_supply_issue
+    show_header_toggle: false
+    title: Voeding
+    type: entities
+icon: 'mdi:rocket'
+path: start
+title: Start

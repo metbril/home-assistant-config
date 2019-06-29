@@ -1,0 +1,68 @@
+badges:
+  - binary_sensor.ha_mode
+  - group.motion
+  - group.contact
+cards:
+  - cards:
+      - entity: input_boolean.ha_mode_home
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_away
+        hold_action:
+          action: more-info
+        icon: 'mdi:exit-run'
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_night
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: input_boolean.ha_mode_vacation
+        hold_action:
+          action: more-info
+        tap_action:
+          action: toggle
+        type: entity-button
+    type: horizontal-stack
+  - entities:
+      - entity: binary_sensor.benext_molite_8_motion
+      - entity: binary_sensor.motion_garage
+    title: Beweging
+    type: glance
+  - entities:
+      - entity: binary_sensor.frontdoor_contact_sensor
+      - entity: binary_sensor.master_bedroom_outside_door_sensor
+    title: Contactsensoren
+    type: glance
+  - card:
+      show_state: false
+      title: Open contacten
+      type: glance
+    entities:
+      - entity: binary_sensor.frontdoor_contact_sensor
+      - entity: binary_sensor.master_bedroom_outside_door_sensor
+        name: Balkondeur
+    show_empty: false
+    state_filter:
+      - 'on'
+    type: entity-filter
+  - card:
+      show_state: false
+      title: Beweging
+      type: glance
+    entities:
+      - entity: binary_sensor.motion_garage
+      - entity: binary_sensor.benext_molite_8_motion
+    show_empty: false
+    state_filter:
+      - 'on'
+    type: entity-filter
+icon: 'mdi:shield'
+path: beveiliging
+title: Beveiliging

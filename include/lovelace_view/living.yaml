@@ -1,0 +1,46 @@
+badges:
+  - binary_sensor.benext_molite_8_motion
+  - sensor.benext_molite_8_temperature
+  - media_player.living_tv
+cards:
+  - entity: light.living_lights
+    type: light
+  - content: 'De meest uitgebreide entiteiten van de woonkamer. Want dat is waar het allemaal gebeurt.'
+    type: markdown
+  - entities:
+      - entity: light.hoge_kast
+      - entity: light.bank
+      - entity: light.bollamp
+      - entity: light.willner
+      - entity: light.turbine_lamp
+    title: Verlichting
+    type: glance
+  - entities:
+      - entity: switch.charging_station_plug_switch
+        tap_action:
+          action: toggle
+      - entity: sensor.charging_station_plug_power
+      - entity: automation.switch_off_charging_station
+        icon: 'mdi:tune'
+        name: Auto uit
+    title: Oplaadstation
+    type: glance
+  - entity: media_player.living_tv
+    type: media-control
+  - entity: media_player.woonkamer
+    type: media-control
+  - entity: scene.goodnight
+    hold_action:
+      action: more-info
+    icon: 'mdi:sleep'
+    name: Welterusten
+    show_name: false
+    tap_action:
+      action: call-service
+      data:
+        - entity_id: scene.goodnight
+      service: scene.turn_on
+    type: entity-button
+icon: 'mdi:sofa'
+path: woonkamer
+title: Woonkamer
