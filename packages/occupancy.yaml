@@ -135,6 +135,44 @@ binary_sensor:
 ############################################################################
 
 automation:
+
+  # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
+  - alias: Schakel verlichting uit als op vakantie
+    trigger:
+      - platform: time
+        at: '23:00:00'
+    condition:
+      - condition: state
+        entity_id: sensor.occupancy
+        state: 'vacation'
+    action:
+      # wacht tussen 0 en 29 minuten
+      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+      - service: light.turn_off
+        entity_id: group.dusk_living_lights
+      - service: notify.admin
+        data_template:
+          title: 'Vakantie'
+          message: 'Verlichting automatisch uitgeschakeld.'
+
+  # notify when vacation enabled, and daily when still in vacation mode
+  - alias: Notify Vacation Enabled
+    trigger:
+      - platform: state
+        entity_id: sensor.occupancy
+        to: 'vacation'
+      - platform: time
+        at: '9:00:00'
+    condition:
+      - condition: state
+        entity_id: sensor.occupancy
+        state: 'vacation'
+    action:
+      - service: notify.admin
+        data_template:
+          title: 'Vakantie'
+          message: 'Vakantiemodus is ingeschakeld'
+
   - alias: Occupancy Sync
     initial_state: true
     trigger:

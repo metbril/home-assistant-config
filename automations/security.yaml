@@ -121,38 +121,3 @@
         #     ] %}
         #     {{ pictures|random }}
 
-# schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
-- alias: Schakel verlichting uit als op vakantie
-  trigger:
-    - platform: time
-      at: '23:00:00'
-  condition:
-    - condition: state
-      entity_id: sensor.occupancy
-      state: 'vacation'
-  action:
-    # wacht tussen 0:0:0 en 0:29:0
-    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
-    - service: light.turn_off
-      entity_id: group.dusk_living_lights
-    - service: notify.admin
-      data_template:
-        title: 'Vakantiemodus'
-        message: 'Schermverlichting woonkamer automatisch uitgeschakeld.'
-
-- alias: Notify Vacation Enabled
-  trigger:
-    - platform: time
-      at: '9:00:00'
-    - platform: state
-      entity_id: sensor.occupancy
-      to: 'vacation'
-  condition:
-    - condition: state
-      entity_id: sensor.occupancy
-      state: 'vacation'
-  action:
-    - service: notify.admin
-      data_template:
-        title: 'Vakantiemodus'
-        message: 'Vakantiemodus is ingeschakeld'
