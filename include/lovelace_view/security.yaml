@@ -2,31 +2,31 @@ title: Beveiliging
 path: beveiliging
 icon: 'mdi:shield'
 badges:
-  - binary_sensor.ha_mode
+  - binary_sensor.occupancy
   - group.motion
   - group.contact
 cards:
   - cards:
-      - entity: input_boolean.ha_mode_home
+      - entity: input_boolean.occupancy_home
         hold_action:
           action: more-info
         tap_action:
           action: toggle
         type: entity-button
-      - entity: input_boolean.ha_mode_away
+      - entity: input_boolean.occupancy_away
         hold_action:
           action: more-info
         icon: 'mdi:exit-run'
         tap_action:
           action: toggle
         type: entity-button
-      - entity: input_boolean.ha_mode_night
+      - entity: input_boolean.occupancy_night
         hold_action:
           action: more-info
         tap_action:
           action: toggle
         type: entity-button
-      - entity: input_boolean.ha_mode_vacation
+      - entity: input_boolean.occupancy_vacation
         hold_action:
           action: more-info
         tap_action:

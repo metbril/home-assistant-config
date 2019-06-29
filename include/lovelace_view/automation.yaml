@@ -7,7 +7,7 @@ cards:
       - entity: automation.familie_thuis
       - entity: automation.forward_persistent_notifications
       - entity: automation.frontdoor_bell_pressed
-      - entity: automation.ha_mode_sync
+      - entity: automation.occupancy_sync
       - entity: automation.ha_update_available_for_hass_io_notification
       - entity: automation.ha_update_available_notification
       - entity: automation.kaku_remote_group_off
