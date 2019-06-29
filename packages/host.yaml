@@ -230,7 +230,7 @@ automation:
       above: 0
       for:
         minutes: 5
-    condition:
+    condition: []
     action:
     - service: persistent_notification.create
       data_template:
