@@ -19,7 +19,7 @@ homeassistant:
 
 sensor:
   - platform: pi_hole
-    host: localhost:8880
+    host: localhost:4865
     ssl: false
     monitored_conditions:
       - ads_blocked_today
@@ -28,4 +28,4 @@ sensor:
 weblink:
   entities:
     - name: Pi-Hole
-      url: http://hassio.local:8880/
+      url: http://hassio.local:4865/
