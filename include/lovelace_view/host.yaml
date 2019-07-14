@@ -23,6 +23,7 @@ cards:
       - entity: sensor.disk_free
       - entity: sensor.home_assistant_v2_db
       - entity: alert.db_large
+      - entity: script.purge_database
     show_header_toggle: false
     title: Systeemopslag
     type: entities
@@ -50,6 +51,10 @@ cards:
       - entity: sensor.pi_hole_ads_blocked_today
       - entity: sensor.pi_hole_ads_percentage_blocked_today
       - entity: weblink.pi_hole
+      - type: weblink
+        url: //hassio.local:4865/admin/
+        name: Pi-Hole
+        icon: mdi:open-in-new
     show_header_toggle: false
     title: pi Hole
     type: entities
@@ -74,3 +79,12 @@ cards:
     show_header_toggle: false
     title: Nodes
     type: entities
+  - type: entities
+    entities:
+      - sensor.pontius_battery_level
+      - sensor.robertipad_battery_level
+      - sensor.iphone_van_robert_werk_battery_level
+      - sensor.benext_molite_8_battery_level
+      - sensor.pws_th_battery_level
+      - sensor.robert_owntracks_battery_level
+    title: Batterijen
