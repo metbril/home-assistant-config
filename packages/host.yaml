@@ -202,6 +202,12 @@ script:
   restart_home_assistant:
     sequence:
     - service: homeassistant.restart
+  purge_database:
+    sequence:
+    - service: recorder.purge
+      data:
+        keep_days: 1
+        repack: true
 
 ################################################
 ## Automation
