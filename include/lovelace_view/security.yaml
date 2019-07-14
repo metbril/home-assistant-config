@@ -6,7 +6,8 @@ badges:
   - group.motion
   - group.contact
 cards:
-  - cards:
+  - type: horizontal-stack
+    cards:
       - entity: input_boolean.occupancy_home
         hold_action:
           action: more-info
@@ -32,18 +33,21 @@ cards:
         tap_action:
           action: toggle
         type: entity-button
-    type: horizontal-stack
-  - entities:
+  - type: glance
+    title: Beweging
+    entities:
       - entity: binary_sensor.benext_molite_8_motion
       - entity: binary_sensor.motion_garage
-    title: Beweging
-    type: glance
-  - entities:
+  - type: glance
+    title: Contactsensoren
+    entities:
       - entity: binary_sensor.frontdoor_contact_sensor
       - entity: binary_sensor.master_bedroom_outside_door_sensor
-    title: Contactsensoren
-    type: glance
-  - card:
+  - type: entity-filter
+    state_filter:
+      - 'on'
+    show_empty: false
+    card:
       show_state: false
       title: Open contacten
       type: glance
@@ -51,18 +55,14 @@ cards:
       - entity: binary_sensor.frontdoor_contact_sensor
       - entity: binary_sensor.master_bedroom_outside_door_sensor
         name: Balkondeur
-    show_empty: false
+  - type: entity-filter
     state_filter:
       - 'on'
-    type: entity-filter
-  - card:
+    show_empty: false
+    card:
       show_state: false
       title: Beweging
       type: glance
     entities:
       - entity: binary_sensor.motion_garage
       - entity: binary_sensor.benext_molite_8_motion
-    show_empty: false
-    state_filter:
-      - 'on'
-    type: entity-filter
