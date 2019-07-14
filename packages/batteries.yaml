@@ -29,18 +29,33 @@ homeassistant:
     ################################################
 
     sensor.benext_molite_8_battery_level:
-      device_class: battery
       friendly_name: Batterij beweging woonkamer
+      device_class: battery
+      unit_of_measurement: '%'
+
+    sensor.frontdoor_contact_battery_level:
+      friendly_name: Batterij contact voordeur
+      device_class: battery
+      unit_of_measurement: '%'
+
+    sensor.living_siren_alarm_battery_level:
+      friendly_name: Batterij sirene woonkamer
+      device_class: battery
+      unit_of_measurement: '%'
+
+    sensor.master_bedroom_outside_door_battery_level:
+      friendly_name: Batterij contact hoofdslaapkamer
+      device_class: battery
       unit_of_measurement: '%'
 
     sensor.pws_th_battery_level:
+      friendly_name: Batterij temperatuur PWS
       device_class: battery
-      friendly_name: PWS TH Sensor
       unit_of_measurement: '%'
 
     sensor.robert_owntracks_battery_level:
-      device_class: battery
       friendly_name: Robert Owntracks
+      device_class: battery
       unit_of_measurement: '%'
 
 ################################################
@@ -52,26 +67,24 @@ sensor:
     sensors:
 
       benext_molite_8_battery_level:
-        value_template: "{{ states.zwave.benext_molite_8.attributes.battery_level }}"
-        # value_template:  "states('zwave.benext_molite_8.attributes.battery_level')|int('unknown')"
-        # icon_template: >-
-        #   {% set battery_level = states('sensor.benext_molite_8_battery_level')|int('unknown') %}
-        #   {% set battery_round = (battery_level|int / 10)|int * 10 %}
-        #   {% if battery_level == unknown -%}
-        #     mdi:battery-unknown
-        #   {% elif battery_round >= 100 -%}
-        #     mdi:battery
-        #   {% elif battery_round > 0 -%}
-        #     mdi:battery-{{ battery_round }}
-        #   {% else -%}
-        #     mdi:battery-alert
-        #   {% endif %}
-
-
-      robert_owntracks_battery_level:
-        entity_id: device_tracker.robert_owntracks
+        entity_id: zwave.benext_molite_8
         value_template: >-
-          {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
+          {{ states.zwave.benext_molite_8.attributes.battery_level }}
+
+      frontdoor_contact_battery_level:
+        entity_id: zwave.frontdoor_contact
+        value_template: >-
+          {{ states.zwave.frontdoor_contact.attributes.battery_level }}
+
+      living_siren_alarm_battery_level:
+        entity_id: zwave.living_siren_alarm
+        value_template: >-
+          {{ states.zwave.living_siren_alarm.attributes.battery_level }}
+
+      master_bedroom_outside_door_battery_level:
+        entity_id: zwave.master_bedroom_outside_door
+        value_template: >-
+          {{ states.zwave.master_bedroom_outside_door.attributes.battery_level }}
 
       pws_th_battery_level:
         entity_id: sensor.pws_th_temperature
@@ -84,26 +97,10 @@ sensor:
             {{battery_level}}
           {% endif %}
 
-      master_bedroom_outside_door_battery_level:
-        friendly_name: "Master Bedroom Outside Door Battery Level"
-        unit_of_measurement: '%'
-        device_class: battery
-        value_template: >
-          {{ states.zwave.master_bedroom_outside_door.attributes.battery_level }}
-
-      frontdoor_contact_battery_level:
-        friendly_name: "Frontdoor Contact Battery Level"
-        unit_of_measurement: '%'
-        device_class: battery
-        value_template: >
-          {{ states.zwave.frontdoor_contact.attributes.battery_level }}
-
-      living_siren_alarm_battery_level:
-        friendly_name: "Living Siren Alarm Battery Level"
-        unit_of_measurement: '%'
-        device_class: battery
-        value_template: >
-          {{ states.zwave.living_siren_alarm.attributes.battery_level }}
+      robert_owntracks_battery_level:
+        entity_id: device_tracker.robert_owntracks
+        value_template: >-
+          {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
 
 ################################################
 ## Group
