@@ -1,10 +1,72 @@
 ################################################
+## Packages / Batteries
+##
+## Batteries
+##
+################################################
+
+homeassistant:
+
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'batteries'
+
+    ################################################
+    ## Group
+    ################################################
+
+    group.batteries:
+      friendly_name: Batterijen
+
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.benext_molite_8_battery_level:
+      device_class: battery
+      friendly_name: Batterij beweging woonkamer
+      unit_of_measurement: '%'
+
+    sensor.pws_th_battery_level:
+      device_class: battery
+      friendly_name: PWS TH Sensor
+      unit_of_measurement: '%'
+
+    sensor.robert_owntracks_battery_level:
+      device_class: battery
+      friendly_name: Robert Owntracks
+      unit_of_measurement: '%'
+
+################################################
 ## Sensor
 ################################################
 
 sensor:
   - platform: template
     sensors:
+
+      benext_molite_8_battery_level:
+        value_template: "{{ states.zwave.benext_molite_8.attributes.battery_level }}"
+        # value_template:  "states('zwave.benext_molite_8.attributes.battery_level')|int('unknown')"
+        # icon_template: >-
+        #   {% set battery_level = states('sensor.benext_molite_8_battery_level')|int('unknown') %}
+        #   {% set battery_round = (battery_level|int / 10)|int * 10 %}
+        #   {% if battery_level == unknown -%}
+        #     mdi:battery-unknown
+        #   {% elif battery_round >= 100 -%}
+        #     mdi:battery
+        #   {% elif battery_round > 0 -%}
+        #     mdi:battery-{{ battery_round }}
+        #   {% else -%}
+        #     mdi:battery-alert
+        #   {% endif %}
+
 
       robert_owntracks_battery_level:
         entity_id: device_tracker.robert_owntracks

@@ -13,30 +13,6 @@ homeassistant:
       customize: &customize
         package: 'motion'
 
-
-################################################
-## Sensor
-################################################
-
-sensor:
-  - platform: template
-    sensors:
-      benext_molite_8_battery_level:
-        value_template: "{{ states.zwave.benext_molite_8.attributes.battery_level }}"
-        # value_template:  "states('zwave.benext_molite_8.attributes.battery_level')|int('unknown')"
-        # icon_template: >-
-        #   {% set battery_level = states('sensor.benext_molite_8_battery_level')|int('unknown') %}
-        #   {% set battery_round = (battery_level|int / 10)|int * 10 %}
-        #   {% if battery_level == unknown -%}
-        #     mdi:battery-unknown
-        #   {% elif battery_round >= 100 -%}
-        #     mdi:battery
-        #   {% elif battery_round > 0 -%}
-        #     mdi:battery-{{ battery_round }}
-        #   {% else -%}
-        #     mdi:battery-alert
-        #   {% endif %}
-
 ############################################################################
 ## Group
 ############################################################################

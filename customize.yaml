@@ -44,8 +44,6 @@ group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
-group.batteries:
-  friendly_name: Batterijen
 group.contact:
   friendly_name: Contactsensoren
 group.dusk_living_lights:
@@ -102,10 +100,6 @@ sensor.asuswrt_upload_speed:
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
   icon: mdi:alert
-sensor.benext_molite_8_battery_level:
-  device_class: battery
-  friendly_name: Batterij beweging woonkamer
-  unit_of_measurement: '%'
 sensor.benext_molite_8_luminance:
   friendly_name: Lichtsterkte woonkamer
   icon: mdi:brightness-6
@@ -178,19 +172,11 @@ sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
   friendly_name: Percentage geblokkeerde advertenties
-sensor.pws_th_battery_level:
-  device_class: battery
-  friendly_name: PWS TH Sensor
-  unit_of_measurement: '%'
 sensor.pws_th_humidity:
   friendly_name: Luchtvochtigheid
   icon: mdi:water-percent
 sensor.pws_th_temperature:
   friendly_name: Temperatuur
-sensor.robert_owntracks_battery_level:
-  device_class: battery
-  friendly_name: Robert Owntracks
-  unit_of_measurement: '%'
 sensor.season:
   friendly_name: Seizoen
 sensor.time:
