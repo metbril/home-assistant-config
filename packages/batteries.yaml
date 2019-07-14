@@ -1,10 +1,16 @@
+################################################
+## Sensor
+################################################
+
 sensor:
   - platform: template
     sensors:
+
       robert_owntracks_battery_level:
         entity_id: device_tracker.robert_owntracks
         value_template: >-
           {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
+
       pws_th_battery_level:
         entity_id: sensor.pws_th_temperature
         value_template: >-
@@ -16,11 +22,46 @@ sensor:
             {{battery_level}}
           {% endif %}
 
+      master_bedroom_outside_door_battery_level:
+        friendly_name: "Master Bedroom Outside Door Battery Level"
+        unit_of_measurement: '%'
+        device_class: battery
+        value_template: >
+          {{ states.zwave.master_bedroom_outside_door.attributes.battery_level }}
+
+      frontdoor_contact_battery_level:
+        friendly_name: "Frontdoor Contact Battery Level"
+        unit_of_measurement: '%'
+        device_class: battery
+        value_template: >
+          {{ states.zwave.frontdoor_contact.attributes.battery_level }}
+
+      living_siren_alarm_battery_level:
+        friendly_name: "Living Siren Alarm Battery Level"
+        unit_of_measurement: '%'
+        device_class: battery
+        value_template: >
+          {{ states.zwave.living_siren_alarm.attributes.battery_level }}
+
+################################################
+## Group
+################################################
+
 group:
   batteries:
     name: Batteries
     entities:
+      # phones
       - sensor.robert_owntracks_battery_level
-      - sensor.benext_molite_8_battery_level
-      - sensor.pws_th_battery_level
+      - sensor.pontius_battery_level
+      - sensor.robertipad_battery_level
+      - sensor.iphone_van_robert_werk_battery_level
 
+      # zwave
+      - sensor.benext_molite_8_battery_level
+      - sensor.frontdoor_contact_battery_level
+      - sensor.master_bedroom_outside_door_battery_level
+      - sensor.living_siren_alarm_battery_level
+
+      # rf
+      - sensor.pws_th_battery_level

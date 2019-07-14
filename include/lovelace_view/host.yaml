@@ -84,6 +84,9 @@ cards:
       - sensor.pontius_battery_level
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
+      - sensor.frontdoor_contact_battery_level
+      - sensor.master_bedroom_outside_door_battery_level
+      - sensor.living_siren_alarm_battery_level
       - sensor.benext_molite_8_battery_level
       - sensor.pws_th_battery_level
       - sensor.robert_owntracks_battery_level
