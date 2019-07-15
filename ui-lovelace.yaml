@@ -7,14 +7,14 @@ resources:
     url: /local/ext-weblink.js?v=0
 
 views:
-  - !include include/lovelace_view/start.yaml
-  - !include include/lovelace_view/home.yaml
-  - !include include/lovelace_view/downstairs.yaml
-  - !include include/lovelace_view/living.yaml
-  - !include include/lovelace_view/presence.yaml
-  - !include include/lovelace_view/security.yaml
-  - !include include/lovelace_view/weather.yaml
-  - !include include/lovelace_view/info.yaml
-  - !include include/lovelace_view/utilities.yaml
-  - !include include/lovelace_view/host.yaml
-  - !include include/lovelace_view/automation.yaml
+  - !include include/lovelace_view/start_view.yaml
+  - !include include/lovelace_view/home_view.yaml
+  - !include include/lovelace_view/downstairs_view.yaml
+  - !include include/lovelace_view/living_view.yaml
+  - !include include/lovelace_view/presence_view.yaml
+  - !include include/lovelace_view/security_view.yaml
+  - !include include/lovelace_view/weather_view.yaml
+  - !include include/lovelace_view/info_view.yaml
+  - !include include/lovelace_view/utilities_view.yaml
+  - !include include/lovelace_view/host_view.yaml
+  - !include include/lovelace_view/automation_view.yaml
