@@ -43,9 +43,3 @@ cards:
       - entity: sensor.pws_th_temperature
       - entity: sensor.power_consumption
     type: glance
-  - entities:
-      - entity: sensor.rpi_power_status
-      - entity: automation.power_supply_issue
-    show_header_toggle: false
-    title: Voeding
-    type: entities

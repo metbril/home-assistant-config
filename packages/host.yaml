@@ -227,18 +227,3 @@ automation:
         title: New backup
         message: "Created {{ trigger.event.data.file }} in {{ trigger.event.data.folder }}"
 
-  - id: rpi_power_issue
-    alias: Power Supply Issue
-    trigger:
-    - platform: numeric_state
-      entity_id: sensor.rpi_power_status
-      value_template: '{{ state.attributes.value }}'
-      above: 0
-      for:
-        minutes: 5
-    condition: []
-    action:
-    - service: persistent_notification.create
-      data_template:
-        message: "De systeemvoeding meldt: '{{ states.sensor.rpi_power_status.state }}'. De vorige status was '{{ trigger.from_state.state }}' "
-        title: Systeemvoeding
