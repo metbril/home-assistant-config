@@ -1,10 +1,10 @@
 title: HIERO
 
 resources:
-  - type: js
-    url: /local/bignumber-card.js
-  - type: js
-    url: /local/ext-weblink.js?v=0
+  - url: /local/bignumber-card.js?v=0.0.2
+    type: js
+  - url: /local/vertical-stack-in-card.js?v=0.1.3
+    type: js
 
 views:
   - !include include/lovelace_view/start_view.yaml

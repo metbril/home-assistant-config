@@ -4,8 +4,13 @@ icon: 'mdi:rocket'
 badges:
   - binary_sensor.occupancy
 cards:
-  - entity: sensor.time
-    type: 'custom:bignumber-card'
+  - type: custom:vertical-stack-in-card
+    cards:
+      - entity: sensor.time
+        type: 'custom:bignumber-card'
+      - entity: sensor.date
+        type: 'custom:bignumber-card'
+        scale: '20px'
   - entity: binary_sensor.occupancy
     hold_action:
       action: more-info
