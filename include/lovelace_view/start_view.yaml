@@ -4,6 +4,13 @@ icon: 'mdi:rocket'
 badges:
   - binary_sensor.occupancy
 cards:
+  - type: glance
+    entities:
+      - entity: person.robert
+      - entity: person.monique
+      - entity: person.bjorn
+      - entity: binary_sensor.occupancy
+      - entity: alarm_control_panel.home
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
@@ -28,18 +35,18 @@ cards:
     tap_action:
       action: toggle
     type: light
-  - card:
-      show_state: false
-      title: open contacten
-      type: glance
+  - type: entity-filter
     entities:
       - entity: binary_sensor.frontdoor_contact_sensor
       - entity: binary_sensor.master_bedroom_outside_door_sensor
         name: Balkondeur
-    show_empty: false
     state_filter:
       - 'on'
-    type: entity-filter
+    card:
+      type: glance
+      title: Open contacten
+      show_state: false
+    show_empty: false
   - entities:
       - entity: alert.frontdoor_open
     title: Voordeur alert
