@@ -55,3 +55,7 @@ cards:
           - entity: sensor.dark_sky_uv_index
         type: entities
     type: vertical-stack
+  - type: map
+    title: Blikseminslag
+    geo_location_sources:
+      - wwlln

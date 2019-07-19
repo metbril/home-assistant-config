@@ -13,9 +13,19 @@ homeassistant:
       customize: &customize
         package: 'weather'
 
+################################################
+## Weather
+################################################
+
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
+
+################################################
+## World Wide Lightning Location Network (WWLLN)
+################################################
+
+wwlln:
 
 ################################################
 ## Sensor
