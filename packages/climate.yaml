@@ -31,7 +31,7 @@ climate:
   - platform: generic_thermostat
     name: Master Bedroom
     heater: input_boolean.master_bedroom_fan
-    target_sensor: sensor.benext_molite_8_temperature
+    target_sensor: sensor.living_multi_sensor_temperature
     ac_mode: true
     target_temp: 18
     keep_alive:

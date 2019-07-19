@@ -35,7 +35,7 @@ homekit:
       # - switch.mess_call
       # - switch.garage_door_plug_switch
 
-      # - sensor.benext_molite_8_temperature
+      # - sensor.living_multi_sensor_temperature
       # - sensor.dark_sky_apparent_temperature
       # - sensor.dark_sky_humidity
       # - sensor.pws_th_humidity

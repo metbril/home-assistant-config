@@ -1,8 +1,8 @@
-sensor.benext_molite_8_temperature:
+sensor.living_multi_sensor_temperature:
   ignored: false
   polling_intensity: 15
   # polling_intensity: 900
-sensor.benext_molite_8_luminance:
+sensor.living_multi_sensor_luminance:
   ignored: false
   polling_intensity: 15
   # polling_intensity: 900

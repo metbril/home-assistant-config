@@ -37,7 +37,7 @@ cards:
   - type: glance
     title: Beweging
     entities:
-      - entity: binary_sensor.benext_molite_8_motion
+      - entity: binary_sensor.living_multi_sensor_motion
       - entity: binary_sensor.motion_garage
   - type: glance
     title: Contactsensoren
@@ -66,6 +66,6 @@ cards:
       type: glance
     entities:
       - entity: binary_sensor.motion_garage
-      - entity: binary_sensor.benext_molite_8_motion
+      - entity: binary_sensor.living_multi_sensor_motion
   - type: alarm-panel
     entity: alarm_control_panel.home

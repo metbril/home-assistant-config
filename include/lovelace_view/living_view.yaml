@@ -2,8 +2,8 @@ title: Woonkamer
 path: woonkamer
 icon: 'mdi:sofa'
 badges:
-  - binary_sensor.benext_molite_8_motion
-  - sensor.benext_molite_8_temperature
+  - binary_sensor.living_multi_sensor_motion
+  - sensor.living_multi_sensor_temperature
   - media_player.living_tv
 cards:
   - entity: light.living_lights

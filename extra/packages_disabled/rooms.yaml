@@ -201,7 +201,7 @@ group:
       - group.dusk_living_lights
       - media_player.apple_tv_van_bregt
       - remote.apple_tv_van_bregt
-      - group.benext_molite_8
+      - group.living_multi_sensor
       - group.fibaro_wall_plug_7
 
   garage_view:

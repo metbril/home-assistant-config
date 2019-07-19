@@ -4,7 +4,7 @@ automation.rain_alarm:
   friendly_name: Buienalarm
 automation.switch_off_charging_station:
   friendly_name: Uitschakelen oplaadstation
-binary_sensor.benext_molite_8_motion:
+binary_sensor.living_multi_sensor_motion:
   device_class: motion
   friendly_name: Beweging woonkamer
 binary_sensor.daytime:
@@ -100,10 +100,10 @@ sensor.asuswrt_upload_speed:
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
   icon: mdi:alert
-sensor.benext_molite_8_luminance:
+sensor.living_multi_sensor_luminance:
   friendly_name: Lichtsterkte woonkamer
   icon: mdi:brightness-6
-sensor.benext_molite_8_temperature:
+sensor.living_multi_sensor_temperature:
   friendly_name: Temperatuur woonkamer
 sensor.buienradar_precipitation_forecast_average:
   friendly_name: Verwachte neerslag

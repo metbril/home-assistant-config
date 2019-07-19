@@ -22,4 +22,4 @@ group:
     name: Motion
     entities:
       - binary_sensor.motion_garage
-      - binary_sensor.benext_molite_8_motion
+      - binary_sensor.living_multi_sensor_motion
