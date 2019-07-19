@@ -14,6 +14,13 @@ homeassistant:
     - type: homeassistant
     - type: legacy_api_password # still required for iOS app
       api_password: !secret http_password # required since 0.90
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - ::1
+        - 192.168.1.0/24
+        - fd00::/8
+
   customize: !include customize.yaml
 
 lovelace:
@@ -30,21 +37,14 @@ map:
 # conversation:
 
 http:
-  # api_password: !secret http_password # deprecated as of 0.90
-  ip_ban_enabled: yes
-  login_attempts_threshold: 3
+  server_port: 8123
   # base_url: !secret http_base_url
-  # ssl_certificate: /ssl/fullchain.pem
-  # ssl_key: /ssl/privkey.pem
+  ip_ban_enabled: yes
+  login_attempts_threshold: 10
   use_x_forwarded_for: true # default: false, use for proxied setup
   trusted_proxies: # required since 0.73
     - 127.0.0.1
     - ::1
-  trusted_networks:
-    - 127.0.0.1
-    - ::1
-    - 192.168.1.0/24
-    - fd00::/8
 
 # Combine automation editor and manual automations
 automation: !include automations.yaml
