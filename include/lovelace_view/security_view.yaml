@@ -5,6 +5,7 @@ badges:
   - binary_sensor.occupancy
   - group.motion
   - group.contact
+  - alarm_control_panel.home
 cards:
   - type: horizontal-stack
     cards:
@@ -66,3 +67,5 @@ cards:
     entities:
       - entity: binary_sensor.motion_garage
       - entity: binary_sensor.benext_molite_8_motion
+  - type: alarm-panel
+    entity: alarm_control_panel.home
