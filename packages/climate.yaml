@@ -26,6 +26,8 @@ input_boolean:
 ############################################################################
 
 climate:
+
+  ## https://www.home-assistant.io/components/generic_thermostat/
   - platform: generic_thermostat
     name: Master Bedroom
     heater: input_boolean.master_bedroom_fan
@@ -34,7 +36,7 @@ climate:
     target_temp: 18
     keep_alive:
       minutes: 3
-    initial_operation_mode: "off" # "auto" or "off"
+    initial_hvac_mode: "off"
     away_temp: 30
 
 ############################################################################
