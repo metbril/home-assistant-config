@@ -10,6 +10,7 @@ views:
   - !include include/lovelace_view/start_view.yaml
   - !include include/lovelace_view/home_view.yaml
   - !include include/lovelace_view/downstairs_view.yaml
+  - !include include/lovelace_view/upstairs_view.yaml
   - !include include/lovelace_view/living_view.yaml
   - !include include/lovelace_view/presence_view.yaml
   - !include include/lovelace_view/security_view.yaml

@@ -1,0 +1,23 @@
+title: Bovenverdieping
+path: boven
+icon: 'mdi:home-floor-1'
+badges:
+  - binary_sensor.master_bedroom_outside_door_sensor
+cards:
+  - type: markdown
+    content: 'Alle entiteiten per vertrek van de slaapverdieping.'
+  - type: horizontal-stack
+    cards:
+      - type: sensor
+        entity: sensor.living_multi_sensor_temperature
+        graph: line
+        name: Binnen
+      - type: sensor
+        entity: sensor.pws_th_temperature
+        graph: line
+        name: Buiten
+  - type: thermostat
+    entity: climate.master_bedroom
+  - type: entities
+    entities: 
+      - input_boolean.master_bedroom_fan
