@@ -1,5 +1,5 @@
 ############################################################################
-## Packages / Host / Updates
+## Packages / Updates
 ############################################################################
 
 homeassistant:
@@ -34,16 +34,10 @@ homeassistant:
 
     sensor.hassio_version_installed:
       friendly_name: Geïnstalleerde versie Hassio
-      icon: mdi:application
     sensor.hassio_version_stable:
       friendly_name: Stabiele versie Hassio
-      icon: mdi:check-decagram
     sensor.hassio_version_beta:
       friendly_name: Beta versie Hassio
-      icon: mdi:beta
-    sensor.hassio_version_development:
-      friendly_name: Ontwikkelversie Hassio
-      icon: mdi:alpha
 
     ########################################################################
     ## Automation
@@ -82,25 +76,20 @@ binary_sensor:
 
 sensor:
   - platform: version
+    source: local
     name: Hassio Version Installed
 
-  - platform: rest
-    resource: https://s3.amazonaws.com/hassio-version/stable.json
+  - platform: version
+    source: hassio
+    image: raspberrypi3
+    beta: false
     name: Hassio Version Stable
-    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
-    scan_interval: 3600
 
-  - platform: rest
-    resource: https://s3.amazonaws.com/hassio-version/beta.json
+  - platform: version
+    source: hassio
+    image: raspberrypi3
+    beta: true
     name: Hassio Version Beta
-    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
-    scan_interval: 3600
-
-  - platform: rest
-    resource: https://s3.amazonaws.com/hassio-version/dev.json
-    name: Hassio Version Development
-    value_template: '{{ value_json.homeassistant.raspberrypi3 }}'
-    scan_interval: 3600
 
 ############################################################################
 ## Automation
