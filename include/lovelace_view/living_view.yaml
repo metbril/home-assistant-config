@@ -35,12 +35,12 @@ cards:
   - entity: scene.goodnight
     hold_action:
       action: more-info
-    icon: 'mdi:sleep'
-    name: Welterusten
     show_name: false
     tap_action:
       action: call-service
-      data:
-        - entity_id: scene.goodnight
       service: scene.turn_on
+      service_data:
+        entity_id: scene.goodnight
     type: entity-button
+    name: Welterusten
+    icon: 'mdi:sleep'

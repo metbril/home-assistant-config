@@ -14,7 +14,6 @@ cards:
       - entity: sensor.pws_th_humidity
     type: glance
   - type: horizontal-stack
-    title: Weerstation
     cards:
       - type: sensor
         entity: sensor.pws_th_temperature

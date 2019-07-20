@@ -30,10 +30,6 @@ cards:
     name: Het weer hiero
     type: weather-forecast
   - entity: light.living_lights
-    hold_action:
-      action: more-info
-    tap_action:
-      action: toggle
     type: light
   - type: entity-filter
     entities:
