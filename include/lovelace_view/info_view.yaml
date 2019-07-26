@@ -16,21 +16,6 @@ cards:
     show_icon: true
     title: Euro 95
     type: glance
-  - cards:
-      - entities:
-          - entity: sensor.bitcoin
-          - entity: sensor.bitcoin_cash
-          - entity: sensor.xrp
-          - entity: sensor.ethereum
-          - entity: sensor.litecoin
-        show_header_toggle: false
-        title: Cryptovaluta
-        type: entities
-      - entities:
-          - sensor.bitcoin
-        title: Bitcoin
-        type: history-graph
-    type: vertical-stack
   - entities:
       - entity: binary_sensor.morning
       - entity: binary_sensor.daytime
