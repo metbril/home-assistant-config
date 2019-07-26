@@ -9,6 +9,20 @@ homeassistant:
     sensor.lpg*:
       unit_of_measurement: "€/L"
       icon: mdi:gas-station
+    sensor.diesel_advies:
+      friendly_name: Diesel
+    sensor.euro95_advies:
+      friendly_name: Euro 95 (Advies)
+    sensor.euro95_hoofdweg:
+      friendly_name: Euro 95 (Hoofdweg)
+    sensor.euro95_lukoil_schermerhoek:
+      friendly_name: Euro 95 (Lukoil Schermerhoek)
+    sensor.euro95_shell_nieuwerkerk:
+      friendly_name: Euro 95 (Shell Nieuwerkerk)
+    sensor.euro95_tinq_bermweg:
+      friendly_name: Euro 95 (Tinq Bermweg)
+    sensor.lpg_advies:
+      friendly_name: LPG
 
 sensor:
   - platform: scrape

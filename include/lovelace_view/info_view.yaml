@@ -5,18 +5,6 @@ badges:
   - sensor.postnl
 cards:
   - entities:
-      - entity: sensor.euro95_advies
-        name: Advies
-      - entity: sensor.euro95_lukoil_schermerhoek
-        name: Schermerhoek
-      - entity: sensor.euro95_shell_nieuwerkerk
-        name: Nieuwerkerk
-      - entity: sensor.euro95_tinq_bermweg
-        name: Bermweg
-    show_icon: true
-    title: Euro 95
-    type: glance
-  - entities:
       - entity: binary_sensor.morning
       - entity: binary_sensor.daytime
       - entity: binary_sensor.evening

@@ -138,18 +138,6 @@ sensor.dark_sky_wind_speed:
   friendly_name: Windsnelheid omgeving
 sensor.date:
   friendly_name: Datum
-sensor.diesel_advies:
-  friendly_name: Diesel
-sensor.euro95_advies:
-  friendly_name: Euro 95 (Advies)
-sensor.euro95_hoofdweg:
-  friendly_name: Euro 95 (Hoofdweg)
-sensor.euro95_lukoil_schermerhoek:
-  friendly_name: Euro 95 (Lukoil Schermerhoek)
-sensor.euro95_shell_nieuwerkerk:
-  friendly_name: Euro 95 (Shell Nieuwerkerk)
-sensor.euro95_tinq_bermweg:
-  friendly_name: Euro 95 (Tinq Bermweg)
 sensor.fibaro_wall_plug_7_energy:
   friendly_name: Verbruik FIBARO
   icon: mdi:counter
@@ -164,8 +152,6 @@ sensor.gas_consumption:
   unit_of_measurement: m³
 sensor.hourly_gas_consumption:
   hidden: true
-sensor.lpg_advies:
-  friendly_name: LPG
 sensor.moon:
   friendly_name: Maan
 sensor.pihole_ads_blocked_today:
