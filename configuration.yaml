@@ -64,10 +64,6 @@ zwave:
   device_config: !include zwave_device_config.yaml
   network_key: !secret zwave_network_key
 
-hue:
-  bridges:
-    - host: !secret hue_host
-
 # tts:
 #   - platform: google
 

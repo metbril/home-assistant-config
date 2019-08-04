@@ -43,7 +43,6 @@ bin/mindergas.py
 
 *.conf
 plex.conf
-phue.conf
 harmony_media_room.conf
 
 # zwave
