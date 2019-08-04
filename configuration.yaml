@@ -26,7 +26,8 @@ homeassistant:
 lovelace:
   mode: yaml
 
-# discovery:
+discovery:
+
 system_health:
 
 # UI elements
