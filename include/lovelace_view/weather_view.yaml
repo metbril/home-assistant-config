@@ -58,3 +58,10 @@ cards:
     title: Blikseminslag
     geo_location_sources:
       - wwlln
+  - type: entities
+    entities:
+      - entity: sensor.current_uv_level
+      - entity: binary_sensor.protection_window
+      - entity: sensor.current_uv_index
+      - entity: sensor.max_uv_index
+      - entity: sensor.current_ozone_level
