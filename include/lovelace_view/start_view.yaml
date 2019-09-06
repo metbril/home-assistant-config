@@ -9,7 +9,6 @@ cards:
       - entity: person.robert
       - entity: person.monique
       - entity: person.bjorn
-      - entity: binary_sensor.occupancy
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
