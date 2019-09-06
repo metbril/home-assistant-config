@@ -51,6 +51,8 @@ http:
 automation: !include automations.yaml
 automation old: !include_dir_merge_list automations
 
+group: !include groups.yaml
+
 ##########
 ## Bridges and hubs
 ##########

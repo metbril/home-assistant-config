@@ -1,0 +1,60 @@
+############################################################################
+## Group
+############################################################################
+
+## https://www.home-assistant.io/components/group/
+
+## Default groups:
+## - group.all_automations
+## - group.all_devices
+## - group.all_fans
+## - group.all_lights
+## - group.all_remotes
+## - group.all_switches
+
+batteries:
+    name: Batteries
+    entities:
+      # phones
+      - sensor.robert_owntracks_battery_level
+      - sensor.pontius_battery_level
+      - sensor.robertipad_battery_level
+      - sensor.iphone_van_robert_werk_battery_level
+
+      # zwave
+      - sensor.living_multi_sensor_battery_level
+      - sensor.frontdoor_contact_battery_level
+      - sensor.master_bedroom_outside_door_battery_level
+      - sensor.living_siren_alarm_battery_level
+
+      # rf
+      - sensor.pws_th_battery_level
+
+contact:
+  name: Contact Sensors
+  entities:
+    - binary_sensor.master_bedroom_outside_door_sensor
+    - binary_sensor.frontdoor_contact_sensor
+
+motion:
+  name: Motion
+  entities:
+    - binary_sensor.motion_garage
+    - binary_sensor.living_multi_sensor_motion
+
+dusk_living_lights:
+  entities:
+    - light.bank
+    - light.bollamp
+    - light.hoge_kast
+    - light.willner
+    - light.turbine_lamp
+
+living_lights:
+  entities:
+    ## clockwise from the door
+    - light.hoge_kast
+    - light.bank
+    - light.bollamp
+    - light.willner
+    - light.turbine_lamp

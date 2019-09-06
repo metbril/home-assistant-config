@@ -101,26 +101,3 @@ sensor:
         entity_id: device_tracker.robert_owntracks
         value_template: >-
           {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
-
-################################################
-## Group
-################################################
-
-group:
-  batteries:
-    name: Batteries
-    entities:
-      # phones
-      - sensor.robert_owntracks_battery_level
-      - sensor.pontius_battery_level
-      - sensor.robertipad_battery_level
-      - sensor.iphone_van_robert_werk_battery_level
-
-      # zwave
-      - sensor.living_multi_sensor_battery_level
-      - sensor.frontdoor_contact_battery_level
-      - sensor.master_bedroom_outside_door_battery_level
-      - sensor.living_siren_alarm_battery_level
-
-      # rf
-      - sensor.pws_th_battery_level
