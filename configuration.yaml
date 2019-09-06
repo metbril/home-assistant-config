@@ -51,6 +51,7 @@ http:
 automation: !include automations.yaml
 automation old: !include_dir_merge_list include/automations
 
+sensor: !include_dir_merge_list include/sensors
 group: !include groups.yaml
 
 ##########

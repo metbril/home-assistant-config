@@ -3,6 +3,7 @@ path: weer
 icon: 'mdi:weather-partlycloudy'
 badges:
   - binary_sensor.meteoalarm
+  - binary_sensor.protection_window
 cards:
   - entity: weather.dark_sky
     name: Thuis
@@ -60,7 +61,7 @@ cards:
       - wwlln
   - type: entities
     entities:
-      - entity: sensor.current_uv_level
+      - entity: sensor.current_uv_level_local
       - entity: binary_sensor.protection_window
       - entity: sensor.current_uv_index
       - entity: sensor.max_uv_index
