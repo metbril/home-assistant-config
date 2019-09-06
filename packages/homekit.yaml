@@ -22,8 +22,6 @@ homekit:
   filter:
     include_entities:
     
-      - alarm_control_panel.home
-
       - binary_sensor.master_bedroom_outside_door_sensor
 
       - light.bank
@@ -40,8 +38,3 @@ homekit:
       # - sensor.dark_sky_humidity
       # - sensor.pws_th_humidity
       # - sensor.pws_th_temperature
-
-  entity_config:
-    alarm_control_panel.home:
-      code: !secret alarm_home_code
-

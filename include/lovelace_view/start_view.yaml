@@ -10,7 +10,6 @@ cards:
       - entity: person.monique
       - entity: person.bjorn
       - entity: binary_sensor.occupancy
-      - entity: alarm_control_panel.home
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
