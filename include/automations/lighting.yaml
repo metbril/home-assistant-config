@@ -1,4 +1,4 @@
-- alias: Turn On Living Dusk Devices
+- alias: Turn On Living Lights
   trigger:
     - platform: event
       event_type: button_pressed
@@ -7,13 +7,13 @@
         state: 'on'
   action:
     - service: light.turn_on
-      entity_id: group.dusk_living_lights
+      entity_id: group.living_lights
     - service: logbook.log
       data:
-        name: Schemerverlichting
+        name: Woonkamerverlichting
         message: ingeschakeld
 
-- alias: Turn Off Living Devices
+- alias: Turn Off Living Lights
   trigger:
     - platform: event
       event_type: button_pressed
