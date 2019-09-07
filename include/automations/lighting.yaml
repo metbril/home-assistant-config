@@ -12,9 +12,6 @@
       data:
         name: Schemerverlichting
         message: ingeschakeld
-    - service: notify.admin
-      data:
-        message: 'Schemerverlichting ingeschakeld.'
 
 - alias: Turn Off Living Devices
   trigger:
@@ -30,6 +27,3 @@
       data:
         name: Woonkamerverlichting
         message: uitgeschakeld
-    - service: notify.admin
-      data:
-        message: 'Woonkamerverlichting uitgeschakeld.'
