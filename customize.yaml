@@ -1,5 +1,3 @@
-automation.rain_alarm:
-  friendly_name: Buienalarm
 automation.switch_off_charging_station:
   friendly_name: Uitschakelen oplaadstation
 binary_sensor.living_multi_sensor_motion:
@@ -88,9 +86,6 @@ sensor.living_multi_sensor_luminance:
   icon: mdi:brightness-6
 sensor.living_multi_sensor_temperature:
   friendly_name: Temperatuur woonkamer
-sensor.buienradar_precipitation_forecast_average:
-  friendly_name: Verwachte neerslag
-  unit_of_measurement: mm/u
 sensor.charging_station_plug_energy:
   friendly_name: Verbruik oplaadstation
   icon: mdi:counter
