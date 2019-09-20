@@ -42,14 +42,6 @@ cards:
       - entity: sensor.ha_uptime
     type: entities
   - entities:
-      - entity: sensor.asuswrt_download
-      - entity: sensor.asuswrt_upload
-      - entity: sensor.asuswrt_download_speed
-      - entity: sensor.asuswrt_upload_speed
-    show_header_toggle: false
-    title: Router
-    type: entities
-  - entities:
       - entity: sensor.pi_hole_ads_blocked_today
       - entity: sensor.pi_hole_ads_percentage_blocked_today
       - entity: weblink.pi_hole

@@ -14,37 +14,6 @@ homeassistant:
         package: 'presence'
 
 ################################################
-## ASUSWRT
-################################################
-
-asuswrt:
-  host: !secret asuswrt_host
-  username: !secret asuswrt_username
-  ssh_key: !secret asuswrt_ssh_key
-  protocol: ssh
-  port: 22
-  mode: router
-  sensors:
-      - upload
-      - download
-      - upload_speed
-      - download_speed
-
-################################################
-## Device Tracker
-################################################
-
-# https://home-assistant.io/components/device_tracker/
-
-device_tracker:
-  - platform: asuswrt
-    consider_home: 180
-    interval_seconds: 60 # Seconds between each scan for new devices
-    new_device_defaults:
-      track_new_devices: false
-      hide_if_away: false
-
-################################################
 ## Script
 ## https://www.home-assistant.io/components/script
 ################################################
