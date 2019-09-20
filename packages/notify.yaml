@@ -28,11 +28,3 @@ notify:
       # - service: admin
       - service: ios_pontius
       - service: ios_patti
-
-  - name: Twitter
-    platform: twitter
-    consumer_key: !secret twitter_consumer_key
-    consumer_secret: !secret twitter_consumer_secret
-    access_token: !secret twitter_access_token
-    access_token_secret: !secret twitter_access_token_secret
-
