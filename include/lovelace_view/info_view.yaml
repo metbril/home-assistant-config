@@ -1,8 +1,6 @@
 title: Information
 path: info
 icon: 'mdi:information'
-badges:
-  - sensor.postnl
 cards:
   - entities:
       - entity: binary_sensor.morning
