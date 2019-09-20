@@ -30,8 +30,6 @@ cards:
     type: glance
   - entity: media_player.living_tv
     type: media-control
-  - entity: media_player.woonkamer
-    type: media-control
   - entity: scene.goodnight
     hold_action:
       action: more-info

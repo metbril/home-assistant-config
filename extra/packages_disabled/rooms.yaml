@@ -196,7 +196,6 @@ group:
     name: Living
     view: yes
     entities:
-      - media_player.woonkamer
       - group.living_lights
       - group.dusk_living_lights
       - media_player.apple_tv_van_bregt
