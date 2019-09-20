@@ -7,18 +7,8 @@ cards:
     type: markdown
   - entities:
       - entity: light.living_lights
-      - entity: switch.mess_call
     show_header_toggle: false
     title: Woonkamer
-    type: entities
-  - entities:
-      - entity: switch.frontdoor_bell
-    show_header_toggle: false
-    title: Entree
-    type: entities
-  - entities: []
-    show_header_toggle: false
-    title: Ouderslaapkamer
     type: entities
   - entities:
       - entity: switch.turbine_light_plug_switch

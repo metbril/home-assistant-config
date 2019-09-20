@@ -3,14 +3,10 @@ path: beneden
 icon: 'mdi:home-floor-0'
 badges:
   - binary_sensor.motion_garage
-  - automation.frontdoor_bell_pressed
-  - sensor.doorbell_presses
-  - switch.frontdoor_bell
 cards:
   - content: 'Alle entiteiten per vertrek van de begane grond.'
     type: markdown
   - entities:
-      - entity: switch.frontdoor_bell
       - entity: binary_sensor.motion_garage
     title: Entree
     type: glance

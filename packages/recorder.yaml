@@ -57,10 +57,6 @@ history:
     domains:
       - input_boolean
       - input_select
-    # entities:
-    #   # packages / rfxtrx
-    #   - light.standing_ikea_vaster # restore state after reboot?
-    #   - switch.frontdoor_bell # for counter
 
 ################################################
 ## Logbook

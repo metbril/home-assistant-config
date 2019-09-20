@@ -120,18 +120,12 @@ group:
       - light.hoge_kast
       - light.bank
       - light.bollamp
-      - light.standing_ikea_vaster
       - light.tv_meubel
 
   kitchen:
     control: hidden
     entities:
       # - 
-
-  entry:
-    control: hidden
-    entities:
-      - switch.frontdoor_bell
 
   toilet_gf:
     control: hidden
@@ -172,11 +166,6 @@ group:
     control: hidden
     # entities:
     #   - 
-
-  driveway:
-    control: hidden
-    entities:
-      - switch.frontdoor_bell
 
   rooms_view:
     name: Rooms

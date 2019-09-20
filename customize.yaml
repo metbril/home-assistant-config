@@ -4,9 +4,6 @@ binary_sensor.daytime:
 binary_sensor.evening:
   friendly_name: Avond
   icon: mdi:timetable
-binary_sensor.flamingo_remote_button_a:
-  friendly_name: Flamingo Afstandsbediening A
-  icon: mdi:remote
 binary_sensor.morning:
   friendly_name: Ochtend
   icon: mdi:timetable
@@ -51,10 +48,6 @@ light.hoge_kast:
   icon: mdi:lamp
 light.living_lights:
   friendly_name: Woonkamerverlichting
-light.standing_ikea_vaster:
-  assumed_state: false
-  friendly_name: Steellamp
-  icon: mdi:floor-lamp
 light.tv_meubel:
   icon: mdi:lamp
 light.willner:
@@ -92,24 +85,12 @@ sensor.turbine_light_plug_power:
   friendly_name: Verbruik Turbine Lamp
 sun.sun:
   friendly_name: Zon
-switch.flamingo_plug_1:
-  assumed_state: false
-  friendly_name: Flamingo Plug 1
-  icon: mdi:power
-switch.frontdoor_bell:
-  assumed_state: false
-  friendly_name: Bel voordeur
-  icon: mdi:bell-ring
 switch.living_wallswitch_left:
   assumed_state: false
   friendly_name: Linker wandschakelaar woonkamer
 switch.living_wallswitch_right:
   assumed_state: false
   friendly_name: Rechter wandschakelaar woonkamer
-switch.mess_call:
-  assumed_state: false
-  friendly_name: Bel verzamelen
-  icon: mdi:bell-ring
 switch.turbine_light_plug_switch:
   friendly_name: Turbine Lamp
   icon: mdi:power

@@ -6,13 +6,11 @@ cards:
   - entities:
       - entity: automation.familie_thuis
       - entity: automation.forward_persistent_notifications
-      - entity: automation.frontdoor_bell_pressed
       - entity: automation.occupancy_sync
       - entity: automation.ha_update_available_for_hass_io_notification
       - entity: automation.ha_update_available_notification
       - entity: automation.kaku_remote_group_off
       - entity: automation.log_level
-      - entity: automation.mess_call_pressed
       - entity: group.all_automations
     type: entities
   - entities:
