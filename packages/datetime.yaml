@@ -29,22 +29,6 @@ binary_sensor:
     name: Workday
     country: NL
     workdays: [ mon, tue, wed, thu, fri ]
-  - platform: tod
-    name: Morning
-    after: 06:00
-    before: sunrise
-  - platform: tod
-    name: Daytime
-    after: sunrise
-    before: sunset
-  - platform: tod
-    name: Evening
-    after: sunset
-    before: '23:00'
-  - platform: tod
-    name: Night
-    after: '23:00'
-    before: '06:00'
 
 ################################################
 ## Sensor
