@@ -1,9 +1,0 @@
-sensor:
-  - platform: history_stats
-    name: Doorbell Presses
-    entity_id: switch.frontdoor_bell
-    state: 'on'
-    type: count
-    end: '{{ now() }}'
-    duration:
-      hours: 24
