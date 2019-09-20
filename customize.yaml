@@ -160,8 +160,6 @@ sensor.time:
 sensor.time_of_day:
   friendly_name: Tijd van de dag
   icon_template: mdi:clock
-sensor.toronto_time:
-  friendly_name: Tijd in Toronto
 sensor.turbine_light_plug_power:
   device_class: power
   friendly_name: Verbruik Turbine Lamp

@@ -55,11 +55,6 @@ sensor:
     display_options:
       - 'date'
       - 'time'
-  - platform: worldclock
-    name: Toronto Time
-    time_zone: America/Toronto
-  - platform: moon
-  - platform: season
   - platform: template
     sensors:
       time_of_day:

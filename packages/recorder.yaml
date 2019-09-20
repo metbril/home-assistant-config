@@ -39,7 +39,6 @@ recorder:
     entities:
       - sensor.date
       - sensor.time
-      - sensor.toronto_time
       - sensor.ha_uptime
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_humidity
