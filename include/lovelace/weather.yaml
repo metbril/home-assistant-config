@@ -1,5 +1,0 @@
-title: Weer
-path: weer
-icon: 'mdi:weather-partlycloudy'
-badges:
-  - binary_sensor.protection_window

@@ -27,6 +27,8 @@ group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
+group.batteries:
+  friendly_name: Batterijen
 group.dusk_living_lights:
   friendly_name: Schemerverlichting Woonkamer
 group.living_lights:

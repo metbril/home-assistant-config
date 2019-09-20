@@ -3,14 +3,6 @@ path: info
 icon: 'mdi:information'
 cards:
   - entities:
-      - entity: binary_sensor.morning
-      - entity: binary_sensor.daytime
-      - entity: binary_sensor.evening
-      - entity: binary_sensor.night
-    type: glance
-  - entities:
-      - entity: sensor.moon
-      - entity: sensor.season
       - entity: binary_sensor.workday
       - entity: sun.sun
     type: glance

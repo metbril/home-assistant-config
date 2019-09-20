@@ -1,6 +1,0 @@
-title: Bovenverdieping
-path: boven
-icon: 'mdi:home-floor-1'
-cards:
-  - type: markdown
-    content: 'Alle entiteiten per vertrek van de slaapverdieping.'
