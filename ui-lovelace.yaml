@@ -7,15 +7,15 @@ resources:
     type: js
 
 views:
-  - !include include/lovelace_view/start_view.yaml
-  - !include include/lovelace_view/home_view.yaml
-  - !include include/lovelace_view/downstairs_view.yaml
-  - !include include/lovelace_view/upstairs_view.yaml
-  - !include include/lovelace_view/living_view.yaml
-  - !include include/lovelace_view/presence_view.yaml
-  - !include include/lovelace_view/security_view.yaml
-  - !include include/lovelace_view/weather_view.yaml
-  - !include include/lovelace_view/info_view.yaml
-  - !include include/lovelace_view/utilities_view.yaml
-  - !include include/lovelace_view/host_view.yaml
-  - !include include/lovelace_view/automation_view.yaml
+  - !include include/lovelace/start.yaml
+  - !include include/lovelace/home.yaml
+  - !include include/lovelace/downstairs.yaml
+  - !include include/lovelace/upstairs.yaml
+  - !include include/lovelace/living.yaml
+  - !include include/lovelace/presence.yaml
+  - !include include/lovelace/security.yaml
+  - !include include/lovelace/weather.yaml
+  - !include include/lovelace/info.yaml
+  - !include include/lovelace/utilities.yaml
+  - !include include/lovelace/host.yaml
+  - !include include/lovelace/automation.yaml
