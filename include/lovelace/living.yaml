@@ -14,13 +14,3 @@ cards:
       - entity: light.turbine_lamp
     title: Verlichting
     type: glance
-  - entities:
-      - entity: switch.charging_station_plug_switch
-        tap_action:
-          action: toggle
-      - entity: sensor.charging_station_plug_power
-      - entity: automation.switch_off_charging_station
-        icon: 'mdi:tune'
-        name: Auto uit
-    title: Oplaadstation
-    type: glance

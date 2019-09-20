@@ -1,5 +1,3 @@
-automation.switch_off_charging_station:
-  friendly_name: Uitschakelen oplaadstation
 binary_sensor.daytime:
   friendly_name: Overdag
   icon: mdi:timetable
@@ -72,23 +70,8 @@ script.reset_energy_meters:
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
   icon: mdi:alert
-sensor.charging_station_plug_energy:
-  friendly_name: Verbruik oplaadstation
-  icon: mdi:counter
-sensor.charging_station_plug_power:
-  friendly_name: Verbruik oplaadstation
-  icon: mdi:flash
 sensor.date:
   friendly_name: Datum
-sensor.fibaro_wall_plug_7_energy:
-  friendly_name: Verbruik FIBARO
-  icon: mdi:counter
-sensor.garage_door_plug_energy:
-  friendly_name: Verbruik garagedeur
-  icon: mdi:counter
-sensor.garage_door_plug_power:
-  friendly_name: Verbruik garagedeur
-  icon: mdi:flash
 sensor.gas_consumption:
   friendly_name: Gasverbruik
   unit_of_measurement: m³
@@ -109,9 +92,6 @@ sensor.turbine_light_plug_power:
   friendly_name: Verbruik Turbine Lamp
 sun.sun:
   friendly_name: Zon
-switch.charging_station_plug_switch:
-  friendly_name: Oplaadstation
-  icon: mdi:power
 switch.flamingo_plug_1:
   assumed_state: false
   friendly_name: Flamingo Plug 1
@@ -120,9 +100,6 @@ switch.frontdoor_bell:
   assumed_state: false
   friendly_name: Bel voordeur
   icon: mdi:bell-ring
-switch.garage_door_plug_switch:
-  friendly_name: Garagedeur
-  icon: mdi:power
 switch.living_wallswitch_left:
   assumed_state: false
   friendly_name: Linker wandschakelaar woonkamer
@@ -136,9 +113,5 @@ switch.mess_call:
 switch.turbine_light_plug_switch:
   friendly_name: Turbine Lamp
   icon: mdi:power
-zwave.charging_station_plug:
-  friendly_name: Oplaadstation
-zwave.garage_door_plug:
-  friendly_name: Garagedeur
 zwave.turbine_light_plug:
   friendly_name: Turbine Lamp Schakelaar

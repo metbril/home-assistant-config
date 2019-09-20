@@ -3,7 +3,6 @@ path: beneden
 icon: 'mdi:home-floor-0'
 badges:
   - binary_sensor.motion_garage
-  - switch.garage_door_plug_switch
   - automation.frontdoor_bell_pressed
   - sensor.doorbell_presses
   - switch.frontdoor_bell
@@ -17,6 +16,5 @@ cards:
     type: glance
   - entities:
       - entity: binary_sensor.motion_garage
-      - entity: switch.garage_door_plug_switch
     title: Garage
     type: glance

@@ -7,16 +7,9 @@ cards:
     type: markdown
   - entities:
       - entity: light.living_lights
-      - entity: switch.charging_station_plug_switch
-      - entity: switch.fibaro_wall_plug_7
       - entity: switch.mess_call
     show_header_toggle: false
     title: Woonkamer
-    type: entities
-  - entities:
-      - entity: switch.garage_door_plug_switch
-    show_header_toggle: false
-    title: Garage
     type: entities
   - entities:
       - entity: switch.frontdoor_bell
@@ -28,8 +21,6 @@ cards:
     title: Ouderslaapkamer
     type: entities
   - entities:
-      - entity: switch.garage_door_plug_switch
-      - entity: switch.charging_station_plug_switch
       - entity: switch.turbine_light_plug_switch
     title: Schakelaars
     type: glance

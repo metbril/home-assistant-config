@@ -17,13 +17,8 @@ cards:
     title: Totaalgebruik
     type: 'custom:bignumber-card'
   - entities:
-      - entity: sensor.charging_station_plug_power
-        name: Oplaadstation
-      - entity: sensor.garage_door_plug_power
-        name: Garagedeur
       - entity: sensor.turbine_light_plug_power
         name: Turbinelamp
-      - entity: sensor.fibaro_wall_plug_7_power
     show_header_toggle: false
     title: Gebruik per apparaat
     type: entities
@@ -60,22 +55,9 @@ cards:
           - sensor.power_consumption
         title: Totaalgebruik
         type: history-graph
-      - entities:
-          - sensor.charging_station_plug_power
-          - sensor.garage_door_plug_power
-          - sensor.fibaro_wall_plug_7_power
-        hours_to_show: 8
-        title: Gebruik stekkers
-        type: history-graph
     type: vertical-stack
   - columns: 3
     entities:
-      - entity: sensor.charging_station_plug_energy
-      - entity: sensor.garage_door_plug_energy
-      - entity: sensor.fibaro_wall_plug_7_energy
-      - entity: sensor.charging_station_plug_power
-      - entity: sensor.garage_door_plug_power
-      - entity: sensor.fibaro_wall_plug_7_power
       - entity: sensor.turbine_light_plug_power
       - entity: sensor.turbine_light_plug_energy
     title: Verbruik

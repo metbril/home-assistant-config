@@ -123,11 +123,6 @@ group:
       - light.standing_ikea_vaster
       - light.tv_meubel
 
-  garage:
-    control: hidden
-    entities:
-      - switch.garage_door_plug_switch
-
   kitchen:
     control: hidden
     entities:
@@ -200,7 +195,6 @@ group:
       - group.dusk_living_lights
       - media_player.apple_tv_van_bregt
       - remote.apple_tv_van_bregt
-      - group.fibaro_wall_plug_7
 
   garage_view:
     name: Garage

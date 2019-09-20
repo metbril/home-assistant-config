@@ -61,10 +61,6 @@ cards:
     type: entities
   - entities:
       - entity: zwave.controller_1
-      - entity: zwave.fibaro_wall_plug_7
-      - entity: zwave.unknown_node_8
-      - entity: zwave.charging_station_plug
-      - entity: zwave.garage_door_plug
       - entity: zwave.turbine_light_plug
     show_header_toggle: false
     title: Nodes
