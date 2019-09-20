@@ -29,28 +29,7 @@ cards:
       action: none
     type: picture
   - cards:
-      - entity: sensor.waqi_rotterdam
-        max: 500
-        min: 0
-        scale: 28px
-        severity:
-          - style: green
-            value: 50
-          - style: gold
-            value: 100
-          - style: orange
-            value: 150
-          - style: crimson
-            value: 200
-          - style: indigo
-            value: 300
-          - style: black
-            value: 500
-        title: Luchtkwaliteit
-        type: 'custom:bignumber-card'
       - entities:
-          - entity: sensor.waqi_rotterdam
-          - entity: sensor.waqi_rotterdam_impact
           - entity: sensor.dark_sky_ozone
           - entity: sensor.dark_sky_uv_index
         type: entities

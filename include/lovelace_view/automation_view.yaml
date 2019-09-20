@@ -27,7 +27,6 @@ cards:
   - entities:
       - entity: automation.notify_new_device_detected
       - entity: automation.notify_vacation_enabled
-      - entity: automation.notify_waqi_status_change
     show_header_toggle: false
     title: Notificaties
     type: entities
