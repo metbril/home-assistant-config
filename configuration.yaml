@@ -96,7 +96,6 @@ person:
     user_id: !secret person1_user_id
     device_trackers:
       - device_tracker.robert_iphone     # asuswrt
-      - device_tracker.robert_owntracks  # owntracks
       - device_tracker.pontius           # ios
   - name: Monique
     id: monique2

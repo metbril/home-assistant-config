@@ -31,24 +31,6 @@ asuswrt:
       - download_speed
 
 ################################################
-## MQTT
-################################################
-
-mqtt:
-  # broker: core-mosquitto
-  broker: !secret mqtt_cloudmqtt_broker
-  port: !secret mqtt_cloudmqtt_port
-  username: !secret mqtt_cloudmqtt_username
-  password: !secret mqtt_cloudmqtt_password
-  certificate: auto
-
-################################################
-## OwnTracks
-################################################
-
-owntracks:
-
-################################################
 ## Device Tracker
 ################################################
 

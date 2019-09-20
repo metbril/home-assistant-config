@@ -10,14 +10,11 @@ cards:
   - columns: 4
     entities:
       - entity: device_tracker.robert_iphone
-      - entity: device_tracker.robert_owntracks
-      - entity: sensor.robert_owntracks_battery_level
       - entity: sensor.pontius_battery_level
       - entity: sensor.pontius_battery_state
     title: iPhone Robert
     type: glance
   - entities:
-      - entity: device_tracker.robert_owntracks
       - entity: device_tracker.robert_iphone
     title: Waar is Robert nu?
     type: map
@@ -46,7 +43,6 @@ cards:
   - entities:
       - entity: person.robert
       - entity: device_tracker.robert_iphone
-      - entity: device_tracker.robert_owntracks
       - entity: device_tracker.pontius
     title: Robert
     type: glance

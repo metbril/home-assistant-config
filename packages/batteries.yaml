@@ -53,11 +53,6 @@ homeassistant:
       device_class: battery
       unit_of_measurement: '%'
 
-    sensor.robert_owntracks_battery_level:
-      friendly_name: Robert Owntracks
-      device_class: battery
-      unit_of_measurement: '%'
-
 ################################################
 ## Sensor
 ################################################
@@ -96,8 +91,3 @@ sensor:
           {% else %}
             {{battery_level}}
           {% endif %}
-
-      robert_owntracks_battery_level:
-        entity_id: device_tracker.robert_owntracks
-        value_template: >-
-          {{ state_attr('device_tracker.robert_owntracks', 'battery') | int('unknown') }}
