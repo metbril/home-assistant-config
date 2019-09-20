@@ -24,9 +24,6 @@ cards:
     tap_action:
       action: more-info
     type: entity-button
-  - entity: weather.dark_sky
-    name: Het weer hiero
-    type: weather-forecast
   - entity: light.living_lights
     type: light
   - type: entity-filter
