@@ -66,7 +66,6 @@ cards:
       - entity: zwave.charging_station_plug
       - entity: zwave.garage_door_plug
       - entity: zwave.turbine_light_plug
-      - entity: zwave.living_siren_alarm
     show_header_toggle: false
     title: Nodes
     type: entities
@@ -75,6 +74,5 @@ cards:
       - sensor.pontius_battery_level
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
-      - sensor.living_siren_alarm_battery_level
       - sensor.pws_th_battery_level
     title: Batterijen

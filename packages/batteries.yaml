@@ -28,11 +28,6 @@ homeassistant:
     ## Sensor
     ################################################
 
-    sensor.living_siren_alarm_battery_level:
-      friendly_name: Batterij sirene woonkamer
-      device_class: battery
-      unit_of_measurement: '%'
-
     sensor.pws_th_battery_level:
       friendly_name: Batterij temperatuur PWS
       device_class: battery
@@ -45,11 +40,6 @@ homeassistant:
 sensor:
   - platform: template
     sensors:
-
-      living_siren_alarm_battery_level:
-        entity_id: zwave.living_siren_alarm
-        value_template: >-
-          {{ states.zwave.living_siren_alarm.attributes.battery_level }}
 
       pws_th_battery_level:
         entity_id: sensor.pws_th_temperature
