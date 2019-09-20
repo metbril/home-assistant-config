@@ -139,11 +139,6 @@ sensor:
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
 
-  ## Custom component
-  ## https://github.com/custom-components/sensor.rpi_power
-  - platform: rpi_power
-    text_state: true
-
 ################################################
 ## Folder Watcher
 ## https://www.home-assistant.io/components/folder_watcher/

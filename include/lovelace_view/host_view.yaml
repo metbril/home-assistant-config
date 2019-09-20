@@ -6,7 +6,6 @@ badges:
   - binary_sensor.db_large
   - binary_sensor.cpu_high
   - binary_sensor.cpu_hot
-  - binary_sensor.rpi_power_issue
 
 cards:
   - entities:
@@ -84,11 +83,3 @@ cards:
       - sensor.living_multi_sensor_battery_level
       - sensor.pws_th_battery_level
     title: Batterijen
-  - type: entities
-    entities:
-      - entity: binary_sensor.rpi_power_issue
-      - entity: sensor.rpi_power_status
-      - entity: alert.rpi_power_issue
-      - entity: automation.rpi_power_issue_notification
-    show_header_toggle: false
-    title: Voeding
