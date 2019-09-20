@@ -32,12 +32,8 @@ binary_sensor.night:
 binary_sensor.workday:
   friendly_name: Werkdag
   icon: mdi:briefcase
-climate.master_bedroom:
-  friendly_name: Ouderslaapkamer
 device_tracker.pontius:
   icon: mdi:apple-ios
-fan.master_bedroom:
-  friendly_name: Ouderslaapkamer
 group.all_automations:
   hidden: false
 group.all_scripts:
@@ -60,9 +56,6 @@ group.person_monique:
 group.person_robert:
   friendly_name: Robert
   icon: mdi:human-male
-input_boolean.master_bedroom_fan:
-  friendly_name: Ouderslaapkamer
-  icon: mdi:fan
 light.bank:
   icon: mdi:floor-lamp
 light.bollamp:

@@ -16,8 +16,3 @@ cards:
         entity: sensor.pws_th_temperature
         graph: line
         name: Buiten
-  - type: thermostat
-    entity: climate.master_bedroom
-  - type: entities
-    entities: 
-      - input_boolean.master_bedroom_fan
