@@ -2,7 +2,6 @@ title: Weer
 path: weer
 icon: 'mdi:weather-partlycloudy'
 badges:
-  - binary_sensor.meteoalarm
   - binary_sensor.protection_window
 cards:
   - entity: weather.dark_sky
