@@ -19,10 +19,3 @@ cards:
         graph: line
   - cards:
     type: vertical-stack
-  - type: entities
-    entities:
-      - entity: sensor.current_uv_level_local
-      - entity: binary_sensor.protection_window
-      - entity: sensor.current_uv_index
-      - entity: sensor.max_uv_index
-      - entity: sensor.current_ozone_level

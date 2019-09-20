@@ -2,20 +2,3 @@
   alias: dummy
   trigger: []
   action: []
-- id: 'update_openuv_during_daytime'
-  alias: Ververs UV-verwachting
-  trigger:
-  - hours: ''
-    minutes: /30
-    platform: time_pattern
-    seconds: ''
-  condition:
-  - after: sunrise
-    condition: sun
-  - before: sunset
-    condition: sun
-  action:
-  - service: openuv.update_data
-  - data:
-      message: UV data is ververst.
-    service: notify.admin
