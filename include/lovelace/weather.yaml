@@ -3,19 +3,3 @@ path: weer
 icon: 'mdi:weather-partlycloudy'
 badges:
   - binary_sensor.protection_window
-cards:
-  - entities:
-      - entity: automation.rain_alarm
-      - entity: sensor.pws_th_temperature
-      - entity: sensor.pws_th_humidity
-    type: glance
-  - type: horizontal-stack
-    cards:
-      - type: sensor
-        entity: sensor.pws_th_temperature
-        graph: line
-      - type: sensor
-        entity: sensor.pws_th_humidity
-        graph: line
-  - cards:
-    type: vertical-stack

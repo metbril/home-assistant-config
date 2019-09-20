@@ -98,11 +98,6 @@ sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
   friendly_name: Percentage geblokkeerde advertenties
-sensor.pws_th_humidity:
-  friendly_name: Luchtvochtigheid
-  icon: mdi:water-percent
-sensor.pws_th_temperature:
-  friendly_name: Temperatuur
 sensor.season:
   friendly_name: Seizoen
 sensor.time:

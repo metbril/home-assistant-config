@@ -23,31 +23,3 @@ homeassistant:
 
     group.batteries:
       friendly_name: Batterijen
-
-    ################################################
-    ## Sensor
-    ################################################
-
-    sensor.pws_th_battery_level:
-      friendly_name: Batterij temperatuur PWS
-      device_class: battery
-      unit_of_measurement: '%'
-
-################################################
-## Sensor
-################################################
-
-sensor:
-  - platform: template
-    sensors:
-
-      pws_th_battery_level:
-        entity_id: sensor.pws_th_temperature
-        value_template: >-
-          {% set battery_numeric = states.sensor.pws_th_temperature.attributes['Battery numeric'] | int('unknown') %}
-          {% set battery_level = battery_numeric * 10 | int('unknown') %}
-          {% if (battery_level == 90) %}
-            100
-          {% else %}
-            {{battery_level}}
-          {% endif %}

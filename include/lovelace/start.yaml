@@ -27,6 +27,5 @@ cards:
   - entity: light.living_lights
     type: light
   - entities:
-      - entity: sensor.pws_th_temperature
       - entity: sensor.power_consumption
     type: glance

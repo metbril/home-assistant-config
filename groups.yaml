@@ -20,9 +20,6 @@ batteries:
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
 
-      # rf
-      - sensor.pws_th_battery_level
-
 motion:
   name: Motion
   entities:

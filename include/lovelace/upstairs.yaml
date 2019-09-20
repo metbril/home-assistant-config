@@ -4,9 +4,3 @@ icon: 'mdi:home-floor-1'
 cards:
   - type: markdown
     content: 'Alle entiteiten per vertrek van de slaapverdieping.'
-  - type: horizontal-stack
-    cards:
-      - type: sensor
-        entity: sensor.pws_th_temperature
-        graph: line
-        name: Buiten
