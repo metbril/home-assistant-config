@@ -1,9 +1,6 @@
 title: Woonkamer
 path: woonkamer
 icon: 'mdi:sofa'
-badges:
-  - binary_sensor.living_multi_sensor_motion
-  - sensor.living_multi_sensor_temperature
 cards:
   - entity: light.living_lights
     type: light

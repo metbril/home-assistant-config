@@ -28,11 +28,6 @@ homeassistant:
     ## Sensor
     ################################################
 
-    sensor.living_multi_sensor_battery_level:
-      friendly_name: Batterij beweging woonkamer
-      device_class: battery
-      unit_of_measurement: '%'
-
     sensor.living_siren_alarm_battery_level:
       friendly_name: Batterij sirene woonkamer
       device_class: battery
@@ -50,11 +45,6 @@ homeassistant:
 sensor:
   - platform: template
     sensors:
-
-      living_multi_sensor_battery_level:
-        entity_id: zwave.living_multi_sensor
-        value_template: >-
-          {{ states.zwave.living_multi_sensor.attributes.battery_level }}
 
       living_siren_alarm_battery_level:
         entity_id: zwave.living_siren_alarm

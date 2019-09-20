@@ -35,7 +35,6 @@ cards:
   - type: glance
     title: Beweging
     entities:
-      - entity: binary_sensor.living_multi_sensor_motion
       - entity: binary_sensor.motion_garage
   - type: entity-filter
     state_filter:
@@ -47,4 +46,3 @@ cards:
       type: glance
     entities:
       - entity: binary_sensor.motion_garage
-      - entity: binary_sensor.living_multi_sensor_motion

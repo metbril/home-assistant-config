@@ -1,12 +1,3 @@
-sensor.living_multi_sensor_temperature:
-  ignored: false
-  polling_intensity: 15
-  # polling_intensity: 900
-sensor.living_multi_sensor_luminance:
-  ignored: false
-  polling_intensity: 15
-  # polling_intensity: 900
-
 sensor.fibaro_wall_plug_7_distance:
   ignored: true
 sensor.fibaro_wall_plug_7_general:

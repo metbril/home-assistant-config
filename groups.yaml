@@ -21,7 +21,6 @@ batteries:
       - sensor.iphone_van_robert_werk_battery_level
 
       # zwave
-      - sensor.living_multi_sensor_battery_level
       - sensor.living_siren_alarm_battery_level
 
       # rf
@@ -31,7 +30,6 @@ motion:
   name: Motion
   entities:
     - binary_sensor.motion_garage
-    - binary_sensor.living_multi_sensor_motion
 
 dusk_living_lights:
   entities:

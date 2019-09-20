@@ -1,8 +1,5 @@
 automation.switch_off_charging_station:
   friendly_name: Uitschakelen oplaadstation
-binary_sensor.living_multi_sensor_motion:
-  device_class: motion
-  friendly_name: Beweging woonkamer
 binary_sensor.daytime:
   friendly_name: Overdag
   icon: mdi:timetable
@@ -73,11 +70,6 @@ script.reset_energy_meters:
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
   icon: mdi:alert
-sensor.living_multi_sensor_luminance:
-  friendly_name: Lichtsterkte woonkamer
-  icon: mdi:brightness-6
-sensor.living_multi_sensor_temperature:
-  friendly_name: Temperatuur woonkamer
 sensor.charging_station_plug_energy:
   friendly_name: Verbruik oplaadstation
   icon: mdi:counter

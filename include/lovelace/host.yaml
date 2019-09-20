@@ -76,6 +76,5 @@ cards:
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
       - sensor.living_siren_alarm_battery_level
-      - sensor.living_multi_sensor_battery_level
       - sensor.pws_th_battery_level
     title: Batterijen

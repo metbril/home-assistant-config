@@ -7,10 +7,6 @@ cards:
   - type: horizontal-stack
     cards:
       - type: sensor
-        entity: sensor.living_multi_sensor_temperature
-        graph: line
-        name: Binnen
-      - type: sensor
         entity: sensor.pws_th_temperature
         graph: line
         name: Buiten
