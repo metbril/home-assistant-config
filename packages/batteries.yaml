@@ -33,18 +33,8 @@ homeassistant:
       device_class: battery
       unit_of_measurement: '%'
 
-    sensor.frontdoor_contact_battery_level:
-      friendly_name: Batterij contact voordeur
-      device_class: battery
-      unit_of_measurement: '%'
-
     sensor.living_siren_alarm_battery_level:
       friendly_name: Batterij sirene woonkamer
-      device_class: battery
-      unit_of_measurement: '%'
-
-    sensor.master_bedroom_outside_door_battery_level:
-      friendly_name: Batterij contact hoofdslaapkamer
       device_class: battery
       unit_of_measurement: '%'
 
@@ -66,20 +56,10 @@ sensor:
         value_template: >-
           {{ states.zwave.living_multi_sensor.attributes.battery_level }}
 
-      frontdoor_contact_battery_level:
-        entity_id: zwave.frontdoor_contact
-        value_template: >-
-          {{ states.zwave.frontdoor_contact.attributes.battery_level }}
-
       living_siren_alarm_battery_level:
         entity_id: zwave.living_siren_alarm
         value_template: >-
           {{ states.zwave.living_siren_alarm.attributes.battery_level }}
-
-      master_bedroom_outside_door_battery_level:
-        entity_id: zwave.master_bedroom_outside_door
-        value_template: >-
-          {{ states.zwave.master_bedroom_outside_door.attributes.battery_level }}
 
       pws_th_battery_level:
         entity_id: sensor.pws_th_temperature

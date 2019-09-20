@@ -4,7 +4,6 @@ icon: 'mdi:shield'
 badges:
   - binary_sensor.occupancy
   - group.motion
-  - group.contact
 cards:
   - type: horizontal-stack
     cards:
@@ -38,23 +37,6 @@ cards:
     entities:
       - entity: binary_sensor.living_multi_sensor_motion
       - entity: binary_sensor.motion_garage
-  - type: glance
-    title: Contactsensoren
-    entities:
-      - entity: binary_sensor.frontdoor_contact_sensor
-      - entity: binary_sensor.master_bedroom_outside_door_sensor
-  - type: entity-filter
-    state_filter:
-      - 'on'
-    show_empty: false
-    card:
-      show_state: false
-      title: Open contacten
-      type: glance
-    entities:
-      - entity: binary_sensor.frontdoor_contact_sensor
-      - entity: binary_sensor.master_bedroom_outside_door_sensor
-        name: Balkondeur
   - type: entity-filter
     state_filter:
       - 'on'

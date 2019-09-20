@@ -26,22 +26,6 @@ cards:
     type: entity-button
   - entity: light.living_lights
     type: light
-  - type: entity-filter
-    entities:
-      - entity: binary_sensor.frontdoor_contact_sensor
-      - entity: binary_sensor.master_bedroom_outside_door_sensor
-        name: Balkondeur
-    state_filter:
-      - 'on'
-    card:
-      type: glance
-      title: Open contacten
-      show_state: false
-    show_empty: false
-  - entities:
-      - entity: alert.frontdoor_open
-    title: Voordeur alert
-    type: glance
   - entities:
       - entity: sensor.pws_th_temperature
       - entity: sensor.power_consumption

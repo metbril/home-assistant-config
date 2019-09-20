@@ -22,18 +22,10 @@ batteries:
 
       # zwave
       - sensor.living_multi_sensor_battery_level
-      - sensor.frontdoor_contact_battery_level
-      - sensor.master_bedroom_outside_door_battery_level
       - sensor.living_siren_alarm_battery_level
 
       # rf
       - sensor.pws_th_battery_level
-
-contact:
-  name: Contact Sensors
-  entities:
-    - binary_sensor.master_bedroom_outside_door_sensor
-    - binary_sensor.frontdoor_contact_sensor
 
 motion:
   name: Motion

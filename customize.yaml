@@ -12,12 +12,6 @@ binary_sensor.evening:
 binary_sensor.flamingo_remote_button_a:
   friendly_name: Flamingo Afstandsbediening A
   icon: mdi:remote
-binary_sensor.frontdoor_contact_sensor:
-  device_class: door
-  friendly_name: Voordeur
-binary_sensor.master_bedroom_outside_door_sensor:
-  device_class: door
-  friendly_name: Balkondeur Ouderslaapkamer
 binary_sensor.morning:
   friendly_name: Ochtend
   icon: mdi:timetable
@@ -36,8 +30,6 @@ group.all_automations:
   hidden: false
 group.all_scripts:
   hidden: false
-group.contact:
-  friendly_name: Contactsensoren
 group.dusk_living_lights:
   friendly_name: Schemerverlichting Woonkamer
 group.living_lights:

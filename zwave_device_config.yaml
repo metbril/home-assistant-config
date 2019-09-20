@@ -67,21 +67,3 @@ sensor.garage_door_plug_previous_reading_4:
   ignored: true
 sensor.garage_door_plug_interval_4:
   ignored: true
-
-sensor.frontdoor_contact_access_control:
-  ignored: true
-sensor.frontdoor_contact_alarm_level:
-  ignored: true
-sensor.frontdoor_contact_alarm_type:
-  ignored: true
-sensor.frontdoor_contact_sourcenodeid:
-  ignored: true
-
-sensor.master_bedroom_outside_door_access_control:
-  ignored: true
-sensor.master_bedroom_outside_door_alarm_level:
-  ignored: true
-sensor.master_bedroom_outside_door_alarm_type:
-  ignored: true
-sensor.master_bedroom_outside_door_sourcenodeid:
-  ignored: true

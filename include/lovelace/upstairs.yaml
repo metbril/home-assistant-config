@@ -1,8 +1,6 @@
 title: Bovenverdieping
 path: boven
 icon: 'mdi:home-floor-1'
-badges:
-  - binary_sensor.master_bedroom_outside_door_sensor
 cards:
   - type: markdown
     content: 'Alle entiteiten per vertrek van de slaapverdieping.'

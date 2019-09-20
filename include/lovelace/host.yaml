@@ -65,8 +65,6 @@ cards:
       - entity: zwave.unknown_node_8
       - entity: zwave.charging_station_plug
       - entity: zwave.garage_door_plug
-      - entity: zwave.frontdoor_contact
-      - entity: zwave.master_bedroom_outside_door
       - entity: zwave.turbine_light_plug
       - entity: zwave.living_siren_alarm
     show_header_toggle: false
@@ -77,8 +75,6 @@ cards:
       - sensor.pontius_battery_level
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
-      - sensor.frontdoor_contact_battery_level
-      - sensor.master_bedroom_outside_door_battery_level
       - sensor.living_siren_alarm_battery_level
       - sensor.living_multi_sensor_battery_level
       - sensor.pws_th_battery_level
