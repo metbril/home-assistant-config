@@ -28,7 +28,6 @@ notify:
       # - service: admin
       - service: ios_pontius
       - service: ios_patti
-      - service: living_tv
 
   - name: Twitter
     platform: twitter

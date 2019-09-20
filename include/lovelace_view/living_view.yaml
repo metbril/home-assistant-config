@@ -4,7 +4,6 @@ icon: 'mdi:sofa'
 badges:
   - binary_sensor.living_multi_sensor_motion
   - sensor.living_multi_sensor_temperature
-  - media_player.living_tv
 cards:
   - entity: light.living_lights
     type: light
@@ -28,8 +27,6 @@ cards:
         name: Auto uit
     title: Oplaadstation
     type: glance
-  - entity: media_player.living_tv
-    type: media-control
   - entity: scene.goodnight
     hold_action:
       action: more-info

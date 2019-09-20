@@ -22,5 +22,4 @@ scene:
   - name: Goodnight
     entities:
       light.living_lights: off
-      media_player.living_tv: off
 

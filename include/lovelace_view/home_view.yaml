@@ -7,7 +7,6 @@ cards:
     type: markdown
   - entities:
       - entity: light.living_lights
-      - entity: media_player.living_tv
       - entity: switch.charging_station_plug_switch
       - entity: switch.fibaro_wall_plug_7
       - entity: switch.mess_call

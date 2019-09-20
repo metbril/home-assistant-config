@@ -79,9 +79,6 @@ ios:
 # show hass.io panel
 hassio:
 
-# enable sending wake on lan packets from HA
-wake_on_lan:
-
 ###############################################################################
 ## Person
 ## https://www.home-assistant.io/components/person

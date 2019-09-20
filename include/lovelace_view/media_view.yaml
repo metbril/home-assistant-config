@@ -1,7 +1,0 @@
-title: Media
-path: play
-icon: 'mdi:play-network'
-badges: []
-cards:
-  - entity: media_player.living_tv
-    type: media-control
