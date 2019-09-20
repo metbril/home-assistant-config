@@ -7,7 +7,6 @@ cards:
       - entity: binary_sensor.daytime
       - entity: binary_sensor.evening
       - entity: binary_sensor.night
-      - entity: sensor.time_of_day
     type: glance
   - entities:
       - entity: sensor.moon
