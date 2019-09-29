@@ -21,76 +21,24 @@ homeassistant:
 
   customize: !include customize.yaml
 
-lovelace:
-  mode: yaml
-
-discovery:
-
-system_health:
-
-# UI elements
-
-frontend:
+##############################
+## Integrations
+##############################
 config:
-map:
-# conversation:
-
+discovery:
+frontend:
+hassio:
 http:
-  server_port: 8123
-  # base_url: !secret http_base_url
   ip_ban_enabled: yes
   login_attempts_threshold: 10
-  use_x_forwarded_for: true # default: false, use for proxied setup
-  trusted_proxies: # required since 0.73
+  use_x_forwarded_for: true
+  trusted_proxies:
     - 127.0.0.1
     - ::1
-
-# Combine automation editor and manual automations
-automation: !include automations.yaml
-automation old: !include_dir_merge_list include/automations
-
-binary_sensor: !include_dir_merge_list include/binary_sensors
-sensor: !include_dir_merge_list include/sensors
-switch: !include_dir_merge_list include/switches
-group: !include groups.yaml
-
-##########
-## Bridges and hubs
-##########
-
-rfxtrx:
-  device: !secret rfxtrx_device
-  debug: no
-
-zwave:
-  usb_path: !secret zwave_usb_path
-  device_config: !include zwave_device_config.yaml
-  network_key: !secret zwave_network_key
-
-# tts:
-#   - platform: google
-
-# Home Assistant Cloud
-# cloud:
-
-# enable ios app
 ios:
-
-# show hass.io panel
-hassio:
-pi_hole:
-  host: 'localhost:4865' # default: 'pi.hole'
-  ssl: false # default: false
-  verify_ssl: false # default: false
-
-###############################################################################
-## Person
-## https://www.home-assistant.io/components/person
-##
-## Person component does not seem to be working from
-## packages at the moment, therefor added to main config
-###############################################################################
-
+lovelace:
+  mode: yaml
+map:
 person:
   - name: King
     id: king1
@@ -105,3 +53,25 @@ person:
     id: bishop3
     device_trackers:
       - device_tracker.bishop_iphone
+pi_hole:
+  host: 'localhost:4865' # default: 'pi.hole'
+  ssl: false # default: false
+  verify_ssl: false # default: false
+rfxtrx:
+  device: !secret rfxtrx_device
+  debug: no
+system_health:
+zwave:
+  usb_path: !secret zwave_usb_path
+  device_config: !include zwave_device_config.yaml
+  network_key: !secret zwave_network_key
+
+##############################
+## Included entities
+##############################
+automation: !include automations.yaml
+automation old: !include_dir_merge_list include/automations
+binary_sensor: !include_dir_merge_list include/binary_senso rs
+group: !include groups.yaml
+sensor: !include_dir_merge_list include/sensors
+switch: !include_dir_merge_list include/switches
