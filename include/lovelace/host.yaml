@@ -43,11 +43,6 @@ cards:
   - entities:
       - entity: sensor.pi_hole_ads_blocked_today
       - entity: sensor.pi_hole_ads_percentage_blocked_today
-      - entity: weblink.pi_hole
-      - type: weblink
-        url: //hassio.local:4865/admin/
-        name: Pi-Hole
-        icon: mdi:open-in-new
     show_header_toggle: false
     title: pi Hole
     type: entities
