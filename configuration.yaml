@@ -40,19 +40,6 @@ lovelace:
   mode: yaml
 map:
 person:
-  - name: King
-    id: king1
-    user_id: !secret person1_user_id
-    device_trackers:
-      - device_tracker.pontius           # ios
-  - name: Queen
-    id: queen2
-    device_trackers:
-      - device_tracker.queen_iphone
-  - name: Bishop
-    id: bishop3
-    device_trackers:
-      - device_tracker.bishop_iphone
 pi_hole:
   host: 'localhost:4865' # default: 'pi.hole'
   ssl: false # default: false
