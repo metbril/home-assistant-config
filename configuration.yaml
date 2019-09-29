@@ -12,8 +12,6 @@ homeassistant:
     # - /backup # for folder watcher (not working yet)
   auth_providers:
     - type: homeassistant
-    - type: legacy_api_password # still required for iOS app
-      api_password: !secret http_password # required since 0.90
     - type: trusted_networks
       trusted_networks:
         - 127.0.0.1
