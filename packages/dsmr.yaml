@@ -155,24 +155,58 @@ utility_meter:
     cycle: monthly
 
 ############################################################################
+## Notify
+############################################################################
+
+notify:
+  - name: energy_consumption
+    platform: file
+    filename: energy_consumption.csv
+    timestamp: false
+
+############################################################################
+## Script
+############################################################################
+
+script:
+  log_energy_consumption:
+    sequence:
+      - service: notify.energy_consumption
+        data_template: 
+          message: >
+            {{ now() }}, 
+            {{ states('sensor.power_consumption_low') }}, 
+            {{ states('sensor.power_consumption_normal') }}, 
+            {{ states('sensor.gas_consumption')}}
+
+############################################################################
 ## Automation
 ## https://www.home-assistant.io/components/automation/
 ############################################################################
 
 automation:
-- alias: Post Gas Consumption
-  hide_entity: no # default no
-  trigger:
-    - platform: time
-      ## run daily at 00:15:00
-      ## gas meter reading usually updated around 0:06
-      ## publishing should happen after that
-      at: '00:15:00'
-  action:
-    - service: rest_command.post_mindergas
-    - service: logbook.log
-      data:
-        name: Gasverbruik
-        message: is verstuurd naar mindergas.nl
-        entity_id: sensor.gas_consumption
-        domain: sensor
+  - alias: Post Gas Consumption
+    hide_entity: no # default no
+    trigger:
+      - platform: time
+        ## run daily at 00:15:00
+        ## gas meter reading usually updated around 0:06
+        ## publishing should happen after that
+        at: '00:15:00'
+    action:
+      - service: rest_command.post_mindergas
+      - service: logbook.log
+        data:
+          name: Gasverbruik
+          message: is verstuurd naar mindergas.nl
+          entity_id: sensor.gas_consumption
+          domain: sensor
+  - alias: Log Energy Consumption
+    trigger:
+      - platform: time_pattern
+        hours: '*'
+        minutes: '0'
+        seconds: '0'
+    action:
+      - service: script.log_energy_consumption
+        
