@@ -6,9 +6,9 @@ badges:
 cards:
   - type: glance
     entities:
-      - entity: person.robert
-      - entity: person.monique
-      - entity: person.bjorn
+      - entity: person.king
+      - entity: person.queen
+      - entity: person.bishop
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time

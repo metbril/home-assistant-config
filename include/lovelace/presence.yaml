@@ -2,21 +2,21 @@ title: Aanwezigheid
 path: aanwezigheid
 icon: 'mdi:account'
 badges:
-  - person.robert
-  - person.monique
-  - person.bjorn
+  - person.king
+  - person.queen
+  - person.bishop
   - binary_sensor.occupancy
 cards:
   - columns: 4
     entities:
-      - entity: device_tracker.robert_iphone
+      - entity: device_tracker.king_iphone
       - entity: sensor.pontius_battery_level
       - entity: sensor.pontius_battery_state
-    title: iPhone Robert
+    title: iPhone King
     type: glance
   - entities:
-      - entity: device_tracker.robert_iphone
-    title: Waar is Robert nu?
+      - entity: device_tracker.king_iphone
+    title: Waar is King nu?
     type: map
   - entities:
       - entity: input_boolean.occupancy_home
@@ -41,8 +41,8 @@ cards:
     show_header_toggle: false
     type: entities
   - entities:
-      - entity: person.robert
-      - entity: device_tracker.robert_iphone
+      - entity: person.king
+      - entity: device_tracker.king_iphone
       - entity: device_tracker.pontius
-    title: Robert
+    title: King
     type: glance

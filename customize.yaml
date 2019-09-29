@@ -31,14 +31,14 @@ group.living_lights:
 group.motion:
   friendly_name: Bewegingsensoren
   icon: mdi:run
-group.person_bjorn:
-  friendly_name: Björn
+group.person_bishop:
+  friendly_name: Bishop
   icon: mdi:human-male
-group.person_monique:
-  friendly_name: Monique
+group.person_queen:
+  friendly_name: Queen
   icon: mdi:human-female
-group.person_robert:
-  friendly_name: Robert
+group.person_king:
+  friendly_name: King
   icon: mdi:human-male
 light.bank:
   icon: mdi:floor-lamp
@@ -52,12 +52,12 @@ light.tv_meubel:
   icon: mdi:lamp
 light.willner:
   icon: mdi:lamp
-person.bjorn:
-  entity_picture: /local/img/wasd.png
-person.monique:
-  entity_picture: /local/img/golf.png
-person.robert:
-  entity_picture: /local/img/uil.png
+person.bishop:
+  icon: mdi:chess-bishop
+person.queen:
+  icon: mdi:chess-queen
+person.king:
+  icon: mdi:chess-king
 script.reset_energy_meters:
   friendly_name: Opnieuw instellen Z-Wave Energiemeters
 sensor.bad_login:
