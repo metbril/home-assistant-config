@@ -16,4 +16,5 @@ views:
   - !include include/lovelace/info.yaml
   - !include include/lovelace/utilities.yaml
   - !include include/lovelace/host.yaml
+  - !include include/lovelace/zwave.yaml
   - !include include/lovelace/automation.yaml

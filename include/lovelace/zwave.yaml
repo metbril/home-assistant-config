@@ -1,0 +1,40 @@
+title: Z-Wave
+path: zwave
+icon: 'mdi:z-wave'
+badges:
+cards:
+    - type: entities
+      title: 'Nodes'
+      show_header_toggle: false
+      entities:
+        - zwave.controller_1
+        - zwave.fibaro_wall_plug_7
+        - zwave.charging_station_plug
+        - zwave.turbine_light_plug
+    - type: entities
+      title: 'Oplaadstation'
+      show_header_toggle: false
+      entities:
+        - switch.charging_station_plug_switch
+        - sensor.charging_station_plug_current
+        - sensor.charging_station_plug_voltage
+        - sensor.charging_station_plug_energy
+        - sensor.charging_station_plug_power
+    - type: entities
+      title: 'Turbine Lamp Schakelaar'
+      show_header_toggle: false
+      entities:
+        - switch.turbine_light_plug_switch
+        - sensor.turbine_light_plug_current
+        - sensor.turbine_light_plug_voltage
+        - sensor.turbine_light_plug_energy
+        - sensor.turbine_light_plug_power
+    - type: entities
+      title: 'Fibaro Schakelaar'
+      show_header_toggle: false
+      entities:
+        - switch.fibaro_wall_plug_7
+        - sensor.fibaro_wall_plug_7_energy
+        - sensor.fibaro_wall_plug_7_power
+
+

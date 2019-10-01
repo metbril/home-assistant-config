@@ -54,12 +54,6 @@ cards:
     show_header_toggle: false
     title: WAN
     type: entities
-  - entities:
-      - entity: zwave.controller_1
-      - entity: zwave.turbine_light_plug
-    show_header_toggle: false
-    title: Nodes
-    type: entities
   - type: entities
     entities:
       - sensor.pontius_battery_level
