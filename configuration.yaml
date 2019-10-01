@@ -24,7 +24,21 @@ homeassistant:
 ##############################
 ## Integrations
 ##############################
+asuswrt:
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  ssh_key: !secret asuswrt_ssh_key
+  protocol: ssh
+  port: 22
+  mode: router
 config:
+device_tracker:
+  - platform: asuswrt
+    consider_home: 180
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
 discovery:
 frontend:
 hassio:
