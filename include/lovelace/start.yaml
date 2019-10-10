@@ -2,13 +2,17 @@ title: Start
 path: start
 icon: 'mdi:rocket'
 badges:
-  - binary_sensor.occupancy
+  - entity: binary_sensor.occupancy
+  - person.queen
+  - person.king
+  - person.bishop
 cards:
   - type: glance
     entities:
       - entity: person.king
       - entity: person.queen
       - entity: person.bishop
+      - entity: sensor.occupancy
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
