@@ -72,7 +72,7 @@ zwave:
 ##############################
 automation: !include automations.yaml
 automation old: !include_dir_merge_list include/automations
-binary_sensor: !include_dir_merge_list include/binary_senso rs
+binary_sensor: !include_dir_merge_list include/binary_sensors
 group: !include groups.yaml
 sensor: !include_dir_merge_list include/sensors
 switch: !include_dir_merge_list include/switches
