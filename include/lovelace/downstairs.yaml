@@ -1,16 +1,5 @@
 title: Beneden
 path: beneden
 icon: 'mdi:home-floor-0'
-badges:
-  - binary_sensor.motion_garage
-cards:
-  - content: 'Alle entiteiten per vertrek van de begane grond.'
-    type: markdown
-  - entities:
-      - entity: binary_sensor.motion_garage
-    title: Entree
-    type: glance
-  - entities:
-      - entity: binary_sensor.motion_garage
-    title: Garage
-    type: glance
+badges: []
+cards: []

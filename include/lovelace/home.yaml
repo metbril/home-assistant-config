@@ -3,14 +3,16 @@ path: huis
 icon: 'mdi:home'
 badges: []
 cards:
-  - content: 'De belangrijkste entiteiten in huis, gegroepeerd per ruimte.'
-    type: markdown
-  - entities:
+  - type: entities
+    entities:
       - entity: light.living_lights
-    show_header_toggle: false
     title: Woonkamer
-    type: entities
-  - entities:
+    show_header_toggle: false
+  - type: glance
+    entities:
       - entity: switch.turbine_light_plug_switch
     title: Schakelaars
-    type: glance
+  - type: glance
+    entities:
+      - entity: binary_sensor.motion_garage
+    title: Garage
