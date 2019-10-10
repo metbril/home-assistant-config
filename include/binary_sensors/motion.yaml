@@ -1,5 +1,0 @@
-- platform: rfxtrx
-  automatic_add: false
-  devices:
-    0b110010011600020a010f70: # kaku motion
-      name: motion_garage

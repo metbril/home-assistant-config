@@ -7,9 +7,6 @@ binary_sensor.evening:
 binary_sensor.morning:
   friendly_name: Ochtend
   icon: mdi:timetable
-binary_sensor.motion_garage:
-  device_class: motion
-  friendly_name: Beweging garage
 binary_sensor.night:
   friendly_name: Nacht
   icon: mdi:timetable
@@ -61,14 +58,10 @@ sensor.gas_consumption:
   unit_of_measurement: m³
 sensor.hourly_gas_consumption:
   hidden: true
-sensor.moon:
-  friendly_name: Maan
 sensor.pihole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pihole_ads_percentage_blocked_today:
   friendly_name: Percentage geblokkeerde advertenties
-sensor.season:
-  friendly_name: Seizoen
 sensor.time:
   friendly_name: Tijd
 sensor.turbine_light_plug_power:
