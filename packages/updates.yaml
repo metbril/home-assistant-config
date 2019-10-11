@@ -13,14 +13,6 @@ homeassistant:
         package: 'updates'
 
     ########################################################################
-    ## Updater
-    ########################################################################
-
-    updater.updater:
-      friendly_name: HA Update Beschikbaar
-      icon: mdi:sync
-
-    ########################################################################
     ## Binary Sensor
     ########################################################################
 
@@ -47,16 +39,6 @@ homeassistant:
       friendly_name: Hassio Update Beschikbaar Melding
     automation.ha_update_available_notification:
       friendly_name: HA Update Beschikbaar Melding
-
-############################################################################
-## Updater
-## https://www.home-assistant.io/components/updater/
-## https://www.home-assistant.io/docs/backend/updater/
-############################################################################
-
-updater:
-  reporting: true # collect basic information about this instance and its environment
-  include_used_components: true # report components to developers
 
 ############################################################################
 ## Binary Sensor
