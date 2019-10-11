@@ -32,13 +32,6 @@ asuswrt:
   port: 22
   mode: router
 config:
-device_tracker:
-  - platform: asuswrt
-    consider_home: 180
-    interval_seconds: 60
-    new_device_defaults:
-      track_new_devices: false
-      hide_if_away: false
 discovery:
 frontend:
 hassio:
@@ -53,7 +46,6 @@ ios:
 lovelace:
   mode: yaml
 map:
-person:
 pi_hole:
   host: 'localhost:4865' # default: 'pi.hole'
   ssl: false # default: false

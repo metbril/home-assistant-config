@@ -13,8 +13,6 @@ binary_sensor.night:
 binary_sensor.workday:
   friendly_name: Werkdag
   icon: mdi:briefcase
-device_tracker.pontius:
-  icon: mdi:apple-ios
 group.all_automations:
   hidden: false
 group.all_scripts:
@@ -40,12 +38,6 @@ light.tv_meubel:
   icon: mdi:lamp
 light.willner:
   icon: mdi:lamp
-person.bishop:
-  icon: mdi:chess-bishop
-person.queen:
-  icon: mdi:chess-queen
-person.king:
-  icon: mdi:chess-king
 script.reset_energy_meters:
   friendly_name: Opnieuw instellen Z-Wave Energiemeters
 sensor.bad_login:
