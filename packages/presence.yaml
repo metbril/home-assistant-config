@@ -15,11 +15,14 @@ homeassistant:
     ## Person
     ########################################################################
     person.bishop:
+      name: !secret person_bishop_name
       icon: mdi:chess-bishop
-    person.queen:
-      icon: mdi:chess-queen
     person.king:
+      name: !secret person_king_name
       icon: mdi:chess-king
+    person.queen:
+      name: !secret person_queen_name
+      icon: mdi:chess-queen
 
 ############################################################################
 ## Device Tracker
