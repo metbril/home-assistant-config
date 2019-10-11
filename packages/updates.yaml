@@ -79,15 +79,6 @@ sensor:
 
 automation:
 
-  - alias: 'HA Update Available Notification'
-    trigger:
-      - platform: state
-        entity_id: updater.updater
-    action:
-      - service: notify.admin
-        data:
-          message: 'Update voor Home Assistant beschikbaar.'
-
   - alias: 'Hassio Update Available Notification'
     trigger:
       - platform: state
