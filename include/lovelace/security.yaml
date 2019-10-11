@@ -33,7 +33,7 @@ cards:
           action: toggle
         type: entity-button
   - type: glance
-    title: Beweging
+    title: Alle beweging
     entities:
       - entity: binary_sensor.motion_garage
   - type: entity-filter
