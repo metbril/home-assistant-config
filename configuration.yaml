@@ -5,7 +5,7 @@ homeassistant:
   elevation: !secret home_elevation
   unit_system: metric
   time_zone: Europe/Amsterdam
-  packages: !include_dir_named packages
+  packages: !include_dir_named includes/packages
   whitelist_external_dirs:
     - !secret whitelist_dir_config
     - !secret whitelist_dir_ssl
