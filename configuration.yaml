@@ -56,7 +56,7 @@ rfxtrx:
 system_health:
 zwave:
   usb_path: !secret zwave_usb_path
-  device_config: !include zwave_device_config.yaml
+  # device_config: !include zwave_device_config.yaml
   network_key: !secret zwave_network_key
 
 ##############################
@@ -65,5 +65,4 @@ zwave:
 automation: !include automations.yaml
 automation old: !include_dir_merge_list include/automations
 group: !include groups.yaml
-sensor: !include_dir_merge_list include/sensors
 switch: !include_dir_merge_list include/switches
