@@ -55,3 +55,4 @@ zwscene.xml
 .*
 !/.gitignore
 !/.travis.yml
+energy_consumption.csv
