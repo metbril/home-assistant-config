@@ -85,7 +85,8 @@ automation:
         entity_id: sensor.cert_pem_last_updated
     condition: 
       - condition: template
-        value_template: "{{ (trigger.from_state.state != 'None') }}"
+        value_template: >
+          {{ trigger.from_state.state not in ['None', 'unknown'] }}
     action:
       - service: hassio.addon_restart
         data:
