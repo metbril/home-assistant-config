@@ -7,13 +7,15 @@ badges:
   - person.bishop
   - binary_sensor.occupancy
 cards:
-  - columns: 4
+  - type: glance
     entities:
-      - entity: device_tracker.king_iphone
+      - entity: device_tracker.pontius
+      - entity: device_tracker.robert_iphone
       - entity: sensor.pontius_battery_level
       - entity: sensor.pontius_battery_state
     title: iPhone King
-    type: glance
+    columns: 4
+    
   - entities:
       - entity: device_tracker.king_iphone
     title: Waar is King nu?
