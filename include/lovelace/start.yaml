@@ -3,8 +3,8 @@ path: start
 icon: 'mdi:rocket'
 badges:
   - entity: binary_sensor.occupancy
-  - person.queen
   - person.king
+  - person.queen
   - person.bishop
 cards:
   - type: glance
@@ -13,6 +13,13 @@ cards:
       - entity: person.queen
       - entity: person.bishop
       - entity: sensor.occupancy
+  - type: glance
+    entities:
+      - entity: light.living_lights
+        tap_action: 
+          action: toggle
+
+
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
@@ -28,8 +35,8 @@ cards:
     tap_action:
       action: more-info
     type: entity-button
-  - entity: light.living_lights
-    type: light
+  - type: light
+    entity: light.living_lights
   - entities:
       - entity: sensor.power_consumption
     type: glance
