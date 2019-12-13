@@ -1,0 +1,87 @@
+######################################################################
+## Holidays
+######################################################################
+
+homeassistant:
+
+  customize_glob:
+    sensor.*_countdown:
+      unit_of_measurement: "dagen"
+      icon: mdi:counter
+
+  customize:
+    package.node_anchors:
+      customize: &customize
+        package: 'holidays'
+
+    sensor.easter_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Pasen"
+
+    sensor.king_s_day_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Koningsdag"
+
+    sensor.mother_s_day_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Moederdag"
+
+    sensor.father_s_day_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Vaderdag"
+
+    sensor.sinterklaas_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Pakjesavond"
+
+    sensor.christmas_countdown:
+      <<: *customize
+      friendly_name: "Aftellen tot Kerstmis"
+
+sensor:
+
+  ## Wolfram Alpha queries for days until some holidays
+  ## https://products.wolframalpha.com/short-answers-api/documentation/
+  ## Save on API calls, call every 12 hours
+
+  - platform: rest
+    name: Easter Countdown
+    resource: !secret wolframalpha_api_easter
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200
+
+  - platform: rest
+    name: King's Day Countdown
+    resource: !secret wolframalpha_api_king_s_day
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200
+
+  - platform: rest
+    name: Mother's Day Countdown
+    resource: !secret wolframalpha_api_mother_s_day
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200
+
+  - platform: rest
+    name: Father's Day Countdown
+    resource: !secret wolframalpha_api_father_s_day
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200
+
+  - platform: rest
+    name: Sinterklaas Countdown
+    resource: !secret wolframalpha_api_sinterklaas
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200
+
+  - platform: rest
+    name: Christmas Countdown
+    resource: !secret wolframalpha_api_christmas
+    value_template: "{{ (value|replace(' days', '')) | int }}"
+    unit_of_measurement: Days
+    scan_interval: 43200

@@ -1,15 +1,8 @@
 title: Information
 path: info
 icon: 'mdi:information'
+
 cards:
-  - entities:
-      - entity: binary_sensor.workday
-      - entity: sun.sun
-    type: glance
-  - entities:
-      - entity: sensor.date
-      - entity: sensor.time
-    type: entities
   - entities:
       - entity: automation.log_level
       - entity: input_select.log_level
