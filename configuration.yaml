@@ -42,7 +42,10 @@ http:
   trusted_proxies:
     - 127.0.0.1
     - ::1
+
 ios:
+mobile_app:
+
 lovelace:
   mode: yaml
 map:
@@ -54,10 +57,10 @@ rfxtrx:
   device: !secret rfxtrx_device
   debug: no
 system_health:
-zwave:
-  usb_path: !secret zwave_usb_path
-  # device_config: !include zwave_device_config.yaml
-  network_key: !secret zwave_network_key
+#zwave:
+#  usb_path: !secret zwave_usb_path
+#  # device_config: !include zwave_device_config.yaml
+#  network_key: !secret zwave_network_key
 
 ##############################
 ## Included entities
