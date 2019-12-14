@@ -9,17 +9,20 @@ badges:
 cards:
   - type: glance
     entities:
-      - entity: device_tracker.pontius
+      - entity: device_tracker.pontius_2
       - entity: device_tracker.robert_iphone
-      - entity: sensor.pontius_battery_level
-      - entity: sensor.pontius_battery_state
+      - entity: sensor.battery_level
+      - entity: sensor.battery_state
     title: iPhone King
     columns: 4
     
-  - entities:
-      - entity: device_tracker.king_iphone
+  - type: map
+    entities:
+      - entity: device_tracker.pontius_2
     title: Waar is King nu?
-    type: map
+    aspect_ratio: 16x9
+    default_zoom: 14
+
   - entities:
       - entity: input_boolean.occupancy_home
         tap_action:
