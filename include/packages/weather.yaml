@@ -1,0 +1,78 @@
+################################################
+## Weather
+################################################
+
+homeassistant:
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'weather'
+
+    weather.home:
+      friendly_name: Thuis
+    sensor.dark_sky_apparent_temperature:
+      friendly_name: Gevoelstemperatuur omgeving
+    sensor.dark_sky_humidity:
+      friendly_name: Luchtvochtigheid omgeving
+    sensor.dark_sky_ozone:
+      friendly_name: Ozon
+      icon: mdi:weather-sunny
+    sensor.dark_sky_precip_intensity:
+      friendly_name: Neerslagintensiteit omgeving
+      unit_of_measurement: mm/u
+    sensor.dark_sky_precip_probability:
+      friendly_name: Neerslagkans omgeving
+    sensor.dark_sky_pressure:
+      friendly_name: Luchtdruk omgeving
+    sensor.dark_sky_temperature:
+      friendly_name: Temperatuur omgeving
+    sensor.dark_sky_uv_index:
+      friendly_name: UV-index
+    sensor.dark_sky_wind_bearing:
+      friendly_name: Windrichting omgeving
+    sensor.dark_sky_wind_speed:
+      friendly_name: Windsnelheid omgeving
+
+################################################
+## Weather
+################################################
+
+weather:
+  - platform: darksky
+    name: home
+    api_key: !secret darksky_api_key
+    units: si
+
+################################################
+## Sensor
+################################################
+
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    units: si
+    language: nl
+    monitored_conditions:
+      - summary
+      - minutely_summary
+      - icon
+      - temperature
+      - apparent_temperature
+      - humidity
+      - pressure
+      - visibility
+      - wind_speed
+      - wind_gust
+      - wind_bearing
+      - cloud_cover
+      - ozone
+      - uv_index
+      - precip_intensity
+      - precip_probability
+      - precip_type
+      - alerts

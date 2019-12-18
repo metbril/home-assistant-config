@@ -7,6 +7,9 @@ badges:
   - person.queen
   - person.bishop
 cards:
+  - type: weather-forecast
+    entity: weather.home
+    name: Thuis
   - type: glance
     entities:
       - entity: person.king
