@@ -7,17 +7,17 @@ resources:
     type: js
 
 views:
-  - !include include/lovelace/start.yaml
-  - !include include/lovelace/home.yaml
-  - !include include/lovelace/living.yaml
-  - !include include/lovelace/presence.yaml
-  - !include include/lovelace/security.yaml
-  - !include include/lovelace/info.yaml
-  - !include include/lovelace/calendar.yaml
-  - !include include/lovelace/utilities.yaml
-  - !include include/lovelace/host.yaml
-  - !include include/lovelace/zwave.yaml
-  - !include include/lovelace/automation.yaml
-  - !include include/lovelace/downstairs.yaml
-  - !include include/lovelace/webcams.yaml
-  - !include include/lovelace/lab.yaml
+  - !include lovelace/start.yaml
+  - !include lovelace/home.yaml
+  - !include lovelace/living.yaml
+  - !include lovelace/presence.yaml
+  - !include lovelace/security.yaml
+  - !include lovelace/info.yaml
+  - !include lovelace/calendar.yaml
+  - !include lovelace/utilities.yaml
+  - !include lovelace/host.yaml
+  - !include lovelace/zwave.yaml
+  - !include lovelace/automation.yaml
+  - !include lovelace/downstairs.yaml
+  - !include lovelace/webcams.yaml
+  - !include lovelace/lab.yaml
