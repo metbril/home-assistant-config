@@ -13,6 +13,7 @@ views:
   - !include lovelace/presence.yaml
   - !include lovelace/security.yaml
   - !include lovelace/info.yaml
+  - !include lovelace/mobility.yaml
   - !include lovelace/calendar.yaml
   - !include lovelace/utilities.yaml
   - !include lovelace/host.yaml

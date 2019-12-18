@@ -1,0 +1,21 @@
+title: Mobility
+path: mobility
+icon: 'mdi:car'
+
+cards:
+  - type: entities
+    entities:
+      - sensor.niro_expdate
+      - binary_sensor.niro_insured
+      - sensor.niro_recall
+    show_header_toggle: False
+    title: Kia Niro
+
+  - type: entities
+    entities:
+      - sensor.aygo_expdate
+      - binary_sensor.aygo_insured
+      - sensor.aygo_recall
+    show_header_toggle: False
+    title: Toyota Aygo
+

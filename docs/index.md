@@ -3,3 +3,4 @@
 A [site](https://metbril.github.io/home-assistant-config) to document my personal Home Assistant configuration.
 
 - [Hass.io](./hassio)
+- [Custom Components](./custom_components)
