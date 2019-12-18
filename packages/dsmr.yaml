@@ -102,7 +102,7 @@ sensor:
     sensors:
       power_tariff_nl: # vertaald in NL
         value_template: >-
-          {% set value = states.sensor.power_tariff.state %}
+          {% set value = states('sensor.power_tariff') %}
           {{ value | replace('low', 'laag') | replace('normal', 'normaal') }}
 
       daily_power:
@@ -127,7 +127,7 @@ rest_command:
     headers:
       Content-Type: application/json
       AUTH-TOKEN: !secret mindergas_token 
-    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{states.sensor.gas_consumption.state }}" }'
+    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{ states('sensor.gas_consumption') }}" }'
 
 ############################################################################
 ## Utility Meter

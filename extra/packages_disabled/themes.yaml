@@ -28,4 +28,4 @@ automation:
     action:
       - service: frontend.set_theme
         data_template:
-          name: "{{ states.input_select.frontend_theme.state }}"
+          name: "{{ states('input_select.frontend_theme') }}"

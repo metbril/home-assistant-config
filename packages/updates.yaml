@@ -49,8 +49,8 @@ binary_sensor:
     sensors:
       hassio_update_available:
         value_template: >-
-          {{ states.sensor.hassio_version_stable.state != states.sensor.hassio_version_installed.state and
-             states.sensor.hassio_version_stable.state != 'unavailable' }}
+          {{ states('sensor.hassio_version_stable') != states('sensor.hassio_version_installed') and
+             states('sensor.hassio_version_stable') != 'unavailable' }}
 
 ############################################################################
 ## Sensor
@@ -86,5 +86,5 @@ automation:
     action:
       - service: notify.admin
         data:
-          message: 'Hassio versie {{ states.sensor.hassio_version_stable.state }} is nu beschikbaar.'
+          message: 'Hassio versie {{ states('sensor.hassio_version_stable') }} is nu beschikbaar.'
           title: Home Assistant Update

@@ -61,7 +61,7 @@ automation:
     action:
       - service: logger.set_level
         data_template:
-          homeassistant.components: "{{ states.input_select.log_level.state }}"
+          homeassistant.components: "{{ states('input_select.log_level') }}"
       - service: notify.admin
         data_template:
-          message: 'Logging is ingesteld op "{{ states.input_select.log_level.state }}"'
+          message: 'Logging is ingesteld op "{{ states('input_select.log_level') }}"'
