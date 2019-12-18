@@ -18,11 +18,6 @@ cards:
     title: Scripts
     type: entities
   - entities:
-      - entity: automation.dagelijkse_backup
-    show_header_toggle: false
-    title: Automatisering
-    type: entities
-  - entities:
       - entity: automation.notify_new_device_detected
       - entity: automation.notify_vacation_enabled
     show_header_toggle: false
