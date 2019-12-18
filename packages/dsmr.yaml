@@ -127,7 +127,7 @@ rest_command:
     headers:
       Content-Type: application/json
       AUTH-TOKEN: !secret mindergas_token 
-    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{ states('sensor.gas_consumption') }}" }'
+    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{ states(''sensor.gas_consumption'') }}" }'
 
 ############################################################################
 ## Utility Meter

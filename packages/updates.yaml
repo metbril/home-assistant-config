@@ -86,5 +86,5 @@ automation:
     action:
       - service: notify.admin
         data:
-          message: 'Hassio versie {{ states('sensor.hassio_version_stable') }} is nu beschikbaar.'
+          message: "Hassio versie {{ states('sensor.hassio_version_stable') }} is nu beschikbaar."
           title: Home Assistant Update
