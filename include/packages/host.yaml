@@ -140,19 +140,6 @@ sensor:
     value_template: '{{ value | int - 1 }}'
 
 ################################################
-## Folder Watcher
-## https://www.home-assistant.io/components/folder_watcher/
-##
-## Currently not yet working, error on startup
-## Whitelisting '/backup' is not yet possible with hassio
-## https://github.com/home-assistant/hassio-build/issues/129
-###############################################
-
-# folder_watcher:
-#   - folder: /backup
-#     patterns: '*.tar'
-
-################################################
 ## Alert
 ################################################
 
@@ -206,22 +193,3 @@ script:
       data:
         keep_days: 1
         repack: true
-
-################################################
-## Automation
-################################################
-automation:
-
-  ## Send notification for new hassio backup
-  - alias: New file alert
-    trigger:
-      platform: event
-      event_type: folder_watcher
-      event_data:
-        event_type: created
-    action:
-      service: notify.admin
-      data_template:
-        title: New backup
-        message: "Created {{ trigger.event.data.file }} in {{ trigger.event.data.folder }}"
-
