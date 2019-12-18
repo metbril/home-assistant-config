@@ -4,3 +4,11 @@ icon: 'mdi:microscope'
 
 cards:
 
+  - type: entities
+    show_header_toggle: off
+    entities: 
+      - input_boolean.signpost_manual
+      - input_datetime.signpost_date
+      - sensor.signpost_event
+      - sensor.holiday
+      - sensor.flag
