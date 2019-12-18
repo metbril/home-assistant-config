@@ -47,3 +47,21 @@ input_select:
       - debug
       - notset
 
+############################################################################
+## Automation
+############################################################################
+automation:
+
+  ##  Dynamically set log level without editing configuration and restart
+  - alias: Log Level
+    trigger:
+      - platform: state
+        entity_id:
+          - input_select.log_level
+    action:
+      - service: logger.set_level
+        data_template:
+          homeassistant.components: "{{ states.input_select.log_level.state }}"
+      - service: notify.admin
+        data_template:
+          message: 'Logging is ingesteld op "{{ states.input_select.log_level.state }}"'

@@ -70,6 +70,5 @@ system_health:
 ##############################
 automation: !include automations.yaml
 script: !include scripts.yaml
-automation old: !include_dir_merge_list include/automations
 group: !include groups.yaml
 switch: !include_dir_merge_list include/switches

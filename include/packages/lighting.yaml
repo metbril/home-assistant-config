@@ -28,3 +28,51 @@ light:
   - platform: switch
     name: Turbine Lamp
     entity_id: switch.turbine_light_plug_switch
+
+############################################################
+## Automation
+############################################################
+automation:
+
+  - alias: Turn On Living Lights
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data: 
+          entity_id: switch.living_wallswitch_left
+          state: 'on'
+    action:
+      - service: light.turn_on
+        entity_id: group.living_lights
+      - service: logbook.log
+        data:
+          name: Woonkamerverlichting
+          message: ingeschakeld
+
+  - alias: Turn Off Living Lights
+    trigger:
+      - platform: event
+        event_type: button_pressed
+        event_data: 
+          entity_id: switch.living_wallswitch_left
+          state: 'off'
+    action:
+      - service: light.turn_off
+        entity_id: group.living_lights
+      - service: logbook.log
+        data:
+          name: Woonkamerverlichting
+          message: uitgeschakeld
+
+  - alias: Turn On Dusk Living Lights
+    trigger:
+      - platform: sun
+        event: sunset
+        offset: "-00:30:00"
+    action:
+      - service: light.turn_on
+        entity_id: group.dusk_living_lights
+      - service: logbook.log
+        data:
+          name: Schemerverlichting woonkamer
+          message: is ingeschakeld
