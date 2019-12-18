@@ -1,9 +1,9 @@
 title: HIERO
 
 resources:
-  - url: /local/bignumber-card.js?v=0.0.2
+  - url: /local/cards/bignumber-card.js?v=0.0.2
     type: js
-  - url: /local/vertical-stack-in-card.js?v=0.1.3
+  - url: /local/cards/vertical-stack-in-card.js?v=0.1.3
     type: js
 
 views:
@@ -20,3 +20,4 @@ views:
   - !include include/lovelace/automation.yaml
   - !include include/lovelace/downstairs.yaml
   - !include include/lovelace/webcams.yaml
+  - !include include/lovelace/lab.yaml
