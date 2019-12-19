@@ -61,6 +61,14 @@ homeassistant:
       <<: *customize
       friendly_name: Windsnelheid omgeving
 
+    ################################################
+    ## Binary Sensor
+    ################################################
+
+    binary_sensor.car_wash:
+      <<: *customize
+      friendly_name: "Auto wassen"
+
 ################################################
 ## Weather
 ################################################
@@ -101,3 +109,11 @@ sensor:
       - precip_probability
       - precip_type
       - alerts
+
+################################################
+## Binary Sensor
+################################################
+binary_sensor:
+
+  - platform: car_wash
+    weather: weather.home
