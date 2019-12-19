@@ -15,6 +15,8 @@ homeassistant:
       friendly_name: Euro 95 (Advies)
     sensor.euro95_hoofdweg:
       friendly_name: Euro 95 (Hoofdweg)
+    sensor.euro95_dijktank_kanaalweg:
+      friendly_name: Euro 95 (Dijktank Kanaalweg)
     sensor.euro95_lukoil_schermerhoek:
       friendly_name: Euro 95 (Lukoil Schermerhoek)
     sensor.euro95_shell_nieuwerkerk:
@@ -46,11 +48,18 @@ sensor:
     value_template: "{{ value |replace('€', '') |replace(',', '.') |round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
+  # - platform: scrape
+  #   name: Euro95 Tinq Bermweg
+  #   resource: "http://www.tinq.nl/tankstation?id=251"
+  #   select: "#station-prijzen tr:nth-of-type(3) td:nth-of-type(2)"
+  #   value_template: "{{ value.split('\xa0')[1].replace('&nbsp;','').replace(',', '.') | float }}"
+  #   scan_interval: 3600 # be nice; once per hour only
+
   - platform: scrape
     name: Euro95 Tinq Bermweg
-    resource: "http://www.tinq.nl/tankstation?id=251"
-    select: "#station-prijzen tr:nth-of-type(3) td:nth-of-type(2)"
-    value_template: "{{ value.split('\xa0')[1].replace('&nbsp;','').replace(',', '.') | float }}"
+    resource: "https://www.tinq.nl/tankstation?id=251"
+    select: "table#station-prijzen tr:nth-of-type(3) .literprijs"
+    value_template: "{{ value | replace('€', '') | replace(',', '.') | round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
   - platform: scrape
@@ -65,6 +74,13 @@ sensor:
     name: Euro95 Lukoil Schermerhoek
     select: "#tabbedInfoContent div:nth-of-type(14)"
     value_template: "{{ value.split('\x0D')[2].replace('EUR/L', '').replace(',', '.') | float }}"
+    scan_interval: 3600 # be nice; once per hour only
+
+  - platform: scrape
+    name: Euro95 Dijktank Kanaalweg
+    resource: "https://www.brandstof-zoeker.nl/station/dijktank-b-v-capelle-aan-den-yssel-565/"
+    select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
+    value_template: "{{ value.split(' ')[1] | round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
   # - platform: scrape
