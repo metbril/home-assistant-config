@@ -28,14 +28,15 @@ cards:
     show_header_toggle: false
     title: Systeemopslag
     type: entities
-  - entities:
+  - type: entities
+    title: Systeemsoftware
+    entities:
       - entity: binary_sensor.hassio_update_available
       - entity: sensor.hassio_version_installed
       - entity: sensor.hassio_version_stable
+      - entity: sensor.hacs
       - entity: automation.hassio_update_available_notification
     show_header_toggle: false
-    title: Systeemsoftware
-    type: entities
   - entities:
       - entity: sensor.last_boot
       - entity: sensor.ha_uptime
