@@ -1,6 +1,9 @@
-################################################
-## Weather
-################################################
+###############################################################################
+#   @author         :   Robert van Bregt
+#   @date           :   2019-12-19
+#   @package        :   Weather
+#   @description    :   Get local weather conditions
+###############################################################################
 
 homeassistant:
   customize:
@@ -13,29 +16,49 @@ homeassistant:
       customize: &customize
         package: 'weather'
 
+    ################################################
+    ## Weather
+    ################################################
+
     weather.home:
+      <<: *customize
       friendly_name: Thuis
+
+    ################################################
+    ## Sensor
+    ################################################
+
     sensor.dark_sky_apparent_temperature:
+      <<: *customize
       friendly_name: Gevoelstemperatuur omgeving
     sensor.dark_sky_humidity:
+      <<: *customize
       friendly_name: Luchtvochtigheid omgeving
     sensor.dark_sky_ozone:
+      <<: *customize
       friendly_name: Ozon
       icon: mdi:weather-sunny
     sensor.dark_sky_precip_intensity:
+      <<: *customize
       friendly_name: Neerslagintensiteit omgeving
       unit_of_measurement: mm/u
     sensor.dark_sky_precip_probability:
+      <<: *customize
       friendly_name: Neerslagkans omgeving
     sensor.dark_sky_pressure:
+      <<: *customize
       friendly_name: Luchtdruk omgeving
     sensor.dark_sky_temperature:
+      <<: *customize
       friendly_name: Temperatuur omgeving
     sensor.dark_sky_uv_index:
+      <<: *customize
       friendly_name: UV-index
     sensor.dark_sky_wind_bearing:
+      <<: *customize
       friendly_name: Windrichting omgeving
     sensor.dark_sky_wind_speed:
+      <<: *customize
       friendly_name: Windsnelheid omgeving
 
 ################################################
@@ -44,7 +67,7 @@ homeassistant:
 
 weather:
   - platform: darksky
-    name: home
+    name: Home
     api_key: !secret darksky_api_key
     units: si
 
