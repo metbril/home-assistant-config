@@ -61,6 +61,15 @@ homeassistant:
       <<: *customize
       friendly_name: Windsnelheid omgeving
 
+    sensor.buienradar_precipitation_forecast_average:
+      <<: *customize
+      friendly_name: Verwachte neerslag
+      unit_of_measurement: mm/u
+    sensor.buienradar_precipitation_forecast_total:
+      <<: *customize
+      friendly_name: Verwachte neerslag
+      unit_of_measurement: mm
+
     ################################################
     ## Binary Sensor
     ################################################
@@ -68,6 +77,14 @@ homeassistant:
     binary_sensor.car_wash:
       <<: *customize
       friendly_name: "Auto wassen"
+
+    ################################################
+    ## Automation
+    ################################################
+
+    automation.rain_alarm:
+      <<: *customize
+      friendly_name: Buienalarm
 
 ################################################
 ## Weather
@@ -110,6 +127,15 @@ sensor:
       - precip_type
       - alerts
 
+  - platform: buienradar
+    name: Buienradar
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    timeframe: 30 # minutes to look ahead for precipitation
+    monitored_conditions:
+      - precipitation_forecast_average
+      - precipitation_forecast_total
+
 ################################################
 ## Binary Sensor
 ################################################
@@ -117,3 +143,19 @@ binary_sensor:
 
   - platform: car_wash
     weather: weather.home
+
+################################################
+## Automation
+################################################
+automation:
+
+  - alias: Rain Alarm
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        above: 0
+    action:
+      - service: notify.all
+        data_template:
+          title: "Regenalarm"
+          message: "De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement }} neerslag verwacht"
