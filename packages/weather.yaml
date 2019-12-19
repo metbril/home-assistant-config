@@ -57,6 +57,8 @@ sensor:
     api_key: !secret darksky_api_key
     units: si
     language: nl
+    scan_interval:
+      minutes: 5 # default 2 minutes
     monitored_conditions:
       - summary
       - minutely_summary
