@@ -18,75 +18,126 @@ homeassistant:
     ################################################
 
     sensor.daily_gas:
+      <<: *customize
       friendly_name: Dagelijks gasverbruik
-    sensor.daily_power_offpeak:
-      friendly_name: Dagelijks energieverbruik dal
-    sensor.daily_power_peak:
-      friendly_name: Dagelijks energieverbruik piek
 
     sensor.daily_power:
+      <<: *customize
       friendly_name: Dagelijks energieverbruik
       icon: mdi:counter
       unit_of_measurement: kWu
 
+    sensor.daily_power_offpeak:
+      <<: *customize
+      friendly_name: Dagelijks energieverbruik dal
+
+    sensor.daily_power_peak:
+      <<: *customize
+      friendly_name: Dagelijks energieverbruik piek
+
+    sensor.long_power_failure_count:
+      <<: *customize
+      friendly_name: Aantal langdurige storingen
+
+    sensor.monthly_gas:
+      <<: *customize
+      friendly_name: Maandelijks gasverbruik
+
     sensor.monthly_power:
+      <<: *customize
       friendly_name: Maandelijks energieverbruik
       icon: mdi:counter
       unit_of_measurement: kWu
 
-    sensor.long_power_failure_count:
-      friendly_name: Aantal langdurige storingen
-
-    sensor.monthly_gas:
-      friendly_name: Maandelijks gasverbruik
     sensor.monthly_power_offpeak:
+      <<: *customize
       friendly_name: Maandelijks energieverbruik dal
+
     sensor.monthly_power_peak:
+      <<: *customize
       friendly_name: Maandelijks energieverbruik piek
 
     sensor.power_consumption:
+      <<: *customize
       friendly_name: Energieverbruik
+
     sensor.power_consumption_low:
+      <<: *customize
       friendly_name: Energieverbruik laag tarief
       unit_of_measurement: kWu
+
     sensor.power_consumption_normal:
+      <<: *customize
       friendly_name: Energieverbruik normaal tarief
       unit_of_measurement: kWu
+
     sensor.power_consumption_phase_l1:
+      <<: *customize
       hidden: true
+
     sensor.power_consumption_phase_l2:
+      <<: *customize
       hidden: true
+
     sensor.power_consumption_phase_l3:
+      <<: *customize
       hidden: true
+
     sensor.power_production:
+      <<: *customize
       hidden: true
+
     sensor.power_production_low:
+      <<: *customize
       hidden: true
+
     sensor.power_production_normal:
+      <<: *customize
       hidden: true
+
     sensor.power_production_phase_l1:
+      <<: *customize
       hidden: true
+
     sensor.power_production_phase_l2:
+      <<: *customize
       hidden: true
+
     sensor.power_production_phase_l3:
+      <<: *customize
       hidden: true
+
     sensor.power_tariff:
+      <<: *customize
       hidden: true
+
     sensor.power_tariff_nl:
+      <<: *customize
       friendly_name: Energietarief
       icon: mdi:currency-eur
 
     sensor.voltage_sags_phase_l1:
+      <<: *customize
       hidden: true
+
     sensor.voltage_sags_phase_l2:
+      <<: *customize
       hidden: true
+
     sensor.voltage_sags_phase_l3:
+      <<: *customize
       hidden: true
+
     sensor.voltage_swells_phase_l1:
+      <<: *customize
       hidden: true
+
     sensor.voltage_swells_phase_l2:
+      <<: *customize
       hidden: true
+
     sensor.voltage_swells_phase_l3:
+      <<: *customize
       hidden: true
 
 ################################################
@@ -100,6 +151,7 @@ sensor:
 
   - platform: template
     sensors:
+
       power_tariff_nl: # vertaald in NL
         value_template: >-
           {% set value = states('sensor.power_tariff') %}
@@ -120,7 +172,10 @@ sensor:
 ##################################################
 
 rest_command:
+
   ## API documentation at https://www.mindergas.nl/member/api
+  ## Post current gas reading to mindergas.nl for yesterday
+  ## Should be executed as soon as the first meter change after midnight
   post_mindergas:
     url: https://www.mindergas.nl/api/gas_meter_readings
     method: post
@@ -185,6 +240,9 @@ script:
 ############################################################################
 
 automation:
+
+  ## Post gas consumption to mindergas.nl daily at 00:15. 
+  ## The gas reading is updated hourly around 10 minutes after the full hour
   - alias: Post Gas Consumption
     hide_entity: no # default no
     trigger:
@@ -201,6 +259,8 @@ automation:
           message: is verstuurd naar mindergas.nl
           entity_id: sensor.gas_consumption
           domain: sensor
+
+  ## Log energy consumption every hour at the full hour.
   - alias: Log Energy Consumption
     trigger:
       - platform: time_pattern
@@ -209,4 +269,3 @@ automation:
         seconds: '0'
     action:
       - service: script.log_energy_consumption
-        
