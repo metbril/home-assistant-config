@@ -6,7 +6,6 @@ before_install:
   - touch ./fake_id_rsa
   - touch ./home-assistant_v2.db
   - touch ./home-assistant.log
-  - touch ./OZW_Log.txt
   - touch ./fake_cert.pem
 install:
   - pip3 install homeassistant
