@@ -57,9 +57,9 @@ sensor:
 
   - platform: scrape
     name: Euro95 Tinq Bermweg
-    resource: "https://www.tinq.nl/tankstation?id=251"
-    select: "table#station-prijzen tr:nth-of-type(3) .literprijs"
-    value_template: "{{ value | replace('€', '') | replace(',', '.') | round(3) }}"
+    resource: "https://www.tinq.nl/tankstations/capelle-ad-ijssel-bermweg"
+    select: ".field--name-field-station-prices .taxonomy-term-Euro95 .field--name-field-prices-price-pump"
+    value_template: "{{ value | replace('€', '') | replace('EUR/L', '') | float | round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
   - platform: scrape
@@ -72,8 +72,8 @@ sensor:
   - platform: scrape
     resource: "http://lukoil.nl/go/lukoil_station.cfm?id=465"
     name: Euro95 Lukoil Schermerhoek
-    select: "#tabbedInfoContent div:nth-of-type(14)"
-    value_template: "{{ value.split('\x0D')[2].replace('EUR/L', '').replace(',', '.') | float }}"
+    select: "#tabbedInfoContent div.tab:nth-of-type(2) .priceBox2 .price"
+    value_template: "{{ value | replace('EUR/L', '') | float | round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
   - platform: scrape
