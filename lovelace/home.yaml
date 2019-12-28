@@ -1,18 +1,17 @@
 title: Huis
 path: huis
 icon: 'mdi:home'
-badges: []
+badges:
+  - entity: binary_sensor.occupancy
 cards:
   - type: entities
     entities:
       - entity: light.living_lights
     title: Woonkamer
     show_header_toggle: false
-  - type: glance
+  - type: entities
     entities:
-      - entity: switch.turbine_light_plug_switch
-    title: Schakelaars
-  - type: glance
-    entities:
-      - entity: binary_sensor.motion_garage
+      # - entity: binary_sensor.motion_garage
+      - entity: switch.garagedoor_switch
     title: Garage
+    show_header_toggle: false

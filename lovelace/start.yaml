@@ -7,22 +7,6 @@ badges:
   - person.queen
   - person.bishop
 cards:
-  - type: weather-forecast
-    entity: weather.home
-    name: Thuis
-  - type: glance
-    entities:
-      - entity: person.king
-      - entity: person.queen
-      - entity: person.bishop
-      - entity: sensor.occupancy
-  - type: glance
-    entities:
-      - entity: light.living_lights
-        tap_action: 
-          action: toggle
-
-
   - type: custom:vertical-stack-in-card
     cards:
       - entity: sensor.time
@@ -30,16 +14,8 @@ cards:
       - entity: sensor.date
         type: 'custom:bignumber-card'
         scale: '20px'
-  - entity: binary_sensor.occupancy
-    hold_action:
-      action: more-info
-    show_icon: true
-    show_name: false
-    tap_action:
-      action: more-info
-    type: entity-button
+  - type: weather-forecast
+    entity: weather.home
+    name: Thuis
   - type: light
     entity: light.living_lights
-  - entities:
-      - entity: sensor.power_consumption
-    type: glance
