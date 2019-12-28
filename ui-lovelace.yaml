@@ -11,7 +11,7 @@ views:
   - !include lovelace/home.yaml
   - !include lovelace/living.yaml
   - !include lovelace/presence.yaml
-  - !include lovelace/security.yaml
+  # - !include lovelace/security.yaml
   - !include lovelace/info.yaml
   - !include lovelace/mobility.yaml
   - !include lovelace/calendar.yaml

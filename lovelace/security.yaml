@@ -3,46 +3,26 @@ path: beveiliging
 icon: 'mdi:shield'
 badges:
   - binary_sensor.occupancy
-  - group.motion
 cards:
   - type: horizontal-stack
+    title: Bezetting
     cards:
-      - entity: input_boolean.occupancy_home
-        hold_action:
-          action: more-info
-        tap_action:
-          action: toggle
-        type: entity-button
-      - entity: input_boolean.occupancy_away
-        hold_action:
-          action: more-info
-        icon: 'mdi:exit-run'
-        tap_action:
-          action: toggle
-        type: entity-button
-      - entity: input_boolean.occupancy_asleep
-        hold_action:
-          action: more-info
-        tap_action:
-          action: toggle
-        type: entity-button
-      - entity: input_boolean.occupancy_vacation
-        hold_action:
-          action: more-info
-        tap_action:
-          action: toggle
-        type: entity-button
-  - type: glance
-    title: Alle beweging
-    entities:
-      - entity: binary_sensor.motion_garage
-  - type: entity-filter
-    state_filter:
-      - 'on'
-    show_empty: false
-    card:
-      show_state: false
-      title: Beweging
-      type: glance
-    entities:
-      - entity: binary_sensor.motion_garage
+      - type: entity-button
+        entity: input_boolean.occupancy_home
+      - type: entity-button
+        entity: input_boolean.occupancy_away
+      - type: entity-button
+        entity: input_boolean.occupancy_guests
+      - type: entity-button
+        entity: input_boolean.occupancy_asleep
+      - type: entity-button
+        entity: input_boolean.occupancy_vacation
+
+  ## Card for debugging
+  # - type: entities
+  #   entities:
+  #     - entity: input_boolean.occupancy_home
+  #     - entity: input_boolean.occupancy_away
+  #     - entity: input_boolean.occupancy_guests
+  #     - entity: input_boolean.occupancy_asleep
+  #     - entity: input_boolean.occupancy_vacation
