@@ -25,6 +25,10 @@ homeassistant:
     zwave.turbine_light_plug:
       friendly_name: "Node 17: Turbine Lamp Schakelaar"
 
+    script.reset_energy_meters:
+      friendly_name: Opnieuw instellen Z-Wave Energiemeters
+
+
 ################################################
 ## Script
 ################################################
