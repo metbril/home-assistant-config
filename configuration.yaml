@@ -64,6 +64,11 @@ system_health:
 #  usb_path: !secret zwave_usb_path
 #  # device_config: !include zwave_device_config.yaml
 #  network_key: !secret zwave_network_key
+panel_iframe:
+  zwave2mqtt:
+    title: Z-Wave to MQTT
+    icon: mdi:z-wave
+    url: http://hassio.local:8091
 
 ##############################
 ## Included entities
