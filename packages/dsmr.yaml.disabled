@@ -35,6 +35,14 @@ homeassistant:
       <<: *customize
       friendly_name: Dagelijks energieverbruik piek
 
+    sensor.gas_consumption:
+      <<: *customize
+      friendly_name: Gasverbruik
+      unit_of_measurement: m³
+
+    sensor.hourly_gas_consumption:
+      hidden: true
+
     sensor.long_power_failure_count:
       <<: *customize
       friendly_name: Aantal langdurige storingen

@@ -1,0 +1,13 @@
+## Pi-Hole
+
+homeassistant:
+  customize:
+    sensor.pihole_ads_blocked_today:
+      friendly_name: Geblokkeerde advertenties
+    sensor.pihole_ads_percentage_blocked_today:
+      friendly_name: Percentage geblokkeerde advertenties
+
+pi_hole:
+  host: 'localhost:4865'              # default: 'pi.hole'
+  ssl: false                          # default: false
+  verify_ssl: false                   # default: false

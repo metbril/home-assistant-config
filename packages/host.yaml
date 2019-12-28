@@ -22,6 +22,12 @@ homeassistant:
       device_class: problem
       friendly_name: Grote database
 
+    ################################################
+    ## Sensor
+    ################################################
+    sensor.bad_login:
+      friendly_name: Mislukte inlogpogingen
+      icon: mdi:alert
     sensor.cpu_temperature:
       friendly_name: Processortemperatuur
     sensor.disk_free:

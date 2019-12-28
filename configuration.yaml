@@ -19,18 +19,9 @@ homeassistant:
         - 192.168.1.0/24
         - fd00::/8
 
-  customize: !include customize.yaml
-
 ##############################
 ## Integrations
 ##############################
-asuswrt:
-  host: !secret asuswrt_host
-  username: !secret asuswrt_username
-  ssh_key: !secret asuswrt_ssh_key
-  protocol: ssh
-  port: 22
-  mode: router
 config:
 discovery:
 frontend:
@@ -49,14 +40,6 @@ mobile_app:
 lovelace:
   mode: yaml
 map:
-pi_hole:
-  host: 'localhost:4865' # default: 'pi.hole'
-  ssl: false # default: false
-  verify_ssl: false # default: false
-
-# rfxtrx:
-#   device: !secret rfxtrx_device
-#   debug: no
 
 system_health:
 
@@ -65,11 +48,3 @@ panel_iframe:
     title: Z-Wave to MQTT
     icon: mdi:z-wave
     url: http://hassio.local:8091
-
-##############################
-## Included entities
-##############################
-automation: !include automations.yaml
-script: !include scripts.yaml
-group: !include groups.yaml
-switch: !include_dir_merge_list include/switches
