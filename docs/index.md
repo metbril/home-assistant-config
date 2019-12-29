@@ -5,3 +5,4 @@ A [site](https://metbril.github.io/home-assistant-config) to self-document my pe
 - [Hass.io](./hassio)
 - [Custom Components](./custom_components)
 - [Z-Wave](./zwave)
+- [Hardware](./hardware)
