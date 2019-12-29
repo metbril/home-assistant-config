@@ -48,3 +48,6 @@ panel_iframe:
     title: Z-Wave to MQTT
     icon: mdi:z-wave
     url: http://hassio.local:8091
+
+# enable sending wake on lan packets from HA
+wake_on_lan:

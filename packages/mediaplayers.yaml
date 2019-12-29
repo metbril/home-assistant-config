@@ -1,0 +1,51 @@
+###############################################################################
+#   @author         :   Robert van Bregt
+#   @date           :   2019-12-29
+#   @package        :   Media Players
+#   @description    :   Media Players
+###############################################################################
+
+homeassistant:
+  customize:
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'mediaplayers'
+
+    ################################################
+    ## Media Player
+    ################################################
+    media_player.living_tv:
+      <<: *customize
+      friendly_name: TV Woonkamer
+
+    ################################################
+    ## Notify
+    ################################################
+    notify.living_tv:
+      <<: *customize
+
+################################################
+## Media Player
+################################################
+media_player:
+  ## https://www.home-assistant.io/integrations/webostv/
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret living_tv_mac
+
+################################################
+## Notify
+################################################
+notify:
+  ## https://www.home-assistant.io/integrations/webostv/
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
