@@ -20,9 +20,7 @@ cards:
     detail: 2
     hours_to_show: 6
 
-  - type: picture
-    image: 'https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=512'
-    tap_action:
-      action: none
-    hold_action:
-      action: none
+  - type: picture-entity
+    entity: camera.buienradar
+    show_state: false
+    show_name: false

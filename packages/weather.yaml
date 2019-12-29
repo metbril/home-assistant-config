@@ -79,6 +79,13 @@ homeassistant:
       friendly_name: "Auto wassen"
 
     ################################################
+    ## Camera
+    ################################################
+
+    camera.buienradar:
+      <<: *customize
+
+    ################################################
     ## Automation
     ################################################
 
@@ -144,6 +151,14 @@ binary_sensor:
 
   - platform: car_wash
     weather: weather.home
+
+################################################
+## Camera
+################################################
+camera:
+  - platform: buienradar
+    name: Buienradar
+    dimension: 700                      # largest size
 
 ################################################
 ## Automation
