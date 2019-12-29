@@ -95,6 +95,7 @@ weather:
     name: Home
     api_key: !secret darksky_api_key
     units: si
+    mode: daily
 
 ################################################
 ## Sensor
@@ -106,7 +107,7 @@ sensor:
     units: si
     language: nl
     scan_interval:
-      minutes: 5 # default 2 minutes
+      minutes: 10                     # default 2 minutes
     monitored_conditions:
       - summary
       - minutely_summary
@@ -131,7 +132,7 @@ sensor:
     name: Buienradar
     latitude: !secret home_latitude
     longitude: !secret home_longitude
-    timeframe: 30 # minutes to look ahead for precipitation
+    timeframe: 30                     # minutes to look ahead for precipitation
     monitored_conditions:
       - precipitation_forecast_average
       - precipitation_forecast_total
