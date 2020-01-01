@@ -1,17 +1,29 @@
 title: Huis
 path: huis
 icon: 'mdi:home'
+
 badges:
   - entity: binary_sensor.occupancy
+
 cards:
   - type: entities
     entities:
       - entity: light.living_lights
+      - entity: switch.charging_station_switch
+      - entity: media_player.woonkamer
+      - entity: media_player.living_tv
     title: Woonkamer
     show_header_toggle: false
+
   - type: entities
     entities:
       # - entity: binary_sensor.motion_garage
-      - entity: switch.garagedoor_switch
+      - entity: switch.garage_door_switch
     title: Garage
+    show_header_toggle: false
+
+  - type: entities
+    entities:
+      - entity: media_player.studeerkamer
+    title: Studeerkamer
     show_header_toggle: false
