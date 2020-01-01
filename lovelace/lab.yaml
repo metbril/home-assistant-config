@@ -12,3 +12,41 @@ cards:
       - sensor.signpost_event
       - sensor.holiday
       - sensor.flag
+
+  - type: horizontal-stack
+    cards:
+      - type: entity-button
+        entity: switch.charging_station_switch
+
+      - type: custom:mini-graph-card
+        entities: 
+          - sensor.charging_station_power
+        hours_to_show: 1
+        points_per_hour: 60
+
+  - type: entities
+    entities:
+      - switch.charging_station_switch
+      - sensor.charging_station_power
+      - sensor.charging_station_current
+      - sensor.charging_station_voltage
+      - sensor.charging_station_energy
+
+  - type: custom:mini-graph-card
+    entities: 
+      - sensor.charging_station_power
+    hours_to_show: 1
+    points_per_hour: 60
+    color_thresholds:
+      - value: 1
+        color: "green"
+      - value: 5
+        color: "orange"
+      - value: 8
+        color: "red"
+      - value: 10
+        color: "purple"
+    # show:
+    #   labels: true
+    #   # average: true
+    #   # extrema: true
