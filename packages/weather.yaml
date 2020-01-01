@@ -20,7 +20,7 @@ homeassistant:
     ## Weather
     ################################################
 
-    weather.home:
+    weather.dark_sky:
       <<: *customize
       friendly_name: Thuis
 
@@ -99,7 +99,6 @@ homeassistant:
 
 weather:
   - platform: darksky
-    name: Home
     api_key: !secret darksky_api_key
     units: si
     mode: daily
@@ -150,7 +149,7 @@ sensor:
 binary_sensor:
 
   - platform: car_wash
-    weather: weather.home
+    weather: weather.dark_sky
 
 ################################################
 ## Camera

@@ -15,7 +15,7 @@ cards:
         type: 'custom:bignumber-card'
         scale: '20px'
   - type: weather-forecast
-    entity: weather.home
+    entity: weather.dark_sky
     name: Thuis
   - type: light
     entity: light.living_lights
