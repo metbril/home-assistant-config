@@ -59,6 +59,25 @@ Replace all occurences of `.nodeid_18` with `.charging_station`.
 Notice the prepending dot (`.`). 
 This will let you rename only sensors and switches. Be careful not to change the unique ID of the entity.
 
+Search and replace is based on the "label" attribute in the JSON message.
+
+entity type | search | replace
+--- | --- | ---
+sensor | `gas_density` | `voltage`
+sensor | `generic` | `current`
+sensor | `power` | `energy`
+sensor | `power_8` | `power`
+
+Hide sensors:
+
+- `sensor.*_gas_density_17`
+- `sensor.*_generic_21`
+- `sensor.*_power_1`
+- `sensor.*_power_2`
+- `sensor.*_power_9`
+- `sensor.*_temperature*`
+- `sensor.*_water`
+
 ## Devices
 
 An overview of the devices I use:
