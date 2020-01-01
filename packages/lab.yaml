@@ -111,3 +111,11 @@ automation:
         data:
           name: Signpost lamp
           message: is uitgeschakeld
+
+weather:
+  - platform: buienradar
+    name: Buienradar
+    forecast: true
+
+## The met.no weather is added through the integration
+## it can't be added manually

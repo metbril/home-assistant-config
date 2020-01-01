@@ -50,3 +50,13 @@ cards:
     #   labels: true
     #   # average: true
     #   # extrema: true
+
+  - type: weather-forecast
+    entity: weather.dark_sky
+    name: Thuis
+
+  - type: weather-forecast
+    entity: weather.home_2
+
+  - type: weather-forecast
+    entity: weather.buienradar
