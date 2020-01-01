@@ -1,0 +1,71 @@
+######################################################################
+## HACS
+## https://hacs.xyz/
+######################################################################
+
+homeassistant:
+
+  customize:
+    package.node_anchors:
+      customize: &customize
+        package: 'hacs'
+
+    ######################################################################
+    ## Sensor
+    ######################################################################
+    sensor.hacs:
+      <<: *customize
+      friendly_name: Te verwerken HACS updates
+      unit_of_measurement: updates
+
+    ######################################################################
+    ## Automation
+    ######################################################################
+    automation.notify_hacs_updates_pending:
+      <<: *customize
+      friendly_name: Melden HACS updates te verwerken
+    automation.notify_hacs_repository_added:
+      friendly_name: Melden HACS repository toegevoegd
+      <<: *customize
+
+######################################################################
+## Automation
+######################################################################
+automation:
+
+  - alias: Notify HACS updates pending
+    trigger:
+      platform: state
+      entity_id: sensor.hacs
+    condition:
+      - condition: template
+        value_template: "{{ states(trigger.entity_id) != 'unknown'}}"
+      - condition: template
+        value_template: "{{ (states(trigger.entity_id) | float) != 0}}"
+    action:
+      service: persistent_notification.create
+      data_template:
+        title: Te verwerken updates in HACS
+        message: >-
+          {% for repo in state_attr(trigger.entity_id, 'repositories') %}
+            **{{ repo.display_name }}** _{{ repo["installed version"] }}_ -> _{{ repo["available version"] }}_
+          {% endfor %}
+
+  - alias: Notify HACS repository added
+    trigger:
+      platform: event
+      event_type: hacs/repository
+      event_data:
+        action: registration
+    condition:
+      condition: template
+      value_template: "{{ trigger.event.data.repository is defined }}"
+    action:
+      service: persistent_notification.create
+      data_template:
+        title: Nieuwe repository in HACS
+        message: >-
+          {% set repo = trigger.event.data.repository %}
+          {% set id = trigger.event.data.repository_id %}
+          [{{ repo }}](/hacs/repository/{{ id }})
+          werd zojuist toegevoegd aan HACS.
