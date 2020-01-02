@@ -23,4 +23,4 @@ views:
   - !include lovelace/automation.yaml
   - !include lovelace/downstairs.yaml
   - !include lovelace/webcams.yaml
-  - !include lovelace/lab.yaml
+  - !include lovelace/zz_lab.yaml
