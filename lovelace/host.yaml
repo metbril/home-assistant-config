@@ -82,3 +82,25 @@ cards:
       - automation.daily_full_backup
       - automation.daily_dropbox_sync
     title: Backup
+
+  - type: vertical-stack
+    cards:
+      - type: custom:mini-graph-card
+        name: ASUSWRT data
+        icon: mdi:network-router
+        entities: 
+          - entity: sensor.asuswrt_download
+          - entity: sensor.asuswrt_upload
+        show:
+          graph: line
+        points_per_hour: 1
+
+      - type: custom:mini-graph-card
+        name: ASUSWRT datasnelheid
+        icon: mdi:speedometer
+        entities: 
+          - entity: sensor.asuswrt_download_speed
+          - entity: sensor.asuswrt_upload_speed
+        show:
+          graph: line
+        points_per_hour: 1
