@@ -3,6 +3,7 @@ path: mobility
 icon: 'mdi:car'
 
 badges:
+  - binary_sensor.rain_alarm
   - binary_sensor.car_wash
 
 cards:
