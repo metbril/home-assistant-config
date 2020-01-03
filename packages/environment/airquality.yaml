@@ -1,0 +1,156 @@
+###############################################################################
+# @package        :   Air Quality
+# @description    :   Air Quality
+# @author         :   Robert van Bregt
+###############################################################################
+
+homeassistant:
+
+  customize_glob:
+    sensor.*_p1:
+      unit_of_measurement: "µg/m3"
+      icon: mdi:thought-bubble
+    sensor.*_p2:
+      unit_of_measurement: "µg/m3"
+      icon: mdi:thought-bubble-outline
+    sensor.*_uv_index:
+      unit_of_measurement: "UV index"
+      icon: mdi:weather-sunny
+    sensor.*_ozone*:
+      unit_of_measurement: "DU"
+      icon: mdi:vector-triangle
+
+  customize:
+
+    ################################################
+    ## Node Anchors
+    ################################################
+
+    package.node_anchors:
+      customize: &customize
+        package: 'airquality'
+
+    ################################################
+    ## Sensor
+    ################################################
+
+    # luftdaten
+    sensor.luftdaten_19822_p1:
+      <<: *customize
+      friendly_name: Fijnstof PM10 Erasmusbrug
+    sensor.luftdaten_19822_p2:
+      <<: *customize
+      friendly_name: Fijnstof PM2.5 Erasmusbrug
+
+    # opensensemap
+    sensor.pompenburg_rotterdam_p1:
+      <<: *customize
+    sensor.pompenburg_rotterdam_p2:
+      <<: *customize
+
+    # airvisual
+    sensor.chinese_air_pollution_level:
+      <<: *customize
+    sensor.chinese_air_pollution_index:
+      <<: *customize
+    sensor.chinese_main_pollutant:
+      <<: *customize
+
+    # openuv
+    sensor.current_uv_index:
+      <<: *customize
+      friendly_name: UV-index OpenUV
+    sensor.current_uv_level:
+      <<: *customize
+    sensor.max_uv_index:
+      <<: *customize
+    sensor.current_ozone_level:
+      <<: *customize
+      friendly_name: Ozon OpenUV
+    sensor.skin_type_1_safe_exposure_time:
+      <<: *customize
+    sensor.skin_type_2_safe_exposure_time:
+      <<: *customize
+    sensor.skin_type_3_safe_exposure_time:
+      <<: *customize
+    sensor.skin_type_4_safe_exposure_time:
+      <<: *customize
+    sensor.skin_type_5_safe_exposure_time:
+      <<: *customize
+    sensor.skin_type_6_safe_exposure_time:
+      <<: *customize
+
+################################################
+## Luftdaten
+## https://www.home-assistant.io/integrations/luftdaten/
+################################################
+luftdaten:
+
+  ## https://data.sensor.community/airrohr/v1/sensor/19822/
+  sensor_id: 19822
+  show_on_map: false
+  sensors:
+    monitored_conditions:
+      - P1
+      - P2
+      # - temperature                   # unsupported by station
+      # - humidity                      # unsupported by station
+      # - pressure                      # unsupported by station
+
+################################################
+## OpenSenseMap
+################################################
+air_quality:
+
+  # Vondelweg (5b3bce295dc1ec001b7234ba) geeft ontwaarschijnlijk lage waarden
+  # https://opensensemap.org/explore/5aa96530396417001b2caba4
+  - platform: opensensemap
+    station_id: 5aa96530396417001b2caba4
+    name: Pompenburg Rotterdam
+
+################################################
+## Sensor
+################################################
+sensor:
+
+  ## Airvisual
+  - platform: airvisual
+    api_key: !secret airvisual_api_key # keys are only valid for 365 days
+    show_on_map: false
+    monitored_conditions:
+      - cn
+
+  ## OpenSenseMap
+  - platform: template
+    sensors:
+      pompenburg_rotterdam_p1:
+        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_10') | float | round(2) }}"
+        friendly_name: PM10 Pompenburg Rotterdam
+      pompenburg_rotterdam_p2:
+        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_2_5') | float | round(2) }}"
+        friendly_name: PM2.5 Pompenburg Rotterdam
+
+################################################
+## OpenUV
+################################################
+openuv:
+  api_key: !secret openuv_api_key
+
+################################################
+## Automation
+################################################
+automation:
+
+  - alias: Update OpenUV every 30 minutes during daytime
+    trigger:
+      platform: time_pattern
+      minutes: '/30'
+    condition:
+      condition: and
+      conditions:
+        - condition: sun
+          after: sunrise
+        - condition: sun
+          before: sunset
+    action:
+      service: openuv.update_data

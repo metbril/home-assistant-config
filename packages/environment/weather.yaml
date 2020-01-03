@@ -34,10 +34,6 @@ homeassistant:
     sensor.dark_sky_humidity:
       <<: *customize
       friendly_name: Luchtvochtigheid omgeving
-    sensor.dark_sky_ozone:
-      <<: *customize
-      friendly_name: Ozon
-      icon: mdi:weather-sunny
     sensor.dark_sky_precip_intensity:
       <<: *customize
       friendly_name: Neerslagintensiteit omgeving
@@ -51,9 +47,18 @@ homeassistant:
     sensor.dark_sky_temperature:
       <<: *customize
       friendly_name: Temperatuur omgeving
+
     sensor.dark_sky_uv_index:
       <<: *customize
-      friendly_name: UV-index
+      friendly_name: UV-index Dark Sky
+    sensor.dark_sky_ozone:
+      <<: *customize
+      friendly_name: Ozon Dark Sky
+      icon: mdi:vector-triangle
+    sensor.dark_sky_cloud_coverage:
+      <<: *customize
+      friendly_name: Bewolking
+
     sensor.dark_sky_wind_bearing:
       <<: *customize
       friendly_name: Windrichting omgeving
@@ -150,7 +155,7 @@ binary_sensor:
 
   - platform: car_wash
     weather: weather.dark_sky
-
+  
 ################################################
 ## Camera
 ################################################

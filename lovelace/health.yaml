@@ -1,0 +1,53 @@
+title: Gezondheid
+path: gezondheid
+icon: 'mdi:hospital-box-outline'
+badges: []
+cards:
+
+  - type: entities
+    entities:
+      # luftdaten
+      - sensor.luftdaten_19822_p1
+      - sensor.luftdaten_19822_p2
+      # opensensemap
+      - sensor.pompenburg_rotterdam_p1
+      - sensor.pompenburg_rotterdam_p2
+      # airvisual
+      - sensor.chinese_air_quality_index
+      - sensor.chinese_air_pollution_level
+      - sensor.chinese_main_pollutant
+      # airly
+    title: Luchtkwaliteit
+    show_header_toggle: false
+
+  - type: glance
+    entities:
+      ## openUV
+      - entity: sensor.skin_type_1_safe_exposure_time
+        name: Huidtype 1
+      - entity: sensor.skin_type_2_safe_exposure_time
+        name: Huidtype 2
+      - entity: sensor.skin_type_3_safe_exposure_time
+        name: Huidtype 3
+      - entity: sensor.skin_type_4_safe_exposure_time
+        name: Huidtype 4
+      - entity: sensor.skin_type_5_safe_exposure_time
+        name: Huidtype 5
+      - entity: sensor.skin_type_6_safe_exposure_time
+        name: Huidtype 6
+    title: Zonnebrand
+    columns: 6
+
+  - type: entities
+    entities:
+      ## openUV
+      - sensor.current_uv_index
+      - sensor.dark_sky_uv_index
+      - sensor.max_uv_index
+      - sensor.current_uv_level
+      - sensor.current_ozone_level
+      - sensor.dark_sky_ozone
+      - sensor.dark_sky_cloud_coverage
+    title: Zonnekracht
+    show_header_toggle: false
+
