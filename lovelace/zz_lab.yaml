@@ -60,3 +60,36 @@ cards:
 
   - type: weather-forecast
     entity: weather.buienradar
+
+  - type: entities
+    entities:
+      - input_select.signaallamp_scene
+      - light.signaallamp
+      - scene.signaal_regenalarm
+      - scene.signaal_vertraging_ns
+      - scene.signaal_uit
+      - input_boolean.signaallamp_enabled
+      - sensor.buienradar_precipitation_forecast_average
+      - input_number.buienradar_precipitation_forecast_average
+      - binary_sensor.rain_alarm
+
+  - type: vertical-stack
+    cards:
+      - type: entities
+        entities:
+          - switch.nodeid_7_switch
+          - sensor.nodeid_7_power
+          - sensor.nodeid_7_power_4
+          - sensor.nodeid_7_power_8
+          - sensor.nodeid_7_water
+
+      - type: custom:mini-graph-card
+        entities: 
+          - entity: sensor.nodeid_7_power_4
+        hours_to_show: 1
+        points_per_hour: 60
+        name: Vermogen Node 7 (laatste uur)
+        hour24: true
+        show:
+          labels: false
+          points: false

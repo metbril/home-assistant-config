@@ -1,0 +1,169 @@
+#########################################################################
+## @package     : signals
+## @description : Signal Lamp Management
+## @author      : Robert van Bregt
+#########################################################################
+
+homeassistant:
+  customize:
+
+    #####################################################################
+    ## Node Anchors
+    #####################################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'signals'
+
+    #####################################################################
+    ## Input Boolean
+    #####################################################################
+    input_boolean.signaallamp_enabled:
+      <<: *customize
+      friendly_name: Signaallamp ingeschakeld
+      icon: mdi:alarm-light
+
+    #####################################################################
+    ## Input Select
+    #####################################################################
+    input_select.signaallamp_scene:
+      <<: *customize
+      friendly_name: Signaallamp Scene
+      icon: mdi:alarm-light
+
+#########################################################################
+## Input Boolean
+#########################################################################
+input_boolean:
+
+  signaallamp_enabled:
+    initial: True
+
+#########################################################################
+## Input Select
+#########################################################################
+input_select:
+
+  signaallamp_scene:
+    initial: Uit
+    options:
+      - Regenalarm
+      - Uit
+    icon: mdi:alarm-light
+
+#########################################################################
+## Automation
+#########################################################################
+automation:
+
+  ## Raise alarm when rain expected on workdays between 6 and 9
+  - alias: Set Rain Alarm Scene
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        above: 0
+      - platform: numeric_state
+        entity_id: input_number.buienradar_precipitation_forecast_average
+        above: 0
+    condition:
+      - condition: state
+        entity_id: binary_sensor.workday
+        state: "on"
+      - condition: time
+        after: "06:00:00"
+        before: "09:00:00"
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.signaallamp_scene
+        option: 'Regenalarm'
+
+  ## Remove rain alarm at 9 on workdays or when no rain expected
+  - alias: Remove Rain Alarm Signal
+    trigger:
+      - platform: template
+        value_template: "{{ states('sensor.buienradar_precipitation_forecast_average') | float == 0 }}"
+      - platform: template
+        value_template: "{{ states('input_number.buienradar_precipitation_forecast_average') | float == 0 }}"
+      - platform: time
+        at: "09:00:00"
+    condition:
+      - condition: state
+        entity_id: input_sensor.signaallamp
+        state: "Regenalarm"
+      - condition: state
+        entity_id: binary_sensor.workday
+        state: "on"
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.signaallamp_scene
+        option: 'Uit'
+
+  ## Sync scene if lamp switched off manually
+  - alias: Sync Scene with Signaallamp
+    trigger:
+      - platform: state
+        entity_id: light.signaallamp
+        to: "off"
+    action:
+    - service: input_select.select_option
+      data:
+        entity_id: input_select.signaallamp_scene
+        option: 'Uit'
+
+  - alias: Update Signaallamp
+    trigger:
+      - platform: state
+        entity_id: input_select.signaallamp_scene
+    # condition:
+    #   - condition: state
+    #     entity_id: binary_sensor.signaallamp_enabled
+    #     state: "on"
+    action:
+      - service: scene.turn_on
+        data_template:
+          entity_id: "{{ ('scene.signaal_' ~ trigger.to_state.state) | lower | replace(' ', '_' ) }}"
+
+#########################################################################
+## Scene
+#########################################################################
+scene:
+
+  - name: Signaal Regenalarm
+    entities:
+      light.signaallamp:
+        state: 'on'
+        brightness_pct: 67
+        rgb_color:
+        - 63
+        - 57
+        - 255
+
+  ## For future use
+  - name: Signaal Vertraging NS
+    entities:
+      light.signaallamp:
+        state: 'on'
+        brightness: 255
+        rgb_color:
+        - 255
+        - 190
+        - 0
+
+  - name: Signaal Uit
+    entities:
+      light.signaallamp:
+        state: 'off'
+
+
+
+#####################
+
+input_number:
+  buienradar_precipitation_forecast_average:
+    initial: 0
+    min: 0
+    max: 10
+    mode: slider
+    unit_of_measurement: "mm/u"
+    icon: mdi:weather-pouring
