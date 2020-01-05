@@ -3,3 +3,30 @@
   trigger: []
   condition: []
   action: []
+- id: notify_1578136483
+  alias: Forward Persistent Notifications
+  description: Stuur persistente notificaties door naar Pushover.
+  trigger:
+  - event_data:
+      domain: persistent_notification
+      service: create
+    event_type: call_service
+    platform: event
+  action:
+  - data_template:
+      message: "{% set message = trigger.event.data.service_data.message %} {% if\
+        \ 'login attempt' in message|lower %}\n  {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\
+        \ message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}"
+    service: notify.admin
+  initial_state: 'on'
+- id: '1578217154137'
+  alias: Notify for presence change
+  description: ''
+  trigger:
+  - entity_id: device_tracker.pontius
+    platform: state
+  condition: []
+  action:
+  - data_template:
+      message: 'Device is now {{ state.trigger.to_state }} '
+    service: notify.mobile_app_pontius
