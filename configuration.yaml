@@ -55,4 +55,6 @@ panel_iframe:
 # enable sending wake on lan packets from HA
 wake_on_lan:
 
+# UI configurations
 automation: !include automations.yaml
+scene: !include scenes.yaml
