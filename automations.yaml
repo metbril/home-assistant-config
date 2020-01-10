@@ -38,3 +38,17 @@
         %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
       title: Nieuwe repository in HACS
     service: persistent_notification.create
+- id: '1578650308372'
+  alias: Synchroniseer Signaallamp Scene
+  description: ''
+  trigger:
+  - event_data:
+      domain: scene
+      service: turn_on
+    event_type: call_service
+    platform: event
+  condition: []
+  action:
+  - data:
+      message: Scene called
+    service: notify.admin
