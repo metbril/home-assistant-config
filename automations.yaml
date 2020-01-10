@@ -3,3 +3,38 @@
   trigger: []
   condition: []
   action: []
+- id: '1578603337940'
+  alias: Melden HACS Updates
+  description: ''
+  trigger:
+  - entity_id: sensor.hacs
+    platform: state
+  condition:
+  - condition: template
+    value_template: '{{ states(trigger.entity_id) != "unknown"}}'
+  - condition: template
+    value_template: '{{ (states(trigger.entity_id) | float) != 0}}'
+  action:
+  - data_template:
+      message: "{% for repo in state_attr(trigger.entity_id, 'repositories') %}\n\
+        \  **{{ repo.display_name }}** _{{ repo[\"installed version\"] }}_ -> _{{\
+        \ repo[\"available version\"] }}_\n{% endfor %}"
+      title: Te verwerken updates in HACS
+    service: persistent_notification.create
+- id: '1578603656941'
+  alias: Melden HACS Repository
+  description: ''
+  trigger:
+  - event_data:
+      action: registration
+    event_type: hacs/repository
+    platform: event
+  condition:
+  - condition: template
+    value_template: '{{ trigger.event.data.repository is defined }}'
+  action:
+  - data_template:
+      message: '{% set repo = trigger.event.data.repository %} {% set id = trigger.event.data.repository_id
+        %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
+      title: Nieuwe repository in HACS
+    service: persistent_notification.create
