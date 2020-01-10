@@ -3,7 +3,7 @@
   trigger: []
   condition: []
   action: []
-- id: '1578603337940'
+- id: hacs_1578603337940
   alias: Melden HACS Updates
   description: ''
   trigger:
@@ -21,7 +21,7 @@
         \ repo[\"available version\"] }}_\n{% endfor %}"
       title: Te verwerken updates in HACS
     service: persistent_notification.create
-- id: '1578603656941'
+- id: hacs_1578603656941
   alias: Melden HACS Repository
   description: ''
   trigger:
@@ -38,7 +38,7 @@
         %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
       title: Nieuwe repository in HACS
     service: persistent_notification.create
-- id: '1578650308372'
+- id: signals_1578650308372
   alias: Synchroniseer Signaallamp Scene
   description: ''
   trigger:
@@ -52,3 +52,67 @@
   - data:
       message: Scene called
     service: notify.admin
+- id: signals_1578658533
+  alias: Set Rain Alarm Scene
+  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am
+  trigger:
+  - above: '0'
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - after: 06:00:00
+    before: 09:00:00
+    condition: time
+  action:
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Regenalarm
+    service: input_select.select_option
+- id: signals_1578658827
+  alias: Remove Rain Alarm Signal
+  description: Remove rain alarm at 9 or when no rain expected
+  trigger:
+  - platform: template
+    value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+      | float == 0 }}'
+  - at: 09:00:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_select.signaallamp_scene
+    state: Regenalarm
+  action:
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+    service: input_select.select_option
+- id: signals_1578659184
+  alias: Sync Signaallamp Scene with Light
+  description: Set scene input when light switched off manually
+  trigger:
+  - entity_id: light.signaallamp
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+    service: input_select.select_option
+- id: signals_1578661126
+  alias: Update Signaallamp
+  description: Update Signaallamp light using selected scene
+  trigger:
+  - entity_id: input_select.signaallamp_scene
+    platform: state
+  condition:
+  - condition: state
+    entity_id: input_boolean.signaallamp_enabled
+    state: 'on'
+  action:
+  - data_template:
+      entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
+        '', ''_'' ) }}'
+    service: scene.turn_on
