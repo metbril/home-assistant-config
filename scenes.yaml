@@ -1,0 +1,25 @@
+- id: '1578651682475'
+  name: Signaal Regenalarm
+  entities:
+    light.signaallamp:
+      state: 'on'
+      brightness_pct: 67
+      rgb_color:
+      - 63
+      - 57
+      - 255
+- id: '1578651682476'
+  name: Signaal Vertraging NS
+  entities:
+    light.signaallamp:
+      state: 'on'
+      brightness_pct: 67
+      rgb_color:
+      - 255
+      - 190
+      - 0
+- id: '1578651682477'
+  name: Signaal Uit
+  entities:
+    light.signaallamp:
+      state: 'off'
