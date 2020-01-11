@@ -1,0 +1,54 @@
+title: Verlichting
+path: lighthing
+icon: 'mdi:lightbulb'
+
+cards:
+
+  - type: light
+    entity: light.living_lights
+
+  - type: light
+    entity: light.leeslamp
+
+  - type: light
+    entity: light.turbinelamp
+
+  - type: glance
+    entities:
+      - entity: light.hoge_kast
+      - entity: light.signaallamp
+      - entity: light.bank
+      - entity: light.leeslamp
+      - entity: light.turbinelamp
+      - entity: light.willner
+      - entity: light.bollamp
+    title: Woonkamer
+    show_header_toggle: true
+
+  - type: entities
+    entities:
+      - entity: light.hoge_kast
+      - entity: light.signaallamp
+      - entity: light.bank
+      - entity: light.leeslamp
+      - entity: light.turbinelamp
+      - entity: light.willner
+      - entity: light.bollamp
+    title: Woonkamer
+    show_header_toggle: true
+
+  - type: entities
+    entities:
+      - light.experiment
+    title: Studeerkamer
+    show_header_toggle: true
+
+  - type: entities
+    entities:
+      - entity: light.living_lights
+      - entity: light.woonkamer
+      - entity: light.leeshoek
+      - entity: light.ergens
+      - light.lab
+    title: Lichtgroepen
+    show_header_toggle: true

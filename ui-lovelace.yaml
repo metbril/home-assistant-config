@@ -12,6 +12,8 @@ views:
   - !include lovelace/start.yaml
   - !include lovelace/home.yaml
   - !include lovelace/living.yaml
+  - !include lovelace/lighting.yaml
+  - !include lovelace/media.yaml
   - !include lovelace/presence.yaml
   # - !include lovelace/security.yaml
   - !include lovelace/health.yaml
