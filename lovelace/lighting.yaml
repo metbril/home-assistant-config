@@ -4,36 +4,28 @@ icon: 'mdi:lightbulb'
 
 cards:
 
-  - type: light
-    entity: light.living_lights
+  - type: horizontal-stack
+    cards:
 
-  - type: light
-    entity: light.leeslamp
+      - type: light
+        entity: light.living_dusk
+        name: Schemer
 
-  - type: light
-    entity: light.turbinelamp
+      - type: light
+        entity: light.leeslamp
 
-  - type: glance
-    entities:
-      - entity: light.hoge_kast
-      - entity: light.signaallamp
-      - entity: light.bank
-      - entity: light.leeslamp
-      - entity: light.turbinelamp
-      - entity: light.willner
-      - entity: light.bollamp
-    title: Woonkamer
-    show_header_toggle: true
+      - type: light
+        entity: light.living
 
   - type: entities
     entities:
       - entity: light.hoge_kast
-      - entity: light.signaallamp
       - entity: light.bank
-      - entity: light.leeslamp
       - entity: light.turbinelamp
       - entity: light.willner
       - entity: light.bollamp
+      - entity: light.leeslamp
+      - entity: light.signaallamp
     title: Woonkamer
     show_header_toggle: true
 
@@ -45,7 +37,8 @@ cards:
 
   - type: entities
     entities:
-      - entity: light.living_lights
+      - entity: light.living
+      - entity: light.living_dusk
       - entity: light.woonkamer
       - entity: light.leeshoek
       - entity: light.ergens
