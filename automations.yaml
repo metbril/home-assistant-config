@@ -124,7 +124,7 @@
       offset: "-00:30:00"
   action:
     - service: light.turn_on
-      entity_id: group.dusk_living_lights
+      entity_id: light.living_dusk
 - id: lighting_1578815662
   alias: Turn On Living Lights
   description: 'Turn On Living Lights from RFXTRX Wall Switch'
@@ -136,7 +136,7 @@
         state: 'on'
   action:
     - service: light.turn_on
-      entity_id: group.living_lights
+      entity_id: light.living
 - id: lighting_1578815663
   alias: Turn Off Living Lights
   description: 'Turn Off Living Lights from RFXTRX Wall Switch'
@@ -148,7 +148,7 @@
         state: 'off'
   action:
     - service: light.turn_off
-      entity_id: group.living_lights
+      entity_id: light.living
 - id: presence_1578816540
   alias: "Melden Familie Thuis"
   trigger:
