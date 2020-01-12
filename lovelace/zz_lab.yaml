@@ -63,15 +63,15 @@ cards:
 
   - type: entities
     entities:
-      - input_select.signaallamp_scene
+      - sensor.buienradar_precipitation_forecast_average
+      - binary_sensor.rain_alarm
       - light.signaallamp
+      - input_select.signaallamp_scene
       - scene.signaal_regenalarm
       - scene.signaal_vertraging_ns
       - scene.signaal_uit
       - input_boolean.signaallamp_enabled
-      - sensor.buienradar_precipitation_forecast_average
       - input_number.buienradar_precipitation_forecast_average
-      - binary_sensor.rain_alarm
 
   - type: vertical-stack
     cards:
