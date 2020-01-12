@@ -123,13 +123,28 @@ mobile_app:
 
 light:
   - platform: group
-    name: Living Lights
+    name: Living
     entities:
-      - light.bank
-      - light.bollamp
+      ## clockwise from the door
       - light.hoge_kast
-      - light.turbine_lamp
+      - light.bank
+      - light.signaallamp
+      - light.leeslamp
+      - light.turbinelamp
       - light.willner
+      - light.bollamp
+
+  - platform: group
+    name: Living Dusk
+    entities:
+      ## clockwise from the door
+      - light.hoge_kast
+      # - light.signaallamp
+      - light.bank
+      - light.leeslamp
+      - light.turbinelamp
+      - light.willner
+      - light.bollamp
 
 lovelace:
   mode: yaml
