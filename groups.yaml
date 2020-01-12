@@ -22,3 +22,10 @@ batteries:
       - sensor.pontius_battery_level
       - sensor.robertipad_battery_level
       - sensor.iphone_van_robert_werk_battery_level
+
+family:
+  name: Family
+  entities:
+    - person.king
+    - person.queen
+    - person.bishop
