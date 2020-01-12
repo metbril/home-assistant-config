@@ -160,21 +160,5 @@ wake_on_lan:
 automation: !include automations.yaml
 scene: !include scenes.yaml
 group: !include groups.yaml
-
-################################################
-## Binary Sensor
-################################################
-binary_sensor:
-  - platform: workday
-    name: Workday
-    country: NL
-    workdays: [ mon, tue, wed, thu, fri ]
-
-################################################
-## Sensor
-################################################
-sensor:
-  - platform: time_date
-    display_options:
-      - 'date'
-      - 'time'
+sensor: !include_dir_merge_list include/sensor/
+binary_sensor: !include_dir_merge_list include/binary_sensor/

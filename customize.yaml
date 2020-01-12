@@ -1,20 +1,24 @@
+binary_sensor.aygo_insured:
+  friendly_name: Aygo verzekerd
 binary_sensor.daytime:
   friendly_name: Overdag
-  icon: mdi:timetable
+  icon: 'mdi:timetable'
 binary_sensor.evening:
   friendly_name: Avond
-  icon: mdi:timetable
+  icon: 'mdi:timetable'
 binary_sensor.morning:
   friendly_name: Ochtend
-  icon: mdi:timetable
+  icon: 'mdi:timetable'
 binary_sensor.night:
   friendly_name: Nacht
-  icon: mdi:timetable
+  icon: 'mdi:timetable'
+binary_sensor.niro_insured:
+  friendly_name: Niro verzekerd
 binary_sensor.workday:
   friendly_name: Werkdag
-  icon: mdi:briefcase
+  icon: 'mdi:briefcase'
 device_tracker.pontius:
-  icon: mdi:apple-ios
+  icon: 'mdi:apple-ios'
 group.batteries:
   friendly_name: Batterijen
 group.dusk_living_lights:
@@ -22,64 +26,110 @@ group.dusk_living_lights:
 group.living_lights:
   friendly_name: Verlichting Woonkamer
 light.bank:
-  icon: mdi:floor-lamp
+  icon: 'mdi:floor-lamp'
 light.bollamp:
-  icon: mdi:lamp
+  icon: 'mdi:lamp'
 light.ergens:
-  icon: mdi:lightbulb-group
+  icon: 'mdi:lightbulb-group'
 light.hoge_kast:
-  icon: mdi:lamp
+  icon: 'mdi:lamp'
 light.lab:
-  icon: mdi:lightbulb-group
+  icon: 'mdi:lightbulb-group'
 light.leeshoek:
-  icon: mdi:lightbulb-group
+  icon: 'mdi:lightbulb-group'
 light.leeslamp:
-  icon: mdi:track-light
+  icon: 'mdi:track-light'
 light.living_lights:
   friendly_name: Woonkamerverlichting
-  icon: mdi:lightbulb-group
+  icon: 'mdi:lightbulb-group'
 light.signaallamp:
-  icon: mdi:alarm-light
+  icon: 'mdi:alarm-light'
 light.turbinelamp:
-  icon: mdi:lava-lamp
+  icon: 'mdi:lava-lamp'
 light.tv_meubel:
-  icon: mdi:lamp
+  icon: 'mdi:lamp'
 light.willner:
-  icon: mdi:lamp
+  icon: 'mdi:lamp'
 light.woonkamer:
-  icon: mdi:lightbulb-group
+  icon: 'mdi:lightbulb-group'
 media_player.living_tv:
   friendly_name: TV Woonkamer
 person.bishop:
-  icon: mdi:chess-bishop
+  icon: 'mdi:chess-bishop'
 person.king:
   entity_picture: /local/img/people/robert.jpg
 person.queen:
-  icon: mdi:chess-queen
+  icon: 'mdi:chess-queen'
 sensor.asuswrt_download:
   friendly_name: ASUSWRT Download
-  icon: mdi:download-network
+  icon: 'mdi:download-network'
 sensor.asuswrt_upload:
   friendly_name: ASUSWRT Upload
-  icon: mdi:upload-network
+  icon: 'mdi:upload-network'
 sensor.aswrt_download_speed:
   friendly_name: ASUSWRT Downloadsnelheid
-  icon: mdi:speedometer
+  icon: 'mdi:speedometer'
 sensor.aswrt_upload_speed:
   friendly_name: ASUSWRT Uploadsnelheid
-  icon: mdi:speedometer
+  icon: 'mdi:speedometer'
+sensor.aygo_expdate:
+  friendly_name: Vervaldatum APK Aygo
+sensor.aygo_insured:
+  friendly_name: Aygo verzekerd
+sensor.aygo_recall:
+  friendly_name: Terugroepacties Aygo
+  unit_of_measurement: recalls
 sensor.christmas_countdown:
   friendly_name: Aftellen tot Kerstmis
 sensor.date:
   friendly_name: Datum
+sensor.diesel_advies:
+  friendly_name: Diesel (Advies)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
 sensor.easter_countdown:
   friendly_name: Aftellen tot Pasen
+sensor.euro95_advies:
+  friendly_name: Euro 95 (Advies)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
+sensor.euro95_dijktank_kanaalweg:
+  friendly_name: Euro 95 (Dijktank Kanaalweg)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
+sensor.euro95_hoofdweg:
+  friendly_name: Euro 95 (Hoofdweg)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
+sensor.euro95_lukoil_schermerhoek:
+  friendly_name: Euro 95 (Lukoil Schermerhoek)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
+sensor.euro95_shell_nieuwerkerk:
+  friendly_name: Euro 95 (Shell Nieuwerkerk)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
+sensor.euro95_tinq_bermweg:
+  friendly_name: Euro 95 (Tinq Bermweg)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
 sensor.father_s_day_countdown:
   friendly_name: Aftellen tot Vaderdag
 sensor.king_s_day_countdown:
   friendly_name: Aftellen tot Koningsdag
+sensor.lpg_advies:
+  friendly_name: LPG (Advies)
+  icon: 'mdi:gas-station'
+  unit_of_measurement: €/L
 sensor.mother_s_day_countdown:
   friendly_name: Aftellen tot Moederdag
+sensor.niro_expdate:
+  friendly_name: Vervaldatum APK Niro
+sensor.niro_insured:
+  friendly_name: Niro verzekerd
+sensor.niro_recall:
+  friendly_name: Terugroepacties Niro
+  unit_of_measurement: recalls
 sensor.pi_hole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pi_hole_ads_percentage_blocked_today:

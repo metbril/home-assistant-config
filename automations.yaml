@@ -195,3 +195,14 @@
           {% else %}
             {{ message }}
           {% endif %}
+- id: rdw_1578819664
+  alias: Notify APK Date Expiration
+  description: 'Notify 21 days before the APK date expires'
+  trigger:
+    - platform: template
+      value_template: "{{ ((as_timestamp(strptime(states('sensor.niro_expdate'), '%Y-%m-%d')) / 86400) | int) == ((as_timestamp(strptime(states('sensor.date'), '%Y-%m-%d')) / 86400) | int) + 21 }} }}"
+  action:
+    - service: notify.admin
+      data_template:
+        title: '*Auto*'
+        message: De APK keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan een APK keuring bij de garage.
