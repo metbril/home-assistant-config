@@ -23,12 +23,8 @@ device_tracker.robert_phone_owntracks:
   icon: 'mdi:map-marker-radius'
 group.batteries:
   friendly_name: Batterijen
-group.dusk_living_lights:
-  friendly_name: Schemerverlichting Woonkamer
 group.family:
   friendly_name: Familie
-group.living_lights:
-  friendly_name: Verlichting Woonkamer
 light.bank:
   icon: 'mdi:floor-lamp'
 light.bollamp:
@@ -43,9 +39,12 @@ light.leeshoek:
   icon: 'mdi:lightbulb-group'
 light.leeslamp:
   icon: 'mdi:track-light'
-light.living_lights:
-  friendly_name: Woonkamerverlichting
-  icon: 'mdi:lightbulb-group'
+light.living:
+  friendly_name: Woonkamer
+  icon: 'mdi:sofa'
+light.living_dusk:
+  friendly_name: Schemer Woonkamer
+  icon: 'mdi:weather-sunset'
 light.signaallamp:
   icon: 'mdi:alarm-light'
 light.turbinelamp:
