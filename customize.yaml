@@ -17,12 +17,16 @@ binary_sensor.niro_insured:
 binary_sensor.workday:
   friendly_name: Werkdag
   icon: 'mdi:briefcase'
-device_tracker.pontius:
+device_tracker.robert_phone_app:
   icon: 'mdi:apple-ios'
+device_tracker.robert_phone_owntracks:
+  icon: 'mdi:map-marker-radius'
 group.batteries:
   friendly_name: Batterijen
 group.dusk_living_lights:
   friendly_name: Schemerverlichting Woonkamer
+group.family:
+  friendly_name: Familie
 group.living_lights:
   friendly_name: Verlichting Woonkamer
 light.bank:
