@@ -1,0 +1,106 @@
+binary_sensor.daytime:
+  friendly_name: Overdag
+  icon: mdi:timetable
+binary_sensor.evening:
+  friendly_name: Avond
+  icon: mdi:timetable
+binary_sensor.morning:
+  friendly_name: Ochtend
+  icon: mdi:timetable
+binary_sensor.night:
+  friendly_name: Nacht
+  icon: mdi:timetable
+binary_sensor.workday:
+  friendly_name: Werkdag
+  icon: mdi:briefcase
+device_tracker.pontius:
+  icon: mdi:apple-ios
+group.batteries:
+  friendly_name: Batterijen
+group.dusk_living_lights:
+  friendly_name: Schemerverlichting Woonkamer
+group.living_lights:
+  friendly_name: Verlichting Woonkamer
+light.bank:
+  icon: mdi:floor-lamp
+light.bollamp:
+  icon: mdi:lamp
+light.ergens:
+  icon: mdi:lightbulb-group
+light.hoge_kast:
+  icon: mdi:lamp
+light.lab:
+  icon: mdi:lightbulb-group
+light.leeshoek:
+  icon: mdi:lightbulb-group
+light.leeslamp:
+  icon: mdi:track-light
+light.living_lights:
+  friendly_name: Woonkamerverlichting
+  icon: mdi:lightbulb-group
+light.signaallamp:
+  icon: mdi:alarm-light
+light.turbinelamp:
+  icon: mdi:lava-lamp
+light.tv_meubel:
+  icon: mdi:lamp
+light.willner:
+  icon: mdi:lamp
+light.woonkamer:
+  icon: mdi:lightbulb-group
+media_player.living_tv:
+  friendly_name: TV Woonkamer
+person.bishop:
+  icon: mdi:chess-bishop
+person.king:
+  entity_picture: /local/img/people/robert.jpg
+person.queen:
+  icon: mdi:chess-queen
+sensor.asuswrt_download:
+  friendly_name: ASUSWRT Download
+  icon: mdi:download-network
+sensor.asuswrt_upload:
+  friendly_name: ASUSWRT Upload
+  icon: mdi:upload-network
+sensor.aswrt_download_speed:
+  friendly_name: ASUSWRT Downloadsnelheid
+  icon: mdi:speedometer
+sensor.aswrt_upload_speed:
+  friendly_name: ASUSWRT Uploadsnelheid
+  icon: mdi:speedometer
+sensor.christmas_countdown:
+  friendly_name: Aftellen tot Kerstmis
+sensor.date:
+  friendly_name: Datum
+sensor.easter_countdown:
+  friendly_name: Aftellen tot Pasen
+sensor.father_s_day_countdown:
+  friendly_name: Aftellen tot Vaderdag
+sensor.king_s_day_countdown:
+  friendly_name: Aftellen tot Koningsdag
+sensor.mother_s_day_countdown:
+  friendly_name: Aftellen tot Moederdag
+sensor.pi_hole_ads_blocked_today:
+  friendly_name: Geblokkeerde advertenties
+sensor.pi_hole_ads_percentage_blocked_today:
+  friendly_name: Percentage geblokkeerde advertenties
+sensor.pi_hole_dns_queries_cached:
+  friendly_name: Gecachete DNS-verzoeken
+sensor.pi_hole_dns_queries_forwarded:
+  friendly_name: Doorgestuurde DNS-verzoeken
+sensor.pi_hole_dns_queries_today:
+  friendly_name: DNS-verzoeken
+sensor.pi_hole_dns_unique_clients:
+  friendly_name: Unieke clients
+sensor.pi_hole_dns_unique_domains:
+  friendly_name: Unieke domeinen
+sensor.pi_hole_domains_blocked:
+  friendly_name: Geblokkeerde domeinen
+sensor.pi_hole_seen_clients:
+  friendly_name: Waargenomen clients
+sensor.sinterklaas_countdown:
+  friendly_name: Aftellen tot Pakjesavond
+sensor.time:
+  friendly_name: Tijd
+sun.sun:
+  friendly_name: Zon

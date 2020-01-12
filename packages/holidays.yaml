@@ -17,18 +17,6 @@ homeassistant:
     ######################################################################
     ## Sensor
     ######################################################################
-    sensor.easter_countdown:
-      friendly_name: "Aftellen tot Pasen"
-    sensor.king_s_day_countdown:
-      friendly_name: "Aftellen tot Koningsdag"
-    sensor.mother_s_day_countdown:
-      friendly_name: "Aftellen tot Moederdag"
-    sensor.father_s_day_countdown:
-      friendly_name: "Aftellen tot Vaderdag"
-    sensor.sinterklaas_countdown:
-      friendly_name: "Aftellen tot Pakjesavond"
-    sensor.christmas_countdown:
-      friendly_name: "Aftellen tot Kerstmis"
 
 ######################################################################
 ## Sensor

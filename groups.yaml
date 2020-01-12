@@ -1,0 +1,24 @@
+dusk_living_lights:
+  entities:
+    - light.bank
+    - light.bollamp
+    - light.hoge_kast
+    - light.willner
+    - light.turbine_lamp
+
+living_lights:
+  entities:
+    ## clockwise from the door
+    - light.hoge_kast
+    - light.bank
+    - light.bollamp
+    - light.willner
+    - light.turbine_lamp
+
+batteries:
+    name: Batteries
+    entities:
+      # phones
+      - sensor.pontius_battery_level
+      - sensor.robertipad_battery_level
+      - sensor.iphone_van_robert_werk_battery_level

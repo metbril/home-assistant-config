@@ -116,3 +116,82 @@
       entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
         '', ''_'' ) }}'
     service: scene.turn_on
+- id: lighting_1578815661
+  alias: Turn On Living Lights at Dusk
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "-00:30:00"
+  action:
+    - service: light.turn_on
+      entity_id: group.dusk_living_lights
+- id: lighting_1578815662
+  alias: Turn On Living Lights
+  description: 'Turn On Living Lights from RFXTRX Wall Switch'
+  trigger:
+    - platform: event
+      event_type: button_pressed
+      event_data: 
+        entity_id: switch.living_wallswitch_left
+        state: 'on'
+  action:
+    - service: light.turn_on
+      entity_id: group.living_lights
+- id: lighting_1578815663
+  alias: Turn Off Living Lights
+  description: 'Turn Off Living Lights from RFXTRX Wall Switch'
+  trigger:
+    - platform: event
+      event_type: button_pressed
+      event_data: 
+        entity_id: switch.living_wallswitch_left
+        state: 'off'
+  action:
+    - service: light.turn_off
+      entity_id: group.living_lights
+- id: presence_1578816540
+  alias: "Melden Familie Thuis"
+  trigger:
+    - platform: state
+      entity_id: group.family
+  action:
+    - service: notify.admin
+      data_template:
+        message: >-
+          {% set state = trigger.to_state.state %}
+          {% if state == 'home' -%}
+            Ik heb gemerkt dat er weer iemand thuis is.
+          {%- elif state == 'not_home' -%}
+            Ik zie dat er niemand meer thuis is.
+          {%- else -%}
+            Ik weet even niet of er iemand thuis is.            
+          {%- endif %}
+- id: presence_1578816550
+  alias: "Melden Nieuw Apparaat Gedetecteerd"
+  trigger:
+    - platform: event
+      event_type: device_tracker_new_device
+  action:
+    - service: persistent_notification.create
+      data:
+        message: "Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor details."
+        title: "Nieuw apparaat"
+- id: notify_1578816860
+  alias: Forward Persistent Notifications OLD
+  initial_state: 'off'
+  trigger:
+    - platform: event
+      event_type: call_service
+      event_data:
+        domain: persistent_notification
+        service: create
+  action:
+    - service: notify.admin
+      data_template:
+        message: >-
+          {% set message = trigger.event.data.service_data.message %}
+          {% if 'login attempt' in message|lower %}
+            {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{ message.split('from ')[1] }}
+          {% else %}
+            {{ message }}
+          {% endif %}

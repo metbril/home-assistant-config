@@ -23,6 +23,82 @@ homeassistant:
 ##############################
 ## Integrations
 ##############################
+
+asuswrt:
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  ssh_key: !secret asuswrt_ssh_key
+  protocol: ssh
+  port: 22
+  mode: router
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed
+
+############################################################################
+## Device Tracker
+############################################################################
+device_tracker:
+  # This requires the asuswrt integration in configuration.yaml
+  - platform: asuswrt
+    consider_home: 180
+    interval_seconds: 60
+    new_device_defaults:
+      track_new_devices: false
+      hide_if_away: false
+
+############################################################################
+## Person
+############################################################################
+person:
+
+############################################################################
+## Zone
+############################################################################
+zone:
+  - name: Work King
+    latitude: 51.8794643
+    longitude: 4.5344588
+    radius: 250
+    icon: mdi:hospital
+
+################################################
+## Notify
+################################################
+notify:
+  - name: admin
+    platform: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+  - name: all
+    platform: group
+    services:
+      # - service: admin
+      - service: ios_pontius
+      - service: ios_patti
+      - service: living_tv
+
+  ## https://www.home-assistant.io/integrations/webostv/
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
+
+################################################
+## Media Player
+################################################
+media_player:
+  ## https://www.home-assistant.io/integrations/webostv/
+  - platform: webostv
+    host: !secret living_tv_host
+    name: Living TV
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+      data:
+        mac: !secret living_tv_mac
+
 config:
 discovery:
 
@@ -41,9 +117,33 @@ http:
 ios:
 mobile_app:
 
+############################################################
+## Light
+############################################################
+
+light:
+  - platform: group
+    name: Living Lights
+    entities:
+      - light.bank
+      - light.bollamp
+      - light.hoge_kast
+      - light.turbine_lamp
+      - light.willner
+
 lovelace:
   mode: yaml
 map:
+
+pi_hole:
+  host: 'localhost:4865'              # default: 'pi.hole'
+  ssl: false                          # default: false
+  verify_ssl: false                   # default: false
+
+################################################
+## Sun
+################################################
+sun:
 
 system_health:
 
@@ -59,3 +159,22 @@ wake_on_lan:
 # UI configurations
 automation: !include automations.yaml
 scene: !include scenes.yaml
+group: !include groups.yaml
+
+################################################
+## Binary Sensor
+################################################
+binary_sensor:
+  - platform: workday
+    name: Workday
+    country: NL
+    workdays: [ mon, tue, wed, thu, fri ]
+
+################################################
+## Sensor
+################################################
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
