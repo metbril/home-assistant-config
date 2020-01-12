@@ -122,6 +122,8 @@ sensor:
     monitored_conditions:
       - summary
       - minutely_summary
+      - hourly_summary
+      - daily_summary
       - icon
       - temperature
       - apparent_temperature
@@ -145,8 +147,25 @@ sensor:
     longitude: !secret home_longitude
     timeframe: 30                     # minutes to look ahead for precipitation
     monitored_conditions:
+      - stationname
+      - symbol
+      - conditionexact
+      - barometerfcname
+      - temperature
+      - feeltemperature
+      - pressure
+      - humidity
+      - windspeed
+      - windforce
+      - windgust
+      - windazimuth
+      - visibility
+      - precipitation
       - precipitation_forecast_average
       - precipitation_forecast_total
+      - irradiance
+      - rainlast24hour
+      - rainlasthour
 
 ################################################
 ## Binary Sensor
