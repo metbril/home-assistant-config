@@ -70,19 +70,6 @@ cards:
     title: WAN
     type: entities
 
-  - type: entities
-    entities:
-      - sensor.pontius_battery_level
-      - sensor.robertipad_battery_level
-      - sensor.iphone_van_robert_werk_battery_level
-    title: Batterijen
-
-  - type: entities
-    entities:
-      - automation.daily_full_backup
-      - automation.daily_dropbox_sync
-    title: Backup
-
   - type: vertical-stack
     cards:
       - type: custom:mini-graph-card

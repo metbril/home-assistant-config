@@ -20,3 +20,5 @@ cards:
     entities:
       - entity: sensor.date
       - entity: sensor.time
+      - sensor.holiday
+      - sensor.flag
