@@ -47,43 +47,6 @@
   - data:
       message: Scene called
     service: notify.admin
-- id: signals_1578658533
-  alias: Aanzetten regenalarm
-  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am
-  trigger:
-  - above: '0'
-    entity_id: sensor.buienradar_precipitation_forecast_average
-    platform: numeric_state
-  condition:
-  - condition: state
-    entity_id: binary_sensor.workday
-    state: 'on'
-  - after: 06:00:00
-    before: 09:00:00
-    condition: time
-  action:
-  - data:
-      entity_id: input_select.signaallamp_scene
-      option: Regenalarm
-    service: input_select.select_option
-- id: signals_1578658827
-  alias: Verwijderen waarschuwing regenalarm
-  description: Remove rain alarm at 9 or when no rain expected
-  trigger:
-  - platform: template
-    value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
-      | float == 0 }}'
-  - at: 09:00:00
-    platform: time
-  condition:
-  - condition: state
-    entity_id: input_select.signaallamp_scene
-    state: Regenalarm
-  action:
-  - data:
-      entity_id: input_select.signaallamp_scene
-      option: Uit
-    service: input_select.select_option
 - id: signals_1578659184
   alias: Synchroniseren scene signaallamp met licht
   description: Set scene input when light switched off manually

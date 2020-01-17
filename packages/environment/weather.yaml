@@ -1,112 +1,96 @@
 ###############################################################################
-#   @author         :   Robert van Bregt
-#   @date           :   2019-12-19
 #   @package        :   Weather
 #   @description    :   Get local weather conditions
+#   @author         :   Robert van Bregt
 ###############################################################################
 
 homeassistant:
   customize:
 
     ################################################
-    ## Node Anchors
-    ################################################
-
-    package.node_anchors:
-      customize: &customize
-        package: 'weather'
-
-    ################################################
     ## Weather
     ################################################
 
     weather.dark_sky:
-      <<: *customize
       friendly_name: Thuis
 
     ################################################
     ## Sensor
     ################################################
 
+    sensor.buienradar_precipitation_forecast_average:
+      friendly_name: Verwachte neerslag
+      unit_of_measurement: mm/u
+
+    sensor.buienradar_precipitation_forecast_total:
+      friendly_name: Verwachte neerslag
+      unit_of_measurement: mm
+
     sensor.dark_sky_apparent_temperature:
-      <<: *customize
       friendly_name: Gevoelstemperatuur omgeving
+
+    sensor.dark_sky_cloud_coverage:
+      friendly_name: Bewolking
+
     sensor.dark_sky_humidity:
-      <<: *customize
       friendly_name: Luchtvochtigheid omgeving
+
+    sensor.dark_sky_ozone:
+      friendly_name: Ozon Dark Sky
+      icon: mdi:vector-triangle
+
     sensor.dark_sky_precip_intensity:
-      <<: *customize
       friendly_name: Neerslagintensiteit omgeving
       unit_of_measurement: mm/u
+
     sensor.dark_sky_precip_probability:
-      <<: *customize
       friendly_name: Neerslagkans omgeving
+
     sensor.dark_sky_pressure:
-      <<: *customize
       friendly_name: Luchtdruk omgeving
+
     sensor.dark_sky_temperature:
-      <<: *customize
       friendly_name: Temperatuur omgeving
 
     sensor.dark_sky_uv_index:
-      <<: *customize
       friendly_name: UV-index Dark Sky
-    sensor.dark_sky_ozone:
-      <<: *customize
-      friendly_name: Ozon Dark Sky
-      icon: mdi:vector-triangle
-    sensor.dark_sky_cloud_coverage:
-      <<: *customize
-      friendly_name: Bewolking
 
     sensor.dark_sky_wind_bearing:
-      <<: *customize
       friendly_name: Windrichting omgeving
-    sensor.dark_sky_wind_speed:
-      <<: *customize
-      friendly_name: Windsnelheid omgeving
 
-    sensor.buienradar_precipitation_forecast_average:
-      <<: *customize
-      friendly_name: Verwachte neerslag
-      unit_of_measurement: mm/u
-    sensor.buienradar_precipitation_forecast_total:
-      <<: *customize
-      friendly_name: Verwachte neerslag
-      unit_of_measurement: mm
+    sensor.dark_sky_wind_speed:
+      friendly_name: Windsnelheid omgeving
 
     ################################################
     ## Binary Sensor
     ################################################
 
     binary_sensor.car_wash:
-      <<: *customize
       friendly_name: "Auto wassen"
-
-    ################################################
-    ## Camera
-    ################################################
-
-    camera.buienradar:
-      <<: *customize
 
     ################################################
     ## Automation
     ################################################
 
     automation.rain_alarm:
-      <<: *customize
       friendly_name: Buienalarm
 
 ################################################
 ## Weather
 ################################################
 
+## The met.no weather is added through the integration
+## it can't be added manually
+
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
     units: si
     mode: daily
+
+  - platform: buienradar
+    name: Buienradar
+    forecast: true
 
 ################################################
 ## Sensor
@@ -117,8 +101,8 @@ sensor:
     api_key: !secret darksky_api_key
     units: si
     language: nl
-    scan_interval:
-      minutes: 10                     # default 2 minutes
+    scan_interval:                    # default 2 minutes
+      minutes: 10                     
     monitored_conditions:
       - hourly_summary
       - daily_summary
@@ -185,7 +169,7 @@ camera:
 ################################################
 automation:
 
-  - alias: Rain Alarm
+  - alias: Notify Rain Alarm
     trigger:
       - platform: numeric_state
         entity_id: sensor.buienradar_precipitation_forecast_average
@@ -208,3 +192,46 @@ automation:
           message: "{{state_attr('binary_sensor.meteoalarm', 'description')}} is effectief op {{state_attr('binary_sensor.meteoalarm', 'effective')}}"
           data:
             url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
+
+  - alias: Raise Rain Alarm Signal
+    description: Trigger rain alarm when rain expected on workdays between 6 and 9 am
+    trigger:
+      - above: '0'
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        platform: numeric_state
+    condition:
+      - condition: state
+        entity_id: sensor.occupancy
+        state: 'home'
+      - condition: state
+        entity_id: group.family
+        state: 'home'
+      - condition: state
+        entity_id: binary_sensor.workday
+        state: 'on'
+      - after: 06:00:00
+        before: 09:00:00
+        condition: time
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.signaallamp_scene
+          option: Regenalarm
+
+  - alias: Cancel Rain Alarm Signal
+    description: Remove rain alarm at 9 or when no rain expected
+    trigger:
+      - platform: template
+        value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+          | float == 0 }}'
+      - at: 09:00:00
+        platform: time
+    condition:
+      - condition: state
+        entity_id: input_select.signaallamp_scene
+        state: Regenalarm
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.signaallamp_scene
+          option: Uit
