@@ -113,13 +113,22 @@
     service: scene.turn_on
 - id: lighting_1578815661
   alias: Turn On Living Lights at Dusk
+  description: ''
   trigger:
-  - platform: sun
-    event: sunset
+  - event: sunset
     offset: -00:30:00
+    platform: sun
   action:
-  - service: light.turn_on
-    entity_id: light.living_dusk
+  - entity_id: light.living_dusk
+    service: light.turn_on
+  - data_template:
+      message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+        "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
+        zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
+        tijd om de verlichting in te schakelen." ] | random + " #HomeAssistant" +
+        [ " #Beveiliging", " #Zonsondergang", " #Verlichting", " #Hue", " #SmartLighting",
+        " #SmartHome", " #HomeAutomation" ] | random }}'
+    service: notify.twitter
 - id: lighting_1578815662
   alias: Turn On Living Lights
   description: Turn On Living Lights from RFXTRX Wall Switch
@@ -147,15 +156,15 @@
 - id: presence_1578816540
   alias: Melden Familie Thuis
   trigger:
-  - platform: state
-    entity_id: group.family
+  - entity_id: group.family
+    platform: state
   action:
-  - service: notify.admin
-    data_template:
+  - data_template:
       message: "{% set state = trigger.to_state.state %} {% if state == 'home' -%}\n\
         \  Ik heb gemerkt dat er weer iemand thuis is.\n{%- elif state == 'not_home'\
         \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%- else -%}\n  Ik weet even\
         \ niet of er iemand thuis is.            \n{%- endif %}"
+    service: notify.admin
 - id: presence_1578816550
   alias: Melden Nieuw Apparaat Gedetecteerd
   trigger:
@@ -196,3 +205,4 @@
         een APK keuring bij de garage.
       title: '*Auto*'
     service: notify.admin
+    
