@@ -42,9 +42,6 @@ cards:
 
   - type: entities
     entities:
-
-  - type: entities
-    entities:
       - sensor.buienradar_barometer
       - sensor.buienradar_irradiance
       - sensor.buienradar_precipitation_forecast_average
