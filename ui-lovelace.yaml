@@ -16,6 +16,7 @@ views:
   - !include lovelace/media.yaml
   - !include lovelace/presence.yaml
   # - !include lovelace/security.yaml
+  - !include lovelace/weather.yaml
   - !include lovelace/health.yaml
   - !include lovelace/info.yaml
   - !include lovelace/mobility.yaml

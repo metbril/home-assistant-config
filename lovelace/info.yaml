@@ -9,18 +9,3 @@ cards:
         icon: 'mdi:home'
     type: entities
 
-  - type: entities
-    entities:
-      - entity: sensor.buienradar_precipitation_forecast_average
-      - entity: sensor.buienradar_precipitation_forecast_total
-
-  - type: sensor
-    entity: sensor.buienradar_precipitation_forecast_average
-    graph: line
-    detail: 2
-    hours_to_show: 6
-
-  - type: picture-entity
-    entity: camera.buienradar
-    show_state: false
-    show_name: false
