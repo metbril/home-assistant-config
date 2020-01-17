@@ -86,44 +86,12 @@ sensor.christmas_countdown:
   friendly_name: Aftellen tot Kerstmis
 sensor.date:
   friendly_name: Datum
-sensor.diesel_advies:
-  friendly_name: Diesel (Advies)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
 sensor.easter_countdown:
   friendly_name: Aftellen tot Pasen
-sensor.euro95_advies:
-  friendly_name: Euro 95 (Advies)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_dijktank_kanaalweg:
-  friendly_name: Euro 95 (Dijktank Kanaalweg)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_hoofdweg:
-  friendly_name: Euro 95 (Hoofdweg)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_lukoil_schermerhoek:
-  friendly_name: Euro 95 (Lukoil Schermerhoek)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_shell_nieuwerkerk:
-  friendly_name: Euro 95 (Shell Nieuwerkerk)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_tinq_bermweg:
-  friendly_name: Euro 95 (Tinq Bermweg)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
 sensor.father_s_day_countdown:
   friendly_name: Aftellen tot Vaderdag
 sensor.king_s_day_countdown:
   friendly_name: Aftellen tot Koningsdag
-sensor.lpg_advies:
-  friendly_name: LPG (Advies)
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
 sensor.mother_s_day_countdown:
   friendly_name: Aftellen tot Moederdag
 sensor.niro_expdate:

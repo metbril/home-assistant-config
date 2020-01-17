@@ -69,18 +69,3 @@ cards:
             name: Adviesprijs
         title: Euro 95
         show_header_toggle: False
-
-      - type: history-graph
-        entities:
-          - entity: sensor.euro95_dijktank_kanaalweg
-            name: Dijktank Kanaalweg
-          - entity: sensor.euro95_tinq_bermweg
-            name: Tinq Bermweg
-          - entity: sensor.euro95_lukoil_schermerhoek
-            name: Lukoil Schermerhoek
-          - entity: sensor.euro95_shell_nieuwerkerk
-            name: Shell Nieuwerkerk
-          - entity: sensor.euro95_advies
-            name: Adviesprijs
-        title: 'Euro 95'
-        hours_to_show: 48
