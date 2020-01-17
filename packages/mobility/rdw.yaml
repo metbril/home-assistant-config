@@ -1,0 +1,99 @@
+# ----------------------------------------------------------------------
+# RDW
+# ----------------------------------------------------------------------
+
+homeassistant:
+
+  customize_glob:
+    sensor.*_recall:
+      unit_of_measurement: recalls # change to numeric state
+
+  customize:
+    binary_sensor.aygo_insured:
+      friendly_name: Aygo verzekerd
+    binary_sensor.niro_insured:
+      friendly_name: Niro verzekerd
+    sensor.aygo_expdate:
+      friendly_name: Vervaldatum APK Aygo
+    sensor.aygo_insured:
+      friendly_name: Aygo verzekerd
+    sensor.aygo_recall:
+      friendly_name: Terugroepacties Aygo
+    sensor.niro_expdate:
+      friendly_name: Vervaldatum APK Niro
+    sensor.niro_insured:
+      friendly_name: Niro verzekerd
+    sensor.niro_recall:
+      friendly_name: Terugroepacties Niro
+
+# ----------------------------------------
+# Sensor
+# ----------------------------------------
+sensor:
+  - platform: rdw
+    name: "Niro"
+    plate: !secret rdw_niro_plate
+    dateformat: '%Y-%m-%d'
+    sensors:
+      - expdate
+      - insured
+      - recall
+
+  - platform: rdw
+    name: "Aygo"
+    plate: !secret rdw_aygo_plate
+    dateformat: '%Y-%m-%d'
+    sensors:
+      - expdate
+      - insured
+      - recall
+
+  - platform: template
+    sensors:
+      niro_recall_int:
+        value_template: "{{ states('sensor.niro_recall') | int }}"
+        friendly_name: Niro Recall
+        icon_template: mdi:wrench
+        unit_of_measurement: recalls
+      aygo_recall_int:
+        value_template: "{{ states('sensor.aygo_recall') | int }}"
+        friendly_name: Aygo Recall
+        icon_template: mdi:wrench
+        unit_of_measurement: recalls
+
+# ----------------------------------------
+# Binary Sensor
+# ----------------------------------------
+binary_sensor:
+
+  - platform: template
+    sensors:
+      niro_insured:
+        friendly_name: "Niro Insured"
+        entity_id: sensor.niro_insured
+        value_template: "{{ is_state('sensor.niro_insured', 'True') }}"
+        icon_template: "mdi:car"
+
+      aygo_insured:
+        friendly_name: "Aygo Insured"
+        entity_id: sensor.aygo_insured
+        value_template: "{{ is_state('sensor.niro_insured', 'True') }}"
+        icon_template: "mdi:car"
+
+# ----------------------------------------
+# Automation
+# ----------------------------------------
+automation:
+  - alias: Notify APK expiry
+    description: Notify 21 days before the APK date expires
+    trigger:
+    - platform: template
+      value_template: '{{ ((as_timestamp(strptime(states(''sensor.niro_expdate''), ''%Y-%m-%d''))
+        / 86400) | int) == ((as_timestamp(strptime(states(''sensor.date''), ''%Y-%m-%d''))
+        / 86400) | int) + 21 }} }}'
+    action:
+    - service: notify.admin
+      data_template:
+        title: 'APK-keuring'
+        message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
+          tijdig een APK-keuring bij de garage.

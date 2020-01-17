@@ -1,5 +1,3 @@
-binary_sensor.aygo_insured:
-  friendly_name: Aygo verzekerd
 binary_sensor.daytime:
   friendly_name: Overdag
   icon: mdi:timetable
@@ -12,8 +10,6 @@ binary_sensor.morning:
 binary_sensor.night:
   friendly_name: Nacht
   icon: mdi:timetable
-binary_sensor.niro_insured:
-  friendly_name: Niro verzekerd
 binary_sensor.workday:
   friendly_name: Werkdag
   icon: mdi:briefcase
@@ -75,13 +71,6 @@ sensor.aswrt_download_speed:
 sensor.aswrt_upload_speed:
   friendly_name: ASUSWRT Uploadsnelheid
   icon: mdi:speedometer
-sensor.aygo_expdate:
-  friendly_name: Vervaldatum APK Aygo
-sensor.aygo_insured:
-  friendly_name: Aygo verzekerd
-sensor.aygo_recall:
-  friendly_name: Terugroepacties Aygo
-  unit_of_measurement: recalls
 sensor.christmas_countdown:
   friendly_name: Aftellen tot Kerstmis
 sensor.date:
@@ -94,13 +83,6 @@ sensor.king_s_day_countdown:
   friendly_name: Aftellen tot Koningsdag
 sensor.mother_s_day_countdown:
   friendly_name: Aftellen tot Moederdag
-sensor.niro_expdate:
-  friendly_name: Vervaldatum APK Niro
-sensor.niro_insured:
-  friendly_name: Niro verzekerd
-sensor.niro_recall:
-  friendly_name: Terugroepacties Niro
-  unit_of_measurement: recalls
 sensor.pi_hole_ads_blocked_today:
   friendly_name: Geblokkeerde advertenties
 sensor.pi_hole_ads_percentage_blocked_today:

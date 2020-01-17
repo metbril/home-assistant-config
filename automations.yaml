@@ -191,18 +191,3 @@
         \ 'login attempt' in message|lower %}\n  {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\
         \ message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}"
     service: notify.admin
-- id: rdw_1578819664
-  alias: Melden bijna verlopen APK-datum
-  description: Notify 21 days before the APK date expires
-  trigger:
-  - platform: template
-    value_template: '{{ ((as_timestamp(strptime(states(''sensor.niro_expdate''), ''%Y-%m-%d''))
-      / 86400) | int) == ((as_timestamp(strptime(states(''sensor.date''), ''%Y-%m-%d''))
-      / 86400) | int) + 21 }} }}'
-  action:
-  - data_template:
-      message: De APK keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
-        een APK keuring bij de garage.
-      title: '*Auto*'
-    service: notify.admin
-    
