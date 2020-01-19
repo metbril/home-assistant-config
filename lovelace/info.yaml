@@ -1,8 +1,12 @@
-title: Information
+title: Informatie
 path: info
 icon: 'mdi:information'
 
 cards:
+  - type: entities
+    entities:
+      - sensor.p2000_brandweer
+    
   - entities:
       - entity: automation.log_level
       - entity: input_select.log_level

@@ -40,7 +40,6 @@ cards:
       - sensor.niro_expdate
       - binary_sensor.niro_insured
       - sensor.niro_recall
-      - input_number.manual_recall
     show_header_toggle: False
     title: Kia Niro
 
@@ -57,8 +56,6 @@ cards:
 
       - type: entities
         entities:
-          - entity: sensor.euro95_dijktank_kanaalweg
-            name: Dijktank Kanaalweg
           - entity: sensor.euro95_tinq_bermweg
             name: Tinq Bermweg
           - entity: sensor.euro95_lukoil_schermerhoek

@@ -35,7 +35,8 @@ cards:
 
   - type: entities
     entities:
-      - entity: sensor.robert_phone_geocoded_location      
+      - entity: sensor.robert_phone_geocoded_location
+        name: Adres
 
   - type: map
     entities:
@@ -54,3 +55,4 @@ cards:
       - sensor.robert_phone_bssid                  
       - sensor.robert_phone_sim_1                  
     title: Telefoon van Robert
+    show_header_toggle: false

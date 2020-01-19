@@ -18,4 +18,4 @@ cards:
     entity: weather.dark_sky
     name: Thuis
   - type: light
-    entity: light.living_lights
+    entity: light.living

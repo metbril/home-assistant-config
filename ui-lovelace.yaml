@@ -23,8 +23,8 @@ views:
   - !include lovelace/calendar.yaml
   # - !include lovelace/utilities.yaml
   - !include lovelace/host.yaml
-  - !include lovelace/zwave.yaml
-  - !include lovelace/automation.yaml
-  - !include lovelace/downstairs.yaml
-  - !include lovelace/webcams.yaml
+  # - !include lovelace/zwave.yaml
+  # - !include lovelace/automation.yaml
+  # - !include lovelace/downstairs.yaml
+  # - !include lovelace/webcams.yaml
   - !include lovelace/zz_lab.yaml
