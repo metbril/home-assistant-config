@@ -20,7 +20,7 @@ sensor:
     name: P2000 Brandweer
     regios: 17                  # rotterdam rijnmond
     disciplines: 1              # brandweer
-    radius: 5000                # meter, default 5000
+    radius: 2000                # meter, default 5000
     scan_interval: 60           # seconden, default 30
 
 # ----------------------------------------
