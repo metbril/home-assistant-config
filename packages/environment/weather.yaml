@@ -85,7 +85,7 @@ homeassistant:
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
-    units: si
+    units: ca
     mode: daily
 
   - platform: buienradar
@@ -99,7 +99,7 @@ weather:
 sensor:
   - platform: darksky
     api_key: !secret darksky_api_key
-    units: si
+    units: ca
     language: nl
     scan_interval:                    # default 2 minutes
       minutes: 10                     
