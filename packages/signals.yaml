@@ -19,3 +19,45 @@ input_select:
       - Uit
     name: Signaallamp Scene
     icon: mdi:alarm-light
+
+automation:
+  - alias: Synchroniseren Signaallamp Scene
+    description: ''
+    trigger:
+    - event_data:
+        domain: scene
+        service: turn_on
+      event_type: call_service
+      platform: event
+    condition: []
+    action:
+    - data:
+        message: Scene called
+      service: notify.admin
+
+  - alias: Synchroniseren scene signaallamp met licht
+    description: Set scene input when light switched off manually
+    trigger:
+    - entity_id: light.signaallamp
+      platform: state
+      to: 'off'
+    action:
+    - data:
+        entity_id: input_select.signaallamp_scene
+        option: Uit
+      service: input_select.select_option
+
+  - alias: Bijwerken signaallamp via scene
+    description: Update Signaallamp light using selected scene
+    trigger:
+    - entity_id: input_select.signaallamp_scene
+      platform: state
+    condition:
+    - condition: state
+      entity_id: input_boolean.signaallamp_enabled
+      state: 'on'
+    action:
+    - data_template:
+        entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
+          '', ''_'' ) }}'
+      service: scene.turn_on
