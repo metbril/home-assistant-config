@@ -153,4 +153,11 @@ automation:
         - condition: sun
           before: sunset
     action:
-      service: openuv.update_data
+      - service: openuv.update_uv_index_data
+
+  - alias: Update OpenUV protection window daily
+    trigger:
+      - platform: time
+        at: "02:12:00"
+    action:
+      - service: openuv.update_protection_data
