@@ -47,7 +47,7 @@ device_tracker:
     interval_seconds: 60
     new_device_defaults:
       track_new_devices: false
-      hide_if_away: false
+      # hide_if_away: false             # deprecated since 0.104/105
 
 ############################################################################
 ## Person
@@ -82,22 +82,21 @@ notify:
       - service: living_tv
 
   ## https://www.home-assistant.io/integrations/webostv/
-  - platform: webostv
-    host: !secret living_tv_host
-    name: Living TV
+  # - platform: webostv
+  #   host: !secret living_tv_host
+  #   name: Living TV
 
 ################################################
-## Media Player
+## WebOS TV
 ################################################
-media_player:
-  ## https://www.home-assistant.io/integrations/webostv/
-  - platform: webostv
-    host: !secret living_tv_host
-    name: Living TV
-    turn_on_action:
-      service: wake_on_lan.send_magic_packet
-      data:
-        mac: !secret living_tv_mac
+## https://www.home-assistant.io/integrations/webostv/
+webostv:
+  host: !secret living_tv_host
+  name: Living TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_tv_mac
 
 config:
 discovery:
