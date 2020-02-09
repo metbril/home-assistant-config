@@ -1,7 +1,8 @@
 title: Gezondheid
 path: gezondheid
 icon: 'mdi:hospital-box-outline'
-badges: []
+badges:
+  - binary_sensor.protection_window
 cards:
 
   - type: entities
