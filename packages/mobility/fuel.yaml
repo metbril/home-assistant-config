@@ -72,13 +72,12 @@ sensor:
 
   # --- Brandstof-Zoeker.nl ---
 
-  # # Dijktank Euro95 prices unavailable since jan 2020
-  # - platform: scrape
-  #   name: Euro95 (Dijktank Kanaalweg)
-  #   resource: "https://www.brandstof-zoeker.nl/station/dijktank-b-v-capelle-aan-den-yssel-565/"
-  #   select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
-  #   value_template: "{{ value.split(' ')[1]|float|round(3) }}"
-  #   scan_interval: 3600 # be nice; once per hour only
+  - platform: scrape
+    name: Euro95 (Dijktank Kanaalweg)
+    resource: "https://www.brandstof-zoeker.nl/station/dijktank-b-v-capelle-aan-den-yssel-565/"
+    select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
+    value_template: "{{ value.split(' ')[1]|float|round(3) }}"
+    scan_interval: 3600 # be nice; once per hour only
 
   # --- Tango ---
 
