@@ -109,16 +109,15 @@ air_quality:
     name: Pompenburg Rotterdam
 
 ################################################
+## AirVisual
+################################################
+airvisual:
+  api_key: !secret airvisual_api_key # keys are only valid for 365 days
+
+################################################
 ## Sensor
 ################################################
 sensor:
-
-  ## Airvisual
-  - platform: airvisual
-    api_key: !secret airvisual_api_key # keys are only valid for 365 days
-    show_on_map: false
-    monitored_conditions:
-      - cn
 
   ## OpenSenseMap
   - platform: template

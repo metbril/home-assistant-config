@@ -1,13 +1,5 @@
 title: HIERO
 
-resources:
-  - url: /local/cards/vertical-stack-in-card.js
-    type: js
-  - url: /local/community/bignumber-card/bignumber-card.js
-    type: js
-  - url: /local/community/mini-graph-card/mini-graph-card-bundle.js
-    type: module
-
 views:
   - !include lovelace/start.yaml
   - !include lovelace/home.yaml
@@ -28,3 +20,4 @@ views:
   # - !include lovelace/downstairs.yaml
   # - !include lovelace/webcams.yaml
   - !include lovelace/zz_lab.yaml
+
