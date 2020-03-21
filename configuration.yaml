@@ -148,14 +148,7 @@ light:
       - light.bollamp
 
 lovelace:
-  mode: yaml
-  resources:
-    - url: /local/community/vertical-stack-in-card/vertical-stack-in-card.js
-      type: module
-    - url: /local/community/bignumber-card/bignumber-card.js
-      type: module
-    - url: /local/community/mini-graph-card/mini-graph-card-bundle.js
-      type: module
+  mode: storage
 
 map:
 
