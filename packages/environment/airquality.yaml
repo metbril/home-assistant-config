@@ -48,14 +48,6 @@ homeassistant:
     sensor.pompenburg_rotterdam_p2:
       <<: *customize
 
-    # airvisual
-    sensor.chinese_air_pollution_level:
-      <<: *customize
-    sensor.chinese_air_pollution_index:
-      <<: *customize
-    sensor.chinese_main_pollutant:
-      <<: *customize
-
     # openuv
     sensor.current_uv_index:
       <<: *customize
@@ -107,12 +99,6 @@ air_quality:
   - platform: opensensemap
     station_id: 5aa96530396417001b2caba4
     name: Pompenburg Rotterdam
-
-################################################
-## AirVisual
-################################################
-airvisual:
-  api_key: !secret airvisual_api_key # keys are only valid for 365 days
 
 ################################################
 ## Sensor
