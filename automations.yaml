@@ -113,3 +113,28 @@
         \ 'login attempt' in message|lower %}\n  {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\
         \ message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}"
     service: notify.admin
+- id: backup_full
+  alias: Daily Full Backup
+  description: Full snapshot every day at 2:00
+  trigger:
+    platform: time
+    at: '02:00:00'
+  action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Automatische dagelijkse volledige backup {{ now().strftime('%Y-%m-%d') }}
+        # password: YOUR PASSWORD
+
+- id: backup_sync
+  alias: Daily Dropbox Sync
+  description: Sync all snapshots to Dropbox every day at 3:00
+  trigger:
+    - platform: time
+      at: '03:00:00'
+  action:
+    - service: hassio.addon_stdin
+      data:
+        addon: 7be23ff5_dropbox_sync
+        input:
+          command: upload
+
