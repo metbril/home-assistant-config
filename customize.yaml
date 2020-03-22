@@ -111,3 +111,7 @@ sensor.flag:
   icon: mdi:flag
 sensor.holiday:
   icon: mdi:party-popper
+sensor.netherlands_coronavirus_deaths:
+  friendly_name: Overleden Nederland
+sensor.hacs:
+  friendly_name: HACS updates

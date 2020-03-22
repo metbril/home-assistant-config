@@ -17,7 +17,7 @@
       title: Te verwerken updates in HACS
     service: persistent_notification.create
 - id: hacs_1578603656941
-  alias: Melden HACS Repository
+  alias: Melden HACS Repository toegevoegd
   description: ''
   trigger:
   - event_data:
