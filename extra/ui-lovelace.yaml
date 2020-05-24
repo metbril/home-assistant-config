@@ -330,7 +330,6 @@ views:
           - sensor.chinese_air_quality_index
           - sensor.chinese_air_pollution_level
           - sensor.chinese_main_pollutant
-          # airly
         title: Luchtkwaliteit
         show_header_toggle: false
 
