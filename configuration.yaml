@@ -151,11 +151,6 @@ lovelace:
 
 map:
 
-pi_hole:
-  host: 'localhost:4865'              # default: 'pi.hole'
-  ssl: false                          # default: false
-  verify_ssl: false                   # default: false
-
 ################################################
 ## Sun
 ################################################
