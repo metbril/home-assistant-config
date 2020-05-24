@@ -31,12 +31,11 @@ asuswrt:
   protocol: ssh
   port: 22
   mode: router
-  ## Temporarily disable for upgrade to 0.107.2
-  # sensors:
-  #   - upload
-  #   - download
-  #   - upload_speed
-  #   - download_speed
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed
 
 ############################################################################
 ## Device Tracker
