@@ -1,10 +1,4 @@
 homeassistant:
-  name: HIERO
-  latitude: !secret home_latitude
-  longitude: !secret home_longitude
-  elevation: !secret home_elevation
-  unit_system: metric
-  time_zone: Europe/Amsterdam
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - !secret whitelist_dir_config
