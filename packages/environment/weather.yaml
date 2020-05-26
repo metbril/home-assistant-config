@@ -124,8 +124,6 @@ sensor:
 
   - platform: buienradar
     name: Buienradar
-    latitude: !secret home_latitude
-    longitude: !secret home_longitude
     timeframe: 30                     # minutes to look ahead for precipitation
     monitored_conditions:
       - barometerfcname
