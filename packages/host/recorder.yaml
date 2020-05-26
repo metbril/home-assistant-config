@@ -20,7 +20,6 @@ homeassistant:
 ################################################
 
 recorder:
-  purge_interval: 1
   purge_keep_days: 1
   exclude:
     domains:
