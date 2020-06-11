@@ -50,9 +50,6 @@ sensor:
         entity_id: sensor.cert_pem
         value_template: "{{ as_timestamp(state_attr('sensor.cert_pem', 'last_updated')) | timestamp_custom('%Y-%m-%d') }}"
 
-  - platform: cert_expiry
-    host: !secret cert_expiry_host
-
   - platform: filesize
     file_paths:
       - !secret filesize_ssl_cert
