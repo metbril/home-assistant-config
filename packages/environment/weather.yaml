@@ -92,10 +92,6 @@ weather:
     name: Buienradar
     forecast: true
 
-  - platform: openweathermap
-    api_key: !secret openweathermap_api_key
-    mode: freedaily
-
 ################################################
 ## Sensor
 ################################################
