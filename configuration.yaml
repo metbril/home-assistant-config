@@ -1,9 +1,9 @@
 homeassistant:
+  customize: !include customize.yaml
   packages: !include_dir_named packages
   whitelist_external_dirs:
     - !secret whitelist_dir_config
     - !secret whitelist_dir_ssl
-    # - /backup # for folder watcher (not working yet)
   auth_providers:
     - type: homeassistant
     - type: trusted_networks
@@ -12,7 +12,25 @@ homeassistant:
         - ::1
         - 192.168.1.0/24
         - fd00::/8
-  customize: !include customize.yaml
+
+##############################
+## Includes for UI integration
+##############################
+
+automation: !include automations.yaml
+scene: !include scenes.yaml
+group: !include groups.yaml
+
+##############################
+## Other includes
+##############################
+
+binary_sensor: !include_dir_merge_list include/binary_sensor/
+sensor: !include_dir_merge_list include/sensor/
+
+frontend:
+  themes: !include_dir_merge_named themes
+  
 
 ##############################
 ## Integrations
@@ -31,9 +49,8 @@ asuswrt:
     - upload_speed
     - download_speed
 
-############################################################################
-## Device Tracker
-############################################################################
+config:
+
 device_tracker:
   # This requires the asuswrt integration in configuration.yaml
   - platform: asuswrt
@@ -41,62 +58,11 @@ device_tracker:
     interval_seconds: 60
     new_device_defaults:
       track_new_devices: false
-      # hide_if_away: false             # deprecated since 0.104/105
 
-############################################################################
-## Person
-############################################################################
-person:
-
-################################################
-## Notify
-################################################
-notify:
-  - name: admin
-    platform: pushover
-    api_key: !secret pushover_api_key
-    user_key: !secret pushover_user_key
-
-  - name: all
-    platform: group
-    services:
-      # - service: admin
-      - service: ios_pontius
-      - service: ios_patti
-      - service: living_tv
-
-  ## https://www.home-assistant.io/integrations/webostv/
-  # - platform: webostv
-  #   host: !secret living_tv_host
-  #   name: Living TV
-
-################################################
-## Spotify
-################################################
-## https://www.home-assistant.io/integrations/spotify/
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
-
-################################################
-## WebOS TV
-################################################
-## https://www.home-assistant.io/integrations/webostv/
-webostv:
-  host: !secret living_tv_host
-  name: Living TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret living_tv_mac
-
-config:
 discovery:
 
-frontend:
-  themes: !include_dir_merge_named themes
-  
 hassio:
+
 http:
   ip_ban_enabled: yes
   login_attempts_threshold: 10
@@ -107,11 +73,6 @@ http:
     - ::1
 
 ios:
-mobile_app:
-
-############################################################
-## Light
-############################################################
 
 light:
   - platform: group
@@ -143,19 +104,40 @@ lovelace:
 
 map:
 
-################################################
-## Sun
-################################################
+mobile_app:
+
+notify:
+  - name: admin
+    platform: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+  - name: all
+    platform: group
+    services:
+      # - service: admin
+      - service: ios_pontius
+      - service: ios_patti
+      - service: living_tv
+
+person:
+
+spotify:
+  ## https://www.home-assistant.io/integrations/spotify/
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
 sun:
 
 system_health:
 
-# enable sending wake on lan packets from HA
 wake_on_lan:
 
-# UI configurations
-automation: !include automations.yaml
-scene: !include scenes.yaml
-group: !include groups.yaml
-sensor: !include_dir_merge_list include/sensor/
-binary_sensor: !include_dir_merge_list include/binary_sensor/
+webostv:
+  ## https://www.home-assistant.io/integrations/webostv/
+  host: !secret living_tv_host
+  name: Living TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_tv_mac
