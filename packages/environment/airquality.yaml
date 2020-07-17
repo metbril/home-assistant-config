@@ -8,13 +8,13 @@ homeassistant:
 
   customize_glob:
     sensor.*_p1:
-      unit_of_measurement: "µg/m3"
+      unit_of_measurement: "µg/m³"
       icon: mdi:thought-bubble
     sensor.*_p2:
-      unit_of_measurement: "µg/m3"
+      unit_of_measurement: "µg/m³"
       icon: mdi:thought-bubble-outline
     sensor.*_uv_index:
-      unit_of_measurement: "UV index"
+      unit_of_measurement: "UV-index"
       icon: mdi:weather-sunny
     sensor.*_ozone*:
       unit_of_measurement: "DU"
@@ -78,6 +78,7 @@ homeassistant:
 ################################################
 luftdaten:
 
+  ## nabij Erasmusbrug
   ## https://data.sensor.community/airrohr/v1/sensor/19822/
   sensor_id: 19822
   show_on_map: false
