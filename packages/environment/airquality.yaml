@@ -7,12 +7,6 @@
 homeassistant:
 
   customize_glob:
-    sensor.*_p1:
-      unit_of_measurement: "µg/m³"
-      icon: mdi:thought-bubble
-    sensor.*_p2:
-      unit_of_measurement: "µg/m³"
-      icon: mdi:thought-bubble-outline
     sensor.*_uv_index:
       unit_of_measurement: "UV-index"
       icon: mdi:weather-sunny
@@ -34,19 +28,17 @@ homeassistant:
     ## Sensor
     ################################################
 
-    # luftdaten
-    sensor.luftdaten_19822_p1:
-      <<: *customize
-      friendly_name: Fijnstof PM10 Erasmusbrug
-    sensor.luftdaten_19822_p2:
-      <<: *customize
-      friendly_name: Fijnstof PM2.5 Erasmusbrug
-
     # opensensemap
     sensor.pompenburg_rotterdam_p1:
       <<: *customize
+      friendly_name: Fijnstof PM10 Pompenburg
+      unit_of_measurement: µg/m³
+      icon: mdi:thought-bubble
     sensor.pompenburg_rotterdam_p2:
       <<: *customize
+      friendly_name: Fijnstof PM2.5 Pompenburg
+      unit_of_measurement: µg/m³
+      icon: mdi:thought-bubble-outline
 
     # openuv
     sensor.current_uv_index:
@@ -73,24 +65,6 @@ homeassistant:
       <<: *customize
 
 ################################################
-## Luftdaten
-## https://www.home-assistant.io/integrations/luftdaten/
-################################################
-luftdaten:
-
-  ## nabij Erasmusbrug
-  ## https://data.sensor.community/airrohr/v1/sensor/19822/
-  sensor_id: 19822
-  show_on_map: false
-  sensors:
-    monitored_conditions:
-      - P1
-      - P2
-      # - temperature                   # unsupported by station
-      # - humidity                      # unsupported by station
-      # - pressure                      # unsupported by station
-
-################################################
 ## OpenSenseMap
 ################################################
 air_quality:
@@ -111,10 +85,8 @@ sensor:
     sensors:
       pompenburg_rotterdam_p1:
         value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_10') | float | round(2) }}"
-        friendly_name: PM10 Pompenburg Rotterdam
       pompenburg_rotterdam_p2:
         value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_2_5') | float | round(2) }}"
-        friendly_name: PM2.5 Pompenburg Rotterdam
 
 ################################################
 ## Automation
