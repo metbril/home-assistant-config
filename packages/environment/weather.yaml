@@ -58,6 +58,14 @@ homeassistant:
     sensor.dark_sky_wind_bearing:
       friendly_name: Windrichting omgeving
 
+    sensor.dark_sky_wind_direction:
+      friendly_name: Windrichting omgeving
+      icon: mdi:compass
+
+    sensor.dark_sky_wind_direction_nl:
+      friendly_name: Windrichting omgeving
+      icon: mdi:compass
+
     sensor.dark_sky_wind_speed:
       friendly_name: Windsnelheid omgeving
 
@@ -132,6 +140,20 @@ sensor:
       - irradiance
       - rainlast24hour
       - rainlasthour
+
+  - platform: template
+    sensors:
+      dark_sky_wind_direction:
+      # https://community.home-assistant.io/t/wind-direction/210532/6
+        value_template: >
+          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }} 
+      dark_sky_wind_direction_nl:
+        value_template: >
+          {% set direction = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'] %}
+          {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }} 
 
 ################################################
 ## Binary Sensor
