@@ -90,10 +90,14 @@ sensor.time:
 sun.sun:
   friendly_name: Zon
 sensor.flag:
+  friendly_name: Vlagdag
   icon: mdi:flag
 sensor.holiday:
+  friendly_name: Feestdag
   icon: mdi:party-popper
 sensor.netherlands_coronavirus_deaths:
   friendly_name: Overleden Nederland
 sensor.hacs:
   friendly_name: HACS updates
+light.lichtstraat:
+  icon: mdi:wall-sconce-flat
