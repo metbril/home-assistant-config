@@ -23,3 +23,48 @@
   entities:
     light.signaallamp:
       state: 'off'
+- id: '1597676235869'
+  name: Woonkamerverlichting Maximaal
+  entities:
+    light.bank:
+      brightness: 255
+      color_temp: 360
+      state: 'on'
+    light.bollamp:
+      brightness: 255
+      color_temp: 360
+      state: 'on'
+    light.hoge_kast:
+      brightness: 255
+      rgb_color:
+      - 255
+      - 243
+      - 216
+      state: 'on'
+    light.leeslamp:
+      brightness: 255
+      color_temp: 360
+      state: 'on'
+    light.lichtstraat_1:
+      brightness: 254
+      state: 'on'
+    light.lichtstraat_2:
+      brightness: 254
+      state: 'on'
+    light.lichtstraat_3:
+      brightness: 254
+      state: 'on'
+    light.lichtstraat_4:
+      brightness: 254
+      state: 'on'
+    light.signaallamp:
+      brightness: 255
+      color_temp: 360
+      state: 'on'
+    light.turbinelamp:
+      state: 'on'
+    light.willner:
+      brightness: 255
+      color_temp: 360
+      state: 'on'
+  icon: mdi:brightness-7
