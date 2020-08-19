@@ -84,8 +84,21 @@ light:
       - light.signaallamp
       - light.leeslamp
       - light.turbinelamp
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
       - light.willner
       - light.bollamp
+
+  - platform: group
+    name: Lichtstraat
+    entities:
+      ## left to right
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
 
   - platform: group
     name: Living Dusk
