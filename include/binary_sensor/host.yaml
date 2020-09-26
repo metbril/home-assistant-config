@@ -1,0 +1,4 @@
+## binary_sensor/host.yaml
+
+# https://github.com/custom-components/sensor.rpi_power
+- platform: rpi_power
