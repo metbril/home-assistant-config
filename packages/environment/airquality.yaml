@@ -8,7 +8,7 @@ homeassistant:
 
   customize_glob:
     sensor.*_uv_index:
-      unit_of_measurement: "UV-index"
+      unit_of_measurement: "UVI"
       icon: mdi:weather-sunny
     sensor.*_ozone*:
       unit_of_measurement: "DU"
