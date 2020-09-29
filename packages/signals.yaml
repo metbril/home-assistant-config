@@ -49,7 +49,7 @@ automation:
       service: scene.turn_on
 
   - alias: Raise Rain Alarm Signal
-    description: Trigger rain alarm when rain expected on workdays between 6 and 9 am
+    description: Trigger rain alarm when rain expected on workdays between 6 and 9 am, but only when someone is home
     trigger:
       - above: '0'
         entity_id: sensor.buienradar_precipitation_forecast_average
