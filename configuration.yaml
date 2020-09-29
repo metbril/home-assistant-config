@@ -80,16 +80,31 @@ light:
     entities:
       ## clockwise from the door
       - light.hoge_kast
-      - light.bank
       - light.signaallamp
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
       - light.leeslamp
       - light.turbinelamp
       - light.lichtstraat_1
       - light.lichtstraat_2
       - light.lichtstraat_3
       - light.lichtstraat_4
+      - light.bank
       - light.willner
-      - light.bollamp
+      # - light.bollamp
+
+  - platform: group
+    name: Living Dusk
+    entities:
+      ## clockwise from the door
+      - light.hoge_kast
+      - light.magnarp
+      - light.leeslamp
+      - light.turbinelamp
+      - light.lichtstraat
+      - light.bank
+      - light.willner
 
   - platform: group
     name: Lichtstraat
@@ -101,16 +116,12 @@ light:
       - light.lichtstraat_4
 
   - platform: group
-    name: Living Dusk
+    name: MAGNARP
     entities:
-      ## clockwise from the door
-      - light.hoge_kast
-      # - light.signaallamp
-      - light.bank
-      - light.leeslamp
-      - light.turbinelamp
-      - light.willner
-      - light.bollamp
+      ## top to bottom
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
 
 lovelace:
   mode: storage
