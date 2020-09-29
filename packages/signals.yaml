@@ -47,3 +47,46 @@ automation:
         entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
           '', ''_'' ) }}'
       service: scene.turn_on
+
+  - alias: Raise Rain Alarm Signal
+    description: Trigger rain alarm when rain expected on workdays between 6 and 9 am
+    trigger:
+      - above: '0'
+        entity_id: sensor.buienradar_precipitation_forecast_average
+        platform: numeric_state
+    condition:
+      - condition: state
+        entity_id: sensor.occupancy
+        state: 'home'
+      - condition: state
+        entity_id: group.family
+        state: 'home'
+      - condition: state
+        entity_id: binary_sensor.workday
+        state: 'on'
+      - after: 06:00:00
+        before: 09:00:00
+        condition: time
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.signaallamp_scene
+          option: Regenalarm
+
+  - alias: Cancel Rain Alarm Signal
+    description: Remove rain alarm at 9 or when no rain expected
+    trigger:
+      - platform: template
+        value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+          | float == 0 }}'
+      - at: 09:00:00
+        platform: time
+    condition:
+      - condition: state
+        entity_id: input_select.signaallamp_scene
+        state: Regenalarm
+    action:
+      - service: input_select.select_option
+        data:
+          entity_id: input_select.signaallamp_scene
+          option: Uit
