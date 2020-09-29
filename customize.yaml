@@ -111,3 +111,5 @@ sensor.dark_sky_wind_gust:
   unit_of_measurement: km/u
 binary_sensor.rpi_power_status:
   icon: ''
+light.magnarp:
+  icon: mdi:floor-lamp
