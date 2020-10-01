@@ -35,14 +35,13 @@
     service: persistent_notification.create
 - id: lighting_1578815661
   alias: Turn On Living Lights at Dusk
-  description: ''
+  description: Inschakelen schemerverlichting woonkamer voor zonsondergang
   trigger:
   - event: sunset
     offset: -00:30:00
     platform: sun
   action:
-  - entity_id: light.living_dusk
-    service: light.turn_on
+  - scene: scene.schemerverlichting
   - data_template:
       message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
         "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
@@ -51,6 +50,7 @@
         [ " #Beveiliging", " #Zonsondergang", " #Verlichting", " #Hue", " #SmartLighting",
         " #SmartHome", " #HomeAutomation" ] | random }}'
     service: notify.twitter
+  mode: single
 - id: lighting_1578815662
   alias: Turn On Living Lights
   description: Turn On Living Lights from RFXTRX Wall Switch
