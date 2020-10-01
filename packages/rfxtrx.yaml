@@ -10,7 +10,7 @@ homeassistant:
       friendly_name: Rechter wandschakelaar woonkamer
 
 rfxtrx:
-  device: !secret rfxtrx_device
+  device: /dev/ttyUSB0
   debug: no
 
 switch:
