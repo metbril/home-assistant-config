@@ -27,44 +27,238 @@
   name: Woonkamerverlichting Maximaal
   entities:
     light.bank:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
       brightness: 255
       color_temp: 360
+      effect: none
+      friendly_name: Bank
+      supported_features: 63
+      icon: mdi:floor-lamp
       state: 'on'
     light.bollamp:
-      brightness: 255
-      color_temp: 360
-      state: 'on'
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      friendly_name: Bollamp
+      supported_features: 63
+      icon: mdi:lamp
+      state: unavailable
     light.hoge_kast:
+      effect_list:
+      - colorloop
+      - random
       brightness: 255
+      hs_color:
+      - 41.053
+      - 14.902
       rgb_color:
       - 255
       - 243
       - 216
+      xy_color:
+      - 0.355
+      - 0.356
+      effect: none
+      friendly_name: Hoge Kast
+      supported_features: 61
+      icon: mdi:lamp
       state: 'on'
     light.leeslamp:
+      min_mireds: 153
+      max_mireds: 500
       brightness: 255
       color_temp: 360
+      friendly_name: Leeslamp
+      supported_features: 43
+      icon: mdi:track-light
       state: 'on'
     light.lichtstraat_1:
       brightness: 254
+      friendly_name: Lichtstraat 1
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
       state: 'on'
     light.lichtstraat_2:
       brightness: 254
+      friendly_name: Lichtstraat 2
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
       state: 'on'
     light.lichtstraat_3:
       brightness: 254
+      friendly_name: Lichtstraat 3
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
       state: 'on'
     light.lichtstraat_4:
       brightness: 254
+      friendly_name: Lichtstraat 4
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
       state: 'on'
     light.signaallamp:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
       brightness: 255
       color_temp: 360
+      effect: none
+      friendly_name: Signaallamp
+      supported_features: 63
+      icon: mdi:alarm-light
       state: 'on'
     light.turbinelamp:
+      friendly_name: Turbinelamp
+      supported_features: 40
+      icon: mdi:lava-lamp
       state: 'on'
     light.willner:
+      min_mireds: 153
+      max_mireds: 500
       brightness: 255
       color_temp: 360
+      friendly_name: Willner
+      supported_features: 43
+      icon: mdi:lamp
+      state: 'on'
+    light.magnarp_1:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 254
+      color_temp: 345
+      friendly_name: MAGNARP 1
+      supported_features: 35
+      state: 'on'
+    light.magnarp_2:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 254
+      color_temp: 351
+      friendly_name: MAGNARP 2
+      supported_features: 35
+      state: 'on'
+    light.magnarp_3:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 254
+      color_temp: 353
+      friendly_name: MAGNARP 3
+      supported_features: 35
       state: 'on'
   icon: mdi:brightness-7
+- id: '1601486865465'
+  name: Schemerverlichting
+  entities:
+    light.bank:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      - random
+      brightness: 122
+      color_temp: 369
+      effect: none
+      friendly_name: Bank
+      supported_features: 63
+      icon: mdi:floor-lamp
+      state: 'on'
+    light.hoge_kast:
+      effect_list:
+      - colorloop
+      - random
+      brightness: 179
+      hs_color:
+      - 30
+      - 57.255
+      rgb_color:
+      - 255
+      - 181
+      - 108
+      xy_color:
+      - 0.493
+      - 0.389
+      effect: none
+      friendly_name: Hoge Kast
+      supported_features: 61
+      icon: mdi:lamp
+      state: 'on'
+    light.leeslamp:
+      min_mireds: 153
+      max_mireds: 500
+      brightness: 179
+      color_temp: 443
+      friendly_name: Leeslamp
+      supported_features: 43
+      icon: mdi:track-light
+      state: 'on'
+    light.turbinelamp:
+      friendly_name: Turbinelamp
+      supported_features: 40
+      icon: mdi:lava-lamp
+      state: 'on'
+    light.willner:
+      min_mireds: 153
+      max_mireds: 500
+      brightness: 180
+      color_temp: 454
+      friendly_name: Willner
+      supported_features: 43
+      icon: mdi:lamp
+      state: 'on'
+    light.lichtstraat_1:
+      brightness: 65
+      friendly_name: Lichtstraat 1
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
+      state: 'on'
+    light.lichtstraat_2:
+      brightness: 68
+      friendly_name: Lichtstraat 2
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
+      state: 'on'
+    light.lichtstraat_3:
+      brightness: 67
+      friendly_name: Lichtstraat 3
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
+      state: 'on'
+    light.lichtstraat_4:
+      brightness: 67
+      friendly_name: Lichtstraat 4
+      icon: mdi:wall-sconce-flat
+      supported_features: 33
+      state: 'on'
+    light.magnarp_1:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 25
+      color_temp: 370
+      friendly_name: MAGNARP 1
+      supported_features: 35
+      state: 'on'
+    light.magnarp_2:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 25
+      color_temp: 370
+      friendly_name: MAGNARP 2
+      supported_features: 35
+      state: 'on'
+    light.magnarp_3:
+      min_mireds: 250
+      max_mireds: 454
+      brightness: 25
+      color_temp: 370
+      friendly_name: MAGNARP 3
+      supported_features: 35
+      state: 'on'
+  icon: mdi:weather-sunset
