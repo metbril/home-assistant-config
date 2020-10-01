@@ -20,18 +20,6 @@
     # - light.bollamp
 
 - platform: group
-  name: Living Dusk
-  entities:
-    ## clockwise from the door
-    - light.hoge_kast
-    - light.magnarp
-    - light.leeslamp
-    - light.turbinelamp
-    - light.lichtstraat
-    - light.bank
-    - light.willner
-
-- platform: group
   name: Lichtstraat
   entities:
     ## left to right

@@ -38,9 +38,6 @@ light.leeslamp:
 light.living:
   friendly_name: Woonkamer
   icon: mdi:sofa
-light.living_dusk:
-  friendly_name: Schemer Woonkamer
-  icon: mdi:weather-sunset
 light.signaallamp:
   icon: mdi:alarm-light
 light.turbinelamp:
