@@ -193,25 +193,6 @@ automation:
         data:
           entity_id: input_boolean.occupancy_home
 
-  # schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie zijn
-  - alias: Schakel verlichting uit als op vakantie
-    trigger:
-      - platform: time
-        at: '23:00:00'
-    condition:
-      - condition: state
-        entity_id: sensor.occupancy
-        state: 'vacation'
-    action:
-      # wacht tussen 0 en 29 minuten
-      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
-      - service: light.turn_off
-        entity_id: light.living_dusk
-      - service: notify.admin
-        data_template:
-          title: 'Vakantie'
-          message: 'Verlichting automatisch uitgeschakeld.'
-
   ## Notify when vacation or guests is enabled, 
   ##   and daily when still in vacation or guest mode
   - alias: Notify Absence Enabled

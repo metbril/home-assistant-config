@@ -163,3 +163,22 @@
   - data:
       message: De auto kan weer worden gewassen.
     service: notify.mobile_app_pontius
+- id: lighting_living_off_vacation
+  alias: Woonkamerverlichting uitschakelen bij vakantie
+  description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
+    zijn
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+  - condition: state
+    entity_id: sensor.occupancy
+    state: vacation
+  action:
+  - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+  - service: light.turn_off
+    entity_id: light.living
+  - service: notify.admin
+    data_template:
+      title: Vakantie
+      message: Verlichting automatisch uitgeschakeld.
