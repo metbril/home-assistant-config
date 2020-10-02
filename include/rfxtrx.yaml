@@ -1,0 +1,10 @@
+device: /dev/ttyUSB0
+automatic_add: false
+debug: no
+devices:
+  0b1100190099acb60b010f60: # kaku wandschakelaar links
+    # name: Living Wallswitch Left
+    fire_event: true
+  0b1100250099acb60c010f60: # kaku wandschakelaar rechts
+    # name: Living Wallswitch Right
+    fire_event: true
