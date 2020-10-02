@@ -70,13 +70,11 @@ binary_sensor:
     sensors:
       niro_insured:
         friendly_name: "Niro Insured"
-        entity_id: sensor.niro_insured
         value_template: "{{ is_state('sensor.niro_insured', 'True') }}"
         icon_template: "mdi:car"
 
       aygo_insured:
         friendly_name: "Aygo Insured"
-        entity_id: sensor.aygo_insured
         value_template: "{{ is_state('sensor.niro_insured', 'True') }}"
         icon_template: "mdi:car"
 
