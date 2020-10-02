@@ -51,30 +51,6 @@
         " #SmartHome", " #HomeAutomation" ] | random }}'
     service: notify.twitter
   mode: single
-- id: lighting_1578815662
-  alias: Turn On Living Lights
-  description: Turn On Living Lights from RFXTRX Wall Switch
-  trigger:
-  - platform: event
-    event_type: button_pressed
-    event_data:
-      entity_id: switch.living_wallswitch_left
-      state: 'on'
-  action:
-  - service: light.turn_on
-    entity_id: light.living
-- id: lighting_1578815663
-  alias: Turn Off Living Lights
-  description: Turn Off Living Lights from RFXTRX Wall Switch
-  trigger:
-  - platform: event
-    event_type: button_pressed
-    event_data:
-      entity_id: switch.living_wallswitch_left
-      state: 'off'
-  action:
-  - service: light.turn_off
-    entity_id: light.living
 - id: presence_1578816540
   alias: Melden Familie Thuis
   trigger:
@@ -151,7 +127,7 @@
   - data: {}
     service: openuv.update_uv_index_data
 - id: carwash_notification
-  alias: Carwash
+  alias: Carwash Notification
   description: Geef een melding wanneer de auto gewassen kan worden
   trigger:
   - entity_id: binary_sensor.car_wash
@@ -163,6 +139,7 @@
   - data:
       message: De auto kan weer worden gewassen.
     service: notify.mobile_app_pontius
+  mode: single
 - id: lighting_living_off_vacation
   alias: Woonkamerverlichting uitschakelen bij vakantie
   description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
