@@ -1,38 +1,7 @@
 auto_purge: true # default = true
 purge_keep_days: 1
 exclude:
-  domains:
-    - alert
-    - automation
-    - group
-    - history_graph
-    - media_player
-    - script
-    - sun
-    - updater
-    - weather
-    - weblink
-    - zone
-    - zwave
   entities:
     - sensor.date
     - sensor.time
     - sensor.ha_uptime
-    - sensor.daily_power
-    - sensor.daily_power_offpeak
-    - sensor.daily_power_peak
-    - sensor.daily_gas
-    - sensor.monthly_gas
-    - sensor.monthly_power_offpeak
-    - sensor.monthly_power_peak
-
-    - sensor.dark_sky_apparent_temperature
-    - sensor.dark_sky_humidity
-    - sensor.dark_sky_ozone
-    - sensor.dark_sky_precip_intensity
-    - sensor.dark_sky_precip_probability
-    - sensor.dark_sky_pressure
-    - sensor.dark_sky_temperature
-    - sensor.dark_sky_uv_index
-    - sensor.dark_sky_wind_bearing
-    - sensor.dark_sky_wind_speed
