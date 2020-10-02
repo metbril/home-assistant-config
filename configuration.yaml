@@ -27,6 +27,7 @@ group: !include groups.yaml
 
 binary_sensor: !include_dir_merge_list include/binary_sensor/
 light: !include_dir_merge_list include/light/
+recorder: !include include/recorder.yaml
 sensor: !include_dir_merge_list include/sensor/
 
 frontend:
@@ -64,6 +65,8 @@ discovery:
 
 hassio:
 
+history:
+
 http:
   ip_ban_enabled: yes
   login_attempts_threshold: 10
@@ -74,6 +77,8 @@ http:
     - ::1
 
 ios:
+
+logbook:
 
 lovelace:
   mode: storage
