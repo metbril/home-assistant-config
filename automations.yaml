@@ -182,3 +182,41 @@
     data_template:
       title: Vakantie
       message: Verlichting automatisch uitgeschakeld.
+- id: lighting_living_switch_on
+  alias: Woonkamerverlichting aan schakelaar
+  description: ''
+  trigger:
+  - platform: event
+    event_type: rfxtrx_event
+    event_data:
+      packet_type: 17
+      sub_type: 0
+      type_string: AC
+      id_string: 099acb6:11
+      values:
+        Command: 'On'
+  condition: []
+  action:
+  - data: {}
+    service: light.turn_on
+    entity_id: light.living
+  mode: single
+- id: lighting_living_switch_off
+  alias: Woonkamerverlichting uit schakelaar
+  description: ''
+  trigger:
+  - platform: event
+    event_type: rfxtrx_event
+    event_data:
+      packet_type: 17
+      sub_type: 0
+      type_string: AC
+      id_string: 099acb6:11
+      values:
+        Command: 'Off'
+  condition: []
+  action:
+  - data: {}
+    service: light.turn_off
+    entity_id: light.living
+  mode: single
