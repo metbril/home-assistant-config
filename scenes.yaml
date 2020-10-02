@@ -220,19 +220,19 @@
       supported_features: 33
       state: 'on'
     light.lichtstraat_2:
-      brightness: 68
+      brightness: 65
       friendly_name: Lichtstraat 2
       icon: mdi:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_3:
-      brightness: 67
+      brightness: 65
       friendly_name: Lichtstraat 3
       icon: mdi:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_4:
-      brightness: 67
+      brightness: 65
       friendly_name: Lichtstraat 4
       icon: mdi:wall-sconce-flat
       supported_features: 33
