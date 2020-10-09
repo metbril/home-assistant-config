@@ -14,36 +14,36 @@ homeassistant:
 sensor:
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
     name: Pollen Bomen Vandaag
     scan_interval: 28800
 
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
     name: Pollen Grassen Vandaag
     scan_interval: 28800
 
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(1) > strong:nth-of-type(1)"
     name: Pollen Ambrosia Vandaag
     scan_interval: 28800
 
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(1) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
     name: Pollen Bomen Morgen
     scan_interval: 28800
 
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
     name: Pollen Grassen Morgen
     scan_interval: 28800
 
   - platform: scrape
     resource: https://weather.com/nl-NL/forecast/allergy/l/db19ad713b7a4bbb0c2dbf54d8bb22a26cf9e03aeb10959e2d6c5b9eca1d8472
-    select: "._-_-components-src-organism-PollenBreakdown-PollenBreakdown--body--OrmOR > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
+    select: "._2i7U7 > div:nth-of-type(3) > div:nth-of-type(1) > div:nth-of-type(2) > ul:nth-of-type(1) > li:nth-of-type(2) > strong:nth-of-type(1)"
     name: Pollen Ambrosia Morgen
     scan_interval: 28800
