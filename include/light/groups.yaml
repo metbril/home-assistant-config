@@ -5,7 +5,6 @@
   entities:
     ## clockwise from the door
     - light.hoge_kast
-    - light.signaallamp
     - light.magnarp_1
     - light.magnarp_2
     - light.magnarp_3
@@ -15,9 +14,8 @@
     - light.lichtstraat_2
     - light.lichtstraat_3
     - light.lichtstraat_4
-    - light.bank
+    - light.bollamp
     - light.willner
-    # - light.bollamp
 
 - platform: group
   name: Lichtstraat
