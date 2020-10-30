@@ -161,44 +161,6 @@
     data_template:
       title: Vakantie
       message: Verlichting automatisch uitgeschakeld.
-- id: lighting_living_switch_on
-  alias: Woonkamerverlichting aan schakelaar
-  description: ''
-  trigger:
-  - platform: event
-    event_type: rfxtrx_event
-    event_data:
-      packet_type: 17
-      sub_type: 0
-      type_string: AC
-      id_string: 099acb6:11
-      values:
-        Command: 'On'
-  condition: []
-  action:
-  - data: {}
-    service: light.turn_on
-    entity_id: light.living
-  mode: single
-- id: lighting_living_switch_off
-  alias: Woonkamerverlichting uit schakelaar
-  description: ''
-  trigger:
-  - platform: event
-    event_type: rfxtrx_event
-    event_data:
-      packet_type: 17
-      sub_type: 0
-      type_string: AC
-      id_string: 099acb6:11
-      values:
-        Command: 'Off'
-  condition: []
-  action:
-  - data: {}
-    service: light.turn_off
-    entity_id: light.living
-  mode: single
 - id: rdw_niro_apk_expiry
   alias: Notify APK expiry
   description: Notify 21 days before the APK date expires
@@ -276,4 +238,17 @@
         {{ states(''sensor.p2000_brandweer'') }} https://www.openstreetmap.org/?mlat={{
         state_attr(''sensor.p2000_brandweer'', ''latitude'') }}&mlon={{ state_attr(''sensor.p2000_brandweer'',
         ''longitude'') }}&zoom=16'
+  mode: single
+- id: lighting_living_switch_left
+  alias: Woonkamerverlichting Links
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.ac_099acb6_11
+  condition: []
+  action:
+  - service: light.turn_{{ trigger.to_state.state }}
+    data:
+      entity_id: light.living
+    entity_id: light.living
   mode: single
