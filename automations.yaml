@@ -252,26 +252,28 @@
     data:
       entity_id: input_select.signaallamp
       option: Regenalarm
-
-- alias: 'Melden P2000 Brandweer'
-  id: p2000_brandweer_notification
+- id: p2000_brandweer_notification
+  alias: P2000 Brandweer Melding
   trigger:
-    platform: state
+  - platform: state
     entity_id: sensor.p2000_brandweer
   condition:
-    condition: template
-    value_template: "{{ states('sensor.p2000_brandweer') != 'unknown' }}"
+  - condition: template
+    value_template: '{{ states(''sensor.p2000_brandweer'') != ''unknown'' }}'
   action:
-    - service_template: notify.admin
-      data_template:
-        title: "🚒 P2000 Brandweer"
-        message: "{{ states('sensor.p2000_brandweer') }}"
-        data:
-          url: "http://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer', 'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude') }}&zoom=16"
-    - service: notify.twitter
-      data_template: # blank line in message for newline
-        message: >-
-          🚒 De #brandweer is in de buurt. #P2000
-          
-          {{ states('sensor.p2000_brandweer') }}
-          https://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer', 'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude') }}&zoom=16
+  - service_template: notify.all
+    data_template:
+      title: 🚒 P2000 Brandweer
+      message: '{{ states(''sensor.p2000_brandweer'') }}'
+      data:
+        url: http://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer',
+          'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude')
+          }}&zoom=16
+  - service: notify.twitter
+    data_template:
+      message: '🚒 De #brandweer is in de buurt. #P2000
+
+        {{ states(''sensor.p2000_brandweer'') }} https://www.openstreetmap.org/?mlat={{
+        state_attr(''sensor.p2000_brandweer'', ''latitude'') }}&mlon={{ state_attr(''sensor.p2000_brandweer'',
+        ''longitude'') }}&zoom=16'
+  mode: single
