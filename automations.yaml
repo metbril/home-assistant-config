@@ -1,5 +1,5 @@
 - id: hacs_1578603337940
-  alias: Melden HACS Updates
+  alias: 'HACS: Melden Updates'
   description: ''
   trigger:
   - entity_id: sensor.hacs
@@ -16,8 +16,9 @@
         \ repo[\"available version\"] }}_\n{% endfor %}"
       title: Te verwerken updates in HACS
     service: persistent_notification.create
+  mode: single
 - id: hacs_1578603656941
-  alias: Melden HACS Repository toegevoegd
+  alias: 'HACS: Melden Repository toegevoegd'
   description: ''
   trigger:
   - event_data:
@@ -33,6 +34,7 @@
         %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
       title: Nieuwe repository in HACS
     service: persistent_notification.create
+  mode: single
 - id: lighting_1578815661
   alias: Turn On Living Lights at Dusk
   description: Inschakelen schemerverlichting woonkamer voor zonsondergang
@@ -208,6 +210,6 @@
   action:
   - service: notify.admin
     data_template:
-      title: 'APK-keuring'
+      title: APK-keuring
       message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
         tijdig een APK-keuring bij de garage.
