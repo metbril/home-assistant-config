@@ -97,9 +97,10 @@ notify:
     platform: group
     services:
       # - service: admin
-      - service: ios_pontius
-      - service: ios_patti
-      - service: living_tv
+      - service: mobile_app_pontius
+      - service: mobile_app_patricius
+      - service: mobile_app_magnus
+      # - service: living_tv
 
 person:
 
