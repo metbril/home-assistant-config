@@ -213,3 +213,65 @@
       title: APK-keuring
       message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
         tijdig een APK-keuring bij de garage.
+- id: signaallamp_off_sync
+  alias: Signaallamp uitschakelen synchroniseren
+  description: Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
+    handmatig wordt uitgeschakeld.
+  trigger:
+  - entity_id: light.signaallamp
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      entity_id: input_select.signaallamp
+      option: Uit
+    service: input_select.select_option
+- id: signaallamp_rainalarm_on
+  alias: Raise Rain Alarm Signal
+  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
+    but only when someone is home
+  trigger:
+  - above: '0'
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: sensor.occupancy
+    state: home
+  - condition: state
+    entity_id: group.family
+    state: home
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - after: 06:00:00
+    before: 09:00:00
+    condition: time
+  action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp
+      option: Regenalarm
+
+- alias: 'Melden P2000 Brandweer'
+  id: p2000_brandweer_notification
+  trigger:
+    platform: state
+    entity_id: sensor.p2000_brandweer
+  condition:
+    condition: template
+    value_template: "{{ states('sensor.p2000_brandweer') != 'unknown' }}"
+  action:
+    - service_template: notify.admin
+      data_template:
+        title: "🚒 P2000 Brandweer"
+        message: "{{ states('sensor.p2000_brandweer') }}"
+        data:
+          url: "http://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer', 'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude') }}&zoom=16"
+    - service: notify.twitter
+      data_template: # blank line in message for newline
+        message: >-
+          🚒 De #brandweer is in de buurt. #P2000
+          
+          {{ states('sensor.p2000_brandweer') }}
+          https://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer', 'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude') }}&zoom=16

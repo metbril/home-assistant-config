@@ -114,3 +114,6 @@ sensor.aygo_recall:
   unit_of_measurement: recalls
 sensor.niro_recall:
   unit_of_measurement: recalls
+sensor.p2000_brandweer:
+  icon: mdi:fire-truck
+  friendly_name: Brandweer
