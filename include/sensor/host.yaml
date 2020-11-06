@@ -1,0 +1,6 @@
+- platform: version
+  source: local
+
+- platform: version
+  source: hassio
+  image: raspberrypi3

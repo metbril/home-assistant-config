@@ -16,7 +16,7 @@ homeassistant:
     ## Binary Sensor
     ########################################################################
 
-    binary_sensor.hassio_update_available:
+    binary_sensor.update_available:
       device_class: safety
       friendly_name: Update Beschikbaar voor HA
 
@@ -24,67 +24,15 @@ homeassistant:
     ## Sensor
     ########################################################################
 
-    sensor.hassio_version_installed:
-      friendly_name: Geïnstalleerde versie Hassio
-    sensor.hassio_version_stable:
-      friendly_name: Stabiele versie Hassio
-    sensor.hassio_version_beta:
-      friendly_name: Beta versie Hassio
+    sensor.current_version:
+      friendly_name: Huidige versie
+    sensor.latest_version:
+      friendly_name: Laatste versie
 
     ########################################################################
     ## Automation
     ########################################################################
 
-    automation.hassio_update_available_notification:
-      friendly_name: Hassio Update Beschikbaar Melding
-    automation.ha_update_available_notification:
-      friendly_name: HA Update Beschikbaar Melding
+    automation.update_available_notification:
+      friendly_name: Update Beschikbaar Melding
 
-############################################################################
-## Binary Sensor
-############################################################################
-
-binary_sensor:
-  - platform: template
-    sensors:
-      hassio_update_available:
-        value_template: >-
-          {{ states('sensor.hassio_version_stable') != states('sensor.hassio_version_installed') and
-             states('sensor.hassio_version_stable') != 'unavailable' }}
-
-############################################################################
-## Sensor
-############################################################################
-
-sensor:
-  - platform: version
-    source: local
-    name: Hassio Version Installed
-
-  - platform: version
-    source: hassio
-    image: raspberrypi3
-    beta: false
-    name: Hassio Version Stable
-
-  - platform: version
-    source: hassio
-    image: raspberrypi3
-    beta: true
-    name: Hassio Version Beta
-
-############################################################################
-## Automation
-############################################################################
-
-automation:
-
-  - alias: 'Hassio Update Available Notification'
-    trigger:
-      - platform: state
-        entity_id: binary_sensor.hassio_update_available
-    action:
-      - service: notify.admin
-        data:
-          message: "Hassio versie {{ states('sensor.hassio_version_stable') }} is nu beschikbaar."
-          title: Home Assistant Update
