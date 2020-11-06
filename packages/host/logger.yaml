@@ -26,7 +26,7 @@ homeassistant:
 logger:
   default: warn
   # logs:
-  #   homeassistant.components.rfxtrx: debug
+  #   RFXtrx: debug
 
 ############################################################################
 ## Input Select
