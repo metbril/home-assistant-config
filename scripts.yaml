@@ -1,0 +1,7 @@
+adguard_bijwerken:
+  alias: AdGuard bijwerken
+  sequence:
+  - service: adguard.refresh
+    data: {}
+  mode: single
+  icon: hass:shield-refresh
