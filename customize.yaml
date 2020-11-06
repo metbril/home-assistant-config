@@ -92,10 +92,6 @@ sensor.flag:
 sensor.holiday:
   friendly_name: Feestdag
   icon: mdi:party-popper
-sensor.netherlands_coronavirus_deaths:
-  friendly_name: Overleden Nederland
-sensor.hacs:
-  friendly_name: HACS updates
 light.lichtstraat:
   icon: mdi:wall-sconce-flat
 sensor.weatherbit_solar_radiation:
@@ -117,3 +113,10 @@ sensor.niro_recall:
 sensor.p2000_brandweer:
   icon: mdi:fire-truck
   friendly_name: Brandweer
+binary_sensor.update_available:
+  device_class: safety
+  friendly_name: Update Beschikbaar voor HA
+sensor.current_version:
+  friendly_name: Huidige versie
+sensor.latest_version:
+  friendly_name: Laatste versie
