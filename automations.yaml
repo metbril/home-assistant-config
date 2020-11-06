@@ -1,6 +1,6 @@
 - id: hacs_1578603337940
-  alias: 'HACS: Melden Updates'
-  description: ''
+  alias: 'HACS: Updates Melden'
+  description: Notificatie bij updates in HACS
   trigger:
   - entity_id: sensor.hacs
     platform: state
@@ -77,7 +77,7 @@
         details.
       title: Nieuw apparaat
 - id: notify_1578816860
-  alias: Doorsturen persistente meldingen naar beheerder
+  alias: Persistente meldingen doorsturen naar beheerder
   description: Doorsturen persistente meldingen naar beheerder via Pushover
   trigger:
   - event_data:
@@ -91,6 +91,7 @@
         \ 'login attempt' in message|lower %}\n  {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\
         \ message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}"
     service: notify.admin
+  mode: single
 - id: backup_full
   alias: Daily Full Backup
   description: Full snapshot every day at 2:00
@@ -189,7 +190,7 @@
       option: Uit
     service: input_select.select_option
 - id: signaallamp_rainalarm_on
-  alias: Raise Rain Alarm Signal
+  alias: Regenalarm melden op werkdagen
   description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
     but only when someone is home
   trigger:
@@ -214,8 +215,10 @@
     data:
       entity_id: input_select.signaallamp
       option: Regenalarm
+  mode: single
 - id: p2000_brandweer_notification
   alias: P2000 Brandweer Melding
+  description: Notificatie bij een nieuw P2000-bericht dat de brandweer dichtbij is
   trigger:
   - platform: state
     entity_id: sensor.p2000_brandweer
@@ -241,7 +244,7 @@
   mode: single
 - id: lighting_living_switch_left
   alias: Woonkamerverlichting Links
-  description: ''
+  description: Actie bij gebruik linker wandschakelaar
   trigger:
   - platform: state
     entity_id: switch.ac_099acb6_11
@@ -251,4 +254,19 @@
     data:
       entity_id: light.living
     entity_id: light.living
+  mode: single
+- id: update_notification
+  alias: Versie  update melding
+  trigger:
+  - platform: state
+    entity_id: sensor.latest_version
+  condition:
+  - condition: template
+    value_template: '{{ states(''sensor.latest_version'') != states(''sensor.current_version'')
+      }}'
+  action:
+  - service: notify.admin
+    data:
+      message: Home Assistant versie {{ states('sensor.latest_version') }} is nu beschikbaar.
+      title: Update beschikbaar
   mode: single
