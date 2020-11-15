@@ -89,19 +89,30 @@ map:
 mobile_app:
 
 notify:
-  - name: admin
+  - name: pushover
     platform: pushover
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
 
-  - name: all
+  - name: robert
     platform: group
     services:
-      # - service: admin
       - service: mobile_app_pontius
       - service: mobile_app_patricius
       - service: mobile_app_magnus
-      # - service: living_tv
+
+  - name: admin
+    platform: group
+    services:
+      - service: pushover
+      - service: mobile_app_pontius
+
+  - name: all
+    platform: group
+    services:
+      - service: admin
+      - service: robert
+      - service: living_tv
 
 person:
 
