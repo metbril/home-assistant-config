@@ -270,3 +270,32 @@
       message: Home Assistant versie {{ states('sensor.latest_version') }} is nu beschikbaar.
       title: Update beschikbaar
   mode: single
+- id: '1604731822645'
+  alias: Regenalarm melden
+  trigger:
+  - platform: numeric_state
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    above: '0'
+  action:
+  - service: notify.robert
+    data:
+      title: Regenalarm
+      message: De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement
+        }} neerslag verwacht
+  mode: single
+- id: '1605447033'
+  alias: Weerwaarschuwing
+  description: Stuur een melding als er een nieuwe weerwaarschuwing is.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.meteoalarm
+    to: 'on'
+  action:
+  - service: notify.robert
+    data_template:
+      title: '{{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
+      message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} is effectief
+        op {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+      data:
+        url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
+  mode: single
