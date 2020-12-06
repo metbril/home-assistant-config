@@ -16,12 +16,14 @@ sensor:
 
       friendly_power_tariff: # vertaald in NL
         friendly_name: Power Tariff
+        unique_id: friendly_power_tariff
         value_template: >-
           {% set value = states('sensor.power_tariff') %}
           {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
 
       hourly_energy_consumption:
         friendly_name: Hourly Energy Consumption
+        unique_id: hourly_energy_consumption
         unit_of_measurement: kWh
         value_template: >-
           {{ states('sensor.hourly_energy_consumption_tarif_1')|float +  
@@ -29,6 +31,7 @@ sensor:
 
       daily_energy_consumption:
         friendly_name: Daily Energy Consumption
+        unique_id: daily_energy_consumption
         unit_of_measurement: kWh
         value_template: >-
           {{ states('sensor.daily_energy_consumption_tarif_1')|float +  
@@ -36,6 +39,7 @@ sensor:
 
       monthly_energy_consumption:
         friendly_name: Monthly Energy Consumption
+        unique_id: monthly_energy_consumption
         unit_of_measurement: kWh
         value_template: >-
           {{ states('sensor.monthly_energy_consumption_tarif_1')|float +  
