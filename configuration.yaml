@@ -39,26 +39,33 @@ frontend:
 ## Integrations
 ##############################
 
-asuswrt:
-  host: !secret asuswrt_host
-  username: !secret asuswrt_username
-  ssh_key: !secret asuswrt_ssh_key
-  protocol: ssh
-  port: 22
-  mode: router
-  sensors:
-    - upload
-    - download
-    - upload_speed
-    - download_speed
+# asuswrt:
+#   host: !secret asuswrt_host
+#   username: !secret asuswrt_username
+#   ssh_key: !secret asuswrt_ssh_key
+#   protocol: ssh
+#   port: 22
+#   mode: router
+#   sensors:
+#     - upload
+#     - download
+#     - upload_speed
+#     - download_speed
 
 config:
 
 device_tracker:
-  # This requires the asuswrt integration in configuration.yaml
-  - platform: asuswrt
-    consider_home: 180
-    interval_seconds: 60
+  # # This requires the asuswrt integration in configuration.yaml
+  # - platform: asuswrt
+  #   consider_home: 180
+  #   interval_seconds: 60
+  #   new_device_defaults:
+  #     track_new_devices: false
+
+  - platform: netgear
+    host: 192.168.1.1 # default: 192.168.1.1
+    username: admin # default: admin
+    password: !secret netgear_admin_password
     new_device_defaults:
       track_new_devices: false
 
