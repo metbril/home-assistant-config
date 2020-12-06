@@ -2,43 +2,6 @@
 ## Packages / Energy / DSMR
 ################################################
 
-homeassistant:
-  customize:
-    sensor.hourly_gas_consumption:
-      hidden: true
-    sensor.power_consumption_phase_l1:
-      hidden: true
-    sensor.power_consumption_phase_l2:
-      hidden: true
-    sensor.power_consumption_phase_l3:
-      hidden: true
-    sensor.power_production:
-      hidden: true
-    sensor.power_production_low:
-      hidden: true
-    sensor.power_production_normal:
-      hidden: true
-    sensor.power_production_phase_l1:
-      hidden: true
-    sensor.power_production_phase_l2:
-      hidden: true
-    sensor.power_production_phase_l3:
-      hidden: true
-    sensor.power_tariff:
-      hidden: true
-    sensor.voltage_sags_phase_l1:
-      hidden: true
-    sensor.voltage_sags_phase_l2:
-      hidden: true
-    sensor.voltage_sags_phase_l3:
-      hidden: true
-    sensor.voltage_swells_phase_l1:
-      hidden: true
-    sensor.voltage_swells_phase_l2:
-      hidden: true
-    sensor.voltage_swells_phase_l3:
-      hidden: true
-
 ################################################
 ## Sensor
 ################################################
@@ -51,20 +14,21 @@ sensor:
   - platform: template
     sensors:
 
-      power_tariff_nl: # vertaald in NL
+      friendly_power_tariff: # vertaald in NL
+        friendly_name: Power Tariff
         value_template: >-
           {% set value = states('sensor.power_tariff') %}
-          {{ value | replace('low', 'laag') | replace('normal', 'normaal') }}
+          {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
 
-      daily_power:
+      daily_power_consumption:
         value_template: >-
-          {{ states('sensor.daily_power_offpeak')|float +  
-             states('sensor.daily_power_peak')|float }}
+          {{ states('sensor.daily_power_consumption_tarif_1')|float +  
+             states('sensor.daily_power_consumption_tarif_2')|float }}
 
-      monthly_power:
+      monthly_power_consumption:
         value_template: >-
-          {{ states('sensor.monthly_power_offpeak')|float +  
-             states('sensor.monthly_power_peak')|float }}
+          {{ states('sensor.monthly_power_consumption_tarif_1')|float +  
+             states('sensor.monthly_power_consumption_tarif_1')|float }}
 
 ##################################################
 ## REST Command
@@ -89,22 +53,28 @@ rest_command:
 ############################################################################
 
 utility_meter:
-  daily_power_offpeak:
-    source: sensor.power_consumption_low
+  hourly_power_consumption_tarif_1:
+    source: sensor.power_consumption_tarif_1
+    cycle: hourly
+  hourly_power_consumption_tarif_2:
+    source: sensor.power_consumption_tarif_2
+    cycle: hourly
+  daily_power_consumption_tarif_1:
+    source: sensor.power_consumption_tarif_1
     cycle: daily
-  daily_power_peak:
-    source: sensor.power_consumption_normal
+  daily_power_consumption_tarif_2:
+    source: sensor.power_consumption_tarif_2
     cycle: daily
-  daily_gas:
+  daily_gas_consumption:
     source: sensor.gas_consumption
     cycle: daily
-  monthly_power_offpeak:
-    source: sensor.power_consumption_low
+  monthly_power_consumption_tarif_1:
+    source: sensor.power_consumption_tarif_1
     cycle: monthly
-  monthly_power_peak:
-    source: sensor.power_consumption_normal
+  monthly_power_consumption_tarif_2:
+    source: sensor.power_consumption_tarif_2
     cycle: monthly
-  monthly_gas:
+  monthly_gas_consumption:
     source: sensor.gas_consumption
     cycle: monthly
 
@@ -129,8 +99,8 @@ script:
         data_template: 
           message: >
             {{ now() }}, 
-            {{ states('sensor.power_consumption_low') }}, 
-            {{ states('sensor.power_consumption_normal') }}, 
+            {{ states('sensor.power_consumption_tarif_1') }}, 
+            {{ states('sensor.power_consumption_tarif_2') }}, 
             {{ states('sensor.gas_consumption')}}
 
 ############################################################################
@@ -143,7 +113,7 @@ automation:
   ## Post gas consumption to mindergas.nl daily at 00:15. 
   ## The gas reading is updated hourly around 10 minutes after the full hour
   - alias: Post Gas Consumption
-    hide_entity: no # default no
+    # hide_entity: no # default no
     trigger:
       - platform: time
         ## run daily at 00:15:00
