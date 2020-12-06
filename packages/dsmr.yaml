@@ -20,15 +20,15 @@ sensor:
           {% set value = states('sensor.power_tariff') %}
           {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
 
-      daily_power_consumption:
+      daily_energy_consumption:
         value_template: >-
-          {{ states('sensor.daily_power_consumption_tarif_1')|float +  
-             states('sensor.daily_power_consumption_tarif_2')|float }}
+          {{ states('sensor.daily_energy_consumption_tarif_1')|float +  
+             states('sensor.daily_energy_consumption_tarif_2')|float }}
 
-      monthly_power_consumption:
+      monthly_energy_consumption:
         value_template: >-
-          {{ states('sensor.monthly_power_consumption_tarif_1')|float +  
-             states('sensor.monthly_power_consumption_tarif_1')|float }}
+          {{ states('sensor.monthly_energy_consumption_tarif_1')|float +  
+             states('sensor.monthly_energy_consumption_tarif_1')|float }}
 
 ##################################################
 ## REST Command
@@ -53,26 +53,26 @@ rest_command:
 ############################################################################
 
 utility_meter:
-  hourly_power_consumption_tarif_1:
-    source: sensor.power_consumption_tarif_1
+  hourly_energy_consumption_tarif_1:
+    source: sensor.energy_consumption_tarif_1
     cycle: hourly
-  hourly_power_consumption_tarif_2:
-    source: sensor.power_consumption_tarif_2
+  hourly_energy_consumption_tarif_2:
+    source: sensor.energy_consumption_tarif_2
     cycle: hourly
-  daily_power_consumption_tarif_1:
-    source: sensor.power_consumption_tarif_1
+  daily_energy_consumption_tarif_1:
+    source: sensor.energy_consumption_tarif_1
     cycle: daily
-  daily_power_consumption_tarif_2:
-    source: sensor.power_consumption_tarif_2
+  daily_energy_consumption_tarif_2:
+    source: sensor.energy_consumption_tarif_2
     cycle: daily
   daily_gas_consumption:
     source: sensor.gas_consumption
     cycle: daily
-  monthly_power_consumption_tarif_1:
-    source: sensor.power_consumption_tarif_1
+  monthly_energy_consumption_tarif_1:
+    source: sensor.energy_consumption_tarif_1
     cycle: monthly
-  monthly_power_consumption_tarif_2:
-    source: sensor.power_consumption_tarif_2
+  monthly_energy_consumption_tarif_2:
+    source: sensor.energy_consumption_tarif_2
     cycle: monthly
   monthly_gas_consumption:
     source: sensor.gas_consumption
@@ -99,8 +99,8 @@ script:
         data_template: 
           message: >
             {{ now() }}, 
-            {{ states('sensor.power_consumption_tarif_1') }}, 
-            {{ states('sensor.power_consumption_tarif_2') }}, 
+            {{ states('sensor.energy_consumption_tarif_1') }}, 
+            {{ states('sensor.energy_consumption_tarif_2') }}, 
             {{ states('sensor.gas_consumption')}}
 
 ############################################################################
