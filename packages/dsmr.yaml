@@ -39,7 +39,7 @@ sensor:
         unit_of_measurement: kWh
         value_template: >-
           {{ states('sensor.monthly_energy_consumption_tarif_1')|float +  
-             states('sensor.monthly_energy_consumption_tarif_1')|float }}
+             states('sensor.monthly_energy_consumption_tarif_2')|float }}
 
 ##################################################
 ## REST Command
