@@ -20,6 +20,11 @@ sensor:
           {% set value = states('sensor.power_tariff') %}
           {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
 
+      hourly_energy_consumption:
+        value_template: >-
+          {{ states('sensor.hourly_energy_consumption_tarif_1')|float +  
+             states('sensor.hourly_energy_consumption_tarif_2')|float }}
+
       daily_energy_consumption:
         value_template: >-
           {{ states('sensor.daily_energy_consumption_tarif_1')|float +  
