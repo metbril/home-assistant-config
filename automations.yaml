@@ -299,3 +299,44 @@
       data:
         url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
   mode: single
+- id: '1606817920226'
+  alias: Werk Niet Storen
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.teams_status_robert
+  condition:
+  - condition: and
+    conditions:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.teams_status_robert
+        state: Bezet
+      - condition: state
+        entity_id: sensor.teams_status_robert
+        state: Niet storen
+    - condition: state
+      entity_id: person.king
+      state: home
+  action:
+  - scene: scene.niet_storen_2
+  mode: single
+- id: '1606818215280'
+  alias: Werk Vrij
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.teams_status_robert
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.teams_status_robert
+      state: Bezet
+    - condition: state
+      entity_id: sensor.teams_status_robert
+      state: Niet storen
+  action:
+  - scene: scene.werk_vrij
+  mode: single

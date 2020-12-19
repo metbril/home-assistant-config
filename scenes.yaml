@@ -342,3 +342,23 @@
       icon: mdi:alarm-light
       state: 'on'
   icon: mdi:crown
+- id: '1606817686136'
+  name: Werk Niet Storen
+  entities:
+    light.werkstatus:
+      brightness: 255
+      rgb_color:
+      - 255
+      - 79
+      - 70
+      friendly_name: Werkstatus
+      state: 'on'
+    media_player.studeerkamer:
+      state: paused
+  icon: mdi:account-cancel
+- id: '1606818069276'
+  name: Werk Vrij
+  entities:
+    light.werkstatus:
+      state: 'off'
+  icon: mdi:account-check
