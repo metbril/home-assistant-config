@@ -33,6 +33,9 @@ The OZW logfile was growing rapidly with it's default configuration. To lower th
 ```xml
   <Option name="SaveLogLevel" value="6" />
 ```
+## Backups
+
+I create backups with the [Home Assistant Google Drive Backup addon](https://github.com/sabeechen/hassio-google-drive-backup).
 
 ## Contributions
 
