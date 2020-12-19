@@ -247,7 +247,7 @@
   description: Actie bij gebruik linker wandschakelaar
   trigger:
   - platform: state
-    entity_id: switch.ac_099acb6_11
+    entity_id: binary_sensor.wandschakelaar_links
   condition: []
   action:
   - service: light.turn_{{ trigger.to_state.state }}
@@ -279,7 +279,7 @@
   action:
   - service: notify.robert
     data:
-      title: Regenalarm
+      title: ☔️ Regenalarm
       message: De komende 30 minuten wordt {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement
         }} neerslag verwacht
   mode: single
