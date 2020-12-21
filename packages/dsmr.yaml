@@ -2,6 +2,27 @@
 ## Packages / Energy / DSMR
 ################################################
 
+homeassistant:
+
+  ################################################
+  ## Customize
+  ################################################
+
+  customize:
+
+    ################################################
+    ## Sensor
+    ################################################
+
+    sensor.daily_energy_consumption_tarif_1:
+      friendly_name: Dagelijks energieverbruik  (tarief 1)
+    sensor.daily_energy_consumption_tarif_2:
+      friendly_name: Dagelijks energieverbruik  (tarief 2)
+    sensor.monthly_energy_consumption_tarif_1:
+      friendly_name: Maandelijks energieverbruik  (tarief 1)
+    sensor.monthly_energy_consumption_tarif_2:
+      friendly_name: Maandelijks energieverbruik  (tarief 2)
+
 ################################################
 ## Sensor
 ################################################
@@ -20,14 +41,6 @@ sensor:
         value_template: >-
           {% set value = states('sensor.power_tariff') %}
           {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
-
-      hourly_energy_consumption:
-        friendly_name: Hourly Energy Consumption
-        unique_id: hourly_energy_consumption
-        unit_of_measurement: kWh
-        value_template: >-
-          {{ states('sensor.hourly_energy_consumption_tarif_1')|float +  
-             states('sensor.hourly_energy_consumption_tarif_2')|float }}
 
       daily_energy_consumption:
         friendly_name: Daily Energy Consumption
@@ -68,29 +81,17 @@ rest_command:
 ############################################################################
 
 utility_meter:
-  hourly_energy_consumption_tarif_1:
-    source: sensor.energy_consumption_tarif_1
-    cycle: hourly
-  hourly_energy_consumption_tarif_2:
-    source: sensor.energy_consumption_tarif_2
-    cycle: hourly
   daily_energy_consumption_tarif_1:
     source: sensor.energy_consumption_tarif_1
     cycle: daily
   daily_energy_consumption_tarif_2:
     source: sensor.energy_consumption_tarif_2
     cycle: daily
-  daily_gas_consumption:
-    source: sensor.gas_consumption
-    cycle: daily
   monthly_energy_consumption_tarif_1:
     source: sensor.energy_consumption_tarif_1
     cycle: monthly
   monthly_energy_consumption_tarif_2:
     source: sensor.energy_consumption_tarif_2
-    cycle: monthly
-  monthly_gas_consumption:
-    source: sensor.gas_consumption
     cycle: monthly
 
 ############################################################################

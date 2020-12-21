@@ -120,19 +120,3 @@ sensor.current_version:
   friendly_name: Huidige versie
 sensor.latest_version:
   friendly_name: Laatste versie
-sensor.daily_energy_consumption_tarif_1:
-  friendly_name: Dagelijks energieverbruik  (tarief 1)
-sensor.daily_energy_consumption_tarif_2:
-  friendly_name: Dagelijks energieverbruik  (tarief 2)
-sensor.monthly_energy_consumption_tarif_1:
-  friendly_name: Maandelijks energieverbruik  (tarief 1)
-sensor.monthly_energy_consumption_tarif_2:
-  friendly_name: Maandelijks energieverbruik  (tarief 2)
-sensor.hourly_energy_consumption_tarif_1:
-  friendly_name: Uurlijks energieverbruik  (tarief 1)
-sensor.hourly_energy_consumption_tarif_2:
-  friendly_name: Uurlijks energieverbruik  (tarief 2)
-sensor.daily_gas_consumption:
-  friendly_name: Dagelijks gasverbruik
-sensor.monthly_gas_consumption:
-  friendly_name: Maandelijks gasverbruik
