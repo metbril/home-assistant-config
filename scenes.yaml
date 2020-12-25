@@ -1,69 +1,53 @@
-- id: '1578651682475'
+- id: signalering_regenalarm
   name: Signaal Regenalarm
   entities:
     light.signaallamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
       brightness: 171
-      hs_color:
-      - 241.865
-      - 75.686
       rgb_color:
       - 67
       - 62
       - 255
-      xy_color:
-      - 0.16
-      - 0.074
-      effect: none
-      friendly_name: Signaallamp
-      supported_features: 63
-      icon: mdi:alarm-light
       state: 'on'
   icon: mdi:umbrella
-- id: '1578651682476'
+- id: signalering_vertraging_ns
   name: Signaal Vertraging NS
   entities:
     light.signaallamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
       brightness: 171
-      hs_color:
-      - 44.706
-      - 100
       rgb_color:
       - 255
       - 190
       - 0
-      xy_color:
-      - 0.528
-      - 0.446
-      effect: none
-      friendly_name: Signaallamp
-      supported_features: 63
-      icon: mdi:alarm-light
       state: 'on'
   icon: mdi:train
-- id: '1578651682477'
+- id: signalering_uit
   name: Signaal Uit
   entities:
     light.signaallamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      friendly_name: Signaallamp
-      supported_features: 63
-      icon: mdi:alarm-light
       state: 'off'
   icon: mdi:bell-off
+- id: signalering_feyenoord
+  name: Signaal Feyenoord
+  entities:
+    light.signaallamp:
+      brightness: 160
+      rgb_color:
+      - 255
+      - 49
+      - 5
+      state: 'on'
+  icon: mdi:soccer
+- id: signalering_oranje
+  name: Signaal Oranje
+  entities:
+    light.signaallamp:
+      brightness: 160
+      rgb_color:
+      - 255
+      - 129
+      - 27
+      state: 'on'
+  icon: mdi:crown
 - id: '1597676235869'
   name: Woonkamerverlichting Maximaal
   entities:
@@ -290,58 +274,6 @@
       icon: mdi:lamp
       state: 'on'
   icon: mdi:weather-sunset
-- id: '1602229745916'
-  name: Signaal Feyenoord
-  entities:
-    light.signaallamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      brightness: 160
-      hs_color:
-      - 10.56
-      - 98.039
-      rgb_color:
-      - 255
-      - 49
-      - 5
-      xy_color:
-      - 0.685
-      - 0.311
-      effect: none
-      friendly_name: Signaallamp
-      supported_features: 63
-      icon: mdi:alarm-light
-      state: 'on'
-  icon: mdi:soccer
-- id: '1602229898238'
-  name: Signaal Oranje
-  entities:
-    light.signaallamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      brightness: 160
-      hs_color:
-      - 26.96
-      - 89.02
-      rgb_color:
-      - 255
-      - 129
-      - 27
-      xy_color:
-      - 0.605
-      - 0.372
-      effect: none
-      friendly_name: Signaallamp
-      supported_features: 63
-      icon: mdi:alarm-light
-      state: 'on'
-  icon: mdi:crown
 - id: '1606817686136'
   name: Werk Niet Storen
   entities:

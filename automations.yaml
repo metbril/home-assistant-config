@@ -176,46 +176,6 @@
       title: APK-keuring
       message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
         tijdig een APK-keuring bij de garage.
-- id: signaallamp_off_sync
-  alias: Signaallamp uitschakelen synchroniseren
-  description: Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
-    handmatig wordt uitgeschakeld.
-  trigger:
-  - entity_id: light.signaallamp
-    platform: state
-    to: 'off'
-  action:
-  - data:
-      entity_id: input_select.signaallamp
-      option: Uit
-    service: input_select.select_option
-- id: signaallamp_rainalarm_on
-  alias: Regenalarm melden op werkdagen
-  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
-    but only when someone is home
-  trigger:
-  - above: '0'
-    entity_id: sensor.buienradar_precipitation_forecast_average
-    platform: numeric_state
-  condition:
-  - condition: state
-    entity_id: sensor.occupancy
-    state: home
-  - condition: state
-    entity_id: group.family
-    state: home
-  - condition: state
-    entity_id: binary_sensor.workday
-    state: 'on'
-  - after: 06:00:00
-    before: 09:00:00
-    condition: time
-  action:
-  - service: input_select.select_option
-    data:
-      entity_id: input_select.signaallamp
-      option: Regenalarm
-  mode: single
 - id: p2000_brandweer_notification
   alias: P2000 Brandweer Melding
   description: Notificatie bij een nieuw P2000-bericht dat de brandweer dichtbij is
@@ -226,7 +186,7 @@
   - condition: template
     value_template: '{{ states(''sensor.p2000_brandweer'') != ''unknown'' }}'
   action:
-  - service_template: notify.all
+  - service_template: notify.robert
     data_template:
       title: 🚒 P2000 Brandweer
       message: '{{ states(''sensor.p2000_brandweer'') }}'
@@ -340,3 +300,78 @@
   action:
   - scene: scene.werk_vrij
   mode: single
+- id: signaallamp_bijwerken_via_scene
+  alias: Signaallamp bijwerken via scene
+  description: Werk de signaallamp bij met behulp van de geselecteerde scene.
+  trigger:
+  - entity_id: input_select.signaallamp_scene
+    platform: state
+  action:
+  - data_template:
+      entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
+        '', ''_'' ) }}'
+    service: scene.turn_on
+- id: signaallamp_off_sync_scene
+  alias: Signaallamp uitschakelen synchroniseren met scene
+  description: Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
+    handmatig wordt uitgeschakeld.
+  trigger:
+  - entity_id: light.signaallamp
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+    service: input_select.select_option
+- id: signaallamp_rainalarm_on
+  alias: Signaallamp regenalarm melden op werkdagen
+  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
+    but only when someone is home
+  trigger:
+  - above: '0'
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: binary_sensor.signaallamp_ingeschakeld
+    state: 'on'
+  - condition: time
+    after: 06:00:00
+    before: 09:00:00
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.verlof
+    state: 'off'
+  - condition: state
+    entity_id: sensor.occupancy
+    state: home
+  - condition: state
+    entity_id: group.family
+    state: home
+  action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Regenalarm
+  mode: single
+- id: signaallamp_rainalarm_off
+  alias: Signaallamp regenalarm annuleren
+  description: Annuleer regenalarm om 9:00 of als er geen regen meer wordt verwacht.
+  trigger:
+  - platform: template
+    value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+      | float == 0 }}'
+  - at: 09:00:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_select.signaallamp_scene
+    state: Regenalarm
+  action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
