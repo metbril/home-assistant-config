@@ -177,32 +177,6 @@
       title: APK-keuring
       message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
         tijdig een APK-keuring bij de garage.
-- id: p2000_brandweer_notification
-  alias: P2000 Brandweer Melding
-  description: Notificatie bij een nieuw P2000-bericht dat de brandweer dichtbij is
-  trigger:
-  - platform: state
-    entity_id: sensor.p2000_brandweer
-  condition:
-  - condition: template
-    value_template: '{{ states(''sensor.p2000_brandweer'') != ''unknown'' }}'
-  action:
-  - service_template: notify.robert
-    data_template:
-      title: 🚒 P2000 Brandweer
-      message: '{{ states(''sensor.p2000_brandweer'') }}'
-      data:
-        url: http://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer',
-          'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 'longitude')
-          }}&zoom=16
-  - service: notify.twitter
-    data_template:
-      message: '🚒 De #brandweer is in de buurt. #P2000
-
-        {{ states(''sensor.p2000_brandweer'') }} https://www.openstreetmap.org/?mlat={{
-        state_attr(''sensor.p2000_brandweer'', ''latitude'') }}&mlon={{ state_attr(''sensor.p2000_brandweer'',
-        ''longitude'') }}&zoom=16'
-  mode: single
 - id: lighting_living_switch_left
   alias: Woonkamerverlichting Links
   description: Actie bij gebruik linker wandschakelaar
@@ -376,3 +350,15 @@
     data:
       entity_id: input_select.signaallamp_scene
       option: Uit
+- id: frontdoor_bell_pressed_notification
+  alias: Aanbellen Voordeur
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: switch.bel_voordeur
+  condition: []
+  action:
+  - service: notify.all
+    data:
+      message: 🛎 Er wordt aangebeld aan de voordeur.
+  mode: single
