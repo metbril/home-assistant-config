@@ -44,3 +44,9 @@ binary_sensor:
     name: Workday
     country: NL
     workdays: [ mon, tue, wed, thu, fri ]
+
+##################################################
+## Sun
+##################################################
+
+sun:

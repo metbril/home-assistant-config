@@ -1,18 +1,3 @@
-binary_sensor.daytime:
-  friendly_name: Overdag
-  icon: mdi:timetable
-binary_sensor.evening:
-  friendly_name: Avond
-  icon: mdi:timetable
-binary_sensor.morning:
-  friendly_name: Ochtend
-  icon: mdi:timetable
-binary_sensor.night:
-  friendly_name: Nacht
-  icon: mdi:timetable
-binary_sensor.workday:
-  friendly_name: Werkdag
-  icon: mdi:briefcase
 device_tracker.robert_phone_app:
   icon: mdi:apple-ios
 device_tracker.robert_phone_owntracks:
@@ -68,30 +53,6 @@ sensor.aswrt_download_speed:
 sensor.aswrt_upload_speed:
   friendly_name: ASUSWRT Uploadsnelheid
   icon: mdi:speedometer
-sensor.christmas_countdown:
-  friendly_name: Aftellen tot Kerstmis
-sensor.date:
-  friendly_name: Datum
-sensor.easter_countdown:
-  friendly_name: Aftellen tot Pasen
-sensor.father_s_day_countdown:
-  friendly_name: Aftellen tot Vaderdag
-sensor.king_s_day_countdown:
-  friendly_name: Aftellen tot Koningsdag
-sensor.mother_s_day_countdown:
-  friendly_name: Aftellen tot Moederdag
-sensor.sinterklaas_countdown:
-  friendly_name: Aftellen tot Pakjesavond
-sensor.time:
-  friendly_name: Tijd
-sun.sun:
-  friendly_name: Zon
-sensor.flag:
-  friendly_name: Vlagdag
-  icon: mdi:flag
-sensor.holiday:
-  friendly_name: Feestdag
-  icon: mdi:party-popper
 light.lichtstraat:
   icon: mdi:wall-sconce-flat
 sensor.weatherbit_solar_radiation:
