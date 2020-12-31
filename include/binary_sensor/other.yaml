@@ -1,6 +1,0 @@
-### binary_sensor/other.yaml
-
-- platform: workday
-  name: Workday
-  country: NL
-  workdays: [ mon, tue, wed, thu, fri ]

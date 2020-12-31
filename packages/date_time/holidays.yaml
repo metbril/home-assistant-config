@@ -17,7 +17,25 @@ homeassistant:
     ######################################################################
     ## Sensor
     ######################################################################
-
+    sensor.christmas_countdown:
+      friendly_name: Aftellen tot Kerstmis
+    sensor.easter_countdown:
+      friendly_name: Aftellen tot Pasen
+    sensor.father_s_day_countdown:
+      friendly_name: Aftellen tot Vaderdag
+    sensor.king_s_day_countdown:
+      friendly_name: Aftellen tot Koningsdag
+    sensor.mother_s_day_countdown:
+      friendly_name: Aftellen tot Moederdag
+    sensor.sinterklaas_countdown:
+      friendly_name: Aftellen tot Pakjesavond
+    sensor.flag:
+      friendly_name: Vlagdag
+      icon: mdi:flag
+    sensor.holiday:
+      friendly_name: Feestdag
+      icon: mdi:party-popper
+          
 ######################################################################
 ## Sensor
 ######################################################################

@@ -1,0 +1,46 @@
+# date_time.yaml
+# Various date/time related configuration
+
+homeassistant:
+  customize:
+    # binary_sensor.daytime:
+    #   friendly_name: Overdag
+    #   icon: mdi:timetable
+    # binary_sensor.evening:
+    #   friendly_name: Avond
+    #   icon: mdi:timetable
+    # binary_sensor.morning:
+    #   friendly_name: Ochtend
+    #   icon: mdi:timetable
+    # binary_sensor.night:
+    #   friendly_name: Nacht
+    #   icon: mdi:timetable
+    binary_sensor.workday:
+      friendly_name: Werkdag
+      icon: mdi:briefcase
+    sensor.date:
+      friendly_name: Datum
+    sensor.time:
+      friendly_name: Tijd
+    sun.sun:
+      friendly_name: Zon
+                
+##################################################
+## Sensor
+##################################################
+
+sensor:
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+
+##################################################
+## Binary Sensor
+##################################################
+
+binary_sensor:
+  - platform: workday
+    name: Workday
+    country: NL
+    workdays: [ mon, tue, wed, thu, fri ]
