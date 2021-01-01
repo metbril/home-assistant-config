@@ -200,3 +200,42 @@ camera:
   - platform: buienradar
     name: Buienradar
     dimension: 700                      # largest size
+
+################################################
+## Automation
+################################################
+
+automation:
+
+  - id: rain_alarm
+    alias: Regenalarm melden
+    trigger:
+    - platform: numeric_state
+      entity_id: sensor.buienradar_precipitation_forecast_average
+      above: '0'
+    action:
+    - service: notify.robert
+      data:
+        title: ☔️ Regenalarm
+        message: Regen verwacht van {{ trigger.to_state.state }} {{ trigger.to_state.attributes.unit_of_measurement }}
+        data:
+          url: "https://www.buienalarm.nl/{{state_attr('zone.home', 'latitude')}},{{state_attr('zone.home', 'longitude')}}"
+    mode: single
+
+  - id: weather_alarm
+    alias: Weerwaarschuwing
+    description: Stuur een melding als er een nieuwe weerwaarschuwing is.
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.meteoalarm
+      to: 'on'
+    action:
+    - service: notify.robert
+      data_template:
+        title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
+        message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} 
+          gaat in op {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+        data:
+          url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
+    mode: single
+  
