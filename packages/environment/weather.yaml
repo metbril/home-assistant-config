@@ -152,13 +152,32 @@ sensor:
     name: Buienradar
     timeframe: 30                     # minutes to look ahead for precipitation
     monitored_conditions:
+      - barometerfc
       - barometerfcname
+      - condition
+      - conditioncode
+      - conditiondetailed
+      - conditionexact
+      - feeltemperature
+      - groundtemperature
+      - humidity
+      - irradiance
+      - precipitation
       - precipitation_forecast_average
       - precipitation_forecast_total
-      - irradiance
+      - pressure
       - rainlast24hour
       - rainlasthour
-
+      - stationname
+      - symbol
+      - temperature
+      - visibility
+      - windazimuth
+      - winddirection
+      - windforce
+      - windgust
+      - windspeed
+      
   - platform: template
     sensors:
       dark_sky_wind_direction:
