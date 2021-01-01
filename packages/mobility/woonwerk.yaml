@@ -1,0 +1,62 @@
+sensor:
+
+  - platform: waze_travel_time
+    name: "Robert to Work"
+    origin: person.king
+    destination: zone.werk
+    region: 'EU'
+
+  - platform: waze_travel_time
+    name: "Robert to Home"
+    origin: person.king
+    destination: zone.home
+    region: 'EU'
+
+  - platform: here_travel_time
+    name: Robert naar werk per fiets
+    api_key: here_api_key
+    origin_entity_id: person.king
+    destination_entity_id: zone.werk
+    mode: bicycle
+    route_mode: shortest
+    traffic_mode: false
+
+  - platform: here_travel_time
+    name: Robert naar huis per fiets
+    api_key: here_api_key
+    origin_entity_id: person.king
+    destination_entity_id: zone.home
+    mode: bicycle
+    route_mode: shortest
+    traffic_mode: false
+
+  - platform: template
+    sensors:
+      bearing_to_work:
+        unit_of_measurement: °
+        value_template: >-
+          {% set lat1 = state_attr('person.king', 'latitude') * pi / 180 %}
+          {% set long1 = state_attr('person.king', 'longitude') * pi / 180 %}
+          {% set lat2 = state_attr('zone.werk', 'latitude') * pi / 180 %}
+          {% set long2 = state_attr('zone.werk', 'longitude') * pi / 180 %}
+          {% set longdiff = long2 - long1 %}
+          {% set y = sin(longdiff) * cos(lat2) %}
+          {% set x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(longdiff) %}
+          {% set bearing = atan2(y,x) * 180 / pi %}
+          {% set bearing = (bearing + 360) % 360 %}
+          {% set bearing = bearing | round %}
+          {{ bearing}}
+
+proximity:
+  home:
+    zone: home
+    devices:
+      - person.king
+    tolerance: 50
+    unit_of_measurement: km
+  werk:
+    zone: werk
+    devices:
+      - person.king
+    tolerance: 50
+    unit_of_measurement: km
