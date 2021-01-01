@@ -1,0 +1,34 @@
+# media.yaml
+# Mediaplayer related stuff
+
+# https://www.home-assistant.io/integrations/input_select/
+input_select:
+  playlist:
+    name: Afspeellijst
+    icon: hass:playlist-music
+    options: # case-sensitive!
+      - All Out 80s
+      - This Is Coldplay
+      - This Is Jack Johnson
+      - Happy Campers
+    # initial:                  # no initial value; HA saves state between restarts
+    #   - All Out 80s
+  media_player:
+    name: Speaker
+    icon: hass:speaker-wireless
+    options:
+      - Studeerkamer
+      - Woonkamer
+
+automation:
+  - id: media_play
+    alias: Afspeellijst starten op speaker
+    trigger:
+      - platform: state
+        entity_id: input_select.playlist
+    action:
+      - service: media_player.select_source
+        data_template:
+          entity_id: 'media_player.{{states(''input_select.media_player'')|lower|replace('' '',''_'')}}'
+          source: '{{states(''input_select.playlist'') }}'
+    mode: single
