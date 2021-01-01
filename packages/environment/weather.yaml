@@ -18,6 +18,8 @@ homeassistant:
     ## Sensor
     ################################################
 
+    # Buienradar
+    
     sensor.buienradar_precipitation_forecast_average:
       friendly_name: Verwachte neerslag
       unit_of_measurement: mm/u
@@ -26,6 +28,8 @@ homeassistant:
       friendly_name: Verwachte neerslag
       unit_of_measurement: mm
 
+    # Dark Sky
+    
     sensor.dark_sky_apparent_temperature:
       friendly_name: Gevoelstemperatuur omgeving
 
@@ -66,9 +70,23 @@ homeassistant:
       friendly_name: Windrichting omgeving
       icon: mdi:compass
 
+    sensor.dark_sky_wind_gust:
+      unit_of_measurement: km/u
+
     sensor.dark_sky_wind_speed:
       friendly_name: Windsnelheid omgeving
 
+    ## Weatherbit
+
+    sensor.weatherbit_solar_radiation:
+      unit_of_measurement: W/m²
+
+    sensor.weatherbit_rain_today:
+      unit_of_measurement: mm/u
+
+    sensor.weatherbit_snow:
+      unit_of_measurement: mm/u
+      
     ################################################
     ## Binary Sensor
     ################################################

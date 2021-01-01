@@ -55,14 +55,6 @@ sensor.aswrt_upload_speed:
   icon: mdi:speedometer
 light.lichtstraat:
   icon: mdi:wall-sconce-flat
-sensor.weatherbit_solar_radiation:
-  unit_of_measurement: W/m²
-sensor.weatherbit_rain_today:
-  unit_of_measurement: mm/u
-sensor.weatherbit_snow:
-  unit_of_measurement: mm/u
-sensor.dark_sky_wind_gust:
-  unit_of_measurement: km/u
 binary_sensor.rpi_power_status:
   icon: ''
 light.magnarp:
