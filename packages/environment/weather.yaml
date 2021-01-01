@@ -21,7 +21,7 @@ homeassistant:
     # Buienradar
     
     sensor.buienradar_precipitation_forecast_average:
-      friendly_name: Verwachte neerslag
+      friendly_name: Verwachte neerslagintensiteit
       unit_of_measurement: mm/u
 
     sensor.buienradar_precipitation_forecast_total:
