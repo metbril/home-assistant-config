@@ -1,0 +1,27 @@
+homeassistant:
+  customize:
+    sensor.asuswrt_download:
+      friendly_name: ASUSWRT Download
+      icon: mdi:download-network
+    sensor.asuswrt_upload:
+      friendly_name: ASUSWRT Upload
+      icon: mdi:upload-network
+    sensor.aswrt_download_speed:
+      friendly_name: ASUSWRT Downloadsnelheid
+      icon: mdi:speedometer
+    sensor.aswrt_upload_speed:
+      friendly_name: ASUSWRT Uploadsnelheid
+      icon: mdi:speedometer
+
+asuswrt:
+  host: !secret asuswrt_host
+  username: !secret asuswrt_username
+  ssh_key: !secret asuswrt_ssh_key
+  protocol: ssh
+  port: 22
+  mode: router
+  sensors:
+    - upload
+    - download
+    - upload_speed
+    - download_speed

@@ -33,19 +33,6 @@ frontend:
 ## Integrations
 ##############################
 
-# asuswrt:
-#   host: !secret asuswrt_host
-#   username: !secret asuswrt_username
-#   ssh_key: !secret asuswrt_ssh_key
-#   protocol: ssh
-#   port: 22
-#   mode: router
-#   sensors:
-#     - upload
-#     - download
-#     - upload_speed
-#     - download_speed
-
 config:
 
 discovery:
