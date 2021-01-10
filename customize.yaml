@@ -1,7 +1,7 @@
 device_tracker.robert_phone_app:
-  icon: mdi:apple-ios
+  icon: hass:apple-ios
 device_tracker.robert_phone_owntracks:
-  icon: mdi:map-marker-radius
+  icon: hass:map-marker-radius
 group.batteries:
   friendly_name: Batterijen
 group.family:

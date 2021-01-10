@@ -41,7 +41,7 @@ homeassistant:
 
     sensor.dark_sky_ozone:
       friendly_name: Ozon Dark Sky
-      icon: mdi:vector-triangle
+      icon: hass:vector-triangle
 
     sensor.dark_sky_precip_intensity:
       friendly_name: Neerslagintensiteit omgeving
@@ -64,11 +64,11 @@ homeassistant:
 
     sensor.dark_sky_wind_direction:
       friendly_name: Windrichting omgeving
-      icon: mdi:compass
+      icon: hass:compass
 
     sensor.dark_sky_wind_direction_nl:
       friendly_name: Windrichting omgeving
-      icon: mdi:compass
+      icon: hass:compass
 
     sensor.dark_sky_wind_gust:
       unit_of_measurement: km/u

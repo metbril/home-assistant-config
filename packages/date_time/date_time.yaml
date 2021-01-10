@@ -5,19 +5,19 @@ homeassistant:
   customize:
     # binary_sensor.daytime:
     #   friendly_name: Overdag
-    #   icon: mdi:timetable
+    #   icon: hass:timetable
     # binary_sensor.evening:
     #   friendly_name: Avond
-    #   icon: mdi:timetable
+    #   icon: hass:timetable
     # binary_sensor.morning:
     #   friendly_name: Ochtend
-    #   icon: mdi:timetable
+    #   icon: hass:timetable
     # binary_sensor.night:
     #   friendly_name: Nacht
-    #   icon: mdi:timetable
+    #   icon: hass:timetable
     binary_sensor.workday:
       friendly_name: Werkdag
-      icon: mdi:briefcase
+      icon: hass:briefcase
     sensor.date:
       friendly_name: Datum
     sensor.time:

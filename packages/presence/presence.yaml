@@ -3,11 +3,11 @@
 homeassistant:
   customize:
     person.bishop:
-      icon: mdi:chess-bishop
+      icon: hass:chess-bishop
     person.king:
       entity_picture: /local/img/people/robert.jpg
     person.queen:
-      icon: mdi:chess-queen
+      icon: hass:chess-queen
 
 person:
 

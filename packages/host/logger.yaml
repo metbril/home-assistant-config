@@ -6,7 +6,7 @@
 homeassistant:
   customize_glob:
     "input_select.log_*":
-      icon: mdi:bug
+      icon: hass:bug
       hidden: False
 
   customize:

@@ -8,7 +8,7 @@
       - 62
       - 255
       state: 'on'
-  icon: mdi:umbrella
+  icon: hass:umbrella
 - id: signalering_vertraging_ns
   name: Signaal Vertraging NS
   entities:
@@ -19,13 +19,13 @@
       - 190
       - 0
       state: 'on'
-  icon: mdi:train
+  icon: hass:train
 - id: signalering_uit
   name: Signaal Uit
   entities:
     light.signaallamp:
       state: 'off'
-  icon: mdi:bell-off
+  icon: hass:bell-off
 - id: signalering_feyenoord
   name: Signaal Feyenoord
   entities:
@@ -36,7 +36,7 @@
       - 49
       - 5
       state: 'on'
-  icon: mdi:soccer
+  icon: hass:soccer
 - id: signalering_oranje
   name: Signaal Oranje
   entities:
@@ -47,7 +47,7 @@
       - 129
       - 27
       state: 'on'
-  icon: mdi:crown
+  icon: hass:crown
 - id: '1597676235869'
   name: Woonkamerverlichting Maximaal
   entities:
@@ -59,7 +59,7 @@
       - random
       friendly_name: Bank
       supported_features: 63
-      icon: mdi:floor-lamp
+      icon: hass:floor-lamp
       state: unavailable
     light.bollamp:
       min_mireds: 153
@@ -72,7 +72,7 @@
       effect: none
       friendly_name: Bollamp
       supported_features: 63
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
     light.hoge_kast:
       effect_list:
@@ -92,7 +92,7 @@
       effect: none
       friendly_name: Hoge Kast
       supported_features: 61
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
     light.leeslamp:
       min_mireds: 153
@@ -101,36 +101,36 @@
       color_temp: 360
       friendly_name: Leeslamp
       supported_features: 43
-      icon: mdi:track-light
+      icon: hass:track-light
       state: 'on'
     light.lichtstraat_1:
       brightness: 254
       friendly_name: Lichtstraat 1
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_2:
       brightness: 254
       friendly_name: Lichtstraat 2
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_3:
       brightness: 254
       friendly_name: Lichtstraat 3
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_4:
       brightness: 254
       friendly_name: Lichtstraat 4
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.turbinelamp:
       friendly_name: Turbinelamp
       supported_features: 40
-      icon: mdi:lava-lamp
+      icon: hass:lava-lamp
       state: 'on'
     light.willner:
       min_mireds: 153
@@ -139,7 +139,7 @@
       color_temp: 360
       friendly_name: Willner
       supported_features: 43
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
     light.magnarp_1:
       min_mireds: 250
@@ -165,7 +165,7 @@
       friendly_name: MAGNARP 3
       supported_features: 35
       state: 'on'
-  icon: mdi:brightness-7
+  icon: hass:brightness-7
 - id: '1601486865465'
   name: Schemerverlichting
   entities:
@@ -187,7 +187,7 @@
       effect: none
       friendly_name: Hoge Kast
       supported_features: 61
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
     light.leeslamp:
       min_mireds: 153
@@ -196,12 +196,12 @@
       color_temp: 440
       friendly_name: Leeslamp
       supported_features: 43
-      icon: mdi:track-light
+      icon: hass:track-light
       state: 'on'
     light.turbinelamp:
       friendly_name: Turbinelamp
       supported_features: 40
-      icon: mdi:lava-lamp
+      icon: hass:lava-lamp
       state: 'on'
     light.willner:
       min_mireds: 153
@@ -210,30 +210,30 @@
       color_temp: 435
       friendly_name: Willner
       supported_features: 43
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
     light.lichtstraat_1:
       brightness: 65
       friendly_name: Lichtstraat 1
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_2:
       brightness: 65
       friendly_name: Lichtstraat 2
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_3:
       brightness: 65
       friendly_name: Lichtstraat 3
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.lichtstraat_4:
       brightness: 65
       friendly_name: Lichtstraat 4
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
       supported_features: 33
       state: 'on'
     light.magnarp_1:
@@ -271,9 +271,9 @@
       effect: none
       friendly_name: Bollamp
       supported_features: 63
-      icon: mdi:lamp
+      icon: hass:lamp
       state: 'on'
-  icon: mdi:weather-sunset
+  icon: hass:weather-sunset
 - id: '1606817686136'
   name: Werk Niet Storen
   entities:
@@ -287,10 +287,10 @@
       state: 'on'
     media_player.studeerkamer:
       state: paused
-  icon: mdi:account-cancel
+  icon: hass:account-cancel
 - id: '1606818069276'
   name: Werk Vrij
   entities:
     light.werkstatus:
       state: 'off'
-  icon: mdi:account-check
+  icon: hass:account-check

@@ -4,13 +4,13 @@ homeassistant:
   customize:
     sensor.speedtest_download:
       friendly_name: "Downloadsnelheid"
-      icon: mdi:download
+      icon: hass:download
     sensor.speedtest_upload:
       friendly_name: "Uploadsnelheid"
-      icon: mdi:upload
+      icon: hass:upload
     sensor.speedtest_ping:
       friendly_name: "Reactietijd"
-      icon: mdi:timer
+      icon: hass:timer
 
 sensor:
   - platform: speedtest

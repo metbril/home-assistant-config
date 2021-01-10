@@ -89,7 +89,7 @@ sensor:
 group:
   finance:
     name: Finance
-    icon: mdi:finance
+    icon: hass:finance
     entities:
       - sensor.stocks_aex
       - sensor.stocks_google

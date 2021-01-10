@@ -6,7 +6,7 @@
 homeassistant:
   customize:
     sensor.p2000_brandweer:
-      icon: mdi:fire-truck
+      icon: hass:fire-truck
       friendly_name: Brandweer
     
 sensor:

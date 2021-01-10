@@ -17,7 +17,7 @@ homeassistant:
     ########################################################################
     group.motion:
       friendly_name: Bewegingsensoren
-      icon: mdi:run
+      icon: hass:run
 
 ############################################################################
 ## Binary Sensor

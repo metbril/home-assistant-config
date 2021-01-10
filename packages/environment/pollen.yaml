@@ -5,11 +5,11 @@ homeassistant:
 
   customize_glob:
     "sensor.pollen_bomen_*":
-      icon: mdi:tree
+      icon: hass:tree
     "sensor.pollen_grassen_*":
-      icon: mdi:sprout
+      icon: hass:sprout
     "sensor.pollen_ambrosia_*":
-      icon: mdi:flower
+      icon: hass:flower
 
 sensor:
   - platform: scrape

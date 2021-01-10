@@ -32,18 +32,18 @@ homeassistant:
     ################################################
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
-      icon: mdi:alert
+      icon: hass:alert
     sensor.cpu_temperature:
       friendly_name: Processortemperatuur
     sensor.disk_free:
       friendly_name: Beschikbare opslag
-      icon: mdi:sd
+      icon: hass:sd
     sensor.disk_use_percent:
       friendly_name: Gebruikte opslag
-      icon: mdi:sd
+      icon: hass:sd
     sensor.ha_uptime:
       friendly_name: Sinds laatste start HA
-      icon: mdi:clock
+      icon: hass:clock
     sensor.homeassistant_v2db:
       friendly_name: Grootte database
     sensor.homeassistantlog:
@@ -54,16 +54,16 @@ homeassistant:
       friendly_name: Geheugengebruik
     sensor.network_in_eth0:
       friendly_name: Bytes ontvangen
-      icon: mdi:download-network
+      icon: hass:download-network
     sensor.network_out_eth0:
       friendly_name: Bytes verzonden
-      icon: mdi:upload-network
+      icon: hass:upload-network
     sensor.packets_in_eth0:
       friendly_name: Pakketten ontvangen
-      icon: mdi:download-network
+      icon: hass:download-network
     sensor.packets_out_eth0:
       friendly_name: Pakketten verzonden
-      icon: mdi:upload-network
+      icon: hass:upload-network
     sensor.processor_use:
       friendly_name: Processorgebruik
     sensor.since_last_boot:

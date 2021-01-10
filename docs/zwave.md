@@ -31,7 +31,7 @@ Add a panel to the Home Assistant UI in `configuration.yaml`. This will make it 
 panel_iframe:
   zwave2mqtt:
     title: Z-Wave to MQTT
-    icon: mdi:z-wave
+    icon: hass:z-wave
     url: http://hassio.local:8091
 ```
 

@@ -3,36 +3,36 @@
 homeassistant:
   customize:
     light.bank:
-      icon: mdi:floor-lamp
+      icon: hass:floor-lamp
     light.bollamp:
-      icon: mdi:lamp
+      icon: hass:lamp
     light.ergens:
-      icon: mdi:lightbulb-group
+      icon: hass:lightbulb-group
     light.hoge_kast:
-      icon: mdi:lamp
+      icon: hass:lamp
     light.lab:
-      icon: mdi:lightbulb-group
+      icon: hass:lightbulb-group
     light.leeshoek:
-      icon: mdi:lightbulb-group
+      icon: hass:lightbulb-group
     light.leeslamp:
-      icon: mdi:track-light
+      icon: hass:track-light
     light.lichtstraat:
-      icon: mdi:wall-sconce-flat
+      icon: hass:wall-sconce-flat
     light.living:
       friendly_name: Woonkamer
-      icon: mdi:sofa
+      icon: hass:sofa
     light.magnarp:
-      icon: mdi:floor-lamp
+      icon: hass:floor-lamp
     light.signaallamp:
-      icon: mdi:alarm-light
+      icon: hass:alarm-light
     light.turbinelamp:
-      icon: mdi:lava-lamp
+      icon: hass:lava-lamp
     light.tv_meubel:
-      icon: mdi:lamp
+      icon: hass:lamp
     light.willner:
-      icon: mdi:lamp
+      icon: hass:lamp
     light.woonkamer:
-      icon: mdi:lightbulb-group
+      icon: hass:lightbulb-group
           
 ######################################################################
 ## Light

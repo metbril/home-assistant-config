@@ -9,10 +9,10 @@ homeassistant:
   customize_glob:
     sensor.*_uv_index:
       unit_of_measurement: "UVI"
-      icon: mdi:weather-sunny
+      icon: hass:weather-sunny
     sensor.*_ozone*:
       unit_of_measurement: "DU"
-      icon: mdi:vector-triangle
+      icon: hass:vector-triangle
 
   customize:
 
@@ -33,12 +33,12 @@ homeassistant:
       <<: *customize
       friendly_name: Fijnstof PM10 Pompenburg
       unit_of_measurement: µg/m³
-      icon: mdi:thought-bubble
+      icon: hass:thought-bubble
     sensor.pompenburg_rotterdam_p2:
       <<: *customize
       friendly_name: Fijnstof PM2.5 Pompenburg
       unit_of_measurement: µg/m³
-      icon: mdi:thought-bubble-outline
+      icon: hass:thought-bubble-outline
 
     # openuv
     sensor.current_uv_index:

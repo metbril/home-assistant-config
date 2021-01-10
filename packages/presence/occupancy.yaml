@@ -31,27 +31,27 @@ homeassistant:
     input_boolean.occupancy_home:
       <<: *customize
       friendly_name: Thuis
-      icon: mdi:home-account
+      icon: hass:home-account
 
     input_boolean.occupancy_away:
       <<: *customize
       friendly_name: Weg
-      icon: mdi:exit-run
+      icon: hass:exit-run
 
     input_boolean.occupancy_asleep:
       <<: *customize
       friendly_name: Slapend
-      icon: mdi:sleep
+      icon: hass:sleep
 
     input_boolean.occupancy_guests:
       <<: *customize
       friendly_name: Gasten
-      icon: mdi:key
+      icon: hass:key
 
     input_boolean.occupancy_vacation:
       <<: *customize
       friendly_name: Vakantie
-      icon: mdi:airplane-takeoff
+      icon: hass:airplane-takeoff
 
     ########################################################################
     ## Sensor

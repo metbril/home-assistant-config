@@ -7,7 +7,7 @@ homeassistant:
   customize_glob:
     sensor.*_countdown:
       unit_of_measurement: "dagen"
-      icon: mdi:counter
+      icon: hass:counter
 
   customize:
     package.node_anchors:
@@ -31,10 +31,10 @@ homeassistant:
       friendly_name: Aftellen tot Pakjesavond
     sensor.flag:
       friendly_name: Vlagdag
-      icon: mdi:flag
+      icon: hass:flag
     sensor.holiday:
       friendly_name: Feestdag
-      icon: mdi:party-popper
+      icon: hass:party-popper
           
 ######################################################################
 ## Sensor

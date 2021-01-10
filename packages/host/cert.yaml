@@ -23,7 +23,7 @@ homeassistant:
 
     sensor.myip:
       friendly_name: Publiek IP-adres
-      icon: mdi:wan
+      icon: hass:wan
 
     sensor.ssl_certificate_expiry:
       friendly_name: Geldigheidsduur SSL-certificaat
