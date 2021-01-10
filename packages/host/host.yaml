@@ -21,7 +21,12 @@ homeassistant:
     binary_sensor.db_large:
       device_class: problem
       friendly_name: Grote database
-
+    binary_sensor.rpi_power_status:
+      icon: '' # hide icon
+    binary_sensor.update_available:
+      device_class: safety
+      friendly_name: Update Beschikbaar voor HA
+      
     ################################################
     ## Sensor
     ################################################
@@ -63,6 +68,11 @@ homeassistant:
       friendly_name: Processorgebruik
     sensor.since_last_boot:
       friendly_name: Sinds laatste herstart
+    sensor.current_version:
+      friendly_name: Huidige versie
+    sensor.latest_version:
+      friendly_name: Laatste versie
+      
     script.purge_database:
       friendly_name: Database opschonen
 

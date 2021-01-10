@@ -14,12 +14,3 @@ person.king:
   entity_picture: /local/img/people/robert.jpg
 person.queen:
   icon: mdi:chess-queen
-binary_sensor.rpi_power_status:
-  icon: ''
-binary_sensor.update_available:
-  device_class: safety
-  friendly_name: Update Beschikbaar voor HA
-sensor.current_version:
-  friendly_name: Huidige versie
-sensor.latest_version:
-  friendly_name: Laatste versie
