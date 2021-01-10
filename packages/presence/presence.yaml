@@ -1,0 +1,12 @@
+## Presence
+
+homeassistant:
+  customize:
+    person.bishop:
+      icon: mdi:chess-bishop
+    person.king:
+      entity_picture: /local/img/people/robert.jpg
+    person.queen:
+      icon: mdi:chess-queen
+
+person:

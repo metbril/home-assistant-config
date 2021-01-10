@@ -8,9 +8,3 @@ group.family:
   friendly_name: Familie
 media_player.living_tv:
   friendly_name: TV Woonkamer
-person.bishop:
-  icon: mdi:chess-bishop
-person.king:
-  entity_picture: /local/img/people/robert.jpg
-person.queen:
-  icon: mdi:chess-queen

@@ -87,8 +87,6 @@ notify:
       - service: robert
       - service: living_tv
 
-person:
-
 recorder:
   auto_purge: true # default = true
   purge_keep_days: 1
