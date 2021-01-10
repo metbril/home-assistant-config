@@ -23,22 +23,14 @@ group: !include groups.yaml
 script: !include scripts.yaml
 
 ##############################
-## Other includes
-##############################
-
-frontend:
-  themes: !include_dir_merge_named themes
-
-##############################
 ## Integrations
 ##############################
 
 config:
-
 discovery:
-
+  frontend:
+    themes: !include_dir_merge_named themes
 hassio:
-
 history:
 
 http:
@@ -51,45 +43,12 @@ http:
     - ::1
 
 ios:
-
 logbook:
-
 lovelace:
   mode: storage
-
 map:
-
 mobile_app:
-
-notify:
-  - name: pushover
-    platform: pushover
-    api_key: !secret pushover_api_key
-    user_key: !secret pushover_user_key
-
-  - name: robert
-    platform: group
-    services:
-      - service: mobile_app_pontius
-      - service: mobile_app_patricius
-      - service: mobile_app_magnus
-
-  - name: admin
-    platform: group
-    services:
-      - service: pushover
-      - service: mobile_app_pontius
-
-  - name: all
-    platform: group
-    services:
-      - service: admin
-      - service: robert
-      - service: living_tv
-
+notify: !include include/notify.yaml
 recorder: !include include/recorder.yaml
-
 system_health:
-
-## WOL needed for WebOS TV
-wake_on_lan:
+wake_on_lan: # WOL needed for WebOS TV
