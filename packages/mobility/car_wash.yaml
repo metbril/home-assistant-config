@@ -1,0 +1,32 @@
+# Car Wash (custom component)
+
+homeassistant:
+  customize:
+
+    binary_sensor.car_wash:
+      friendly_name: "Auto wassen"
+
+
+################################################
+## Binary Sensor
+################################################
+binary_sensor:
+
+  - platform: car_wash
+    weather: weather.dark_sky
+  
+automation:
+  - id: carwash_notification
+    alias: Carwash Notification
+    description: Geef een melding wanneer de auto gewassen kan worden
+    trigger:
+    - entity_id: binary_sensor.car_wash
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition: []
+    action:
+    - data:
+        message: De auto kan weer worden gewassen.
+      service: notify.mobile_app_pontius
+    mode: single

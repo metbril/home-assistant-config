@@ -28,20 +28,6 @@
   action:
   - data: {}
     service: openuv.update_uv_index_data
-- id: carwash_notification
-  alias: Carwash Notification
-  description: Geef een melding wanneer de auto gewassen kan worden
-  trigger:
-  - entity_id: binary_sensor.car_wash
-    from: 'off'
-    platform: state
-    to: 'on'
-  condition: []
-  action:
-  - data:
-      message: De auto kan weer worden gewassen.
-    service: notify.mobile_app_pontius
-  mode: single
 - id: update_notification
   alias: Versie  update melding
   trigger:

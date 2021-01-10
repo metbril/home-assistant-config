@@ -88,13 +88,6 @@ homeassistant:
       unit_of_measurement: mm/u
       
     ################################################
-    ## Binary Sensor
-    ################################################
-
-    binary_sensor.car_wash:
-      friendly_name: "Auto wassen"
-
-    ################################################
     ## Automation
     ################################################
 
@@ -202,9 +195,6 @@ binary_sensor:
     province: 'Zuid-Holland'
     language: 'ne'
 
-  - platform: car_wash
-    weather: weather.dark_sky
-  
   - platform: template
     sensors:
       rain_alarm:
