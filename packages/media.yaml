@@ -32,3 +32,24 @@ automation:
           entity_id: 'media_player.{{states(''input_select.media_player'')|lower|replace('' '',''_'')}}'
           source: '{{states(''input_select.playlist'') }}'
     mode: single
+
+######################################################################
+## Spotify
+######################################################################
+spotify:
+  ## https://www.home-assistant.io/integrations/spotify/
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+
+######################################################################
+## WebOS TV
+######################################################################
+webostv:
+  ## https://www.home-assistant.io/integrations/webostv/
+  host: !secret living_tv_host
+  name: Living TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_tv_mac
+   

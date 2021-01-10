@@ -26,14 +26,8 @@ script: !include scripts.yaml
 ## Other includes
 ##############################
 
-binary_sensor: !include_dir_merge_list include/binary_sensor/
-light: !include_dir_merge_list include/light/
-recorder: !include include/recorder.yaml
-sensor: !include_dir_merge_list include/sensor/
-
 frontend:
   themes: !include_dir_merge_named themes
-  
 
 ##############################
 ## Integrations
@@ -70,6 +64,42 @@ http:
     - ::1
 
 ios:
+
+light:
+
+  - platform: group
+    name: Living
+    entities:
+      ## clockwise from the door
+      - light.hoge_kast
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      - light.leeslamp
+      - light.turbinelamp
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+      - light.bollamp
+      - light.willner
+
+  - platform: group
+    name: Lichtstraat
+    entities:
+      ## left to right
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+
+  - platform: group
+    name: MAGNARP
+    entities:
+      ## top to bottom
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
 
 logbook:
 
@@ -118,20 +148,16 @@ rdw:
   - plate: !secret rdw_aygo_plate
     name: "Aygo"
 
-spotify:
-  ## https://www.home-assistant.io/integrations/spotify/
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
+recorder:
+  auto_purge: true # default = true
+  purge_keep_days: 1
+  exclude:
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.ha_uptime
 
 system_health:
 
+## WOL needed for WebOS TV
 wake_on_lan:
-
-webostv:
-  ## https://www.home-assistant.io/integrations/webostv/
-  host: !secret living_tv_host
-  name: Living TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret living_tv_mac
