@@ -35,25 +35,6 @@
       title: Nieuwe repository in HACS
     service: persistent_notification.create
   mode: single
-- id: lighting_1578815661
-  alias: Turn On Living Lights at Dusk
-  description: Inschakelen schemerverlichting woonkamer voor zonsondergang
-  trigger:
-  - event: sunset
-    offset: -00:30:00
-    platform: sun
-  action:
-  - scene: scene.schemerverlichting
-  - data_template:
-      message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
-        "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
-        zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
-        tijd om de @IKEA @Tradfri verlichting in te schakelen." ] | random + " #HomeAssistant
-        " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting", "#PhilipsHue", "Hue",
-        "#IkeaTradfri", "#Tradfri", "#SmartLighting", "#SmartHome", "#HomeAutomation"
-        ] | random }}'
-    service: notify.twitter
-  mode: single
 - id: presence_1578816540
   alias: Melden Familie Thuis
   trigger:
@@ -144,25 +125,6 @@
       message: De auto kan weer worden gewassen.
     service: notify.mobile_app_pontius
   mode: single
-- id: lighting_living_off_vacation
-  alias: Woonkamerverlichting uitschakelen bij vakantie
-  description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
-    zijn
-  trigger:
-  - platform: time
-    at: '23:00:00'
-  condition:
-  - condition: state
-    entity_id: sensor.occupancy
-    state: vacation
-  action:
-  - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
-  - service: light.turn_off
-    entity_id: light.living
-  - service: notify.admin
-    data_template:
-      title: Vakantie
-      message: Verlichting automatisch uitgeschakeld.
 - id: rdw_niro_apk_expiry
   alias: Notify APK expiry
   description: Notify 21 days before the APK date expires
@@ -177,19 +139,6 @@
       title: APK-keuring
       message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
         tijdig een APK-keuring bij de garage.
-- id: lighting_living_switch_left
-  alias: Woonkamerverlichting Links
-  description: Actie bij gebruik linker wandschakelaar
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.wandschakelaar_links
-  condition: []
-  action:
-  - service: light.turn_{{ trigger.to_state.state }}
-    data:
-      entity_id: light.living
-    entity_id: light.living
-  mode: single
 - id: update_notification
   alias: Versie  update melding
   trigger:

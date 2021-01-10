@@ -6,33 +6,6 @@ group.batteries:
   friendly_name: Batterijen
 group.family:
   friendly_name: Familie
-light.bank:
-  icon: mdi:floor-lamp
-light.bollamp:
-  icon: mdi:lamp
-light.ergens:
-  icon: mdi:lightbulb-group
-light.hoge_kast:
-  icon: mdi:lamp
-light.lab:
-  icon: mdi:lightbulb-group
-light.leeshoek:
-  icon: mdi:lightbulb-group
-light.leeslamp:
-  icon: mdi:track-light
-light.living:
-  friendly_name: Woonkamer
-  icon: mdi:sofa
-light.signaallamp:
-  icon: mdi:alarm-light
-light.turbinelamp:
-  icon: mdi:lava-lamp
-light.tv_meubel:
-  icon: mdi:lamp
-light.willner:
-  icon: mdi:lamp
-light.woonkamer:
-  icon: mdi:lightbulb-group
 media_player.living_tv:
   friendly_name: TV Woonkamer
 person.bishop:
@@ -53,12 +26,8 @@ sensor.aswrt_download_speed:
 sensor.aswrt_upload_speed:
   friendly_name: ASUSWRT Uploadsnelheid
   icon: mdi:speedometer
-light.lichtstraat:
-  icon: mdi:wall-sconce-flat
 binary_sensor.rpi_power_status:
   icon: ''
-light.magnarp:
-  icon: mdi:floor-lamp
 sensor.aygo_recall:
   unit_of_measurement: recalls
 sensor.niro_recall:

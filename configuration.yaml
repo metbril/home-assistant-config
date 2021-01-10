@@ -65,42 +65,6 @@ http:
 
 ios:
 
-light:
-
-  - platform: group
-    name: Living
-    entities:
-      ## clockwise from the door
-      - light.hoge_kast
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      - light.leeslamp
-      - light.turbinelamp
-      - light.lichtstraat_1
-      - light.lichtstraat_2
-      - light.lichtstraat_3
-      - light.lichtstraat_4
-      - light.bollamp
-      - light.willner
-
-  - platform: group
-    name: Lichtstraat
-    entities:
-      ## left to right
-      - light.lichtstraat_1
-      - light.lichtstraat_2
-      - light.lichtstraat_3
-      - light.lichtstraat_4
-
-  - platform: group
-    name: MAGNARP
-    entities:
-      ## top to bottom
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-
 logbook:
 
 lovelace:

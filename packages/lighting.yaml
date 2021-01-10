@@ -1,0 +1,132 @@
+# Lighting package
+
+homeassistant:
+  customize:
+    light.bank:
+      icon: mdi:floor-lamp
+    light.bollamp:
+      icon: mdi:lamp
+    light.ergens:
+      icon: mdi:lightbulb-group
+    light.hoge_kast:
+      icon: mdi:lamp
+    light.lab:
+      icon: mdi:lightbulb-group
+    light.leeshoek:
+      icon: mdi:lightbulb-group
+    light.leeslamp:
+      icon: mdi:track-light
+    light.lichtstraat:
+      icon: mdi:wall-sconce-flat
+    light.living:
+      friendly_name: Woonkamer
+      icon: mdi:sofa
+    light.magnarp:
+      icon: mdi:floor-lamp
+    light.signaallamp:
+      icon: mdi:alarm-light
+    light.turbinelamp:
+      icon: mdi:lava-lamp
+    light.tv_meubel:
+      icon: mdi:lamp
+    light.willner:
+      icon: mdi:lamp
+    light.woonkamer:
+      icon: mdi:lightbulb-group
+          
+######################################################################
+## Light
+######################################################################
+light:
+
+  - platform: group
+    name: Living
+    entities:
+      ## clockwise from the door
+      - light.hoge_kast
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      - light.leeslamp
+      - light.turbinelamp
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+      - light.bollamp
+      - light.willner
+
+  - platform: group
+    name: Lichtstraat
+    entities:
+      ## left to right
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+
+  - platform: group
+    name: MAGNARP
+    entities:
+      ## top to bottom
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+
+######################################################################
+## Automation
+######################################################################
+automation:
+
+  - id: lighting_1578815661
+    alias: Turn On Living Lights at Dusk
+    description: Inschakelen schemerverlichting woonkamer voor zonsondergang
+    trigger:
+    - event: sunset
+      offset: -00:30:00
+      platform: sun
+    action:
+    - scene: scene.schemerverlichting
+    - data_template:
+        message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+          "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
+          zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
+          tijd om de @IKEA @Tradfri verlichting in te schakelen." ] | random + " #HomeAssistant
+          " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting", "#PhilipsHue", "Hue",
+          "#IkeaTradfri", "#Tradfri", "#SmartLighting", "#SmartHome", "#HomeAutomation"
+          ] | random }}'
+      service: notify.twitter
+    mode: single
+  - id: lighting_living_off_vacation
+    alias: Woonkamerverlichting uitschakelen bij vakantie
+    description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
+      zijn
+    trigger:
+    - platform: time
+      at: '23:00:00'
+    condition:
+    - condition: state
+      entity_id: sensor.occupancy
+      state: vacation
+    action:
+    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+    - service: light.turn_off
+      entity_id: light.living
+    - service: notify.admin
+      data_template:
+        title: Vakantie
+        message: Verlichting automatisch uitgeschakeld.
+
+  - id: lighting_living_switch_left
+    alias: Woonkamerverlichting Links
+    description: Actie bij gebruik linker wandschakelaar
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.wandschakelaar_links
+    condition: []
+    action:
+    - service: light.turn_{{ trigger.to_state.state }}
+      data:
+        entity_id: light.living
+      entity_id: light.living
+    mode: single
