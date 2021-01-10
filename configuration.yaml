@@ -102,16 +102,6 @@ notify:
 
 person:
 
-# ----------------------------------------------------------------------
-# RDW custom integration
-# https://github.com/eelcohn/home-assistant-rdw
-# ----------------------------------------------------------------------
-rdw:
-  - plate: !secret rdw_niro_plate
-    name: "Niro"
-  - plate: !secret rdw_aygo_plate
-    name: "Aygo"
-
 recorder:
   auto_purge: true # default = true
   purge_keep_days: 1

@@ -28,10 +28,6 @@ sensor.aswrt_upload_speed:
   icon: mdi:speedometer
 binary_sensor.rpi_power_status:
   icon: ''
-sensor.aygo_recall:
-  unit_of_measurement: recalls
-sensor.niro_recall:
-  unit_of_measurement: recalls
 binary_sensor.update_available:
   device_class: safety
   friendly_name: Update Beschikbaar voor HA
