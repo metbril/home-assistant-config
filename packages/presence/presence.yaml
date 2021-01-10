@@ -10,3 +10,29 @@ homeassistant:
       icon: mdi:chess-queen
 
 person:
+
+automation:
+  - id: presence_1578816540
+    alias: Melden Familie Thuis
+    trigger:
+    - entity_id: group.family
+      platform: state
+    action:
+    - data_template:
+        message: "{% set state = trigger.to_state.state %} {% if state == 'home' -%}\n\
+          \  Ik heb gemerkt dat er weer iemand thuis is.\n{%- elif state == 'not_home'\
+          \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%- else -%}\n  Ik weet even\
+          \ niet of er iemand thuis is.            \n{%- endif %}"
+      service: notify.admin
+
+  - id: presence_1578816550
+    alias: Melden Nieuw Apparaat Gedetecteerd
+    trigger:
+    - platform: event
+      event_type: device_tracker_new_device
+    action:
+    - service: persistent_notification.create
+      data:
+        message: Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor
+          details.
+        title: Nieuw apparaat
