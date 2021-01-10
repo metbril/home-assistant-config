@@ -54,3 +54,4 @@ binary_sensor:
           {% else %}
             mdi:account-question
           {% endif %}
+
