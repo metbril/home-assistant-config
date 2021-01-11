@@ -12,7 +12,7 @@ homeassistant:
     "sensor.pollen_tree_*":
       icon: hass:tree
     "sensor.pollen_grass_*":
-      icon: hass:sprout
+      icon: hass:grass
     "sensor.pollen_ragweed_*":
       icon: hass:flower
 
