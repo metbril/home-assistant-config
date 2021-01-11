@@ -54,12 +54,14 @@ sensor:
 
   # --- Shell Express ---
 
-  - platform: scrape
-    resource: https://www.shellexpress.nl/nl_nl/station/se-nieuwerkerk-aan-den-ijssel
-    name: Euro95 (Shell Nieuwerkerk)
-    select: ".price-actual"
-    value_template: "{{ value.split(' ')[0].replace(',', '.')|float|round(3) }}"
-    scan_interval: 3600 # be nice; once per hour only
+  # Shell Express and Shell don't publish their prices directly any longer.
+  # 
+  # - platform: scrape
+  #   resource: https://www.shellexpress.nl/nl_nl/station/se-nieuwerkerk-aan-den-ijssel
+  #   name: Euro95 (Shell Nieuwerkerk)
+  #   select: ".price-actual"
+  #   value_template: "{{ value.split(' ')[0].replace(',', '.')|float|round(3) }}"
+  #   scan_interval: 3600 # be nice; once per hour only
 
   # --- Lukoil ---
 
@@ -78,6 +80,13 @@ sensor:
     select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
     value_template: "{{ value.split(' ')[1]|float|round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
+
+  # - platform: scrape
+  #   name: Euro95 (Sakko Metaalhof)
+  #   resource: "https://www.brandstof-zoeker.nl/station/sakko-metaalhof-rotterdam-637/"
+  #   select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
+  #   value_template: "{{ value.split(' ')[1]|float|round(3) }}"
+  #   scan_interval: 3600 # be nice; once per hour only
 
   # --- Tango ---
 
