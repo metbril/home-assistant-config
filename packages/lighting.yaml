@@ -87,7 +87,7 @@ automation:
       platform: sun
     action:
     - scene: scene.schemerverlichting
-    - data_template:
+    - data:
         message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
           "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
           zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
@@ -113,7 +113,7 @@ automation:
     - service: light.turn_off
       entity_id: light.living
     - service: notify.admin
-      data_template:
+      data:
         title: Vakantie
         message: Verlichting automatisch uitgeschakeld.
 

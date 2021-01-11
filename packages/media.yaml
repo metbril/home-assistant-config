@@ -28,7 +28,7 @@ automation:
         entity_id: input_select.playlist
     action:
       - service: media_player.select_source
-        data_template:
+        data:
           entity_id: 'media_player.{{states(''input_select.media_player'')|lower|replace('' '',''_'')}}'
           source: '{{states(''input_select.playlist'') }}'
     mode: single

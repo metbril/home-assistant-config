@@ -28,8 +28,8 @@ automation:
     - condition: template
       value_template: '{{ states(''sensor.p2000_brandweer'') != ''unknown'' }}'
     action:
-    - service_template: notify.robert
-      data_template:
+    - service: notify.robert
+      data:
         title: 🚒 P2000 Brandweer
         message: '{{ states(''sensor.p2000_brandweer'') }}'
         data:
@@ -37,7 +37,7 @@ automation:
             'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 
             'longitude')}}&zoom=16
     - service: notify.twitter
-      data_template:
+      data:
         message: '🚒 De #brandweer is in de buurt. #P2000
 
           {{ states(''sensor.p2000_brandweer'') }} https://www.openstreetmap.org/?mlat={{

@@ -249,7 +249,7 @@ automation:
       to: 'on'
     action:
     - service: notify.robert
-      data_template:
+      data:
         title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
         message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} 
           gaat in op {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'

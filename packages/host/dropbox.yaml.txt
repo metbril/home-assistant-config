@@ -10,7 +10,7 @@ automation:
       at: 02:00:00
     action:
     - service: hassio.snapshot_full
-      data_template:
+      data:
         name: Automatische dagelijkse volledige backup {{ now().strftime('%Y-%m-%d')
           }}
 

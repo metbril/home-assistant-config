@@ -69,7 +69,7 @@ automation:
         value_template: '{{ (trigger.to_state.state > trigger.from_state.state) }}'
     action:
       - service: notify.admin
-        data_template:
+        data:
           message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{trigger.from_state.state}} naar {{trigger.to_state.state}}'
           title: "Nieuw apparaat"
 
@@ -88,5 +88,5 @@ automation:
         data:
           addon: "53caca22_nginx_proxy"
       - service: notify.admin
-        data_template:
+        data:
           message: 'NGinx proxy is herstart om een nieuw SSL-certificaat te activeren. ({{trigger.from_state.state}})'

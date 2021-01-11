@@ -18,7 +18,7 @@ automation:
     - entity_id: group.family
       platform: state
     action:
-    - data_template:
+    - data:
         message: "{% set state = trigger.to_state.state %} {% if state == 'home' -%}\n\
           \  Ik heb gemerkt dat er weer iemand thuis is.\n{%- elif state == 'not_home'\
           \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%- else -%}\n  Ik weet even\

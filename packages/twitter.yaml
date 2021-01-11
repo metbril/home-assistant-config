@@ -25,7 +25,7 @@ automation:
         event: shutdown
     action:
       - service: notify.twitter
-        data_template:
+        data:
           message: >-
             {% set phrases = [
               "💤 Ik ga even een dutje doen.",

@@ -32,7 +32,7 @@ automation:
         / 86400) | int) + 21 }} }}'
     action:
     - service: notify.admin
-      data_template:
+      data:
         title: APK-keuring
         message: De APK-keuring verloopt op {{ states('sensor.niro_expdate') }}. Plan
           tijdig een APK-keuring bij de garage.

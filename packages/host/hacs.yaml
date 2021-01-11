@@ -12,7 +12,7 @@ automation:
     - condition: template
       value_template: '{{ (states(trigger.entity_id) | float) != 0}}'
     action:
-    - data_template:
+    - data:
         message: "{% for repo in state_attr(trigger.entity_id, 'repositories') %}\n\
           \  **{{ repo.display_name }}** _{{ repo[\"installed version\"] }}_ -> _{{\
           \ repo[\"available version\"] }}_\n{% endfor %}"
@@ -32,7 +32,7 @@ automation:
     - condition: template
       value_template: '{{ trigger.event.data.repository is defined }}'
     action:
-    - data_template:
+    - data:
         message: '{% set repo = trigger.event.data.repository %} {% set id = trigger.event.data.repository_id
           %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
         title: Nieuwe repository in HACS

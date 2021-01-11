@@ -8,7 +8,7 @@
     event_type: call_service
     platform: event
   action:
-  - data_template:
+  - data:
       message: "{% set message = trigger.event.data.service_data.message %} {% if\
         \ 'login attempt' in message|lower %}\n  {{ message }}: http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\
         \ message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}"
@@ -91,7 +91,7 @@
   - entity_id: input_select.signaallamp_scene
     platform: state
   action:
-  - data_template:
+  - data:
       entity_id: '{{ (''scene.signaal_'' ~ trigger.to_state.state) | lower | replace(''
         '', ''_'' ) }}'
     service: scene.turn_on
@@ -190,6 +190,6 @@
   condition: []
   action:
   - service: notify.pushover
-    data_template:
+    data:
       message: '{{ states.sensor.king_phone_battery_state.state }}'
   mode: single

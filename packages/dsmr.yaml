@@ -112,7 +112,7 @@ script:
   log_energy_consumption:
     sequence:
       - service: notify.energy_consumption
-        data_template: 
+        data: 
           message: >
             {{ now() }}, 
             {{ states('sensor.energy_consumption_tarif_1') }}, 
