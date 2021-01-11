@@ -81,18 +81,18 @@ sensor:
     value_template: "{{ value.split(' ')[1]|float|round(3) }}"
     scan_interval: 3600 # be nice; once per hour only
 
-  # - platform: scrape
-  #   name: Euro95 (Sakko Metaalhof)
-  #   resource: "https://www.brandstof-zoeker.nl/station/sakko-metaalhof-rotterdam-637/"
-  #   select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
-  #   value_template: "{{ value.split(' ')[1]|float|round(3) }}"
-  #   scan_interval: 3600 # be nice; once per hour only
+  - platform: scrape
+    name: Euro95 (Sakko Metaalhof)
+    resource: "https://www.brandstof-zoeker.nl/station/sakko-metaalhof-rotterdam-637/"
+    select: "div.half.half2 dl dd"
+    value_template: "{{ value.split(' ')[1]|float|round(3) }}"
+    scan_interval: 3600 # be nice; once per hour only
 
   # --- Tango ---
 
   # - platform: scrape
   #   resource: "https://www.tango.nl/stations/tango-capelle-aan-den-ijssel-hoofdweg"
-  #   name: Euro95 Hoofdweg
+  #   name: Euro95 (Tango Hoofdweg)
   #   select: “#euro95 .pump_price span.price”
   #   # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
   #   scan_interval: 3600 # be nice; once per hour only
