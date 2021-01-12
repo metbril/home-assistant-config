@@ -9,6 +9,12 @@ before_install:
   - touch ./fake_cert.pem
 install:
   - pip3 install homeassistant
-  - hass --version
+  - git clone https://github.com/Limych/ha-car_wash.git
+  - mv ha-car_wash/custom_components ./custom_components
+  - git clone https://github.com/LordBoos/discord_game.git
+  - mv discord_game/custom_components ./custom_components
+  - git clone https://github.com/cyberjunky/home-assistant-p2000.git
+  - mv home-assistant-p2000/custom_components ./custom_components
 script:
+  - hass --version
   - hass -c . --script check_config
