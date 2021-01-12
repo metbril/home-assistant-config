@@ -14,5 +14,20 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@master
+    - name: Create secrets.yaml file
+      run: |
+        mv ./secrets.template.yaml ./secrets.yaml
+    - name: Create ssh key file
+      run: |
+        touch ./fake_id_rsa
+    - name: Create empty database file
+      run: |
+        touch ./home-assistant_v2.db
+    - name: Create empty log file
+      run: |
+        touch ./home-assistant.log
+    - name: Create ssl certificate file
+      run: |
+        touch ./fake_cert.pem
     - name: Run Config Check
       uses: ludeeus/action-ha-config-check@master

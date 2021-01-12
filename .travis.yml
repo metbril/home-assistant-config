@@ -2,7 +2,7 @@ language: python
 python:
   - "3.8.7"
 before_install:
-  - mv secrets_travis.yaml secrets.yaml
+  - mv secrets.example.yaml secrets.yaml
   - touch ./fake_id_rsa
   - touch ./home-assistant_v2.db
   - touch ./home-assistant.log
