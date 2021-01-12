@@ -16,7 +16,7 @@ jobs:
       uses: actions/checkout@master
     - name: Create secrets.yaml file
       run: |
-        mv ./secrets.template.yaml ./secrets.yaml
+        mv ./secrets.example.yaml ./secrets.yaml
     - name: Create ssh key file
       run: |
         touch ./fake_id_rsa
