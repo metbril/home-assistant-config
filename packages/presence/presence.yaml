@@ -12,7 +12,7 @@ homeassistant:
 person:
 
 automation:
-  - id: presence_1578816540
+  - id: 6dd43a66-6b17-4bd3-a24e-212c36017fae
     alias: Melden Familie Thuis
     trigger:
     - entity_id: group.family
@@ -25,7 +25,7 @@ automation:
           \ niet of er iemand thuis is.            \n{%- endif %}"
       service: notify.admin
 
-  - id: presence_1578816550
+  - id: 16d91ce7-188d-408f-a63a-3ee22046a003
     alias: Melden Nieuw Apparaat Gedetecteerd
     trigger:
     - platform: event

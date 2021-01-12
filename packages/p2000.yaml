@@ -18,7 +18,7 @@ sensor:
     scan_interval: 30           # seconden, default 30
 
 automation:
-  - id: p2000_brandweer_notification
+  - id: 971fc035-f021-4015-a54b-8c6da9ddf200
     alias: P2000 Brandweer Melding
     description: Notificatie bij een nieuw P2000-bericht dat de brandweer dichtbij is
     trigger:

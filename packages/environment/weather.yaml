@@ -216,7 +216,7 @@ camera:
 
 automation:
 
-  - id: rain_alarm
+  - id: 068719c4-88f2-44b5-a809-e2513ae65604
     alias: Regenalarm melden
     trigger:
       - platform: numeric_state
@@ -247,7 +247,7 @@ automation:
             ] | random + " https://www.buienalarm.nl/ #buienalarm" }}
     mode: single
     
-  - id: weather_alarm
+  - id: 6d8d1695-8120-49d7-9788-f17f121894ad
     alias: Weerwaarschuwing
     description: Stuur een melding als er een nieuwe weerwaarschuwing is.
     trigger:

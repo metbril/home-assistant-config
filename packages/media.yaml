@@ -21,7 +21,7 @@ input_select:
       - Woonkamer
 
 automation:
-  - id: media_play
+  - id: 67a5205f-4f1b-47a0-9bb6-f19c9102e0c1
     alias: Afspeellijst starten op speaker
     trigger:
       - platform: state

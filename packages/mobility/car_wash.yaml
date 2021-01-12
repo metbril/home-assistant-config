@@ -16,7 +16,7 @@ binary_sensor:
     weather: weather.dark_sky
   
 automation:
-  - id: carwash_notification
+  - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
     alias: Carwash Notification
     description: Geef een melding wanneer de auto gewassen kan worden
     trigger:

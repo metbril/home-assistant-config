@@ -2,7 +2,7 @@
 
 automation:
 
-  - id: backup_full
+  - id: 5d3b38ea-46de-4bdd-842a-7fe74bdd84d8
     alias: Daily Full Backup
     description: Full snapshot every day at 2:00
     trigger:
@@ -14,7 +14,7 @@ automation:
         name: Automatische dagelijkse volledige backup {{ now().strftime('%Y-%m-%d')
           }}
 
-  - id: backup_sync
+  - id: c962ab54-e612-45d3-92b9-cdc148af1300
     alias: Daily Dropbox Sync
     description: Sync all snapshots to Dropbox every day at 3:00
     trigger:

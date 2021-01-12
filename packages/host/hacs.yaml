@@ -1,6 +1,6 @@
 automation:
 
-  - id: hacs_1578603337940
+  - id: 4f63071f-16ae-419e-bf54-8064a147ad3e
     alias: 'HACS: Updates Melden'
     description: Notificatie bij updates in HACS
     trigger:
@@ -20,7 +20,7 @@ automation:
       service: persistent_notification.create
     mode: single
 
-  - id: hacs_1578603656941
+  - id: 086eb1f7-3e73-497b-bdf8-a02414761465
     alias: 'HACS: Melden Repository toegevoegd'
     description: ''
     trigger:

@@ -22,7 +22,7 @@ homeassistant:
 ######################################################################
 automation:
 
-  - id: rdw_niro_apk_expiry
+  - id: b3f22139-ac93-4856-af48-302464cbe3ce
     alias: Notify APK expiry
     description: Notify 21 days before the APK date expires
     trigger:

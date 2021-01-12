@@ -78,7 +78,7 @@ light:
 ######################################################################
 automation:
 
-  - id: lighting_1578815661
+  - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
     alias: Turn On Living Lights at Dusk
     description: Inschakelen schemerverlichting woonkamer voor zonsondergang
     trigger:
@@ -97,7 +97,8 @@ automation:
           ] | random }}'
       service: notify.twitter
     mode: single
-  - id: lighting_living_off_vacation
+
+  - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
     alias: Woonkamerverlichting uitschakelen bij vakantie
     description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
       zijn
@@ -117,7 +118,7 @@ automation:
         title: Vakantie
         message: Verlichting automatisch uitgeschakeld.
 
-  - id: lighting_living_switch_left
+  - id: b24e7ee3-fbd7-4e91-9116-095d7b24c843
     alias: Woonkamerverlichting Links
     description: Actie bij gebruik linker wandschakelaar
     trigger:
