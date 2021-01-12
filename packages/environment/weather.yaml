@@ -234,10 +234,17 @@ automation:
               'longitude')}}
       - service: notify.twitter
         data:
-          message: '☔️ Er wordt lokaal {{ states(''sensor.buienradar_precipitation_forecast_average'')
-            }} {{  state_attr(''sensor.buienradar_precipitation_forecast_average'',''unit_of_measurement'')
-            }} regen verwacht.  Vergeet geen regenjas 🧥 of paraplu 🌂 mee te nemen en hou
-            @buienalarm in de gaten! https://www.buienalarm.nl/ #buienalarm'
+          message: >-
+            {{ "☔️ Er wordt in de buurt {{ 
+            states('sensor.buienradar_precipitation_forecast_average') }} {{ 
+            state_attr('sensor.buienradar_precipitation_forecast_average','unit_of_measurement') }} 
+            regen verwacht. " +  
+            [  
+            "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",  
+            "Neem een paraplu \U0001F302 mee!",  
+            "Je bent gewaarschuwd!", 
+            "Hou @buienalarm in de gaten!"  
+            ] | random + " https://www.buienalarm.nl/ #buienalarm" }}
     mode: single
     
   - id: weather_alarm
