@@ -99,10 +99,12 @@ sensor:
     name: Holiday
     scan_interval: 14400
     value_template: >-
+      {%- set value = 'unknown' -%}
       {%- set now_string = now().strftime('%Y-%m-%d') -%}
       {%- for day_val in value_json if day_val.date == now_string -%}
-          {{ day_val.name }}
+        {%- set value = day_val.name -%}
       {%- endfor -%}
+      {{ value }}
 
   ################################################################################
   # Flag days for Netherlands: https://www.webcal.fi/nl-NL/vlag_dagen.php
@@ -114,7 +116,9 @@ sensor:
     name: Flag
     scan_interval: 14400
     value_template: >-
+      {%- set value = 'unknown' -%}
       {%- set now_string = now().strftime('%Y-%m-%d') -%}
       {%- for day_val in value_json if day_val.date == now_string -%}
-          {{ day_val.name }}
+        {%- set value = day_val.name -%}
       {%- endfor -%}
+      {{ value }}
