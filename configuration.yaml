@@ -33,12 +33,10 @@ frontend:
 hassio:
 history:
 http: !include include/http.yaml
-ios:
 logbook:
 lovelace:
   mode: storage
 map:
-mobile_app:
 notify: !include include/notify.yaml
 recorder: !include include/recorder.yaml
 system_health:

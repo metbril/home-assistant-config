@@ -1,0 +1,13 @@
+## Mobile
+
+notify:
+  - name: person1_mobile
+    platform: group
+    services:
+      - service: mobile_app_pontius
+      - service: mobile_app_patricius
+      - service: mobile_app_magnus
+
+ios:
+
+mobile_app:
