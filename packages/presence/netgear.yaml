@@ -1,0 +1,10 @@
+## Netgear
+
+device_tracker:
+  - platform: netgear
+    username: !secret netgear_username
+    password: !secret netgear_password
+    accesspoints:
+      - !secret netgear_accesspoint1
+      - !secret netgear_accesspoint2
+      - !secret netgear_accesspoint3
