@@ -15,7 +15,6 @@
   platform: group
   services:
     - service: pushover
-    - service: mobile_app_pontius
 
 - name: all
   platform: group
