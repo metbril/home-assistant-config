@@ -1,6 +1,6 @@
-device_tracker.robert_phone_app:
+device_tracker.person1_phone_app:
   icon: hass:apple-ios
-device_tracker.robert_phone_owntracks:
+device_tracker.person1_phone_owntracks:
   icon: hass:map-marker-radius
 group.batteries:
   friendly_name: Batterijen

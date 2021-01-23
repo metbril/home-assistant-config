@@ -4,8 +4,8 @@ homeassistant:
   customize:
     person.bishop:
       icon: hass:chess-bishop
-    person.king:
-      entity_picture: /local/img/people/robert.jpg
+    person.person1:
+      entity_picture: /local/img/people/person1.jpg
     person.queen:
       icon: hass:chess-queen
 

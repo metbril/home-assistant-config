@@ -28,7 +28,7 @@ automation:
     - condition: template
       value_template: '{{ states(''sensor.p2000_brandweer'') != ''unknown'' }}'
     action:
-    - service: notify.robert
+    - service: notify.person1
       data:
         title: 🚒 P2000 Brandweer
         message: '{{ states(''sensor.p2000_brandweer'') }}'

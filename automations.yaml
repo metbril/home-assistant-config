@@ -61,7 +61,7 @@
         entity_id: sensor.teams_status_robert
         state: Niet storen
     - condition: state
-      entity_id: person.king
+      entity_id: person.person1
       state: home
   action:
   - scene: scene.niet_storen_2
@@ -186,10 +186,10 @@
     gaat.
   trigger:
   - platform: state
-    entity_id: sensor.king_phone_battery_state
+    entity_id: sensor.person1_phone_battery_state
   condition: []
   action:
   - service: notify.pushover
     data:
-      message: '{{ states.sensor.king_phone_battery_state.state }}'
+      message: '{{ states.sensor.person1_phone_battery_state.state }}'
   mode: single

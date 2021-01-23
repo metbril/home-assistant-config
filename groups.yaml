@@ -9,6 +9,6 @@ batteries:
 family:
   name: Family
   entities:
-    - person.king
+    - person.person1
     - person.queen
     - person.bishop
