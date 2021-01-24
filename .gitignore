@@ -55,5 +55,6 @@ zwscene.xml
 .*
 !/.gitignore
 !.gitkeep
+!.github
 !/.travis.yml
 energy_consumption.csv
