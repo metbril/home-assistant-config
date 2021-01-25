@@ -11,11 +11,11 @@ homeassistant:
 # RDW custom integration
 # https://github.com/eelcohn/home-assistant-rdw
 # ----------------------------------------------------------------------
-  rdw:
-    - plate: !secret rdw_niro_plate
-      name: "Niro"
-    - plate: !secret rdw_aygo_plate
-      name: "Aygo"
+rdw:
+  - plate: !secret rdw_niro_plate
+    name: "Niro"
+  - plate: !secret rdw_aygo_plate
+    name: "Aygo"
 
 ######################################################################
 ## Automation
