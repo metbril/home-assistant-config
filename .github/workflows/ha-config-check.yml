@@ -28,11 +28,11 @@ jobs:
       - run: mv home-assistant-rdw rdw
       - run: mv rdw ./custom_components
       - run: git clone https://github.com/Limych/ha-car_wash.git
-      - run: mv ha-car_wash/custom_components/ ./custom_components
+      - run: mv ha-car_wash/custom_components/* ./custom_components
       - run: git clone https://github.com/LordBoos/discord_game.git
-      - run: mv discord_game/custom_components/ ./custom_components
+      - run: mv discord_game/custom_components/* ./custom_components
       - run: git clone https://github.com/cyberjunky/home-assistant-p2000.git
-      - run: mv home-assistant-p2000/custom_components/ ./custom_components
+      - run: mv home-assistant-p2000/custom_components/* ./custom_components
       # check config
       - name: Run Config Check
         uses: frenck/action-home-assistant@v1
