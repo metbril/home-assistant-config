@@ -197,7 +197,7 @@ automation:
         entity_id: sensor.occupancy
         to: 'guests'
       - platform: time
-        at: '9:00:00'
+        at: "09:00:00"
     condition:
       condition: or
       conditions:

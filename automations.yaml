@@ -113,7 +113,7 @@
   description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
     but only when someone is home
   trigger:
-  - above: '0'
+  - above: 0
     entity_id: sensor.buienradar_precipitation_forecast_average
     platform: numeric_state
   condition:
