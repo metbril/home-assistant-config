@@ -82,10 +82,6 @@ homeassistant:
 
 binary_sensor:
 
-  # custom component has been deprecated in favour of core compoonent?
-  # https://github.com/custom-components/sensor.rpi_power
-  - platform: rpi_power
-
   - platform: template
     sensors:
       cpu_high:
