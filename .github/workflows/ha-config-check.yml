@@ -25,17 +25,14 @@ jobs:
         run: touch ./fake_cert.pem
       # clone custom components
       - run: git clone https://github.com/eelcohn/home-assistant-rdw.git
-      - run: mv home-assistant-rdw rdw
-      - run: ls -la rdw
-      - run: mv rdw ./custom_components
-      - run: ls -la ./custom_components
+      - run: mv -v home-assistant-rdw rdw
+      - run: mv -v rdw ./custom_components
       - run: git clone https://github.com/Limych/ha-car_wash.git
-      - run: mv ha-car_wash/custom_components/* ./custom_components
+      - run: mv -v ha-car_wash/custom_components/* ./custom_components
       - run: git clone https://github.com/LordBoos/discord_game.git
-      - run: mv discord_game/custom_components/* ./custom_components
+      - run: mv -v discord_game/custom_components/* ./custom_components
       - run: git clone https://github.com/cyberjunky/home-assistant-p2000.git
-      - run: mv home-assistant-p2000/custom_components/* ./custom_components
-      - run: ls -la ./custom_components
+      - run: mv -v home-assistant-p2000/custom_components/* ./custom_components
       # check config
       - name: Run Config Check
         uses: frenck/action-home-assistant@v1
