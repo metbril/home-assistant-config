@@ -1,9 +1,9 @@
 homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named packages
-  whitelist_external_dirs:
-    - !secret whitelist_dir_config
-    - !secret whitelist_dir_ssl
+  allowlist_external_dirs:
+    - !secret allowlist_dir_config
+    - !secret allowlist_dir_ssl
   auth_providers:
     - type: homeassistant
     - type: trusted_networks
