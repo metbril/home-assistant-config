@@ -25,7 +25,8 @@ jobs:
         run: touch ./fake_cert.pem
       # clone custom components
       - run: git clone https://github.com/eelcohn/home-assistant-rdw.git
-      - run: mv home-assistant-rdw/ ./custom_components/rdw
+      - run: mv home-assistant-rdw rdw
+      - run: mv rdw ./custom_components
       - run: git clone https://github.com/Limych/ha-car_wash.git
       - run: mv ha-car_wash/custom_components/ ./custom_components
       - run: git clone https://github.com/LordBoos/discord_game.git
