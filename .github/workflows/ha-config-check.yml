@@ -33,6 +33,7 @@ jobs:
       - run: mv discord_game/custom_components/* ./custom_components
       - run: git clone https://github.com/cyberjunky/home-assistant-p2000.git
       - run: mv home-assistant-p2000/custom_components/* ./custom_components
+      - run: ls -la .
       # check config
       - name: Run Config Check
         uses: frenck/action-home-assistant@v1
