@@ -12,23 +12,30 @@ jobs:
     name: Home Assistant Config Check
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - name: Create ssh key file
-      run: |
-        touch ./fake_id_rsa
-    - name: Create empty database file
-      run: |
-        touch ./home-assistant_v2.db
-    - name: Create empty log file
-      run: |
-        touch ./home-assistant.log
-    - name: Create ssl certificate file
-      run: |
-        touch ./fake_cert.pem
-    - name: Run Config Check
-      uses: frenck/action-home-assistant@v1
-      with:
-        path: "."
-        secrets: ./secrets.example.yaml
-        version: stable
+      - name: Checkout
+        uses: actions/checkout@v2
+      # touch files
+      - name: Create ssh key file
+        run: touch ./fake_id_rsa
+      - name: Create empty database file
+        run: touch ./home-assistant_v2.db
+      - name: Create empty log file
+        run: touch ./home-assistant.log
+      - name: Create ssl certificate file
+        run: touch ./fake_cert.pem
+      # clone custom components
+      - run: git clone https://github.com/eelcohn/home-assistant-rdw.git
+      - run: mv home-assistant-rdw/custom_components ./custom_components
+      - run: git clone https://github.com/Limych/ha-car_wash.git
+      - run: mv ha-car_wash/custom_components ./custom_components
+      - run: git clone https://github.com/LordBoos/discord_game.git
+      - run: mv discord_game/custom_components ./custom_components
+      - run: git clone https://github.com/cyberjunky/home-assistant-p2000.git
+      - run: mv home-assistant-p2000/custom_components ./custom_components
+      # check config
+      - name: Run Config Check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: "."
+          secrets: ./secrets.example.yaml
+          version: stable
