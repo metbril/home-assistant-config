@@ -26,7 +26,7 @@ jobs:
       # clone custom components
       - run: git clone https://github.com/eelcohn/home-assistant-rdw.git
       - run: mv -v home-assistant-rdw rdw
-      - run: mv -v ./rdw ./custom_components
+      - run: mv -v ./rdw ./custom_components/
       - run: git clone https://github.com/Limych/ha-car_wash.git
       - run: mv -v ha-car_wash/custom_components/* ./custom_components
       - run: git clone https://github.com/LordBoos/discord_game.git
