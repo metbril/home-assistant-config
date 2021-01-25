@@ -1,10 +1,4 @@
-device_tracker.person1_phone_app:
-  icon: hass:apple-ios
-device_tracker.person1_phone_owntracks:
-  icon: hass:map-marker-radius
 group.batteries:
   friendly_name: Batterijen
-group.family:
-  friendly_name: Familie
 media_player.living_tv:
   friendly_name: TV Woonkamer

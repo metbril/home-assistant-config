@@ -4,10 +4,10 @@
   api_key: !secret pushover_api_key
   user_key: !secret pushover_user_key
 
-- name: person1
+- name: robert
   platform: group
   services:
-    - service: person1_mobile
+    - service: robert_mobile
 
 - name: admin
   platform: group
@@ -18,5 +18,5 @@
   platform: group
   services:
     - service: admin
-    - service: person1
+    - service: robert
     - service: living_tv

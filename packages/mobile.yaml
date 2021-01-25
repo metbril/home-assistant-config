@@ -1,7 +1,7 @@
 ## Mobile
 
 notify:
-  - name: person1_mobile
+  - name: robert_mobile
     platform: group
     services:
       - service: mobile_app_pontius

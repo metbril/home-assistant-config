@@ -223,7 +223,7 @@ automation:
         entity_id: sensor.buienradar_precipitation_forecast_average
         above: '0.09'
     action:
-      - service: notify.person1
+      - service: notify.robert
         data:
           title: ☔️ Regenalarm
           message: 'Regen verwacht van {{ states(''sensor.buienradar_precipitation_forecast_average'')
@@ -255,7 +255,7 @@ automation:
       entity_id: binary_sensor.meteoalarm
       to: 'on'
     action:
-    - service: notify.person1
+    - service: notify.robert
       data:
         title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
         message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} 

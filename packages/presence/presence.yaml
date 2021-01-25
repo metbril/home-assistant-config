@@ -2,14 +2,35 @@
 
 homeassistant:
   customize:
-    person.bishop:
-      icon: hass:chess-bishop
-    person.person1:
-      entity_picture: /local/img/people/person1.jpg
-    person.queen:
+    person.robert:
+      entity_picture: /local/img/people/robert.jpg
+    person.monique:
       icon: hass:chess-queen
-
+    person.bjorn:
+      icon: hass:chess-bishop
+    group.family:
+      friendly_name: Familie
+    device_tracker.robert_phone_app:
+      icon: hass:apple-ios
+    device_tracker.robert_phone_owntracks:
+      icon: hass:map-marker-radius
+                
 person:
+  - name: Robert
+    id: robert
+    user_id: fb61692a4d13494d9b87a26cd287de9c
+    device_trackers:
+      - device_tracker.pontius
+  - name: Monique
+    id: monique
+    user_id: a90cd2586de64d419c313aca0e8c71b4
+    device_trackers:
+      - device_tracker.monique_iphone
+  - name: Björn
+    id: bjorn
+    user_id: 58716e8c4c534af3877f796228291e83
+    device_trackers:
+      - device_tracker.bjorn_iphone
 
 automation:
   - id: 6dd43a66-6b17-4bd3-a24e-212c36017fae
