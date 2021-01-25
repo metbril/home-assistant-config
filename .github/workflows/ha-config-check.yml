@@ -13,10 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@master
-    - name: Create secrets.yaml file
-      run: |
-        mv ./secrets.example.yaml ./secrets.yaml
+      uses: actions/checkout@v2
     - name: Create ssh key file
       run: |
         touch ./fake_id_rsa
@@ -30,4 +27,8 @@ jobs:
       run: |
         touch ./fake_cert.pem
     - name: Run Config Check
-      uses: ludeeus/action-ha-config-check@master
+      uses: frenck/action-home-assistant@v1
+      with:
+        path: "."
+        secrets: ./secrets.example.yaml
+        version: stable
