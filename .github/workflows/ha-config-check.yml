@@ -6,6 +6,8 @@ on:
   pull_request:
     branch:
       - master
+  schedule:
+    - cron: 0 2 * * *
 
 jobs:
   check:
