@@ -4,12 +4,12 @@
 tts:
   - platform: google_translate
     service_name: say
-    # cache: true # default = true
-    # cache_dir: /config/tts # default = /config/tts
-    time_memory: 3600 # 1 hour, default = 60
+    # cache: true  # default = true
+    # cache_dir: /config/tts  # default = /config/tts
+    time_memory: 3600  # 1 hour, default = 60
     # http protocol doesn't seem to work
     base_url: !secret tts_base_url
-    language: 'nl' # default = en
+    language: 'nl'  # default = en
 
 script:
 

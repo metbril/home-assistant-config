@@ -41,4 +41,4 @@ map:
 notify: !include include/notify.yaml
 recorder: !include include/recorder.yaml
 system_health:
-wake_on_lan: # WOL needed for WebOS TV
+wake_on_lan:  # WOL needed for WebOS TV

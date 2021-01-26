@@ -15,15 +15,15 @@ homeassistant:
 
 sensor:
   - platform: speedtest
-    minute: 0 # every hour at the full hour
-    # server_id: 1208 # Qweb, Alblasserdam
+    minute: 0  # every hour at the full hour
+    # server_id: 1208  # Qweb, Alblasserdam
     monitored_conditions:
       - ping
       - download
       - upload
   
   - platform: fastdotcom 
-    minute: 30 # every hour at the half hour
+    minute: 30  # every hour at the half hour
 
 group:
   speedtest:

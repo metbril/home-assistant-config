@@ -49,7 +49,7 @@ sensor:
     - symbol: TSLA
     - symbol: NYT
 
-    scan_interval: 600 # 10 minutes
+    scan_interval: 600  # 10 minutes
 
   # https://github.com/home-assistant/home-assistant/issues/15300
   # - platform: fixer
@@ -59,29 +59,29 @@ sensor:
   #   name: Exchange Rate USD
 
   - platform: coinmarketcap
-    currency_id: 1 # BTC
+    currency_id: 1  # BTC
 
   - platform: coinmarketcap
-    currency_id: 1027 # ETH
+    currency_id: 1027  # ETH
 
   - platform: coinmarketcap
-    currency_id: 52 # XRP
+    currency_id: 52  # XRP
 
   - platform: coinmarketcap
-    currency_id: 1831 # BCH
+    currency_id: 1831  # BCH
 
   - platform: coinmarketcap
-    currency_id: 2 # LTC
+    currency_id: 2  # LTC
 
 
   ## it would be awesome if this was possible:
   # - platform: coinmarketcap
   #   currency_id: 
-  #     - 1 # BTC
-  #     - 1027 # ETH
-  #     - 52 # XRP
-  #     - 1831 # BCH
-  #     - 2 # LTC
+  #     - 1  # BTC
+  #     - 1027  # ETH
+  #     - 52  # XRP
+  #     - 1831  # BCH
+  #     - 2  # LTC
 
 ############################################################################
 ## Group

@@ -7,7 +7,7 @@ input_select:
   playlist:
     name: Afspeellijst
     icon: hass:playlist-music
-    options: # case-sensitive!
+    options:  # case-sensitive!
       - All Out 80s
       - This Is Coldplay
       - This Is Jack Johnson

@@ -134,7 +134,7 @@ automation:
     description: ''
     trigger:
       - platform: state
-        entity_id: sensor.holiday # triggers around midnight
+        entity_id: sensor.holiday  # triggers around midnight
     condition:
       - condition: not
         conditions:

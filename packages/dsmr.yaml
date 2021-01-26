@@ -36,7 +36,7 @@ sensor:
   - platform: template
     sensors:
 
-      friendly_power_tariff: # vertaald in NL
+      friendly_power_tariff:  # vertaald in NL
         friendly_name: Power Tariff
         unique_id: friendly_power_tariff
         value_template: >-
@@ -130,7 +130,7 @@ automation:
   ## Post gas consumption to mindergas.nl daily at 00:15. 
   ## The gas reading is updated hourly around 10 minutes after the full hour
   - alias: Post Gas Consumption
-    # hide_entity: no # default no
+    # hide_entity: no  # default no
     trigger:
       - platform: time
         ## run daily at 00:15:00

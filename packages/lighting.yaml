@@ -92,7 +92,7 @@ automation:
         message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
           "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
           zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
-          tijd om de @IKEA @Tradfri verlichting in te schakelen." ] | random + " #HomeAssistant
+          tijd om de @IKEA @Tradfri verlichting in te schakelen." ] | random + "  #HomeAssistant
           " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting", "#PhilipsHue", "Hue",
           "#IkeaTradfri", "#Tradfri", "#SmartLighting", "#SmartHome", "#HomeAutomation"
           ] | random }}'
