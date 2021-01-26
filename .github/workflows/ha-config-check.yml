@@ -20,7 +20,7 @@ jobs:
       - run: yamllint --version
       - name: Run default yamllint
         run: |
-          yamllint .
+          yamllint . --format standard
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.0.2
 
