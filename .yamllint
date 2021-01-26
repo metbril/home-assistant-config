@@ -1,0 +1,6 @@
+---
+extends: default
+
+ignore: |
+  themes/
+  custom_components/

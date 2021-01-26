@@ -53,6 +53,7 @@ zwcfg*.xml
 zwscene.xml
 
 .*
+!.yamllint
 !/.gitignore
 !.gitkeep
 !.github
