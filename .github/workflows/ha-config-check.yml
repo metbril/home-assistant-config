@@ -11,6 +11,9 @@ jobs:
   check:
     name: Home Assistant Config Check
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: ["stable", "beta", "dev"]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,4 +42,4 @@ jobs:
         with:
           path: "."
           secrets: ./secrets.example.yaml
-          version: stable
+          version: "${{ matrix.version }}"
