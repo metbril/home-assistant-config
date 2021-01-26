@@ -1,3 +1,4 @@
+---
 sensor:
 
   - platform: waze_travel_time

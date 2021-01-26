@@ -1,3 +1,4 @@
+---
 sensor:
   - platform: discord_game
     token: !secret discord_game_token

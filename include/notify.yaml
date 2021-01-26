@@ -1,4 +1,5 @@
-# notify:
+---
+  # notify:
 - name: pushover
   platform: pushover
   api_key: !secret pushover_api_key

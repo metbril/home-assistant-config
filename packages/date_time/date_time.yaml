@@ -1,4 +1,5 @@
-# date_time.yaml
+---
+  # date_time.yaml
 # Various date/time related configuration
 
 homeassistant:
