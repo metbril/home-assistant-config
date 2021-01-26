@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2.3.4
       - run: yamllint --version
       - name: Run default yamllint
         run: |
@@ -32,7 +32,7 @@ jobs:
         version: ["stable", "beta", "dev"]
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
       # touch files
       - name: Create ssh key file
         run: touch ./fake_id_rsa
