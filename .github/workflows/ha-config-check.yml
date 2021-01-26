@@ -17,7 +17,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Run yamllint
+      - run: yamllint --version
+      - name: Run default yamllint
+        run: |
+          yamllint .
+      - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.0.2
 
   check:
