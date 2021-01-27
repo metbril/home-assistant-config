@@ -11,4 +11,3 @@ homeassistant:
     package.node_anchors:
       customize: &customize
         package: 'lab'
-
