@@ -8,7 +8,7 @@ homeassistant:
   customize_glob:
     "input_select.log_*":
       icon: hass:bug
-      hidden: False
+      hidden: false
 
   customize:
 
