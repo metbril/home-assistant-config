@@ -8,13 +8,13 @@ homeassistant:
   customize_glob:
     "sensor.euro95_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station  
+      icon: hass:gas-station
     "sensor.diesel_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station  
+      icon: hass:gas-station
     "sensor.lpg_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station  
+      icon: hass:gas-station
 
 # ----------------------------------------
 # Sensor
@@ -56,7 +56,7 @@ sensor:
   # --- Shell Express ---
 
   # Shell Express and Shell don't publish their prices directly any longer.
-  # 
+  #
   # - platform: scrape
   #   resource: https://www.shellexpress.nl/nl_nl/station/se-nieuwerkerk-aan-den-ijssel
   #   name: Euro95 (Shell Nieuwerkerk)

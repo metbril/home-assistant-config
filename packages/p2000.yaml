@@ -9,7 +9,7 @@ homeassistant:
     sensor.p2000_brandweer:
       icon: hass:fire-truck
       friendly_name: Brandweer
-    
+
 sensor:
   - platform: p2000
     name: P2000 Brandweer
@@ -35,7 +35,7 @@ automation:
         message: '{{ states(''sensor.p2000_brandweer'') }}'
         data:
           url: http://www.openstreetmap.org/?mlat={{ state_attr('sensor.p2000_brandweer',
-            'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer', 
+            'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer',
             'longitude')}}&zoom=16
     - service: notify.twitter
       data:

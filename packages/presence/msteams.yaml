@@ -33,7 +33,7 @@ binary_sensor:
       teams_status_robert:
         friendly_name: "Microsoft Teams status Robert"
         value_template: >-
-          {{ is_state('sensor.teams_status_robert', 'Beschikbaar') 
+          {{ is_state('sensor.teams_status_robert', 'Beschikbaar')
             or is_state('sensor.teams_status_robert', 'Bezet')
             or is_state('sensor.teams_status_robert', 'Afwezig')
             or is_state('sensor.teams_status_robert', 'Zo terug')

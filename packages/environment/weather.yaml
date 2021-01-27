@@ -20,7 +20,7 @@ homeassistant:
     ################################################
 
     # Buienradar
-    
+
     sensor.buienradar_precipitation_forecast_average:
       friendly_name: Verwachte neerslagintensiteit
       unit_of_measurement: mm/u
@@ -30,7 +30,7 @@ homeassistant:
       unit_of_measurement: mm
 
     # Dark Sky
-    
+
     sensor.dark_sky_apparent_temperature:
       friendly_name: Gevoelstemperatuur omgeving
 
@@ -87,7 +87,7 @@ homeassistant:
 
     sensor.weatherbit_snow:
       unit_of_measurement: mm/u
-      
+
     ################################################
     ## Automation
     ################################################
@@ -122,7 +122,7 @@ sensor:
     units: ca
     language: nl
     scan_interval:                    # default 2 minutes
-      minutes: 10                     
+      minutes: 10
     monitored_conditions:
       - hourly_summary
       - daily_summary
@@ -171,7 +171,7 @@ sensor:
       - windforce
       - windgust
       - windspeed
-      
+
   - platform: template
     sensors:
       dark_sky_wind_direction:
@@ -179,12 +179,12 @@ sensor:
         value_template: >
           {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
           {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
-          {{ direction[((degree+11.25)/22.5)|int] }} 
+          {{ direction[((degree+11.25)/22.5)|int] }}
       dark_sky_wind_direction_nl:
         value_template: >
           {% set direction = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'] %}
           {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
-          {{ direction[((degree+11.25)/22.5)|int] }} 
+          {{ direction[((degree+11.25)/22.5)|int] }}
 
 ################################################
 ## Binary Sensor
@@ -236,18 +236,18 @@ automation:
       - service: notify.twitter
         data:
           message: >-
-            {{ "☔️ Er wordt in de buurt {{ 
-            states('sensor.buienradar_precipitation_forecast_average') }} {{ 
-            state_attr('sensor.buienradar_precipitation_forecast_average','unit_of_measurement') }} 
-            regen verwacht. " +  
-            [  
-            "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",  
-            "Neem een paraplu \U0001F302 mee!",  
-            "Je bent gewaarschuwd!", 
-            "Hou @buienalarm in de gaten!"  
+            {{ "☔️ Er wordt in de buurt {{
+            states('sensor.buienradar_precipitation_forecast_average') }} {{
+            state_attr('sensor.buienradar_precipitation_forecast_average','unit_of_measurement') }}
+            regen verwacht. " +
+            [
+            "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",
+            "Neem een paraplu \U0001F302 mee!",
+            "Je bent gewaarschuwd!",
+            "Hou @buienalarm in de gaten!"
             ] | random + " https://www.buienalarm.nl/ #buienalarm" }}
     mode: single
-    
+
   - id: 6d8d1695-8120-49d7-9788-f17f121894ad
     alias: Weerwaarschuwing
     description: Stuur een melding als er een nieuwe weerwaarschuwing is.
@@ -259,9 +259,8 @@ automation:
     - service: notify.robert
       data:
         title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
-        message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}} 
+        message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}}
           gaat in op {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
         data:
           url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
     mode: single
-  

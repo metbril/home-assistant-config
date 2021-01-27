@@ -36,7 +36,7 @@ homeassistant:
     sensor.holiday:
       friendly_name: Feestdag
       icon: hass:party-popper
-          
+
 ######################################################################
 ## Sensor
 ######################################################################
@@ -164,14 +164,14 @@ automation:
       - service: notify.twitter
         data:
           message: >-
-            {{ "🏖️ " + 
-            [ 
+            {{ "🏖️ " +
+            [
             "Is het vandaag {{ states('sensor.holiday') }}?",
             "Net even aan Siri gevraagd, en vandaag is het {{ states.sensor.holiday.state }}.",
-            "Vandaag is het {{ states('sensor.holiday') }}." 
-            ] | random + " " + 
-            [ 
+            "Vandaag is het {{ states('sensor.holiday') }}."
+            ] | random + " " +
+            [
             "#feestdag",
-            "#{{ states('sensor.holiday') | lower | replace(' ', '_') }}" 
+            "#{{ states('sensor.holiday') | lower | replace(' ', '_') }}"
             ] | random }}
     mode: single

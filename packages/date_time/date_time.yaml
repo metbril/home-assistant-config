@@ -25,7 +25,7 @@ homeassistant:
       friendly_name: Tijd
     sun.sun:
       friendly_name: Zon
-                
+
 ##################################################
 ## Sensor
 ##################################################

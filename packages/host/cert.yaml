@@ -65,7 +65,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.ssl_certificate_expiry
-    condition: 
+    condition:
       - condition: template
         value_template: '{{ (trigger.to_state.state > trigger.from_state.state) }}'
     action:
@@ -80,7 +80,7 @@ automation:
     trigger:
       - platform: state
         entity_id: sensor.cert_pem_last_updated
-    condition: 
+    condition:
       - condition: template
         value_template: >
           {{ trigger.from_state.state not in ['None', 'unknown'] }}

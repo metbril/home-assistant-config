@@ -48,7 +48,7 @@ sensor:
         unique_id: daily_energy_consumption
         unit_of_measurement: kWh
         value_template: >-
-          {{ states('sensor.daily_energy_consumption_tarif_1')|float +  
+          {{ states('sensor.daily_energy_consumption_tarif_1')|float +
              states('sensor.daily_energy_consumption_tarif_2')|float }}
 
       monthly_energy_consumption:
@@ -56,7 +56,7 @@ sensor:
         unique_id: monthly_energy_consumption
         unit_of_measurement: kWh
         value_template: >-
-          {{ states('sensor.monthly_energy_consumption_tarif_1')|float +  
+          {{ states('sensor.monthly_energy_consumption_tarif_1')|float +
              states('sensor.monthly_energy_consumption_tarif_2')|float }}
 
 ##################################################
@@ -73,7 +73,7 @@ rest_command:
     method: post
     headers:
       Content-Type: application/json
-      AUTH-TOKEN: !secret mindergas_token 
+      AUTH-TOKEN: !secret mindergas_token
     payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) | timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{ states(''sensor.gas_consumption'') }}" }'
 
 ############################################################################
@@ -113,11 +113,11 @@ script:
   log_energy_consumption:
     sequence:
       - service: notify.energy_consumption
-        data: 
+        data:
           message: >
-            {{ now() }}, 
-            {{ states('sensor.energy_consumption_tarif_1') }}, 
-            {{ states('sensor.energy_consumption_tarif_2') }}, 
+            {{ now() }},
+            {{ states('sensor.energy_consumption_tarif_1') }},
+            {{ states('sensor.energy_consumption_tarif_2') }},
             {{ states('sensor.gas_consumption')}}
 
 ############################################################################
@@ -127,7 +127,7 @@ script:
 
 automation:
 
-  ## Post gas consumption to mindergas.nl daily at 00:15. 
+  ## Post gas consumption to mindergas.nl daily at 00:15.
   ## The gas reading is updated hourly around 10 minutes after the full hour
   - alias: Post Gas Consumption
     # hide_entity: no  # default no

@@ -31,7 +31,7 @@ homeassistant:
       friendly_name: Pollen Grassen Morgen
     sensor.pollen_grass_later:
       friendly_name: Pollen Grassen Overmorgen
-  
+
     sensor.pollen_ragweed_today:
       friendly_name: Pollen Ambrosia Vandaag
     sensor.pollen_ragweed_tomorrow:

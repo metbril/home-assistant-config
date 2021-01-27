@@ -27,7 +27,7 @@ homeassistant:
     binary_sensor.update_available:
       device_class: safety
       friendly_name: Update Beschikbaar voor HA
-      
+
     ################################################
     ## Sensor
     ################################################
@@ -73,7 +73,7 @@ homeassistant:
       friendly_name: Huidige versie
     sensor.latest_version:
       friendly_name: Laatste versie
-      
+
     script.purge_database:
       friendly_name: Database opschonen
 
@@ -97,10 +97,10 @@ binary_sensor:
       update_available:
         value_template: >-
           {{ states('sensor.latest_version') != states('sensor.current_version') and
-              states('sensor.latest_version') != 'unavailable' and 
+              states('sensor.latest_version') != 'unavailable' and
               states('sensor.latest_version') != 'unknown' }}
 
-  
+
 ################################################
 ## Sensor
 ################################################

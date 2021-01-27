@@ -15,7 +15,7 @@ binary_sensor:
 
   - platform: car_wash
     weather: weather.dark_sky
-  
+
 automation:
   - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
     alias: Carwash Notification

@@ -15,7 +15,7 @@ homeassistant:
       icon: hass:apple-ios
     device_tracker.robert_phone_owntracks:
       icon: hass:map-marker-radius
-                
+
 person:
   - name: Robert
     id: robert
