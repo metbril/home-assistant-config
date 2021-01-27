@@ -177,12 +177,18 @@ sensor:
       dark_sky_wind_direction:
       # https://community.home-assistant.io/t/wind-direction/210532/6
         value_template: >
-          {% set direction = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW','N'] %}
+          {% set direction = [
+            'N','NNE','NE','ENE','E','ESE','SE','SSE',
+            'S','SSW','SW','WSW','W','WNW','NW','NNW','N'
+            ] %}
           {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
           {{ direction[((degree+11.25)/22.5)|int] }}
       dark_sky_wind_direction_nl:
         value_template: >
-          {% set direction = ['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'] %}
+          {% set direction = [
+            'N','NNO','NO','ONO','O','OZO','ZO','ZZO',
+            'Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'
+            ] %}
           {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
           {{ direction[((degree+11.25)/22.5)|int] }}
 
@@ -200,8 +206,14 @@ binary_sensor:
     sensors:
       rain_alarm:
         friendly_name: Rain Alarm
-        value_template: "{{ states('sensor.buienradar_precipitation_forecast_average') | float > 0 }}"
-        icon_template: "mdi:umbrella{% if states('sensor.buienradar_precipitation_forecast_average') | float == 0 %}-closed{% endif %}"
+        value_template: >-
+          {{ states('sensor.buienradar_precipitation_forecast_average')
+            | float > 0 }}
+        icon_template: >-
+          mdi:umbrella{% if
+            states('sensor.buienradar_precipitation_forecast_average')
+            | float == 0
+            %}-closed{% endif %}
 
 ################################################
 ## Camera
@@ -227,18 +239,24 @@ automation:
       - service: notify.robert
         data:
           title: ☔️ Regenalarm
-          message: 'Regen verwacht van {{ states(''sensor.buienradar_precipitation_forecast_average'')
-            }} {{  state_attr(''sensor.buienradar_precipitation_forecast_average'',''unit_of_measurement'')
+          message: 'Regen verwacht van {{
+            states(''sensor.buienradar_precipitation_forecast_average'')
+            }} {{
+            state_attr(''sensor.buienradar_precipitation_forecast_average'',
+            ''unit_of_measurement'')
             }} '
           data:
-            url: https://www.buienalarm.nl/{{state_attr('zone.home', 'latitude')}},{{state_attr('zone.home',
+            url: https://www.buienalarm.nl/{{state_attr('zone.home',
+              'latitude')}},
+              {{state_attr('zone.home',
               'longitude')}}
       - service: notify.twitter
         data:
           message: >-
             {{ "☔️ Er wordt in de buurt {{
             states('sensor.buienradar_precipitation_forecast_average') }} {{
-            state_attr('sensor.buienradar_precipitation_forecast_average','unit_of_measurement') }}
+            state_attr('sensor.buienradar_precipitation_forecast_average',
+            'unit_of_measurement') }}
             regen verwacht. " +
             [
             "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",
@@ -260,7 +278,8 @@ automation:
       data:
         title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
         message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}}
-          gaat in op {{state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+          gaat in op {{
+          state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
         data:
           url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
     mode: single

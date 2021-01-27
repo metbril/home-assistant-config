@@ -96,6 +96,7 @@ sensor:
   # Update every 14400 seconds (4 hours)
   ################################################################################
   - platform: rest
+    # yamllint disable-line rule:line-length
     resource: https://www.webcal.fi/cal.php?id=111&format=json&start_year=current_year&end_year=current_year&tz=Europe%2FAmsterdam
     name: Holiday
     scan_interval: 14400
@@ -113,6 +114,7 @@ sensor:
   # Update every 14400 seconds (4 hours)
   ################################################################################
   - platform: rest
+    # yamllint disable-line rule:line-length
     resource: https://www.webcal.fi/cal.php?id=482&format=json&start_year=current_year&end_year=current_year&tz=Europe%2FAmsterdam
     name: Flag
     scan_interval: 14400
@@ -154,20 +156,26 @@ automation:
       - wait_for_trigger:
         - platform: template
           value_template: >-
-            {{ now().hour == range(6, 9)|random and now().minute == range(0, 60)|random }}
+            {{ now().hour == range(6, 9)|
+            random and now().minute == range(0, 60)|
+            random }}
       # - wait_for_trigger:
       #   - platform: time
       #     value_template:
       #         at: '07:00:00'
       # # delay randomly before 09:00:00
-      # - delay: '0{{ (range(0, 1)|random|int) }}:{{ range(0,5) | random | int }}{{ range(0,9) | random | int }}:{{ range(0,5) | random | int }}{{ range(0,9) | random | int }}'
+      # - delay: '0{{ (range(0, 1)|random|int) }}:{{
+      #     range(0,5) | random | int }}{{
+      #     range(0,9) | random | int }}:{{ range(0,5) | random | int }}{{
+      #     range(0,9) | random | int }}'
       - service: notify.twitter
         data:
           message: >-
             {{ "🏖️ " +
             [
             "Is het vandaag {{ states('sensor.holiday') }}?",
-            "Net even aan Siri gevraagd, en vandaag is het {{ states.sensor.holiday.state }}.",
+            "Net even aan Siri gevraagd, en vandaag is het {{
+              states.sensor.holiday.state }}.",
             "Vandaag is het {{ states('sensor.holiday') }}."
             ] | random + " " +
             [

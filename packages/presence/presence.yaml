@@ -41,9 +41,12 @@ automation:
       platform: state
     action:
     - data:
-        message: "{% set state = trigger.to_state.state %} {% if state == 'home' -%}\n\
-          \  Ik heb gemerkt dat er weer iemand thuis is.\n{%- elif state == 'not_home'\
-          \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%- else -%}\n  Ik weet even\
+        message: "{% set state = trigger.to_state.state %} {%
+          if state == 'home' -%}\n\
+          \  Ik heb gemerkt dat er weer iemand thuis is.\n{%-
+            elif state == 'not_home'\
+          \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%-
+            else -%}\n  Ik weet even\
           \ niet of er iemand thuis is.            \n{%- endif %}"
       service: notify.admin
 
@@ -55,6 +58,6 @@ automation:
     action:
     - service: persistent_notification.create
       data:
-        message: Nieuw apparaat herkend. Controleer bestand 'known_devices.yaml' voor
-          details.
+        message: Nieuw apparaat herkend. Controleer bestand
+          'known_devices.yaml' voor details.
         title: Nieuw apparaat

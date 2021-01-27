@@ -14,8 +14,10 @@ automation:
       value_template: '{{ (states(trigger.entity_id) | float) != 0}}'
     action:
     - data:
-        message: "{% for repo in state_attr(trigger.entity_id, 'repositories') %}\n\
-          \  **{{ repo.display_name }}** _{{ repo[\"installed version\"] }}_ -> _{{\
+        message: "{% for repo in state_attr(trigger.entity_id, 'repositories')
+          %}\n\
+          \  **{{ repo.display_name }}** _{{
+            repo[\"installed version\"] }}_ -> _{{\
           \ repo[\"available version\"] }}_\n{% endfor %}"
         title: Te verwerken updates in HACS
       service: persistent_notification.create
@@ -34,8 +36,10 @@ automation:
       value_template: '{{ trigger.event.data.repository is defined }}'
     action:
     - data:
-        message: '{% set repo = trigger.event.data.repository %} {% set id = trigger.event.data.repository_id
-          %} [{{ repo }}](/hacs/repository/{{ id }}) werd zojuist toegevoegd aan HACS.'
+        message: '{% set repo = trigger.event.data.repository %} {%
+          set id = trigger.event.data.repository_id
+          %} [{{ repo }}](/hacs/repository/{{ id
+          }}) werd zojuist toegevoegd aan HACS.'
         title: Nieuwe repository in HACS
       service: persistent_notification.create
     mode: single

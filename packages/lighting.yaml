@@ -89,20 +89,23 @@ automation:
     action:
     - scene: scene.schemerverlichting
     - data:
-        message: '{{ [ "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
-          "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.", "Steeds
-          zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.", "De hoogste
-          tijd om de @IKEA @Tradfri verlichting in te schakelen." ] | random + "  #HomeAssistant
-          " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting", "#PhilipsHue", "Hue",
-          "#IkeaTradfri", "#Tradfri", "#SmartLighting", "#SmartHome", "#HomeAutomation"
+        message: '{{ [
+          "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+          "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.",
+          "Steeds zodra de zon verdwijnt, doe ik de @TweetHue verlichting aan.",
+          "De hoogste tijd om de @IKEA @Tradfri verlichting in te schakelen." ]
+          | random + "  #HomeAssistant
+          " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting", "#PhilipsHue",
+          "Hue", "#IkeaTradfri", "#Tradfri", "#SmartLighting", "#SmartHome",
+          "#HomeAutomation"
           ] | random }}'
       service: notify.twitter
     mode: single
 
   - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
     alias: Woonkamerverlichting uitschakelen bij vakantie
-    description: Schakel de verlichting uit tussen 23:00 en 23:30 als we op vakantie
-      zijn
+    description: Schakel de verlichting uit tussen 23:00 en 23:30
+      als we op vakantie zijn
     trigger:
     - platform: time
       at: '23:00:00'

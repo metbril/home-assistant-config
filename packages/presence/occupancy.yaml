@@ -1,5 +1,5 @@
 ---
-###############################################################################
+############################################################################
 ## @package     : Occupancy
 ## @description : Manage home occupancy
 ## @author      : Robert van Bregt
@@ -172,7 +172,11 @@ automation:
       - service: input_boolean.turn_off
         data:
           entity_id: >
-            {% set booleans = [ 'input_boolean.occupancy_home', 'input_boolean.occupancy_away', 'input_boolean.occupancy_asleep', 'input_boolean.occupancy_guests', 'input_boolean.occupancy_vacation' ] | reject('equalto', trigger.entity_id) %}
+            {% set booleans = [ 'input_boolean.occupancy_home',
+              'input_boolean.occupancy_away', 'input_boolean.occupancy_asleep',
+              'input_boolean.occupancy_guests',
+              'input_boolean.occupancy_vacation' ] |
+              reject('equalto', trigger.entity_id) %}
             {{ booleans | list | join(', ') }}
 
   - alias: Occupancy Default
@@ -213,5 +217,6 @@ automation:
         data:
           title: "Afwezig"
           message: >
-            {%- set i = 'input_boolean.occupancy_' + states('sensor.occupancy') -%}
+            {%- set i = 'input_boolean.occupancy_' +
+            states('sensor.occupancy') -%}
             Bezetting is ingeschakeld op {{ state_attr(i, 'friendly_name') }}

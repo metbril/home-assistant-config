@@ -85,9 +85,11 @@ sensor:
   - platform: template
     sensors:
       pompenburg_rotterdam_p1:
-        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_10') | float | round(2) }}"
+        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam',
+        'particulate_matter_10') | float | round(2) }}"
       pompenburg_rotterdam_p2:
-        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam', 'particulate_matter_2_5') | float | round(2) }}"
+        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam',
+        'particulate_matter_2_5') | float | round(2) }}"
 
 ################################################
 ## Automation

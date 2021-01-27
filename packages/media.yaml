@@ -12,7 +12,7 @@ input_select:
       - This Is Coldplay
       - This Is Jack Johnson
       - Happy Campers
-    # initial:                  # no initial value; HA saves state between restarts
+    # initial:  # no initial value; HA saves state between restarts
     #   - All Out 80s
   media_player:
     name: Speaker
@@ -30,7 +30,8 @@ automation:
     action:
       - service: media_player.select_source
         data:
-          entity_id: 'media_player.{{states(''input_select.media_player'')|lower|replace('' '',''_'')}}'
+          entity_id: 'media_player.{{states(''input_select.media_player'')|
+            lower|replace('' '',''_'')}}'
           source: '{{states(''input_select.playlist'') }}'
     mode: single
 

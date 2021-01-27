@@ -3,6 +3,7 @@
 ## Packages / Support / cURL
 ################################################################
 
+# yamllint disable-line rule:line-length
 ## Based on https://github.com/dale3h/homeassistant-config/blob/master/packages/drop-in/curl.yaml
 
 ################################################
@@ -41,4 +42,8 @@
 
 shell_command:
   curl: >-
-    /usr/bin/curl {{ args|default('-sS') }} -X {{ method|default('get')|upper }} {%- for k in headers %} -H "{{ k }}: {{ headers[k] }}"{% endfor %} {{- (' -d \'' ~ payload|tojson ~ '\'') if payload }} {{ url }} > {{ stream|default('/dev/null') }}
+    /usr/bin/curl {{
+    args|default('-sS') }} -X {{ method|default('get')|upper }} {%-
+    for k in headers %} -H "{{ k }}: {{ headers[k] }}"{% endfor %} {{-
+    (' -d \'' ~ payload|tojson ~ '\'') if payload }} {{ url }} > {{
+    stream|default('/dev/null') }}

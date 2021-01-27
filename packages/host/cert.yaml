@@ -48,7 +48,8 @@ sensor:
   - platform: template
     sensors:
       cert_pem_last_updated:
-        value_template: "{{ as_timestamp(state_attr('sensor.cert_pem', 'last_updated')) | timestamp_custom('%Y-%m-%d') }}"
+        value_template: "{{ as_timestamp(state_attr('sensor.cert_pem',
+          'last_updated')) | timestamp_custom('%Y-%m-%d') }}"
 
   - platform: filesize
     file_paths:
@@ -67,11 +68,13 @@ automation:
         entity_id: sensor.ssl_certificate_expiry
     condition:
       - condition: template
-        value_template: '{{ (trigger.to_state.state > trigger.from_state.state) }}'
+        value_template: '{{ (trigger.to_state.state >
+          trigger.from_state.state) }}'
     action:
       - service: notify.admin
         data:
-          message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{trigger.from_state.state}} naar {{trigger.to_state.state}}'
+          message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{
+            trigger.from_state.state}} naar {{trigger.to_state.state}}'
           title: "Nieuw apparaat"
 
   ## Restart NGinx addon when SSL certificate has changed (to load new cert)
@@ -90,4 +93,5 @@ automation:
           addon: "53caca22_nginx_proxy"
       - service: notify.admin
         data:
-          message: 'NGinx proxy is herstart om een nieuw SSL-certificaat te activeren. ({{trigger.from_state.state}})'
+          message: 'NGinx proxy is herstart om een nieuw SSL-certificaat
+            te activeren. ({{trigger.from_state.state}})'

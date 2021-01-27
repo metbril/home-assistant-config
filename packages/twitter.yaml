@@ -37,7 +37,8 @@ automation:
               "#HomeAssistant",
               "#HassIO"
             ] %}
-            {{ phrases|random ~ " " ~ hashtags|random ~ " #IOT #SmartHome" ~ " https://metbril.github.io/home-assistant-config"}}
+            {{ phrases|random ~ " " ~ hashtags|random ~ " #IOT #SmartHome" ~
+            " https://metbril.github.io/home-assistant-config"}}
           data:
             media: >-
               {% set pictures = [
