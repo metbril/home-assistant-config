@@ -30,30 +30,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      # touch files
-      - name: Create ssh key file
-        run: touch ./fake_id_rsa
-      - name: Create empty database file
-        run: touch ./home-assistant_v2.db
-      - name: Create empty log file
-        run: touch ./home-assistant.log
-      - name: Create ssl certificate file
-        run: touch ./fake_cert.pem
-      # clone custom components
-      - run: mkdir -p ./custom_components
+      - name: Create fake empty files
+        run: |
+          touch ./home-assistant_v2.db
+          touch ./home-assistant.log
+          touch ./fake_id_rsa
+          touch ./fake_cert.pem
+      - name: Create empty custom components folder
+        run: |
+          mkdir -p ./custom_components
       - name: Clone RDW
-        # yamllint disable-line rule:line-length
-        run: git clone https://github.com/eelcohn/home-assistant-rdw.git && mv -v home-assistant-rdw ./custom_components/rdw
+        run: |
+          git clone https://github.com/eelcohn/home-assistant-rdw.git
+          mv -v home-assistant-rdw ./custom_components/rdw
       - name: Clone Car Wash
-        # yamllint disable-line rule:line-length
-        run: git clone https://github.com/Limych/ha-car_wash.git && mv -v ha-car_wash/custom_components/* ./custom_components
+        run: |
+          git clone https://github.com/Limych/ha-car_wash.git
+          mv -v ha-car_wash/custom_components/* ./custom_components
       - name: Clone Discord Game
-        # yamllint disable-line rule:line-length
-        run: git clone https://github.com/LordBoos/discord_game.git && mv -v discord_game/custom_components/* ./custom_components
+        run: |
+          git clone https://github.com/LordBoos/discord_game.git
+          mv -v discord_game/custom_components/* ./custom_components
       - name: Clone P2000
-        # yamllint disable-line rule:line-length
-        run: git clone https://github.com/cyberjunky/home-assistant-p2000.git && mv -v home-assistant-p2000/custom_components/* ./custom_components
-      # check config
+        run: |
+          git clone https://github.com/cyberjunky/home-assistant-p2000.git
+          mv -v home-assistant-p2000/custom_components/* ./custom_components
       - name: Run Config Check
         uses: frenck/action-home-assistant@v1
         with:
