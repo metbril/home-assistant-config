@@ -62,7 +62,7 @@ automation:
 
   ## Notify when SSL certificate has been renewed
   - alias: "Notify SSL Certificate Renewed"
-    initial_state: on
+    initial_state: true
     trigger:
       - platform: state
         entity_id: sensor.ssl_certificate_expiry
@@ -79,7 +79,7 @@ automation:
 
   ## Restart NGinx addon when SSL certificate has changed (to load new cert)
   - alias: "Timestamp SSL cert changed"
-    initial_state: on
+    initial_state: true
     trigger:
       - platform: state
         entity_id: sensor.cert_pem_last_updated

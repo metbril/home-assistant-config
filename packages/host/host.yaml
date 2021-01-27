@@ -180,8 +180,8 @@ alert:
     entity_id: binary_sensor.cpu_high
     state: 'on'
     repeat: 5  # minutes
-    can_acknowledge: True
-    skip_first: False
+    can_acknowledge: true
+    skip_first: false
     notifiers:
       - admin
 
@@ -190,8 +190,8 @@ alert:
     entity_id: binary_sensor.cpu_high
     state: 'on'
     repeat: 5  # minutes
-    can_acknowledge: True
-    skip_first: False
+    can_acknowledge: true
+    skip_first: false
     notifiers:
       - admin
 

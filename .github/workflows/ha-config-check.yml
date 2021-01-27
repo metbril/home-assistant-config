@@ -1,5 +1,6 @@
 ---
 name: "Run action"
+# yamllint disable-line rule:truthy
 on:
   push:
     branch:
