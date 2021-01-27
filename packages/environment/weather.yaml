@@ -270,16 +270,17 @@ automation:
     alias: Weerwaarschuwing
     description: Stuur een melding als er een nieuwe weerwaarschuwing is.
     trigger:
-    - platform: state
-      entity_id: binary_sensor.meteoalarm
-      to: 'on'
+      - platform: state
+        entity_id: binary_sensor.meteoalarm
+        to: 'on'
     action:
-    - service: notify.robert
-      data:
-        title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
-        message: '{{state_attr(''binary_sensor.meteoalarm'', ''description'')}}
-          gaat in op {{
-          state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+      - service: notify.robert
         data:
-          url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
+          title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
+          message: '{{state_attr(''binary_sensor.meteoalarm'',
+            ''description'')}}
+            gaat in op {{
+            state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+          data:
+            url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html
     mode: single

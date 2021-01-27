@@ -21,13 +21,13 @@ automation:
     alias: Carwash Notification
     description: Geef een melding wanneer de auto gewassen kan worden
     trigger:
-    - entity_id: binary_sensor.car_wash
-      from: 'off'
-      platform: state
-      to: 'on'
+      - entity_id: binary_sensor.car_wash
+        from: 'off'
+        platform: state
+        to: 'on'
     condition: []
     action:
-    - data:
-        message: De auto kan weer worden gewassen.
-      service: notify.mobile_app_pontius
+      - data:
+          message: De auto kan weer worden gewassen.
+        service: notify.mobile_app_pontius
     mode: single

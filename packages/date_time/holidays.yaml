@@ -154,7 +154,7 @@ automation:
           message: "Vandaag is het {{ states('sensor.holiday') }}"
           title: "{{ states('sensor.holiday') }}"
       - wait_for_trigger:
-        - platform: template
+        - platform: template  # yamllint disable-line rule:indentation
           value_template: >-
             {{ now().hour == range(6, 9)|
             random and now().minute == range(0, 60)|

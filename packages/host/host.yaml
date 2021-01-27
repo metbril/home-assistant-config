@@ -216,11 +216,11 @@ alert:
 script:
   restart_home_assistant:
     sequence:
-    - service: homeassistant.restart
+      - service: homeassistant.restart
   purge_database:
     alias: Purge Database
     sequence:
-    - service: recorder.purge
-      data:
-        keep_days: 1
-        repack: true
+      - service: recorder.purge
+        data:
+          keep_days: 1
+          repack: true
