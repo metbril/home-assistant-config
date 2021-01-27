@@ -44,7 +44,7 @@ binary_sensor:
   - platform: workday
     name: Workday
     country: NL
-    workdays: [ mon, tue, wed, thu, fri ]
+    workdays: [mon, tue, wed, thu, fri]
 
 ##################################################
 ## Sun
