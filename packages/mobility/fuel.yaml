@@ -94,12 +94,12 @@ sensor:
     value_template: "{{ value.split(' ')[1]|float|round(3) }}"
     scan_interval: 3600  # be nice; once per hour only
 
-  # --- Tango ---
+# --- Tango ---
 
-  # - platform: scrape
-  # yamllint disable-line rule:line-length
-  #   resource: "https://www.tango.nl/stations/tango-capelle-aan-den-ijssel-hoofdweg"
-  #   name: Euro95 (Tango Hoofdweg)
-  #   select: “#euro95 .pump_price span.price”
-  #   # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
-  #   scan_interval: 3600  # be nice; once per hour only
+# - platform: scrape
+# yamllint disable-line rule:line-length
+#   resource: "https://www.tango.nl/stations/tango-capelle-aan-den-ijssel-hoofdweg"
+#   name: Euro95 (Tango Hoofdweg)
+#   select: “#euro95 .pump_price span.price”
+#   # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
+#   scan_interval: 3600  # be nice; once per hour only

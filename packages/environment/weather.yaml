@@ -175,7 +175,7 @@ sensor:
   - platform: template
     sensors:
       dark_sky_wind_direction:
-      # https://community.home-assistant.io/t/wind-direction/210532/6
+        # https://community.home-assistant.io/t/wind-direction/210532/6
         value_template: >
           {% set direction = [
             'N','NNE','NE','ENE','E','ESE','SE','SSE',

@@ -7,13 +7,13 @@ input_select:
   playlist:
     name: Afspeellijst
     icon: hass:playlist-music
+    # initial:  # no initial value; HA saves state between restarts
+    #   - All Out 80s
     options:  # case-sensitive!
       - All Out 80s
       - This Is Coldplay
       - This Is Jack Johnson
       - Happy Campers
-    # initial:  # no initial value; HA saves state between restarts
-    #   - All Out 80s
   media_player:
     name: Speaker
     icon: hass:speaker-wireless
