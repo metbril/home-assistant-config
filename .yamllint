@@ -4,3 +4,10 @@ extends: default
 ignore: |
   themes/
   custom_components/
+  automations.yaml
+  customize.yaml
+  groups.yaml
+  ip_bans.yaml
+  known_devices.yaml
+  scenes.yaml
+  scripts.yaml
