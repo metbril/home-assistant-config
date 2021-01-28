@@ -22,7 +22,7 @@ person:
     id: robert
     user_id: fb61692a4d13494d9b87a26cd287de9c
     device_trackers:
-      - device_tracker.pontius
+      - device_tracker.robert_iphone  ## HA app
   - name: Monique
     id: monique
     user_id: a90cd2586de64d419c313aca0e8c71b4
