@@ -3,6 +3,12 @@
 auto_purge: true  # default = true
 purge_keep_days: 1
 exclude:
+  domains:
+    - alert
+    - automation
+    - sun
+    - script
+    - weather
   entities:
     - sensor.date
     - sensor.time
