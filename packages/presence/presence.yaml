@@ -16,6 +16,7 @@ homeassistant:
     device_tracker.robert_phone_owntracks:
       icon: hass:map-marker-radius
 
+########################################
 person:
   - name: Robert
     id: robert
@@ -29,10 +30,20 @@ person:
       - device_tracker.monique_iphone
   - name: Björn
     id: bjorn
-    user_id: 58716e8c4c534af3877f796228291e83
+    user_id: a33369a450714e48b0d8c1ffcceee97c
     device_trackers:
       - device_tracker.bjorn_iphone
 
+########################################
+group:
+  family:
+    name: Family
+    entities:
+      - person.robert
+      - person.monique
+      - person.bjorn
+
+########################################
 automation:
   - id: 6dd43a66-6b17-4bd3-a24e-212c36017fae
     alias: Melden Familie Thuis
