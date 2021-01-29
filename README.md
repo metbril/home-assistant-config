@@ -1,4 +1,4 @@
-# Metbril's Home Assistant Configuration
+# Metbril's 🤓 Home Assistant Configuration
 
 ![Check configuration](https://github.com/metbril/home-assistant-config/workflows/Check%20configuration/badge.svg)
 
@@ -36,6 +36,11 @@ The OZW logfile was growing rapidly with it's default configuration. To lower th
 ## Backups
 
 I create backups with the [Home Assistant Google Drive Backup addon](https://github.com/sabeechen/hassio-google-drive-backup).
+
+## Credits 🙏
+
+- [Frenck's yamllint action](https://github.com/frenck/action-yamllint)
+- [Frenck's home assistant configuration checker](https://github.com/frenck/action-home-assistant)
 
 ## Contributions
 
