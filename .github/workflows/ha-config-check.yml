@@ -22,7 +22,8 @@ jobs:
         uses: frenck/action-yamllint@v1.0.2
 
   check:
-    name: Home Assistant Config Check
+    name: Home Assistant Core ${{ matrix.version }} Configuration Check
+    needs: [yamllint]
     runs-on: ubuntu-latest
     strategy:
       matrix:
