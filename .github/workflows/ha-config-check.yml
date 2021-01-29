@@ -1,5 +1,5 @@
 ---
-name: "Run action"
+name: "Check configuration"
 # yamllint disable-line rule:truthy
 on:
   push:
@@ -13,10 +13,10 @@ on:
 
 jobs:
   yamllint:
-    name: yamllint
+    name: YAML linter
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.0.2
@@ -28,7 +28,7 @@ jobs:
       matrix:
         version: ["stable", "beta", "dev"]
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v2
       - name: Create fake empty files
         run: |
@@ -39,23 +39,23 @@ jobs:
       - name: Create empty custom components folder
         run: |
           mkdir -p ./custom_components
-      - name: Clone RDW
+      - name: Clone custom component RDW
         run: |
           git clone https://github.com/eelcohn/home-assistant-rdw.git
           mv -v home-assistant-rdw ./custom_components/rdw
-      - name: Clone Car Wash
+      - name: Clone custom component Car Wash
         run: |
           git clone https://github.com/Limych/ha-car_wash.git
           mv -v ha-car_wash/custom_components/* ./custom_components
-      - name: Clone Discord Game
+      - name: Clone custom component Discord Game
         run: |
           git clone https://github.com/LordBoos/discord_game.git
           mv -v discord_game/custom_components/* ./custom_components
-      - name: Clone P2000
+      - name: Clone custom component P2000
         run: |
           git clone https://github.com/cyberjunky/home-assistant-p2000.git
           mv -v home-assistant-p2000/custom_components/* ./custom_components
-      - name: Run Config Check
+      - name: Check configuration
         uses: frenck/action-home-assistant@v1
         with:
           path: "."
