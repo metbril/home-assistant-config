@@ -16,8 +16,17 @@ homeassistant:
         package: 'holidays'
 
     ######################################################################
+    ## Binary Sensor
+    ######################################################################
+
+    binary_sensor.holiday:
+      friendly_name: Feestdag
+      icon: hass:party-popper
+
+    ######################################################################
     ## Sensor
     ######################################################################
+
     sensor.christmas_countdown:
       friendly_name: Aftellen tot Kerstmis
     sensor.easter_countdown:
@@ -30,12 +39,27 @@ homeassistant:
       friendly_name: Aftellen tot Moederdag
     sensor.sinterklaas_countdown:
       friendly_name: Aftellen tot Pakjesavond
+
     sensor.flag:
       friendly_name: Vlagdag
       icon: hass:flag
     sensor.holiday:
       friendly_name: Feestdag
       icon: hass:party-popper
+
+##################################################
+## Binary Sensor
+##################################################
+
+binary_sensor:
+
+  # https://www.home-assistant.io/integrations/workday/
+  - platform: workday
+    name: holiday
+    country: NL
+    workdays:
+      - holiday
+    excludes: []
 
 ######################################################################
 ## Sensor
