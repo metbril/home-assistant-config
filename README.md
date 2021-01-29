@@ -1,6 +1,6 @@
-# home-assistant-config
+# Metbril's Home Assistant Configuration
 
-[![Build Status](https://travis-ci.org/metbril/home-assistant-config.svg?branch=master)](https://travis-ci.org/metbril/home-assistant-config)
+![Check configuration](https://github.com/metbril/home-assistant-config/workflows/Check%20configuration/badge.svg)
 
 This repository contains my configuration for Home Assistant. It is installed on a Raspberry Pi model 2B.
 
