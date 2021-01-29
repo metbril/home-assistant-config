@@ -1,6 +1,6 @@
 # Metbril's 🤓 Home Assistant Configuration
 
-![Check configuration](https://github.com/metbril/home-assistant-config/workflows/Check%20configuration/badge.svg)
+[![Check configuration](https://github.com/metbril/home-assistant-config/workflows/Check%20configuration/badge.svg)](https://github.com/metbril/home-assistant-config/actions?query=workflow%3A%22Check+configuration%22)
 
 This repository contains my configuration for Home Assistant. It is installed on a Raspberry Pi model 2B.
 
