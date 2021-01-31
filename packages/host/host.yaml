@@ -24,9 +24,6 @@ homeassistant:
       friendly_name: Grote database
     binary_sensor.rpi_power_status:
       icon: ''  # hide icon
-    binary_sensor.update_available:
-      device_class: safety
-      friendly_name: Update Beschikbaar voor HA
 
     ################################################
     ## Sensor
@@ -69,11 +66,6 @@ homeassistant:
       friendly_name: Processorgebruik
     sensor.since_last_boot:
       friendly_name: Sinds laatste herstart
-    sensor.current_version:
-      friendly_name: Huidige versie
-    sensor.latest_version:
-      friendly_name: Laatste versie
-
     script.purge_database:
       friendly_name: Database opschonen
 
@@ -93,14 +85,6 @@ binary_sensor:
 
       db_large:
         value_template: "{{states('sensor.home_assistant_v2_db')|float>3000}}"
-
-      update_available:
-        value_template: >-
-          {{ states('sensor.latest_version') !=
-              states('sensor.current_version') and
-              states('sensor.latest_version') != 'unavailable' and
-              states('sensor.latest_version') != 'unknown' }}
-
 
 ################################################
 ## Sensor
@@ -162,13 +146,6 @@ sensor:
     name: bad_login
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
-
-  - platform: version
-    source: local
-
-  - platform: version
-    source: hassio
-    image: raspberrypi3
 
 ################################################
 ## Alert

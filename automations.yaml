@@ -28,21 +28,6 @@
   action:
   - data: {}
     service: openuv.update_uv_index_data
-- id: update_notification
-  alias: Versie  update melding
-  trigger:
-  - platform: state
-    entity_id: sensor.latest_version
-  condition:
-  - condition: template
-    value_template: '{{ states(''sensor.latest_version'') != states(''sensor.current_version'')
-      }}'
-  action:
-  - service: notify.admin
-    data:
-      message: Home Assistant versie {{ states('sensor.latest_version') }} is nu beschikbaar.
-      title: Update beschikbaar
-  mode: single
 - id: '1606817920226'
   alias: Werk Niet Storen
   description: ''
