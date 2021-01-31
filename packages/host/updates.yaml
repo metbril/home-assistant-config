@@ -41,7 +41,7 @@ sensor:
 ## Automation
 ################################################
 automation:
-  - alias: Home Assistant Core update notification
+  - alias: Home Assistant Core Update Notification
     id: 5de10ea7-1d36-4fbd-bc4b-d6df8c30c80b
     description: >-
       Send notification for Home Assistant Core updates
@@ -50,11 +50,14 @@ automation:
         entity_id: sensor.latest_version
     condition:
       - condition: template
-        value_template: '{{ states(''sensor.latest_version'') != states(''sensor.current_version'')
-          }}'
+        value_template: >-
+          {{ states('sensor.latest_version') !=
+             states('sensor.current_version') }}
     action:
       - service: notify.admin
         data:
-          message: Home Assistant versie {{ states('sensor.latest_version') }} is nu beschikbaar.
-          title: Update beschikbaar
+          message: >-
+            Home Assistant versie {{ states('sensor.latest_version') }}
+            is nu beschikbaar.
+          title: Core Update
     mode: single
