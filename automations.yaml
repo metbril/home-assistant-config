@@ -1,6 +1,6 @@
 - id: notify_1578816860
   alias: Persistente meldingen doorsturen naar beheerder
-  description: Doorsturen persistente meldingen naar beheerder via Pushover
+  description: Doorsturen persistente meldingen naar beheerder
   trigger:
   - event_data:
       domain: persistent_notification
@@ -174,7 +174,7 @@
     entity_id: sensor.robert_phone_battery_state
   condition: []
   action:
-  - service: notify.pushover
+  - service: notify.robert
     data:
       message: '{{ states.sensor.robert_phone_battery_state.state }}'
   mode: single

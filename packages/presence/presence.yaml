@@ -17,6 +17,13 @@ homeassistant:
       icon: hass:map-marker-radius
 
 ########################################
+notify:
+  - name: robert
+    platform: group
+    services:
+      - service: robert_mobile
+  
+########################################
 person:
   - name: Robert
     id: robert
@@ -59,7 +66,7 @@ automation:
             \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%-
               else -%}\n  Ik weet even\
             \ niet of er iemand thuis is.            \n{%- endif %}"
-        service: notify.admin
+        service: notify.robert
 
   - id: 16d91ce7-188d-408f-a63a-3ee22046a003
     alias: Melden Nieuw Apparaat Gedetecteerd

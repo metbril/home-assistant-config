@@ -5,15 +5,10 @@ notify:
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
 
-  - name: robert
-    platform: group
-    services:
-      - service: robert_mobile
-
   - name: admin
     platform: group
     services:
-      - service: pushover
+      - service: mobile_app_pontius
 
   - name: all
     platform: group
