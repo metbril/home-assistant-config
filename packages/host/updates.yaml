@@ -21,7 +21,7 @@ binary_sensor:
     sensors:
       update_available:
         value_template: >-
-          {{ states('sensor.latest_version') != 
+          {{ states('sensor.latest_version') !=
           states('sensor.current_version') and
           states('sensor.latest_version') != 'unavailable' and
           states('sensor.latest_version') != 'unknown' }}

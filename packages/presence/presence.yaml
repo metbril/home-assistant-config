@@ -22,7 +22,7 @@ notify:
     platform: group
     services:
       - service: robert_mobile
-  
+
 ########################################
 person:
   - name: Robert
