@@ -1,6 +1,9 @@
 ---
 # https://github.com/EBOOZ/TeamsStatus
 
+################################################
+## Sensor
+################################################
 sensor:
   - platform: template
     sensors:
@@ -27,6 +30,9 @@ sensor:
           {%- endif %}
         unique_id: sensor.teams_activity_robert
 
+################################################
+## Binary Sensor
+################################################
 binary_sensor:
   - platform: template
     sensors:
@@ -55,3 +61,74 @@ binary_sensor:
           {% else %}
             mdi:account-question
           {% endif %}
+
+################################################
+## Scene
+################################################
+scene:
+  - name: Werk Niet Storen
+    id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
+    icon: hass:account-cancel
+    entities:
+      light.werkstatus:
+        brightness: 255
+        rgb_color:
+          - 255
+          - 79
+          - 70
+        friendly_name: Werkstatus
+        state: 'on'
+      media_player.studeerkamer:
+        state: paused
+
+  - name: Werk Vrij
+    id: e9d03c5e-e877-4aec-a976-e2622e641813
+    icon: hass:account-check
+    entities:
+      light.werkstatus:
+        state: 'off'
+
+################################################
+## Automation
+################################################
+automation:
+  - alias: Werk Niet Storen
+    id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
+    trigger:
+      - platform: state
+        entity_id: sensor.teams_status_robert
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: person.robert
+            state: home
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: sensor.teams_status_robert
+                state: Bezet
+              - condition: state
+                entity_id: sensor.teams_status_robert
+                state: Niet storen
+    action:
+      - scene: scene.niet_storen_2
+    mode: single
+
+  - alias: Werk Vrij
+    id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
+    trigger:
+      - platform: state
+        entity_id: sensor.teams_status_robert
+    condition:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.teams_status_robert
+            state: Bezet
+          - condition: state
+            entity_id: sensor.teams_status_robert
+            state: Niet storen
+    action:
+      - scene: scene.werk_vrij
+    mode: single

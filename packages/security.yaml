@@ -1,0 +1,23 @@
+---
+automation:
+  - id: frontdoor_bell_pressed_notification
+    alias: Aanbellen Voordeur
+    description: ''
+    trigger:
+      - platform: state
+        entity_id: switch.bel_voordeur
+    condition: []
+    action:
+      - service: notify.all
+        data:
+          message: 🛎 Er wordt aangebeld aan de voordeur.
+      - service: script.sonos_say
+        data:
+          media_player: media_player.woonkamer
+          volume_level: 0.3
+          delay: 3
+          message: Er wordt aangebeld aan de voordeur.
+      - service: notify.twitter
+        data:
+          message: 🛎 Er wordt aangebeld aan de voordeur.
+    mode: single
