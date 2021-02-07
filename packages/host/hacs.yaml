@@ -1,45 +1,108 @@
 ---
 automation:
 
-  - id: 4f63071f-16ae-419e-bf54-8064a147ad3e
-    alias: 'HACS: Updates Melden'
-    description: Notificatie bij updates in HACS
+  - alias: HACS Updates
+    description: >
+      Verstuur een notificatie als er updates zijn van onderdelen
+      die met HACS zijn geïnstalleerd.
+    id: 4f63071f-16ae-419e-bf54-8064a147ad3e
     trigger:
-      - entity_id: sensor.hacs
-        platform: state
+      - platform: state
+        entity_id: sensor.hacs
+      - platform: homeassistant
+        event: start
     condition:
       - condition: template
-        value_template: '{{ states(trigger.entity_id) != "unknown"}}'
+        value_template: "{{ states('sensor.hacs') != 'unknown'}}"
       - condition: template
-        value_template: '{{ (states(trigger.entity_id) | float) != 0}}'
+        value_template: "{{ (states('sensor.hacs') | float) != 0}}"
     action:
-      - data:
-          message: "{% for repo in state_attr(trigger.entity_id, 'repositories')
-            %}\n\
-            \  **{{ repo.display_name }}** _{{
-              repo[\"installed version\"] }}_ -> _{{\
-            \ repo[\"available version\"] }}_\n{% endfor %}"
-          title: Te verwerken updates in HACS
-        service: persistent_notification.create
+      - service: notify.admin
+        data:
+          title: HACS Updates
+          message: >
+            Te verwerken HACS-updates:
+            {% for repo in state_attr('sensor.hacs', 'repositories') -%}
+              * {{repo.display_name}} {{
+              repo.installed_version}} ->  {{
+              repo.available_version}}
+            {%- endfor %}
+          data:
+            push:
+              thread-id: updates
+            apns_headers:
+              apns-collapse-id: update_hacs
+            url: /hacs
+      - service: persistent_notification.create
+        data:
+          title: HACS Updates
+          message: >
+            Te verwerken [HACS-updates](/hacs):
+            {% for repo in state_attr('sensor.hacs', 'repositories') %}
+              * {{repo.display_name}} {{
+              repo.installed_version}} -> {{
+              repo.available_version}}
+            {% endfor %}
+          notification_id: update_hacs
     mode: single
 
-  - id: 086eb1f7-3e73-497b-bdf8-a02414761465
-    alias: 'HACS: Melden Repository toegevoegd'
-    description: ''
+  - alias: HACS Updates Done
+    description: >
+      Verstuur een notificatie als alle updates voor HACS zijn geïnstalleerd.
+    id: 0923084c-025e-4f9f-b30b-029b87760465
     trigger:
-      - event_data:
-          action: registration
+      - platform: numeric_state
+        entity_id: sensor.hacs
+        below: 1
+    action:
+      - service: notify.admin
+        data:
+          title: HACS Updates
+          message: >
+            Alle HACS-updates zijn verwerkt.
+          data:
+            push:
+              thread-id: updates
+            apns_headers:
+              apns-collapse-id: update_hacs
+            url: /hacs
+      - service: persistent_notification.dismiss
+        data:
+          notification_id: update_hacs
+    mode: single
+
+  - alias: 'HACS Repository Toegevoegd Melden'
+    description: >
+      Verstuur een melding als er een nieuwe repository wordt toegevoegd
+      aan HACS.
+    id: 086eb1f7-3e73-497b-bdf8-a02414761465
+    trigger:
+      - platform: event
         event_type: hacs/repository
-        platform: event
+        event_data:
+          action: registration
     condition:
       - condition: template
-        value_template: '{{ trigger.event.data.repository is defined }}'
+        value_template: '{{trigger.event.data.repository is defined}}'
     action:
-      - data:
-          message: '{% set repo = trigger.event.data.repository %} {%
-            set id = trigger.event.data.repository_id
-            %} [{{ repo }}](/hacs/repository/{{ id
-            }}) werd zojuist toegevoegd aan HACS.'
-          title: Nieuwe repository in HACS
-        service: persistent_notification.create
-    mode: single
+      - service: notify.admin
+        data:
+          title: HACS-repository toegevoegd
+          message: >
+            Repository toegevoegd:
+            * {{trigger.event.data.repository}}
+          data:
+            push:
+              thread-id: updates
+            apns_headers:
+              apns-collapse-id: update_hacs_repo
+            url: /hacs/repository/{{trigger.event.data.repository_id}}
+      - service: persistent_notification.create
+        data:
+          title: HACS-repository toegevoegd
+          message: >
+            Repository toegevoegd:
+            * [{{trigger.event.data.repository
+              }}](/hacs/repository/{{trigger.event.data.repository_id}})
+          notification_id: update_hacs_repo
+    mode: queued
