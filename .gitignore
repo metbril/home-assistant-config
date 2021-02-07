@@ -1,61 +1,49 @@
-# home assistant specific
+# home assistant files
 home-assistant_v2.db
 home-assistant.log
-secrets.yaml
-known_devices.yaml
 ip_bans.yaml
-entity_registry.yaml
+known_devices.yaml
+secrets.yaml
 
 # home assistant folders
-www/
-lib/
+.cloud/
+.storage/
 deps/
+homebridge/
+lib/
 tts/
 custom_components/
-homebridge/
+www/
+www/community/
 
-# custom folders
-ssh/
-
-# this script contains secrets
-bin/mindergas.py
+# zwave
+OZW_Log.txt
 
 # MacOS
 .DS_Store
 ._*
 
-*.log
-
-# sane defaults from cookbook
-
+# sane defaults
 *.pid
 *.xml
+*.conf
 *.csr
 *.crt
 *.key
+*.log
 
-# some temporary database files
+# database files
+*.db
 *.db-shm
 *.db-wal
 *.db-journal
+*.sqlite
 *.sqlite-journal
 
-
-*.conf
-plex.conf
-harmony_media_room.conf
-
-# zwave
-OZW_Log.txt
-pyozw.sqlite
-options.xml
-zwcfg*.xml
-zwscene.xml
-
-.*
-!.yamllint
-!/.gitignore
-!.gitkeep
-!.github
-!/.travis.yml
+# custom files
 energy_consumption.csv
+
+# custom folders
+ssh/
+
+# exceptions (!...)
