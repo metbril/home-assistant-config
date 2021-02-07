@@ -54,3 +54,23 @@ webostv:
     service: wake_on_lan.send_magic_packet
     data:
       mac: !secret living_tv_mac
+
+######################################################################
+## Automation
+######################################################################
+automation:
+  - alias: Pause living speaker when TV is turned on
+    id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
+    description: Pause living speaker when living TV is turned on
+    trigger:
+      - platform: state
+        entity_id: media_player.living_tv
+        to: 'on'
+    condition:
+      - condition: state
+        entity_id: media_player.woonkamer
+        state: playing
+    action:
+      - service: media_player.media_pause
+        entity_id: media_player.woonkamer
+    mode: single
