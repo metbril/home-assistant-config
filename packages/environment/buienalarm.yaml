@@ -1,0 +1,26 @@
+---
+# Buienalarm custom component
+# https://github.com/gieljnssns/buienalarm-sensor-homeassistant
+#
+# Uses latitude/longitude from home assistant configuration
+
+homeassistant:
+  customize:
+    sensor.buienalarm_precipitation:
+      friendly_name: Buienalarm Neerslagintensiteit
+      unit_of_measurement: mm/u
+    sensor.buienalarm_precipitation_forecast_average:
+      friendly_name: Buienalarm Neerslagintensiteit verwacht
+      unit_of_measurement: mm/u
+    sensor.buienalarm_next_rain_forecast:
+      friendly_name: Buienalarm Neerslag verwacht
+      unit_of_measurement: minuten
+
+sensor:
+  - platform: buienalarm
+    name: Buienalarm
+    timeframe: 15  # minutes
+    monitored_conditions:
+      - precipitation
+      - precipitation_forecast_average
+      - next_rain_forecast
