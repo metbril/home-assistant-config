@@ -67,7 +67,7 @@ jobs:
           mv -v home-assistant-p2000/custom_components/* ./custom_components
       # yamllint enable rule:line-length
       - name: Check configuration
-        uses: frenck/action-home-assistant@v1
+        uses: frenck/action-home-assistant@v1.0
         with:
           path: "."
           secrets: ./secrets.example.yaml
