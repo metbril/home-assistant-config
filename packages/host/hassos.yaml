@@ -1,0 +1,91 @@
+---
+# HassOS
+
+# yamllint disable-line rule:line-length
+# Credits: https://github.com/pinkywafer/Home-Assistant_Config/blob/master/packages/system/homeassistant_os_update.yaml
+
+################################################
+## Sensor
+################################################
+sensor:
+  - platform: command_line
+    name: HassOS Current Version
+    # yamllint disable-line rule:line-length
+    command: 'curl http://supervisor/host/info -H "Authorization: Bearer $(printenv SUPERVISOR_TOKEN)" '
+    value_template: "{{ value_json.data.operating_system[18:] }}"
+    json_attributes:
+      - data
+
+################################################
+## Automation
+################################################
+automation:
+  - alias: HassOS Update Notification
+    id: e401462b-27bd-4d8a-809f-1acbe22e77f5
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id:
+          - sensor.latest_version
+          - sensor.hassos_current_version
+    condition:
+      - condition: template
+        value_template: >-
+          {{ states("sensor.hassos_current_version") !=
+             state_attr("sensor.latest_version", "hassos") }}
+    action:
+      - service: notify.admin
+        data:
+          title: HassOS Update
+          message: >
+            There is an update to HassOS:
+              * {{ states("sensor.hassos_current_version")
+              }} -> {{ state_attr("sensor.latest_version",
+              "hassos") }}
+          data:
+            push:
+              thread-id: updates
+            apns_headers:
+              apns-collapse-id: update_hassos
+            url: /hassio/dashboard
+      - service: persistent_notification.create
+        data:
+          title: HassOS Update
+          message: >-
+            There is an update to HassOS:
+              * {{ states("sensor.hassos_current_version")
+              }} -> {{ state_attr("sensor.latest_version",
+              "hassos") }}
+          notification_id: update_hassos
+
+  - alias: HassOS Update Notification Dismiss
+    id: a87cf63d-807c-43bd-83cd-af9d4e1e135e
+    trigger:
+      - platform: homeassistant
+        event: start
+      - platform: state
+        entity_id:
+          - sensor.hassos_current_version
+          - sensor.latest_version
+    condition:
+      - condition: template
+        value_template: >-
+          {{ states("sensor.hassos_current_version") ==
+          state_attr("sensor.latest_version", "hassos") }}
+    action:
+      # Triggers each entity update (every few minutes)
+      # - service: notify.admin
+      #   data:
+      #     title: HassOS Update
+      #     message: >
+      #       HassOS is bijgewerkt.
+      #     data:
+      #       push:
+      #         thread-id: updates
+      #       apns_headers:
+      #         apns-collapse-id: update_hassos
+      #       url: /hassio/dashboard
+      - service: persistent_notification.dismiss
+        data:
+          notification_id: update_hassos
