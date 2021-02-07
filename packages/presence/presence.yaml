@@ -11,9 +11,10 @@ homeassistant:
       icon: hass:chess-bishop
     group.family:
       friendly_name: Familie
-    device_tracker.robert_phone_app:
+      icon: hass:account-group
+    device_tracker.robert_iphone_app:
       icon: hass:apple-ios
-    device_tracker.robert_phone_owntracks:
+    device_tracker.robert_iphone_owntracks:
       icon: hass:map-marker-radius
 
 ########################################
@@ -29,17 +30,31 @@ person:
     id: robert
     user_id: fb61692a4d13494d9b87a26cd287de9c
     device_trackers:
-      - device_tracker.robert_iphone  ## HA app
+      - device_tracker.robert_iphone_app
+      - device_tracker.robert_iphone_wifi
+      - device_tracker.robert_iphone_wifi_on_router_1
+      - device_tracker.robert_iphone_wifi_on_router_2
+      - device_tracker.robert_iphone_wifi_on_router_3
+
   - name: Monique
     id: monique
     user_id: a90cd2586de64d419c313aca0e8c71b4
     device_trackers:
-      - device_tracker.monique_iphone
+      - device_tracker.monique_iphone_app
+      - device_tracker.monique_iphone_wifi
+      - device_tracker.monique_iphone_wifi_on_router_1
+      - device_tracker.monique_iphone_wifi_on_router_2
+      - device_tracker.monique_iphone_wifi_on_router_3
+
   - name: Björn
     id: bjorn
     user_id: a33369a450714e48b0d8c1ffcceee97c
     device_trackers:
-      - device_tracker.bjorn_iphone
+      - device_tracker.bjorn_iphone_app
+      - device_tracker.bjorn_iphone_wifi
+      - device_tracker.bjorn_iphone_wifi_on_router_1
+      - device_tracker.bjorn_iphone_wifi_on_router_2
+      - device_tracker.bjorn_iphone_wifi_on_router_3
 
 ########################################
 group:
@@ -52,8 +67,8 @@ group:
 
 ########################################
 automation:
-  - id: 6dd43a66-6b17-4bd3-a24e-212c36017fae
-    alias: Melden Familie Thuis
+  - alias: Melden Familie Thuis
+    id: 6dd43a66-6b17-4bd3-a24e-212c36017fae
     trigger:
       - entity_id: group.family
         platform: state
@@ -68,8 +83,8 @@ automation:
             \ niet of er iemand thuis is.            \n{%- endif %}"
         service: notify.robert
 
-  - id: 16d91ce7-188d-408f-a63a-3ee22046a003
-    alias: Melden Nieuw Apparaat Gedetecteerd
+  - alias: Melden Nieuw Apparaat Gedetecteerd
+    id: 16d91ce7-188d-408f-a63a-3ee22046a003
     trigger:
       - platform: event
         event_type: device_tracker_new_device
