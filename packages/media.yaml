@@ -21,20 +21,6 @@ input_select:
       - Studeerkamer
       - Woonkamer
 
-automation:
-  - id: 67a5205f-4f1b-47a0-9bb6-f19c9102e0c1
-    alias: Afspeellijst starten op speaker
-    trigger:
-      - platform: state
-        entity_id: input_select.playlist
-    action:
-      - service: media_player.select_source
-        data:
-          entity_id: 'media_player.{{states(''input_select.media_player'')|
-            lower|replace('' '',''_'')}}'
-          source: '{{states(''input_select.playlist'') }}'
-    mode: single
-
 ######################################################################
 ## Spotify
 ######################################################################
@@ -73,4 +59,17 @@ automation:
     action:
       - service: media_player.media_pause
         entity_id: media_player.woonkamer
+    mode: single
+
+  - alias: Afspeellijst starten op speaker
+    id: 67a5205f-4f1b-47a0-9bb6-f19c9102e0c1
+    trigger:
+      - platform: state
+        entity_id: input_select.playlist
+    action:
+      - service: media_player.select_source
+        data:
+          entity_id: 'media_player.{{states(''input_select.media_player'')|
+            lower|replace('' '',''_'')}}'
+          source: '{{states(''input_select.playlist'') }}'
     mode: single
