@@ -100,13 +100,13 @@ sensor:
         friendly_name: "Occupancy"
         value_template: >-
           {% if is_state('input_boolean.occupancy_home', 'on') %}
-              home
+            home
           {% elif is_state('input_boolean.occupancy_away', 'on') %}
-              away
+            away
           {% elif is_state('input_boolean.occupancy_asleep', 'on') %}
             asleep
           {% elif is_state('input_boolean.occupancy_guests', 'on') %}
-              guests
+            guests
           {% elif is_state('input_boolean.occupancy_vacation', 'on') %}
             vacation
           {% endif %}
