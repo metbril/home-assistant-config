@@ -1,23 +1,138 @@
 ---
+################################################################################
+# Script
+################################################################################
+script:
+  bark_the_dog:
+    alias: Laat de hond blaffen
+    description: >
+      Loudly play the sound of a barking dog. Delay for the duration of the clip
+      afterwards. Lower the volume just in case.
+    icon: mdi:dog-side
+    variables:
+      sound_player: media_player.woonkamer
+      host: !secret tts_base_url
+    mode: single
+    sequence:
+      - service: sonos.snapshot
+        data:
+          entity_id: "{{sound_player}}"
+      - service: sonos.unjoin
+        data:
+          entity_id: "{{sound_player}}"
+      - service: media_player.volume_set
+        data:
+          volume_level: 1
+          entity_id: "{{sound_player}}"
+      - service: media_player.play_media
+        data:
+          media_content_type: music
+          # yamllint disable-line rule:line-length
+          media_content_id: "{{host}}/local/sounds/dog-barking-noise.mp3"
+          entity_id: "{{sound_player}}"
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 13
+          milliseconds: 0
+      - service: media_player.volume_set
+        data:
+          volume_level: 0.1
+          entity_id: "{{sound_player}}"
+      - service: sonos.restore
+        data:
+          entity_id: "{{sound_player}}"
+  
+################################################################################
+# Automation
+################################################################################
 automation:
-  - id: frontdoor_bell_pressed_notification
-    alias: Aanbellen Voordeur
-    description: ''
+  - alias: Deurbel
+    description: Notify and tweet when the frontdoor bell is pressed.
+    id: 0a66031f-56c6-483e-ada1-2199c0b39224
+    mode: single
     trigger:
       - platform: state
         entity_id: switch.bel_voordeur
-    condition: []
     action:
       - service: notify.all
         data:
           message: 🛎 Er wordt aangebeld aan de voordeur.
+      - service: notify.twitter
+        data:
+          message: >-
+            {{ [
+            "Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.",
+            "Au! Dat deed pijn. Wie raakte de deurbel aan?",
+            "Dat deed een belletje bij me rinkelen.",
+            "Klop, klop. Wie is daar? Isabel. Isabel wie? Isabel kapot. Daarom klop ik.",
+            "Klop, klop. Wie is daar? Wil. Wil wie? Wil naar binnen.",
+            "De bel gaat. Ja, ja, ik kom er aan.",
+            "Doe even open @robertvanbregt. Er staat iemand aan de deur."
+            ] | random + " #HomeAssistant" + [
+            " #Security",
+            " #Alarm",
+            " #SmartHome",
+            " #HomeAutomation"
+            ] | random }}
+          data:
+            media: >-
+              {% set pictures = [
+                "/config/www/img/klopklop.jpg",
+                "/config/www/img/deurklopper.png",
+                "/config/www/img/aankloppen.jpg",
+                "/config/www/img/deurbel.jpg",
+              ] %}
+              {{ pictures|random }}
+
+  - alias: Deurbel spreken
+    description: >
+      When someone is at home, speak out loud that the doorbell is pressed.
+    id: 053c89e0-8d24-41f0-987a-22f70b7803ec
+    mode: single
+    trigger:
+      - platform: state
+        entity_id: switch.bel_voordeur
+    condition:
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: group.family
+          state: "not_home"
+        - condition: state
+          entity_id: sensor.occupancy
+          state: "away"
+        - condition: state
+          entity_id: sensor.occupancy
+          state: "vacation"
+    action:
       - service: script.sonos_say
         data:
           media_player: media_player.woonkamer
           volume_level: 0.3
           delay: 3
           message: Er wordt aangebeld aan de voordeur.
-      - service: notify.twitter
-        data:
-          message: 🛎 Er wordt aangebeld aan de voordeur.
+
+  - alias: Deurbel blaffen
+    id: 4a7e909a-5d0f-4842-958d-1b67314e771d
+    description: >
+      When no-one is at home, bark the dog.
     mode: single
+    trigger:
+      - platform: state
+        entity_id: switch.bel_voordeur
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: group.family
+          state: "not_home"
+        - condition: state
+          entity_id: sensor.occupancy
+          state: "away"
+        - condition: state
+          entity_id: sensor.occupancy
+          state: "vacation"
+    action:
+      - service: script.bark_the_dog
+
