@@ -308,17 +308,20 @@ scene:
 ######################################################################
 automation:
 
-  - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
-    alias: Turn On Living Lights at Dusk
+  - alias: Turn On Living Lights at Dusk
     description: Inschakelen schemerverlichting woonkamer voor zonsondergang
+    id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
+    mode: single
     trigger:
       - event: sunset
         offset: -00:30:00
         platform: sun
     action:
       - scene: scene.schemerverlichting
-      - data:
-          message: '{{ [
+      - service: notify.twitter
+        data:
+          message: >
+            {{ [
             "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
             "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.",
             "Steeds zodra de zon verdwijnt,
@@ -329,9 +332,17 @@ automation:
             " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting",
             "#PhilipsHue", "Hue", "#IkeaTradfri", "#Tradfri", "#SmartLighting",
             "#SmartHome", "#HomeAutomation"
-            ] | random }}'
-        service: notify.twitter
-    mode: single
+            ] | random }}
+          data:
+            media: >-
+              {% set pictures = [
+                "/config/www/img/sunset1.jpg",
+                "/config/www/img/sunset2.jpg",
+                "/config/www/img/sunset3.jpg",
+                "/config/www/img/sunset4.jpg",
+                "/config/www/img/sunset5.jpg",
+              ] %}
+              {{ pictures|random }}
 
   - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
     alias: Woonkamerverlichting uitschakelen bij vakantie
