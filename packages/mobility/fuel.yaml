@@ -83,3 +83,35 @@ sensor:
 #   select: “#euro95 .pump_price span.price”
 #   # value_template: "{{ value.split(' ')[0].replace(',', '.') | float }}"
 #   scan_interval: 3600  # be nice; once per hour only
+
+automation:
+  - alias: "Melding bij gewijzigde brandstofprijzen"
+    id: 6e17a20a-4bad-4def-9f60-4b4ace77762c
+    description: >
+      Send notification when a fuel price changed
+    trigger:
+      - platform: state
+        entity_id:
+          - sensor.adviesprijs_euro95
+          - sensor.adviesprijs_diesel
+          - sensor.adviesprijs_lpg
+          - sensor.adviesprijs_super
+          - sensor.adviesprijs_super_mlv
+          - sensor.adviesprijs_premium_benzines
+          - sensor.adviesprijs_premium_diesels
+          - sensor.adviesprijs_blueone95
+    condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
+    action:
+      - service: notify.robert
+        data:
+          title: Adviesprijs
+          message: >
+            De adviesprijs voor
+            {{ state_attr(trigger.entity_id, 'friendly_name') }}
+            is
+            {% if trigger.state.to_state > trigger.state.from_state %}
+              verhoogd
+            {% else %}
+              verlaagd
+            {% endif %}
+    mode: queued
