@@ -1,9 +1,16 @@
 ---
+################################################################################
+# Notify
+################################################################################
 notify:
   - name: pushover
     platform: pushover
     api_key: !secret pushover_api_key
     user_key: !secret pushover_user_key
+
+  - name: telegram
+    platform: telegram
+    chat_id: !secret telegram_bot_chat_id_robert
 
   - name: admin
     platform: group
@@ -17,6 +24,18 @@ notify:
       - service: robert
       - service: living_tv
 
+################################################################################
+# Telegram Bot
+################################################################################
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    allowed_chat_ids:
+      - !secret telegram_bot_chat_id_robert
+
+################################################################################
+# Automation
+################################################################################
 automation:
   - alias: Persistente meldingen doorsturen naar beheerder
     id: 7319632e-f122-4a54-a81c-569d5601446a
