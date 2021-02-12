@@ -42,7 +42,7 @@ script:
       - service: sonos.restore
         data:
           entity_id: "{{sound_player}}"
-  
+
 ################################################################################
 # Automation
 ################################################################################
@@ -65,7 +65,8 @@ automation:
             "Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.",
             "Au! Dat deed pijn. Wie raakte de deurbel aan?",
             "Dat deed een belletje bij me rinkelen.",
-            "Klop, klop. Wie is daar? Isabel. Isabel wie? Isabel kapot. Daarom klop ik.",
+            "Klop, klop. Wie is daar? Isabel. Isabel wie? " ~
+              "Isabel kapot. Daarom klop ik.",
             "Klop, klop. Wie is daar? Wil. Wil wie? Wil naar binnen.",
             "De bel gaat. Ja, ja, ik kom er aan.",
             "Doe even open @robertvanbregt. Er staat iemand aan de deur."
@@ -135,4 +136,3 @@ automation:
           state: "vacation"
     action:
       - service: script.bark_the_dog
-
