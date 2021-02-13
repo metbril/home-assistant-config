@@ -76,232 +76,152 @@ light:
 ## Scene
 ######################################################################
 scene:
-  - id: '1597676235869'
-    name: Woonkamerverlichting Maximaal
+  - name: Woonkamerverlichting Maximaal
+    id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
+    icon: hass:brightness-7
     entities:
-      light.bank:
-        min_mireds: 153
-        max_mireds: 500
-        effect_list:
-          - colorloop
-          - random
-        friendly_name: Bank
-        supported_features: 63
-        icon: hass:floor-lamp
-        state: unavailable
       light.bollamp:
-        min_mireds: 153
-        max_mireds: 500
-        effect_list:
-          - colorloop
-          - random
         brightness: 255
         color_temp: 326
         effect: none
-        friendly_name: Bollamp
-        supported_features: 63
-        icon: hass:lamp
         state: 'on'
       light.hoge_kast:
-        effect_list:
-          - colorloop
-          - random
         brightness: 255
-        hs_color:
-          - 42.632
-          - 14.902
         rgb_color:
           - 255
           - 244
           - 216
-        xy_color:
-          - 0.355
-          - 0.357
         effect: none
-        friendly_name: Hoge Kast
-        supported_features: 61
-        icon: hass:lamp
         state: 'on'
       light.leeslamp:
-        min_mireds: 153
-        max_mireds: 500
         brightness: 255
         color_temp: 360
-        friendly_name: Leeslamp
-        supported_features: 43
-        icon: hass:track-light
         state: 'on'
       light.lichtstraat_1:
         brightness: 254
-        friendly_name: Lichtstraat 1
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_2:
         brightness: 254
-        friendly_name: Lichtstraat 2
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_3:
         brightness: 254
-        friendly_name: Lichtstraat 3
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_4:
         brightness: 254
-        friendly_name: Lichtstraat 4
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.turbinelamp:
-        friendly_name: Turbinelamp
-        supported_features: 40
-        icon: hass:lava-lamp
         state: 'on'
       light.willner:
-        min_mireds: 153
-        max_mireds: 500
         brightness: 255
         color_temp: 360
-        friendly_name: Willner
-        supported_features: 43
-        icon: hass:lamp
         state: 'on'
       light.magnarp_1:
-        min_mireds: 250
-        max_mireds: 454
         brightness: 254
         color_temp: 345
-        friendly_name: MAGNARP 1
-        supported_features: 35
         state: 'on'
       light.magnarp_2:
-        min_mireds: 250
-        max_mireds: 454
         brightness: 254
         color_temp: 351
-        friendly_name: MAGNARP 2
-        supported_features: 35
         state: 'on'
       light.magnarp_3:
-        min_mireds: 250
-        max_mireds: 454
         brightness: 254
         color_temp: 353
-        friendly_name: MAGNARP 3
-        supported_features: 35
         state: 'on'
-    icon: hass:brightness-7
-  - id: '1601486865465'
-    name: Schemerverlichting
+
+  - name: Schemerverlichting
+    id: ec425f24-abca-428d-8a98-d6ea5aa374e8
+    icon: hass:weather-sunset
     entities:
       light.hoge_kast:
-        effect_list:
-          - colorloop
-          - random
         brightness: 179
-        hs_color:
-          - 30
-          - 57.255
         rgb_color:
           - 255
           - 181
           - 108
-        xy_color:
-          - 0.493
-          - 0.389
         effect: none
-        friendly_name: Hoge Kast
-        supported_features: 61
-        icon: hass:lamp
+        state: 'on'
+      light.magnarp_1:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
+      light.magnarp_2:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
+      light.magnarp_3:
+        brightness: 85
+        color_temp: 400
         state: 'on'
       light.leeslamp:
-        min_mireds: 153
-        max_mireds: 500
         brightness: 140
         color_temp: 440
-        friendly_name: Leeslamp
-        supported_features: 43
-        icon: hass:track-light
         state: 'on'
       light.turbinelamp:
-        friendly_name: Turbinelamp
-        supported_features: 40
-        icon: hass:lava-lamp
-        state: 'on'
-      light.willner:
-        min_mireds: 153
-        max_mireds: 500
-        brightness: 175
-        color_temp: 435
-        friendly_name: Willner
-        supported_features: 43
-        icon: hass:lamp
         state: 'on'
       light.lichtstraat_1:
         brightness: 65
-        friendly_name: Lichtstraat 1
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_2:
         brightness: 65
-        friendly_name: Lichtstraat 2
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_3:
         brightness: 65
-        friendly_name: Lichtstraat 3
-        icon: hass:wall-sconce-flat
-        supported_features: 33
         state: 'on'
       light.lichtstraat_4:
         brightness: 65
-        friendly_name: Lichtstraat 4
-        icon: hass:wall-sconce-flat
-        supported_features: 33
-        state: 'on'
-      light.magnarp_1:
-        min_mireds: 250
-        max_mireds: 454
-        brightness: 85
-        color_temp: 400
-        friendly_name: MAGNARP 1
-        supported_features: 35
-        state: 'on'
-      light.magnarp_2:
-        min_mireds: 250
-        max_mireds: 454
-        brightness: 85
-        color_temp: 400
-        friendly_name: MAGNARP 2
-        supported_features: 35
-        state: 'on'
-      light.magnarp_3:
-        min_mireds: 250
-        max_mireds: 454
-        brightness: 85
-        color_temp: 400
-        friendly_name: MAGNARP 3
-        supported_features: 35
         state: 'on'
       light.bollamp:
-        min_mireds: 153
-        max_mireds: 500
-        effect_list:
-          - colorloop
-          - random
         brightness: 141
         color_temp: 434
         effect: none
-        friendly_name: Bollamp
-        supported_features: 63
-        icon: hass:lamp
         state: 'on'
-    icon: hass:weather-sunset
+      light.willner:
+        brightness: 175
+        color_temp: 435
+        state: 'on'
+
+  - name: Verlichting Woonkamer Gedimd
+    id: 88a1bee5-12d9-41b9-9928-1775d42f9727
+    icon: hass:brightness-3
+    entities:
+      light.hoge_kast:
+        state: 'off'
+      light.magnarp_1:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.magnarp_2:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.magnarp_3:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.leeslamp:
+        brightness: 3
+        color_temp: 440
+        state: 'on'
+      light.turbinelamp:
+        state: 'off'
+      light.lichtstraat_1:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_2:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_3:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_4:
+        brightness: 3
+        state: 'on'
+      light.bollamp:
+        state: 'off'
+      light.willner:
+        brightness: 3
+        color_temp: 435
+        state: 'on'
 
 ######################################################################
 ## Automation
