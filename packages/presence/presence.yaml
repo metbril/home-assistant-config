@@ -94,3 +94,43 @@ automation:
           message: Nieuw apparaat herkend. Controleer bestand
             'known_devices.yaml' voor details.
           title: Nieuw apparaat
+
+  - alias: Say who's come home
+    description: >
+      Speak out loud which person has arrived at home
+    id: 768a86b3-8ba5-4741-8cd9-a3f81c5ce20f
+    mode: queued
+    trigger:
+      - platform: state
+        entity_id:
+          - person.robert
+          - person.monique
+          - person.bjorn
+        to: home
+    action:
+      - service: script.sonos_say
+        data:
+          media_player: media_player.woonkamer
+          volume_level: 0.5
+          delay: 3
+          message: >
+            {% if not trigger is defined %}
+              {% set someone = 'Iemand' %}
+            {% else %}
+              {% set someone = state_attr(trigger.entity_id,'friendly_name') %}
+            {% endif %}
+            {{ [ someone ~ ' is nu thuis.',
+            'Ja hoor, ' ~ someone ~ 'is er weer.',
+            'Het feest kan beginnen, want ' ~ someone ~ ' is binnen!'] |
+            random }}
+      - service: notify.telegram
+        data:
+          message: >
+            {% if not trigger is defined %}
+              Er is weer iemand thuis.
+            {% elif trigger.entity_id == 'person.robert' %}
+              Welkom thuis, Robert!
+            {% else %}
+              {{ state_attr(trigger.entity_id, 'friendly_name') ~
+              ' is weer thuis.' }}
+            {% endif %}
