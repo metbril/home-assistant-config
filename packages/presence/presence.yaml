@@ -32,9 +32,10 @@ person:
     device_trackers:
       - device_tracker.robert_iphone_app
       - device_tracker.robert_iphone_wifi
-      - device_tracker.robert_iphone_wifi_on_router_1
-      - device_tracker.robert_iphone_wifi_on_router_2
-      - device_tracker.robert_iphone_wifi_on_router_3
+      # # Netgear
+      # - device_tracker.robert_iphone_wifi_on_router_1
+      # - device_tracker.robert_iphone_wifi_on_router_2
+      # - device_tracker.robert_iphone_wifi_on_router_3
 
   - name: Monique
     id: monique
@@ -42,9 +43,10 @@ person:
     device_trackers:
       - device_tracker.monique_iphone_app
       - device_tracker.monique_iphone_wifi
-      - device_tracker.monique_iphone_wifi_on_router_1
-      - device_tracker.monique_iphone_wifi_on_router_2
-      - device_tracker.monique_iphone_wifi_on_router_3
+      # # Netgear
+      # - device_tracker.monique_iphone_wifi_on_router_1
+      # - device_tracker.monique_iphone_wifi_on_router_2
+      # - device_tracker.monique_iphone_wifi_on_router_3
 
   - name: Björn
     id: bjorn
@@ -52,9 +54,10 @@ person:
     device_trackers:
       - device_tracker.bjorn_iphone_app
       - device_tracker.bjorn_iphone_wifi
-      - device_tracker.bjorn_iphone_wifi_on_router_1
-      - device_tracker.bjorn_iphone_wifi_on_router_2
-      - device_tracker.bjorn_iphone_wifi_on_router_3
+      # # Netgear
+      # - device_tracker.bjorn_iphone_wifi_on_router_1
+      # - device_tracker.bjorn_iphone_wifi_on_router_2
+      # - device_tracker.bjorn_iphone_wifi_on_router_3
 
 ########################################
 group:
