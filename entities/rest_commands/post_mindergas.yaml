@@ -1,0 +1,15 @@
+################################################################################
+## Post current gas meter reading to mindergas.nl for yesterday
+## Should be executed as soon as the first meter change after midnight
+##
+## API documentation at https://www.mindergas.nl/member/api
+################################################################################
+post_mindergas:
+  url: https://www.mindergas.nl/api/gas_meter_readings
+  method: post
+  headers:
+    Content-Type: application/json
+    AUTH-TOKEN: !secret mindergas_token
+  payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) |
+    timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{
+    states(''sensor.gas_consumption'') }}" }'

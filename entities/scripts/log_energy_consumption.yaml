@@ -1,0 +1,9 @@
+log_energy_consumption:
+  sequence:
+    - service: notify.log_energy_consumption
+      data:
+        message: >
+          {{ now() }},
+          {{ states('sensor.energy_consumption_tarif_1') }},
+          {{ states('sensor.energy_consumption_tarif_2') }},
+          {{ states('sensor.gas_consumption')}}

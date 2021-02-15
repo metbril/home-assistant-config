@@ -1,3 +1,6 @@
+---
+binary_sensor.car_wash:
+  friendly_name: Auto wassen
 group.batteries:
   friendly_name: Batterijen
 media_player.living_tv:
@@ -9,13 +12,21 @@ sensor.cert_pem:
 sensor.cert_pem_last_updated:
   friendly_name: Laatste wijziging SSL-certificaat
   icon: calendar-clock
+sensor.daily_energy_consumption_tarif_1:
+  friendly_name: Dagelijks energieverbruik  (tarief 1)
+sensor.daily_energy_consumption_tarif_2:
+  friendly_name: Dagelijks energieverbruik  (tarief 2)
+sensor.monthly_energy_consumption_tarif_1:
+  friendly_name: Maandelijks energieverbruik  (tarief 1)
+sensor.monthly_energy_consumption_tarif_2:
+  friendly_name: Maandelijks energieverbruik  (tarief 2)
 sensor.myip:
   friendly_name: Publiek IP-adres
   icon: hass:wan
 sensor.niro_recall:
   unit_of_measurement: recalls
+sensor.p2000_brandweer:
+  friendly_name: Brandweer
 sensor.ssl_certificate_expiry:
   friendly_name: Geldigheidsduur SSL-certificaat
   unit_of_measurement: dagen
-binary_sensor.car_wash:
-  friendly_name: "Auto wassen"

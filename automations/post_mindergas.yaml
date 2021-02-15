@@ -1,0 +1,25 @@
+################################################################################
+## Post gas consumption to mindergas.nl daily at 00:15.
+##
+## The gas meter reading is every hour around 10 minutes after the full hour
+## Posting should happen after that
+################################################################################
+alias: Post Gas Consumption
+id: 00dff5ad-9600-4932-b4de-17eae6928528
+description: >
+  Post gas consumption to mindergas.nl daily at 00:15.
+mode: single
+
+trigger:
+  - platform: time
+    ## run daily at 00:15:00
+    ## gas meter reading usually updated around 0:06
+    at: '00:15:00'
+action:
+  - service: rest_command.post_mindergas
+  - service: logbook.log
+    data:
+      name: Gasverbruik
+      message: is verstuurd naar mindergas.nl
+      entity_id: sensor.gas_consumption
+      domain: sensor
