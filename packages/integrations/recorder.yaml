@@ -1,4 +1,7 @@
----
+################################################################################
+## Recorder
+## https://www.home-assistant.io/integrations/recorder
+################################################################################
 recorder:
   auto_purge: true  # default = true
   purge_keep_days: 1

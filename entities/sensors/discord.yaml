@@ -1,0 +1,5 @@
+platform: discord_game
+token: !secret discord_game_token
+image_format: png  # optional, available formats are: png, webp, jpeg, jpg
+members:
+  - metbril#4151
