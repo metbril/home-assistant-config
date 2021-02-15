@@ -1,0 +1,9 @@
+################################################################################
+## Fixer
+## https://www.home-assistant.io/integrations/fixer
+################################################################################
+
+platform: fixer
+target: USD
+name: Exchange Rate USD
+api_key: !secret fixer_api_key

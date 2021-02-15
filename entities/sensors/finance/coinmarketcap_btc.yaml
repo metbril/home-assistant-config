@@ -1,0 +1,7 @@
+################################################################################
+## Coinmarketcap
+## https://www.home-assistant.io/integrations/coinmarketcap
+################################################################################
+
+platform: coinmarketcap
+currency_id: 1

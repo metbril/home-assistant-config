@@ -1,0 +1,25 @@
+################################################################################
+## Generic Sonos say script
+################################################################################
+sonos_say:
+  alias: "Sonos Text-To-Speech"
+  mode: queued
+  sequence:
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ media_player }}"
+    - service: sonos.unjoin
+      data:
+        entity_id: "{{ media_player }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ media_player }}"
+        volume_level: "{{ volume_level }}"
+    - service: tts.say
+      data:
+        entity_id: "{{ media_player }}"
+        message: "{{ message }}"
+    - delay: "{{ delay }}"
+    - service: sonos.restore
+      data:
+        entity_id: "{{ media_player }}"

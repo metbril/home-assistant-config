@@ -1,0 +1,38 @@
+alias: Turn On Living Lights at Dusk
+id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
+description: >
+  Inschakelen schemerverlichting woonkamer voor zonsondergang
+mode: single
+
+trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+
+action:
+  - scene: scene.schemerverlichting
+  - service: notify.twitter
+    data:
+      message: >
+        {{ [
+        "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+        "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.",
+        "Steeds zodra de zon verdwijnt,
+          doe ik de @TweetHue verlichting aan.",
+        "De hoogste tijd om de @IKEA @Tradfri verlichting in te schakelen."
+        ]
+        | random + "  #HomeAssistant
+        " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting",
+        "#PhilipsHue", "Hue", "#IkeaTradfri", "#Tradfri", "#SmartLighting",
+        "#SmartHome", "#HomeAutomation"
+        ] | random }}
+      data:
+        media: >-
+          {% set pictures = [
+            "/config/www/img/sunset1.jpg",
+            "/config/www/img/sunset2.jpg",
+            "/config/www/img/sunset3.jpg",
+            "/config/www/img/sunset4.jpg",
+            "/config/www/img/sunset5.jpg",
+          ] %}
+          {{ pictures|random }}
