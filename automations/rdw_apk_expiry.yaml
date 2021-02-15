@@ -1,0 +1,19 @@
+alias: Notify APK expiry
+id: b3f22139-ac93-4856-af48-302464cbe3ce
+description: Notify 21 days before the APK date expires
+
+trigger:
+  - platform: template
+    value_template: '{{ ((as_timestamp(strptime(
+      states(''sensor.niro_expdate''), ''%Y-%m-%d''))
+      / 86400) | int) == ((as_timestamp(strptime(states(''sensor.date''),
+      ''%Y-%m-%d''))
+      / 86400) | int) + 21 }} }}'
+
+action:
+  - service: notify.robert
+    data:
+      title: APK-keuring
+      message: De APK-keuring verloopt op {{
+        states('sensor.niro_expdate') }}. Plan
+        tijdig een APK-keuring bij de garage.

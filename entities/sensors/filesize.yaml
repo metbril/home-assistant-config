@@ -1,0 +1,5 @@
+platform: filesize
+file_paths:
+  - !secret filesize_ssl_cert
+  - !secret filesize_homeassistant_db
+  - !secret filesize_homeassistant_log

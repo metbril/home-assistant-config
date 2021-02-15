@@ -1,0 +1,7 @@
+platform: github
+access_token: !secret github_access_token
+repositories:
+  - path: 'metbril/home-assistant-config'
+    name: GitHub Metbril home-assistant-config
+  - path: 'home-assistant/core'
+    name: Github Home-Assistant Core

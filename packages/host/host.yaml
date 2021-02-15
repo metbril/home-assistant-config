@@ -115,11 +115,6 @@ sensor:
     unit_of_measurement: "°C"
     value_template: '{{ value | multiply(0.001) | round(1) }}'
 
-  - platform: filesize
-    file_paths:
-      - !secret filesize_homeassistant_db
-      - !secret filesize_homeassistant_log
-
   - platform: command_line
     # https://home-assistant.io/components/sensor.command_line/
     name: "HA Uptime"

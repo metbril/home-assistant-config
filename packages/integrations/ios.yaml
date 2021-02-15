@@ -1,5 +1,5 @@
 ################################################################################
-## Sensor
-## https://www.home-assistant.io/integrations/sensor
+## iOS
+## https://www.home-assistant.io/integrations/ios
 ################################################################################
-sensor: !include_dir_list ../../entities/sensors
+ios:

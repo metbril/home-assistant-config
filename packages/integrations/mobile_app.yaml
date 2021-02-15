@@ -1,5 +1,5 @@
 ################################################################################
-## Sensor
-## https://www.home-assistant.io/integrations/sensor
+## Mobile App
+## https://www.home-assistant.io/integrations/mobile_app
 ################################################################################
-sensor: !include_dir_list ../../entities/sensors
+mobile_app:

@@ -2,3 +2,20 @@ group.batteries:
   friendly_name: Batterijen
 media_player.living_tv:
   friendly_name: TV Woonkamer
+sensor.aygo_recall:
+  unit_of_measurement: recalls
+sensor.cert_pem:
+  friendly_name: Grootte SSL-certificaat
+sensor.cert_pem_last_updated:
+  friendly_name: Laatste wijziging SSL-certificaat
+  icon: calendar-clock
+sensor.myip:
+  friendly_name: Publiek IP-adres
+  icon: hass:wan
+sensor.niro_recall:
+  unit_of_measurement: recalls
+sensor.ssl_certificate_expiry:
+  friendly_name: Geldigheidsduur SSL-certificaat
+  unit_of_measurement: dagen
+binary_sensor.car_wash:
+  friendly_name: "Auto wassen"
