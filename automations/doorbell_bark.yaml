@@ -1,0 +1,26 @@
+alias: Deurbel blaffen
+id: 4a7e909a-5d0f-4842-958d-1b67314e771d
+description: >
+  When no-one is at home, bark the dog.
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: switch.bel_voordeur
+
+# Conditions are opposite of speak automation
+condition:
+  condition: or
+  conditions:
+    - condition: state
+      entity_id: group.family
+      state: "not_home"
+    - condition: state
+      entity_id: sensor.occupancy
+      state: "away"
+    - condition: state
+      entity_id: sensor.occupancy
+      state: "vacation"
+
+action:
+  - service: script.bark_the_dog
