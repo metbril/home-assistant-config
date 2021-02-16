@@ -1,6 +1,14 @@
 ---
 binary_sensor.car_wash:
   friendly_name: Auto wassen
+binary_sensor.holiday:
+  friendly_name: Feestdag
+  icon: hass:party-popper
+binary_sensor.weekend:
+  icon: hass:food-croissant
+binary_sensor.workday:
+  friendly_name: Werkdag
+  icon: hass:briefcase
 group.batteries:
   friendly_name: Batterijen
 light.bank:
@@ -41,14 +49,32 @@ sensor.cert_pem:
 sensor.cert_pem_last_updated:
   friendly_name: Laatste wijziging SSL-certificaat
   icon: calendar-clock
+sensor.christmas_countdown:
+  friendly_name: Aftellen tot Kerstmis
 sensor.daily_energy_consumption_tarif_1:
   friendly_name: Dagelijks energieverbruik  (tarief 1)
 sensor.daily_energy_consumption_tarif_2:
   friendly_name: Dagelijks energieverbruik  (tarief 2)
+sensor.date:
+  friendly_name: Datum
+sensor.easter_countdown:
+  friendly_name: Aftellen tot Pasen
+sensor.father_s_day_countdown:
+  friendly_name: Aftellen tot Vaderdag
+sensor.flag:
+  friendly_name: Vlagdag
+  icon: hass:flag
+sensor.holiday:
+  friendly_name: Feestdag
+  icon: hass:party-popper
+sensor.king_s_day_countdown:
+  friendly_name: Aftellen tot Koningsdag
 sensor.monthly_energy_consumption_tarif_1:
   friendly_name: Maandelijks energieverbruik  (tarief 1)
 sensor.monthly_energy_consumption_tarif_2:
   friendly_name: Maandelijks energieverbruik  (tarief 2)
+sensor.mother_s_day_countdown:
+  friendly_name: Aftellen tot Moederdag
 sensor.myip:
   friendly_name: Publiek IP-adres
   icon: hass:wan
@@ -56,6 +82,12 @@ sensor.niro_recall:
   unit_of_measurement: recalls
 sensor.p2000_brandweer:
   friendly_name: Brandweer
+sensor.sinterklaas_countdown:
+  friendly_name: Aftellen tot Pakjesavond
 sensor.ssl_certificate_expiry:
   friendly_name: Geldigheidsduur SSL-certificaat
   unit_of_measurement: dagen
+sensor.time:
+  friendly_name: Tijd
+sun.sun:
+  friendly_name: Zon

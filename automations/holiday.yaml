@@ -1,0 +1,58 @@
+alias: Feestdag melden
+id: 5ce30bdc-dd3f-45a9-a96c-948bdba4065c
+description: ''
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: sensor.holiday  # triggers around midnight
+
+condition:
+  - condition: not
+    conditions:
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: sensor.holiday
+            state: unknown
+          - condition: state
+            entity_id: sensor.holiday
+            state: ''
+
+action:
+  - service: persistent_notification.create
+    data:
+      message: "Vandaag is het {{ states('sensor.holiday') }}"
+      title: "{{ states('sensor.holiday') }}"
+
+  - wait_for_trigger:
+    - platform: template  # yamllint disable-line rule:indentation
+      value_template: >-
+        {{ now().hour == range(6, 9)|
+        random and now().minute == range(0, 60)|
+        random }}
+
+  # - wait_for_trigger:
+  #   - platform: time
+  #     value_template:
+  #         at: '07:00:00'
+  # # delay randomly before 09:00:00
+  # - delay: '0{{ (range(0, 1)|random|int) }}:{{
+  #     range(0,5) | random | int }}{{
+  #     range(0,9) | random | int }}:{{ range(0,5) | random | int }}{{
+  #     range(0,9) | random | int }}'
+
+  - service: notify.twitter
+    data:
+      message: >-
+        {{ "🏖️ " +
+        [
+        "Is het vandaag {{ states('sensor.holiday') }}?",
+        "Net even aan Siri gevraagd, en vandaag is het {{
+          states.sensor.holiday.state }}.",
+        "Vandaag is het {{ states('sensor.holiday') }}."
+        ] | random + " " +
+        [
+        "#feestdag",
+        "#{{ states('sensor.holiday') | lower | replace(' ', '_') }}"
+        ] | random }}
