@@ -1,0 +1,16 @@
+---
+################################################################################
+## Light
+## https://www.home-assistant.io/integrations/light.group
+################################################################################
+
+## Individual lights, from left to right
+
+platform: group
+name: Lichtstraat
+entities:
+  - light.lichtstraat_1
+  - light.lichtstraat_2
+  - light.lichtstraat_3
+  - light.lichtstraat_4
+

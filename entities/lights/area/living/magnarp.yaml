@@ -1,0 +1,14 @@
+---
+################################################################################
+## Light
+## https://www.home-assistant.io/integrations/light.group
+################################################################################
+
+## Individual lights, top to bottom
+
+platform: group
+name: MAGNARP
+entities:
+  - light.magnarp_1
+  - light.magnarp_2
+  - light.magnarp_3
