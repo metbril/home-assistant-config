@@ -1,0 +1,129 @@
+---
+################################################################################
+## Microsoft Teams Status from my work laptop.
+##
+## https://github.com/EBOOZ/TeamsStatus
+################################################################################
+## Helper sensor, mainly for showing an icon in a Lovelace badge
+
+################################################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      teams_status_robert:
+        friendly_name: "Microsoft Teams status Robert"
+        value_template: >-
+          {{ is_state('sensor.teams_status_robert', 'Beschikbaar')
+            or is_state('sensor.teams_status_robert', 'Bezet')
+            or is_state('sensor.teams_status_robert', 'Afwezig')
+            or is_state('sensor.teams_status_robert', 'Zo terug')
+            or is_state('sensor.teams_status_robert', 'Niet storen')
+            or is_state('sensor.teams_status_robert', 'Offline') }}
+        icon_template: >-
+          {% if is_state('sensor.teams_status_robert', 'Beschikbaar') %}
+            mdi:account-check
+          {% elif is_state('sensor.teams_status_robert', 'Bezet') %}
+            mdi:account-off
+          {% elif is_state('sensor.teams_status_robert', 'Afwezig') %}
+            mdi:account-arrow-right
+          {% elif is_state('sensor.teams_status_robert', 'Zo terug') %}
+            mdi:account-clock
+          {% elif is_state('sensor.teams_status_robert', 'Niet storen') %}
+            mdi:account-cancel
+          {% elif is_state('sensor.teams_status_robert', 'Offline') %}
+            mdi:account-remove
+          {% else %}
+            mdi:account-question
+          {% endif %}
+
+################################################################################
+sensor:
+  - platform: template
+    sensors:
+      teams_status_robert:
+        friendly_name: "Microsoft Teams status Robert"
+        value_template: unknown
+        icon_template: mdi:microsoft-teams
+        unique_id: sensor.teams_status_robert
+
+      teams_activity_robert:
+        friendly_name: "Microsoft Teams activity Robert"
+        value_template: unknown
+        icon_template: mdi:microsoft-teams
+        unique_id: sensor.teams_activity_robert
+
+################################################################################
+scene:
+  - name: Werk Beschikbaar
+    id: e9d03c5e-e877-4aec-a976-e2622e641813
+    icon: hass:account-check
+    entities:
+      light.werkstatus:
+        state: 'off'
+
+  - name: Werk Niet Storen
+    id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
+    icon: hass:account-cancel
+    entities:
+      light.werkstatus:
+        brightness: 255
+        rgb_color:
+          - 255
+          - 79
+          - 70
+        state: 'on'
+      media_player.studeerkamer:
+        state: paused
+
+################################################################################
+automation:
+
+  - alias: Werk Niet Storen
+    id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
+    description: >
+      Show do not disturb when working from home and busy.
+    mode: single
+    
+    trigger:
+      - platform: state
+        entity_id: sensor.teams_status_robert
+    
+    condition:
+      - condition: and
+        conditions:
+          - condition: state
+            entity_id: person.robert
+            state: home
+          - condition: or
+            conditions:
+              - condition: state
+                entity_id: sensor.teams_status_robert
+                state: Bezet
+              - condition: state
+                entity_id: sensor.teams_status_robert
+                state: Niet storen
+    
+    action:
+      - scene: scene.werk_niet_storen
+
+  - alias: Werk Beschikbaar
+    id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
+    mode: single
+    
+    trigger:
+      - platform: state
+        entity_id: sensor.teams_status_robert
+    
+    condition:
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.teams_status_robert
+            state: Bezet
+          - condition: state
+            entity_id: sensor.teams_status_robert
+            state: Niet storen
+    
+    action:
+      - scene: scene.werk_beschikbaar
+      
