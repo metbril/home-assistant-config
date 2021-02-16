@@ -1,0 +1,20 @@
+---
+################################################################################
+## Microsoft Teams Activity from my work laptop.
+##
+## https://github.com/EBOOZ/TeamsStatus
+################################################################################
+
+platform: template
+sensors:
+  teams_activity_robert:
+    friendly_name: "Microsoft Teams activity Robert"
+    value_template: >-
+      {% if states('sensor.teams_activity_robert') == '' -%}
+        Offline
+      {%- endif %}
+    icon_template: >-
+      {% if states('sensor.teams_activity_robert') == '' -%}
+        mdi:microsoft-teams
+      {%- endif %}
+    unique_id: sensor.teams_activity_robert

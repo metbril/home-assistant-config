@@ -1,0 +1,20 @@
+alias: Werk Beschikbaar
+id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: sensor.teams_status_robert
+
+condition:
+  - condition: not
+    conditions:
+      - condition: state
+        entity_id: sensor.teams_status_robert
+        state: Bezet
+      - condition: state
+        entity_id: sensor.teams_status_robert
+        state: Niet storen
+
+action:
+  - scene: scene.werk_beschikbaar

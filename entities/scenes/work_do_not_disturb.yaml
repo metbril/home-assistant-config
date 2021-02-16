@@ -1,0 +1,15 @@
+name: Werk Niet Storen
+id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
+icon: hass:account-cancel
+
+entities:
+  light.werkstatus:
+    brightness: 255
+    rgb_color:
+      - 255
+      - 79
+      - 70
+    state: 'on'
+
+  media_player.studeerkamer:
+    state: paused
