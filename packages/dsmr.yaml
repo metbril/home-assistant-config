@@ -1,0 +1,154 @@
+---
+################################################################################
+## DSMR
+## https://www.home-assistant.io/integrations/dsmr
+################################################################################
+sensor:
+  - platform: dsmr
+    port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5Z5VJCX-if00-port0
+    dsmr_version: 4
+
+  - platform: template
+    sensors:
+      friendly_power_tariff:  # vertaald in NL
+        friendly_name: Power Tariff
+        unique_id: friendly_power_tariff
+        value_template: >-
+          {% set value = states('sensor.power_tariff') %}
+          {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
+
+      daily_energy_consumption:
+        friendly_name: Daily Energy Consumption
+        unique_id: daily_energy_consumption
+        unit_of_measurement: kWh
+        value_template: >-
+          {{ states('sensor.daily_energy_consumption_tarif_1')|float +
+              states('sensor.daily_energy_consumption_tarif_2')|float }}
+
+      monthly_energy_consumption:
+        friendly_name: Monthly Energy Consumption
+        unique_id: monthly_energy_consumption
+        unit_of_measurement: kWh
+        value_template: >-
+          {{ states('sensor.monthly_energy_consumption_tarif_1')|float +
+              states('sensor.monthly_energy_consumption_tarif_2')|float }}
+
+################################################################################
+## Utility Meter
+## https://www.home-assistant.io/components/utility_meter/
+################################################################################
+utility_meter:
+
+  daily_energy_consumption_tarif_1:
+    source: sensor.energy_consumption_tarif_1
+    cycle: daily
+  daily_energy_consumption_tarif_2:
+    source: sensor.energy_consumption_tarif_2
+    cycle: daily
+
+  monthly_energy_consumption_tarif_1:
+    source: sensor.energy_consumption_tarif_1
+    cycle: monthly
+  monthly_energy_consumption_tarif_2:
+    source: sensor.energy_consumption_tarif_2
+    cycle: monthly
+
+################################################################################
+## REST Command
+## https://www.home-assistant.io/integrations/rest_command
+################################################################################
+rest_command:
+
+  ##############################################################################
+  ## Post current gas meter reading to mindergas.nl for yesterday
+  ## Should be executed as soon as the first meter change after midnight
+  ##
+  ## API documentation at https://www.mindergas.nl/member/api
+  ##############################################################################
+  post_mindergas:
+    url: https://www.mindergas.nl/api/gas_meter_readings
+    method: post
+    headers:
+      Content-Type: application/json
+      AUTH-TOKEN: !secret mindergas_token
+    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) |
+      timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{
+      states(''sensor.gas_consumption'') }}" }'
+
+################################################################################
+## Notify
+## https://www.home-assistant.io/integrations/notify
+################################################################################
+notify:
+
+  ##############################################################################
+  ## File
+  ## https://www.home-assistant.io/integrations/file
+  ##############################################################################
+  - name: log_energy_consumption
+    platform: file
+    filename: energy_consumption.csv
+    timestamp: false
+
+################################################################################
+## Script
+## https://www.home-assistant.io/integrations/script
+################################################################################
+script:
+  log_energy_consumption:
+    sequence:
+      - service: notify.log_energy_consumption
+        data:
+          message: >
+            {{ now() }},
+            {{ states('sensor.energy_consumption_tarif_1') }},
+            {{ states('sensor.energy_consumption_tarif_2') }},
+            {{ states('sensor.gas_consumption')}}
+
+################################################################################
+## Automation
+## https://www.home-assistant.io/integrations/automation
+################################################################################
+automation:
+
+  ##############################################################################
+  ## Post gas consumption to mindergas.nl daily at 00:15.
+  ##
+  ## The gas meter reading is every hour around 10 minutes after the full hour
+  ## Posting should happen after that
+  ##############################################################################
+  - alias: Post Gas Consumption
+    id: 00dff5ad-9600-4932-b4de-17eae6928528
+    description: >
+      Post gas consumption to mindergas.nl daily at 00:15.
+    mode: single
+
+    trigger:
+      - platform: time
+        ## run daily at 00:15:00
+        ## gas meter reading usually updated around 0:06
+        at: '00:15:00'
+    action:
+      - service: rest_command.post_mindergas
+      - service: logbook.log
+        data:
+          name: Gasverbruik
+          message: is verstuurd naar mindergas.nl
+          entity_id: sensor.gas_consumption
+          domain: sensor
+
+
+  ##############################################################################
+  - alias: Log Energy Consumption
+    id: 934b4450-7816-4064-b906-3a3894d99345
+    description: >
+      Log energy consumption every hour at the full hour.
+
+    trigger:
+      - platform: time_pattern
+        hours: '*'
+        minutes: '0'
+        seconds: '0'
+
+    action:
+      - service: script.log_energy_consumption

@@ -1,7 +1,0 @@
-################################################################################
-## DSMR
-## https://www.home-assistant.io/integrations/dsmr
-################################################################################
-platform: dsmr
-port: /dev/serial/by-id/usb-FTDI_FT232R_USB_UART_A5Z5VJCX-if00-port0
-dsmr_version: 4

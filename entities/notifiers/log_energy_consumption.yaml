@@ -1,4 +1,0 @@
-name: log_energy_consumption
-platform: file
-filename: energy_consumption.csv
-timestamp: false
