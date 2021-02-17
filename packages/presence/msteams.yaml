@@ -1,26 +1,60 @@
 ---
-################################################################################
+############################################################
 ## Microsoft Teams Status from my work laptop.
 ##
 ## https://github.com/EBOOZ/TeamsStatus
-################################################################################
-## Helper sensor, mainly for showing an icon in a Lovelace badge
+############################################################
 
-################################################################################
-binary_sensor:
+############################################################
+# These sensors get updated by the remote REST POST script
+# Sensors are intended as helpers, not for the UI
+############################################################
+input_text:
+  teams_status_robert:
+    name: Microsoft Teams status Robert
+    icon: mdi:microsoft-teams
+  teams_activity_robert:
+    name: Microsoft Teams activity Robert
+    icon: mdi:microsoft-teams
+
+############################################################
+# Sensors that can be used in the UI.
+############################################################
+sensor:
   - platform: template
     sensors:
       teams_status_robert:
         friendly_name: "Microsoft Teams status Robert"
+        value_template: "{{states('input_text.teams_status_robert')}}"
+        icon_template: "{{state_attr('input_text.teams_status_robert',
+          'icon')}}"
+        unique_id: sensor.teams_status_robert
+
+      teams_activity_robert:
+        friendly_name: "Microsoft Teams activity Robert"
+        value_template: "{{states('input_text.teams_activity_robert')}}"
+        icon_template: "{{state_attr('input_text.teams_activity_robert',
+          'icon')}}"
+        unique_id: sensor.teams_activity_robert
+
+############################################################
+binary_sensor:
+  - platform: template
+    sensors:
+      ############################################################
+      # Helper sensor, mainly for showing an icon in a Lovelace badge
+      ############################################################
+      teams_status_robert:
+        friendly_name: "Microsoft Teams status Robert"
         value_template: >-
-          {{ is_state('sensor.teams_status_robert', 'Beschikbaar')
+          {{   is_state('sensor.teams_status_robert', 'Beschikbaar')
             or is_state('sensor.teams_status_robert', 'Bezet')
             or is_state('sensor.teams_status_robert', 'Afwezig')
             or is_state('sensor.teams_status_robert', 'Zo terug')
             or is_state('sensor.teams_status_robert', 'Niet storen')
             or is_state('sensor.teams_status_robert', 'Offline') }}
         icon_template: >-
-          {% if is_state('sensor.teams_status_robert', 'Beschikbaar') %}
+          {% if   is_state('sensor.teams_status_robert', 'Beschikbaar') %}
             mdi:account-check
           {% elif is_state('sensor.teams_status_robert', 'Bezet') %}
             mdi:account-off
@@ -36,23 +70,7 @@ binary_sensor:
             mdi:account-question
           {% endif %}
 
-################################################################################
-sensor:
-  - platform: template
-    sensors:
-      teams_status_robert:
-        friendly_name: "Microsoft Teams status Robert"
-        value_template: unknown
-        icon_template: mdi:microsoft-teams
-        unique_id: sensor.teams_status_robert
-
-      teams_activity_robert:
-        friendly_name: "Microsoft Teams activity Robert"
-        value_template: unknown
-        icon_template: mdi:microsoft-teams
-        unique_id: sensor.teams_activity_robert
-
-################################################################################
+############################################################
 scene:
   - name: Werk Beschikbaar
     id: e9d03c5e-e877-4aec-a976-e2622e641813
@@ -75,7 +93,9 @@ scene:
       media_player.studeerkamer:
         state: paused
 
-################################################################################
+############################################################
+## Automation
+############################################################
 automation:
 
   - alias: Werk Niet Storen
@@ -106,6 +126,7 @@ automation:
     action:
       - scene: scene.werk_niet_storen
 
+  ############################################################
   - alias: Werk Beschikbaar
     id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
     mode: single
@@ -126,3 +147,34 @@ automation:
 
     action:
       - scene: scene.werk_beschikbaar
+
+  ############################################################
+  - alias: Teams Status Reset
+    id: aaff7435-8f79-4657-af57-454710cde9b9
+    description: >
+      Reset Teams Status when not changed for a long time outside
+      work hours.
+
+      This usually happens when you put your laptop in sleep or
+      hibernate mode without closing the Teams application first.
+    mode: single
+
+    trigger:
+      platform: template
+      value_template: >
+        {{ as_timestamp(now()) - 
+            as_timestamp(states.sensor.teams_status_robert.last_changed) > 
+            1*3600 }}"
+
+    condition:
+      - condition: time
+        after: "18:00:00"
+
+    action:
+      - service: input_text.set_value
+        data:
+          entity_id: input_text.teams_status_robert
+          value: Offline
+      - service: notify.robert
+        data:
+          message: Microsoft Teams status forced to 'Offline'
