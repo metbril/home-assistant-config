@@ -11,35 +11,6 @@ binary_sensor.workday:
   icon: hass:briefcase
 group.batteries:
   friendly_name: Batterijen
-light.bank:
-  icon: hass:floor-lamp
-light.bollamp:
-  icon: hass:lamp
-light.ergens:
-  icon: hass:lightbulb-group
-light.hoge_kast:
-  icon: hass:lamp
-light.lab:
-  icon: hass:lightbulb-group
-light.leeshoek:
-  icon: hass:lightbulb-group
-light.leeslamp:
-  icon: hass:track-light
-light.lichtstraat:
-  icon: hass:wall-sconce-flat
-light.living:
-  friendly_name: Woonkamer
-  icon: hass:sofa
-light.magnarp:
-  icon: hass:floor-lamp
-light.turbinelamp:
-  icon: hass:lava-lamp
-light.tv_meubel:
-  icon: hass:lamp
-light.willner:
-  icon: hass:lamp
-light.woonkamer:
-  icon: hass:lightbulb-group
 media_player.living_tv:
   friendly_name: TV Woonkamer
 sensor.aygo_recall:

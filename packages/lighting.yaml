@@ -1,0 +1,323 @@
+---
+############################################################
+## Lighting
+############################################################
+
+# All physical lights are added through UI configuration.
+# Customization of those lights is also done through the UI.
+# This package connects the dots.
+
+homeassistant:
+  customize:
+    light.lichtstraat:
+      icon: hass:wall-sconce-flat
+    light.living:
+      friendly_name: Woonkamer
+      icon: hass:sofa
+    light.magnarp:
+      icon: hass:floor-lamp
+
+############################################################
+## Light
+## https://www.home-assistant.io/integrations/light
+############################################################
+light:
+
+  - platform: group
+    name: Living
+    ## Individual lights, clockwise from the door
+    entities:
+      - light.hoge_kast
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      - light.leeslamp
+      - light.turbinelamp
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+      - light.bollamp
+      - light.willner
+
+  - platform: group
+    name: Lichtstraat
+    ## Individual lights, from left to right
+    entities:
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+
+  - platform: group
+    name: MAGNARP
+    ## Individual lights, from top to bottom
+    entities:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+
+################################################################################
+## Sensor
+## https://www.home-assistant.io/integrations/sensor
+################################################################################
+sensor:
+
+  ## https://www.home-assistant.io/integrations/history_stats
+  - platform: history_stats
+    name: Living Lights Today
+    entity_id: light.living
+    state: 'on'
+    type: time
+    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+  ## https://www.home-assistant.io/integrations/history_stats
+  - platform: history_stats
+    name: Living Lights YTD
+    entity_id: light.living
+    state: 'on'
+    type: time
+    start: '{{ now().replace(month=1).replace(day=1).replace(hour=0)
+      .replace(minute=0).replace(second=0) }}'
+    end: '{{ now() }}'
+
+############################################################
+## Scene
+## https://www.home-assistant.io/integrations/scene
+############################################################
+scene:
+  - name: Verlichting Woonkamer Gedimd
+    id: 88a1bee5-12d9-41b9-9928-1775d42f9727
+    icon: hass:brightness-3
+    entities:
+      light.hoge_kast:
+        state: 'off'
+      light.magnarp_1:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.magnarp_2:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.magnarp_3:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.leeslamp:
+        brightness: 3
+        color_temp: 440
+        state: 'on'
+      light.turbinelamp:
+        state: 'off'
+      light.lichtstraat_1:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_2:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_3:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_4:
+        brightness: 3
+        state: 'on'
+      light.bollamp:
+        state: 'off'
+      light.willner:
+        brightness: 3
+        color_temp: 435
+        state: 'on'
+
+  - name: Schemerverlichting
+    id: ec425f24-abca-428d-8a98-d6ea5aa374e8
+    icon: hass:weather-sunset
+    entities:
+      light.hoge_kast:
+        brightness: 179
+        rgb_color:
+          - 255
+          - 181
+          - 108
+        effect: none
+        state: 'on'
+      light.magnarp_1:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
+      light.magnarp_2:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
+      light.magnarp_3:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
+      light.leeslamp:
+        brightness: 140
+        color_temp: 440
+        state: 'on'
+      light.turbinelamp:
+        state: 'on'
+      light.lichtstraat_1:
+        brightness: 65
+        state: 'on'
+      light.lichtstraat_2:
+        brightness: 65
+        state: 'on'
+      light.lichtstraat_3:
+        brightness: 65
+        state: 'on'
+      light.lichtstraat_4:
+        brightness: 65
+        state: 'on'
+      light.bollamp:
+        brightness: 141
+        color_temp: 434
+        effect: none
+        state: 'on'
+      light.willner:
+        brightness: 175
+        color_temp: 435
+        state: 'on'
+
+  - name: Woonkamerverlichting Maximaal
+    id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
+    icon: hass:brightness-7
+    entities:
+      light.bollamp:
+        brightness: 255
+        color_temp: 326
+        effect: none
+        state: 'on'
+      light.hoge_kast:
+        brightness: 255
+        rgb_color:
+          - 255
+          - 244
+          - 216
+        effect: none
+        state: 'on'
+      light.leeslamp:
+        brightness: 255
+        color_temp: 360
+        state: 'on'
+      light.lichtstraat_1:
+        brightness: 254
+        state: 'on'
+      light.lichtstraat_2:
+        brightness: 254
+        state: 'on'
+      light.lichtstraat_3:
+        brightness: 254
+        state: 'on'
+      light.lichtstraat_4:
+        brightness: 254
+        state: 'on'
+      light.turbinelamp:
+        state: 'on'
+      light.willner:
+        brightness: 255
+        color_temp: 360
+        state: 'on'
+      light.magnarp_1:
+        brightness: 254
+        color_temp: 345
+        state: 'on'
+      light.magnarp_2:
+        brightness: 254
+        color_temp: 351
+        state: 'on'
+      light.magnarp_3:
+        brightness: 254
+        color_temp: 353
+        state: 'on'
+
+############################################################
+## Automation
+## https://www.home-assistant.io/integrations/automation
+############################################################
+automation:
+
+  ############################################################
+  - alias: Turn On Living Lights at Dusk
+    id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
+    description: >
+      Inschakelen schemerverlichting woonkamer voor zonsondergang
+    mode: single
+
+    trigger:
+      - event: sunset
+        offset: -00:30:00
+        platform: sun
+
+    action:
+      - scene: scene.schemerverlichting
+      - service: notify.twitter
+        data:
+          message: >
+            {{ [
+            "Vlak voor zonsondergang doe ik altijd de binnenverlichting aan.",
+            "Ik doe de lampen aan, omdat het straks binnen donker gaat worden.",
+            "Steeds zodra de zon verdwijnt,
+              doe ik de @TweetHue verlichting aan.",
+            "De hoogste tijd om de @IKEA @Tradfri verlichting in te schakelen."
+            ]
+            | random + "  #HomeAssistant
+            " + [ "#Beveiliging", "#Zonsondergang", "#Verlichting",
+            "#PhilipsHue", "Hue", "#IkeaTradfri", "#Tradfri", "#SmartLighting",
+            "#SmartHome", "#HomeAutomation"
+            ] | random }}
+          data:
+            media: >-
+              {% set pictures = [
+                "/config/www/img/sunset1.jpg",
+                "/config/www/img/sunset2.jpg",
+                "/config/www/img/sunset3.jpg",
+                "/config/www/img/sunset4.jpg",
+                "/config/www/img/sunset5.jpg",
+              ] %}
+              {{ pictures|random }}
+
+  ############################################################
+  - alias: Woonkamerverlichting uitschakelen bij vakantie
+    id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
+    description: >
+      Schakel de verlichting uit tussen 23:00 en 23:30
+      als we op vakantie zijn
+    mode: single
+
+    trigger:
+      - platform: time
+        at: '23:00:00'
+
+    condition:
+      - condition: state
+        entity_id: sensor.occupancy
+        state: vacation
+
+    action:
+      - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+      - service: light.turn_off
+        entity_id: light.living
+      - service: notify.admin
+        data:
+          title: Vakantie
+          message: Verlichting automatisch uitgeschakeld.
+
+  ############################################################
+  - alias: Woonkamerverlichting Links
+    id: b24e7ee3-fbd7-4e91-9116-095d7b24c843
+    description: Actie bij gebruik linker wandschakelaar
+    mode: single
+
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.wandschakelaar_links
+
+    action:
+      - service: light.turn_{{ trigger.to_state.state }}
+        data:
+          entity_id: light.living
+        entity_id: light.living
