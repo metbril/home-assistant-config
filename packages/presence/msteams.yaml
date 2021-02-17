@@ -162,9 +162,9 @@ automation:
     trigger:
       platform: template
       value_template: >
-        {{ as_timestamp(now()) - 
-            as_timestamp(states.sensor.teams_status_robert.last_changed) > 
-            1*3600 }}"
+        {{ as_timestamp(now()) -
+           as_timestamp(states.sensor.teams_status_robert.last_changed) >
+           1*3600 }}"
 
     condition:
       - condition: time
