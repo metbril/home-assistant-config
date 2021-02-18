@@ -14,7 +14,7 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.home_assistant
-        to: 'false'
+        to: 'off'
     action:
       - service: notify.admin
         data:
