@@ -1,0 +1,92 @@
+blueprint:
+  name: ZHA - IKEA Symfonisk sound controller for media
+  description: 'Control media with an IKEA Symfonisk sound controller (the spinny
+    ones).
+
+    Single press will toggle Play/Pause on your selected media player.
+
+    You can set functions for double press and triple press.
+
+    Rotating left/right will change the volume smoothly of the selected media player,
+    if that function is possible.'
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: IKEA Symfonisk controller to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: IKEA of Sweden
+          model: SYMFONISK Sound Controller
+    media_player:
+      name: Media Player
+      description: The media player to control
+      selector:
+        target:
+          entity:
+            domain: media_player
+    double_press:
+      name: Double press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    triple_press:
+      name: Triple press
+      description: Action to run on triple press
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one/266130
+mode: single
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input 'remote'
+action:
+- variables:
+    command: '{{ trigger.event.data.command }}'
+    cluster_id: '{{ trigger.event.data.cluster_id }}'
+    endpoint_id: '{{ trigger.event.data.endpoint_id }}'
+    args: '{{ trigger.event.data.args }}'
+- choose:
+  - conditions:
+    - '{{ command == ''toggle'' }}'
+    - '{{ cluster_id == 6 }}'
+    - '{{ endpoint_id == 1 }}'
+    sequence:
+    - service: media_player.media_play_pause
+      target: !input 'media_player'
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 1, 0] }}'
+    sequence: !input 'double_press'
+  - conditions:
+    - '{{ command == ''step'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 1, 0] }}'
+    sequence: !input 'triple_press'
+  - conditions:
+    - '{{ command == ''move'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [0, 195] }}'
+    sequence:
+    - service: media_player.volume_up
+      target: !input 'media_player'
+    - delay: 1
+  - conditions:
+    - '{{ command == ''move'' }}'
+    - '{{ cluster_id == 8 }}'
+    - '{{ endpoint_id == 1 }}'
+    - '{{ args == [1, 195] }}'
+    sequence:
+    - service: media_player.volume_down
+      target: !input 'media_player'
+    - delay: 1
