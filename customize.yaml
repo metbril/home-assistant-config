@@ -15,11 +15,6 @@ media_player.living_tv:
   friendly_name: TV Woonkamer
 sensor.aygo_recall:
   unit_of_measurement: recalls
-sensor.cert_pem:
-  friendly_name: Grootte SSL-certificaat
-sensor.cert_pem_last_updated:
-  friendly_name: Laatste wijziging SSL-certificaat
-  icon: calendar-clock
 sensor.christmas_countdown:
   friendly_name: Aftellen tot Kerstmis
 sensor.daily_energy_consumption_tarif_1:
@@ -46,18 +41,12 @@ sensor.monthly_energy_consumption_tarif_2:
   friendly_name: Maandelijks energieverbruik  (tarief 2)
 sensor.mother_s_day_countdown:
   friendly_name: Aftellen tot Moederdag
-sensor.myip:
-  friendly_name: Publiek IP-adres
-  icon: hass:wan
 sensor.niro_recall:
   unit_of_measurement: recalls
 sensor.p2000_brandweer:
   friendly_name: Brandweer
 sensor.sinterklaas_countdown:
   friendly_name: Aftellen tot Pakjesavond
-sensor.ssl_certificate_expiry:
-  friendly_name: Geldigheidsduur SSL-certificaat
-  unit_of_measurement: dagen
 sensor.time:
   friendly_name: Tijd
 sun.sun:
