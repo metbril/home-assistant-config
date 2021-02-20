@@ -88,13 +88,6 @@ homeassistant:
     sensor.weatherbit_snow:
       unit_of_measurement: mm/u
 
-    ################################################
-    ## Automation
-    ################################################
-
-    automation.rain_alarm:
-      friendly_name: Buienalarm
-
 ################################################
 ## Weather
 ################################################
@@ -202,19 +195,6 @@ binary_sensor:
     province: 'Zuid-Holland'
     language: 'ne'
 
-  - platform: template
-    sensors:
-      rain_alarm:
-        friendly_name: Rain Alarm
-        value_template: >-
-          {{ states('sensor.buienradar_precipitation_forecast_average')
-            | float > 0 }}
-        icon_template: >-
-          mdi:umbrella{% if
-            states('sensor.buienradar_precipitation_forecast_average')
-            | float == 0
-            %}-closed{% endif %}
-
 ################################################
 ## Camera
 ################################################
@@ -228,43 +208,6 @@ camera:
 ################################################
 
 automation:
-
-  - id: 068719c4-88f2-44b5-a809-e2513ae65604
-    alias: Regenalarm melden
-    trigger:
-      - platform: numeric_state
-        entity_id: sensor.buienradar_precipitation_forecast_average
-        above: 0.09
-    action:
-      - service: notify.robert
-        data:
-          title: ☔️ Regenalarm
-          message: 'Regen verwacht van {{
-            states(''sensor.buienradar_precipitation_forecast_average'')
-            }} {{
-            state_attr(''sensor.buienradar_precipitation_forecast_average'',
-            ''unit_of_measurement'')
-            }} '
-          data:
-            url: https://www.buienalarm.nl/{{state_attr('zone.home',
-              'latitude')}},
-              {{state_attr('zone.home',
-              'longitude')}}
-      - service: notify.twitter
-        data:
-          message: >-
-            {{ "☔️ Er wordt in de buurt {{
-            states('sensor.buienradar_precipitation_forecast_average') }} {{
-            state_attr('sensor.buienradar_precipitation_forecast_average',
-            'unit_of_measurement') }}
-            regen verwacht. " +
-            [
-            "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",
-            "Neem een paraplu \U0001F302 mee!",
-            "Je bent gewaarschuwd!",
-            "Hou @buienalarm in de gaten!"
-            ] | random + " https://www.buienalarm.nl/ #buienalarm" }}
-    mode: single
 
   - id: 6d8d1695-8120-49d7-9788-f17f121894ad
     alias: Weerwaarschuwing
