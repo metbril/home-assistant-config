@@ -138,13 +138,12 @@ automation:
       - service: notify.twitter
         data:
           message: >-
-            ☔️ Er wordt in de buurt 
-            {{ state_attr(trigger.entity_id,'label')|lower }}
-            verwacht.
+            ☔️ {{ state_attr(trigger.entity_id,'label') }}
+            vlakbij verwacht.
             {{ [
-            "Vergeet je regenjas \U0001F9E5 niet mee te nemen!",
-            "Neem een paraplu \U0001F302 mee!",
-            "Je bent gewaarschuwd!",
-            "Hou @buienalarm in de gaten!"
+            "Vergeet je regenjas 🧥 niet mee te nemen!",
+            "Neem een paraplu 🌂 mee!",
+            "Je bent ⚠️ gewaarschuwd!",
+            "Hou @buienalarm 🌧️ in de gaten!"
             ] | random  }}
             https://www.buienalarm.nl/ #buienalarm
