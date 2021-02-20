@@ -14,3 +14,4 @@ ignore: |
   known_devices.yaml
   scenes.yaml
   scripts.yaml
+  blueprints/automation/seamus65/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one.yaml
