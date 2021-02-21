@@ -1,7 +1,0 @@
-## https://www.home-assistant.io/integrations/workday/
-
-platform: workday
-name: Weekend
-country: NL
-workdays: [sat, sun]
-excludes: []  # don't exclude holidays

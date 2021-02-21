@@ -1,0 +1,61 @@
+sensor:
+
+  ##############################################################################
+  ## Time/Date
+  ## https://www.home-assistant.io/integrations/time_date
+  ##############################################################################
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+
+  - platform: template
+    sensors:
+
+      ##########################################################################
+      # Sensor that holds today's day
+      # Can be used for TTS or notifications
+      ##########################################################################
+      weekday:
+        friendly_name: 'Dag van de week'
+        # Dutch
+        value_template: >-
+          {{['maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag',
+          'zondag'][now().weekday()] }}
+        # English
+        # value_template: >-
+        #   {{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',
+        #   'Sunday'][now().weekday()] }}
+        icon_template: hass:calendar
+
+binary_sensor:
+
+  ##############################################################################
+  ## Determine if today is a workday (weekend nor holiday)
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: Workday
+    country: NL
+    workdays: [mon, tue, wed, thu, fri]
+
+  ##############################################################################
+  ## Determine if today is weekend, not taking holidays into account
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: Weekend
+    country: NL
+    workdays: [sat, sun]
+    excludes: []  # don't exclude holidays
+
+  ##############################################################################
+  ## Determine if today is a holiday
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: holiday
+    country: NL
+    workdays:
+      - holiday
+    excludes: []
