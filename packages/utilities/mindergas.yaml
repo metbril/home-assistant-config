@@ -17,7 +17,7 @@
 ##############################################################################
 rest_command:
   post_mindergas:
-    url: https://www.mindergas.nl/api/gas_meter_readings
+    url: https://www.mindergas.nl/api/meter_readings
     method: post
     headers:
       Content-Type: application/json
