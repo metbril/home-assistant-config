@@ -13,7 +13,7 @@
 ## - reading_date: The date formatted as YYYY-MM-DD
 ##
 ## Expects reading from end of day (23:59:59)
-## Use yesterday's date when posting reading right after midnigt.
+## Use yesterday's date when posting reading right after midnight.
 ##############################################################################
 rest_command:
   post_mindergas:
@@ -38,13 +38,11 @@ automation:
 
       The gas meter reading is updated once every hour,
       within 10 minutes after the full hour.
-      Posting as soon as possible after that, with a safe delay.
+      Posting as soon as possible after that, with a safe margin.
     mode: single
 
     trigger:
       - platform: time
-        ## run daily at 00:15:00
-        ## gas meter reading usually updated around 0:06
         at: '00:15:00'
 
     action:
@@ -57,6 +55,6 @@ automation:
       - service: logbook.log
         data:
           name: Gasverbruik
-          message: is verstuurd naar mindergas.nl
+          message: verstuurd naar mindergas.nl
           entity_id: sensor.gas_consumption
           domain: sensor
