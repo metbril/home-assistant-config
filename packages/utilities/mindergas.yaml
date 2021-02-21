@@ -1,27 +1,28 @@
 ---
-## mindergas.nl
+################################################################################
+## Mindergas
+## Post gas consumption to mindergas.nl
+## Robert van Bregt
+##
+## API documentation at https://www.mindergas.nl/member/api
+################################################################################
 
-################################################################################
-## REST Command
-## https://www.home-assistant.io/integrations/rest_command
-################################################################################
+##############################################################################
+## The REST command accepts 2 data elements:
+## - reading: Usually the current state of your gas consumpotion sensor
+## - reading_date: The date formatted as YYYY-MM-DD
+##
+## Expects reading from end of day (23:59:59)
+## Use yesterday's date when posting reading right after midnigt.
+##############################################################################
 rest_command:
-
-  ##############################################################################
-  ## Post current gas meter reading to mindergas.nl for yesterday
-  ## Should be executed as soon as the first meter change after midnight
-  ##
-  ## API documentation at https://www.mindergas.nl/member/api
-  ##############################################################################
   post_mindergas:
     url: https://www.mindergas.nl/api/gas_meter_readings
     method: post
     headers:
       Content-Type: application/json
       AUTH-TOKEN: !secret mindergas_token
-    payload: '{ "date": "{{(as_timestamp(now()) - (24*3600)) |
-      timestamp_custom(''%Y-%m-%d'', True) }}", "reading" : "{{
-      states(''sensor.gas_consumption'') }}" }'
+    payload: '{"date":"{{reading_date}}","reading":"{{reading}}"}'
 
 ################################################################################
 ## Automation
@@ -30,15 +31,14 @@ rest_command:
 automation:
 
   ##############################################################################
-  ## Post gas consumption to mindergas.nl daily at 00:15.
-  ##
-  ## The gas meter reading is every hour around 10 minutes after the full hour
-  ## Posting should happen after that
-  ##############################################################################
-  - alias: Post Gas Consumption
+  - alias: Post Gas Consumption to MinderGas.nl
     id: 00dff5ad-9600-4932-b4de-17eae6928528
     description: >
       Post gas consumption to mindergas.nl daily at 00:15.
+
+      The gas meter reading is updated once every hour,
+      within 10 minutes after the full hour.
+      Posting as soon as possible after that, with a safe delay.
     mode: single
 
     trigger:
@@ -46,8 +46,14 @@ automation:
         ## run daily at 00:15:00
         ## gas meter reading usually updated around 0:06
         at: '00:15:00'
+
     action:
       - service: rest_command.post_mindergas
+        data:
+          reading: "{{ states('sensor.gas_consumption') }}"
+          reading_date: "{{ (as_timestamp(now()) - (24*3600)) |
+            timestamp_custom('%Y-%m-%d', True) }}"
+
       - service: logbook.log
         data:
           name: Gasverbruik
