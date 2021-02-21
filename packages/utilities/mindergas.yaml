@@ -49,8 +49,7 @@ automation:
       - service: rest_command.post_mindergas
         data:
           reading: "{{ states('sensor.gas_consumption') }}"
-          reading_date: "{{ (as_timestamp(now()) - (24*3600)) |
-            timestamp_custom('%Y-%m-%d', True) }}"
+          reading_date: "{{ states('sensor.yesterday') }}"
 
       - service: logbook.log
         data:
