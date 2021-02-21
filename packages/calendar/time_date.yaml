@@ -13,6 +13,16 @@ sensor:
     sensors:
 
       ##########################################################################
+      # Calculate yesterday's date, for use in automations
+      ##########################################################################
+      yesterday:
+        friendly_name: Gisteren
+        value_template: >
+          {{(as_timestamp(states('sensor.date'))-(24*3600))
+          |timestamp_custom('%Y-%m-%d',True)}}
+        icon_template: hass:calendar
+
+      ##########################################################################
       # Sensor that holds today's day
       # Can be used for TTS or notifications
       ##########################################################################
