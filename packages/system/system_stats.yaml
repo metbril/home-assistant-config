@@ -1,0 +1,14 @@
+---
+homeassistant:
+  customize:
+    sensor.yaml_config_lines:
+      friendly_name: YAML configuratieregels
+      unit_of_measurement: 'regels'
+      icon: hass:file-code
+
+sensor:
+  - platform: command_line
+    name: YAML Config Lines
+    command: "find /config -name '*.yaml' | xargs cat | wc -l"
+    unit_of_measurement: 'lines'
+    scan_interval: 14400  ## every 4 hours
