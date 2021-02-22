@@ -2,5 +2,6 @@
 ## Car Wash
 ## https://github.com/Limych/ha-car_wash/
 ################################################################################
-platform: car_wash
-weather: weather.dark_sky
+sensor:
+  - platform: car_wash
+    weather: weather.dark_sky
