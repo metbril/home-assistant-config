@@ -1,9 +1,9 @@
 sensor:
 
-    ################################################################################
-    ## Alpha Vantage
-    ## https://www.home-assistant.io/integrations/alpha_vantage
-    ################################################################################
+  ################################################################################
+  ## Alpha Vantage
+  ## https://www.home-assistant.io/integrations/alpha_vantage
+  ################################################################################
 
   - platform: alpha_vantage
     api_key: !secret alpha_vantage_api_key

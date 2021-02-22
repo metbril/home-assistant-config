@@ -3,7 +3,7 @@ homeassistant:
   customize:
     media_player.living_tv:
       friendly_name: TV Woonkamer
-    
+
 ######################################################################
 ## Input Select
 ## https://www.home-assistant.io/integrations/input_select/
@@ -53,15 +53,14 @@ automation:
   - alias: Afspeellijst starten op speaker
     id: 67a5205f-4f1b-47a0-9bb6-f19c9102e0c1
     mode: single
-    
+
     trigger:
       - platform: state
         entity_id: input_select.playlist
-    
+
     action:
       - service: media_player.select_source
         data:
           entity_id: 'media_player.{{states(''input_select.media_player'')|
             lower|replace('' '',''_'')}}'
           source: '{{states(''input_select.playlist'') }}'
-    

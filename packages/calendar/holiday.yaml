@@ -3,7 +3,7 @@ homeassistant:
     sensor.holiday:
       friendly_name: Feestdag
       icon: hass:party-popper
-    
+
 ################################################################################
 # Holidays for Netherlands: https://www.webcal.fi/nl-NL/feestdagen.php
 # More info: https://www.webcal.fi/en/other_file_formats.php
@@ -25,7 +25,7 @@ sensor:
       {{ value }}
 
 automation:
-  
+
   - alias: Feestdag melden
     id: 5ce30bdc-dd3f-45a9-a96c-948bdba4065c
     description: ''

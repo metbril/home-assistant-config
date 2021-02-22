@@ -13,7 +13,7 @@ homeassistant:
       friendly_name: Datum
     sensor.time:
       friendly_name: Tijd
-            
+
 sensor:
 
   ##############################################################################

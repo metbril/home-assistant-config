@@ -2,11 +2,11 @@
 automation:
   - alias: Home Assistant Stop Tweet
     id: f1a564aa-c8da-4f88-bf61-b938627374b2
-    
+
     trigger:
       - platform: homeassistant
         event: shutdown
-    
+
     action:
       - service: notify.twitter
         data:
@@ -30,4 +30,3 @@ automation:
                 "/config/www/img/tv_color_bars.png"
               ] %}
               {{ pictures|random }}
-  

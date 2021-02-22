@@ -3,7 +3,7 @@ homeassistant:
     sensor.flag:
       friendly_name: Vlagdag
       icon: hass:flag
-    
+
 ################################################################################
 # Flag days for Netherlands: https://www.webcal.fi/nl-NL/vlag_dagen.php
 # More info: https://www.webcal.fi/en/other_file_formats.php

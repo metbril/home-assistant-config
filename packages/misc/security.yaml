@@ -39,7 +39,7 @@ script:
       - service: sonos.restore
         data:
           entity_id: "{{sound_player}}"
-  
+
 
 automation:
 
@@ -92,11 +92,11 @@ automation:
     description: >
       When no-one is at home, bark the dog.
     mode: single
-    
+
     trigger:
       - platform: state
         entity_id: switch.bel_voordeur
-    
+
     # Conditions are the opposite of speak automation
     condition:
       condition: or
@@ -110,7 +110,7 @@ automation:
         - condition: state
           entity_id: sensor.occupancy
           state: "vacation"
-    
+
     action:
       - service: script.bark_the_dog
 
@@ -120,11 +120,11 @@ automation:
     description: >
       When someone is at home, speak out loud that the doorbell is pressed.
     mode: single
-    
+
     trigger:
       - platform: state
         entity_id: switch.bel_voordeur
-    
+
     # Conditions are opposite of bark automation
     condition:
       condition: not
@@ -138,7 +138,7 @@ automation:
         - condition: state
           entity_id: sensor.occupancy
           state: "vacation"
-    
+
     action:
       - service: script.sonos_say
         data:
@@ -146,4 +146,3 @@ automation:
           volume_level: 0.3
           delay: 3
           message: Er wordt aangebeld aan de voordeur.
-      

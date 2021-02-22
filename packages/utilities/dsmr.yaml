@@ -9,7 +9,7 @@ homeassistant:
       friendly_name: Maandelijks energieverbruik  (tarief 1)
     sensor.monthly_energy_consumption_tarif_2:
       friendly_name: Maandelijks energieverbruik  (tarief 2)
-          
+
 ################################################################################
 ## DSMR
 ## https://www.home-assistant.io/integrations/dsmr
