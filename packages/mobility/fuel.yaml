@@ -132,7 +132,7 @@ automation:
       - service: notify.telegram
         data:
           message: >
-            {{ state_attr(trigger.entity_id,'friendly_name) }}
+            {{ state_attr(trigger.entity_id,'friendly_name') }}
             is gewijzigd naar
             {{ trigger.to_state.state }}
             {{ state_attr(trigger.entity_id,'unit_of_measurement')}}.
