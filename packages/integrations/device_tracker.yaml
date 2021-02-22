@@ -1,5 +1,0 @@
-################################################################################
-## Device Tracker
-## https://www.home-assistant.io/integrations/device_tracker
-################################################################################
-device_tracker: !include_dir_merge_named ../../entities/device_trackers
