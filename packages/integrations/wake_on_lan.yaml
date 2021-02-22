@@ -1,8 +1,0 @@
-################################################################################
-## Wake On LAN
-## https://www.home-assistant.io/integrations/wake_on_lan
-################################################################################
-
-# WOL is needed for (switching on) WebOS TV
-
-wake_on_lan:

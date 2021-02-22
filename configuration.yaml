@@ -24,3 +24,61 @@ automation: !include automations.yaml
 scene: !include scenes.yaml
 group: !include groups.yaml
 script: !include scripts.yaml
+
+##############################
+## Other integrations
+##############################
+
+config:
+discovery:
+frontend:
+  themes: !include_dir_merge_named ./themes
+hassio:
+
+http:
+  ip_ban_enabled: true
+  login_attempts_threshold: 10
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 172.30.33.0/24
+    - 127.0.0.1
+    - ::1
+
+ios:
+logger:
+  # logs:
+  #   RFXtrx: debug
+  default: warn
+lovelace:
+  mode: storage
+
+map:
+mobile_app:
+# WOL is needed for (switching on) WebOS TV
+spotify:
+  client_id: !secret spotify_client_id
+  client_secret: !secret spotify_client_secret
+telegram_bot:
+  - platform: polling
+    api_key: !secret telegram_bot_api_key
+    allowed_chat_ids:
+      - !secret telegram_bot_chat_id_robert
+tts:
+  - platform: google_translate
+    service_name: say
+    # cache: true
+    # cache_dir: /config/tts
+    time_memory: 3600
+    # http protocol doesn't work, ssl required for sonos
+    base_url: !secret tts_base_url
+    language: 'nl'
+wake_on_lan:
+
+webostv:
+  host: !secret living_tv_host
+  name: Living TV
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_tv_mac
+
