@@ -2,7 +2,7 @@
 ## Netgear
 ## https://www.home-assistant.io/integrations/netgear
 ################################################################################
-sensor
+device_tracker:
   - platform: netgear
     host: !secret netgear_host
     port: !secret netgear_port

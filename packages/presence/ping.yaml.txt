@@ -2,7 +2,7 @@
 ## Ping (ICMP)
 ## https://www.home-assistant.io/integrations/ping
 ################################################################################
-sensor:
+device_tracker:
   - platform: ping
     hosts:
       # Use device names that are also used by Nmap and Netgear trackers.
