@@ -1,3 +1,0 @@
-name: telegram
-platform: telegram
-chat_id: !secret telegram_bot_chat_id_robert

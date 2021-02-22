@@ -1,4 +1,0 @@
-name: admin
-platform: group
-services:
-  - service: mobile_app_pontius

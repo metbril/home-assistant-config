@@ -1,0 +1,32 @@
+sensor:
+
+    ################################################################################
+    ## Alpha Vantage
+    ## https://www.home-assistant.io/integrations/alpha_vantage
+    ################################################################################
+
+  - platform: alpha_vantage
+    api_key: !secret alpha_vantage_api_key
+    symbols:
+      # - symbol: AEX
+      #   name: Stocks AEX
+      # - symbol: INGA
+      # - symbol: GOOGL
+      # - symbol: GOOG
+      - symbol: AAPL
+      # - symbol: AMZN
+      # - symbol: MSFT
+      # - symbol: FB
+      # - symbol: TSLA
+      # - symbol: NYT
+    scan_interval: 600  # 10 minutes
+
+    ################################################################################
+    ## Fixer
+    ## https://www.home-assistant.io/integrations/fixer
+    ################################################################################
+
+  - platform: fixer
+    target: USD
+    name: Exchange Rate USD
+    api_key: !secret fixer_api_key

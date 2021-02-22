@@ -3,11 +3,12 @@
 ##
 ## https://www.home-assistant.io/integrations/history_stats
 ################################################################################
-platform: history_stats
-name: Living TV 24h
-entity_id: media_player.living_tv
-state: 'on'
-type: time
-end: '{{ now() }}'
-duration:
-  hours: 24
+sensor:
+  - platform: history_stats
+    name: Living TV 24h
+    entity_id: media_player.living_tv
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      hours: 24

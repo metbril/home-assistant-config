@@ -1,3 +1,19 @@
+---
+homeassistant:
+  customize:
+    binary_sensor.holiday:
+      friendly_name: Feestdag
+      icon: hass:party-popper
+    binary_sensor.weekend:
+      icon: hass:food-croissant
+    binary_sensor.workday:
+      friendly_name: Werkdag
+      icon: hass:briefcase
+    sensor.date:
+      friendly_name: Datum
+    sensor.time:
+      friendly_name: Tijd
+            
 sensor:
 
   ##############################################################################
@@ -26,6 +42,10 @@ sensor:
       # Sensor that holds today's day
       # Can be used for TTS or notifications
       ##########################################################################
+      # {% set w = strptime(states('sensor.date'),
+      #   '%Y-%m-%d').strftime('%w')|int %}
+      # {{['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag',
+      #   'zaterdag'][w]}}
       weekday:
         friendly_name: 'Dag van de week'
         # Dutch
@@ -37,7 +57,6 @@ sensor:
         #   {{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',
         #   'Sunday'][now().weekday()] }}
         icon_template: hass:calendar
-
 binary_sensor:
 
   ##############################################################################

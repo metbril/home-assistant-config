@@ -1,7 +1,1 @@
-batteries:
-    name: Batteries
-    entities:
-      # phones
-      - sensor.pontius_battery_level
-      - sensor.robertipad_battery_level
-      - sensor.iphone_van_robert_werk_battery_level
+[]

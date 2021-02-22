@@ -1,5 +1,0 @@
-################################################################################
-## Automation
-## https://www.home-assistant.io/integrations/automation
-################################################################################
-automation: !include_dir_list ../../automations

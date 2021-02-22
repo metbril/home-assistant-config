@@ -1,4 +1,15 @@
 ---
+homeassistant:
+  customize:
+    sensor.daily_energy_consumption_tarif_1:
+      friendly_name: Dagelijks energieverbruik  (tarief 1)
+    sensor.daily_energy_consumption_tarif_2:
+      friendly_name: Dagelijks energieverbruik  (tarief 2)
+    sensor.monthly_energy_consumption_tarif_1:
+      friendly_name: Maandelijks energieverbruik  (tarief 1)
+    sensor.monthly_energy_consumption_tarif_2:
+      friendly_name: Maandelijks energieverbruik  (tarief 2)
+          
 ################################################################################
 ## DSMR
 ## https://www.home-assistant.io/integrations/dsmr
