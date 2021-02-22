@@ -123,11 +123,11 @@ automation:
     trigger:
       - platform: state
         entity_id:
-        - sensor.adviesprijs_euro95
-        - sensor.euro95_sakko_metaalhof
-        - sensor.euro95_dijktank_kanaalweg
-        - sensor.euro95_tinq_bermweg
-        - sensor.euro95_lukoil_schermerhoek
+          - sensor.adviesprijs_euro95
+          - sensor.euro95_sakko_metaalhof
+          - sensor.euro95_dijktank_kanaalweg
+          - sensor.euro95_tinq_bermweg
+          - sensor.euro95_lukoil_schermerhoek
     action:
       - service: notify.telegram
         data:

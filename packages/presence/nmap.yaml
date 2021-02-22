@@ -2,7 +2,7 @@
 ## Nmap
 ## https://www.home-assistant.io/integrations/nmap
 ################################################################################
-sensor: 
+sensor:
   - platform: nmap_tracker
     hosts:
       # - 192.168.1.0/24
