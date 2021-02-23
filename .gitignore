@@ -46,4 +46,8 @@ energy_consumption.csv
 # custom folders
 ssh/
 
+# custom components
+# authenticated
+.ip_authenticated.yaml
+
 # exceptions (!...)
