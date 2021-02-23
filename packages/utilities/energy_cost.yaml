@@ -75,4 +75,3 @@ sensor:
                (states('input_number.gas_rate') | float)) / 100) | round(2) }}
         icon_template: hass:currency-eur
         unit_of_measurement: €
-
