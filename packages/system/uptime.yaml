@@ -1,5 +1,34 @@
 ---
+sensor:
+  - platform: template
+    sensors:
+      ha_startup_time:
+        friendly_name: HA Opstarttijd
+        device_class: "timestamp"
+        value_template: >
+          {{ as_timestamp((states.automation.ha_startup.attributes
+            |default).last_triggered|default(None))
+            |timestamp_local or 'unknown' }}
+
 automation:
+
+  ##############################################################################
+  - alias: HA Startup
+    id: ce22b268-dd0c-4991-a566-b1aa1fb80f97
+    description: Empty automation to log when HA has started
+    mode: single
+    initial_state: true
+
+    trigger:
+      - platform: homeassistant
+        event: start
+
+    action:
+      - service: automation.turn_off
+        data:
+          entity_id: automation.ha_startup
+
+  ##############################################################################
   - alias: Home Assistant Stop Tweet
     id: f1a564aa-c8da-4f88-bf61-b938627374b2
 
@@ -30,3 +59,4 @@ automation:
                 "/config/www/img/tv_color_bars.png"
               ] %}
               {{ pictures|random }}
+
