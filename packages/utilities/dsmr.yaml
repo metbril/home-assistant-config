@@ -53,13 +53,19 @@ utility_meter:
   daily_energy_consumption_tarif_1:
     source: sensor.energy_consumption_tarif_1
     cycle: daily
+
   daily_energy_consumption_tarif_2:
     source: sensor.energy_consumption_tarif_2
+    cycle: daily
+
+  daily_gas_consumption:
+    source: sensor.gas_consumption
     cycle: daily
 
   monthly_energy_consumption_tarif_1:
     source: sensor.energy_consumption_tarif_1
     cycle: monthly
+
   monthly_energy_consumption_tarif_2:
     source: sensor.energy_consumption_tarif_2
     cycle: monthly

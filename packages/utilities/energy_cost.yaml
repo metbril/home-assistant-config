@@ -1,0 +1,78 @@
+---
+################################################################################
+## Energy Cost - Calculate daily energy cost for awareness
+## ㎥ / m³
+##
+## Uses manual input for rates.
+## My energy rates are hidden behind an account, so can't be scraped easily.
+##
+## Dependencies:
+##   - dsmr.yaml
+################################################################################
+
+input_number:
+
+  energy_rate_tarif_1:
+    name: Energietarief 1
+    min: 0.0
+    max: 100.0
+    step: 0.001
+    mode: box
+    unit_of_measurement: c€/kWh
+    icon: hass:currency-eur
+
+  energy_rate_tarif_2:
+    name: Energietarief 2
+    min: 0.0
+    max: 100.0
+    step: 0.001
+    mode: box
+    unit_of_measurement: c€/kWh
+    icon: hass:currency-eur
+
+  gas_rate:
+    name: Gastarief
+    min: 0.0
+    max: 100.0
+    step: 0.001
+    mode: box
+    unit_of_measurement: c€/m³
+    icon: hass:currency-eur
+
+sensor:
+  - platform: template
+    sensors:
+
+      daily_energy_cost_tarif_1:
+        friendly_name: Dagelijkse energiekosten normaaltarief
+        value_template: >
+          {{ (states('sensor.daily_energy_consumption_tarif_1') | float) *
+             (states('input_number.energy_rate_tarif_1') | float) }}
+        icon_template: hass:currency-eur
+        unit_of_measurement: c€
+
+      daily_energy_cost_tarif_2:
+        friendly_name: Dagelijkse energiekosten daltarief
+        value_template: >
+          {{ (states('sensor.daily_energy_consumption_tarif_2') | float) *
+             (states('input_number.energy_rate_tarif_2') | float) }}
+        icon_template: hass:currency-eur
+        unit_of_measurement: c€
+
+      daily_energy_cost:
+        friendly_name: Dagelijkse energiekosten
+        value_template: >
+          {{ (((states('sensor.daily_energy_cost_tarif_1') | float) +
+               (states('sensor.daily_energy_cost_tarif_2') | float)) / 100)
+             | round(2) }}
+        icon_template: hass:currency-eur
+        unit_of_measurement: €
+
+      daily_gas_cost:
+        friendly_name: Dagelijkse gaskosten
+        value_template: >
+          {{ (((states('sensor.daily_gas_consumption') | float) *
+               (states('input_number.gas_rate') | float)) / 100) | round(2) }}
+        icon_template: hass:currency-eur
+        unit_of_measurement: €
+
