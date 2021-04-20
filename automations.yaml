@@ -15,3 +15,37 @@
     target:
       entity_id: scene.gedimd_2
   mode: single
+- id: '1616840387700'
+  alias: Achtergevel aan
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunset
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 6086240726c371f6e85175a94e2bb201
+    entity_id: light.achtergevel
+    domain: light
+    brightness_pct: 70
+  - service: notify.robert
+    data:
+      message: Achtergevel is ingeschakeld
+  mode: single
+- id: '1616840430327'
+  alias: Achtergevel uit
+  description: ''
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: -01:00:00
+  condition: []
+  action:
+  - type: turn_off
+    device_id: 6086240726c371f6e85175a94e2bb201
+    entity_id: light.achtergevel
+    domain: light
+  - service: notify.robert
+    data:
+      message: 💡 Achtergevel is uitgeschakeld
+  mode: single
