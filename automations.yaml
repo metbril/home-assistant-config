@@ -1,1 +1,17 @@
-[]
+- id: '1618120380836'
+  alias: Dim verlichting
+  description: ''
+  trigger:
+  - platform: time
+    at: '23:30'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: 'on'
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.gedimd_2
+  mode: single
