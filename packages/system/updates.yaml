@@ -34,7 +34,7 @@ sensor:
     source: local
 
   - platform: version
-    source: hassio
+    source: supervisor
     image: odroid-n2
 
 ################################################
