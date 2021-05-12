@@ -4,6 +4,12 @@
 # yamllint disable-line rule:line-length
 # Credits: https://github.com/pinkywafer/Home-Assistant_Config/blob/master/packages/system/homeassistant_os_update.yaml
 
+homeassistant:
+  customize:
+    sensor.hassos_current_version:
+      icon: hass:package-up
+
+
 ################################################
 ## Sensor
 ################################################
@@ -33,7 +39,7 @@ automation:
       - condition: template
         value_template: >-
           {{ states("sensor.hassos_current_version") !=
-             state_attr("sensor.latest_version", "hassos") }}
+             state_attr("sensor.latest_version", "os") }}
     action:
       - service: notify.admin
         data:
@@ -42,7 +48,7 @@ automation:
             There is an update to HassOS:
               * {{ states("sensor.hassos_current_version")
               }} -> {{ state_attr("sensor.latest_version",
-              "hassos") }}
+              "os") }}
           data:
             push:
               thread-id: updates
@@ -56,7 +62,7 @@ automation:
             There is an update to HassOS:
               * {{ states("sensor.hassos_current_version")
               }} -> {{ state_attr("sensor.latest_version",
-              "hassos") }}
+              "os") }}
           notification_id: update_hassos
 
   - alias: HassOS Update Notification Dismiss
@@ -72,7 +78,7 @@ automation:
       - condition: template
         value_template: >-
           {{ states("sensor.hassos_current_version") ==
-          state_attr("sensor.latest_version", "hassos") }}
+          state_attr("sensor.latest_version", "os") }}
     action:
       # Triggers each entity update (every few minutes)
       # - service: notify.admin
