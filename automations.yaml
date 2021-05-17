@@ -10,6 +10,9 @@
     - condition: state
       entity_id: input_boolean.occupancy_vacation
       state: 'on'
+  - condition: state
+    entity_id: light.living
+    state: 'on'
   action:
   - service: scene.turn_on
     target:
