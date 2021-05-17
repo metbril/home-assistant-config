@@ -45,10 +45,6 @@ jobs:
         run: |
           git clone https://github.com/metbril/home-assistant-brandstofprijzen.git
           mv -v home-assistant-brandstofprijzen/custom_components/* ./custom_components
-      - name: Clone custom component Buienalarm
-        run: |
-          git clone https://github.com/gieljnssns/buienalarm-sensor-homeassistant
-          mv -v buienalarm-sensor-homeassistant/custom_components/* ./custom_components
       - name: Clone custom component RDW
         run: |
           git clone https://github.com/eelcohn/home-assistant-rdw.git
