@@ -54,10 +54,6 @@ lovelace:
 
 map:
 mobile_app:
-# WOL is needed for (switching on) WebOS TV
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
 telegram_bot:
   - platform: polling
     api_key: !secret telegram_bot_api_key
@@ -72,12 +68,3 @@ tts:
     # http protocol doesn't work, ssl required for sonos
     base_url: !secret tts_base_url
     language: 'nl'
-wake_on_lan:
-
-webostv:
-  host: !secret living_tv_host
-  name: Living TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret living_tv_mac
