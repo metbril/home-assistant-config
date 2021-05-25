@@ -5,3 +5,7 @@ adguard_bijwerken:
     data: {}
   mode: single
   icon: hass:shield-refresh
+restart_home_assistant:
+  alias: Herstarten Home Assistant
+  sequence:
+  - service: homeassistant.restart
