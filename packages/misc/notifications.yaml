@@ -43,6 +43,11 @@ notify:
       - service: robert
       - service: living_tv
 
+  - name: robert
+    platform: group
+    services:
+      - service: robert_mobile
+
 automation:
   - alias: Persistente meldingen doorsturen naar beheerder
     id: 7319632e-f122-4a54-a81c-569d5601446a
