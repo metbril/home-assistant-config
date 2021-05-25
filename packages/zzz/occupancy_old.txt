@@ -1,0 +1,222 @@
+---
+############################################################################
+## @package     : Occupancy
+## @description : Manage home occupancy
+## @author      : Robert van Bregt
+## @date        : 2019-12-28
+##
+## Inspired by a post by @Tomahawk in the community thread:
+## https://community.home-assistant.io/t/55934/8
+############################################################################
+
+homeassistant:
+  customize:
+
+    ########################################################################
+    ## Node Anchors
+    ########################################################################
+    package.node_anchors:
+      customize: &customize
+        package: 'occupancy'
+
+    ########################################################################
+    ## Binary Sensor
+    ########################################################################
+    binary_sensor.occupancy:
+      <<: *customize
+      friendly_name: Bezetting
+
+    ########################################################################
+    ## Input Boolean
+    ########################################################################
+    input_boolean.occupancy_home:
+      <<: *customize
+      friendly_name: Thuis
+      icon: hass:home-account
+
+    input_boolean.occupancy_away:
+      <<: *customize
+      friendly_name: Weg
+      icon: hass:exit-run
+
+    input_boolean.occupancy_asleep:
+      <<: *customize
+      friendly_name: Slapend
+      icon: hass:sleep
+
+    input_boolean.occupancy_guests:
+      <<: *customize
+      friendly_name: Gasten
+      icon: hass:key
+
+    input_boolean.occupancy_vacation:
+      <<: *customize
+      friendly_name: Vakantie
+      icon: hass:airplane-takeoff
+
+    ########################################################################
+    ## Sensor
+    ########################################################################
+
+    sensor.occupancy:
+      <<: *customize
+      friendly_name: Bezetting
+
+    ########################################################################
+    ## Automation
+    ########################################################################
+
+    automation.occupancy_sync:
+      <<: *customize
+      friendly_name: Synchroniseer Bezetting
+    automation.occupancy_default:
+      <<: *customize
+      friendly_name: Bezetting standaard instellen
+    automation.notify_absence_enabled:
+      <<: *customize
+      friendly_name: Melden afwezigheid ingeschakeld
+
+############################################################################
+## Input Boolean
+## https://www.home-assistant.io/components/input_boolean/
+## State is restored when no initial value is set
+############################################################################
+
+input_boolean:
+  occupancy_home:
+  occupancy_away:
+  occupancy_asleep:
+  occupancy_guests:
+  occupancy_vacation:
+
+############################################################################
+## Sensor
+############################################################################
+
+sensor:
+  - platform: template
+    sensors:
+      occupancy:
+        friendly_name: "Occupancy"
+        value_template: >-
+          {% if is_state('input_boolean.occupancy_home', 'on') %}
+            home
+          {% elif is_state('input_boolean.occupancy_away', 'on') %}
+            away
+          {% elif is_state('input_boolean.occupancy_asleep', 'on') %}
+            asleep
+          {% elif is_state('input_boolean.occupancy_guests', 'on') %}
+            guests
+          {% elif is_state('input_boolean.occupancy_vacation', 'on') %}
+            vacation
+          {% endif %}
+        icon_template: >-
+          {% if is_state('input_boolean.occupancy_home', 'on') %}
+            mdi:home-account
+          {% elif is_state('input_boolean.occupancy_away', 'on') %}
+            mdi:exit-run
+          {% elif is_state('input_boolean.occupancy_asleep', 'on') %}
+            mdi:sleep
+          {% elif is_state('input_boolean.occupancy_guests', 'on') %}
+            mdi:key
+          {% elif is_state('input_boolean.occupancy_vacation', 'on') %}
+            mdi:airplane-takeoff
+          {% endif %}
+
+############################################################################
+## Binary Sensor
+############################################################################
+
+binary_sensor:
+  - platform: template
+    sensors:
+      occupancy:
+        friendly_name: "Occupancy"
+        value_template: >-
+          {{ is_state('sensor.occupancy', 'home')
+            or is_state('sensor.occupancy', 'away')
+            or is_state('sensor.occupancy', 'asleep')
+            or is_state('sensor.occupancy', 'guests')
+            or is_state('sensor.occupancy', 'vacation') }}
+        icon_template: >-
+          {% if is_state('sensor.occupancy', 'home') %}
+            mdi:home-account
+          {% elif is_state('sensor.occupancy', 'away') %}
+            mdi:exit-run
+          {% elif is_state('sensor.occupancy', 'asleep') %}
+            mdi:sleep
+          {% elif is_state('sensor.occupancy', 'guests') %}
+            mdi:key
+          {% elif is_state('sensor.occupancy', 'vacation') %}
+            mdi:airplane-takeoff
+          {% endif %}
+
+############################################################################
+## Automation
+############################################################################
+
+automation:
+
+  - alias: Occupancy Sync
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id:
+          - input_boolean.occupancy_home
+          - input_boolean.occupancy_away
+          - input_boolean.occupancy_asleep
+          - input_boolean.occupancy_guests
+          - input_boolean.occupancy_vacation
+        to: 'on'
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: >
+            {% set booleans = [ 'input_boolean.occupancy_home',
+              'input_boolean.occupancy_away', 'input_boolean.occupancy_asleep',
+              'input_boolean.occupancy_guests',
+              'input_boolean.occupancy_vacation' ] |
+              reject('equalto', trigger.entity_id) %}
+            {{ booleans | list | join(', ') }}
+
+  - alias: Occupancy Default
+    initial_state: true
+    trigger:
+      - platform: state
+        entity_id:
+          - binary_sensor.occupancy
+        to: 'off'
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.occupancy_home
+
+  ## Notify when vacation or guests is enabled,
+  ##   and daily when still in vacation or guest mode
+  - alias: Notify Absence Enabled
+    trigger:
+      - platform: state
+        entity_id: sensor.occupancy
+        to: 'vacation'
+      - platform: state
+        entity_id: sensor.occupancy
+        to: 'guests'
+      - platform: time
+        at: "09:00:00"
+    condition:
+      condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.occupancy
+          state: 'vacation'
+        - condition: state
+          entity_id: sensor.occupancy
+          state: 'guests'
+    action:
+      - service: notify.admin
+        data:
+          title: "Afwezig"
+          message: >
+            {%- set i = 'input_boolean.occupancy_' +
+            states('sensor.occupancy') -%}
+            Bezetting is ingeschakeld op {{ state_attr(i, 'friendly_name') }}

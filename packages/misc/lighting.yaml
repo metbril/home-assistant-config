@@ -294,8 +294,8 @@ automation:
 
     condition:
       - condition: state
-        entity_id: sensor.occupancy
-        state: vacation
+        entity_id: input_boolean.occupancy_vacation
+        state: 'on'
 
     action:
       - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
