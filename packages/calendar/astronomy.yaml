@@ -3,4 +3,5 @@ homeassistant:
   customize:
     sun.sun:
       friendly_name: Zon
+
 sun:
