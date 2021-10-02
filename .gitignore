@@ -15,6 +15,7 @@ tts/
 custom_components/
 www/
 www/community/
+image/
 
 # zwave
 OZW_Log.txt
