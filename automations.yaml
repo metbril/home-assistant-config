@@ -31,9 +31,6 @@
     entity_id: light.achtergevel
     domain: light
     brightness_pct: 70
-  - service: notify.robert
-    data:
-      message: Achtergevel is ingeschakeld
   mode: single
 - id: '1616840430327'
   alias: Achtergevel uit
@@ -48,7 +45,4 @@
     device_id: 6086240726c371f6e85175a94e2bb201
     entity_id: light.achtergevel
     domain: light
-  - service: notify.robert
-    data:
-      message: 💡 Achtergevel is uitgeschakeld
   mode: single
