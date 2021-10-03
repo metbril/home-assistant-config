@@ -37,6 +37,37 @@ sensor:
           'icon')}}"
         unique_id: sensor.teams_activity_robert
 
+  - platform: history_stats
+    name: Microsoft Teams Call Time Today Robert
+    entity_id: sensor.teams_activity_robert
+    state: "In gesprek"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: Microsoft Teams Call Count Today Robert
+    entity_id: sensor.teams_activity_robert
+    state: "In gesprek"
+    type: count
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  # How long has Teams been online on the laptop
+  # Tracks any state other than Offline or Unknown
+  - platform: history_stats
+    name: Microsoft Teams Online Today Robert
+    entity_id: sensor.teams_status_robert
+    state:
+      - Beschikbaar
+      - Bezet
+      - Niet storen
+      - Afwezig
+      - Zo terug
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
 ############################################################
 binary_sensor:
   - platform: template
@@ -160,21 +191,28 @@ automation:
     mode: single
 
     trigger:
+      # Teams status has not changed for more than 2 hours
       platform: template
       value_template: >
         {{ as_timestamp(now()) -
-           as_timestamp(states.sensor.teams_status_robert.last_changed) >
-           1*3600 }}"
+           as_timestamp(states.input_text.teams_status_robert.last_changed) >
+           2*3600 }}
 
     condition:
-      - condition: time
-        after: "18:00:00"
+      # not a workday or after 18:00 ?
+      - condition: or
+        conditions:
+          - condition: state
+            entity_id: binary_sensor.workday
+            state: "off"
+          - condition: time
+            after: "18:00:00"
 
     action:
       - service: input_text.set_value
         data:
           entity_id: input_text.teams_status_robert
-          value: Offline
+          value: unknown # Don't use Offline to differentiate
       - service: notify.robert
         data:
-          message: Microsoft Teams status forced to 'Offline'
+          message: Microsoft Teams status forced to 'Unknown'
