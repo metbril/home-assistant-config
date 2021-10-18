@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.1
 
@@ -30,7 +30,7 @@ jobs:
         version: ["stable", "beta", "dev"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v2.3.5
       - name: Create fake empty files
         run: |
           touch ./home-assistant_v2.db
