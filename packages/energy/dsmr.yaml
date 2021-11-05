@@ -5,6 +5,8 @@ homeassistant:
       friendly_name: Dagelijks energieverbruik  (tarief 1)
     sensor.daily_energy_consumption_tarif_2:
       friendly_name: Dagelijks energieverbruik  (tarief 2)
+    sensor.daily_gas_consumption:
+      friendly_name: Dagelijks gasverbruik
     sensor.monthly_energy_consumption_tarif_1:
       friendly_name: Maandelijks energieverbruik  (tarief 1)
     sensor.monthly_energy_consumption_tarif_2:
@@ -44,11 +46,34 @@ sensor:
           {{ states('sensor.monthly_energy_consumption_tarif_1')|float +
               states('sensor.monthly_energy_consumption_tarif_2')|float }}
 
+  - platform: statistics
+    name: Daily Gas Consumption Statistics
+    entity_id: sensor.daily_gas_consumption
+    sampling_size: 24  # last 60 values (e.g. 1 hour)
+
+  - platform: statistics
+    name: Gas Consumption Statistics
+    entity_id: sensor.gas_consumption
+    sampling_size: 24  # last 60 values (e.g. 1 hour)
+
+  - platform: filter
+    name: Daily Gas Consumption Moving Average
+    entity_id: sensor.daily_gas_consumption
+    filters:
+      - filter: time_simple_moving_average
+        window_size: "24:00:00"
+        precision: 3
+
+
 ################################################################################
 ## Utility Meter
 ## https://www.home-assistant.io/components/utility_meter/
 ################################################################################
 utility_meter:
+
+  hourly_gas_consumption:
+    source: sensor.gas_consumption
+    cycle: hourly
 
   daily_energy_consumption_tarif_1:
     source: sensor.energy_consumption_tarif_1
