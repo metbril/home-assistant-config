@@ -1,6 +1,7 @@
 # home assistant files
 home-assistant_v2.db
 home-assistant.log
+home-assistant.log*
 ip_bans.yaml
 known_devices.yaml
 secrets.yaml
@@ -42,7 +43,7 @@ OZW_Log.txt
 *.sqlite-journal
 
 # custom files
-energy_consumption.csv
+*.csv
 
 # custom folders
 ssh/
