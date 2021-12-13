@@ -53,7 +53,7 @@ light:
     name: MAGNARP
     ## Individual lights, from top to bottom
     entities:
-      - light.magnarp_1
+      # - light.magnarp_1
       - light.magnarp_2
       - light.magnarp_3
 
@@ -95,10 +95,10 @@ scene:
     entities:
       light.hoge_kast:
         state: 'off'
-      light.magnarp_1:
-        brightness: 3
-        color_temp: 400
-        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 3
+      #   color_temp: 400
+      #   state: 'on'
       light.magnarp_2:
         brightness: 3
         color_temp: 400
@@ -145,10 +145,10 @@ scene:
           - 108
         effect: none
         state: 'on'
-      light.magnarp_1:
-        brightness: 85
-        color_temp: 400
-        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 85
+      #   color_temp: 400
+      #   state: 'on'
       light.magnarp_2:
         brightness: 85
         color_temp: 400
@@ -163,18 +163,18 @@ scene:
         state: 'on'
       light.turbinelamp:
         state: 'on'
-      light.lichtstraat_1:
-        brightness: 65
-        state: 'on'
-      light.lichtstraat_2:
-        brightness: 65
-        state: 'on'
-      light.lichtstraat_3:
-        brightness: 65
-        state: 'on'
-      light.lichtstraat_4:
-        brightness: 65
-        state: 'on'
+      # light.lichtstraat_1:
+      #   brightness: 65
+      #   state: 'on'
+      # light.lichtstraat_2:
+      #   brightness: 65
+      #   state: 'on'
+      # light.lichtstraat_3:
+      #   brightness: 65
+      #   state: 'on'
+      # light.lichtstraat_4:
+      #   brightness: 65
+      #   state: 'on'
       light.bollamp:
         brightness: 141
         color_temp: 434
@@ -225,13 +225,13 @@ scene:
         brightness: 255
         color_temp: 360
         state: 'on'
-      light.magnarp_1:
-        brightness: 254
-        color_temp: 345
+      # light.magnarp_1:
+      #   brightness: 254
+      #   color_temp: 353
         state: 'on'
       light.magnarp_2:
         brightness: 254
-        color_temp: 351
+        color_temp: 353
         state: 'on'
       light.magnarp_3:
         brightness: 254
@@ -246,13 +246,13 @@ scene:
         color_mode: hs
         brightness: 128
         hs_color:
-        - 29.725
-        - 42.745
+          - 29.725
+          - 42.745
         effect: none
         state: 'on'
 
-      light.magnarp_1:
-        state: 'off'
+      # light.magnarp_1:
+      #   state: 'off'
 
       light.magnarp_2:
         state: 'off'
@@ -268,7 +268,7 @@ scene:
 
       light.turbinelamp:
         state: 'off'
-  
+
       light.lichtstraat_1:
         state: 'off'
 
