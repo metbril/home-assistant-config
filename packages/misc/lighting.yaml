@@ -228,7 +228,7 @@ scene:
       # light.magnarp_1:
       #   brightness: 254
       #   color_temp: 353
-        state: 'on'
+      #   state: 'on'
       light.magnarp_2:
         brightness: 254
         color_temp: 353
