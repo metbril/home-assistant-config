@@ -28,7 +28,7 @@ light:
     ## Individual lights, clockwise from the door
     entities:
       - light.hoge_kast
-      # - light.magnarp_1
+      - light.magnarp_1
       - light.magnarp_2
       - light.magnarp_3
       - light.leeslamp
@@ -53,7 +53,7 @@ light:
     name: MAGNARP
     ## Individual lights, from top to bottom
     entities:
-      # - light.magnarp_1
+      - light.magnarp_1
       - light.magnarp_2
       - light.magnarp_3
 
@@ -95,10 +95,10 @@ scene:
     entities:
       light.hoge_kast:
         state: 'off'
-      # light.magnarp_1:
-      #   brightness: 3
-      #   color_temp: 400
-      #   state: 'on'
+      light.magnarp_1:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
       light.magnarp_2:
         brightness: 3
         color_temp: 400
@@ -145,10 +145,10 @@ scene:
           - 108
         effect: none
         state: 'on'
-      # light.magnarp_1:
-      #   brightness: 85
-      #   color_temp: 400
-      #   state: 'on'
+      light.magnarp_1:
+        brightness: 85
+        color_temp: 400
+        state: 'on'
       light.magnarp_2:
         brightness: 85
         color_temp: 400
@@ -225,10 +225,10 @@ scene:
         brightness: 255
         color_temp: 360
         state: 'on'
-      # light.magnarp_1:
-      #   brightness: 254
-      #   color_temp: 353
-      #   state: 'on'
+      light.magnarp_1:
+        brightness: 254
+        color_temp: 353
+        state: 'on'
       light.magnarp_2:
         brightness: 254
         color_temp: 353
@@ -251,8 +251,8 @@ scene:
         effect: none
         state: 'on'
 
-      # light.magnarp_1:
-      #   state: 'off'
+      light.magnarp_1:
+        state: 'off'
 
       light.magnarp_2:
         state: 'off'
