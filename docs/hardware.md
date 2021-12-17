@@ -11,4 +11,4 @@ Sonos speakers are added through discovery. This is more convenient than configu
 
 * * *
 
-[< back](./)
+[< Back](./)
