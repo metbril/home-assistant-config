@@ -19,16 +19,6 @@ homeassistant:
     ## Sensor
     ################################################
 
-    # Buienradar
-
-    sensor.buienradar_precipitation_forecast_average:
-      friendly_name: Verwachte neerslagintensiteit
-      unit_of_measurement: mm/u
-
-    sensor.buienradar_precipitation_forecast_total:
-      friendly_name: Verwachte neerslag
-      unit_of_measurement: mm
-
     # Dark Sky
 
     sensor.dark_sky_apparent_temperature:
@@ -101,10 +91,6 @@ weather:
     units: ca
     mode: daily
 
-  - platform: buienradar
-    name: Buienradar
-    forecast: true
-
 ################################################
 ## Sensor
 ################################################
@@ -135,36 +121,6 @@ sensor:
       - precip_type
       - alerts
 
-  - platform: buienradar
-    name: Buienradar
-    timeframe: 30                     # minutes to look ahead for precipitation
-    monitored_conditions:
-      - barometerfc
-      - barometerfcname
-      - condition
-      - conditioncode
-      - conditiondetailed
-      - conditionexact
-      - feeltemperature
-      - groundtemperature
-      - humidity
-      - irradiance
-      - precipitation
-      - precipitation_forecast_average
-      - precipitation_forecast_total
-      - pressure
-      - rainlast24hour
-      - rainlasthour
-      - stationname
-      - symbol
-      - temperature
-      - visibility
-      - windazimuth
-      - winddirection
-      - windforce
-      - windgust
-      - windspeed
-
   - platform: template
     sensors:
       dark_sky_wind_direction:
@@ -190,18 +146,13 @@ sensor:
 ################################################
 binary_sensor:
 
+  ##############################################################################
+  ## https://www.home-assistant.io/integrations/meteoalarm/
+  ##############################################################################
   - platform: meteoalarm
-    country: 'NL'
+    country: 'netherlands'
     province: 'Zuid-Holland'
-    language: 'ne'
-
-################################################
-## Camera
-################################################
-camera:
-  - platform: buienradar
-    name: Buienradar
-    dimension: 700                      # largest size
+    language: 'nl-NL'
 
 ################################################
 ## Automation
