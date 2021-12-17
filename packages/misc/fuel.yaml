@@ -58,20 +58,19 @@ sensor:
 
   # --- Brandstof-Zoeker.nl ---
 
-  # ## Disabled, since scraping fails when no prices are available.
   # - platform: scrape
-  #   name: Euro95 (Dijktank Kanaalweg)
-  #   # yamllint disable-line rule:line-length
+  # yamllint disable-line rule:line-length
   #   resource: "https://www.brandstof-zoeker.nl/station/dijktank-b-v-capelle-aan-den-yssel-565/"
+  #   name: Euro95 (Dijktank Kanaalweg)
   #   select: "div.half.half2:nth-of-type(2) dl dd:nth-of-type(2)"
   #   value_template: "{{ value.split(' ')[1]|float|round(3) }}"
   #   scan_interval: 3600  # be nice; once per hour only
 
-  # ## Disabled, since scraping fails when no prices are available.
+  # Disabled, since scraping fails when no prices are available.
   # - platform: scrape
-  #   name: Euro95 (Sakko Metaalhof)
-  #   # yamllint disable-line rule:line-length
+  # yamllint disable-line rule:line-length
   #   resource: "https://www.brandstof-zoeker.nl/station/sakko-metaalhof-rotterdam-637/"
+  #   name: Euro95 (Sakko Metaalhof)
   #   select: "div.half.half2 dl dd"
   #   value_template: "{{ value.split(' ')[1]|float|round(3) }}"
   #   scan_interval: 3600  # be nice; once per hour only
