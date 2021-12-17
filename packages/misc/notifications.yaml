@@ -15,10 +15,6 @@ notify:
     access_token: !secret twitter_access_token
     access_token_secret: !secret twitter_access_token_secret
 
-  - name: telegram
-    platform: telegram
-    chat_id: !secret telegram_bot_chat_id_robert
-
   - name: pushover
     platform: pushover
     api_key: !secret pushover_api_key

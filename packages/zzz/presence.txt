@@ -119,7 +119,7 @@ automation:
             'Ja hoor, ' ~ someone ~ 'is er weer.',
             'Het feest kan beginnen, want ' ~ someone ~ ' is binnen!'] |
             random }}
-      - service: notify.telegram
+      - service: notify.robert
         data:
           message: >
             {% if not trigger is defined %}
