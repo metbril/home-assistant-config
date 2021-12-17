@@ -6,3 +6,4 @@ A [site](https://metbril.github.io/home-assistant-config) to self-document my pe
 - [Custom Components](./custom_components)
 - [Z-Wave](./zwave)
 - [Hardware](./hardware)
+- [Tips & Tricks](./tips-tricks)

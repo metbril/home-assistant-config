@@ -26,3 +26,10 @@ A hostname is convenient for remembering, but, more importantly, required for us
 
 ### Samba
 
+### Backups
+
+I create backups with the [Home Assistant Google Drive Backup addon](https://github.com/sabeechen/hassio-google-drive-backup).
+
+* * *
+
+[< Back](./)

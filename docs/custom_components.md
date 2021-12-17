@@ -10,4 +10,6 @@ The [RDW sensor module for Home Assistant](https://github.com/eelcohn/home-assis
 
 Provides information for the family cars. Not available through HACS.
 
-[< Terug](./)
+* * *
+
+[< Back](./)
