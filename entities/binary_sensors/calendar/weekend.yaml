@@ -1,0 +1,10 @@
+---
+##############################################################################
+## Determine if today is weekend, not taking holidays into account
+## https://www.home-assistant.io/integrations/workday/
+##############################################################################
+- platform: workday
+  name: Weekend
+  country: NL
+  workdays: [sat, sun]
+  excludes: []  # don't exclude holidays

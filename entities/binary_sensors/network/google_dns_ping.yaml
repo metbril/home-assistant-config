@@ -1,0 +1,6 @@
+---
+- platform: ping
+  host: 8.8.8.8
+  name: "Google DNS Ping"
+  count: 5
+  scan_interval: 60

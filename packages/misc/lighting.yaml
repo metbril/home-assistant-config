@@ -18,71 +18,6 @@ homeassistant:
       icon: hass:floor-lamp
 
 ############################################################
-## Light
-## https://www.home-assistant.io/integrations/light
-############################################################
-light:
-
-  - platform: group
-    name: Living
-    ## Individual lights, clockwise from the door
-    entities:
-      - light.hoge_kast
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      - light.leeslamp
-      - light.turbinelamp
-      - light.lichtstraat_1
-      - light.lichtstraat_2
-      - light.lichtstraat_3
-      - light.lichtstraat_4
-      - light.bollamp
-      - light.willner
-
-  - platform: group
-    name: Lichtstraat
-    ## Individual lights, from left to right
-    entities:
-      - light.lichtstraat_1
-      - light.lichtstraat_2
-      - light.lichtstraat_3
-      - light.lichtstraat_4
-
-  - platform: group
-    name: MAGNARP
-    ## Individual lights, from top to bottom
-    entities:
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-
-################################################################################
-## Sensor
-## https://www.home-assistant.io/integrations/sensor
-################################################################################
-sensor:
-
-  ## https://www.home-assistant.io/integrations/history_stats
-  - platform: history_stats
-    name: Living Lights Today
-    entity_id: light.living
-    state: 'on'
-    type: time
-    start: '{{ now().replace(hour=0).replace(minute=0).replace(second=0) }}'
-    end: '{{ now() }}'
-
-  ## https://www.home-assistant.io/integrations/history_stats
-  - platform: history_stats
-    name: Living Lights YTD
-    entity_id: light.living
-    state: 'on'
-    type: time
-    start: '{{ now().replace(month=1).replace(day=1).replace(hour=0)
-      .replace(minute=0).replace(second=0) }}'
-    end: '{{ now() }}'
-
-############################################################
 ## Scene
 ## https://www.home-assistant.io/integrations/scene
 ############################################################
@@ -95,18 +30,18 @@ scene:
     entities:
       light.hoge_kast:
         state: 'off'
-      light.magnarp_1:
-        brightness: 3
-        color_temp: 400
-        state: 'on'
-      light.magnarp_2:
-        brightness: 3
-        color_temp: 400
-        state: 'on'
-      light.magnarp_3:
-        brightness: 3
-        color_temp: 400
-        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 3
+      #   color_temp: 400
+      #   state: 'on'
+      # light.magnarp_2:
+      #   brightness: 3
+      #   color_temp: 400
+      #   state: 'on'
+      # light.magnarp_3:
+      #   brightness: 3
+      #   color_temp: 400
+      #   state: 'on'
       light.leeslamp:
         brightness: 3
         color_temp: 440
@@ -145,18 +80,18 @@ scene:
           - 108
         effect: none
         state: 'on'
-      light.magnarp_1:
-        brightness: 85
-        color_temp: 400
-        state: 'on'
-      light.magnarp_2:
-        brightness: 85
-        color_temp: 400
-        state: 'on'
-      light.magnarp_3:
-        brightness: 85
-        color_temp: 400
-        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 85
+      #   color_temp: 400
+      #   state: 'on'
+      # light.magnarp_2:
+      #   brightness: 85
+      #   color_temp: 400
+      #   state: 'on'
+      # light.magnarp_3:
+      #   brightness: 85
+      #   color_temp: 400
+      #   state: 'on'
       light.leeslamp:
         brightness: 140
         color_temp: 440
@@ -225,18 +160,18 @@ scene:
         brightness: 255
         color_temp: 360
         state: 'on'
-      light.magnarp_1:
-        brightness: 254
-        color_temp: 353
-        state: 'on'
-      light.magnarp_2:
-        brightness: 254
-        color_temp: 353
-        state: 'on'
-      light.magnarp_3:
-        brightness: 254
-        color_temp: 353
-        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
+      # light.magnarp_2:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
+      # light.magnarp_3:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
 
   ##########################################################
   - name: Gedimd
@@ -251,14 +186,14 @@ scene:
         effect: none
         state: 'on'
 
-      light.magnarp_1:
-        state: 'off'
+      # light.magnarp_1:
+      #   state: 'off'
 
-      light.magnarp_2:
-        state: 'off'
+      # light.magnarp_2:
+      #   state: 'off'
 
-      light.magnarp_3:
-        state: 'off'
+      # light.magnarp_3:
+      #   state: 'off'
 
       light.leeslamp:
         color_mode: color_temp

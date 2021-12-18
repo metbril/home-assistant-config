@@ -1,0 +1,13 @@
+---
+# Light group: Lichtstraat
+# Individual lights, from top to bottom
+#
+# https://www.home-assistant.io/integrations/light.group/
+#
+- platform: group
+  name: MAGNARP
+  unique_id: b0f1113f-5feb-41ec-a630-9f5ef84b153b
+  entities:
+  - light.magnarp_1
+  - light.magnarp_2
+  - light.magnarp_3

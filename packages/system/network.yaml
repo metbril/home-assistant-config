@@ -5,38 +5,6 @@ homeassistant:
       friendly_name: Publiek IP-adres
       icon: hass:wan
 
-binary_sensor:
-  - platform: ping
-    host: 8.8.8.8
-    name: "Google DNS Ping"
-    count: 5
-    scan_interval: 60
-
-  - platform: ping
-    host: !secret netgear_host
-    name: "Router Ping"
-    count: 5
-    scan_interval: 60
-
-sensor:
-  ############################################################
-  ## DNS IP
-  ## https://www.home-assistant.io/integrations/dnsip
-  ############################################################
-  - platform: dnsip
-
-  - platform: statistics
-    name: WAN Ping Statistics
-    entity_id: sensor.wan_ping
-    sampling_size: 60  # last 60 values (e.g. 1 hour)
-    max_age: 01:00:00
-
-  - platform: statistics
-    name: LAN Ping Statistics
-    entity_id: sensor.lan_ping
-    sampling_size: 60  # last 60 values (e.g. 1 hour)
-    max_age: 01:00:00
-
 # https://www.home-assistant.io/integrations/template/
 template:
   - sensor:
