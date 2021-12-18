@@ -5,7 +5,22 @@
 # main configuration.yaml.
 #
 homeassistant:
+
   # Customize individual entities
   customize: !include_dir_merge_named ../includes/customizations/entities
+
   # Customize entities by pattern
   customize_glob: !include_dir_merge_named ../includes/customizations/globs
+
+  allowlist_external_dirs:
+    - !secret allowlist_dir_config
+    - !secret allowlist_dir_ssl
+
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - ::1
+        - 192.168.1.0/24
+        - fd00::/8

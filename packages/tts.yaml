@@ -1,0 +1,10 @@
+---
+tts:
+  - platform: google_translate
+    service_name: say
+    # cache: true
+    # cache_dir: /config/tts
+    time_memory: 3600
+    # http protocol doesn't work, ssl required for sonos
+    base_url: !secret tts_base_url
+    language: 'nl'

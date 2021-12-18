@@ -1,0 +1,19 @@
+---
+# The http component serves all files and data required for the
+# Home Assistant frontend.
+#
+# https://www.home-assistant.io/integrations/http/
+#
+http:
+
+  # Flag indicating whether additional IP filtering is enabled.
+  ip_ban_enabled: true
+  # Number of failed login attempt from single IP after which 
+  # it will be automatically banned
+  login_attempts_threshold: 10
+
+  # use_x_forwarded_for: true
+  # trusted_proxies:
+  #   - 172.30.33.0/24
+  #   - 127.0.0.1
+  #   - ::1

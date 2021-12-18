@@ -1,0 +1,47 @@
+# Dark Sky
+
+sensor.dark_sky_apparent_temperature:
+  friendly_name: Gevoelstemperatuur omgeving
+
+sensor.dark_sky_cloud_coverage:
+  friendly_name: Bewolking
+
+sensor.dark_sky_humidity:
+  friendly_name: Luchtvochtigheid omgeving
+
+sensor.dark_sky_ozone:
+  friendly_name: Ozon Dark Sky
+  icon: hass:vector-triangle
+
+sensor.dark_sky_precip_intensity:
+  friendly_name: Neerslagintensiteit omgeving
+  unit_of_measurement: mm/u
+
+sensor.dark_sky_precip_probability:
+  friendly_name: Neerslagkans omgeving
+
+sensor.dark_sky_pressure:
+  friendly_name: Luchtdruk omgeving
+
+sensor.dark_sky_temperature:
+  friendly_name: Temperatuur omgeving
+
+sensor.dark_sky_uv_index:
+  friendly_name: UV-index Dark Sky
+
+sensor.dark_sky_wind_bearing:
+  friendly_name: Windrichting omgeving
+
+sensor.dark_sky_wind_direction:
+  friendly_name: Windrichting omgeving
+  icon: hass:compass
+
+sensor.dark_sky_wind_direction_nl:
+  friendly_name: Windrichting omgeving
+  icon: hass:compass
+
+sensor.dark_sky_wind_gust:
+  unit_of_measurement: km/u
+
+sensor.dark_sky_wind_speed:
+  friendly_name: Windsnelheid omgeving
