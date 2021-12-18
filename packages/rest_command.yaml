@@ -1,0 +1,19 @@
+---
+rest_command:
+
+  ##############################################################################
+  ## The REST command accepts 2 data elements:
+  ## - reading: Usually the current state of your gas consumpotion sensor
+  ## - reading_date: The date formatted as YYYY-MM-DD
+  ##
+  ## Expects reading from end of day (23:59:59)
+  ## Use yesterday's date when posting reading right after midnight.
+  ## API documentation at https://www.mindergas.nl/member/api
+  ##############################################################################
+  post_mindergas:
+    url: https://www.mindergas.nl/api/meter_readings
+    method: post
+    headers:
+      Content-Type: application/json
+      AUTH-TOKEN: !secret mindergas_token
+    payload: '{"date":"{{reading_date}}","reading":"{{reading}}"}'

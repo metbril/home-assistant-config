@@ -6,6 +6,6 @@
 #
 homeassistant:
   # Customize individual entities
-  customize: !include_dir_merge_named ../customizations/entities
+  customize: !include_dir_merge_named ../includes/customizations/entities
   # Customize entities by pattern
-  customize_glob: !include_dir_merge_named ../customizations/globs
+  customize_glob: !include_dir_merge_named ../includes/customizations/globs

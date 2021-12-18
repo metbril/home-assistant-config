@@ -1,0 +1,31 @@
+---
+# todo - move entities to separate files
+
+input_number:
+
+  energy_rate_tarif_1:
+    name: Energietarief 1
+    min: 0
+    max: 2
+    # step: 0.001
+    mode: box
+    unit_of_measurement: €/kWh
+    icon: hass:currency-eur
+
+  energy_rate_tarif_2:
+    name: Energietarief 2
+    min: 0
+    max: 2
+    # step: 0.001
+    mode: box
+    unit_of_measurement: €/kWh
+    icon: hass:currency-eur
+
+  gas_rate:
+    name: Gastarief
+    min: 0
+    max: 2
+    # step: 0.001
+    mode: box
+    unit_of_measurement: €/m³
+    icon: hass:currency-eur
