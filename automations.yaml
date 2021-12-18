@@ -46,3 +46,20 @@
     entity_id: light.achtergevel
     domain: light
   mode: single
+- id: '1639729353203'
+  alias: Z-Wave Controller
+  description: 'Notify when Z-Wave controller is not alive'
+  trigger:
+    - platform: device
+      device_id: 170852c54382835e7a043d2e09fd440a
+      domain: zwave_js
+      type: state.node_status
+      entity_id: sensor.z_stick_gen5_usb_controller_node_status
+      from: alive
+  condition: []
+  action:
+    - service: notify.admin
+      data:
+        message: 'Er is een probleem met de Z-Wave controller. Controleer het systeem'
+        title: 'Z-Wave Controller'
+  mode: single
