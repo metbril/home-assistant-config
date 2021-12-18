@@ -8,8 +8,6 @@ homeassistant:
     sensor.season:
       friendly_name: Seizoen
 
-sun:
-
 sensor:
 
   # Day Length (scrape)

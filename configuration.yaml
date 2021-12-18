@@ -29,11 +29,11 @@ script: !include scripts.yaml
 ## Other integrations
 ##############################
 
-config:
 discovery:
-energy:
+
 frontend:
   themes: !include_dir_merge_named ./themes
+
 hassio:
 
 http:
@@ -46,15 +46,15 @@ http:
     - ::1
 
 ios:
+
 logger:
   # logs:
   #   RFXtrx: debug
   default: warn
+
 lovelace:
   mode: storage
 
-map:
-mobile_app:
 tts:
   - platform: google_translate
     service_name: say
