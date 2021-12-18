@@ -1,9 +1,0 @@
----
-homeassistant:
-  customize:
-    sun.sun:
-      friendly_name: Zon
-    sensor.moon:
-      friendly_name: Maan
-    sensor.season:
-      friendly_name: Seizoen

@@ -1,0 +1,11 @@
+---
+# Sets up Home Assistant.
+#
+# Basically, everything that doesn't have to be in the
+# main configuration.yaml.
+#
+homeassistant:
+  # Customize individual entities
+  customize: !include_dir_merge_named ../customizations/entities
+  # Customize entities by pattern
+  customize_glob: !include_dir_merge_named ../customizations/globs

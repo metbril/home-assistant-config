@@ -1,0 +1,22 @@
+---
+alias: Weerwaarschuwing
+description: Stuur een melding als er een nieuwe weerwaarschuwing is.
+
+id: 6d8d1695-8120-49d7-9788-f17f121894ad
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.meteoalarm
+    to: 'on'
+
+action:
+  - service: notify.robert
+    data:
+      title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
+      message: '{{state_attr(''binary_sensor.meteoalarm'',
+        ''description'')}}
+        gaat in op {{
+        state_attr(''binary_sensor.meteoalarm'', ''effective'')}}'
+      data:
+        url: https://meteoalarm.eu/ne_NL/1/0/NL009-Nederland.html

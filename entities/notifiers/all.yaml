@@ -1,0 +1,8 @@
+---
+name: all
+platform: group
+services:
+  - service: admin
+  - service: robert
+  - service: living_tv
+

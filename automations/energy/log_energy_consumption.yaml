@@ -1,0 +1,15 @@
+---
+alias: Log Energy Consumption
+description: >
+  Log energy consumption every hour at the full hour.
+
+id: 934b4450-7816-4064-b906-3a3894d99345
+
+trigger:
+  - platform: time_pattern
+    hours: '*'
+    minutes: '0'
+    seconds: '0'
+
+action:
+  - service: script.log_energy_consumption

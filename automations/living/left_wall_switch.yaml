@@ -1,0 +1,16 @@
+---
+alias: Woonkamerverlichting Links
+description: Actie bij gebruik linker wandschakelaar
+
+id: b24e7ee3-fbd7-4e91-9116-095d7b24c843
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: binary_sensor.wandschakelaar_links
+
+action:
+  - service: light.turn_{{ trigger.to_state.state }}
+    data:
+      entity_id: light.living
+    entity_id: light.living

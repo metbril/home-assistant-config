@@ -1,0 +1,3 @@
+sensor.*_countdown:
+  unit_of_measurement: "dagen"
+  icon: hass:counter

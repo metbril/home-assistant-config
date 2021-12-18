@@ -1,0 +1,7 @@
+---
+- platform: scrape
+  resource: "http://lukoil.nl/go/lukoil_station.cfm?id=465"
+  name: Euro95 (Lukoil Schermerhoek)
+  select: "#tabbedInfoContent div.tab:nth-of-type(2) .priceBox2 .price"
+  value_template: "{{ value|replace('EUR/L', '')|float|round(3) }}"
+  scan_interval: 3600  # be nice; once per hour only
