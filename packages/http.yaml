@@ -8,7 +8,7 @@ http:
 
   # Flag indicating whether additional IP filtering is enabled.
   ip_ban_enabled: true
-  # Number of failed login attempt from single IP after which 
+  # Number of failed login attempt from single IP after which
   # it will be automatically banned
   login_attempts_threshold: 10
 
