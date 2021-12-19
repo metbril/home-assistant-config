@@ -1,0 +1,21 @@
+---
+# Working from home
+#
+# Dependencies
+# - msteams package
+
+##############################
+# Templates
+# https://www.home-assistant.io/integrations/template
+#
+template:
+  - binary_sensor:
+
+      # Is Robert working from home?
+      #
+      - name: Working From Home Robert
+        unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
+        device_class: presence
+        state: >
+          {{ states('binary_sensor.teams_online_robert') == 'on' and
+             states('person.robert') == 'home' }}
