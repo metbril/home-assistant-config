@@ -1,5 +1,0 @@
----
-logger:
-  default: warn
-  # logs:
-  #   RFXtrx: debug

@@ -2,3 +2,99 @@
 homeassistant:
 
   packages: !include_dir_named packages
+
+  # Customize individual entities
+  customize: !include_dir_merge_named ./includes/customizations/entities
+
+  # Customize entities by pattern
+  customize_glob: !include_dir_merge_named ./includes/customizations/globs
+
+  allowlist_external_dirs:
+    - !secret allowlist_dir_config
+    - !secret allowlist_dir_ssl
+
+  auth_providers:
+    - type: homeassistant
+    - type: trusted_networks
+      trusted_networks:
+        - 127.0.0.1
+        - ::1
+        - 192.168.1.0/24
+        - fd00::/8
+
+default_config:
+
+discovery:
+
+# The themes folder is in the root of the config folder, so HACS can install
+# themes there.
+frontend:
+  themes: !include_dir_merge_named ./themes
+
+group: !include ./groups.yaml
+
+# Enable the Supervisor panel in the Home Assistant frontend
+hassio:
+
+# The http component serves all files and data required for the
+# Home Assistant frontend.
+#
+# https://www.home-assistant.io/integrations/http/
+#
+http:
+
+  # Flag indicating whether additional IP filtering is enabled.
+  ip_ban_enabled: true
+  # Number of failed login attempt from single IP after which
+  # it will be automatically banned
+  login_attempts_threshold: 10
+
+  # use_x_forwarded_for: true
+  # trusted_proxies:
+  #   - 172.30.33.0/24
+  #   - 127.0.0.1
+  #   - ::1
+
+# Enable advanced notifications like actionable notifications and categories.
+# https://companion.home-assistant.io/docs/getting_started/
+#
+ios:
+
+logger:
+  default: warn
+  # logs:
+  #   RFXtrx: debug
+
+lovelace:
+  mode: storage
+
+# Recorder
+# https://www.home-assistant.io/integrations/recorder
+#
+recorder:
+  auto_purge: true  # default = true
+  purge_keep_days: 1
+  exclude:
+    domains:
+      - alert
+      - automation
+      - sun
+      - script
+      - weather
+    entity_globs:
+      - sensor.network_*
+      - sensor.packets_*
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.ha_uptime
+
+tts:
+  - platform: google_translate
+    service_name: say
+    # cache: true
+    # cache_dir: /config/tts
+    time_memory: 3600
+    # http protocol doesn't work, ssl required for sonos
+    base_url: !secret tts_base_url
+    language: 'nl'
