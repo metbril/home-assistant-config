@@ -1,11 +1,13 @@
 adguard_bijwerken:
-  alias: AdGuard bijwerken
+  alias: Bijwerken AdGuard
   sequence:
   - service: adguard.refresh
     data: {}
   mode: single
-  icon: hass:shield-refresh
+  icon: mdi:shield-refresh
 restart_home_assistant:
   alias: Herstarten Home Assistant
   sequence:
   - service: homeassistant.restart
+  mode: single
+  icon: mdi:restart
