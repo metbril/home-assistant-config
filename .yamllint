@@ -14,5 +14,7 @@ ignore: |
   known_devices.yaml
   scenes.yaml
   scripts.yaml
+  secrets.yaml
+  secrets.example.yaml
   blueprints/automation/seamus65/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one.yaml
   blueprints/script/homeassistant/confirmable_notification.yaml
