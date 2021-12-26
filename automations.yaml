@@ -46,38 +46,3 @@
     entity_id: light.achtergevel
     domain: light
   mode: single
-<<<<<<< HEAD
-=======
-- id: '1639729353203'
-  alias: Z-Wave Controller
-  description: Notify when Z-Wave controller is not alive
-  trigger:
-  - platform: device
-    device_id: 170852c54382835e7a043d2e09fd440a
-    domain: zwave_js
-    type: state.node_status
-    entity_id: sensor.z_stick_gen5_usb_controller_node_status
-    from: alive
-  condition: []
-  action:
-  - service: notify.admin
-    data:
-      message: Er is een probleem met de Z-Wave controller. Controleer het systeem
-      title: Z-Wave Controller
-  mode: single
-- id: '1640289068692'
-  alias: Onbekende Microsoft Teams Status
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: binary_sensor.microsoft_teams_status_robert
-    to: 'off'
-    from: 'on'
-  condition: []
-  action:
-  - service: notify.admin
-    data:
-      message: 'Microsoft Teams heeft een onbekende status doorgegeven: {{ states(''input_text.microsoft_teams_status_robert'')
-        }}'
-  mode: single
->>>>>>> bff7d8a6feeb36c42c9ae85a637ff85b752647ba
