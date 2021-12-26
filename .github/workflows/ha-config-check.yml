@@ -3,10 +3,8 @@ name: "Check configuration"
 # yamllint disable-line rule:truthy
 on:
   push:
-    branch:
-      - main
   pull_request:
-    branch:
+    branches:
       - main
   schedule:
     - cron: 0 2 * * *
