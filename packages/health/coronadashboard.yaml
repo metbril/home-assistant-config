@@ -1,0 +1,196 @@
+---
+# Sensors
+#
+sensor:
+  # Get data from national feed
+  #
+  - platform: rest
+    name: Coronadashboard Data Nederland
+    resource: https://coronadashboard.rijksoverheid.nl/json/NL.json
+    method: GET
+    scan_interval: 3600  # seconds; once per hour
+    value_template: "OK"  # the default json would exceed 255 character limit
+    json_attributes:
+      - last_generated
+      - difference
+      - vaccine_coverage_per_age_group_estimated
+
+  # VR13 = Amsterdam-Amstelland
+  # Search for yours at https://coronadashboard.rijksoverheid.nl/
+  #
+  - platform: rest
+    name: Coronadashboard Data Regio
+    # resource: https://coronadashboard.rijksoverheid.nl/json/VR13.json
+    resource: !secret coronadashboard_data_regio_resource
+    method: GET
+    scan_interval: 3600  # seconds; once per hour
+    value_template: "OK"  # the default json would exceed 255 character limit
+    json_attributes:
+      - last_generated
+      - difference
+      - vaccine_coverage_per_age_group
+
+  # GM0363 = Amsterdam
+  # Search for yours at https://coronadashboard.rijksoverheid.nl/
+  #
+  - platform: rest
+    name: Coronadashboard Data Gemeente
+    # resource: https://coronadashboard.rijksoverheid.nl/json/GM0363.json
+    resource: !secret coronadashboard_data_gemeente_resource
+    method: GET
+    scan_interval: 3600  # seconds; once per hour
+    value_template: "OK"  # the default json would exceed 255 character limit
+    json_attributes:
+      - last_generated
+      - difference
+      - vaccine_coverage_per_age_group
+
+# Templates
+#
+template:
+  - sensor:
+
+      # Nederland
+
+      - name: "Vaccinatiegraad 18+ Nederland"
+        unique_id: e0ea3b06-eee9-4a81-b71e-9e8ff387335e
+        unit_of_measurement: "%"
+        icon: mdi:needle
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_nederland',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_nederland',
+                'vaccine_coverage_per_age_group_estimated')
+                ['last_value']
+                ['date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_nederland',
+            'vaccine_coverage_per_age_group_estimated')
+            ['last_value']
+            ['age_18_plus_fully_vaccinated']
+          }}
+
+      # Regio
+
+      - name: "Vaccinatiegraad 18+ Regio"
+        unique_id: 552367dd-fa78-4cda-90c3-67d1943b49a6
+        unit_of_measurement: "%"
+        icon: mdi:needle
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_regio',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_regio',
+                'vaccine_coverage_per_age_group')
+                ['values'][1]
+                ['date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_regio',
+            'vaccine_coverage_per_age_group')
+            ['values'][1]
+            ['fully_vaccinated_percentage']
+          }}
+
+      - name: "Positieve testen per 100k Regio"
+        unique_id: 6a1ce1c5-7411-40c3-864f-9e7e0099c1f7
+        unit_of_measurement: "testen"
+        icon: mdi:test-tube
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_regio',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_regio',
+                'difference')
+                ['tested_overall__infected_per_100k_moving_average']
+                ['old_date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_regio',
+            'difference')
+            ['tested_overall__infected_per_100k_moving_average']['old_value']
+          }}
+
+      - name: "Vaccinatiegraad 18+ Gemeente"
+        unique_id: 63b57bb1-7d4a-4514-9451-fc64575b4658
+        unit_of_measurement: "%"
+        icon: mdi:needle
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_gemeente',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_gemeente',
+                'vaccine_coverage_per_age_group')
+                ['values'][1]
+                ['date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_gemeente',
+            'vaccine_coverage_per_age_group')
+            ['values'][1]
+            ['fully_vaccinated_percentage']
+          }}
+
+      - name: "Positieve testen Gemeente"
+        unique_id: 271ed4b8-4b71-42bd-9439-9451681e3405
+        unit_of_measurement: "testen"
+        icon: mdi:test-tube
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_gemeente',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_gemeente',
+                'difference')
+                ['tested_overall__infected_moving_average']
+                ['old_date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_gemeente',
+            'difference')
+            ['tested_overall__infected_moving_average']['old_value']
+          }}
+
+      - name: "Positieve testen per 100k Gemeente"
+        unique_id: be99d35d-373d-41e0-ab6c-4c12dc5edd75
+        unit_of_measurement: "testen"
+        icon: mdi:test-tube
+        attributes:
+          last_generated: >
+            {{ as_local(
+                  state_attr('sensor.coronadashboard_data_gemeente',
+                  'last_generated')
+                  | as_datetime) }}
+          updated: >
+            {{ as_local(
+                state_attr('sensor.coronadashboard_data_gemeente',
+                'difference')
+                ['tested_overall__infected_per_100k_moving_average']
+                ['old_date_unix']
+                | as_datetime) }}
+        state: >
+          {{ state_attr('sensor.coronadashboard_data_gemeente',
+            'difference')
+            ['tested_overall__infected_per_100k_moving_average']['old_value']
+          }}

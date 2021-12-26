@@ -102,6 +102,13 @@ recorder:
       - sensor.time
       - sensor.ha_uptime
 
+      # large sensors
+      - sensor.neerslag_buienalarm_regen_data
+      - sensor.neerslag_buienradar_regen_data
+      - sensor.coronadashboard_data_nederland
+      - sensor.coronadashboard_data_regio
+      - sensor.coronadashboard_data_gemeente
+
 tts:
   - platform: google_translate
     service_name: say
