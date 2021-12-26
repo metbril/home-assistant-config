@@ -128,7 +128,7 @@ tts:
     language: 'nl'
 
 weather:
-- platform: darksky
-  api_key: !secret darksky_api_key
-  units: ca
-  mode: daily
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    units: ca
+    mode: daily
