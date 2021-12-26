@@ -1,9 +1,0 @@
----
-# https://www.home-assistant.io/integrations/template/
-- sensor:
-  - name: "LAN Ping"
-    unique_id: 10a2e49e-b54e-491a-9c9f-05bba86e30f5
-    icon: "mdi:speedometer"
-    unit_of_measurement: "ms"
-    state: "{{ state_attr('binary_sensor.router_ping',
-      'round_trip_time_avg')|round(2) }}"

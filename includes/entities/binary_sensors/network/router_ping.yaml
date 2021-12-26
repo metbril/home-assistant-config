@@ -1,6 +1,0 @@
----
-- platform: ping
-  host: !secret netgear_host
-  name: "Router Ping"
-  count: 5
-  scan_interval: 60
