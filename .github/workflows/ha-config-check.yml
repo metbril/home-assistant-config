@@ -25,7 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ["stable", "beta", "dev"]
+        version: ["stable", "beta"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2.4.0
