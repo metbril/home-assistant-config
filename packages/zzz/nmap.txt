@@ -6,7 +6,7 @@ device_tracker:
   - platform: nmap_tracker
     hosts:
       # - 192.168.1.0/24
-      - !secret robert_iphone_ip
+      - !secret person1_iphone_ip
       - !secret monique_iphone_ip
       - !secret bjorn_iphone_ip
     # exclude:

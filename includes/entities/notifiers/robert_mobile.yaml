@@ -1,5 +1,5 @@
 ---
-name: robert_mobile
+name: person1_mobile
 platform: group
 services:
   - service: mobile_app_pontius

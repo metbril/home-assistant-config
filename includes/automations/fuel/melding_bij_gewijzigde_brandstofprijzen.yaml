@@ -21,7 +21,7 @@ trigger:
 condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
 
 action:
-  - service: notify.robert
+  - service: notify.person1
     data:
       title: Adviesprijs
       message: >

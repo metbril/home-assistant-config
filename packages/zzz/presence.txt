@@ -3,7 +3,7 @@
 
 homeassistant:
   customize:
-    person.robert:
+    person.person1:
       entity_picture: /local/img/people/robert.jpg
     person.monique:
       icon: hass:chess-queen
@@ -12,23 +12,23 @@ homeassistant:
     group.family:
       friendly_name: Familie
       icon: hass:account-group
-    device_tracker.robert_iphone_app:
+    device_tracker.person1_phone_app:
       icon: hass:apple-ios
-    device_tracker.robert_iphone_owntracks:
+    device_tracker.person1_iphone_owntracks:
       icon: hass:map-marker-radius
 
 ########################################
 person:
-  - name: Robert
-    id: robert
+  - name: person1
+    id: person1
     user_id: fb61692a4d13494d9b87a26cd287de9c
     device_trackers:
-      - device_tracker.robert_iphone_app
-      - device_tracker.robert_iphone_wifi
+      - device_tracker.person1_phone_app
+      - device_tracker.person1_iphone_wifi
       # # Netgear
-      # - device_tracker.robert_iphone_wifi_on_router_1
-      # - device_tracker.robert_iphone_wifi_on_router_2
-      # - device_tracker.robert_iphone_wifi_on_router_3
+      # - device_tracker.person1_iphone_wifi_on_router_1
+      # - device_tracker.person1_iphone_wifi_on_router_2
+      # - device_tracker.person1_iphone_wifi_on_router_3
 
   - name: Monique
     id: monique
@@ -57,7 +57,7 @@ group:
   family:
     name: Family
     entities:
-      - person.robert
+      - person.person1
       - person.monique
       - person.bjorn
 
@@ -77,7 +77,7 @@ automation:
             \ -%}\n  Ik zie dat er niemand meer thuis is.\n{%-
               else -%}\n  Ik weet even\
             \ niet of er iemand thuis is.            \n{%- endif %}"
-        service: notify.robert
+        service: notify.person1
 
   - alias: Melden Nieuw Apparaat Gedetecteerd
     id: 16d91ce7-188d-408f-a63a-3ee22046a003
@@ -99,7 +99,7 @@ automation:
     trigger:
       - platform: state
         entity_id:
-          - person.robert
+          - person.person1
           - person.monique
           - person.bjorn
         to: home
@@ -119,13 +119,13 @@ automation:
             'Ja hoor, ' ~ someone ~ 'is er weer.',
             'Het feest kan beginnen, want ' ~ someone ~ ' is binnen!'] |
             random }}
-      - service: notify.robert
+      - service: notify.person1
         data:
           message: >
             {% if not trigger is defined %}
               Er is weer iemand thuis.
-            {% elif trigger.entity_id == 'person.robert' %}
-              Welkom thuis, Robert!
+            {% elif trigger.entity_id == 'person.person1' %}
+              Welkom thuis, Persoon 1!
             {% else %}
               {{ state_attr(trigger.entity_id, 'friendly_name') ~
               ' is weer thuis.' }}

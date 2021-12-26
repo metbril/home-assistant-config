@@ -1,0 +1,18 @@
+---
+# Proximity
+# https://www.home-assistant.io/integrations/proximity
+#
+proximity:
+  person1_home:
+    zone: home
+    devices:
+      - device_tracker.person1_phone_app
+      - device_tracker.pontius
+    unit_of_measurement: m
+
+  person1_work:
+    zone: work_person1
+    devices:
+      - device_tracker.person1_phone_app
+      - device_tracker.pontius
+    unit_of_measurement: km

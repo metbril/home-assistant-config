@@ -29,7 +29,7 @@ automation:
           / 86400) | int) + 21 }} }}'
 
     action:
-      - service: notify.robert
+      - service: notify.person1
         data:
           title: APK-keuring
           message: De APK-keuring verloopt op {{

@@ -15,7 +15,7 @@ trigger:
       - sensor.euro95_lukoil_schermerhoek
 
 action:
-  - service: notify.robert
+  - service: notify.person1
     data:
       message: >
         {{ state_attr(trigger.entity_id,'friendly_name') }}

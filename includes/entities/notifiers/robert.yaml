@@ -1,5 +1,5 @@
 ---
-name: robert
+name: person1
 platform: group
 services:
-  - service: robert_mobile
+  - service: person1_mobile

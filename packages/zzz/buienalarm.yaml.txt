@@ -119,7 +119,7 @@ automation:
                 state: unavailable
 
     action:
-      - service: notify.robert
+      - service: notify.person1
         data:
           title: ☔️ Buienalarm
           message: >

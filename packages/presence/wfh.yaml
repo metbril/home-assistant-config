@@ -11,11 +11,11 @@
 template:
   - binary_sensor:
 
-      # Is Robert working from home?
+      # Is Person1 working from home?
       #
-      - name: Working From Home Robert
+      - name: Working From Home Person1
         unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
         device_class: presence
         state: >
-          {{ states('binary_sensor.teams_online_robert') == 'on' and
-             states('person.robert') == 'home' }}
+          {{ states('binary_sensor.teams_online_person1') == 'on' and
+             states('person.person1') == 'home' }}
