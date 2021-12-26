@@ -1,0 +1,19 @@
+sensor:
+
+  - platform: history_stats
+    name: Quarantine meter Robert
+    entity_id: person.robert
+    state: "home"
+    type: ratio
+    duration:
+      days: 5
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: Quarantine meter Robert times left
+    entity_id: person.robert
+    state: "home"
+    type: count
+    duration:
+      days: 5
+    end: "{{ now() }}"
