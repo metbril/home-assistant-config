@@ -76,9 +76,3 @@ jobs:
           path: "."
           secrets: ./secrets.example.yaml
           version: "${{ matrix.version }}"
-
-      - name: Keep workfow alive
-        uses: gautamkrishnar/keepalive-workflow@master
-        with:
-          committer_username: metbril
-          committer_email: metbril@users.noreply.github.com
