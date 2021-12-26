@@ -2,12 +2,14 @@
 # The free OCR API is limited to 500 call/day AND 25000 requests per month.
 # Documentation at https://ocr.space/OCRAPI
 #
-
+#
+# yamllint disable-line rule:line-length
 # https://api.ocr.space/parse/ImageUrl?apikey=007019321288957&language=dut&url=https://tankservice.app-it-up.com/Tankservice/v2/places/2318.png
-
+#
 sensor:
   - platform: rest
     name: Brandstofprijzen Dijktank Capelle aan den IJssel
+    # yamllint disable-line rule:line-length
     resource: https://api.ocr.space/parse/ImageUrl?apikey=007019321288957&language=dut&url=https://tankservice.app-it-up.com/Tankservice/v2/places/2318.png
     method: GET
     # 1h=3600 / 2h=7200 / 3h=10800 / 4h=14400 / 6h=21600 / 8h=28800 / 12h=43200
@@ -20,6 +22,7 @@ template:
   - sensor:
       - name: "Euro95 Dijktank Kanaalweg"
         state: >
-          {{ state_attr('sensor.brandstofprijzen_dijktank_capelle_aan_den_ijssel',
+          {{ state_attr(
+            'sensor.brandstofprijzen_dijktank_capelle_aan_den_ijssel',
             'ParsedResults')[0]['ParsedText'].split('\r\n')[3].split('€')[1]
             | replace(',', '.') | float }}
