@@ -1,0 +1,106 @@
+---
+homeassistant:
+  customize:
+    sensor.yaml_config_lines:
+      friendly_name: YAML configuratieregels
+      unit_of_measurement: 'regels'
+      icon: hass:file-code
+
+sensor:
+  - platform: command_line
+    name: YAML Config Lines
+    command: "find /config -name '*.yaml' | xargs cat | wc -l"
+    unit_of_measurement: 'lines'
+    scan_interval: 14400  ## every 4 hours
+
+##############################
+# Templates
+# https://www.home-assistant.io/integrations/template
+#
+template:
+  - sensor:
+
+      # Counts of enitities
+      #
+      # yamllint disable-line rule:line-length
+      # https://github.com/basnijholt/home-assistant-config/blob/ae69265f1b9bb904e884e985b99d5d2cbaa77f82/includes/sensors.yaml#L27
+      #
+      - name: "Count Automations"
+        icon: mdi:robot
+        unit_of_measurement: items
+        state: "{{ states.automation | count }}"
+
+      - name: "Count Scripts"
+        icon: mdi:script-text
+        unit_of_measurement: items
+        state: "{{ states.script| count }}"
+
+      - name: "Count Scenes"
+        icon: mdi:palette
+        unit_of_measurement: items
+        state: "{{ states.scene | count }}"
+
+      - name: "Count Groups"
+        icon: mdi:group
+        unit_of_measurement: items
+        state: "{{ states.group| count }}"
+
+      - name: "Count Device Trackers"
+        icon: mdi:map-marker
+        unit_of_measurement: items
+        state: "{{ states.device_tracker | count }}"
+
+      - name: "Count Binary Sensors"
+        icon: mdi:unfold-more-horizontal
+        unit_of_measurement: items
+        state: "{{ states.binary_sensor| count }}"
+
+      - name: "Count Sensors"
+        icon: mdi:resistor
+        unit_of_measurement: items
+        state: "{{ states.sensor | count }}"
+
+      - name: "Count Switches"
+        icon: mdi:flash
+        unit_of_measurement: items
+        state: "{{ states.switch | count }}"
+
+      - name: "Count Lights"
+        icon: mdi:lightbulb
+        unit_of_measurement: items
+        state: "{{ states.lights | count }}"
+
+      - name: "Count Zones"
+        icon: mdi:map-marker-radius
+        unit_of_measurement: items
+        state: "{{ states.zone | count }}"
+
+      - name: "Count Input Booleans"
+        icon: mdi:toggle-switch
+        unit_of_measurement: items
+        state: "{{ states.input_boolean | count }}"
+
+      - name: "Count Input Numbers"
+        icon: mdi:numeric
+        unit_of_measurement: items
+        state: "{{ states.input_number | count }}"
+
+      - name: "Count Input Texts"
+        icon: mdi:alphabetical
+        unit_of_measurement: items
+        state: "{{ states.input_text | count }}"
+
+      - name: "Count Input Selects"
+        icon: mdi:format-list-bulleted
+        unit_of_measurement: items
+        state: "{{ states.input_select | count }}"
+
+      - name: "Count Input Datetimes"
+        icon: mdi:calendar-clock
+        unit_of_measurement: items
+        state: "{{ states.input_datetime | count }}"
+
+      - name: "Count Timers"
+        icon: mdi:timer
+        unit_of_measurement: items
+        state: "{{ states.timer | count }}"
