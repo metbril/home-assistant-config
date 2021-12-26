@@ -1,8 +1,0 @@
----
-# Binary sensors are gathering information about states and conditions.
-#
-# This loads up my binary sensor configurations
-#
-# https://www.home-assistant.io/integrations/binary_sensor/
-#
-binary_sensor: !include_dir_merge_list ../includes/entities/binary_sensors

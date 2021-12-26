@@ -35,16 +35,24 @@ scene split: !include_dir_list includes/scenes
 script: !include scripts.yaml
 script split: !include_dir_merge_named includes/scripts
 
-# Alphabetically listed integrations
-
-default_config:
-
-discovery:
+# Includes
 
 # The themes folder is in the root of the config folder, so HACS can install
 # themes there.
 frontend:
-  themes: !include_dir_merge_named ./themes
+  themes: !include_dir_merge_named themes
+
+binary_sensor: !include_dir_merge_list includes/entities/binary_sensors
+light: !include_dir_merge_list includes/entities/lights
+notify: !include_dir_list includes/entities/notifiers
+sensor: !include_dir_merge_list includes/entities/sensors
+
+# Alphabetically listed integrations
+
+
+default_config:
+
+discovery:
 
 # Enable the Supervisor panel in the Home Assistant frontend
 hassio:
@@ -118,3 +126,9 @@ tts:
     # http protocol doesn't work, ssl required for sonos
     base_url: !secret tts_base_url
     language: 'nl'
+
+weather:
+- platform: darksky
+  api_key: !secret darksky_api_key
+  units: ca
+  mode: daily
