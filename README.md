@@ -6,6 +6,11 @@ This repository contains my configuration for Home Assistant.
 
 The configuration is documented in the `docs` folder of this repository which is also [published as a website][docs].
 
+## Table of Contents
+
+<!-- START doctoc -->
+<!-- END doctoc -->
+
 ## Credits 🙏
 
 - [Frenck's yamllint action](https://github.com/frenck/action-yamllint)
