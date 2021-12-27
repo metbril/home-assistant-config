@@ -10,7 +10,7 @@ The configuration is documented in the `docs` folder of this repository which is
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
+## Table of Contents
 
 - [Credits 🙏](#credits-)
 - [Contributions](#contributions)
