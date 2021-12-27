@@ -9,5 +9,5 @@ jobs:
     steps:
       - uses: technote-space/toc-generator@v4.1.5
         with:
-          TOC_TITLE: '## Table of Contents'
+          TOC_TITLE: 'Details'
           FOLDING: true
