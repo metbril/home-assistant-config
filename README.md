@@ -48,27 +48,17 @@ This file contains specific details about my HASS.io installation.
 
 The system is currently running on a Raspberry Pi 2B. It is equipped with an ? GB SD Card.
 
-### Installed Add-ons
+## Add-ons
 
-#### Nginx Proxy
+I recently switched to [Home Assistant Cloud][cloud] from a self-managed proxy setup.
+So I closed the port on my firewall and no longer need the add-ons that made this possible:
+Nginx Proxy, Duckdns and Certbot.
 
-The Nginx Proxy enables me to service more than one application to the Internet with exposing only 1 port to the outside world. Next to that, it's able to service LE certificate renewal.
+### SSH
 
-#### Duckdns
+### Samba
 
-Although it believe is has not changed for ages, my ISP officialy provides me with a dynamic IP address. To be able to always use a hostname, I let the addon ping the duckdns service.
-
-Using the separate addon, enables me to service multiple domains at once.
-
-A hostname is convenient for remembering, but, more importantly, required for using certificates from Let's Encrypt.
-
-#### Lets Encrypt
-
-#### SSH
-
-#### Samba
-
-#### Backups
+### Backups
 
 I create backups with the [Home Assistant Google Drive Backup addon](https://github.com/sabeechen/hassio-google-drive-backup).
 
