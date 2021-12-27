@@ -1,0 +1,46 @@
+---
+scene:
+
+  - name: Kerstverlichting On
+    id: b962be64-c058-46f3-b22f-f90b28097e55
+    icon: mdi:string-lights
+    entities:
+      switch.fibaro_schakelaar:
+        state: 'on'
+      switch.shelly_1:
+        state: 'on'
+      light.hoge_kast:
+        state: 'off'
+      light.lichtstraat:
+        state: 'off'
+      light.bollamp:
+        color_mode: hs
+        brightness: 141
+        hs_color:
+        - 29.862
+        - 85.098
+        state: 'on'
+
+  - name: Kerstverlichting Off
+    id: 2ceb7178-c8f0-45ca-be35-22220026b1e9
+    icon: mdi:string-lights-off
+    entities:
+      switch.fibaro_schakelaar:
+        state: 'off'
+      switch.shelly_1:
+        state: 'off'
+      light.bollamp:
+        state: 'off'
+
+automation:
+  - alias: Woonkamerverlichting Rechts
+    description: Actie bij gebruik rechter wandschakelaar
+    id: a4f2701c-7dc3-4525-a258-403a6874a1e7
+    mode: single
+    trigger:
+    - platform: state
+      entity_id: binary_sensor.wandschakelaar_rechts
+    action:
+    - service: scene.turn_on
+      target:
+        entity_id: "scene.kerstverlichting_{{ trigger.to_state.state }}"
