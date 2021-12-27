@@ -1,0 +1,29 @@
+---
+homeassistant:
+  customize:
+    # The sun integration is installed with default_config integration
+    sun.sun:
+      friendly_name: Zon
+    sensor.season:
+      friendly_name: Seizoen
+    sensor.moon:
+      friendly_name: Maan
+
+sensor:
+
+  # https://www.home-assistant.io/integrations/moon/
+  - platform: moon
+
+  # https://www.home-assistant.io/integrations/season/
+  - platform: season
+
+  # Day Length (scrape)
+  # https://community.home-assistant.io/t/hours-of-daylight/59422/153
+  #
+  - platform: scrape
+    name: Daylight Hours
+    scan_interval: 3600
+    # resource: https://www.timeanddate.com/astronomy/usa/anchorage
+    # resource: https://www.timeanddate.com/astronomy/@51.92,4.57
+    resource: !secret timeanddate_astronomy_resource
+    select: ".table > tbody:nth-child(1) > tr:nth-child(6) > td:nth-child(2)"
