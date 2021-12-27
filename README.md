@@ -6,11 +6,36 @@ This repository contains my configuration for Home Assistant.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Table of Contents
+<details>
+<summary>## Table of Contents</summary>
 
+- [HASS.io](#hassio)
+  - [Host hardware](#host-hardware)
+  - [Installed Add-ons](#installed-add-ons)
+    - [Nginx Proxy](#nginx-proxy)
+    - [Duckdns](#duckdns)
+    - [Lets Encrypt](#lets-encrypt)
+    - [SSH](#ssh)
+    - [Samba](#samba)
+    - [Backups](#backups)
+- [Custom Components](#custom-components)
+  - [HACS](#hacs)
+  - [RDW](#rdw)
+- [Z-Wave](#z-wave)
+  - [Configuration](#configuration)
+    - [Zwave2Mqtt](#zwave2mqtt)
+    - [Renaming devices and entities](#renaming-devices-and-entities)
+  - [Devices](#devices)
+- [Hardware](#hardware)
+  - [Sonos](#sonos)
+- [Tips & Tricks](#tips--tricks)
+  - [Tracking your Lovelace UI file](#tracking-your-lovelace-ui-file)
+  - [Testing and debugging automations with automation editor](#testing-and-debugging-automations-with-automation-editor)
+  - [Limit database growth](#limit-database-growth)
 - [Credits 🙏](#credits-)
 - [Contributions](#contributions)
 
+</details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## HASS.io
