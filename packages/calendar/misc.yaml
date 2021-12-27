@@ -1,0 +1,93 @@
+homeassistant:
+  customize:
+    binary_sensor.holiday:
+      friendly_name: Feestdag
+      icon: hass:party-popper
+    
+    binary_sensor.weekend:
+      icon: hass:food-croissant
+    
+    binary_sensor.workday:
+      friendly_name: Werkdag
+      icon: hass:briefcase
+
+    sensor.date:
+      friendly_name: Datum
+      
+    sensor.time:
+      friendly_name: Tijd
+         
+sensor:
+  ##############################################################################
+  ## Time/Date
+  ## https://www.home-assistant.io/integrations/time_date
+  ##############################################################################
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+
+  - platform: template
+    sensors:
+
+      ##########################################################################
+      # Sensor that holds today's day
+      # Can be used for TTS or notifications
+      ##########################################################################
+      # {% set w = strptime(states('sensor.date'),
+      #   '%Y-%m-%d').strftime('%w')|int %}
+      # {{['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag',
+      #   'zaterdag'][w]}}
+      weekday:
+        friendly_name: 'Dag van de week'
+        # Dutch
+        value_template: >-
+          {{['maandag','dinsdag','woensdag','donderdag','vrijdag','zaterdag',
+          'zondag'][now().weekday()] }}
+        # English
+        # value_template: >-
+        #   {{['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday',
+        #   'Sunday'][now().weekday()] }}
+        icon_template: mdi:calendar
+
+      ##########################################################################
+      # Calculate yesterday's date, for use in automations
+      ##########################################################################
+      yesterday:
+        friendly_name: Gisteren
+        value_template: >
+          {{(as_timestamp(states('sensor.date'))-(24*3600))
+          |timestamp_custom('%Y-%m-%d',True)}}
+        icon_template: mdi:calendar
+
+binary_sensor:
+
+  ##############################################################################
+  ## Determine if today is a holiday
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: holiday
+    country: NL
+    workdays:
+      - holiday
+    excludes: []
+
+  ##############################################################################
+  ## Determine if today is weekend, not taking holidays into account
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: Weekend
+    country: NL
+    workdays: [sat, sun]
+    excludes: []  # don't exclude holidays
+
+  ##############################################################################
+  ## Determine if today is a workday (weekend nor holiday)
+  ## https://www.home-assistant.io/integrations/workday/
+  ##############################################################################
+  - platform: workday
+    name: Workday
+    country: NL
+    workdays: [mon, tue, wed, thu, fri]
