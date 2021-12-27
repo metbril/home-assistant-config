@@ -16,7 +16,7 @@ homeassistant:
       friendly_name: Aftellen tot Moederdag
     sensor.sinterklaas_countdown:
       friendly_name: Aftellen tot Pakjesavond
-    
+
 sensor:
 
   ## Wolfram Alpha queries for days until some holidays

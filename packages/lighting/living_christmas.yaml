@@ -17,8 +17,8 @@ scene:
         color_mode: hs
         brightness: 141
         hs_color:
-        - 29.862
-        - 85.098
+          - 29.862
+          - 85.098
         state: 'on'
 
   - name: Kerstverlichting Off
@@ -38,9 +38,9 @@ automation:
     id: a4f2701c-7dc3-4525-a258-403a6874a1e7
     mode: single
     trigger:
-    - platform: state
-      entity_id: binary_sensor.wandschakelaar_rechts
+      - platform: state
+        entity_id: binary_sensor.wandschakelaar_rechts
     action:
-    - service: scene.turn_on
-      target:
-        entity_id: "scene.kerstverlichting_{{ trigger.to_state.state }}"
+      - service: scene.turn_on
+        target:
+          entity_id: "scene.kerstverlichting_{{ trigger.to_state.state }}"
