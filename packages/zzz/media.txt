@@ -4,10 +4,6 @@ homeassistant:
     media_player.living_tv:
       friendly_name: TV Woonkamer
 
-spotify:
-  client_id: !secret spotify_client_id
-  client_secret: !secret spotify_client_secret
-
 # WOL is needed for (switching on) WebOS TV
 wake_on_lan:
 
