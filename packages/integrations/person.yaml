@@ -12,14 +12,15 @@ person:
     id: robert
     user_id: fb61692a4d13494d9b87a26cd287de9c
     device_trackers:
-      - device_tracker.robert_phone_app
+      - device_tracker.iphone_robert_app
+      - device_tracker.iphone_robert_router
   - name: Monique
     id: monique
     user_id: a90cd2586de64d419c313aca0e8c71b4
     device_trackers:
-      - device_tracker.monique_phone_app
+      - device_tracker.iphone_monique_router
   - name: Björn
     id: bjorn
     user_id: a33369a450714e48b0d8c1ffcceee97c
     device_trackers:
-      - device_tracker.bjorn_phone_app
+      - device_tracker.iphone_bjorn_router
