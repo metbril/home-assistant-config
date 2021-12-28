@@ -1,0 +1,22 @@
+homeassistant:
+  customize:
+    person.robert:
+      entity_picture: /local/img/people/robert.png
+    person.monique:
+      entity_picture: /local/img/people/monique.png
+    person.bjorn:
+      entity_picture: /local/img/people/bjorn.png
+
+person:
+  - name: Robert
+    id: robert
+    device_trackers:
+      - device_tracker.robert_phone_app
+  - name: Monique
+    id: monique
+    device_trackers:
+      - device_tracker.monique_phone_app
+  - name: Björn
+    id: bjorn
+    device_trackers:
+      - device_tracker.bjorn_phone_app
