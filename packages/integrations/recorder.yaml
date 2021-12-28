@@ -1,0 +1,28 @@
+---
+# Recorder
+# https://www.home-assistant.io/integrations/recorder
+#
+recorder:
+  auto_purge: true  # default = true
+  purge_keep_days: 1
+  exclude:
+    domains:
+      - alert
+      - automation
+      - sun
+      - script
+      - weather
+    entity_globs:
+      - sensor.network_*
+      - sensor.packets_*
+    entities:
+      - sensor.date
+      - sensor.time
+      - sensor.ha_uptime
+
+      # large sensors
+      - sensor.neerslag_buienalarm_regen_data
+      - sensor.neerslag_buienradar_regen_data
+      - sensor.coronadashboard_data_nederland
+      - sensor.coronadashboard_data_regio
+      - sensor.coronadashboard_data_gemeente
