@@ -4,21 +4,20 @@
 #
 homeassistant:
   customize:
-    proximity.person1_home:
-      friendly_name: Person 1 Thuis
-    proximity.person1_work:
-      friendly_name: Person 1 Werk
+    proximity.robert_from_home:
+      friendly_name: Robert van Huis
+    proximity.robert_from_work:
+      friendly_name: Robert van Werk
 
 proximity:
-  person1_home:
+  robert_from_home:
     zone: home
     devices:
-      - device_tracker.person1_phone_app
-      - device_tracker.person1_phone_app
+      - device_tracker.iphone_robert_app
     unit_of_measurement: m
 
-  person1_work:
-    zone: work_person1
+  robert_from_work:
+    zone: work_robert
     devices:
-      - device_tracker.person1_phone_app
+      - device_tracker.iphone_robert_app
     unit_of_measurement: km
