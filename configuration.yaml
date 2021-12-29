@@ -94,6 +94,9 @@ tts:
     base_url: !secret tts_base_url
     language: 'nl'
 
+# WOL is needed for (switching on) WebOS TV
+wake_on_lan:
+
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key

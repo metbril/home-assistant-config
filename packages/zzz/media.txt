@@ -1,20 +1,4 @@
 ---
-homeassistant:
-  customize:
-    media_player.living_tv:
-      friendly_name: TV Woonkamer
-
-# WOL is needed for (switching on) WebOS TV
-wake_on_lan:
-
-webostv:
-  host: !secret living_tv_host
-  name: Living TV
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret living_tv_mac
-
 ######################################################################
 ## Input Select
 ## https://www.home-assistant.io/integrations/input_select/
@@ -40,26 +24,6 @@ input_select:
       - Happy Campers
 
 automation:
-
-  - alias: Pause living speaker when TV is turned on
-    id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
-    description: >
-      Pause living speaker when living TV is turned on
-    mode: single
-
-    trigger:
-      - platform: state
-        entity_id: media_player.living_tv
-        to: 'on'
-
-    condition:
-      - condition: state
-        entity_id: media_player.woonkamer
-        state: playing
-
-    action:
-      - service: media_player.media_pause
-        entity_id: media_player.woonkamer
 
   - alias: Afspeellijst starten op speaker
     id: 67a5205f-4f1b-47a0-9bb6-f19c9102e0c1

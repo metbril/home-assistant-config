@@ -1,0 +1,169 @@
+---
+# webOStv requires the Wake On Lan integration
+#
+
+homeassistant:
+  customize:
+    media_player.living_tv:
+      friendly_name: TV Woonkamer
+
+webostv:
+  name: Living TV
+  host: !secret living_tv_host
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: !secret living_tv_mac
+
+template:
+  - sensor:
+      - name: Living TV Volume Level
+        unique_id: 655f97da-54dc-40d2-8de1-db1b9cc66bf3
+        unit_of_measurement: "%"
+        state: >
+            {{ (state_attr("media_player.living_tv", "volume_level") * 100) | float(Unavailable) }}
+        icon: >
+          {% set vol = states('sensor.living_tv_volume_level') | float(Unavailable) %}
+          {% set lvl = (( (vol-1) // (100/3) ) | int) + 1 %}
+          {% set icons = ['off','low','medium','high'] %}
+          {% if 0 <= lvl <= 3 %}
+          mdi:volume-{{ icons[lvl] }}
+          {% else %}
+          mdi:volume-{{ icons[1] }}
+          {% endif %}
+
+# Living TV history
+# https://www.home-assistant.io/integrations/history_stats
+#
+sensor:
+  - platform: history_stats
+    name: Living TV On Last 24h
+    entity_id: media_player.living_tv
+    state: 'on'
+    type: time
+    end: '{{ now() }}'
+    duration:
+      hours: 24
+
+  - platform: history_stats
+    name: Living TV On Today
+    entity_id: media_player.living_tv
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+  - platform: history_stats
+    name: Living TV On Today Ratio
+    entity_id: media_player.living_tv
+    state: "on"
+    type: ratio
+    start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+    end: "{{ now() }}"
+
+script:
+
+  start_netflix:
+    alias: "Media: Start Netflix"
+    description: >
+      Start de TV als deze nog uit staat, en schakelt vervolgens Netflix in.
+    icon: mdi:netflix
+    mode: single
+    sequence:
+      - choose:
+        - conditions:
+          - condition: state
+            entity_id: media_player.living_tv
+            state: 'off'
+          sequence:
+          - service: notify.mobile_app_pontius
+            data:
+              message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+          - service: media_player.turn_on
+            target:
+              entity_id: media_player.living_tv
+        default: []
+      - wait_template: '{{ is_state(''media_player.living_tv'', ''on'') }}'
+        timeout: 00:01:00
+      - service: media_player.select_source
+        data:
+          source: Netflix
+        target:
+          entity_id: media_player.living_tv
+      - service: notify.living_tv
+        data:
+          message: Netflix is gestart. Veel kijkplezier!
+  
+  switch_netflix_robert:
+    alias: "Media: Ga naar Netflix van Robert"
+    description: >
+
+      Start Netflix en open het profiel van Robert.
+      Aangenomen dat de TV al aan staat.
+
+    icon: mdi:netflix
+    mode: single
+    sequence:
+      - condition: state
+        entity_id: media_player.living_tv
+        state: 'on'
+      - service: media_player.select_source
+        target:
+          entity_id: media_player.living_tv
+        data:
+          source: Netflix
+      - delay:
+          seconds: 1
+      - service: webostv.button
+        data:
+          entity_id: media_player.living_tv
+          button: LEFT
+      - delay:
+          seconds: 1
+      - service: webostv.button
+        data:
+          entity_id: media_player.living_tv
+          button: LEFT
+      - delay:
+          seconds: 1
+      - service: webostv.button
+        data:
+          entity_id: media_player.living_tv
+          button: LEFT
+      - delay:
+          seconds: 1
+      - service: webostv.button
+        data:
+          entity_id: media_player.living_tv
+          button: LEFT
+      - delay:
+          seconds: 2
+      - service: webostv.button
+        data:
+          entity_id: media_player.living_tv
+          button: ENTER
+
+automation:
+
+  - alias: "Media: Pause living speaker when TV is turned on"
+    id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
+    description: >
+      Pause living speaker when living TV is turned on
+    mode: single
+
+    trigger:
+      - platform: state
+        entity_id: media_player.living_tv
+        to: 'on'
+
+    condition:
+      - condition: state
+        entity_id: media_player.woonkamer
+        state: playing
+
+    action:
+      - service: media_player.media_pause
+        entity_id: media_player.woonkamer
+      - service: notify.living_tv
+        data:
+          message: Muziekspeler automatisch gepauzeerd.
