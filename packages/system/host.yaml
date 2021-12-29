@@ -5,13 +5,9 @@
 
 homeassistant:
   customize:
-    ################################################
-    ## Node Anchors
-    ################################################
 
-    package.node_anchors:
-      customize: &customize
-        package: 'host'
+    # Binary sensors
+    #
 
     binary_sensor.cpu_high:
       device_class: problem
@@ -22,12 +18,10 @@ homeassistant:
     binary_sensor.db_large:
       device_class: problem
       friendly_name: Grote database
-    binary_sensor.rpi_power_status:
-      icon: ''  # hide icon
 
-    ################################################
-    ## Sensor
-    ################################################
+    # Sensors
+    #
+
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
@@ -64,8 +58,6 @@ homeassistant:
       icon: hass:upload-network
     sensor.processor_use:
       friendly_name: Processorgebruik
-    sensor.since_last_boot:
-      friendly_name: Sinds laatste herstart
     script.purge_database:
       friendly_name: Database opschonen
 
@@ -102,6 +94,10 @@ sensor:
       - type: network_in
         arg: 'eth0'
       - type: network_out
+        arg: 'eth0'
+      - type: throughput_network_in
+        arg: 'eth0'
+      - type: throughput_network_out
         arg: 'eth0'
       - type: packets_in
         arg: 'eth0'
@@ -198,5 +194,5 @@ script:
     sequence:
       - service: recorder.purge
         data:
-          keep_days: 1
+          keep_days: 5
           repack: true
