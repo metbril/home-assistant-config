@@ -1,0 +1,9 @@
+---
+logger:
+  default: warn
+  logs:
+    # homeassistant.core: debug
+    # RFXtrx: debug
+    # custom_components: debug
+    custom_components.brandstofprijzen: debug
+    custom_components.dutch_public_transport_api: debug

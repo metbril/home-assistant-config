@@ -81,11 +81,6 @@ http:
 #
 ios:
 
-logger:
-  default: warn
-  # logs:
-  #   RFXtrx: debug
-
 lovelace:
   mode: storage
 
