@@ -64,3 +64,57 @@ sensor:
     duration:
       days: 5
     end: "{{ now() }}"
+
+  - platform: template
+    sensors:
+
+      hours_outside_per_day_robert:
+        friendly_name: Uren per dag buitenshuis Robert
+        unit_of_measurement: u
+        icon_template: mdi:exit-run
+        value_template: >
+          {% set value = state_attr("sensor.quarantine_meter_robert", "value") %}
+          {% set i = 5 %}
+          {% if value != None %}
+          {% set args = 1+ (value | length) - ((value.replace(' ', '') | length)) %}
+          {% if args < 2 %}{% set value = "0h " ~ value %}{% endif %}
+          {% if args < 3 %}{% set value = "0d " ~ value %}{% endif %}
+          {% set d, h, m = value.split() %}
+          {% set d, h, m = d[:-1] | int, h[:-1] | int, m[:-1] | int %}
+          {% set hours_outside = ((i - d) * 86400 - h * 3600 - m * 60) / 3600 %}
+          {{ (hours_outside / i) | round(1) }}
+          {% endif %}
+
+      hours_outside_per_day_monique:
+        friendly_name: Uren per dag buitenshuis Monique
+        unit_of_measurement: u
+        icon_template: mdi:exit-run
+        value_template: >
+          {% set value = state_attr("sensor.quarantine_meter_monique", "value") %}
+          {% set i = 5 %}
+          {% if value != None %}
+          {% set args = 1+ (value | length) - ((value.replace(' ', '') | length)) %}
+          {% if args < 2 %}{% set value = "0h " ~ value %}{% endif %}
+          {% if args < 3 %}{% set value = "0d " ~ value %}{% endif %}
+          {% set d, h, m = value.split() %}
+          {% set d, h, m = d[:-1] | int, h[:-1] | int, m[:-1] | int %}
+          {% set hours_outside = ((i - d) * 86400 - h * 3600 - m * 60) / 3600 %}
+          {{ (hours_outside / i) | round(1) }}
+          {% endif %}
+
+      hours_outside_per_day_bjorn:
+        friendly_name: Uren per dag buitenshuis Björn
+        unit_of_measurement: u
+        icon_template: mdi:exit-run
+        value_template: >
+          {% set value = state_attr("sensor.quarantine_meter_bjorn", "value") %}
+          {% set i = 5 %}
+          {% if value != None %}
+          {% set args = 1+ (value | length) - ((value.replace(' ', '') | length)) %}
+          {% if args < 2 %}{% set value = "0h " ~ value %}{% endif %}
+          {% if args < 3 %}{% set value = "0d " ~ value %}{% endif %}
+          {% set d, h, m = value.split() %}
+          {% set d, h, m = d[:-1] | int, h[:-1] | int, m[:-1] | int %}
+          {% set hours_outside = ((i - d) * 86400 - h * 3600 - m * 60) / 3600 %}
+          {{ (hours_outside / i) | round(1) }}
+          {% endif %}
