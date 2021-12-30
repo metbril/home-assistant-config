@@ -1,0 +1,17 @@
+---
+template:
+  - sensor:
+      - name: Energy Rate Tarif 1
+        unit_of_measurement: €/kWh
+        icon: mdi:currency-eur
+        state: 0.15972  # for 2021
+  - sensor:
+      - name: Energy Rate Tarif 2
+        unit_of_measurement: €/kWh
+        icon: mdi:currency-eur
+        state: 0.17522  # for 2021
+  - sensor:
+    - name: Gas Rate
+      unit_of_measurement: €/kWh
+      icon: mdi:currency-eur
+      state: 0.98866  # for 2021
