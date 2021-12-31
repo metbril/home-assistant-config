@@ -11,7 +11,7 @@ template:
         icon: mdi:currency-eur
         state: 0.17522  # for 2021
   - sensor:
-    - name: Gas Rate
-      unit_of_measurement: €/kWh
-      icon: mdi:currency-eur
-      state: 0.98866  # for 2021
+      - name: Gas Rate
+        unit_of_measurement: €/kWh
+        icon: mdi:currency-eur
+        state: 0.98866  # for 2021
