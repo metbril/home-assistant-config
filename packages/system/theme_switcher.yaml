@@ -74,5 +74,5 @@ automation:
               is_state("input_boolean.theme_alternative", "on") else "" -%}
             ios-{{ mode }}-mode-{{ name }}{{ suffix }}
           # mode: >
-          #   {{ "dark" if is_state("input_boolean.dark_mode", "on") 
+          #   {{ "dark" if is_state("input_boolean.dark_mode", "on")
           #     else "light" }}
