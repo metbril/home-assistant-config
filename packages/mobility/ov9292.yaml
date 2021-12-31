@@ -83,3 +83,26 @@ sensor:
     name: Metro Blaak naar Nesselande
     station: rotterdam/metrostation-blaak
     destination: Nesselande
+
+# These groups are used in the UI to sort and get first and next departures
+#
+# Sprinter Blaak is easy; it's only one line. No group needed.
+#
+group:
+  metro_capelsebrug:
+    entities:
+      - sensor.metro_capelsebrug_naar_de_akkers
+      - sensor.metro_capelsebrug_naar_hoek_van_holland_haven
+      - sensor.metro_capelsebrug_naar_schiedam_centrum
+      - sensor.metro_capelsebrug_naar_steendijkpolder
+  sprinter_lombardijen:
+    entities:
+      - sensor.sprinter_lombardijen_naar_den_haag_centraal
+      - sensor.sprinter_lombardijen_naar_den_haag_centraal_future_1
+      - sensor.sprinter_lombardijen_naar_rotterdam_centraal
+      - sensor.sprinter_lombardijen_naar_rotterdam_centraal_future_1
+  metro_blaak:
+    entities:
+      - sensor.metro_blaak_naar_binnenhof
+      - sensor.metro_blaak_naar_de_terp
+      - sensor.metro_blaak_naar_nesselande
