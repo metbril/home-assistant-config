@@ -1,0 +1,78 @@
+---
+# Theme switcher
+#
+# Uses HACS iOS themes
+# https://github.com/basnijholt/lovelace-ios-themes
+#
+# Inspired by @basnijholt
+# https://github.com/basnijholt/home-assistant-config
+# https://www.reddit.com/r/homeassistant/comments/h9ckpt/beautiful_ios_dark_and_light_mode_inspired_themes/
+#
+input_boolean:
+  dark_mode:
+    name: Dark mode
+    icon: mdi:theme-light-dark
+
+  theme_alternative:
+    name: Theme alternative
+
+input_select:
+  theme:
+    options:
+      - blue-red
+      - dark-blue
+      - dark-green
+      - light-blue
+      - light-green
+      - orange
+      - red
+    initial: dark-blue
+    icon: mdi:format-color-fill
+
+automation:
+
+  - alias: "Frontend: turn on dark mode"
+    trigger:
+      - platform: time
+        at: "20:00"
+      - platform: sun
+        event: sunset
+    condition: "{{ is_state('input_boolean.dark_mode', 'off') }}"
+    action:
+      - service: input_boolean.turn_on
+        entity_id: input_boolean.dark_mode
+
+  - alias: "Frontend: turn on light mode"
+    trigger:
+      - platform: time
+        at: "06:00"
+      - platform: sun
+        event: sunrise
+    condition: "{{ is_state('input_boolean.dark_mode', 'on') }}"
+    action:
+      - service: input_boolean.turn_off
+        entity_id: input_boolean.dark_mode
+
+  - alias: "Frontend: change theme"
+    trigger:
+      - platform: state
+        entity_id: input_select.theme
+      - platform: state
+        entity_id: input_boolean.dark_mode
+      - platform: state
+        entity_id: input_boolean.theme_alternative
+      - platform: homeassistant
+        event: start
+    action:
+      - service: frontend.set_theme
+        data:
+          name: >
+            {% set name = states("input_select.theme") -%}
+            {% set mode = "dark" if
+              is_state("input_boolean.dark_mode", "on") else "light" %}
+            {% set suffix = "-alternative" if
+              is_state("input_boolean.theme_alternative", "on") else "" -%}
+            ios-{{ mode }}-mode-{{ name }}{{ suffix }}
+          # mode: >
+          #   {{ "dark" if is_state("input_boolean.dark_mode", "on") 
+          #     else "light" }}
