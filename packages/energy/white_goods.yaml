@@ -1,0 +1,24 @@
+---
+homeassistant:
+  customize:
+    sensor.washing_machine_energy_consumption_daily:
+      friendly_name: "Wasmachine: Dagelijks energieverbruik"
+
+template:
+  - binary_sensor:
+      - name: Washing Machine
+        state: >
+          {{ states("sensor.washing_machine_power_consumption")
+          | float(0) > 3 }}
+        # delay_off: "00:05:00"
+        icon: >
+          {% if is_state("binary_sensor.washing_machine", "on") %}
+            mdi:washing-machine
+          {% else %}
+            mdi:washing-machine-off
+          {% endif %}
+
+utility_meter:
+  washing_machine_energy_consumption_daily:
+    source: sensor.washing_machine_energy_consumption
+    cycle: daily
