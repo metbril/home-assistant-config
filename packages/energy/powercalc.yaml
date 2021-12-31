@@ -25,8 +25,10 @@ sensor:
     multiply_factor: 4
     multiply_factor_standby: true
 
-  # - platform: powercalc
-  #   entity_id: light.signaallamp
+  - platform: powercalc
+    entity_id: light.nijntje
+    manufacturer: signify
+    model: LCT012
 
   - platform: powercalc
     entity_id: light.magnarp
