@@ -6,9 +6,9 @@ sensor:
   - platform: brandstofprijzen
 
 automation:
-  - alias: "Mobiliteit: Melding bij gewijzigde brandstofprijzen"
+  - alias: "Mobility: Advice price fuel change notification"
     description: >
-      Send notification when a fuel advicde price changed
+      Send notification when a fuel advice price changed
 
     id: 6e17a20a-4bad-4def-9f60-4b4ace77762c
     mode: queued
@@ -28,7 +28,7 @@ automation:
     condition: "{{ trigger.state.to_state != trigger.state.from_state }}"
 
     action:
-      - service: notify.person1
+      - service: notify.robert
         data:
           title: Adviesprijs
           message: >

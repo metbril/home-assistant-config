@@ -212,8 +212,8 @@ automation:
       - service: input_text.set_value
         data:
           entity_id: input_text.teams_status_person1
-          value: unknown  # Don't use Offline to differentiate
-      - service: notify.person1
+          value: unknown  # Don't use 'Offline' to differentiate
+      - service: notify.robert
         data:
           message: Microsoft Teams status forced to 'Unknown'
 

@@ -1,0 +1,52 @@
+---
+notify:
+
+  - name: Admin
+    platform: group
+    services:
+      - service: pushover
+
+  - name: All
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+      - service: living_tv
+
+  - name: People
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  - name: Parents
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  - name: Robert
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  - name: Monique
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  - name: Pushover
+    platform: pushover
+    api_key: !secret pushover_api_key
+    user_key: !secret pushover_user_key
+
+    ##############################################################################
+    ## Twitter
+    ## https://www.home-assistant.io/integrations/twitter
+    ##
+    ## Send notifications to the twitter account of the house
+    ## https://twitter.com/domussapiens
+    ##############################################################################
+  - name: Twitter
+    platform: twitter
+    consumer_key: !secret twitter_consumer_key
+    consumer_secret: !secret twitter_consumer_secret
+    access_token: !secret twitter_access_token
+    access_token_secret: !secret twitter_access_token_secret

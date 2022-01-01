@@ -11,7 +11,7 @@ trigger:
     to: 'on'
 
 action:
-  - service: notify.person1
+  - service: notify.robert
     data:
       title: '⚠️ {{state_attr(''binary_sensor.meteoalarm'', ''headline'')}}'
       message: '{{state_attr(''binary_sensor.meteoalarm'',

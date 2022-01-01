@@ -32,7 +32,7 @@ automation:
         value_template: '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
 
     action:
-      - service: notify.person1
+      - service: notify.robert
         data:
           title: 🚒 P2000 Brandweer
           message: '{{ states(''sensor.p2000_brandweer'') }}'
