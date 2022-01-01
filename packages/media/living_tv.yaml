@@ -78,7 +78,7 @@ script:
                 entity_id: media_player.living_tv
                 state: 'off'
             sequence:
-              - service: notify.mobile_app_pontius
+              - service: notify.mobile_app_iphone_robert
                 data:
                   message: >
                     De TV wordt ingeschakeld voor Netflix.

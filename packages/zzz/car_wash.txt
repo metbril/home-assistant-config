@@ -25,6 +25,6 @@ automation:
         to: 'on'
 
     action:
-      - service: notify.mobile_app_pontius
+      - service: notify.mobile_app_iphone_robert
         data:
           message: De auto kan weer worden gewassen.
