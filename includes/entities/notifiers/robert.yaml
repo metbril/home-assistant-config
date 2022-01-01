@@ -1,5 +1,0 @@
----
-name: person1
-platform: group
-services:
-  - service: person1_mobile

@@ -1,7 +1,0 @@
----
-name: all
-platform: group
-services:
-  - service: admin
-  - service: person1
-  - service: living_tv
