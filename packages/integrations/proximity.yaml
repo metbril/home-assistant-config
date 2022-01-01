@@ -4,12 +4,30 @@
 #
 homeassistant:
   customize:
+    proximity.home:
+      friendly_name: Van huis
+    proximity.parents_from_home:
+      friendly_name: Ouders van huis
     proximity.robert_from_home:
-      friendly_name: Robert van Huis
+      friendly_name: Robert van huis
     proximity.robert_from_work:
-      friendly_name: Robert van Werk
+      friendly_name: Robert van werk
 
 proximity:
+  home:
+    devices:
+      - person.robert
+      - person.monique
+      - person.bjorn
+    tolerance: 50
+
+  parents_from_home:
+    zone: home
+    devices:
+      - person.robert
+      - person.monique
+    tolerance: 50
+
   robert_from_home:
     zone: home
     devices:

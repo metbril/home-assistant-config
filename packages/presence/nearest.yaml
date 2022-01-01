@@ -1,0 +1,26 @@
+---
+# Inspired by @basnijholt
+# https://github.com/basnijholt/home-assistant-config/blob/ae69265f1b9bb904e884e985b99d5d2cbaa77f82/includes/sensors.yaml#L227
+#
+# yamllint disable rule:line-length
+# {% set parents = state_attr("proximity.home", "nearest").split(", ") | reject("eq", "Björn") | list %}
+#
+
+template:
+  - sensor:
+      - name: Nearest Parent Notify
+        state: >
+          {% set proximity = states('proximity.parents_from_home') %}
+          {% set parents = state_attr("proximity.parents_from_home",
+            "nearest") %}
+          {% if (parents|count) == 2 or
+              proximity == 'not set' or
+              proximity == 'Unavailable' or
+              proximity == 'unknown' or
+              proximity is None %}
+            notify.parents
+          {% elif parents[0] == "Robert" %}
+            notify.robert
+          {% else %}
+            notify.monique
+          {% endif %}
