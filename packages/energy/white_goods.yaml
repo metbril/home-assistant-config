@@ -1,14 +1,14 @@
 ---
 homeassistant:
   customize:
-    sensor.washing_machine_energy_consumption_daily:
-      friendly_name: "Wasmachine: Dagelijks energieverbruik"
+    sensor.washing_machine_daily_energy:
+      friendly_name: "Dagelijks verbruik wasmachine"
 
 template:
   - binary_sensor:
       - name: Washing Machine
         state: >
-          {{ states("sensor.washing_machine_power_consumption")
+          {{ states("sensor.washing_machine_power")
           | float(0) > 3 }}
         # delay_off: "00:05:00"
         icon: >
@@ -19,6 +19,96 @@ template:
           {% endif %}
 
 utility_meter:
-  washing_machine_energy_consumption_daily:
-    source: sensor.washing_machine_energy_consumption
+  washing_machine_daily_energy:
+    source: sensor.washing_machine_energy
     cycle: daily
+
+input_datetime:
+  washing_machine_on:
+    name: Wasmachine laatst gestart
+    has_date: true
+    has_time: true
+
+  washing_machine_off:
+    name: Wasmachine laatst gereed
+    has_date: true
+    has_time: true
+
+script:
+  white_goods_notification:
+    mode: parallel
+    max: 20
+    fields:
+      name:
+        description: name
+        example: washing_machine
+      emojis:
+        description: emojis
+        example: "👚👕"
+    variables:
+      switch: "{{ 'switch.{}'.format(name) }}"
+      binary_sensor: "{{ 'binary_sensor.{}'.format(name) }}"
+      friendly_name: "{{ name.capitalize().replace('_', ' ') }}"
+      energy_sensor: "{{ 'sensor.{}_energy'.format(name) }}"
+    sequence:
+      - variables:
+          start_time: "{{ as_timestamp(now()) }}"
+          start_kwh: "{{ states(energy_sensor) }}"
+      - wait_for_trigger:
+          platform: template
+          value_template: "{{ is_state(binary_sensor, 'off') }}"
+        timeout: "04:00:00"
+        continue_on_timeout: false
+      - variables:
+          end_time: "{{ as_timestamp(now()) }}"
+          end_kwh: "{{ states(energy_sensor) }}"
+      - variables:
+          total_time: "{{ (end_time - start_time) }}"
+          total_kwh: "{{ end_kwh - start_kwh }}"
+      - variables:
+          minutes: "{{ (total_time / 60) | round(0) }}"
+          total_kwh_rounded: "{{ (total_kwh) | round(2) }}"
+          price: >
+            {{ (states('sensor.energy_rate_tarif_2') | float * total_kwh)
+              | round(2) }}
+          price_formatted: "{{ '{:0.2f%}'.format(price) | replace('.', ',') }}"
+      - service: notify.robert
+        # "{{ states('sensor.nearest_parent_notify') }}"
+        data:
+          title: "Apparaten"
+          message: >
+            {{ friendly_name }} is klaar na {{ minutes }} minuten
+            en verbruikte {{ total_kwh_rounded }} kWh
+            (€{{ price_formatted }}). {{ emojis }}
+
+automation:
+  - alias: "White Goods: appliance started or finished"
+    id: b2b10f8b-811d-4d38-930f-9961f6c3ecaf
+    trigger:
+      - platform: state
+        entity_id: binary_sensor.washing_machine
+    variables:
+      from_state: "{{ trigger.from_state.state }}"
+      to_state: "{{ trigger.to_state.state }}"
+      name: "{{ trigger.entity_id.split('.', 1)[1] }}"
+    condition: >
+      {{ (to_state == 'on' and from_state == 'off') or
+        (to_state == 'off' and from_state == 'on') }}
+    action:
+      service: input_datetime.set_datetime
+      data:
+        entity_id: "input_datetime.{{ name }}_{{ to_state }}"
+        timestamp: "{{ now().timestamp() }}"
+
+  - alias: "White Goods: washing machine notification"
+    id: 51d696db-b786-437a-8ea0-7c5a819115ad
+    trigger:
+      platform: state
+      entity_id: binary_sensor.washing_machine
+      from: "off"
+      to: "on"
+    action:
+      service: script.white_goods_notification
+      data:
+        name: "washing_machine"
+        emojis: "👚👕"
