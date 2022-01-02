@@ -46,3 +46,30 @@
     entity_id: light.achtergevel
     domain: light
   mode: single
+- id: '1641072845694'
+  alias: 'Lighting: Notification for Schemerverlichting'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: scene
+      service: turn_on
+      target:
+        entity_id: scene.schemerverlichting
+  - platform: event
+    event_type: call_service
+    event_data:
+      domain: scene
+      service: turn_on
+      service_data:
+        entity_id: scene.schemerverlichting
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: 'Schemerverlichting geactiveerd. Elevation: {{ state_attr(''sun.sun'',''elevation'')
+        }}.
+
+        '
+  mode: single
