@@ -12,15 +12,16 @@ sensor:
     name: P2000 Brandweer
     regios: 17                  # rotterdam rijnmond
     disciplines: 1              # brandweer
-    radius: 1000                # meter, default 5000
+    radius: 1000                # meter, default 5000; from home
     scan_interval: 30           # seconden, default 30
     icon: hass:fire-truck
 
 automation:
-  - alias: P2000 Brandweer Melding
-    id: 971fc035-f021-4015-a54b-8c6da9ddf200
+  - alias: "Safety: P2000 Brandweer Melding"
     description: >
       Melding dat de brandweer dichtbij is
+
+    id: 971fc035-f021-4015-a54b-8c6da9ddf200
     mode: single
 
     trigger:
@@ -32,7 +33,7 @@ automation:
         value_template: '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
 
     action:
-      - service: notify.robert
+      - service: notify.parents
         data:
           title: 🚒 P2000 Brandweer
           message: '{{ states(''sensor.p2000_brandweer'') }}'
