@@ -201,6 +201,26 @@ To use the automation editor in combination with packages, there needs to be [a 
 
 To limit database growth, I limit [recording](https://home-assistant.io/components/recorder/) as much as possible and purge the database daily for values older than 3 days.
 
+## Maintenance
+
+For the maintenance of my configuration, I use these tools:
+
+- Visual Studio Code, with extensions:
+  - Home Assistant Config Helper
+  - YAML
+  - markdownlint
+  - UUID Generator
+- [yamllint][yamllint]
+- [pre-commit][pre-commit]
+
+To use yamllint with pre-commit, execute these commands:
+
+```shell
+brew install yamllint
+brew install pre-commit
+pre-commit install
+```
+
 ## Credits 🙏
 
 - [Frenck's yamllint action](https://github.com/frenck/action-yamllint)
@@ -212,3 +232,5 @@ If you have suggestions or improvements, please submit an issue or pull request.
 
 [check-badge]: https://github.com/metbril/home-assistant-config/workflows/Check%20configuration/badge.svg
 [check-log]: https://github.com/metbril/home-assistant-config/actions?query=workflow%3A%22Check+configuration%22
+[pre-commit]: https://pre-commit.com/
+[yamllint]: https://yamllint.readthedocs.io/en/stable/
