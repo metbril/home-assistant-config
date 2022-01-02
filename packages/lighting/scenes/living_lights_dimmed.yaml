@@ -40,7 +40,7 @@ scene:
         state: 'on'
       light.bollamp:
         state: 'off'
-      light.mijntje:
+      light.nijntje:
         state: 'off'
       light.willner:
         brightness: 3
