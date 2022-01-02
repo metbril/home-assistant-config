@@ -1,0 +1,58 @@
+---
+scene:
+  - name: Gedimd
+
+    id: 9c656371-07da-4140-b5d5-f7a3b6f79bac
+
+    entities:
+      light.hoge_kast:
+        color_mode: hs
+        brightness: 128
+        hs_color:
+          - 29.725
+          - 42.745
+        effect: none
+        state: 'on'
+
+      # light.magnarp_1:
+      #   state: 'off'
+
+      # light.magnarp_2:
+      #   state: 'off'
+
+      # light.magnarp_3:
+      #   state: 'off'
+
+      light.leeslamp:
+        color_mode: color_temp
+        brightness: 128
+        color_temp: 435
+        state: 'on'
+
+      light.turbinelamp:
+        state: 'off'
+
+      light.lichtstraat_1:
+        state: 'off'
+
+      light.lichtstraat_2:
+        state: 'off'
+
+      light.lichtstraat_3:
+        state: 'off'
+
+      light.lichtstraat_4:
+        state: 'off'
+
+      light.bollamp:
+        color_mode: color_temp
+        brightness: 128
+        color_temp: 435
+        effect: none
+        state: 'on'
+
+      light.willner:
+        color_mode: color_temp
+        brightness: 128
+        color_temp: 435
+        state: 'on'

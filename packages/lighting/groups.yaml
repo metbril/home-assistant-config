@@ -1,6 +1,18 @@
 ---
 # Lighting
 
+homeassistant:
+  customize:
+    light.living:
+      friendly_name: Woonkamer
+      icon: mdi:sofa
+
+    light.lichtstraat:
+      icon: mdi:wall-sconce-flat
+
+    light.magnarp:
+      icon: mdi:floor-lamp
+
 light:
 
   # Light group: Lichtstraat

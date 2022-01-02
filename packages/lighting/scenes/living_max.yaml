@@ -1,0 +1,65 @@
+---
+# Switch on all lights at max brightness and color temperature.
+# Lights are listed clockwise from the door.
+
+scene:
+  - name: Woonkamerverlichting Maximaal
+
+    id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
+    icon: hass:brightness-7
+
+    entities:
+      light.hoge_kast:
+        brightness: 255
+        rgb_color:
+          - 255
+          - 244
+          - 216
+        effect: none
+        state: 'on'
+      light.magnarp:  # group
+        brightness: 254
+        color_temp: 353
+        state: 'on'
+      # light.magnarp_1:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
+      # light.magnarp_2:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
+      # light.magnarp_3:
+      #   brightness: 254
+      #   color_temp: 353
+      #   state: 'on'
+      light.leeslamp:
+        brightness: 255
+        color_temp: 360
+        state: 'on'
+      light.turbinelamp:
+        state: 'on'
+      light.lichtstraat:  # group
+        brightness: 254
+        state: 'on'
+      # light.lichtstraat_1:
+      #   brightness: 254
+      #   state: 'on'
+      # light.lichtstraat_2:
+      #   brightness: 254
+      #   state: 'on'
+      # light.lichtstraat_3:
+      #   brightness: 254
+      #   state: 'on'
+      # light.lichtstraat_4:
+      #   brightness: 254
+      #   state: 'on'
+      light.bollamp:
+        brightness: 255
+        color_temp: 326
+        effect: none
+        state: 'on'
+      light.willner:
+        brightness: 255
+        color_temp: 360
+        state: 'on'

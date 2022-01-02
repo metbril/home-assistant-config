@@ -1,8 +1,0 @@
----
-light.lichtstraat:
-  icon: hass:wall-sconce-flat
-light.living:
-  friendly_name: Woonkamer
-  icon: hass:sofa
-light.magnarp:
-  icon: hass:floor-lamp
