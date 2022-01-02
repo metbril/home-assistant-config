@@ -1,58 +1,48 @@
 ---
 scene:
-  - name: Gedimd
+  - name: Verlichting Woonkamer Gedimd
 
-    id: 9c656371-07da-4140-b5d5-f7a3b6f79bac
+    id: 88a1bee5-12d9-41b9-9928-1775d42f9727
+    icon: mdi:brightness-3
 
     entities:
       light.hoge_kast:
-        color_mode: hs
-        brightness: 128
-        hs_color:
-          - 29.725
-          - 42.745
-        effect: none
+        state: 'off'
+      light.magnarp_1:
+        brightness: 3
+        color_temp: 400
         state: 'on'
-
-      # light.magnarp_1:
-      #   state: 'off'
-
-      # light.magnarp_2:
-      #   state: 'off'
-
-      # light.magnarp_3:
-      #   state: 'off'
-
+      light.magnarp_2:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
+      light.magnarp_3:
+        brightness: 3
+        color_temp: 400
+        state: 'on'
       light.leeslamp:
-        color_mode: color_temp
-        brightness: 128
-        color_temp: 435
+        brightness: 3
+        color_temp: 440
         state: 'on'
-
       light.turbinelamp:
         state: 'off'
-
       light.lichtstraat_1:
-        state: 'off'
-
-      light.lichtstraat_2:
-        state: 'off'
-
-      light.lichtstraat_3:
-        state: 'off'
-
-      light.lichtstraat_4:
-        state: 'off'
-
-      light.bollamp:
-        color_mode: color_temp
-        brightness: 128
-        color_temp: 435
-        effect: none
+        brightness: 3
         state: 'on'
-
+      light.lichtstraat_2:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_3:
+        brightness: 3
+        state: 'on'
+      light.lichtstraat_4:
+        brightness: 3
+        state: 'on'
+      light.bollamp:
+        state: 'off'
+      light.mijntje:
+        state: 'off'
       light.willner:
-        color_mode: color_temp
-        brightness: 128
+        brightness: 3
         color_temp: 435
         state: 'on'

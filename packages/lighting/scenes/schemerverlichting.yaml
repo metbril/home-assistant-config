@@ -3,35 +3,50 @@ scene:
   - name: Schemerverlichting
 
     id: ec425f24-abca-428d-8a98-d6ea5aa374e8
-    icon: hass:weather-sunset
+    icon: mdi:weather-sunset
 
     entities:
+
       light.hoge_kast:
+        color_mode: hs
         brightness: 179
-        rgb_color:
-          - 255
-          - 181
-          - 108
+        hs_color:
+          - 29.589
+          - 57.255
         effect: none
         state: 'on'
+
       light.magnarp:  # group at once
         brightness: 85
         color_temp: 400
         state: 'on'
+
       light.leeslamp:
         brightness: 140
         color_temp: 440
         state: 'on'
+
       light.turbinelamp:
         state: 'on'
+
       light.lichtstraat:  # group at once
         brightness: 65
         state: 'on'
+
       light.bollamp:
+        color_mode: color_temp
         brightness: 141
         color_temp: 434
         effect: none
         state: 'on'
+
+      light.nijntje:
+        color_mode: color_temp
+        brightness: 76
+        color_temp: 350
+        effect: none
+        state: 'on'
+
       light.willner:
         brightness: 175
         color_temp: 435

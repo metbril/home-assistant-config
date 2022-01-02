@@ -35,6 +35,7 @@ light:
       - light.lichtstraat_3
       - light.lichtstraat_4
       - light.bollamp
+      - light.nijntje
       - light.willner
 
   # Light group: Lichtstraat
