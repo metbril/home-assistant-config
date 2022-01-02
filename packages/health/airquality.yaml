@@ -10,60 +10,34 @@ homeassistant:
   customize_glob:
     sensor.*_uv_index:
       unit_of_measurement: "UVI"
-      icon: hass:weather-sunny
+      icon: mdi:weather-sunny
     sensor.*_ozone*:
       unit_of_measurement: "DU"
-      icon: hass:vector-triangle
+      icon: mdi:vector-triangle
 
   customize:
-
-    ################################################
-    ## Node Anchors
-    ################################################
-
-    package.node_anchors:
-      customize: &customize
-        package: 'airquality'
 
     ################################################
     ## Sensor
     ################################################
 
     # opensensemap
+    #
     sensor.pompenburg_rotterdam_p1:
-      <<: *customize
       friendly_name: Fijnstof PM10 Pompenburg
       unit_of_measurement: µg/m³
-      icon: hass:thought-bubble
+      icon: mdi:thought-bubble
     sensor.pompenburg_rotterdam_p2:
-      <<: *customize
       friendly_name: Fijnstof PM2.5 Pompenburg
       unit_of_measurement: µg/m³
-      icon: hass:thought-bubble-outline
+      icon: mdi:thought-bubble-outline
 
     # openuv
+    #
     sensor.current_uv_index:
-      <<: *customize
       friendly_name: UV-index OpenUV
-    sensor.current_uv_level:
-      <<: *customize
-    sensor.max_uv_index:
-      <<: *customize
     sensor.current_ozone_level:
-      <<: *customize
       friendly_name: Ozon OpenUV
-    sensor.skin_type_1_safe_exposure_time:
-      <<: *customize
-    sensor.skin_type_2_safe_exposure_time:
-      <<: *customize
-    sensor.skin_type_3_safe_exposure_time:
-      <<: *customize
-    sensor.skin_type_4_safe_exposure_time:
-      <<: *customize
-    sensor.skin_type_5_safe_exposure_time:
-      <<: *customize
-    sensor.skin_type_6_safe_exposure_time:
-      <<: *customize
 
 ################################################
 ## OpenSenseMap
@@ -95,7 +69,7 @@ sensor:
 ## Automation
 ################################################
 automation:
-  - alias: Update OpenUV 5 minutes before sunrise and after sunset
+  - alias: "Health: Update OpenUV 5 minutes before sunrise and after sunset"
     id: 5753f6f8-2107-45d9-820c-45909ac1f831
     trigger:
       - event: sunrise
@@ -107,7 +81,7 @@ automation:
     action:
       - service: openuv.update_uv_index_data
 
-  - alias: Update OpenUV every 30 minutes during daytime
+  - alias: "Health: Update OpenUV every 30 minutes during daytime"
     id: 92a7c866-74e0-473a-97f6-da3b5f11a542
     trigger:
       - platform: time_pattern
@@ -122,7 +96,7 @@ automation:
     action:
       - service: openuv.update_uv_index_data
 
-  - alias: Update OpenUV protection window daily
+  - alias: "Health: Update OpenUV protection window daily"
     id: 664d5361-6383-45ec-9268-d42ad07c06ce
     trigger:
       - platform: time
