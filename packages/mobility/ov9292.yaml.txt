@@ -3,6 +3,10 @@
 #
 # https://github.com/Juvawa/HomeAssistant9292OvApiSensor
 #
+# 2022-01-04: Disabled, since API is unavailable
+# https://github.com/Juvawa/HomeAssistant9292OvApiSensor/issues/20
+#
+
 sensor:
 
   # Heenreis: metro van Capelsebrug naar Blaak

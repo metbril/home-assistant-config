@@ -58,10 +58,12 @@ jobs:
           git clone https://github.com/eelcohn/home-assistant-rdw.git
           mv -v home-assistant-rdw/custom_components/* ./custom_components
 
-      - name: Clone custom component 9292 OV API sensor
-        run: |
-          git clone https://github.com/Juvawa/HomeAssistant9292OvApiSensor.git
-          mv -v HomeAssistant9292OvApiSensor/custom_components/* ./custom_components
+      # 2022-01-04: Disabled. API unavailable
+      #
+      # - name: Clone custom component 9292 OV API sensor
+      #   run: |
+      #     git clone https://github.com/Juvawa/HomeAssistant9292OvApiSensor.git
+      #     mv -v HomeAssistant9292OvApiSensor/custom_components/* ./custom_components
 
       - name: Clone custom component Car Wash
         run: |
