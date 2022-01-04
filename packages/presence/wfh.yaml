@@ -21,7 +21,7 @@ template:
         unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
         device_class: presence
         state: >
-          {{ is_state('binary_sensor.teams_online_robert', 'on') and
+          {{ is_state('binary_sensor.msteams_online_robert', 'on') and
              is_state('person.robert', 'home') }}
 
       - name: Working From Home
