@@ -7,6 +7,7 @@
 input_boolean:
   working_from_home:
     name: Working from Home
+    icon: mdi:home-import-outline
 
 ##############################
 # Templates
