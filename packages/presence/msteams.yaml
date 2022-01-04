@@ -1,8 +1,16 @@
 ---
-# Monitoring of Microsoft Teams presence
+# Monitoring of Teams presence
 #
 # https://github.com/EBOOZ/TeamsStatus
 #
+homeassistant:
+  customize:
+    sensor.msteams_call_time_today_robert:
+      friendly_name: Teams Call Time Today Robert
+    sensor.msteams_call_count_today_robert:
+      friendly_name: Teams Call Count Today Robert
+    sensor.msteams_online_today_robert:
+      friendly_name: Teams Call Count Today Robert
 
 ##############################
 # Input Texts
@@ -13,15 +21,15 @@ input_text:
   # This sensor gets updated by the remote REST POST script.
   # Inputs are intended as helpers, not for the UI
   #
-  teams_status_person1:
-    name: Microsoft Teams status person1
+  msteams_status_robert:
+    name: Teams status Robert
     icon: mdi:microsoft-teams
 
   # This sensor gets updated by the remote REST POST script.
   # Inputs are intended as helpers, not for the UI
   #
-  teams_activity_person1:
-    name: Microsoft Teams activity Persoon 1
+  msteams_activity_robert:
+    name: Teams activity Robert
     icon: mdi:microsoft-teams
 
 ##############################
@@ -35,27 +43,29 @@ sensor:
 
       # Display teams status in the UI
       #
-      teams_status_person1:
-        friendly_name: "Microsoft Teams status Persoon 1"
-        value_template: "{{states('input_text.teams_status_person1')}}"
-        icon_template: "{{state_attr('input_text.teams_status_person1',
+      msteams_status_robert:
+        friendly_name: "Teams status Robert"
+        value_template: "{{states('input_text.msteams_status_robert')}}"
+        icon_template: "{{state_attr('input_text.msteams_status_robert',
           'icon')}}"
-        unique_id: sensor.teams_status_person1
+        unique_id: sensor.msteams_status_robert
 
       # Display teams activity in the UI
       #
-      teams_activity_person1:
-        friendly_name: "Microsoft Teams activity Persoon 1"
-        value_template: "{{states('input_text.teams_activity_person1')}}"
-        icon_template: "{{state_attr('input_text.teams_activity_person1',
-          'icon')}}"
-        unique_id: sensor.teams_activity_person1
+      msteams_activity_robert:
+        friendly_name: "Teams activity Robert"
+        value_template: >-
+          {{states('input_text.msteams_activity_robert')}}
+        icon_template: >-
+          {{state_attr('input_text.msteams_activity_robert',
+          'icon')}}
+        unique_id: sensor.msteams_activity_robert
 
   # How long user has been in call today
   #
   - platform: history_stats
-    name: Microsoft Teams Call Time Today Person1
-    entity_id: sensor.teams_activity_person1
+    name: MSTeams Call Time Today Robert
+    entity_id: sensor.msteams_activity_robert
     state: "In gesprek"
     type: time
     start: "{{ now().replace(hour=0, minute=0, second=0) }}"
@@ -64,8 +74,8 @@ sensor:
   # How many calls has user had today
   #
   - platform: history_stats
-    name: Microsoft Teams Call Count Today Person1
-    entity_id: sensor.teams_activity_person1
+    name: MSTeams Call Count Today Robert
+    entity_id: sensor.msteams_activity_robert
     state: "In gesprek"
     type: count
     start: "{{ now().replace(hour=0, minute=0, second=0) }}"
@@ -75,14 +85,10 @@ sensor:
   # Tracks any state other than Offline or Unknown
   #
   - platform: history_stats
-    name: Microsoft Teams Online Today Person1
-    entity_id: sensor.teams_status_person1
+    name: MSTeams Online Today Robert
+    entity_id: binary_sensor.msteams_online_robert
     state:
-      - Beschikbaar
-      - Bezet
-      - Niet storen
-      - Afwezig
-      - Zo terug
+      - "on"
     type: time
     start: "{{ now().replace(hour=0, minute=0, second=0) }}"
     end: "{{ now() }}"
@@ -97,28 +103,38 @@ binary_sensor:
 
       # Helper sensor for showing an icon in a badge
       #
-      teams_status_person1:
-        friendly_name: "Microsoft Teams status Persoon 1"
+      msteams_status_robert:
+        friendly_name: "Teams status Robert"
         value_template: >-
-          {{   is_state('sensor.teams_status_person1', 'Beschikbaar')
-            or is_state('sensor.teams_status_person1', 'Bezet')
-            or is_state('sensor.teams_status_person1', 'Afwezig')
-            or is_state('sensor.teams_status_person1', 'Zo terug')
-            or is_state('sensor.teams_status_person1', 'Niet storen')
-            or is_state('sensor.teams_status_person1', 'Offline') }}
+          {% set status = states('sensor.msteams_status_robert') %}
+          {% set list = [
+            'Beschikbaar',
+            'Bezet',
+            'Afwezig',
+            'Zo terug',
+            'Niet storen',
+            'Offline'] %}
+          {{ status in list }}
         icon_template: >-
-          {% if   is_state('sensor.teams_status_person1', 'Beschikbaar') %}
-            mdi:account-check
-          {% elif is_state('sensor.teams_status_person1', 'Bezet') %}
-            mdi:account-off
-          {% elif is_state('sensor.teams_status_person1', 'Afwezig') %}
-            mdi:account-arrow-right
-          {% elif is_state('sensor.teams_status_person1', 'Zo terug') %}
-            mdi:account-clock
-          {% elif is_state('sensor.teams_status_person1', 'Niet storen') %}
-            mdi:account-cancel
-          {% elif is_state('sensor.teams_status_person1', 'Offline') %}
-            mdi:account-remove
+          {% set status = states('sensor.msteams_status_robert') %}
+          {% set list = [
+            'Beschikbaar',
+            'Bezet',
+            'Afwezig',
+            'Zo terug',
+            'Niet storen',
+            'Offline'
+            ] %}
+          {% set icons = [
+            'mdi:account-check',
+            'mdi:account-off',
+            'mdi:account-arrow-right',
+            'mdi:account-clock',
+            'mdi:account-cancel',
+            'mdi:account-remove'
+            ] %}
+          {% if status in list %}
+           {{ icons[list.index(status)] }}
           {% else %}
             mdi:account-question
           {% endif %}
@@ -128,12 +144,12 @@ binary_sensor:
 #
 template:
   - binary_sensor:
-      - name: Teams Online Person1
+      - name: MSTeams Online Robert
         unique_id: b1b5dd57-8102-4e86-b63c-88a9a2a67af9
         device_class: connectivity
         state: >
-          {{ states('input_text.teams_status_person1') != 'Offline' and
-             states('input_text.teams_status_person1') != 'unknown' }}
+          {{ not is_state('input_text.msteams_status_robert','Offline') and
+             not is_state('input_text.msteams_status_robert',unknown) }}
 
 ##############################
 # Scenes
@@ -171,9 +187,9 @@ scene:
 #
 automation:
 
-  # Reset Teams Status Person1
+  # Reset Teams Status Robert
   #
-  - alias: Reset Teams Status Person1
+  - alias: Reset Teams Status Robert
     description: >
       Reset Teams Status when not changed for a long time outside
       work hours.
@@ -187,16 +203,17 @@ automation:
     mode: single
 
     trigger:
-      # Teams status has not changed for more than 2 hours
+      # Teams status has not changed for more than 1 hours
       #
       # TODO: This automation triggers every minute.
-      #       Perhaps (re)set a timer for 2 hours on
+      #       Perhaps (re)set a timer for 1 hours on
       #       status change?
       platform: template
       value_template: >
         {{ as_timestamp(now()) -
-           as_timestamp(states.input_text.teams_status_person1.last_changed) >
-           2*3600 }}
+           as_timestamp(
+             states.input_text.msteams_status_robert.last_changed
+             ) > 1*3600 }}
 
     condition:
       # not a workday or after 18:00 ?
@@ -208,22 +225,33 @@ automation:
           - condition: time
             after: "18:00:00"
 
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: input_text.msteams_status_robert
+            state: unknown
+
     action:
       - service: input_text.set_value
         data:
-          entity_id: input_text.teams_status_person1
+          entity_id: input_text.msteams_status_robert
           value: unknown  # Don't use 'Offline' to differentiate
+      - service: input_text.set_value
+        data:
+          entity_id: input_text.msteams_activity_robert
+          value: unknown
+
       - service: notify.robert
         data:
-          message: Microsoft Teams status forced to 'Unknown'
+          message: Teams status opnieuw ingesteld door inactiviteit.
 
   # Do Not Disturb
   #
-  # Activate scene when Person1
+  # Activate scene when Robert
   #   - is at home and
   #   - he's busy in Teams
   #
-  - alias: Work - Do Not Disturb Person1
+  - alias: Work - Do Not Disturb Robert
     description: >
       Show do not disturb when working from home and busy.
 
@@ -232,45 +260,45 @@ automation:
 
     trigger:
       - platform: state
-        entity_id: sensor.teams_status_person1
+        entity_id: sensor.msteams_status_robert
 
     condition:
       - condition: and
         conditions:
           - condition: state
-            entity_id: person.person1
+            entity_id: person.robert
             state: home
           - condition: or
             conditions:
               - condition: state
-                entity_id: sensor.teams_status_person1
+                entity_id: sensor.msteams_status_robert
                 state: Bezet
               - condition: state
-                entity_id: sensor.teams_status_person1
+                entity_id: sensor.msteams_status_robert
                 state: Niet storen
 
     action:
       - scene: scene.werk_niet_storen
 
-  # Person1 Available
+  # Robert Available
   #
-  - alias: Work - Person1 Available
+  - alias: Work - Robert Available
 
     id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
     mode: single
 
     trigger:
       - platform: state
-        entity_id: sensor.teams_status_person1
+        entity_id: sensor.msteams_status_robert
 
     condition:
       - condition: not
         conditions:
           - condition: state
-            entity_id: sensor.teams_status_person1
+            entity_id: sensor.msteams_status_robert
             state: Bezet
           - condition: state
-            entity_id: sensor.teams_status_person1
+            entity_id: sensor.msteams_status_robert
             state: Niet storen
 
     action:
