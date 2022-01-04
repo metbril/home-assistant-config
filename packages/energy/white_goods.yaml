@@ -7,10 +7,11 @@ homeassistant:
 template:
   - binary_sensor:
       - name: Washing Machine
+        unique_id: 7a04404c-be07-4651-82d1-74a804d5cf25
         state: >
           {{ states("sensor.washing_machine_power")
-          | float(0) > 3 }}
-        # delay_off: "00:05:00"
+          | float(0) > 0 }}
+        delay_off: "00:00:30"  # prevent accidental missing values
         icon: >
           {% if is_state("binary_sensor.washing_machine", "on") %}
             mdi:washing-machine
@@ -35,7 +36,7 @@ input_datetime:
     has_time: true
 
 script:
-  white_goods_notification:
+  white_goods_engine:
     mode: parallel
     max: 20
     fields:
@@ -71,7 +72,7 @@ script:
           price: >
             {{ (states('sensor.energy_rate_tarif_2') | float * total_kwh)
               | round(2) }}
-          price_formatted: "{{ '{:0.2f%}'.format(price) | replace('.', ',') }}"
+          price_formatted: "{{'{:0.2f}'.format(price)|replace('.', ',') }}"
       - service: notify.robert
         # "{{ states('sensor.nearest_parent_notify') }}"
         data:
@@ -108,7 +109,7 @@ automation:
       from: "off"
       to: "on"
     action:
-      service: script.white_goods_notification
+      service: script.white_goods_engine
       data:
         name: "washing_machine"
         emojis: "👚👕"
