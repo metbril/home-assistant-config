@@ -110,9 +110,13 @@ binary_sensor:
           {% set list = [
             'Beschikbaar',
             'Bezet',
+            'In een vergadering',
+            'Aan de telefoon',
             'Afwezig',
             'Zo terug',
             'Niet storen',
+            'Presenteren',
+            'Focussen',
             'Offline'] %}
           {{ status in list }}
         icon_template: >-
@@ -120,17 +124,25 @@ binary_sensor:
           {% set list = [
             'Beschikbaar',
             'Bezet',
+            'In een vergadering',
+            'Aan de telefoon',
             'Afwezig',
             'Zo terug',
             'Niet storen',
+            'Presenteren',
+            'Focussen',
             'Offline'
             ] %}
           {% set icons = [
             'mdi:account-check',
             'mdi:account-off',
+            'mdi:account-group',
+            'mdi:account-voice',
             'mdi:account-arrow-right',
             'mdi:account-clock',
             'mdi:account-cancel',
+            'mdi:account-eye',
+            'mdi:account-alert',
             'mdi:account-remove'
             ] %}
           {% if status in list %}
