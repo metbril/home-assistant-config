@@ -31,6 +31,7 @@ This repository contains my configuration for Home Assistant.
   - [Tracking your Lovelace UI file](#tracking-your-lovelace-ui-file)
   - [Testing and debugging automations with automation editor](#testing-and-debugging-automations-with-automation-editor)
   - [Limit database growth](#limit-database-growth)
+- [Maintenance](#maintenance)
 - [Credits 🙏](#credits-)
 - [Contributions](#contributions)
 
