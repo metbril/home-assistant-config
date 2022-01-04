@@ -4,6 +4,10 @@
 # Dependencies
 # - msteams package
 
+input_boolean:
+  working_from_home:
+    name: Working from Home
+
 ##############################
 # Templates
 # https://www.home-assistant.io/integrations/template
@@ -13,9 +17,45 @@ template:
 
       # Is Person1 working from home?
       #
-      - name: Working From Home Person1
+      - name: Working From Home Robert
         unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
         device_class: presence
         state: >
-          {{ states('binary_sensor.teams_online_person1') == 'on' and
-             states('person.person1') == 'home' }}
+          {{ is_state('binary_sensor.teams_online_robert', 'on') and
+             is_state('person.robert', 'home') }}
+
+      - name: Working From Home
+        unique_id: 970b1cd1-5d86-43ef-abad-d6ce18780fad
+        device_class: presence
+        state: >-
+          {{ is_state('input_boolean.working_from_home', 'on') or
+             is_state('binary_sensor.working_from_home_robert', 'on') }}
+
+sensor:
+  - platform: history_stats
+    name: Working From Home Today
+    entity_id: binary_sensor.working_from_home
+    state: "on"
+    type: time
+    start: "{{ now().replace(hour=0,minute=0,second=0) }}"
+    end: "{{ now() }}"
+
+# For now, just notify.
+# TODO: Speak message
+# TODO: Auto off?
+#
+automation:
+  - alias: "WFH: Working From Home Long Notification"
+    id: 16ffa507-46c0-4b6c-8f2b-620bc8e05b4a
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.working_from_home_today
+        above: 10
+    condition:
+      condition: state
+      entity_id: binary_sensor.working_from_home
+      state: "on"
+    action:
+      - service: notify.parents
+        data:
+          message: Meer dan 10 uur thuisgewerkt. Tijd om er mee te stoppen.
