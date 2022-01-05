@@ -37,13 +37,6 @@ homeassistant:
     sensor.homeassistantlog:
       friendly_name: Grootte logbestand
 
-    ##################################################
-    # Scripts
-    ##################################################
-
-    script.purge_database:
-      friendly_name: Database opschonen
-
 ##################################################
 ## Binary Sensor
 ##################################################
@@ -179,18 +172,3 @@ alert:
     skip_first: false
     notifiers:
       - admin
-
-################################################
-## Script
-################################################
-script:
-  restart_home_assistant:
-    sequence:
-      - service: homeassistant.restart
-  purge_database:
-    alias: Purge Database
-    sequence:
-      - service: recorder.purge
-        data:
-          keep_days: 5
-          repack: true
