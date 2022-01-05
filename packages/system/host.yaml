@@ -1,13 +1,14 @@
 ---
-################################################
-## Packages / Host / Host
-################################################
+##################################################
+# Packages / System / Host
+##################################################
 
 homeassistant:
   customize:
 
+    ##################################################
     # Binary sensors
-    #
+    ##################################################
 
     binary_sensor.cpu_high:
       device_class: problem
@@ -19,20 +20,15 @@ homeassistant:
       device_class: problem
       friendly_name: Grote database
 
+    ##################################################
     # Sensors
-    #
+    ##################################################
 
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
     sensor.cpu_temperature:
       friendly_name: Processortemperatuur
-    sensor.disk_free:
-      friendly_name: Beschikbare opslag
-      icon: hass:sd
-    sensor.disk_use_percent:
-      friendly_name: Gebruikte opslag
-      icon: hass:sd
     sensor.ha_uptime:
       friendly_name: Sinds laatste start HA
       icon: hass:clock
@@ -40,30 +36,17 @@ homeassistant:
       friendly_name: Grootte database
     sensor.homeassistantlog:
       friendly_name: Grootte logbestand
-    sensor.last_boot:
-      friendly_name: Laatste herstart
-    sensor.memory_use_percent:
-      friendly_name: Geheugengebruik
-    sensor.network_in_eth0:
-      friendly_name: Bytes ontvangen
-      icon: hass:download-network
-    sensor.network_out_eth0:
-      friendly_name: Bytes verzonden
-      icon: hass:upload-network
-    sensor.packets_in_eth0:
-      friendly_name: Pakketten ontvangen
-      icon: hass:download-network
-    sensor.packets_out_eth0:
-      friendly_name: Pakketten verzonden
-      icon: hass:upload-network
-    sensor.processor_use:
-      friendly_name: Processorgebruik
+
+    ##################################################
+    # Scripts
+    ##################################################
+
     script.purge_database:
       friendly_name: Database opschonen
 
-################################################
+##################################################
 ## Binary Sensor
-################################################
+##################################################
 
 binary_sensor:
 
@@ -78,29 +61,44 @@ binary_sensor:
       db_large:
         value_template: "{{states('sensor.home_assistant_v2_db')|float>3000}}"
 
-################################################
+##################################################
 ## Sensor
-################################################
+##################################################
 sensor:
   - platform: systemmonitor
     resources:
       - type: memory_use_percent
       - type: processor_use
+      - type: processor_temperature
+      - type: last_boot
+
       - type: disk_use_percent
         arg: /
+
       - type: disk_free
         arg: /
-      - type: last_boot
+
+      - type: ipv4_address
+        arg: 'eth0'
+
+      - type: ipv6_address
+        arg: 'eth0'
+
       - type: network_in
         arg: 'eth0'
+
       - type: network_out
         arg: 'eth0'
+
       - type: throughput_network_in
         arg: 'eth0'
+
       - type: throughput_network_out
         arg: 'eth0'
+
       - type: packets_in
         arg: 'eth0'
+
       - type: packets_out
         arg: 'eth0'
 
