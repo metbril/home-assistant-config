@@ -27,7 +27,7 @@ homeassistant:
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
-    sensor.cpu_temperature:
+    sensor.sensor.processor_temperature:
       friendly_name: Processortemperatuur
     sensor.ha_uptime:
       friendly_name: Sinds laatste start HA
@@ -53,7 +53,7 @@ binary_sensor:
         value_template: "{{states('sensor.processor_use')|float>80}}"
 
       cpu_hot:
-        value_template: "{{states('sensor.cpu_temperature')|float>80}}"
+        value_template: "{{states('sensor.processor_temperature')|float>80}}"
 
       db_large:
         value_template: "{{states('sensor.home_assistant_v2_db')|float>3000}}"
@@ -105,12 +105,6 @@ sensor:
       - !secret filesize_homeassistant_log
 
   - platform: command_line
-    name: CPU Temperature
-    command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
-    unit_of_measurement: "°C"
-    value_template: '{{ value | multiply(0.001) | round(1) }}'
-
-  - platform: command_line
     name: Last Restart
     # yamllint disable-line rule:line-length
     command: date "+%Y-%m-%dT%H:%M:%S%z" -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)"
@@ -159,8 +153,8 @@ alert:
       - admin
 
   cpu_hot:
-    name: Temperatuur CPU is hoog
-    entity_id: binary_sensor.cpu_high
+    name: Processortemperatuur is te hoog
+    entity_id: binary_sensor.cpu_hot
     state: 'on'
     repeat: 5  # minutes
     can_acknowledge: true
