@@ -37,6 +37,10 @@ homeassistant:
     sensor.homeassistantlog:
       friendly_name: Grootte logbestand
 
+    sensor.last_restart:
+      device_class: timestamp
+      friendly_name: Laatste herstart
+
 ##################################################
 ## Binary Sensor
 ##################################################
@@ -105,6 +109,12 @@ sensor:
     command: "/bin/cat /sys/class/thermal/thermal_zone0/temp"
     unit_of_measurement: "°C"
     value_template: '{{ value | multiply(0.001) | round(1) }}'
+
+  - platform: command_line
+    name: Last Restart
+    # yamllint disable-line rule:line-length
+    command: date "+%Y-%m-%dT%H:%M:%S%z" -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)"
+    value_template: '{{ value }}'
 
   - platform: command_line
     name: bad_login
