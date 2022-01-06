@@ -20,18 +20,17 @@ template:
       - name: Living TV Volume Level
         unique_id: 655f97da-54dc-40d2-8de1-db1b9cc66bf3
         unit_of_measurement: "%"
-        state: >
-            {{ (state_attr("media_player.living_tv", "volume_level") * 100)
-              | float(Unavailable) }}
-        icon: >
-          {% set vol = states('sensor.living_tv_volume_level')
-            | float(Unavailable) %}
-          {% set lvl = (( (vol-1) // (100/3) ) | int) + 1 %}
-          {% set icons = ['off','low','medium','high'] %}
-          {% if 0 <= lvl <= 3 %}
-          mdi:volume-{{ icons[lvl] }}
-          {% else %}
-          mdi:volume-{{ icons[1] }}
+        availability: >-
+          {% state_attr('media_player.living_tv','volume_level') is not none %}
+        state: >-
+            {{ (state_attr('media_player.living_tv','volume_level') * 100)
+              | int(0) }}
+        icon: >-
+          {% set state = states('sensor.living_tv_volume_level')|float(0) %}
+          {% if state == 0.0 %} mdi:volume-off
+          {% elif state <= 0.3 %} mdi:volume-low
+          {% elif state <= 0.6 %} mdi:volume-medium
+          {% else %} mdi:volume-high
           {% endif %}
 
 # Living TV history
