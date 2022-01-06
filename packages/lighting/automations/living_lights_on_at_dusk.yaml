@@ -13,4 +13,4 @@ automation:
         platform: sun
 
     action:
-      - scene: scene.schemerverlichting
+      - scene: scene.lighting_living_base
