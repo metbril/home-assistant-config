@@ -5,8 +5,13 @@ rules:
   new-line-at-end-of-file: disable
 
 ignore: |
-  themes/
+
+  # folders
+  blueprints/
   custom_components/
+  themes/
+
+  # files
   automations.yaml
   customize.yaml
   groups.yaml
@@ -16,5 +21,3 @@ ignore: |
   scripts.yaml
   secrets.yaml
   secrets.example.yaml
-  blueprints/automation/seamus65/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one.yaml
-  blueprints/script/homeassistant/confirmable_notification.yaml
