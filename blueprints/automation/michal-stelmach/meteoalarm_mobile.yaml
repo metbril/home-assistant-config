@@ -1,0 +1,98 @@
+blueprint:
+  name: MeteoAlarm notification
+  description: 'Modified for official HA MeteoAlarm integration
+
+    Send a notification when there''s new weather aleft form MeteoAlarm
+
+
+    Available message elements:
+
+    - {{  alert_name  }} = Event,
+
+    - {{  alert_level  }} = Awerness level,
+
+    - {{  alert_type  }} = Awerness type,
+
+    - {{  alert_issued  }} = Effective,
+
+    - {{  alert_start  }} = Onset,
+
+    - {{  alert_end  }} = Expires,
+
+    - {{  alert_content  }} = Descrpition,
+
+    - {{  alert_instruction  }} = Instruction
+
+    '
+  domain: automation
+  input:
+    alert:
+      name: MeteoAlarm sensor
+      description: The sensor which indicates if there's an alert
+      selector:
+        entity:
+          domain: binary_sensor
+    notification_title:
+      name: Notification title
+      description: 'Default: "{{  alert_name  }}"'
+      default: '{{  alert_name  }}'
+    include_whole_alert:
+      name: Include detailed data from alert
+      description: 'Toggle if you''d like to receive whole alert within the notification,
+        default is true; When false only alert level and alert type will be send
+
+        '
+      selector:
+        boolean: {}
+      default: true
+    custom_message:
+      name: Send alert with custom message
+      description: Toggle if you'd like to customize notification, default is false
+      selector:
+        boolean: {}
+      default: false
+    notification_message:
+      name: Custom notification message (optional)
+      description: Create customized message
+      default: '{{  alert_type  }}: {{  alert_start  }}-{{  alert_end  }}: {{  alert_content  }}'
+    notify_device:
+      name: Device to notify
+      description: Choose device that runs official HA app
+      selector:
+        device:
+          integration: mobile_app
+  source_url: https://gist.github.com/michal-stelmach/4e51717da785945c4befb4d830e91d35
+trigger:
+  platform: state
+  entity_id: !input 'alert'
+  to: 'on'
+variables:
+  alert: !input 'alert'
+  alert_name: '{{ states[alert].attributes.event }}'
+  alert_issued: '{{ as_datetime(states[alert].attributes.effective).strftime(''%d.%m.%Y
+    %H:%M'') }}'
+  alert_start: '{{ as_datetime(states[alert].attributes.onset).strftime(''%d.%m.%Y
+    %H:%M'') }}'
+  alert_end: '{{ as_datetime(states[alert].attributes.expires).strftime(''%d.%m.%Y
+    %H:%M'') }}'
+  alert_type: '{{ states[alert].attributes.awareness_type.title()|regex_replace(find=''[1-9];
+    '', replace='''', ignorecase=True) }}'
+  alert_level: '{{ states[alert].attributes.awareness_level.title()|regex_replace(find=''[1-9];
+    '', replace='''', ignorecase=True)|regex_replace(find=''; [a-z]*'', replace='''',
+    ignorecase=True) }}'
+  alert_content: '{{ states[alert].attributes.description }}'
+  alert_instruction: '{{ states[alert].attributes.instruction }}'
+  include_whole_alert: !input 'include_whole_alert'
+  notification_title: !input 'notification_title'
+  custom_message: !input 'custom_message'
+  notification_message: !input 'notification_message'
+  notify_device: !input 'notify_device'
+action:
+- device_id: !input 'notify_device'
+  domain: mobile_app
+  type: notify
+  title: '{{ notification_title }}'
+  message: "{% if include_whole_alert %}\n{% if custom_message %}\n{{ notification_message\
+    \ }}\n{% else %}\n{{ alert_level }} MeteoAlarm: {{  alert_type  }} :: \nFrom {{\
+    \  alert_start  }} To {{  alert_end  }} :: \n{{  alert_content  }}\n{% endif %}\n\
+    {% else %}\nMeteoAlarm: {{ alert_level }}: {{  alert_type  }}\n{% endif %}\n"
