@@ -1,6 +1,6 @@
 ---
 scene:
-  - name: Verlichting Woonkamer Gedimd
+  - name: "Lighting: Living Dimmed"
 
     id: 88a1bee5-12d9-41b9-9928-1775d42f9727
     icon: mdi:brightness-3

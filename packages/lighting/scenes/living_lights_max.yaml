@@ -3,7 +3,7 @@
 # Lights are listed clockwise from the door.
 
 scene:
-  - name: Woonkamerverlichting Maximaal
+  - name: "Lighting: Living Max"
 
     id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
     icon: mdi:brightness-7
