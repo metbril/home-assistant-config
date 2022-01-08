@@ -1,0 +1,99 @@
+---
+homeassistant:
+  customize:
+
+    sensor.dark_sky_apparent_temperature:
+      friendly_name: Gevoelstemperatuur
+
+    sensor.dark_sky_cloud_coverage:
+      friendly_name: Bewolking
+
+    sensor.dark_sky_humidity:
+      friendly_name: Luchtvochtigheid
+
+    sensor.dark_sky_ozone:
+      friendly_name: Ozon
+      icon: mdi:vector-triangle
+
+    sensor.dark_sky_precip_intensity:
+      friendly_name: Neerslagintensiteit
+      unit_of_measurement: mm/u
+
+    sensor.dark_sky_precip_probability:
+      friendly_name: Neerslagkans
+
+    sensor.dark_sky_pressure:
+      friendly_name: Luchtdruk
+
+    sensor.dark_sky_temperature:
+      friendly_name: Temperatuur
+
+    sensor.dark_sky_uv_index:
+      friendly_name: UV-index
+
+    sensor.dark_sky_wind_bearing:
+      friendly_name: Windrichting
+
+    sensor.dark_sky_wind_direction:
+      friendly_name: Windrichting
+      icon: mdi:compass
+
+    sensor.dark_sky_wind_direction_local:
+      friendly_name: Windrichting
+      icon: mdi:compass
+
+    sensor.dark_sky_wind_gust:
+      unit_of_measurement: km/u
+
+    sensor.dark_sky_wind_speed:
+      friendly_name: Windsnelheid
+
+    weather.dark_sky:
+      friendly_name: Thuis
+
+sensor:
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    units: ca
+    language: nl
+    scan_interval:  # default 2 minutes
+      minutes: 10
+    monitored_conditions:
+      - hourly_summary
+      - daily_summary
+      - temperature
+      - apparent_temperature
+      - humidity
+      - pressure
+      - visibility
+      - wind_speed
+      - wind_gust
+      - wind_bearing
+      - cloud_cover
+      - ozone
+      - uv_index
+      - precip_intensity
+      - precip_probability
+      - precip_type
+      - alerts
+
+  - platform: template
+    sensors:
+      dark_sky_wind_direction:
+        # https://community.home-assistant.io/t/wind-direction/210532/6
+        value_template: >
+          {% set direction = [
+            'N','NNE','NE','ENE','E','ESE','SE','SSE',
+            'S','SSW','SW','WSW','W','WNW','NW','NNW','N'
+            ] %}
+          {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
+
+      dark_sky_wind_direction_local:
+        value_template: >
+          {% set direction = [
+            'N','NNO','NO','ONO','O','OZO','ZO','ZZO',
+            'Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'
+            ] %}
+          {% set degree = states('sensor.dark_sky_wind_bearing')|float %}
+          {{ direction[((degree+11.25)/22.5)|int] }}
