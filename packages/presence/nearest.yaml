@@ -9,17 +9,15 @@
 template:
   - sensor:
       - name: Nearest Parent Notify
-        state: >
-          {% set proximity = states('proximity.parents_from_home') %}
-          {% set parents = state_attr("proximity.parents_from_home",
-            "nearest") %}
-          {% if (parents|count) == 2 or
-              proximity == 'not set' or
-              proximity == 'Unavailable' or
-              proximity == 'unknown' or
-              proximity is None %}
+        availability: >-
+          {{ state_attr('proximity.parents_from_home', 'nearest') not in 
+            ['unavailable','unknown','none'] }}
+        state: >-
+          {% if is_state('person.robert', 'home') and 
+            is_state('person.monique', 'home') %}
             notify.parents
-          {% elif parents[0] == "Robert" %}
+          {% elif is_state_attr('proximity.parents_from_home',
+            'nearest', 'Robert') %}
             notify.robert
           {% else %}
             notify.monique
