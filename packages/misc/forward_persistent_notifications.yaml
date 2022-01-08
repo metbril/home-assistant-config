@@ -1,0 +1,27 @@
+---
+automation:
+  - alias: Persistente meldingen doorsturen naar beheerder
+    description: Doorsturen persistente meldingen naar beheerder
+
+    id: 7319632e-f122-4a54-a81c-569d5601446a
+    mode: single
+
+    trigger:
+      - event_data:
+          domain: persistent_notification
+          service: create
+        event_type: call_service
+        platform: event
+
+    action:
+      - service: notify.admin
+        data:
+          message: >
+            {% set message = trigger.event.data.service_data.message %}
+            {% if 'login attempt' in message|lower %}
+              {{ message }}:
+              http://www.ip-tracker.org/locator/ip-lookup.php?ip={{
+                message.split('from ')[1] }}
+            {% else %}
+              {{ message }}
+            {% endif %}
