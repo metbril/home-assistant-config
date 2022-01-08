@@ -1,9 +1,0 @@
----
-- platform: scrape
-  name: Euro95 (Tinq Bermweg)
-  resource: "https://www.tinq.nl/tankstations/capelle-ad-ijssel-bermweg"
-  # yamllint disable-line rule:line-length
-  select: ".field--name-field-station-prices .taxonomy-term-Euro95 .field--name-field-prices-price-pump"
-  value_template: "{{value|replace('€','')|
-    replace('EUR/L','')|float|round(3)}}"
-  scan_interval: 3600  # be nice; once per hour only
