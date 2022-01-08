@@ -1,0 +1,36 @@
+automation:
+
+  - alias: "Lighting: Garden On"
+    description: >
+      Turn on the garden lights at sunset
+
+    id: 8d8468fb-3baf-41be-88ee-9a3a71910909
+    mode: single
+
+    trigger:
+      - platform: sun
+        event: sunset
+
+    action:
+      - service: light.turn_on
+        target:
+          entity_id: light.achtergevel
+        data:
+          brightness_pct: 70  # current light is too powerfull
+
+  - alias: "Lighting: Garden Off"
+    description: >
+      Turn off the garden lights at sunrise
+
+    id: 61ddaf89-65e3-4853-b80d-e0abea5ec53c
+    mode: single
+
+    trigger:
+      - platform: sun
+        event: sunrise
+        offset: -01:00:00
+
+    action:
+      - service: light.turn_off
+        target:
+          entity_id: light.achtergevel
