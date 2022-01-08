@@ -23,7 +23,7 @@ template:
         availability: >-
           {{ state_attr('media_player.living_tv','volume_level') is not none }}
         state: >-
-            {{ (state_attr('media_player.living_tv','volume_level') 
+            {{ (state_attr('media_player.living_tv','volume_level')
               | float(0) * 100) | int }}
         icon: >-
           {% set state = states('sensor.living_tv_volume_level') | float(0) %}
