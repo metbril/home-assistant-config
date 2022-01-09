@@ -1,7 +1,7 @@
 # Metbril's 🤓 Home Assistant Configuration
 
 [![Check configuration][check-badge]][check-log]
-![Twitter Follow](https://img.shields.io/twitter/follow/domussapiens?color=%231da1f2&logo=twitter&style=flat)
+[![Twitter Follow][twitter-badge]][twitter-link]
 
 This repository contains my configuration for Home Assistant.
 
@@ -236,3 +236,5 @@ If you have suggestions or improvements, please submit an issue or pull request.
 [check-log]: https://github.com/metbril/home-assistant-config/actions?query=workflow%3A%22Check+configuration%22
 [pre-commit]: https://pre-commit.com/
 [yamllint]: https://yamllint.readthedocs.io/en/stable/
+[twitter-badge]: https://img.shields.io/twitter/follow/domussapiens?color=1da1f2&logo=twitter&style=flat
+[twitter-link]: https://twitter.com/intent/follow?screen_name=domussapiens
