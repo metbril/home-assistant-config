@@ -40,7 +40,7 @@ script:
             title: Tweet
       - choose:
           - alias: "Image not included"
-            conditions: 
+            conditions:
               - condition: template
                 value_template: "{{ image is undefined }}"
             sequence:

@@ -16,11 +16,11 @@ automation:
       - condition: time
         after: '17:00'
         weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
 
     action:
       - service: notify.parents
