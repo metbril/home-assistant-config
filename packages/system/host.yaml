@@ -27,16 +27,10 @@ homeassistant:
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
-    sensor.ha_uptime:
-      friendly_name: Sinds laatste start HA
-      icon: hass:clock
     sensor.homeassistant_v2db:
       friendly_name: Grootte database
     sensor.homeassistantlog:
       friendly_name: Grootte logbestand
-    sensor.last_restart:
-      device_class: timestamp
-      friendly_name: Laatste herstart
 
 ##################################################
 ## Binary Sensor
@@ -102,37 +96,9 @@ sensor:
       - !secret filesize_homeassistant_log
 
   - platform: command_line
-    name: Last Restart
-    # yamllint disable-line rule:line-length
-    command: date "+%Y-%m-%dT%H:%M:%S%z" -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)"
-    value_template: '{{ value }}'
-
-  - platform: command_line
     name: bad_login
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
-
-  - platform: command_line
-    # https://home-assistant.io/components/sensor.command_line/
-    name: "HA Uptime"
-    # yamllint disable-line rule:line-length
-    command: echo "$(($(date +%s) - $(date -d "$(head -n1 /config/home-assistant.log | cut -d' ' -f-2)" +%s)))"
-    scan_interval: 60  # seconds
-    value_template: >-
-      {% set uptime = value | int %}
-      {% set seconds = uptime % 60 %}
-      {% set minutes = ((uptime % 3600) / 60) | int %}
-      {% set hours = ((uptime % 86400) / 3600) | int %}
-      {% set days = (uptime / 86400) | int %}
-      {% if days > 0 %}
-        {% if days == 1 %}
-          1 day
-        {% else %}
-          {{ days }} days
-        {% endif %}
-        {{ ', ' }}
-      {% endif %}
-      {{ '%02d' % hours }}:{{ '%02d' % minutes }}
 
 ################################################
 ## Alert
