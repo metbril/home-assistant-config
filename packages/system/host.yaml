@@ -27,8 +27,6 @@ homeassistant:
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
-    sensor.sensor.processor_temperature:
-      friendly_name: Processortemperatuur
     sensor.ha_uptime:
       friendly_name: Sinds laatste start HA
       icon: hass:clock
@@ -36,7 +34,6 @@ homeassistant:
       friendly_name: Grootte database
     sensor.homeassistantlog:
       friendly_name: Grootte logbestand
-
     sensor.last_restart:
       device_class: timestamp
       friendly_name: Laatste herstart
