@@ -1,6 +1,7 @@
 # Metbril's 🤓 Home Assistant Configuration
 
 [![Check configuration][check-badge]][check-log]
+![Twitter Follow](https://img.shields.io/twitter/follow/domussapiens?color=%231da1f2&logo=twitter&style=flat)
 
 This repository contains my configuration for Home Assistant.
 
