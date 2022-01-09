@@ -3,6 +3,7 @@ extends: default
 rules:
   document-start: disable
   new-line-at-end-of-file: disable
+  line-length: disable
 
 ignore: |
 
