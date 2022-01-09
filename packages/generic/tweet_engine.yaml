@@ -1,0 +1,56 @@
+---
+# Tweet Engine
+# A generic script that published tweets to the twitter account.
+# Appends some default tags.
+#
+# Inspired by @cconstan
+# https://github.com/CCOSTAN/Home-AssistantConfig
+#
+# Fields:
+# - Tweet (required)
+# - Image
+#
+# Dependencies:
+# - notify.twitter
+#
+script:
+  tweet_engine:
+    alias: Tweet Engine
+    icon: mdi:twitter
+    mode: queued
+    fields:
+      message:
+        name: "Message"
+        description: "The message to tweet"
+        required: true
+        selector:
+          text:
+      image:
+        name: "Image"
+        description: "Local path to an image (e.g. /config/www/picture.jpg)"
+        selector:
+          text:
+    variables:
+      tags: "#IOT #SmartHome #HomeAssistant"
+    sequence:
+      - service: notify.admin
+        data:
+          message: "{{ message }}"
+          data:
+            title: Tweet
+      - choose:
+          - alias: "Image not included"
+            conditions: 
+              - condition: template
+                value_template: "{{ image is undefined }}"
+            sequence:
+              - service: notify.twitter
+                data:
+                  message: "{{ message }} {{ tags }}"
+        default:
+          - service: notify.twitter
+            data:
+              message: "{{ message }} {{ tags }}"
+              data:
+                media: >-
+                  {{ image }}
