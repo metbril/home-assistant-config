@@ -38,8 +38,9 @@ automation:
           data:
             media: >-
               {% set pictures = [
-                "/config/www/img/tv_color_bars.png",
-                "/config/www/img/tv_offline.jpg",
-                "/config/www/img/tv_noise.jpg"
+                "/config/www/img/tweets/uptime/shutdown_laptop.jpg",
+                "/config/www/img/tweets/uptime/tv_color_bars.png",
+                "/config/www/img/tweets/uptime/tv_offline.jpg",
+                "/config/www/img/tweets/uptime/tv_noise.jpg"
               ] %}
               {{ pictures|random }}
