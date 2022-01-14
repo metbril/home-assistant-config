@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2.4.0
       - name: Run Frenk's yamllint
-        uses: frenck/action-yamllint@v1.1.1
+        uses: frenck/action-yamllint@v1.1.2
 
   check:
     name: Home Assistant Core ${{ matrix.version }} Configuration Check
