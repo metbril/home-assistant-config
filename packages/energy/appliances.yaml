@@ -22,29 +22,29 @@ template:
   # https://community.home-assistant.io/t/energy-consumption-for-neo-coolcam-plug/219844/26?u=metbril
   #
   - sensor:
-    - name: "Close-in Boiler Energy"
-      unique_id: eb89a9e4-4fea-458a-b84c-1f82f24b63f1
-      unit_of_measurement: kWh
-      device_class: energy
-      state_class: total_increasing
-      state: >-
-        {% set value = states('sensor.close_in_boiler_raw_energy') | float(0) %}
-        {% set const = 21474836.47 %}
-        {% if value < 0 %}{{ (value + const) | round(2) }}
-        {% else %}{{ value }}
-        {% endif %}
+      - name: "Close-in Boiler Energy"
+        unique_id: eb89a9e4-4fea-458a-b84c-1f82f24b63f1
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: >-
+          {% set value = states('sensor.close_in_boiler_raw_energy') | float(0) %}
+          {% set const = 21474836.47 %}
+          {% if value < 0 %}{{ (value + const) | round(2) }}
+          {% else %}{{ value }}
+          {% endif %}
 
-    - name: "Tumble Dryer Energy"
-      unique_id: 76269b18-7159-4409-9f26-72128fa2e116
-      unit_of_measurement: kWh
-      device_class: energy
-      state_class: total_increasing
-      state: >-
-        {% set value = states('sensor.tumble_dryer_raw_energy') | float(0) %}
-        {% set const = 21474836.47 %}
-        {% if value < 0 %}{{ (value + const) | round(2) }}
-        {% else %}{{ value }}
-        {% endif %}
+      - name: "Tumble Dryer Energy"
+        unique_id: 76269b18-7159-4409-9f26-72128fa2e116
+        unit_of_measurement: kWh
+        device_class: energy
+        state_class: total_increasing
+        state: >-
+          {% set value = states('sensor.tumble_dryer_raw_energy') | float(0) %}
+          {% set const = 21474836.47 %}
+          {% if value < 0 %}{{ (value + const) | round(2) }}
+          {% else %}{{ value }}
+          {% endif %}
 
   # Appliance is on when power usage detected
   - binary_sensor:
