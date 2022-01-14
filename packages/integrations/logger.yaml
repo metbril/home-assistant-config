@@ -20,5 +20,5 @@ logger:
 
     # Custom components maintained by me
     #
-    # custom_components.brandstofprijzen: debug
-    # custom_components.dutch_public_transport_api: debug
+    custom_components.brandstofprijzen: info
+    custom_components.dutch_public_transport_api: info
