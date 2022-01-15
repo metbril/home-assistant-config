@@ -4,12 +4,12 @@
 #
 feedreader:
   urls:
-      # trigger.event.data.title
-      # trigger.event.data.content
-      # trigger.event.data.link
-      # trigger.event.data.published
-      # trigger.event.data.updated
-      - https://alerts.home-assistant.io/feed.xml
+    # trigger.event.data.title
+    # trigger.event.data.content
+    # trigger.event.data.link
+    # trigger.event.data.published
+    # trigger.event.data.updated
+    - https://alerts.home-assistant.io/feed.xml
 
 automation:
   - alias: "System: Send notification of RSS feed title when updated"
