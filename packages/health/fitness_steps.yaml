@@ -19,6 +19,7 @@ automation:
         above: 5000
     variables:
       steps: "{{ trigger.to_state.state }}"
+      emoji: "{{ '🚶🏃🥾👟🏅🏆🎯' | list | random }}"
     action:
       - service: script.tweet_engine
         data:
@@ -27,7 +28,7 @@ automation:
             "Blijf in beweging. Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
             "Fitness tracking thuis, door het huis. Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
             "Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt."
-            ] | random ~ " " ~ {{'🚶🏃🥾👟🏅🏆🎯' | list | random }} ~ " " ~
+            ] | random ~ " " ~ emoji ~ " " ~
             [
             "#QuantifiedSelf", "#SelfTracking", "#eHealth", "#ActivityTracker", "#Ommetje"
             ] | random }}
