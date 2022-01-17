@@ -108,68 +108,32 @@ input_datetime:
     has_date: true
     has_time: true
 
-# Originally by @basnijholt
-# https://github.com/basnijholt/home-assistant-config/blob/master/scripts.yaml
-#
-script:
-  appliance_notification:
-    alias: "Apparatuur: Notificatie"
-    description: >
-      This script is triggered when an appliance is turned 'on'.
-      After getting some starting values, it will wait until the appliance
-      is finished and send a notification.
+input_number:
+  washing_machine_on:
+    min: 0
+    max: 99999
 
-      Please note: the script is aborted when HA is restarted during a run and
-      no notification is sent.
-    mode: parallel
-    max: 20
-    fields:
-      name:
-        description: name
-        example: washing_machine
-      emojis:
-        description: emojis
-        example: "👚👕"
-    variables:
-      binary_sensor: "{{ 'binary_sensor.{}'.format(name) }}"
-      friendly_name: "{{ name.capitalize().replace('_', ' ') }}"
-      energy_sensor: "{{ 'sensor.{}_energy'.format(name) }}"
-    sequence:
-      - variables:
-          start_time: "{{ as_timestamp(now()) }}"
-          start_kwh: "{{ states(energy_sensor) }}"
-      - wait_for_trigger:
-          platform: template
-          value_template: "{{ is_state(binary_sensor, 'off') }}"
-        timeout: "04:00:00"
-        continue_on_timeout: false
-      - variables:
-          end_time: "{{ as_timestamp(now()) }}"
-          end_kwh: "{{ states(energy_sensor) }}"
-      - variables:
-          total_time: "{{ (end_time - start_time) }}"
-          total_kwh: "{{ end_kwh - start_kwh }}"
-      - variables:
-          minutes: "{{ (total_time / 60) | round(0) }}"
-          total_kwh_rounded: "{{ (total_kwh) | round(2) }}"
-          price: >
-            {{ (states('sensor.energy_rate_tarif_2') | float(0) * total_kwh)
-              | round(2) }}
-          price_formatted: "{{'{:0.2f}'.format(price)|replace('.', ',') }}"
-      - service: notify.robert
-        # TODO - "{{ states('sensor.nearest_parent_notify') }}"
-        data:
-          title: "Apparatuur"
-          message: >
-            {{ friendly_name }} is klaar na {{ minutes }} minuten
-            en verbruikte {{ total_kwh_rounded }} kWh
-            (€{{ price_formatted }}). {{ emojis }}
+  washing_machine_off:
+    min: 0
+    max: 99999
+
+  tumble_dryer_on:
+    min: 0
+    max: 99999
+
+  tumble_dryer_off:
+    min: 0
+    max: 99999
 
 automation:
 
   ############################################################
+  # Concept by @basnijholt
+  # https://github.com/basnijholt/home-assistant-config/blob/master/scripts.yaml
+  #
   - alias: "Appliances: appliance started or finished"
     id: b2b10f8b-811d-4d38-930f-9961f6c3ecaf
+    mode: parallel
 
     trigger:
       - platform: state
@@ -188,35 +152,47 @@ automation:
         (to_state == 'off' and from_state == 'on') }}
 
     action:
-      service: input_datetime.set_datetime
-      data:
-        entity_id: "input_datetime.{{ name }}_{{ to_state }}"
-        timestamp: "{{ now().timestamp() }}"
+      - service: input_datetime.set_datetime
+        target:
+          entity_id: "input_datetime.{{ name }}_{{ to_state }}"
+        data:
+          timestamp: "{{ now().timestamp() }}"
 
-  ############################################################
-  - alias: "Appliances: Washing machine notification"
-    id: 51d696db-b786-437a-8ea0-7c5a819115ad
-    trigger:
-      platform: state
-      entity_id: binary_sensor.washing_machine
-      from: "off"
-      to: "on"
-    action:
-      service: script.appliance_notification
-      data:
-        name: "washing_machine"
-        emojis: "🧺👖👕"
+      - service: input_number.set_value
+        target:
+          entity_id: "input_number.{{ name }}_{{ to_state }}"
+        data:
+          value: "{{ states('sensor.' ~ name ~ '_energy') | float(0) }}"
 
-  ############################################################
-  - alias: "Appliances: Tumble dryer notification"
-    id: fa3626ee-c4bd-410e-be39-06f322332bbe
-    trigger:
-      platform: state
-      entity_id: binary_sensor.tumble_dryer
-      from: "off"
-      to: "on"
-    action:
-      service: script.appliance_notification
-      data:
-        name: "tumble_dryer"
-        emojis: "💨👖👕"
+      - condition: template
+        value_template: "{{ to_state == 'off' }}"
+        alias: "Appliance off"
+
+      - variables:
+          binary_sensor: "{{ 'binary_sensor.{}'.format(name) }}"
+          energy_on_sensor: "{{ 'input_number.{}_on'.format(name) }}"
+          energy_off_sensor: "{{ 'input_number.{}_off'.format(name) }}"
+          time_on_sensor: "{{ 'input_datetime.{}_on'.format(name) }}"
+          time_off_sensor: "{{ 'input_datetime.{}_off'.format(name) }}"
+      - variables:
+          start_time: "{{ states(time_on_sensor) | as_timestamp }}"
+          end_time: "{{ states(time_off_sensor) | as_timestamp }}"
+          start_kwh: "{{ states(energy_on_sensor) | float(0) }}"
+          end_kwh: "{{ states(energy_on_sensor) | float(0) }}"
+      - variables:
+          total_time: "{{ (end_time - start_time) }}"
+          total_kwh: "{{ end_kwh - start_kwh }}"
+      - variables:
+          friendly_name: "{{ state_attr( binary_sensor, 'friendly_name') }}"
+          minutes: "{{ (total_time / 60) | round(0) }}"
+          total_kwh_rounded: "{{ (total_kwh) | round(2) }}"
+          price: "{{ (states('sensor.energy_rate_tarif_2') | float(0) * total_kwh) | round(2) }}"
+          price_formatted: "{{'{:0.2f}'.format(price)|replace('.', ',') }}"
+
+      - service: notify.robert
+        data:
+          title: "Apparatuur"
+          message: >-
+            {{ friendly_name }} is klaar na {{ minutes }} minuten
+            en verbruikte {{ total_kwh_rounded }} kWh
+            (€{{ price_formatted }}).
