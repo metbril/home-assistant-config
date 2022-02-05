@@ -178,7 +178,7 @@ automation:
           start_time: "{{ states(time_on_sensor) | as_timestamp }}"
           end_time: "{{ states(time_off_sensor) | as_timestamp }}"
           start_kwh: "{{ states(energy_on_sensor) | float(0) }}"
-          end_kwh: "{{ states(energy_on_sensor) | float(0) }}"
+          end_kwh: "{{ states(energy_off_sensor) | float(0) }}"
       - variables:
           total_time: "{{ (end_time - start_time) }}"
           total_kwh: "{{ end_kwh - start_kwh }}"
