@@ -1,0 +1,52 @@
+---
+###############################################################################
+# @package        :   OpenSenseMap
+# @description    :   OpenSenseMap
+# @author         :   Robert van Bregt
+# @date           :   2022-01-18
+###############################################################################
+
+# Alternative:
+# Pompenburg Rotterdam
+# https://opensensemap.org/explore/5aa96530396417001b2caba4
+#
+# Vondelweg Rotterdam
+# https://opensensemap.org/explore/5b3bce295dc1ec001b7234ba
+air_quality:
+  - platform: opensensemap
+    name: Vondelweg Rotterdam
+    station_id: 5b3bce295dc1ec001b7234ba
+
+################################################
+## Sensor
+################################################
+template:
+  - sensor:
+      - name: "Vondelweg Rotterdam P1"
+        unique_id: 2fef32dc-1ca7-4c43-87dc-677b2c8974f7
+        state: "{{ state_attr('air_quality.vondelweg_rotterdam', 'particulate_matter_10') | float(0) | round(2) }}"
+        unit_of_measurement: µg/m³
+        state_class: measurement
+        icon: mdi:thought-bubble
+        # friendly_name: Fijnstof PM10 Vondelweg
+
+      - name: "Vondelweg Rotterdam P2"
+        unique_id: 55ddac05-bbee-44df-b42e-65a0447c0c48
+        state: "{{ state_attr('air_quality.vondelweg_rotterdam', 'particulate_matter_2_5') | float(0) | round(2) }}"
+        unit_of_measurement: µg/m³
+        state_class: measurement
+        icon: mdi:thought-bubble-outline
+        # friendly_name: Fijnstof PM2.5 Vondelweg
+
+      # https://www.rivm.nl/smog/waarschuwingsgrenzen-en-luchtkwaliteitsindex
+      - name: "Vondelweg Rotterdam P1 Klasse"
+        unique_id: 8919a740-cc24-48b4-b2d6-90dc60c9cbb8
+        state: >-
+          {% set pm = states('sensor.vondelweg_rotterdam_p1') %}
+          {% if pm > 200 %}Zeer slecht
+          {% elif pm >= 125 %}Slecht
+          {% elif pm >= 76 %}Onvoldoende
+          {% elif pm >= 31 %}Matig
+          {% elif pm >= 0 %}Goed
+          {% else %}unavailable
+          {% endif %}

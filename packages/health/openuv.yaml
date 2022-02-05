@@ -16,54 +16,10 @@ homeassistant:
       icon: mdi:vector-triangle
 
   customize:
-
-    ################################################
-    ## Sensor
-    ################################################
-
-    # opensensemap
-    #
-    sensor.pompenburg_rotterdam_p1:
-      friendly_name: Fijnstof PM10 Pompenburg
-      unit_of_measurement: µg/m³
-      icon: mdi:thought-bubble
-    sensor.pompenburg_rotterdam_p2:
-      friendly_name: Fijnstof PM2.5 Pompenburg
-      unit_of_measurement: µg/m³
-      icon: mdi:thought-bubble-outline
-
-    # openuv
-    #
     sensor.current_uv_index:
       friendly_name: UV-index OpenUV
     sensor.current_ozone_level:
       friendly_name: Ozon OpenUV
-
-################################################
-## OpenSenseMap
-################################################
-air_quality:
-
-  # Vondelweg (5b3bce295dc1ec001b7234ba) geeft ontwaarschijnlijk lage waarden
-  # https://opensensemap.org/explore/5aa96530396417001b2caba4
-  - platform: opensensemap
-    station_id: 5aa96530396417001b2caba4
-    name: Pompenburg Rotterdam
-
-################################################
-## Sensor
-################################################
-sensor:
-
-  ## OpenSenseMap
-  - platform: template
-    sensors:
-      pompenburg_rotterdam_p1:
-        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam',
-        'particulate_matter_10') | float | round(2) }}"
-      pompenburg_rotterdam_p2:
-        value_template: "{{ state_attr('air_quality.pompenburg_rotterdam',
-        'particulate_matter_2_5') | float | round(2) }}"
 
 ################################################
 ## Automation
