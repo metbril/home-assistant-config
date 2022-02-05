@@ -12,7 +12,7 @@ sensor:
     name: P2000 Brandweer
     regios: 17                  # rotterdam rijnmond
     disciplines: 1              # brandweer
-    radius: 1000                # meter, default 5000; from home
+    radius: 10000                # meter, default 5000; from home
     scan_interval: 30           # seconden, default 30
     icon: hass:fire-truck
 
