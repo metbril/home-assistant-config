@@ -168,7 +168,7 @@ automation:
         device_id: fe4f064967224e5bcd5f5de5eb9b4f7d
         domain: webostv
         type: webostv.turn_on
-      
+
     condition: []
 
     action:

@@ -72,19 +72,6 @@ sensor:
       - type: ipv6_address
         arg: 'eth0'
 
-      # - type: network_in
-      #   arg: 'eth0'
-      # - type: network_out
-      #   arg: 'eth0'
-      # - type: throughput_network_in
-      #   arg: 'eth0'
-      # - type: throughput_network_out
-      #   arg: 'eth0'
-      # - type: packets_in
-      #   arg: 'eth0'
-      # - type: packets_out
-      #   arg: 'eth0'
-
   - platform: filesize
     file_paths:
       - !secret filesize_homeassistant_db
