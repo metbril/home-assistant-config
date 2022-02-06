@@ -2,19 +2,6 @@
 # webOStv requires the Wake On Lan integration
 #
 
-homeassistant:
-  customize:
-    media_player.living_tv:
-      friendly_name: TV Woonkamer
-
-webostv:
-  name: Living TV
-  host: !secret living_tv_host
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: !secret living_tv_mac
-
 template:
   - sensor:
       - name: Living TV Volume Level
@@ -170,3 +157,21 @@ automation:
       - service: notify.living_tv
         data:
           message: Muziekspeler automatisch gepauzeerd.
+
+  - alias: Living TV On
+    id: 68cfc6e4-561c-4d64-aec7-4b8883e84b43
+    description: ''
+    mode: single
+
+    trigger:
+      - platform: device
+        device_id: fe4f064967224e5bcd5f5de5eb9b4f7d
+        domain: webostv
+        type: webostv.turn_on
+      
+    condition: []
+
+    action:
+      - service: wake_on_lan.send_magic_packet
+        data:
+          mac: !secret living_tv_mac

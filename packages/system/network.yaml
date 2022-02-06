@@ -5,15 +5,6 @@
 # - Speedtest
 # - Netgear
 
-# Sensors
-#
-sensor:
-
-  # DNS IP
-  # https://www.home-assistant.io/integrations/dnsip
-  #
-  - platform: dnsip
-
 # Binary sensors
 #
 binary_sensor:
