@@ -25,10 +25,17 @@ light:
     unique_id: 57b93f90-cd0b-4ce6-a430-b65a85928aff
     entities:
       - light.hoge_kast
-      - light.magnarp
+      # - light.magnarp
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
       - light.leeslamp
       - light.turbinelamp
-      - light.lichtstraat
+      # - light.lichtstraat
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
       - light.bollamp
       - light.nijntje
       - light.willner
