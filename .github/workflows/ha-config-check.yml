@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.1.2
 
@@ -28,7 +28,7 @@ jobs:
         version: ["stable", "beta"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Create fake empty files
         run: |
