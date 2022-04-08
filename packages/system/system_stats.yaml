@@ -104,3 +104,53 @@ template:
         icon: mdi:timer
         unit_of_measurement: items
         state: "{{ states.timer | count }}"
+
+      - name: "Count Air Quality"
+        icon: mdi:air-filter
+        unit_of_measurement: items
+        state: "{{ states.air_quality | count }}"
+
+      - name: "Count Alerts"
+        icon: mdi:alert
+        unit_of_measurement: items
+        state: "{{ states.alert | count }}"
+
+      - name: "Count Buttons"
+        icon: mdi:gesture-tap-button
+        unit_of_measurement: items
+        state: "{{ states.button | count }}"
+
+      - name: "Count Cameras"
+        icon: mdi:video
+        unit_of_measurement: items
+        state: "{{ states.camera | count }}"
+
+      - name: "Count Media Players"
+        icon: mdi:play-box-multiple
+        unit_of_measurement: items
+        state: "{{ states.media_player | count }}"
+
+      - name: "Count Numbers"
+        icon: mdi:ray-vertex
+        unit_of_measurement: items
+        state: "{{ states.number | count }}"
+
+      - name: "Count People"
+        icon: mdi:account
+        unit_of_measurement: items
+        state: "{{ states.person | count }}"
+
+      - name: "Count Proximities"
+        icon: mdi:compass-outline
+        unit_of_measurement: items
+        state: "{{ states.proximity | count }}"
+
+      - name: "Count Remotes"
+        icon: mdi:remote
+        unit_of_measurement: items
+        state: "{{ states.remote | count }}"
+
+      - name: "Count Updates"
+        icon: mdi:download
+        unit_of_measurement: items
+        state: "{{ states.update | count }}"
