@@ -42,7 +42,7 @@ template:
       - name: "Vondelweg Rotterdam P1 Klasse"
         unique_id: 8919a740-cc24-48b4-b2d6-90dc60c9cbb8
         state: >-
-          {% set pm = states('sensor.vondelweg_rotterdam_p1') %}
+          {% set pm = states('sensor.vondelweg_rotterdam_p1') | float(unavailable) %}
           {% if pm > 200 %}Zeer slecht
           {% elif pm >= 125 %}Slecht
           {% elif pm >= 76 %}Onvoldoende
