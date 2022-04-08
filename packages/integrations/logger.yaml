@@ -10,15 +10,15 @@
 logger:
   default: warn
   logs:
-    # homeassistant.core: debug
+    homeassistant.core: warn
 
     # homeassistant.components: info
     # homeassistant.components.binary_sensor.meteoalarm: debug
     # homeassistant.components.meteoalarm: debug
 
     # custom_components: debug
-    custom_components.p2000: debug
-    custom_components.sensor.p2000: debug
+    custom_components.p2000: warn
+    custom_components.sensor.p2000: warn
 
     # Custom components maintained by me
     #
