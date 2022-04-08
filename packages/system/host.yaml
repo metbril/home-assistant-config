@@ -72,11 +72,6 @@ sensor:
       - type: ipv6_address
         arg: 'eth0'
 
-  - platform: filesize
-    file_paths:
-      - !secret filesize_homeassistant_db
-      - !secret filesize_homeassistant_log
-
   - platform: command_line
     name: bad_login
     command: "grep -c 'Login attempt' /config/home-assistant.log"
