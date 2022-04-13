@@ -7,3 +7,56 @@
       feed_url: https://alerts.home-assistant.io/feed.xml
       notifier: robert
       urls_supported: true
+- id: '1649842819459'
+  alias: 'Office: Pause Music'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: sensor.msteams_activity_robert
+    to: In gesprek
+  condition:
+  - condition: state
+    entity_id: binary_sensor.working_from_home_robert
+    state: 'on'
+  - condition: state
+    entity_id: media_player.studeerkamer
+    state: playing
+  action:
+  - service: media_player.media_pause
+    data: {}
+    target:
+      device_id: 49324710c6344a809dae725922db2cc6
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.resume_office_music
+  - service: notify.robert
+    data:
+      message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
+      title: Teams activity
+  mode: single
+- id: '1649843570979'
+  alias: 'Office: Resume Music'
+  description: Resume music when Teams call has finished.
+  trigger:
+  - platform: state
+    entity_id: sensor.msteams_activity_robert
+    from: In gesprek
+  condition:
+  - condition: state
+    entity_id: input_boolean.resume_office_music
+    state: 'on'
+  action:
+  - service: media_player.media_play
+    data: {}
+    target:
+      entity_id: media_player.studeerkamer
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.resume_office_music
+  - service: notify.robert
+    data:
+      message: Muziek in het kantoor voortgezet.
+      title: Teams activity
+  mode: single
