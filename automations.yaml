@@ -60,3 +60,107 @@
       message: Muziek in het kantoor voortgezet.
       title: Teams activity
   mode: single
+- id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
+  alias: 'Lighting: Living lights on at dusk'
+  description: 'Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
+
+    '
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+  action:
+  - scene: scene.lighting_living_base
+  mode: single
+- id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
+  alias: 'Lighting: Living lights off during vacations'
+  description: Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
+    en 23:30.
+  trigger:
+  - platform: time
+    at: '23:00:00'
+  condition:
+  - condition: state
+    entity_id: input_boolean.occupancy_vacation
+    state: 'on'
+  action:
+  - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+  - service: light.turn_off
+    entity_id: light.living
+  - service: notify.admin
+    data:
+      title: Vakantie
+      message: Verlichting automatisch uitgeschakeld.
+  mode: single
+- id: f120e80e-4717-4199-80a7-f56aee0f8690
+  alias: 'Lighting: Living lights dimmed late at night'
+  description: Dim woonkamerverlichting laat in de avond
+  trigger:
+  - platform: time
+    at: '23:30'
+  condition:
+  - condition: state
+    entity_id: light.living
+    state: 'on'
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: 'on'
+  action:
+  - service: scene.turn_on
+    data: {}
+    target:
+      entity_id: scene.lighting_living_dimmed
+  mode: single
+- id: b24e7ee3-fbd7-4e91-9116-095d7b24c843
+  alias: 'Lighting: Living lights wall switch on/off'
+  description: In/uitschakelen verlichting in de woonkamer bij gebruik linker wandschakelaar.
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.wandschakelaar_links
+  action:
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.lighting_living_base
+    default:
+    - service: light.turn_off
+      data: {}
+      target:
+        entity_id: light.living
+  mode: single
+- alias: 'Lighting: Garden On'
+  description: 'Turn on the garden lights at sunset
+
+    '
+  id: 8d8468fb-3baf-41be-88ee-9a3a71910909
+  mode: single
+  trigger:
+  - platform: sun
+    event: sunset
+  action:
+  - service: light.turn_on
+    target:
+      entity_id: light.achtergevel
+    data:
+      brightness_pct: 70
+- alias: 'Lighting: Garden Off'
+  description: 'Turn off the garden lights at sunrise
+
+    '
+  id: 61ddaf89-65e3-4853-b80d-e0abea5ec53c
+  mode: single
+  trigger:
+  - platform: sun
+    event: sunrise
+    offset: -01:00:00
+  action:
+  - service: light.turn_off
+    target:
+      entity_id: light.achtergevel
