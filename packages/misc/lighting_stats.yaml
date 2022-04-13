@@ -1,9 +1,9 @@
 ---
 ################################################################################
-# name        : Lighting
+# name        : Lighting Stats
 # author      : Robert van Bregt
-# date        : 14-01-2022
-# description : Lighting package
+# date        : 13-04-2022
+# description : Lighting Statistics package
 ################################################################################
 
 sensor:
