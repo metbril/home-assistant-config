@@ -1,3 +1,0 @@
-sensor.myip:
-  friendly_name: Publiek IP-adres
-  icon: hass:wan

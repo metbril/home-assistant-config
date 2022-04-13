@@ -4,10 +4,10 @@ homeassistant:
   packages: !include_dir_named packages
 
   # Customize individual entities
-  customize: !include_dir_merge_named ./includes/customizations/entities
+  customize: !include customize.yaml
 
   # Customize entities by pattern
-  customize_glob: !include_dir_merge_named ./includes/customizations/globs
+  # customize_glob: !include customize_globs.yaml
 
   allowlist_external_dirs:
     - !secret allowlist_dir_config
