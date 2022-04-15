@@ -62,9 +62,7 @@
   mode: single
 - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
   alias: 'Lighting: Living lights on at dusk'
-  description: 'Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
-
-    '
+  description: Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
   trigger:
   - event: sunset
     offset: -00:30:00
@@ -136,9 +134,7 @@
         entity_id: light.living
   mode: single
 - alias: 'Lighting: Garden On'
-  description: 'Turn on the garden lights at sunset
-
-    '
+  description: Turn on the garden lights at sunset
   id: 8d8468fb-3baf-41be-88ee-9a3a71910909
   mode: single
   trigger:
@@ -151,9 +147,7 @@
     data:
       brightness_pct: 70
 - alias: 'Lighting: Garden Off'
-  description: 'Turn off the garden lights at sunrise
-
-    '
+  description: Turn off the garden lights at sunrise
   id: 61ddaf89-65e3-4853-b80d-e0abea5ec53c
   mode: single
   trigger:
@@ -164,3 +158,78 @@
   - service: light.turn_off
     target:
       entity_id: light.achtergevel
+- id: c1de5e22-30c1-41c6-873a-88e081e7048a
+  alias: Signaallamp - bijwerken via scene
+  description: Werk de signaallamp bij met behulp van de geselecteerde scene.
+  trigger:
+  - entity_id: input_select.signaallamp_scene
+    platform: state
+  action:
+  - data:
+      entity_id: '{{(''scene.signaal_'' ~ trigger.to_state.state)|lower| replace(''
+        '',''_'')}}'
+    service: scene.turn_on
+- id: ff08a450-aa5f-4bc4-bf21-bdea71c552ce
+  alias: Signaallamp - uitschakelen synchroniseren met scene
+  description: Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
+    handmatig wordt uitgeschakeld.
+  trigger:
+  - entity_id: light.signaal
+    platform: state
+    to: 'off'
+  action:
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+    service: input_select.select_option
+- id: 26e358e0-da5c-4ef1-8349-e9f0bde623bd
+  alias: Signaallamp - regenalarm melden op werkdagen
+  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
+    but only when someone is home
+  trigger:
+  - above: 0
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    platform: numeric_state
+  condition:
+  - condition: state
+    entity_id: binary_sensor.signaallamp_ingeschakeld
+    state: 'on'
+  - condition: time
+    after: 06:00:00
+    before: 09:00:00
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.verlof
+    state: 'off'
+  - condition: state
+    entity_id: sensor.occupancy
+    state: home
+  - condition: state
+    entity_id: group.family
+    state: home
+  action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Regenalarm
+  mode: single
+- id: ca89521c-7219-4e8e-acda-9c9537ff98a1
+  alias: Signaallamp - regenalarm annuleren
+  description: Annuleer regenalarm om 9:00 of als er geen regen meer wordt verwacht.
+  trigger:
+  - platform: template
+    value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+      |float==0}}'
+  - at: 09:00:00
+    platform: time
+  condition:
+  - condition: state
+    entity_id: input_select.signaallamp_scene
+    state: Regenalarm
+  action:
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit

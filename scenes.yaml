@@ -793,3 +793,55 @@
       supported_features: 35
       state: 'off'
   icon: mdi:book-open-variant
+
+
+- id: 495139d1-9bde-4ae9-bf93-021beeabc8aa
+  name: Signaal - Regenalarm
+  entities:
+    light.signaal:
+      brightness: 171
+      rgb_color:
+        - 67
+        - 62
+        - 255
+      state: 'on'
+  icon: hass:umbrella
+- id: 52cf8bde-0f32-43f5-af1f-d754f7a20a68
+  name: Signaal - Vertraging NS
+  entities:
+    light.signaal:
+      brightness: 171
+      rgb_color:
+        - 255
+        - 190
+        - 0
+      state: 'on'
+  icon: hass:train
+- id: 8cc060c3-5c1e-40fb-a9f2-9b98d25089eb
+  name: Signaal - Uit
+  entities:
+    light.signaal:
+      state: 'off'
+  icon: hass:bell-off
+- id: 527fddc7-b503-4b95-9a2d-d50da14d0378
+  name: Signaal - Feyenoord
+  entities:
+    light.signaal:
+      brightness: 160
+      rgb_color:
+        - 255
+        - 49
+        - 5
+      state: 'on'
+  icon: hass:soccer
+- id: 7d4e2a2a-45ec-4f6d-af3b-45d20c1a201a
+  name: Signaal - Oranje
+  entities:
+    light.signaal:
+      brightness: 160
+      rgb_color:
+        - 255
+        - 129
+        - 27
+      state: 'on'
+  icon: hass:crown
