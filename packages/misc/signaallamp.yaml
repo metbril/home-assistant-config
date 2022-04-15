@@ -1,15 +1,10 @@
 ---
 
-homeassistant:
-  customize:
-    light.signaallamp:
-      icon: hass:alarm-light
-
 scene:
   - id: signalering_regenalarm
     name: Signaal Regenalarm
     entities:
-      light.signaallamp:
+      light.signaal:
         brightness: 171
         rgb_color:
           - 67
@@ -20,7 +15,7 @@ scene:
   - id: signalering_vertraging_ns
     name: Signaal Vertraging NS
     entities:
-      light.signaallamp:
+      light.signaal:
         brightness: 171
         rgb_color:
           - 255
@@ -31,13 +26,13 @@ scene:
   - id: signalering_uit
     name: Signaal Uit
     entities:
-      light.signaallamp:
+      light.signaal:
         state: 'off'
     icon: hass:bell-off
   - id: signalering_feyenoord
     name: Signaal Feyenoord
     entities:
-      light.signaallamp:
+      light.signaal:
         brightness: 160
         rgb_color:
           - 255
@@ -48,7 +43,7 @@ scene:
   - id: signalering_oranje
     name: Signaal Oranje
     entities:
-      light.signaallamp:
+      light.signaal:
         brightness: 160
         rgb_color:
           - 255
@@ -75,7 +70,7 @@ automation:
     description: Synchroniseer scene input (en activeer daarmee de scene)
       als de signaallamp handmatig wordt uitgeschakeld.
     trigger:
-      - entity_id: light.signaallamp
+      - entity_id: light.signaal
         platform: state
         to: 'off'
     action:
