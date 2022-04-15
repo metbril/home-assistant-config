@@ -1,42 +1,10 @@
+# Global configuration
+# https://github.com/bramstroker/homeassistant-powercalc#global-configuration
+powercalc:
+
 sensor:
 
-  # - platform: powercalc
-  #   entity_id: light.achtergevel
-
-  - platform: powercalc
-    entity_id: light.bollamp
-    manufacturer: signify
-    model: LCT001
-
-  - platform: powercalc
-    entity_id: light.hoge_kast
-    manufacturer: signify
-    model: LLC011
-
-  # - platform: powercalc
-  #   entity_id: light.leeslamp
-  #   manufacturer: signify
-  #   model: LTW013
-
-  - platform: powercalc
-    entity_id: light.lichtstraat
-    manufacturer: ikea
-    model: LED1837R5
-    multiply_factor: 4
-    multiply_factor_standby: true
-
-  - platform: powercalc
-    entity_id: light.nijntje
-    manufacturer: signify
-    model: LCT012
-
-  - platform: powercalc
-    entity_id: light.magnarp
-    manufacturer: ikea
-    model: LED1545G12  # niet helemaal het juiste model; deze is 980lm ipv 600lm
-    multiply_factor: 3
-    multiply_factor_standby: true
-
+  # Only on/off, power from sticker
   - platform: powercalc
     entity_id: light.turbinelamp
     fixed:
@@ -44,7 +12,6 @@ sensor:
     standby_power: 0
     disable_standby_power: true
 
-  - platform: powercalc
-    entity_id: light.willner
-    manufacturer: signify
-    model: LTW010
+  # Missing: bureaulamp
+  # LED lamp met 3 standen, niet te bepalen wat het verbruik is per stand
+  # Misschien het maximale verbruik opnemen, bij aan/uit  
