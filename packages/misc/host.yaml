@@ -27,10 +27,6 @@ homeassistant:
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
-    sensor.homeassistant_v2db:
-      friendly_name: Grootte database
-    sensor.homeassistantlog:
-      friendly_name: Grootte logbestand
 
 ##################################################
 ## Binary Sensor
@@ -67,9 +63,6 @@ sensor:
         arg: /
 
       - type: ipv4_address
-        arg: 'eth0'
-
-      - type: ipv6_address
         arg: 'eth0'
 
   - platform: command_line
