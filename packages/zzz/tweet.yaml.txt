@@ -112,3 +112,39 @@ automation:
       - service: script.tweet_engine
         data:
           message: "{{ message }}"
+
+  ##############################################################################
+  - alias: Home Assistant Stop Tweet
+    id: f1a564aa-c8da-4f88-bf61-b938627374b2
+
+    trigger:
+      - platform: homeassistant
+        event: shutdown
+
+    action:
+      - service: notify.twitter
+        data:
+          message: >-
+            {% set phrases = [
+              "💤 Ik ga even een dutje doen.",
+              "🚶 Ik moet even weg, maar ik ben zo weer terug.",
+              "🙈 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!",
+              "⛔ Home Assistant wordt gestopt."
+            ] %}
+            {% set hashtags = [
+              "#HomeAutomation",
+              "#SmartHome",
+              "#Domotica",
+              "#IoT"
+            ] %}
+            {{ phrases|random ~ " " ~ hashtags|random ~ " #HomeAssistant" ~
+            " https://metbril.github.io/home-assistant-config"}}
+          data:
+            media: >-
+              {% set pictures = [
+                "/config/www/img/tweets/uptime/shutdown_laptop.jpg",
+                "/config/www/img/tweets/uptime/tv_color_bars.png",
+                "/config/www/img/tweets/uptime/tv_offline.jpg",
+                "/config/www/img/tweets/uptime/tv_noise.jpg"
+              ] %}
+              {{ pictures|random }}
