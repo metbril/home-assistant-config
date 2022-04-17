@@ -9,6 +9,3 @@ sensor.monthly_energy_consumption_tarif_1:
   friendly_name: Maandelijks energieverbruik  (tarief 1)
 sensor.monthly_energy_consumption_tarif_2:
   friendly_name: Maandelijks energieverbruik  (tarief 2)
-sensor.myip:
-  friendly_name: Publiek IP-adres
-  icon: hass:wan
