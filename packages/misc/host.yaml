@@ -6,44 +6,9 @@
 homeassistant:
   customize:
 
-    ##################################################
-    # Binary sensors
-    ##################################################
-
-    binary_sensor.cpu_high:
-      device_class: problem
-      friendly_name: CPU Hoog
-    binary_sensor.cpu_hot:
-      device_class: heat
-      friendly_name: CPU Heet
-    binary_sensor.db_large:
-      device_class: problem
-      friendly_name: Grote database
-
-    ##################################################
-    # Sensors
-    ##################################################
-
     sensor.bad_login:
       friendly_name: Mislukte inlogpogingen
       icon: hass:alert
-
-##################################################
-## Binary Sensor
-##################################################
-
-binary_sensor:
-
-  - platform: template
-    sensors:
-      cpu_high:
-        value_template: "{{states('sensor.processor_use')|float(0)>80}}"
-
-      cpu_hot:
-        value_template: "{{states('sensor.processor_temperature')|float(0)>80}}"
-
-      db_large:
-        value_template: "{{states('sensor.home_assistant_v2_db')|float(0)>3000}}"
 
 ##################################################
 ## Sensor
@@ -69,43 +34,3 @@ sensor:
     name: bad_login
     command: "grep -c 'Login attempt' /config/home-assistant.log"
     value_template: '{{ value | int - 1 }}'
-
-################################################
-## Alert
-################################################
-
-alert:
-  cpu_high:
-    name: Gebruik CPU is hoog
-    entity_id: binary_sensor.cpu_high
-    state: 'on'
-    repeat: 5  # minutes
-    can_acknowledge: true
-    skip_first: false
-    notifiers:
-      - admin
-
-  cpu_hot:
-    name: Processortemperatuur is te hoog
-    entity_id: binary_sensor.cpu_hot
-    state: 'on'
-    repeat: 5  # minutes
-    can_acknowledge: true
-    skip_first: false
-    notifiers:
-      - admin
-
-  db_large:
-    name: Database Large
-    entity_id: binary_sensor.db_large
-    state: 'on'
-    repeat:  # minutes
-      - 15
-      - 30
-      - 60
-      - 120
-      - 240
-    can_acknowledge: true
-    skip_first: false
-    notifiers:
-      - admin
