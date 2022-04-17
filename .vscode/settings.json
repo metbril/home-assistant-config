@@ -1,7 +1,4 @@
 {
-    "files.associations": {
-        "*.yaml": "yaml"
-    },
     "[home-assistant]": {
 
         "editor.insertSpaces": true,
@@ -12,5 +9,8 @@
             "strings": true
         },
         "editor.autoIndent": "full"
+    },
+    "files.associations": {
+        "*.yaml": "home-assistant"
     }
 }
