@@ -19,7 +19,7 @@ input_number:
     mode: box
   gas_rate:
     name: Gastarief
-    unit_of_measurement: €c/m3
+    unit_of_measurement: €c/m³
     icon: mdi:currency-eur
     min: 0
     max: 1000
@@ -39,6 +39,6 @@ template:
         state: "{{ ((states('input_number.energy_rate_tarif_2') | float(0)) / 100) | round(5) }}"
   - sensor:
       - name: Gas Rate
-        unit_of_measurement: €/m3
+        unit_of_measurement: €/m³
         icon: mdi:currency-eur
         state: "{{ ((states('input_number.gas_rate') | float(0)) / 100) | round(5) }}"
