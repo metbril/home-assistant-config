@@ -88,5 +88,4 @@ wake_on_lan:
 weather:
   - platform: darksky
     api_key: !secret darksky_api_key
-    units: ca
     mode: daily
