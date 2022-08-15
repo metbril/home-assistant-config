@@ -1,0 +1,46 @@
+homeassistant:
+  customize:
+    sensor.date:
+      friendly_name: Datum
+
+    sensor.time:
+      friendly_name: Tijd
+
+sensor:
+  ##############################################################################
+  ## Time/Date
+  ## https://www.home-assistant.io/integrations/time_date
+  ##############################################################################
+  - platform: time_date
+    display_options:
+      - 'date'
+      - 'time'
+
+template:
+  - sensor:
+
+      ##########################################################################
+      # Today's day of the week
+      # Can be used for TTS or notifications
+      ##########################################################################
+      - name: Weekday
+        state: >-
+          {% set w = strptime(states('sensor.date'),
+            '%Y-%m-%d').strftime('%w')|int %}
+          {{['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag',
+            'zaterdag'][w]}}
+
+        icon: mdi:calendar
+        unique_id: "2640715b-a6e8-4bbc-be92-328175d3f638"
+        # friendly_name: 'Dag van de week'
+
+      ##########################################################################
+      # Yesterday's date, for use in automations
+      ##########################################################################
+      - name: Yesterday
+        state: >-
+          {{ (as_timestamp(states('sensor.date'))-(24*3600))
+            |timestamp_custom('%Y-%m-%d',True) }}
+        icon: mdi:calendar
+        unique_id: "b995a8b7-b011-47b6-82d4-7bd2827a6515"
+        # friendly_name: Gisteren
