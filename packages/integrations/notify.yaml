@@ -4,7 +4,7 @@ notify:
   - name: Admin
     platform: group
     services:
-      - service: pushover
+      - service: robert
 
   - name: All
     platform: group
@@ -31,11 +31,6 @@ notify:
     platform: group
     services:
       - service: mobile_app_iphone_robert
-
-  - name: Pushover
-    platform: pushover
-    api_key: !secret pushover_api_key
-    user_key: !secret pushover_user_key
 
     ##############################################################################
     ## Twitter
