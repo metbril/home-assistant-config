@@ -8,5 +8,4 @@ recorder:
   exclude:
     domains:
     entities:
-    - sensor.time
-
+      - sensor.time
