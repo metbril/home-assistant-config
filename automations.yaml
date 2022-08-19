@@ -241,3 +241,21 @@
     input:
       webostv: media_player.tv_woonkamer
       webostv_mac: 04:4E:AF:13:F9:7C
+- id: '1660887358846'
+  alias: 'Lighting: Kledingkast Bjorn altijd aan'
+  description: De verlichting in de kledingkast moet altijd aan staan, zodat de sensor
+    het licht kan inschakelen.
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
+    entity_id: light.kledingkast_bjorn
+    domain: light
+  condition: []
+  action:
+  - type: turn_on
+    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
+    entity_id: light.kledingkast_bjorn
+    domain: light
+    brightness_pct: 50
+  mode: single
