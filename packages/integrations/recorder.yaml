@@ -4,27 +4,9 @@
 #
 recorder:
   auto_purge: true  # default = true
-  purge_keep_days: 3
+  purge_keep_days: 10
   exclude:
     domains:
-      - alert
-      - automation
-      - sun
-      - script
-      - weather
-
-      # ov9292
-      - sensor.metro_*
-      - sensor.sprinter_*
-
     entities:
-      - sensor.date
-      - sensor.time
-      - sensor.ha_uptime
+    - sensor.time
 
-      # large sensors
-      - sensor.neerslag_buienalarm_regen_data
-      - sensor.neerslag_buienradar_regen_data
-      - sensor.coronadashboard_data_nederland
-      - sensor.coronadashboard_data_regio
-      - sensor.coronadashboard_data_gemeente
