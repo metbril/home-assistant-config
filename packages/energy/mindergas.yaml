@@ -43,15 +43,18 @@ automation:
       - platform: time
         at: '00:15:00'
 
+    condition:
+      - condition: numeric_state
+        entity_id: sensor.gas_consumption
+        above: "0"
+      - condition: not
+        conditions:
+          - condition: state
+            entity_id: sensor.yesterday
+            state: unavailable
+
     action:
       - service: rest_command.post_mindergas
         data:
           reading: "{{ states('sensor.gas_consumption') }}"
           reading_date: "{{ states('sensor.yesterday') }}"
-
-      - service: logbook.log
-        data:
-          name: Gasverbruik
-          message: verstuurd naar mindergas.nl
-          entity_id: sensor.gas_consumption
-          domain: sensor
