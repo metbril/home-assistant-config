@@ -259,3 +259,42 @@
     domain: light
     brightness_pct: 50
   mode: single
+- id: 068719c4-88f2-44b5-a809-e2513ae65604
+  alias: 'Weer: Buienalarm melden'
+  description: 'Notify for rain alarms'
+  trigger:
+  - platform: state
+    entity_id: sensor.buienalarm_precipitation_forecast_level
+  condition:
+  - condition: not
+    conditions:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: sensor.buienalarm_precipitation_forecast_level
+        state: '0'
+      - condition: state
+        entity_id: sensor.buienalarm_precipitation_forecast_level
+        state: unavailable
+  action:
+  - service: notify.robert
+    data:
+      title: ☔️ Buienalarm
+      message: '{{ state_attr(''sensor.buienalarm_precipitation_forecast_level'',
+        ''label'') }} ({{ states(''sensor.buienalarm_precipitation_forecast_average'')
+        }} {{ state_attr(''sensor.buienalarm_precipitation_forecast_average'', ''unit_of_measurement'')
+        }}) verwacht.
+
+        '
+      data:
+        url: 'https://www.buienalarm.nl/{{ state_attr(''zone.home'', ''latitude'')
+          }},{{ state_attr(''zone.home'',''longitude'') }}
+
+          '
+  - service: notify.twitter
+    data:
+      message: "☔️ {{ state_attr(trigger.entity_id,'label') }} vlakbij verwacht. {{
+        [ \"Vergeet je regenjas \U0001F9E5 niet mee te nemen!\", \"Neem een paraplu
+        \U0001F302 mee!\", \"Je bent ⚠️ gewaarschuwd!\", \"Hou @buienalarm \U0001F327️
+        in de gaten!\" ] | random  }} https://www.buienalarm.nl/ #buienalarm"
+  mode: single

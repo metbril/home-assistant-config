@@ -1,3 +1,12 @@
 ---
+sensor.buienalarm_next_rain_forecast:
+  friendly_name: Buienalarm Neerslag volgende
+  unit_of_measurement: minuten
+sensor.buienalarm_precipitation:
+  friendly_name: Buienalarm Neerslagintensiteit
+  unit_of_measurement: mm/u
+sensor.buienalarm_precipitation_forecast_average:
+  friendly_name: Buienalarm Neerslagintensiteit verwacht
+  unit_of_measurement: mm/u
 sun.sun:
   friendly_name: Zon
