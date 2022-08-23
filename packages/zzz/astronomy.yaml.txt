@@ -1,10 +1,4 @@
 ---
-homeassistant:
-  customize:
-    # The sun integration is installed with default_config integration
-    sun.sun:
-      friendly_name: Zon
-
 sensor:
 
   # Day Length (scrape)
