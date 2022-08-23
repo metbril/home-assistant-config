@@ -1,8 +1,0 @@
----
-################################################################################
-## Authenticated - Custom component
-##
-##  https://github.com/custom-components/authenticated
-################################################################################
-sensor:
-  - platform: authenticated
