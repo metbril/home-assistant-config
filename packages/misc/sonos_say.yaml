@@ -31,16 +31,14 @@ script:
       - delay: "{{ delay }}"
 
       - choose:
-        - conditions: "{{ cannot_restore }}"
-          sequence:
-            - service: tts.cloud_say
-              data:
-                entity_id: "{{ media_player }}"
-                message: "Sorry. Afspelen kan niet worden hersteld."
-            - delay: "5"
+          - conditions: "{{ cannot_restore }}"
+            sequence:
+              - service: tts.cloud_say
+                data:
+                  entity_id: "{{ media_player }}"
+                  message: "Sorry. Afspelen kan niet worden hersteld."
+              - delay: "5"
 
       - service: sonos.restore
         data:
           entity_id: "{{ media_player }}"
-
-
