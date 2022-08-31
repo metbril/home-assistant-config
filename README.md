@@ -45,7 +45,8 @@ This file contains specific details about my HASS.io installation.
 
 ### Host hardware
 
-The system is currently running on a Raspberry Pi 2B. It is equipped with an ? GB SD Card.
+The system is currently running on Hardkernel Odroid-N2 (like [Home Assistant Blue][blue]).
+Previously, I have used a Raspberry Pi 3B and before that a Raspberry Pi 2B.
 
 ## Add-ons
 
@@ -238,3 +239,4 @@ If you have suggestions or improvements, please submit an issue or pull request.
 [yamllint]: https://yamllint.readthedocs.io/en/stable/
 [twitter-badge]: https://img.shields.io/twitter/follow/domussapiens?color=1da1f2&logo=twitter&style=flat
 [twitter-link]: https://twitter.com/intent/follow?screen_name=domussapiens
+[blue]: https://www.home-assistant.io/blue
