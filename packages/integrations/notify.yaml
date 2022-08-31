@@ -45,3 +45,13 @@ notify:
     consumer_secret: !secret twitter_consumer_secret
     access_token: !secret twitter_access_token
     access_token_secret: !secret twitter_access_token_secret
+
+  ##############################################################################
+  ## This notifier is used by the log energy consumption automation.
+  ##
+  ## https://www.home-assistant.io/integrations/file
+  ##############################################################################
+  - name: save_energy_consumption
+    platform: file
+    filename: energy_consumption.csv
+    timestamp: false

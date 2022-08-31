@@ -569,3 +569,38 @@
     mode: '{{ states(''sensor.occupancy'') }}'
     name: '{{ ''input_boolean.occupancy_'' + mode }}'
     label: '{{ state_attr(name, ''friendly_name'') }}'
+- id: 934b4450-7816-4064-b906-3a3894d99345
+  alias: Energy - Save consumption to file
+  description: "Save energy consumption to file every hour, at the full hour.\nEntities
+    used: \n- sensor.energy_consumption_tarif_1 \n- sensor.energy_consumption_tarif_2\n
+    - sensor.gas_consumption"
+  trigger:
+  - platform: time_pattern
+    hours: '*'
+    minutes: '0'
+    seconds: '0'
+  action:
+  - service: notify.save_energy_consumption
+    data:
+      message: '{{ now() }}, {{ states(''sensor.energy_consumption_tarif_1'') }},
+        {{ states(''sensor.energy_consumption_tarif_2'') }}, {{ states(''sensor.gas_consumption'')}}
+
+        '
+  - service: logbook.log
+    data:
+      name: Energieverbruik (tarief 1)
+      message: opgeslagen
+      entity_id: sensor.energy_consumption_tarif_1
+      domain: sensor
+  - service: logbook.log
+    data:
+      name: Energieverbruik (tarief 2)
+      message: opgeslagen
+      entity_id: sensor.energy_consumption_tarif_2
+      domain: sensor
+  - service: logbook.log
+    data:
+      name: Gasverbruik
+      message: opgeslagen
+      entity_id: sensor.gas_consumption
+      domain: sensor
