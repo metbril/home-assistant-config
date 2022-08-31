@@ -304,3 +304,268 @@
         \U0001F302 mee!\", \"Je bent ⚠️ gewaarschuwd!\", \"Hou @buienalarm \U0001F327️
         in de gaten!\" ] | random  }} https://www.buienalarm.nl/ #buienalarm"
   mode: single
+- id: '1661359954658'
+  alias: Robert bijna thuis
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id: proximity.robert_from_home
+    below: '500'
+  condition:
+  - condition: and
+    conditions:
+    - condition: state
+      entity_id: person.robert
+      state: not_home
+    - condition: state
+      entity_id: proximity.robert_from_home
+      attribute: dir_of_travel
+      state: towards
+    - condition: state
+      entity_id: input_boolean.do_not_disturb
+      state: 'off'
+  action:
+  - service: notify.robert
+    data:
+      message: Robert is minder dan {{ states('proximity.robert_from_home') }} meter
+        van huis. Hij is er bijna.
+  mode: single
+- id: '1660920784418'
+  alias: 'Media: Update Sonos Source Selector'
+  description: Update input selector with when Sonos favorites update.
+  trigger:
+  - platform: state
+    entity_id:
+    - input_select.sonos_favorites
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - variables:
+      favs: '{{ state_attr(''sensor.sonos_favorites'', ''items'').values() | list
+        }}'
+  - service: input_select.set_options
+    data:
+      options: '{{ favs }}'
+    target:
+      entity_id: input_select.sonos_favorites
+  mode: single
+- id: '1660923058113'
+  alias: 'Media: Play selected Sonos favorite on kitchen speaker'
+  description: Switch to selected favorite (playlist or radio) when Office speaker
+    is already playing.
+  trigger:
+  - platform: state
+    entity_id:
+    - input_select.sonos_favorites
+  condition:
+  - condition: device
+    device_id: 7bdba22c447d5ca9504e896de5e891d4
+    domain: media_player
+    entity_id: media_player.kantoorspeaker
+    type: is_playing
+  action:
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.kantoorspeaker
+    data:
+      source: '{{ states(''input_select.sonos_favorites'') }}'
+  mode: single
+- id: '1661499047537'
+  alias: ZHA - Lichtstraat remote
+  description: ''
+  use_blueprint:
+    path: metbril/zha_ikea_tradfri_2button_onoff_brightness.yaml
+    input:
+      remote: 28bb8ad428cbbf06defd66c0d19deaac
+      light: light.lichtstraat
+      speed: 100
+- id: '1661505565179'
+  alias: 'Lighting: Sun control outdoor lights'
+  description: Switch the outdoor lights on/off based on sun elevation
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: '1'
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '1'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: '1'
+      sequence:
+      - service: light.turn_off
+        data:
+          transition: 5
+        target:
+          entity_id: light.achtergevel
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: '1'
+      sequence:
+      - service: light.turn_on
+        data:
+          transition: 5
+          brightness_pct: 70
+        target:
+          entity_id: light.achtergevel
+    default: []
+  - service: notify.robert
+    data:
+      message: Sun outdoor lights triggered, please check the light.
+  mode: single
+- id: '1661506070664'
+  alias: Notify printer on
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.samsung_ml_2850nd
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - service: notify.mobile_app_iphone_robert
+    data:
+      message: Printer staat nog aan
+      data:
+        actions:
+        - action: PRINTER_OFF
+          title: Printer uit
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: PRINTER_OFF
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == ''PRINTER_OFF'' }}'
+      sequence:
+      - service: switch.turn_off
+        data: {}
+        target:
+          entity_id: switch.samsung_ml_2850nd
+      - service: notify.robert
+        data:
+          message: Printer uit
+    default: []
+  mode: single
+- id: '1661518079280'
+  alias: Muziek Nieuwe automatisering
+  description: ''
+  use_blueprint:
+    path: seamus65/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one.yaml
+    input:
+      remote: 0c144dc38bacc294824003fcc7f94167
+      media_player:
+        entity_id: media_player.woonkamer
+      double_press:
+      - service: media_player.media_next_track
+        data: {}
+        target:
+          entity_id: media_player.woonkamer
+      triple_press:
+      - service: media_player.media_previous_track
+        data: {}
+        target:
+          entity_id: media_player.woonkamer
+- id: '1661538513078'
+  alias: Lightsaver Sfeerverlichting
+  description: ''
+  use_blueprint:
+    path: niro1987/lightsaver.yaml
+    input:
+      light: light.sfeerverlichting
+      sunset_delay: -50
+- id: '1661884728867'
+  alias: Occupancy - Sync states
+  description: '# Header
+
+    Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden alle andere
+    uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
+
+    '
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.occupancy_home
+    - input_boolean.occupancy_away
+    - input_boolean.occupancy_asleep
+    - input_boolean.occupancy_party
+    - input_boolean.occupancy_guests
+    - input_boolean.occupancy_vacation
+  action:
+  - variables:
+      all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
+        ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      - condition: template
+        value_template: '{{ not all_off }}'
+      sequence:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
+            \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
+            | list | join(', ') }}\n"
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''off'' }}'
+      - condition: template
+        value_template: '{{ all_off }}'
+      sequence:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.occupancy_home
+    default: []
+  initial_state: true
+  mode: single
+- id: '1661885320722'
+  alias: Occupancy - Absence reminder
+  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode
+
+    '
+  trigger:
+  - platform: state
+    entity_id: sensor.occupancy
+    to: vacation
+  - platform: state
+    entity_id: sensor.occupancy
+    to: guests
+  - platform: time
+    at: 09:00:00
+  condition:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sensor.occupancy
+      state: vacation
+    - condition: state
+      entity_id: sensor.occupancy
+      state: guests
+  action:
+  - service: notify.admin
+    data:
+      title: Bezetting
+      message: "\U0001F9F7 De woning is ingesteld op bezetting door {{ label | lower
+        }}."
+  variables:
+    mode: '{{ states(''sensor.occupancy'') }}'
+    name: '{{ ''input_boolean.occupancy_'' + mode }}'
+    label: '{{ state_attr(name, ''friendly_name'') }}'
