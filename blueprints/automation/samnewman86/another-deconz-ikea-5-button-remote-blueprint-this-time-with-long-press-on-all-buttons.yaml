@@ -1,0 +1,136 @@
+blueprint:
+  name: deCONZ - IKEA five button remote
+  description: 'Control anything using IKEA five button remote
+
+    '
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: IKEA remote to use
+      selector:
+        device:
+          integration: deconz
+          manufacturer: IKEA of Sweden
+          model: TRADFRI remote control
+          multiple: false
+    button_on_off_short:
+      name: On off button short press
+      description: Action to run on press on off button
+      default: []
+      selector:
+        action: {}
+    button_on_off_long:
+      name: On off button long press
+      description: Action to run on press on off button
+      default: []
+      selector:
+        action: {}
+    button_brightness_up_short:
+      name: Brightness up button - short press
+      description: Action to run on short brightness up press
+      default: []
+      selector:
+        action: {}
+    button_brightness_up_long:
+      name: Brightness up button - long press
+      description: Action to run on long brightness up press
+      default: []
+      selector:
+        action: {}
+    button_brightness_up_long_release:
+      name: Brightness up button - long press release
+      description: Action to run on long brightness up release
+      default: []
+      selector:
+        action: {}
+    button_brightness_down_short:
+      name: Brightness down button - short press
+      description: Action to run on short brightness down press
+      default: []
+      selector:
+        action: {}
+    button_brightness_down_long:
+      name: Brightness down button - long press
+      description: Action to run on long brightness down press
+      default: []
+      selector:
+        action: {}
+    button_brightness_down_long_release:
+      name: Brightness down button - long press release
+      description: Action to run on long brightness down release
+      default: []
+      selector:
+        action: {}
+    button_left_short:
+      name: Left button - short press
+      description: Action to run on short left button press
+      default: []
+      selector:
+        action: {}
+    button_left_long:
+      name: Left button - long press
+      description: Action to run on long left button press
+      default: []
+      selector:
+        action: {}
+    button_right_short:
+      name: Right button - short press
+      description: Action to run on short right button press
+      default: []
+      selector:
+        action: {}
+    button_right_long:
+      name: Right button - long press
+      description: Action to run on long right button press
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/another-deconz-ikea-5-button-remote-blueprint-this-time-with-long-press-on-all-buttons/258743
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: deconz_event
+  event_data:
+    device_id: !input remote
+action:
+- variables:
+    event: '{{ trigger.event.data.event }}'
+- choose:
+  - conditions:
+    - '{{ event == 1002 }}'
+    sequence: !input button_on_off_short
+  - conditions:
+    - '{{ event == 1001 }}'
+    sequence: !input button_on_off_long
+  - conditions:
+    - '{{ event == 2003 }}'
+    sequence: !input button_brightness_up_long_release
+  - conditions:
+    - '{{ event == 2002 }}'
+    sequence: !input button_brightness_up_short
+  - conditions:
+    - '{{ event == 2001 }}'
+    sequence: !input button_brightness_up_long
+  - conditions:
+    - '{{ event == 3003 }}'
+    sequence: !input button_brightness_down_long_release
+  - conditions:
+    - '{{ event == 3002 }}'
+    sequence: !input button_brightness_down_short
+  - conditions:
+    - '{{ event == 3001 }}'
+    sequence: !input button_brightness_down_long
+  - conditions:
+    - '{{ event == 4002 }}'
+    sequence: !input button_left_short
+  - conditions:
+    - '{{ event == 4001 }}'
+    sequence: !input button_left_long
+  - conditions:
+    - '{{ event == 5002 }}'
+    sequence: !input button_right_short
+  - conditions:
+    - '{{ event == 5001 }}'
+    sequence: !input button_right_long

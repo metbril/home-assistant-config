@@ -1,0 +1,140 @@
+blueprint:
+  name: ZHA - Philips Hue Dimmer Switch (individual buttons)
+  description: 'All four buttons are individual buttons with short,
+
+    long and double press actions for scenes or automations
+
+    '
+  domain: automation
+  input:
+    remote:
+      name: Remote
+      description: The remote to use
+      selector:
+        device:
+          integration: zha
+          manufacturer: Philips
+          entity:
+            domain: sensor
+            device_class: battery
+          multiple: false
+    button_1_single_press:
+      name: Button 1 (ON) Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    button_1_long_press:
+      name: Button 1 (ON) Long Press
+      description: Action to run on long press
+      default: []
+      selector:
+        action: {}
+    button_1_double_press:
+      name: Button 1 (ON) Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    button_2_single_press:
+      name: Button 2 (UP) Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    button_2_long_press:
+      name: Button 2 (UP) Long Press
+      description: Action to run on long press
+      default: []
+      selector:
+        action: {}
+    button_2_double_press:
+      name: Button 2 (UP) Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    button_3_single_press:
+      name: Button 3 (DOWN) Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    button_3_long_press:
+      name: Button 3 (DOWN) Long Press
+      description: Action to run on long press
+      default: []
+      selector:
+        action: {}
+    button_3_double_press:
+      name: Button 3 (DOWN) Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+    button_4_single_press:
+      name: Button 4 (OFF) Single Press
+      description: Action to run on single press
+      default: []
+      selector:
+        action: {}
+    button_4_long_press:
+      name: Button 4 (OFF) Long Press
+      description: Action to run on long press
+      default: []
+      selector:
+        action: {}
+    button_4_double_press:
+      name: Button 4 (OFF) Double Press
+      description: Action to run on double press
+      default: []
+      selector:
+        action: {}
+  source_url: https://community.home-assistant.io/t/zha-philips-hue-dimmer-switch-individual-buttons-with-long-presses/261012
+mode: restart
+max_exceeded: silent
+trigger:
+- platform: event
+  event_type: zha_event
+  event_data:
+    device_id: !input remote
+action:
+- variables:
+    command: '{{ trigger.event.data.command }}'
+- choose:
+  - conditions:
+    - '{{ command == ''on_short_release'' }}'
+    sequence: !input button_1_single_press
+  - conditions:
+    - '{{ command == ''on_hold'' }}'
+    sequence: !input button_1_long_press
+  - conditions:
+    - '{{ command == ''on_double_press'' }}'
+    sequence: !input button_1_double_press
+  - conditions:
+    - '{{ command == ''up_short_release'' }}'
+    sequence: !input button_2_single_press
+  - conditions:
+    - '{{ command == ''up_hold'' }}'
+    sequence: !input button_2_long_press
+  - conditions:
+    - '{{ command == ''up_double_press'' }}'
+    sequence: !input button_2_double_press
+  - conditions:
+    - '{{ command == ''down_short_release'' }}'
+    sequence: !input button_3_single_press
+  - conditions:
+    - '{{ command == ''down_hold'' }}'
+    sequence: !input button_3_long_press
+  - conditions:
+    - '{{ command == ''down_double_press'' }}'
+    sequence: !input button_3_double_press
+  - conditions:
+    - '{{ command == ''off_short_release'' }}'
+    sequence: !input button_4_single_press
+  - conditions:
+    - '{{ command == ''off_hold'' }}'
+    sequence: !input button_4_long_press
+  - conditions:
+    - '{{ command == ''off_double_press'' }}'
+    sequence: !input button_4_double_press
