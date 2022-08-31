@@ -6,5 +6,5 @@
 # https://www.home-assistant.io/integrations/template/
 #
 template:
-  binary_sensor: !include_dir_list ../../entities/template/binary_sensor
-  sensor: !include_dir_list ../../entities/template/sensor
+  binary_sensor: !include_dir_list "../../entities/template/binary_sensor"
+  sensor: !include_dir_list "../../entities/template/sensor"
