@@ -34,22 +34,23 @@ automation:
         value_template: '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
 
     action:
+      - variables:
+          address: "{{ states('sensor.p2000_brandweer') }}"
+          lat: "{{ state_attr('sensor.p2000_brandweer', 'latitude')  }}"
+          lon: "{{ state_attr('sensor.p2000_brandweer', 'longitude') }}"
+          url: >-
+            http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16
+
       - service: notify.parents
         data:
           title: 🚒 P2000 Brandweer
-          message: '{{ states(''sensor.p2000_brandweer'') }}'
+          message: "{{ address }}"
           data:
-            url: http://www.openstreetmap.org/?mlat={{
-              state_attr('sensor.p2000_brandweer',
-              'latitude') }}&mlon={{ state_attr('sensor.p2000_brandweer',
-              'longitude')}}&zoom=16
+            url: '{{ url }}'
 
       - service: notify.twitter
         data:
-          message: '🚒 De #brandweer is in de buurt. #P2000
+          message: >-
+            🚒 De #brandweer is in de buurt. #P2000
 
-            {{ states(''sensor.p2000_brandweer'')
-            }} https://www.openstreetmap.org/?mlat={{
-            state_attr(''sensor.p2000_brandweer'', ''latitude'') }}&mlon={{
-            state_attr(''sensor.p2000_brandweer'',
-            ''longitude'') }}&zoom=16'
+            {{ address }} {{ url }}
