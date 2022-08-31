@@ -1,0 +1,46 @@
+---
+##############################################################################
+## Generic Sonos say script
+##############################################################################
+script:
+  sonos_say:
+    alias: "Sonos Text-To-Speech"
+    mode: queued
+    variables:
+      # volume_level: "{{ volume_level | default 0.3 }}"
+
+      is_playing: "{{ is_state('media_player.kantoorspeaker', 'playing') }}"
+      media: "{{ state_attr('media_player.kantoorspeaker','media_content_id') }}"
+      is_cloud: "{{ (media.split(':')[0] == 'x-sonos-vli') }}"
+      cannot_restore: "{{ is_playing and is_cloud }}"
+    sequence:
+      - service: sonos.snapshot
+        data:
+          entity_id: "{{ media_player }}"
+      # - service: media_player.unjoin
+      #   data:
+      #     entity_id: "{{ media_player }}"
+      - service: media_player.volume_set
+        data:
+          entity_id: "{{ media_player }}"
+          volume_level: "{{ volume_level }}"
+      - service: tts.cloud_say
+        data:
+          entity_id: "{{ media_player }}"
+          message: "{{ message }}"
+      - delay: "{{ delay }}"
+
+      - choose:
+        - conditions: "{{ cannot_restore }}"
+          sequence:
+            - service: tts.cloud_say
+              data:
+                entity_id: "{{ media_player }}"
+                message: "Sorry. Afspelen kan niet worden hersteld."
+            - delay: "5"
+
+      - service: sonos.restore
+        data:
+          entity_id: "{{ media_player }}"
+
+
