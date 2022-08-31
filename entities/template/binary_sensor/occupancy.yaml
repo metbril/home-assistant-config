@@ -1,8 +1,8 @@
 name: "Occupancy"
 unique_id: 80fb3594-f0d4-4ae4-8251-f31e1d9b301f
 state: >-
-  {{ states.input_boolean | select('search', 'occupancy_')  
-      | selectattr('state', 'eq', 'on') | map(attribute='entity_id') 
+  {{ states.input_boolean | select('search', 'occupancy_')
+      | selectattr('state', 'eq', 'on') | map(attribute='entity_id')
       | list | count != 0 }}
 icon: >-
   {{ state_attr('sensor.occupancy', 'icon') }}
