@@ -13,7 +13,7 @@ fields:
     required: true
     selector:
       entity:
-        domain: 
+        domain:
           - media_player
         integration: sonos
         multiple: false
