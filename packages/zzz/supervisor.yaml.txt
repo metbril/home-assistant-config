@@ -11,7 +11,7 @@
 homeassistant:
   customize:
     sensor.supervisor_update_available:
-      icon: hass:package-up
+      icon: mdi:package-up
     binary_sensor.supervisor_update_available:
       device_class: safety
       friendly_name: Supervisor Update Beschikbaar

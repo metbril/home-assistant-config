@@ -15,7 +15,7 @@ sensor:
     radius: 1000                    # meter, default 5000; from home
     nolocation: False               # inlucde without location, default True
     scan_interval: 30               # seconden, default 30
-    icon: hass:fire-truck
+    icon: mdi:fire-truck
 
 automation:
   - alias: "Safety: P2000 Brandweer Melding"

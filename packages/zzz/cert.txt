@@ -8,7 +8,7 @@ homeassistant:
       friendly_name: Grootte SSL-certificaat
     sensor.cert_pem_last_updated:
       friendly_name: Laatste wijziging SSL-certificaat
-      icon: hass:calendar-clock
+      icon: mdi:calendar-clock
     sensor.ssl_certificate_expiry:
       friendly_name: Geldigheidsduur SSL-certificaat
       unit_of_measurement: dagen

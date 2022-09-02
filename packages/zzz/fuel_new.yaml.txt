@@ -3,13 +3,13 @@ homeassistant:
   customize_glob:
     "sensor.euro95_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station
+      icon: mdi:gas-station
     "sensor.diesel_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station
+      icon: mdi:gas-station
     "sensor.lpg_*":
       unit_of_measurement: "€/L"
-      icon: hass:gas-station
+      icon: mdi:gas-station
 
 sensor:
   - platform: scrape

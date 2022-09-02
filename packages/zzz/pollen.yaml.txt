@@ -11,11 +11,11 @@ homeassistant:
 
   customize_glob:
     "sensor.pollen_tree_*":
-      icon: hass:tree
+      icon: mdi:tree
     "sensor.pollen_grass_*":
-      icon: hass:grass
+      icon: mdi:grass
     "sensor.pollen_ragweed_*":
-      icon: hass:flower
+      icon: mdi:flower
 
   customize:
     sensor.pollen_tree_today:

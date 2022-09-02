@@ -2,7 +2,7 @@ homeassistant:
   customize:
     sensor.holiday:
       friendly_name: Feestdag
-      icon: hass:party-popper
+      icon: mdi:party-popper
 
 ################################################################################
 # Holidays for Netherlands: https://www.webcal.fi/nl-NL/feestdagen.php

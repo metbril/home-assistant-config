@@ -208,7 +208,7 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      icon: hass:floor-lamp
+      icon: mdi:floor-lamp
       friendly_name: MAGNARP 2
       supported_features: 35
       color_mode: color_temp
@@ -230,7 +230,7 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      icon: hass:floor-lamp
+      icon: mdi:floor-lamp
       friendly_name: MAGNARP 3
       supported_features: 35
       color_mode: color_temp
@@ -279,7 +279,7 @@
     light.lichtstraat_1:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 1
       supported_features: 33
       color_mode: brightness
@@ -288,7 +288,7 @@
     light.lichtstraat_2:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 2
       supported_features: 33
       color_mode: brightness
@@ -297,7 +297,7 @@
     light.lichtstraat_3:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 3
       supported_features: 33
       color_mode: brightness
@@ -306,7 +306,7 @@
     light.lichtstraat_4:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 4
       supported_features: 33
       color_mode: brightness
@@ -321,7 +321,7 @@
       supported_color_modes:
       - color_temp
       - hs
-      icon: hass:lamp
+      icon: mdi:lamp
       friendly_name: Bollamp
       supported_features: 63
       state: 'off'
@@ -462,7 +462,7 @@
       supported_color_modes:
       - color_temp
       - hs
-      icon: hass:lamp
+      icon: mdi:lamp
       friendly_name: Bollamp
       supported_features: 63
       color_mode: color_temp
@@ -583,28 +583,28 @@
     light.lichtstraat_1:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 1
       supported_features: 33
       state: 'off'
     light.lichtstraat_2:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 2
       supported_features: 33
       state: 'off'
     light.lichtstraat_3:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 3
       supported_features: 33
       state: 'off'
     light.lichtstraat_4:
       supported_color_modes:
       - brightness
-      icon: hass:wall-sconce-flat
+      icon: mdi:wall-sconce-flat
       friendly_name: Lichtstraat 4
       supported_features: 33
       state: 'off'
@@ -617,7 +617,7 @@
       supported_color_modes:
       - color_temp
       - hs
-      icon: hass:lamp
+      icon: mdi:lamp
       friendly_name: Bollamp
       supported_features: 63
       color_mode: color_temp
@@ -719,7 +719,7 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      icon: hass:floor-lamp
+      icon: mdi:floor-lamp
       friendly_name: MAGNARP 2
       supported_features: 35
       state: 'off'
@@ -728,7 +728,7 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      icon: hass:floor-lamp
+      icon: mdi:floor-lamp
       friendly_name: MAGNARP 3
       supported_features: 35
       state: 'off'
@@ -743,7 +743,7 @@
       - 62
       - 255
       state: 'on'
-  icon: hass:umbrella
+  icon: mdi:umbrella
 - id: 52cf8bde-0f32-43f5-af1f-d754f7a20a68
   name: Signaal - Vertraging NS
   entities:
@@ -754,7 +754,7 @@
       - 190
       - 0
       state: 'on'
-  icon: hass:train
+  icon: mdi:train
 - id: 8cc060c3-5c1e-40fb-a9f2-9b98d25089eb
   name: Signaal - Uit
   entities:
@@ -783,7 +783,7 @@
       - 49
       - 5
       state: 'on'
-  icon: hass:soccer
+  icon: mdi:soccer
 - id: 7d4e2a2a-45ec-4f6d-af3b-45d20c1a201a
   name: Signaal - Oranje
   entities:
@@ -794,16 +794,16 @@
       - 129
       - 27
       state: 'on'
-  icon: hass:crown
+  icon: mdi:crown
 - name: Kantoor - Beschikbaar
   id: e9d03c5e-e877-4aec-a976-e2622e641813
-  icon: hass:account-check
+  icon: mdi:account-check
   entities:
     light.werkstatus:
       state: 'off'
 - name: Kantoor - Niet Storen
   id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
-  icon: hass:account-cancel
+  icon: mdi:account-cancel
   entities:
     light.werkstatus:
       brightness: 255

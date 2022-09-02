@@ -7,14 +7,14 @@ input_select:
 
   media_player:
     name: Speaker
-    icon: hass:speaker-wireless
+    icon: mdi:speaker-wireless
     options:
       - Studeerkamer
       - Woonkamer
 
   playlist:
     name: Afspeellijst
-    icon: hass:playlist-music
+    icon: mdi:playlist-music
     # initial:  # no initial value; HA saves state between restarts
     #   - All Out 80s
     options:  # case-sensitive!

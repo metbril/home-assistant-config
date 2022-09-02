@@ -2,7 +2,7 @@ homeassistant:
   customize_glob:
     sensor.*_countdown:
       unit_of_measurement: "dagen"
-      icon: hass:counter
+      icon: mdi:counter
   customize:
     sensor.christmas_countdown:
       friendly_name: Aftellen tot Kerstmis

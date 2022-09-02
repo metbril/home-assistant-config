@@ -12,7 +12,7 @@ input_select:
       - info
       - debug
       - notset
-    icon: hass:bug
+    icon: mdi:bug
 
 automation:
   - alias: Logger Level

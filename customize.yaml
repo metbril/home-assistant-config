@@ -1,7 +1,7 @@
 ---
 sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
-  icon: hass:alert
+  icon: mdi:alert
 sensor.buienalarm_next_rain_forecast:
   friendly_name: Buienalarm Neerslag volgende
   unit_of_measurement: minuten

@@ -4,7 +4,7 @@ homeassistant:
     sensor.yaml_config_lines:
       friendly_name: YAML configuratieregels
       unit_of_measurement: 'regels'
-      icon: hass:file-code
+      icon: mdi:file-code
 
 sensor:
   - platform: command_line
