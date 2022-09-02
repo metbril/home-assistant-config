@@ -1,4 +1,7 @@
 ---
+sensor.bad_login:
+  friendly_name: Mislukte inlogpogingen
+  icon: hass:alert
 sensor.buienalarm_next_rain_forecast:
   friendly_name: Buienalarm Neerslag volgende
   unit_of_measurement: minuten
@@ -8,11 +11,15 @@ sensor.buienalarm_precipitation:
 sensor.buienalarm_precipitation_forecast_average:
   friendly_name: Buienalarm Neerslagintensiteit verwacht
   unit_of_measurement: mm/u
+sensor.date:
+  friendly_name: Datum
 sensor.msteams_call_count_today_robert:
   friendly_name: Teams Call Count Today Robert
 sensor.msteams_call_time_today_robert:
   friendly_name: Teams Call Time Today Robert
 sensor.msteams_online_today_robert:
   friendly_name: Teams Online Today Robert
+sensor.time:
+  friendly_name: Tijd
 sun.sun:
   friendly_name: Zon

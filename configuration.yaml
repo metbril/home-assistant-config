@@ -27,7 +27,6 @@ homeassistant:
 automation: !include automations.yaml
 group: !include groups.yaml
 scene: !include scenes.yaml
-script: !include scripts.yaml
 
 # Includes
 
