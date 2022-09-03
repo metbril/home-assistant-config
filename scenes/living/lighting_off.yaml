@@ -1,0 +1,27 @@
+name: 'Lighting: Living Off'
+icon: mdi:lightbulb-off
+id: 23373edc-d64f-480d-9a93-b7b75c5904cb
+entities:
+  light.hoge_kast:
+    state: 'off'
+
+  light.magnarp:
+    state: 'off'
+
+  light.leeslamp:
+    state: 'off'
+
+  light.turbinelamp:
+    state: 'off'
+
+  light.lichtstraat:
+    state: 'off'
+
+  light.bollamp:
+    state: 'off'
+
+  light.nijntje:
+    state: 'off'
+
+  light.willner:
+    state: 'off'
