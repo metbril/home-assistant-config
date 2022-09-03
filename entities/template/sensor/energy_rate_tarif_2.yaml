@@ -1,0 +1,4 @@
+name: Energy Rate Tarif 2
+unit_of_measurement: €/kWh
+icon: mdi:currency-eur
+state: "{{ ((states('input_number.energy_rate_tarif_2') | float(0)) / 100) | round(5) }}"

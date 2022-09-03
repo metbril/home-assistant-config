@@ -1,0 +1,4 @@
+name: Gas Rate
+unit_of_measurement: €/m³
+icon: mdi:currency-eur
+state: "{{ ((states('input_number.gas_rate') | float(0)) / 100) | round(5) }}"
