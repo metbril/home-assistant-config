@@ -1,0 +1,59 @@
+name: 'Lighting: Living Base'
+icon: mdi:weather-sunset
+id: 3103dea8-2c12-4988-84d7-3e5f3ff37efc
+metadata:
+  light.magnarp:
+    entity_only: true
+entities:
+  light.hoge_kast:
+    color_mode: hs
+    brightness: 102
+    hs_color:
+      - 34.286
+      - 65.882
+    effect: none
+    state: 'on'
+
+  light.leeslamp:
+    color_mode: color_temp
+    brightness: 102
+    color_temp: 360
+    state: 'on'
+
+  light.turbinelamp:
+    color_mode: onoff
+    state: 'on'
+
+  light.bollamp:
+    color_mode: color_temp
+    brightness: 102
+    color_temp: 360
+    effect: none
+    state: 'on'
+
+  light.nijntje:
+    color_mode: color_temp
+    brightness: 102
+    color_temp: 360
+    off_with_transition: false
+    off_brightness:
+    state: 'on'
+
+  light.willner:
+    color_mode: color_temp
+    brightness: 102
+    color_temp: 360
+    state: 'on'
+
+  light.lichtstraat:
+    color_mode: brightness
+    brightness: 102
+    off_with_transition: false
+    off_brightness:
+    state: 'on'
+
+  light.magnarp:
+    color_mode: color_temp
+    brightness: 102
+    color_temp: 360
+    state: 'on'

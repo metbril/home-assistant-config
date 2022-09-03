@@ -1,0 +1,52 @@
+name: 'Lighting: Living Max'
+icon: mdi:brightness-7
+id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
+entities:
+  light.hoge_kast:
+    color_mode: hs
+    brightness: 255
+    hs_color:
+    - 42.162
+    - 14.51
+    effect: none
+    state: 'on'
+
+  light.magnarp:
+    color_mode: color_temp
+    color_temp: 353
+    brightness: 254
+    state: 'on'
+
+  light.leeslamp:
+    color_mode: color_temp
+    color_temp: 326
+    brightness: 255
+    state: 'on'
+
+  light.turbinelamp:
+    color_mode: onoff
+    state: 'on'
+
+  light.lichtstraat:
+    color_mode: brightness
+    brightness: 254
+    state: 'on'
+
+  light.bollamp:
+    color_mode: color_temp
+    color_temp: 326
+    brightness: 255
+    effect: none
+    state: 'on'
+
+  light.nijntje:
+    color_mode: color_temp
+    color_temp: 326
+    brightness: 254
+    state: 'on'
+
+  light.willner:
+    color_mode: color_temp
+    color_temp: 326
+    brightness: 255
+    state: 'on'

@@ -1,0 +1,38 @@
+name: 'Lighting: Living Dimmed'
+icon: mdi:brightness-3
+id: 88a1bee5-12d9-41b9-9928-1775d42f9727
+entities:
+  light.hoge_kast:
+    state: 'off'
+
+  light.magnarp:
+    color_mode: color_temp
+    color_temp: 400
+    brightness: 3
+    state: 'on'
+
+  light.leeslamp:
+    color_mode: color_temp
+    color_temp: 440
+    brightness: 3
+    state: 'on'
+
+  light.turbinelamp:
+    state: 'off'
+
+  light.lichtstraat:
+    color_mode: brightness
+    brightness: 3
+    state: 'on'
+
+  light.bollamp:
+    state: 'off'
+
+  light.nijntje:
+    state: 'off'
+
+  light.willner:
+    color_mode: color_temp
+    color_temp: 435
+    brightness: 3
+    state: 'on'

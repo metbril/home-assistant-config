@@ -22,11 +22,6 @@ homeassistant:
         - 192.168.1.0/24
         - fd00::/8
 
-# Includes for UI items
-
-group: !include groups.yaml
-scene: !include scenes.yaml
-
 # Includes
 
 # The themes folder is in the root of the config folder, so HACS can install
