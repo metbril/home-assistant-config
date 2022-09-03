@@ -1,0 +1,110 @@
+## Perform actions when an appliance has finished
+##
+## This blueprint is my improved version of an original blueprint by @sbyx:
+## - Hysteresis presented as a duration selector. (https://www.home-assistant.io/docs/blueprint/selectors/#duration-selector)
+## - Entities limited to power sensors by device class (https://www.home-assistant.io/docs/blueprint/selectors/#device_class)
+##
+## Original blueprint:
+## https://gist.github.com/sbyx/6d8344d3575c9865657ac51915684696
+##
+## Community thread:
+## https://community.home-assistant.io/t/notify-or-do-something-when-an-appliance-like-a-dishwasher-or-washing-machine-finishes/254841
+##
+
+blueprint:
+  name: Appliance has finished
+  description: Perform one or more actions when an appliance
+    (like a washing machine or dishwasher)
+    has started and finished as detected by a power sensor.
+  source_url: https://github.com/metbril/home-assistant-blueprints/blob/main/automation/appliance_has_finished.yaml
+  domain: automation
+
+  input:
+    power_sensor:
+      name: Power Sensor
+      description: Power sensor entity (e.g. from a smart plug device).
+      selector:
+        entity:
+          domain: sensor
+          device_class: power
+          multiple: false
+
+    starting_threshold:
+      name: Starting power threshold
+      description: Power threshold above which we assume the appliance has started.
+      default: 5
+      selector:
+        number:
+          min: 1.0
+          max: 100.0
+          step: 1.0
+          unit_of_measurement: W
+          mode: slider
+
+    starting_hysteresis:
+      name: Starting hysteresis
+      description: Time duration the power measurement has to stay above the starting
+        power threshold.
+      default:
+        minutes: 5
+      selector:
+        duration:
+
+    finishing_threshold:
+      name: Finishing power threshold
+      description: Power threshold below which we assume the appliance has finished.
+      default: 5
+      selector:
+        number:
+          min: 1.0
+          max: 100.0
+          unit_of_measurement: W
+          mode: slider
+          step: 1.0
+
+    finishing_hysteresis:
+      name: Finishing hysteresis
+      description: Time duration the power measurement has to stay below the finishing
+        power threshold.
+      default:
+        minutes: 5
+      selector:
+        duration:
+
+    actions:
+      name: Actions
+      description: Actions (e.g. pushing a notification, TTS announcement, ...)
+      selector:
+        action: {}
+
+    pre_actions:
+      name: Actions
+      description: Actions when starting threshhold is crossed
+      selector:
+        action: {}
+
+trigger:
+  - platform: numeric_state
+    entity_id: !input power_sensor
+    for:
+      !input starting_hysteresis
+    above: !input starting_threshold
+
+condition: []
+
+action:
+  - choose: []
+    default: !input pre_actions
+
+  - wait_for_trigger:
+    - platform: numeric_state
+      entity_id: !input power_sensor
+      below: !input finishing_threshold
+      for:
+        !input finishing_hysteresis
+
+  - choose: []
+    default: !input actions
+
+mode: single
+max_exceeded: silent
