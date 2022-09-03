@@ -33,11 +33,6 @@ frontend:
 
 default_config:
 
-discovery:
-
-# Enable the Supervisor panel in the Home Assistant frontend
-hassio:
-
 # The http component serves all files and data required for the
 # Home Assistant frontend.
 #
@@ -61,9 +56,6 @@ http:
 # https://companion.home-assistant.io/docs/getting_started/
 #
 ios:
-
-lovelace:
-  mode: storage
 
 tts:
   - platform: google_translate
