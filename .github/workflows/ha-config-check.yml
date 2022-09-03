@@ -58,6 +58,11 @@ jobs:
           git clone https://github.com/Limych/ha-car_wash.git
           mv -v ha-car_wash/custom_components/* ./custom_components
 
+      - name: Clone custom component - Feedparser
+        run: |
+          git clone https://github.com/custom-components/feedparser.git
+          mv -v custom-components/custom_components/* ./custom_components
+
       - name: Clone custom component - P2000
         run: |
           git clone https://github.com/cyberjunky/home-assistant-p2000.git
