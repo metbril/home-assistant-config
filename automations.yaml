@@ -245,7 +245,7 @@
   use_blueprint:
     path: cvroque/webostv_turn_on.yaml
     input:
-      webostv: media_player.tv_woonkamer
+      webostv: media_player.living_tv
       webostv_mac: 04:4E:AF:13:F9:7C
 - id: '1660887358846'
   alias: 'Lighting: Kledingkast Bjorn altijd aan'
@@ -305,7 +305,7 @@
         in de gaten!\" ] | random  }} https://www.buienalarm.nl/ #buienalarm"
   mode: single
 - id: '1661359954658'
-  alias: Robert bijna thuis
+  alias: Presence - Robert bijna thuis
   description: ''
   trigger:
   - platform: numeric_state
@@ -463,25 +463,6 @@
           message: Printer uit
     default: []
   mode: single
-- id: '1661518079280'
-  alias: Muziek Nieuwe automatisering
-  description: ''
-  use_blueprint:
-    path: seamus65/zha-ikea-symfonisk-sound-controller-for-media-the-spinny-one.yaml
-    input:
-      remote: 0c144dc38bacc294824003fcc7f94167
-      media_player:
-        entity_id: media_player.woonkamer
-      double_press:
-      - service: media_player.media_next_track
-        data: {}
-        target:
-          entity_id: media_player.woonkamer
-      triple_press:
-      - service: media_player.media_previous_track
-        data: {}
-        target:
-          entity_id: media_player.woonkamer
 - id: '1661538513078'
   alias: Lightsaver Sfeerverlichting
   description: ''
@@ -492,16 +473,14 @@
       sunset_delay: -50
 - id: '1661884728867'
   alias: Occupancy - Sync states
-  description: '# Header
-
-    Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden alle andere
-    uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
-
-    '
+  description: >
+    Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+    alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
   trigger:
   - platform: state
     entity_id:
     - input_boolean.occupancy_home
+    - input_boolean.occupancy_eco
     - input_boolean.occupancy_away
     - input_boolean.occupancy_asleep
     - input_boolean.occupancy_party
@@ -515,8 +494,6 @@
     - conditions:
       - condition: template
         value_template: '{{ trigger.to_state.state == ''on'' }}'
-      - condition: template
-        value_template: '{{ not all_off }}'
       sequence:
       - service: input_boolean.turn_off
         data:
@@ -525,22 +502,20 @@
             | list | join(', ') }}\n"
     - conditions:
       - condition: template
-        value_template: '{{ trigger.to_state.state == ''off'' }}'
-      - condition: template
-        value_template: '{{ all_off }}'
+        value_template: "{{ states.input_boolean | select('search', 'occupancy_')
+          \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
+          | list | count == 0 }}"
       sequence:
       - service: input_boolean.turn_on
         data:
           entity_id: input_boolean.occupancy_home
     default: []
   initial_state: true
-  mode: single
+  mode: queued
 - id: '1661885320722'
   alias: Occupancy - Absence reminder
   description: 'Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode
-
-    '
+    or guest mode'
   trigger:
   - platform: state
     entity_id: sensor.occupancy
@@ -604,3 +579,129 @@
       message: opgeslagen
       entity_id: sensor.gas_consumption
       domain: sensor
+- id: '1662102264901'
+  alias: 'Appliances: Wasmachine is klaar'
+  description: Verstuur meldingen als de wasmachine klaar is.
+  use_blueprint:
+    path: metbril/appliance_has_finished.yaml
+    input:
+      power_sensor: sensor.washing_machine_power
+      starting_hysteresis:
+        hours: 0
+        minutes: 1
+        seconds: 0
+      finishing_hysteresis:
+        hours: 0
+        minutes: 1
+        seconds: 0
+      starting_threshold: 4
+      finishing_threshold: 4
+      actions:
+      - service: notify.robert
+        data:
+          message: "\U0001F45A\U0001F455\U0001F4A6 Wasmachine is klaar."
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_speaker
+          message: De wasmachine is klaar.
+      - service: notify.living_tv
+        data:
+          message: Wasmachine is klaar.
+          data:
+            icon: /config/www/img/washing-machine.png
+      pre_actions:
+      - service: notify.robert
+        data:
+          message: "\U0001F45A\U0001F455\U0001F4A6 Wasmachine is gestart."
+- id: '1662104026902'
+  alias: 'Appliances: Wasdroger is klaar'
+  description: Verstuur meldingen als de wasdroger klaar is.
+  use_blueprint:
+    path: metbril/appliance_has_finished.yaml
+    input:
+      power_sensor: sensor.tumble_dryer_power
+      starting_hysteresis:
+        hours: 0
+        minutes: 1
+        seconds: 0
+      finishing_hysteresis:
+        hours: 0
+        minutes: 1
+        seconds: 0
+      starting_threshold: 4
+      finishing_threshold: 4
+      actions:
+      - service: notify.robert
+        data:
+          message: "\U0001F45A\U0001F455\U0001F4A6 Wasdroger is klaar."
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_speaker
+          message: De wasdroger is klaar.
+      - service: notify.living_tv
+        data:
+          message: Wasdroger is klaar.
+          data:
+            icon: /config/www/img/dryer.png
+      pre_actions:
+      - service: notify.robert
+        data:
+          message: "\U0001F45A\U0001F455\U0001F4A6 Wasmachine is gestart."
+- id: '1662116397887'
+  alias: 'Security: Warn when door is open after everyone has left'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - group.family
+    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.schuifpui_sensor_state_door_window
+    state: 'on'
+  action:
+  - service: notify.parents
+    data:
+      message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
+  mode: single
+- id: '1662123937783'
+  alias: 'Presence: Robert verlaat werk'
+  description: ''
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.robert
+      zone_entity: zone.maasstad
+      notify_device: 0837dc1d02ba452e9d46a4cbdc5e3638
+- id: '1662124763401'
+  alias: 'Presence: Robert verlaat werk na 16:00 uur (custom)'
+  description: ''
+  trigger:
+  - platform: zone
+    entity_id: person.robert
+    zone: zone.maasstad
+    event: leave
+  condition:
+  - condition: time
+    after: '16:00:00'
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+  action:
+  - service: notify.monique
+    data:
+      message: "Robert is onderweg naar huis. \U0001F6B4‍♂️\U0001F4A8\U0001F618"
+      data:
+        icon_url: /local/img/people/robert.png
+  - service: script.sonos_say
+    data:
+      entity_id: media_player.living_speaker
+      message: Robert is onderweg naar huis.
+      volume_percent: 15
+  mode: single
