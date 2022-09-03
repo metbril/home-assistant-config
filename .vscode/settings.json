@@ -9,8 +9,5 @@
             "strings": true
         },
         "editor.autoIndent": "full"
-    },
-    "files.associations": {
-        "*.yaml": "home-assistant"
     }
 }
