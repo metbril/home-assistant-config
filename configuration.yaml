@@ -24,7 +24,6 @@ homeassistant:
 
 # Includes for UI items
 
-automation: !include automations.yaml
 group: !include groups.yaml
 scene: !include scenes.yaml
 
