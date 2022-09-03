@@ -22,8 +22,9 @@ template:
     - name: "Buienalarm next rain forecast minutes"
       unit_of_measurement: "min"
       state: >
-        {% if as_timestamp(states('sensor.buienalarm_next_rain_forecast')) %}
-          {{ ( ( as_timestamp(states('sensor.buienalarm_next_rain_forecast')) - as_timestamp(now()) ) / 60 ) | round }}
+        {% set forecast = states('sensor.buienalarm_next_rain_forecast') %}
+        {% if forecast is not in [None, 'unavailable', 'unknown'] %}
+          {{ ( ( as_timestamp(forecast) - as_timestamp(now()) ) / 60 ) | round }}
         {% else %}
           unavailable
         {% endif %}
