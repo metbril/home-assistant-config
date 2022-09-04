@@ -473,9 +473,10 @@
       sunset_delay: -50
 - id: '1661884728867'
   alias: Occupancy - Sync states
-  description: >
-    Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
     alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
+
+    '
   trigger:
   - platform: state
     entity_id:
@@ -514,8 +515,8 @@
   mode: queued
 - id: '1661885320722'
   alias: Occupancy - Absence reminder
-  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode'
+  description: Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode
   trigger:
   - platform: state
     entity_id: sensor.occupancy
@@ -633,7 +634,7 @@
       actions:
       - service: notify.robert
         data:
-          message: "\U0001F45A\U0001F455\U0001F4A6 Wasdroger is klaar."
+          message: "\U0001F9FA\U0001F4A8 Wasdroger is klaar."
       - service: script.sonos_say
         data:
           entity_id: media_player.living_speaker
@@ -646,7 +647,7 @@
       pre_actions:
       - service: notify.robert
         data:
-          message: "\U0001F45A\U0001F455\U0001F4A6 Wasmachine is gestart."
+          message: "\U0001F9FA\U0001F4A8 Wasdroger is gestart."
 - id: '1662116397887'
   alias: 'Security: Warn when door is open after everyone has left'
   description: ''
