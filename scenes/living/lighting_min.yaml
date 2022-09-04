@@ -6,8 +6,8 @@ entities:
     color_mode: hs
     brightness: 128
     hs_color:
-    - 29.444
-    - 42.353
+      - 29.444
+      - 42.353
     effect: none
     state: 'on'
 
@@ -16,23 +16,23 @@ entities:
     brightness: 128
     color_temp: 435
     state: 'on'
-  
+
   light.turbinelamp:
     state: 'off'
-  
+
   light.lichtstraat:
     state: 'off'
-  
+
   light.bollamp:
     color_mode: color_temp
     brightness: 128
     color_temp: 435
     effect: none
     state: 'on'
-  
+
   light.nijntje:
     state: 'off'
-  
+
   light.willner:
     color_mode: color_temp
     brightness: 128

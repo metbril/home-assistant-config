@@ -1,0 +1,33 @@
+alias: "Safety: Brandweer in de buurt"
+description: >
+  Stuur een melding dat de brandweer dichtbij is
+  en plaats een bericht op Twitter.
+id: 971fc035-f021-4015-a54b-8c6da9ddf200
+mode: single
+
+trigger:
+  - platform: state
+    entity_id: sensor.p2000_brandweer
+
+condition: "{{states('sensor.p2000_brandweer') != 'unknown'}}"
+
+action:
+  - variables:
+      address: "{{ states('sensor.p2000_brandweer') }}"
+      lat: "{{ state_attr('sensor.p2000_brandweer', 'latitude')  }}"
+      lon: "{{ state_attr('sensor.p2000_brandweer', 'longitude') }}"
+      url: "http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16"
+
+  - service: notify.parents
+    data:
+      title: 🚒 P2000 Brandweer
+      message: "{{ address }}"
+      data:
+        url: "{{ url }}"
+
+  - service: notify.twitter
+    data:
+      message: >-
+        🚒 De #brandweer is in de buurt. #P2000
+
+        {{ address }} {{ url }}

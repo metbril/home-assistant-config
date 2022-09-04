@@ -1,0 +1,12 @@
+################################################################################
+## P2000
+## https://github.com/cyberjunky/home-assistant-p2000
+################################################################################
+platform: p2000
+name: P2000 Brandweer           # Determines Sensor name
+regios: 17                      # rotterdam rijnmond
+disciplines: Brandweerdiensten  # brandweer
+radius: 1000                    # meter, default 5000; from home
+nolocation: False               # inlucde without location, default True
+scan_interval: 30               # seconden, default 30
+icon: mdi:fire-truck

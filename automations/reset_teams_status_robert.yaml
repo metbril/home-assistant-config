@@ -1,0 +1,57 @@
+# Reset Teams Status Robert
+#
+alias: Reset Teams Status Robert
+description: >
+  Reset Teams Status when not changed for a long time outside
+  work hours.
+
+  This usually happens when you put your laptop in sleep or
+  hibernate mode without closing the Teams application first.
+
+  The status should not be reset if you just work outside of regular hours.
+
+id: aaff7435-8f79-4657-af57-454710cde9b9
+mode: single
+
+trigger:
+  # Teams status has not changed for more than 1 hours
+  #
+  # TODO: This automation triggers every minute.
+  #       Perhaps (re)set a timer for 1 hours on
+  #       status change?
+  platform: template
+  value_template: >
+    {{ as_timestamp(now()) -
+        as_timestamp(
+          states.input_text.teams_status_robert.last_changed
+          ) > 1*3600 }}
+
+condition:
+  # not a workday or after 18:00 ?
+  - condition: or
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.workday
+        state: "off"
+      - condition: time
+        after: "18:00:00"
+
+  - condition: not
+    conditions:
+      - condition: state
+        entity_id: input_text.teams_status_robert
+        state: unknown
+
+action:
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.teams_status_robert
+      value: unknown  # Don't use 'Offline' to differentiate
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.teams_activity_robert
+      value: unknown
+
+  - service: notify.robert
+    data:
+      message: Teams status opnieuw ingesteld door inactiviteit.

@@ -1,0 +1,11 @@
+alias: "Safety: Unsnooze lightning notifications."
+id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
+mode: single
+
+trigger:
+  - platform: time
+    at: "00:00:00"
+
+action:
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.snooze_lightning

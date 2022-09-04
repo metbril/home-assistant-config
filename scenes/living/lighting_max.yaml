@@ -6,8 +6,8 @@ entities:
     color_mode: hs
     brightness: 255
     hs_color:
-    - 42.162
-    - 14.51
+      - 42.162
+      - 14.51
     effect: none
     state: 'on'
 
