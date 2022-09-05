@@ -4,8 +4,7 @@ id: '1649843570979'
 mode: single
 
 trigger:
-  - alias: "Robert no longer in call"
-    platform: state
+  - platform: state
     entity_id: sensor.msteams_activity_robert
     from: In gesprek
 
