@@ -1,0 +1,9 @@
+name: Buienalarm
+unique_id: d8dabef5-3b3d-46d1-9062-3feb07c7c4a9
+state: >-
+  {{ states('sensor.buienalarm_precipitation_forecast_average')
+    | float(0) > 0 }}
+icon: >-
+  mdi:umbrella{% if
+    states('sensor.buienalarm_precipitation_forecast_average')
+    | float(0) == 0 %}-closed{% endif %}
