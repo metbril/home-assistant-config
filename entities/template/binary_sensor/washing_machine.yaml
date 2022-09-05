@@ -1,0 +1,13 @@
+# Appliance is running when power usage detected
+name: "Washing Machine"
+unique_id: 7a04404c-be07-4651-82d1-74a804d5cf25
+state: >
+  {{ states("sensor.washing_machine_power")
+  | float(0) > 4 }}
+delay_off: "00:00:30"
+icon: >
+  {% if is_state("binary_sensor.washing_machine", "on") %}
+    mdi:washing-machine
+  {% else %}
+    mdi:washing-machine-off
+  {% endif %}
