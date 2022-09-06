@@ -12,6 +12,7 @@ This repository contains my configuration for Home Assistant.
 <details>
 <summary>Details</summary>
 
+- [Configuration principles](#configuration-principles)
 - [HASS.io](#hassio)
   - [Host hardware](#host-hardware)
 - [Add-ons](#add-ons)
