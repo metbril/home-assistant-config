@@ -11,13 +11,4 @@ homeassistant:
   # Customize entities by pattern
   # customize_glob: !include customize_globs.yaml
 
-  auth_providers:
-    - type: homeassistant
-    - type: trusted_networks
-      trusted_networks:
-        - 127.0.0.1
-        - ::1
-        - 192.168.1.0/24
-        - fd00::/8
-
   packages: !include_dir_named integrations
