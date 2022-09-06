@@ -39,6 +39,21 @@ This repository contains my configuration for Home Assistant.
 </details>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
+## Configuration principles
+
+I used to be an avid user of packages. That provided an easy way to keep 
+funtionality together, enable or disable it, and share with others. However,
+Home Assistant is slowly phasing out YAML configuration and adding more and
+more features to the UI. This has pros and cons, but the main advantage is,
+that you don't need a real computer, ssh or a Samba connection
+to edit the configuration.
+
+The biggest drawback of using the UI is, that editing using the interface 
+usually takes more time than editing a text file. But on the other hand, I have
+spent a lot of time fixed yaml syntax and formatting errors.
+
+So for now I have decided to move as much configuration as possible to the UI.
+
 ## HASS.io
 
 This file contains specific details about my HASS.io installation.
