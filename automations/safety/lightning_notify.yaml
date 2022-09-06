@@ -40,5 +40,5 @@ action:
             title: "Toon kaart"
             url: "/map"
 
-  # - delay:
-  #     minutes: 60
+  - delay:
+      minutes: 1
