@@ -1,14 +1,10 @@
 ---
 homeassistant:
 
+  # allowlist_external_dirs cannot be used in a package:
+  # https://community.home-assistant.io/t/file-size-custom-component/40308/34?u=metbril
   allowlist_external_dirs:
     - !secret allowlist_dir_config
     - !secret allowlist_dir_ssl
-
-  # Customize individual entities
-  customize: !include customize.yaml
-
-  # Customize entities by pattern
-  # customize_glob: !include customize_globs.yaml
 
   packages: !include_dir_named integrations

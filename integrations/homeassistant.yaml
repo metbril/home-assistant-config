@@ -1,0 +1,7 @@
+homeassistant:
+
+  # Customize individual entities
+  customize: !include ../customize.yaml
+
+  # Customize entities by pattern
+  # customize_glob: !include customize_globs.yaml
