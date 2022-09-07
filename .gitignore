@@ -14,7 +14,7 @@ deps/
 homebridge/
 lib/
 tts/
-custom_components/
+custom_components/*
 www/
 www/community/
 image/
