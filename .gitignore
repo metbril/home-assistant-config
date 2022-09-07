@@ -15,6 +15,7 @@ homebridge/
 lib/
 tts/
 custom_components/*
+!custom_components/.gitkeep
 www/
 www/community/
 image/
