@@ -570,3 +570,156 @@
       message: Robert is onderweg naar huis.
       volume_percent: 15
   mode: single
+- id: '1662530759975'
+  alias: 'Security: Inschakelen AdGuard'
+  description: Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
+    gestaan.
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.adguard_protection
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.adguard_protection
+  - service: notify.admin
+    data:
+      message: AdGuard is na 30 minuten weer ingeschakeld.
+  - service: notify.persistent_notification
+    data:
+      message: AdGuard is na 30 minuten weer ingeschakeld.
+  mode: single
+- id: '1662547518457'
+  alias: 'Office: Notify printer on'
+  description: Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
+    en laat deze met een actieknop ook direct uitschakelen.
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.samsung_ml_2850nd
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  condition: []
+  action:
+  - variables:
+      timeout_minutes: '10'
+  - service: notify.robert
+    data:
+      message: Printer staat nog aan
+      data:
+        actions:
+        - action: PRINTER_OFF
+          title: Printer uit
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: PRINTER_OFF
+    timeout:
+      minutes: '{{ timeout_minutes }}'
+    continue_on_timeout: false
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == ''PRINTER_OFF'' }}'
+      sequence:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.samsung_ml_2850nd
+        data: {}
+      - service: notify.robert
+        data:
+          message: Printer uit
+      - service: notify.persistent_notification
+        data:
+          message: Printer uitgeschakeld via notificatie.
+    default: []
+  mode: single
+- id: '1662548077258'
+  alias: 'Security: Switch garden lights based on sun elevation'
+  description: 'Switch the outdoor lights on/off based on sun elevation. Elevation
+    is an attribute of the sun integration. Elevetion is more accurate for darkness
+    that a fixed time. Elevation varies over time. Note: I should create a blueprint
+    for this some day.
+
+    '
+  trigger:
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: '1'
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '1'
+  condition: []
+  action:
+  - choose:
+    - alias: When sun rises and passes the degree above horizon
+      conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: '1'
+      sequence:
+      - service: light.turn_off
+        target:
+          entity_id: light.achtergevel
+        data:
+          transition: 5
+    - alias: When sun sets and passes the degree above horizon
+      conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        below: '1'
+      sequence:
+      - service: light.turn_on
+        target:
+          entity_id: light.achtergevel
+        data:
+          transition: 5
+          brightness_pct: 70
+    default: []
+  - service: notify.robert
+    data:
+      message: Sun outdoor lights triggered, please check the light.
+  mode: single
+- id: '1662548148472'
+  alias: Post Gas Consumption to MinderGas.nl
+  description: 'Post gas consumption to mindergas.nl daily at 00:15.
+
+    The gas meter reading is updated once every hour, within 10 minutes after the
+    full hour. Posting as soon as possible after that, with a safe margin.
+
+
+    '
+  trigger:
+  - platform: time
+    at: 00:15:00
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.gas_consumption
+    above: '0'
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.yesterday
+      state: unavailable
+  action:
+  - service: script.mindergas
+    data:
+      date: '{{ states(''sensor.yesterday'') }}'
+      reading: '{{ states(''sensor.gas_consumption'') }}'
+  mode: single
