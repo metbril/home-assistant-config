@@ -760,3 +760,108 @@
       date: '{{ states(''sensor.yesterday'') }}'
       reading: '{{ states(''sensor.gas_consumption'') }}'
   mode: single
+- id: '1662609361916'
+  alias: 'System: Low battery level detection & notification for all battery sensors'
+  description: ''
+  use_blueprint:
+    path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
+    input:
+      actions:
+      - service: notify.admin
+        data:
+          message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
+      - service: notify.persistent_notification
+        data:
+          message: 'Batterijen bijna leeg: {{sensors}}'
+      exclude:
+        entity_id:
+        - sensor.iphone_robert_battery_level
+        - sensor.iphone_van_bjorn_battery_level
+        - sensor.patricius_battery_level
+      time: '20:00:00'
+- id: '1662669758279'
+  alias: Nieuwe automatisering
+  description: ''
+  trigger:
+  - platform: time
+    at: '22:44:00'
+  condition: []
+  action:
+  - service: notify.robert
+    data:
+      message: Ping!
+  mode: single
+- id: '1662711505910'
+  alias: '@Nieuwe automatisering'
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{% set elevation = state_attr(''sun.sun'',''elevation'') | float(0)
+      %}
+
+      {% set cloud_coverage = states(''sensor.weatherbit_cloud_coverage'') | float(0)
+      %}
+
+      {% set treshold = (1 + (2*cloud_coverage)) %}
+
+      {{ elevation < treshold }}'
+    alias: Sun elevation moves below treshold
+  condition: []
+  action:
+  - variables:
+      elevation: '{{ state_attr(''sun.sun'',''elevation'') }}'
+      cloud_coverage: '{{ states(''sensor.weatherbit_cloud_coverage'') }}'
+      treshold: '{{ (1 + (2*cloud_coverage)) }}'
+  - service: persistent_notification.create
+    data:
+      message: 'Elevation: {{ elevation }} degrees Cloud coverage: {{ cloud_coverage
+        }}% Treshold: {{ treshold }} degrees
+
+        '
+  mode: single
+- id: '1662718496282'
+  alias: 'Occupancy: auto away'
+  description: Set home occupance to 'Away'.
+  trigger:
+  - platform: state
+    entity_id:
+    - group.family
+    from: home
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_guests
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_away
+      state: 'on'
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.occupancy_away
+  - service: persistent_notification.create
+    data:
+      message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
+  mode: single
+- id: '1662718880324'
+  alias: 'Occupancy: dismiss auto notifications'
+  description: Dismiss any persistent notification that has been set due to auto switching
+    of occupancy.
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.occupancy_home
+    to: 'on'
+  condition: []
+  action:
+  - service: persistent_notification.dismiss
+    data:
+      notification_id: auto_occupancy
+  mode: single
