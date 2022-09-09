@@ -29,6 +29,23 @@ blueprint:
           device_class: power
           multiple: false
 
+    energy_sensor:
+      name: Energy Sensor
+      description: Energy sensor entity (e.g. from a smart plug device).
+      selector:
+        entity:
+          domain: sensor
+          device_class: energy
+          multiple: false
+
+    price_sensor:
+      name: Energy Price Sensor
+      description: Peak price energy sensor entity.
+      selector:
+        entity:
+          domain: sensor
+          multiple: false
+
     starting_threshold:
       name: Starting power threshold
       description: Power threshold above which we assume the appliance has started.
@@ -71,9 +88,18 @@ blueprint:
       selector:
         duration:
 
+    wait_timeout:
+      name: Wait timeout
+      description: Time duration the automation is waiting for the appliance to finish.
+        power threshold.
+      selector:
+        duration:
+      default:
+        hours: 2
+
     actions:
       name: Actions
-      description: Actions (e.g. pushing a notification, TTS announcement, ...)
+      description: Actions when appliance has finished (e.g. pushing a notification, TTS announcement, ...)
       selector:
         action: {}
 
@@ -102,6 +128,8 @@ action:
       below: !input finishing_threshold
       for:
         !input finishing_hysteresis
+    timeout: !input wait_timeout
+    continue_on_timeout: false
 
   - choose: []
     default: !input actions
