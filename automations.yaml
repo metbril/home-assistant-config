@@ -186,7 +186,7 @@
       entity_id: input_select.signaallamp_scene
       option: Uit
 - id: '1658943860235'
-  alias: TV Woonkamer - Inschakelen
+  alias: 'Woonkamer: Inschakelen TV'
   description: Door deze automatisering te activeren, verschijnt de power on knop
     in de mediaspeler in het dashboard.
   use_blueprint:
@@ -217,7 +217,8 @@
   description: Notify for rain alarms
   trigger:
   - platform: state
-    entity_id: sensor.buienalarm_precipitation_forecast_level
+    entity_id:
+    - sensor.buienalarm_precipitation_forecast_level
   condition:
   - condition: not
     conditions:
@@ -336,7 +337,7 @@
       light: light.sfeerverlichting
       sunset_delay: -50
 - id: '1661884728867'
-  alias: Occupancy - Sync states
+  alias: 'Huis: Synchroniseer bezetting status'
   description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
     alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
 
@@ -378,15 +379,16 @@
   initial_state: true
   mode: queued
 - id: '1661885320722'
-  alias: Occupancy - Absence reminder
-  description: Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode
+  alias: 'Huis: Herinnering over afwezigheid'
+  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode. These modes let automations behave differently. '
   trigger:
   - platform: state
     entity_id: sensor.occupancy
     to: vacation
   - platform: state
-    entity_id: sensor.occupancy
+    entity_id:
+    - sensor.occupancy
     to: guests
   - platform: time
     at: 09:00:00
@@ -689,6 +691,8 @@
     below: '1'
   condition: []
   action:
+  - variables:
+      rising:
   - choose:
     - alias: When sun rises and passes the degree above horizon
       conditions:
@@ -696,18 +700,27 @@
         entity_id: sun.sun
         attribute: elevation
         above: '1'
+      - condition: template
+        value_template: '{{ rising }}'
+        alias: Sun is rising
       sequence:
       - service: light.turn_off
         target:
           entity_id: light.achtergevel
         data:
           transition: 5
+      - service: notify.robert
+        data:
+          message: Gevel verlichting uit
     - alias: When sun sets and passes the degree above horizon
       conditions:
       - condition: numeric_state
         entity_id: sun.sun
         attribute: elevation
         below: '1'
+      - condition: template
+        value_template: '{{ not rising }}'
+        alias: Sun is setting
       sequence:
       - service: light.turn_on
         target:
@@ -715,10 +728,10 @@
         data:
           transition: 5
           brightness_pct: 70
+      - service: notify.robert
+        data:
+          message: Gevel verlichting aan
     default: []
-  - service: notify.robert
-    data:
-      message: Sun outdoor lights triggered, please check the light.
   mode: single
 - id: '1662548148472'
   alias: Post Gas Consumption to MinderGas.nl
