@@ -1,0 +1,6 @@
+name: Long Date
+icon: mdi:calendar
+state: >
+  {% set months = ["januari","februari","maart","april","mei","juni","juli","augustus","september","oktobert","november","december"] %}
+  {% set today = as_datetime(states('sensor.date')) %}
+  {{ today.day ~ " " ~ months[today.month-1] ~ " " ~ today.year }}
