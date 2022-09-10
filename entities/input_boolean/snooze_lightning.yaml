@@ -1,8 +1,0 @@
-# Snooze Lightning
-#
-# When enabled, lightning notifications are suppressed. This is useful if
-# there's a lot of lightning for a longer period of time.
-#
-name: Snooze bliksem
-initial: false  # disable after a restart
-icon: mdi:weather-lightning
