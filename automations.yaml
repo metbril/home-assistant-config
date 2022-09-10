@@ -225,32 +225,35 @@
     - condition: or
       conditions:
       - condition: state
-        entity_id: sensor.buienalarm_precipitation_forecast_level
+        entity_id: sensor.buienalarm_precipitation_forecast_index
         state: '0'
       - condition: state
         entity_id: sensor.buienalarm_precipitation_forecast_level
         state: unavailable
+      - condition: state
+        entity_id: sensor.buienalarm_precipitation_forecast_level
+        state: unknown
   action:
   - service: notify.robert
     data:
+      message: "{{ states( 'sensor.buienalarm_precipitation_forecast_level' ) }} verwacht.
+        ({{ states( 'sensor.buienalarm_precipitation_forecast_average' ) }} {{\n    state_attr(
+        'sensor.buienalarm_precipitation_forecast_average' ,\n    'unit_of_measurement'
+        ) }})\n"
       title: ☔️ Buienalarm
-      message: '{{ state_attr(''sensor.buienalarm_precipitation_forecast_level'',
-        ''label'') }} ({{ states(''sensor.buienalarm_precipitation_forecast_average'')
-        }} {{ state_attr(''sensor.buienalarm_precipitation_forecast_average'', ''unit_of_measurement'')
-        }}) verwacht.
-
-        '
       data:
-        url: 'https://www.buienalarm.nl/{{ state_attr(''zone.home'', ''latitude'')
-          }},{{ state_attr(''zone.home'',''longitude'') }}
+        url: 'https://www.buienalarm.nl/{{ state_attr( ''zone.home'' , ''latitude''
+          ) }},{{ state_attr( ''zone.home'' , ''longitude'' ) }}
 
           '
   - service: notify.twitter
     data:
-      message: "☔️ {{ state_attr(trigger.entity_id,'label') }} vlakbij verwacht. {{
-        [ \"Vergeet je regenjas \U0001F9E5 niet mee te nemen!\", \"Neem een paraplu
-        \U0001F302 mee!\", \"Je bent ⚠️ gewaarschuwd!\", \"Hou @buienalarm \U0001F327️
-        in de gaten!\" ] | random  }} https://www.buienalarm.nl/ #buienalarm"
+      message: "☔️ {{ states(trigger.entity_id) }} in de buurt verwacht. {{ [ \"Vergeet
+        je regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
+        \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm goed in de gaten! \U0001F327️\",
+        \"Sluit je ramen en deuren! \U0001FA9F\U0001F6AA\", \"Na regen komt zonneschijn!
+        \U0001F326\", \"Zie je de regenboog al? \U0001F308\" ] | random  }} #buienalarm
+        https://www.buienalarm.nl/"
   mode: single
 - id: '1661359954658'
   alias: Presence - Robert bijna thuis
@@ -467,11 +470,14 @@
       - variables:
           end_time: '{{ as_timestamp(now()) }}'
           end_energy: '{{ states(energy_sensor) }}'
+      - variables:
           total_time: '{{ (end_time - start_time) }}'
           total_energy: '{{ end_energy - start_energy }}'
+      - variables:
           minutes: '{{ (total_time / 60) | round(0) }}'
           total_energy_rounded: '{{ (total_energy) | round(2) }}'
-          cost: '{{ ( price_sensor | float(0) * total_energy) | round(2) }}'
+          cost: '{{ ( states(''price_sensor'') | float(0) * total_energy) | round(2)
+            }}'
       - service: notify.robert
         data:
           message: "De wasmachine is klaar na {{ minutes }} minuten  en heeft {{ cost
@@ -491,7 +497,7 @@
           start_energy: '{{ states(energy_sensor) }}'
       - service: notify.robert
         data:
-          message: "\U0001F45A\U0001F455\U0001F4A6 Wasmachine is gestart."
+          message: "Wasmachine is gestart. \U0001F45A\U0001F455\U0001F4A6"
       energy_sensor: sensor.washing_machine_energy
       wait_timeout:
         hours: 5
@@ -616,12 +622,10 @@
     data: {}
     target:
       entity_id: switch.adguard_protection
-  - service: notify.admin
+  - service: persistent_notification.create
     data:
-      message: AdGuard is na 30 minuten weer ingeschakeld.
-  - service: notify.persistent_notification
-    data:
-      message: AdGuard is na 30 minuten weer ingeschakeld.
+      message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
+      title: AdGuard
   mode: single
 - id: '1662547518457'
   alias: 'Office: Notify printer on'
@@ -779,18 +783,6 @@
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
       time: '20:00:00'
-- id: '1662669758279'
-  alias: Nieuwe automatisering
-  description: ''
-  trigger:
-  - platform: time
-    at: '22:44:00'
-  condition: []
-  action:
-  - service: notify.robert
-    data:
-      message: Ping!
-  mode: single
 - id: '1662711505910'
   alias: '@Nieuwe automatisering'
   description: ''
@@ -820,8 +812,8 @@
         '
   mode: single
 - id: '1662718496282'
-  alias: 'Occupancy: auto away'
-  description: Set home occupance to 'Away'.
+  alias: 'Huis: automatisch ingeschakelen bezetting Weg'
+  description: Set home occupance to 'Away' when no-one is at home.
   trigger:
   - platform: state
     entity_id:
@@ -851,7 +843,7 @@
       notification_id: auto_occupancy
   mode: single
 - id: '1662718880324'
-  alias: 'Occupancy: dismiss auto notifications'
+  alias: 'Huis: dismiss auto notifications'
   description: Dismiss any persistent notification that has been set due to auto switching
     of occupancy.
   trigger:
