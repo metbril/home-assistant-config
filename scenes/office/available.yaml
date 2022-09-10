@@ -1,6 +1,0 @@
-name: Office - Available
-id: e9d03c5e-e877-4aec-a976-e2622e641813
-icon: mdi:account-check
-entities:
-  light.werkstatus:
-    state: 'off'

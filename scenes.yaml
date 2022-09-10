@@ -60,3 +60,253 @@
       - 27
       state: 'on'
   icon: mdi:crown
+- name: 'Lighting: Living Base'
+  icon: mdi:weather-sunset
+  id: 3103dea8-2c12-4988-84d7-3e5f3ff37efc
+  metadata:
+    light.magnarp:
+      entity_only: true
+  entities:
+    light.hoge_kast:
+      color_mode: hs
+      brightness: 102
+      hs_color:
+        - 34.286
+        - 65.882
+      effect: none
+      state: 'on'
+
+    light.leeslamp:
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 360
+      state: 'on'
+
+    light.turbinelamp:
+      color_mode: onoff
+      state: 'on'
+
+    light.bollamp:
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 360
+      effect: none
+      state: 'on'
+
+    light.nijntje:
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 360
+      off_with_transition: false
+      off_brightness:
+      state: 'on'
+
+    light.willner:
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 360
+      state: 'on'
+
+    light.lichtstraat:
+      color_mode: brightness
+      brightness: 102
+      off_with_transition: false
+      off_brightness:
+      state: 'on'
+
+    light.magnarp:
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 360
+      state: 'on'
+- name: 'Lighting: Living Dimmed'
+  icon: mdi:brightness-3
+  id: 88a1bee5-12d9-41b9-9928-1775d42f9727
+  entities:
+    light.hoge_kast:
+      state: 'off'
+
+    light.magnarp:
+      color_mode: color_temp
+      color_temp: 400
+      brightness: 3
+      state: 'on'
+
+    light.leeslamp:
+      color_mode: color_temp
+      color_temp: 440
+      brightness: 3
+      state: 'on'
+
+    light.turbinelamp:
+      state: 'off'
+
+    light.lichtstraat:
+      color_mode: brightness
+      brightness: 3
+      state: 'on'
+
+    light.bollamp:
+      state: 'off'
+
+    light.nijntje:
+      state: 'off'
+
+    light.willner:
+      color_mode: color_temp
+      color_temp: 435
+      brightness: 3
+      state: 'on'
+- name: 'Lighting: Living Max'
+  icon: mdi:brightness-7
+  id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
+  entities:
+    light.hoge_kast:
+      color_mode: hs
+      brightness: 255
+      hs_color:
+        - 42.162
+        - 14.51
+      effect: none
+      state: 'on'
+
+    light.magnarp:
+      color_mode: color_temp
+      color_temp: 353
+      brightness: 254
+      state: 'on'
+
+    light.leeslamp:
+      color_mode: color_temp
+      color_temp: 326
+      brightness: 255
+      state: 'on'
+
+    light.turbinelamp:
+      color_mode: onoff
+      state: 'on'
+
+    light.lichtstraat:
+      color_mode: brightness
+      brightness: 254
+      state: 'on'
+
+    light.bollamp:
+      color_mode: color_temp
+      color_temp: 326
+      brightness: 255
+      effect: none
+      state: 'on'
+
+    light.nijntje:
+      color_mode: color_temp
+      color_temp: 326
+      brightness: 254
+      state: 'on'
+
+    light.willner:
+      color_mode: color_temp
+      color_temp: 326
+      brightness: 255
+      state: 'on'
+- name: 'Lighting: Living Min'
+  icon: mdi:flashlight
+  id: 9c656371-07da-4140-b5d5-f7a3b6f79bac
+  entities:
+    light.hoge_kast:
+      color_mode: hs
+      brightness: 128
+      hs_color:
+        - 29.444
+        - 42.353
+      effect: none
+      state: 'on'
+
+    light.leeslamp:
+      color_mode: color_temp
+      brightness: 128
+      color_temp: 435
+      state: 'on'
+
+    light.turbinelamp:
+      state: 'off'
+
+    light.lichtstraat:
+      state: 'off'
+
+    light.bollamp:
+      color_mode: color_temp
+      brightness: 128
+      color_temp: 435
+      effect: none
+      state: 'on'
+
+    light.nijntje:
+      state: 'off'
+
+    light.willner:
+      color_mode: color_temp
+      brightness: 128
+      color_temp: 435
+      state: 'on'
+- name: 'Lighting: Living Off'
+  icon: mdi:lightbulb-off
+  id: 23373edc-d64f-480d-9a93-b7b75c5904cb
+  entities:
+    light.hoge_kast:
+      state: 'off'
+
+    light.magnarp:
+      state: 'off'
+
+    light.leeslamp:
+      state: 'off'
+
+    light.turbinelamp:
+      state: 'off'
+
+    light.lichtstraat:
+      state: 'off'
+
+    light.bollamp:
+      state: 'off'
+
+    light.nijntje:
+      state: 'off'
+
+    light.willner:
+      state: 'off'
+- name: 'Lighting: Living Reading'
+  icon: mdi:book-open-variant
+  id: 86af0dad-d0d5-4d18-84b1-549ac0ae8768
+  entities:
+    light.leeslamp:
+      color_mode: color_temp
+      brightness: 255
+      color_temp: 306
+      state: 'on'
+
+    light.magnarp:
+      color_mode: color_temp
+      brightness: 254
+      color_temp: 250
+      state: 'on'
+- name: Office - Available
+  id: e9d03c5e-e877-4aec-a976-e2622e641813
+  icon: mdi:account-check
+  entities:
+    light.werkstatus:
+      state: 'off'
+- name: Office - Do not disturb
+  id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
+  icon: mdi:account-cancel
+  entities:
+    media_player.office_speaker:
+      state: paused
+    light.werkstatus:
+      brightness: 255
+      rgb_color:
+        - 255
+        - 79
+        - 70
+      state: 'on'
