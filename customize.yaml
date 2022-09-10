@@ -3,8 +3,7 @@ sensor.bad_login:
   friendly_name: Mislukte inlogpogingen
   icon: mdi:alert
 sensor.buienalarm_next_rain_forecast:
-  friendly_name: Buienalarm Neerslag volgende
-  unit_of_measurement: minuten
+  device_class: timestamp
 sensor.buienalarm_precipitation:
   friendly_name: Buienalarm Neerslagintensiteit
   unit_of_measurement: mm/u
@@ -21,5 +20,3 @@ sensor.msteams_online_today_robert:
   friendly_name: Teams Online Today Robert
 sensor.time:
   friendly_name: Tijd
-sun.sun:
-  friendly_name: Zon
