@@ -71,3 +71,161 @@ lees_het_nieuws_voor:
       entity_id: '{{ player }}'
   mode: single
   icon: mdi:account-voice
+mindergas:
+  alias: "Post meter reading to mindergas.nl"
+  description: >
+    A wrapper script around the RESTful command, to be able to post a reading
+    manually through the Services menu in the developer tools.
+  mode: single
+  fields:
+    date:
+      name: Reading date
+      description: The date to post the last reading of.
+      required: true
+      selector:
+        date:
+    reading:
+      name: Meter reading
+      description: The last meter reading at the end of the day of the specified date.
+      required: true
+      default: 0.0
+      example: "1234.567"
+      selector:
+        number:
+          min: 0
+          max: 999999.999
+          step: 0.001  # 3 decimals allowed
+          unit_of_measurement: m3
+          mode: box
+
+  sequence:
+    - service: rest_command.mindergas
+      data:
+        date: "{{ date }}"
+        reading: "{{ reading }}"
+sonos_say:
+  alias: "Sonos Text-To-Speech"
+  description: "Text to speech for Sonos devices."
+  mode: queued
+  fields:
+    entity_id:
+      name: Entity
+      description: "The media player that speeks the text"
+      example: 'media_player.woonkamer'
+      required: true
+      selector:
+        entity:
+          domain:
+            - media_player
+          integration: sonos
+          multiple: false
+    message:
+      name: Message
+      description: "The message to speak"
+      example: 'Hallo wereld!'
+      required: true
+      selector:
+        text:
+          multiline: true
+          type: text
+    volume_percent:
+      name: Volume
+      description: "Volume of the spoken text, Range 0..1"
+      example: "0.3"
+      default: 30
+      selector:
+        number:
+          min: 0
+          max: 100
+          step: 1
+          unit_of_measurement: "%"
+          mode: slider
+    delay:
+      description: "The time in seconds to wait until the media player state is restored. This is the duration of the spoken text."
+      example: "3"
+      default: 5
+
+  variables:
+    volume_level: >-
+      {% if (volume_percent is none) or (volume_percent is undefined) or (volume_percent == "") %}
+        0.3
+      {% else %}
+        {{ (volume_percent / 100) | float(0) }}
+      {% endif %}
+    is_playing: "{{ is_state(entity_id, 'playing') }}"
+    media: "{{ state_attr(entity_id,'media_content_id') }}"
+    is_cloud: "{{ (media.split(':')[0] == 'x-sonos-vli') }}"
+    cannot_restore: "{{ is_playing and is_cloud }}"
+
+  sequence:
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ entity_id }}"
+
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ entity_id }}"
+
+    - service: media_player.media_pause
+      data:
+        entity_id: "{{ entity_id }}"
+
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ entity_id }}"
+        volume_level: "{{ volume_level }}"
+
+    - service: tts.cloud_say
+      data:
+        entity_id: "{{ entity_id }}"
+        message: "{{ message }}"
+
+    - alias: Wait for text online parsing
+      delay: 3
+
+    - alias: Wait until speech has finished
+      wait_template: "{{ is_state( entity_id,'paused') }}"
+
+    - service: sonos.restore
+      data:
+        entity_id: "{{ entity_id }}"
+morning_routine:
+  alias: "Ochtendroutine"
+  fields:
+    player:
+      name: "Sonos Mediaspeler"
+      description: The media player that plays the morning routine.
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+          multiple: false
+  variables:
+    time_of_day: "Goedemorgen."
+    vandaag: >
+      Het is vandaag {{ states('sensor.weekday') }} {{ states('sensor.long_date') }} en de tijd is {{ states('sensor.time') }}.
+    weer: >
+      Het is nu {{ states('sensor.knmi_thuis_omschrijving') | lower }}
+      en {{ state_attr('weather.knmi_thuis','temperature') | float(0) | round(0) }} graden.
+      Het wordt vandaag maximaal {{ state_attr('weather.knmi_thuis','forecast')[0].temperature | float(0) | round(0) }} graden.
+      Later vandaag: {{ states('sensor.knmi_thuis_korte_dagverwachting') }}.
+    weer_waarschuwing: >
+      {% if is_state('binary_sensor.knmi_thuis_waarschuwing','on') %}
+        Let op.
+        {{ state_attr('binary_sensor.knmi_thuis_waarschuwing', 'Waarschuwing') }}
+      {% endif %}
+  sequence:
+    - service: script.sonos_say
+      data:
+        entity_id: "{{ player }}"
+        message: >-
+          {{ time_of_day }}
+          {{ vandaag }}
+          {{ weer }}
+          {{ weer_waarschuwing }}
+        volume_percent: 30
+    - service: script.lees_het_nieuws_voor
+      data:
+        player: "{{ player }}"
+        volume_percent: 30
