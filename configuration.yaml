@@ -8,3 +8,9 @@ homeassistant:
     - !secret allowlist_dir_ssl
 
   packages: !include_dir_named integrations
+
+# UI editor files
+automation: !include automations.yaml
+group: !include groups.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
