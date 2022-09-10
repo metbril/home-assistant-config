@@ -857,3 +857,268 @@
     data:
       notification_id: auto_occupancy
   mode: single
+- alias: "Safety: Brandweer in de buurt"
+  description: >
+    Stuur een melding dat de brandweer dichtbij is
+    en plaats een bericht op Twitter.
+  id: 971fc035-f021-4015-a54b-8c6da9ddf200
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.p2000_brandweer
+
+  condition: "{{states('sensor.p2000_brandweer') != 'unknown'}}"
+
+  action:
+    - variables:
+        address: "{{ states('sensor.p2000_brandweer') }}"
+        lat: "{{ state_attr('sensor.p2000_brandweer', 'latitude')  }}"
+        lon: "{{ state_attr('sensor.p2000_brandweer', 'longitude') }}"
+        url: "http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16"
+
+    - service: notify.parents
+      data:
+        title: 🚒 P2000 Brandweer
+        message: "{{ address }}"
+        data:
+          url: "{{ url }}"
+
+    - service: notify.twitter
+      data:
+        message: >-
+          🚒 De #brandweer is in de buurt. #P2000
+
+          {{ address }} {{ url }}
+- alias: "Safety: Lightning notification"
+  description: >
+    Lightning notification
+    
+    Requires the Blitzortung integration custom component:
+    https://github.com/mrk-its/homeassistant-blitzortung
+    
+    Inspired by:
+    https://github.com/mrk-its/homeassistant-blitzortung
+    https://www.vcloudinfo.com/2020/08/adding-a-lightning-sensor-to-home-assistant.html
+    https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml
+    
+  id: 6e054688-5e75-48bd-9411-52a3e26264d1
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.blitzortung_lightning_counter
+
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: 'home'
+    - condition: numeric_state
+      entity_id: sensor.blitzortung_lightning_counter
+      above: 0
+    - condition: state
+      entity_id: input_boolean.snooze_lightning
+      state: 'off'
+
+  action:
+    - service: notify.robert
+      data:
+        message: "Er is bliksem waargenomen binnen {{ states('sensor.blitzortung_lightning_distance') }} km vanaf ons huis. Wees voorzichtig buitenshuis."
+        data:
+          title: 'Bliksemwaarschuwing!'
+          actions:
+            - action: "SNOOZE_LIGHTNING"
+              title: "Stilhouden tot morgen"
+            - action: "MAP"
+              title: "Toon kaart"
+              url: "/map"
+
+    - delay:
+        minutes: 1
+- alias: "Safety: Snooze lightning notifications"
+  description: >-
+    Snooze future lightning notifications.
+  id: 1f295bb8-8925-4b22-8f75-9l1ghtn1nga8
+  mode: single
+
+  trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: "SNOOZE_LIGHTNING"
+
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.snooze_lightning
+- alias: "Safety: Unsnooze lightning notifications."
+  id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
+  mode: single
+
+  trigger:
+    - platform: time
+      at: "00:00:00"
+
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.snooze_lightning
+- alias: Work - Do Not Disturb Robert
+  description: >
+    Show do not disturb when working from home and busy.
+    Activate scene when Robert
+      - is at home and
+      - he's busy in Teams
+  id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.teams_status_robert
+
+  condition:
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: person.robert
+          state: home
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: sensor.teams_status_robert
+              state: Bezet
+            - condition: state
+              entity_id: sensor.teams_status_robert
+              state: Niet storen
+
+  action:
+    - scene: scene.office_do_not_disturb
+- alias: 'Office: Pause Music'
+  description: 'Pause playing music in the office when in call.'
+  id: '1649842819459'
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.msteams_activity_robert
+      to: In gesprek
+
+  condition:
+    - condition: state
+      entity_id: binary_sensor.working_from_home_robert
+      state: 'on'
+    - condition: state
+      entity_id: media_player.studeerkamer
+      state: playing
+
+  action:
+    - service: media_player.media_pause
+      data: {}
+      target:
+        device_id: 49324710c6344a809dae725922db2cc6
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.resume_office_music
+    - service: notify.robert
+      data:
+        message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
+        title: Teams activity
+- alias: Reset Teams Status Robert
+  description: >
+    Reset Teams Status when not changed for a long time outside
+    work hours.
+
+    This usually happens when you put your laptop in sleep or
+    hibernate mode without closing the Teams application first.
+
+    The status should not be reset if you just work outside of regular hours.
+
+  id: aaff7435-8f79-4657-af57-454710cde9b9
+  mode: single
+
+  trigger:
+    alias: "Teams status Robert has not changed for more than 1 hours"
+    platform: template
+    value_template: >
+      {{ as_timestamp(now()) -
+          as_timestamp(
+            states.input_text.teams_status_robert.last_changed
+            ) > 1*3600 }}
+
+  condition:
+    
+    - condition: or
+      alias: "not a workday or after 18:00 ?"
+      conditions:
+        - condition: state
+          entity_id: binary_sensor.workday
+          state: "off"
+        - condition: time
+          after: "18:00:00"
+
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: input_text.teams_status_robert
+          state: unknown
+
+  action:
+    - service: input_text.set_value
+      data:
+        entity_id: input_text.teams_status_robert
+        value: unknown
+    - service: input_text.set_value
+      data:
+        entity_id: input_text.teams_activity_robert
+        value: unknown
+
+    - service: notify.robert
+      data:
+        message: Teams status opnieuw ingesteld door inactiviteit.
+- alias: 'Office: Resume Music'
+  description: Resume music when Teams call has finished.
+  id: '1649843570979'
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.msteams_activity_robert
+      from: In gesprek
+
+  condition:
+    - alias: "Music was paused when call started"
+      condition: state
+      entity_id: input_boolean.resume_office_music
+      state: 'on'
+
+  action:
+    - service: media_player.media_play
+      target:
+        entity_id: media_player.office_speaker
+    - service: input_boolean.turn_off
+      target:
+        entity_id: input_boolean.resume_office_music
+    - service: notify.robert
+      data:
+        message: "🎶 Muziek in het kantoor is voortgezet."
+        title: Teams activity
+- alias: WFH - Robert Available
+
+  id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
+  mode: single
+
+  trigger:
+    - platform: state
+      entity_id: sensor.teams_status_robert
+
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: sensor.teams_status_robert
+          state: Bezet
+        - condition: state
+          entity_id: sensor.teams_status_robert
+          state: Niet storen
+
+  action:
+    - scene: scene.office_available
