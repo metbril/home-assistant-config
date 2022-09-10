@@ -7,6 +7,11 @@ homeassistant:
     - !secret allowlist_dir_config
     - !secret allowlist_dir_ssl
 
+  # Customize individual entities
+  customize: !include customize.yaml
+
+  # Customize entities by pattern
+  # customize_glob: !include customize_globs.yaml
   packages: !include_dir_named integrations
 
 # UI editor files
@@ -14,3 +19,29 @@ automation: !include automations.yaml
 group: !include groups.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
+
+# ---- integrations ----
+
+default_config:
+
+# The themes folder is in the root of the config folder, so HACS can install
+# themes there.
+frontend:
+  themes: !include_dir_merge_named themes
+
+# Enable advanced notifications like actionable notifications and categories.
+# https://companion.home-assistant.io/docs/getting_started/
+# Note: the documentation is 'tegenstrijdig' in this. It's unclear if it is
+# required or not.
+ios:
+
+rest_command: !include_dir_named entities/rest_command
+
+sensor: !include_dir_list entities/sensor
+
+template:
+  binary_sensor: !include_dir_list entities/template/binary_sensor
+  sensor: !include_dir_list entities/template/sensor
+
+# WOL is needed for (switching on) WebOS TV
+wake_on_lan:

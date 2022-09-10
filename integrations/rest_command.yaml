@@ -1,1 +1,0 @@
-rest_command: !include_dir_named ../entities/rest_command
