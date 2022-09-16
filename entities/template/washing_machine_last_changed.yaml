@@ -1,0 +1,15 @@
+trigger:
+  - platform: state
+    entity_id: light.nijntje
+    from:
+      - 'on'
+      - 'off'
+    to:
+      - 'on'
+      - 'off'
+sensor:
+  - name: "Washing Machine Last Changed"
+    unique_id: "4b70ec63-7466-4d99-bf7b-b67e6d84306c"
+    state: "{{ now() }}"
+    device_class: "timestamp"
+    icon: "mdi:clock"

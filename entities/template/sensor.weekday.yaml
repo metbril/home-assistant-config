@@ -6,11 +6,12 @@
 # will only evaluate daily and not every minute.
 #
 ##########################################################################
-name: Weekday
-state: >-
-  {% set w = strptime(states('sensor.date'),
-    '%Y-%m-%d').strftime('%w')|int %}
-  {{['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag',
-    'zaterdag'][w]}}
-icon: mdi:calendar
-unique_id: "2640715b-a6e8-4bbc-be92-328175d3f638"
+sensor:
+  - name: Weekday
+    state: >-
+      {% set w = strptime(states('sensor.date'),
+        '%Y-%m-%d').strftime('%w')|int %}
+      {{['zondag','maandag','dinsdag','woensdag','donderdag','vrijdag',
+        'zaterdag'][w]}}
+    icon: mdi:calendar
+    unique_id: "2640715b-a6e8-4bbc-be92-328175d3f638"

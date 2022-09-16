@@ -1,0 +1,25 @@
+# https://community.home-assistant.io/t/virtual-light-sensor/31975/24
+# https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day.
+# https://gps-coordinates.org/coordinate-converter.php
+# max elevation https://www.suncalc.org/#/40.1789,-3.5156,3/2022.09.13/17:15/1/3
+sensor:
+  - name: "Outside Brightness"
+    unique_id: "15c131f6-f69c-47b4-912b-e6687890ba23"
+    state: >-
+      {%- set elevation = state_attr('sun.sun','elevation') | float(0) %}
+      {%- set cloud_coverage = states('sensor.weatherbit_cloud_coverage') | float(0) %}
+      {%- set irradiance = states('sensor.weatherbit_solar_radiation') | float(0) %}
+      {%- set irradiance_pct = irradiance / 10 %} {# max irradiance = 1.000, so  irradiance/10 = pct. See https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day #}
+      {%- set adjusted_clouds = cloud_coverage -  irradiance_pct %}
+      {%- set cloud_factor = (1 - (0.75 * ( adjusted_clouds / 100) ** 3 )) %}
+      {%- set min_elevation = -6 %}{# set this to official sun elevation for end of twighlight #}
+      {%- set max_elevation = 61 %}{# set this to the maximum noon sun elevation (minimum is 15 degrees, 90 is theoretical max) #}
+      {%- set adjusted_elevation = elevation - min_elevation %}
+      {%- set adjusted_elevation = [adjusted_elevation,0] | max %}
+      {%- set adjusted_elevation = [adjusted_elevation,max_elevation - min_elevation] | min %}
+      {%- set adjusted_elevation = adjusted_elevation / (max_elevation - min_elevation) %}
+      {%- set adjusted_elevation = adjusted_elevation * 100 %}
+      {%- set brightness = adjusted_elevation * cloud_factor %}
+      {{ brightness | int(0) }}
+    unit_of_measurement: '%'
+    device_class: 'illuminance'

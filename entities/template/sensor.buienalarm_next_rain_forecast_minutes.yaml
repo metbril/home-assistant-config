@@ -1,0 +1,12 @@
+sensor:
+  - name: "Buienalarm next rain forecast minutes"
+    unique_id: 6590b7cf-cceb-48b7-a9fc-759e8a01553e
+    unit_of_measurement: "min"
+    icon: mdi:weather-pouring
+    state: >
+      {% set forecast = states('sensor.buienalarm_next_rain_forecast') %}
+      {% if forecast not in ['unknown','unavailable','',none] %}
+        {{ ((as_timestamp(forecast) - as_timestamp(now())) / 60 ) | round(0) }}
+      {% else %}
+        {{ forecast }}
+      {% endif %}

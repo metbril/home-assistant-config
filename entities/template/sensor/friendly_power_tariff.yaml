@@ -1,5 +1,0 @@
-name: Friendly Power Tariff
-unique_id: friendly_power_tariff
-state: >-
-  {% set value = states('sensor.power_tariff') %}
-  {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}

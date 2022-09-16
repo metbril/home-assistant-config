@@ -1,0 +1,10 @@
+##########################################################################
+# Yesterday's date, for use in automations
+##########################################################################
+sensor:
+  - name: Yesterday
+    state: >-
+      {{ (as_timestamp(states('sensor.date'))-(24*3600))
+        |timestamp_custom('%Y-%m-%d',True) }}
+    icon: mdi:calendar
+    unique_id: "b995a8b7-b011-47b6-82d4-7bd2827a6515"
