@@ -1,0 +1,8 @@
+platform: history_stats
+name: Living TV On Last 24h
+entity_id: media_player.living_tv
+state: 'on'
+type: time
+end: '{{ now() }}'
+duration:
+  hours: 24

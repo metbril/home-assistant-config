@@ -1,0 +1,7 @@
+platform: history_stats
+name: Living TV On Today
+entity_id: media_player.living_tv
+state: "on"
+type: time
+start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+end: "{{ now() }}"
