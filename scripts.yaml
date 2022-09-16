@@ -72,9 +72,10 @@ lees_het_nieuws_voor:
   mode: single
   icon: mdi:account-voice
 mindergas:
-  alias: Post meter reading to mindergas.nl
-  description: 'A wrapper script around the RESTful command, to be able to post a
-    reading manually through the Services menu in the developer tools.
+  alias: 'Energy: Post meter reading to mindergas.nl'
+  description: 'A simple wrapper script around the RESTful command, to be able to
+    post a gas meter reading manually through the Services menu in the developer tools
+    and call it from the automations editor.
 
     '
   mode: single
@@ -89,7 +90,7 @@ mindergas:
       name: Meter reading
       description: The last meter reading at the end of the day of the specified date.
       required: true
-      default: 0.0
+      default: 0
       example: '1234.567'
       selector:
         number:
@@ -103,6 +104,7 @@ mindergas:
     data:
       date: '{{ date }}'
       reading: '{{ reading }}'
+  icon: mdi:meter-gas
 sonos_say:
   alias: Sonos Text-To-Speech
   description: Text to speech for Sonos devices.
@@ -216,3 +218,114 @@ morning_routine:
     data:
       player: '{{ player }}'
       volume_percent: 30
+start_netflix:
+  alias: 'Media: Start Netflix on living TV'
+  description: Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
+    in.
+  icon: mdi:netflix
+  mode: single
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.living_tv
+        state: 'off'
+      sequence:
+      - service: notify.mobile_app_iphone_robert
+        data:
+          message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+      - service: media_player.turn_on
+        target:
+          entity_id: media_player.living_tv
+        data: {}
+    default: []
+  - wait_template: '{{ is_state(''media_player.living_tv'', ''on'') }}'
+    timeout: 00:01:00
+  - service: media_player.select_source
+    data:
+      source: Netflix
+    target:
+      entity_id: media_player.living_tv
+  - service: notify.living_tv
+    data:
+      message: Netflix is gestart. Veel kijkplezier!
+switch_netflix_robert:
+  alias: 'Media: Ga naar Netflix van Robert on living TV'
+  description: Start Netflix en open het profiel van Robert. Aangenomen dat de TV
+    al aan staat.
+  icon: mdi:netflix
+  mode: single
+  sequence:
+  - condition: state
+    entity_id: media_player.living_tv
+    state: 'on'
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.living_tv
+    data:
+      source: Netflix
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 2
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: ENTER
+'1663045328980':
+  alias: 'Kantoor: Printer ingeschakeld'
+  sequence:
+  - service: notify.robert
+    data:
+      message: Printer staat nog aan
+      title: Printer
+      data:
+        actions:
+        - action: PRINTER_OFF
+          title: Uitschakelen
+        - action: PRINTER_REMIND
+          title: Herinneren
+        - action: PRINTER_IGNORE
+          title: Negeren
+  mode: single
+double_toggle:
+  alias: Double Toggle
+  fields:
+    entity:
+      name: Light target
+      description: The light to toggle twice
+      required: true
+      selector:
+        entity:
+          domain: light
+  sequence:
+  - service: light.toggle
+    target:
+      entity_id: '{{ entity }}'
+  - service: light.toggle
+    target:
+      entity_id: '{{ entity }}'
+  mode: single
+  icon: mdi:toggle-switch

@@ -302,7 +302,7 @@
       entity_id: input_select.sonos_favorites
   mode: single
 - id: '1660923058113'
-  alias: 'Media: Play selected Sonos favorite on kitchen speaker'
+  alias: 'Office: Play selected Sonos favorite on office speaker'
   description: Switch to selected favorite (playlist or radio) when Office speaker
     is already playing.
   trigger:
@@ -628,7 +628,7 @@
       title: AdGuard
   mode: single
 - id: '1662547518457'
-  alias: 'Office: Notify printer on'
+  alias: 'Office: Printer powered notification'
   description: Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
     en laat deze met een actieknop ook direct uitschakelen.
   trigger:
@@ -642,39 +642,8 @@
       seconds: 0
   condition: []
   action:
-  - variables:
-      timeout_minutes: '10'
-  - service: notify.robert
-    data:
-      message: Printer staat nog aan
-      data:
-        actions:
-        - action: PRINTER_OFF
-          title: Printer uit
-  - wait_for_trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: PRINTER_OFF
-    timeout:
-      minutes: '{{ timeout_minutes }}'
-    continue_on_timeout: false
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: '{{ wait.trigger.event.data.action == ''PRINTER_OFF'' }}'
-      sequence:
-      - service: switch.turn_off
-        target:
-          entity_id: switch.samsung_ml_2850nd
-        data: {}
-      - service: notify.robert
-        data:
-          message: Printer uit
-      - service: notify.persistent_notification
-        data:
-          message: Printer uitgeschakeld via notificatie.
-    default: []
+  - service: script.1663045328980
+    data: {}
   mode: single
 - id: '1662548077258'
   alias: 'Security: Switch garden lights based on sun elevation'
@@ -936,11 +905,10 @@
   action:
   - service: input_boolean.turn_off
     entity_id: input_boolean.snooze_lightning
-- alias: Work - Do Not Disturb Robert
+- id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
+  alias: 'Office: WFH Do Not Disturb Robert'
   description: "Show do not disturb when working from home and busy. Activate scene
     when Robert\n  - is at home and\n  - he's busy in Teams\n"
-  id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
-  mode: single
   trigger:
   - platform: state
     entity_id: sensor.teams_status_robert
@@ -960,6 +928,7 @@
         state: Niet storen
   action:
   - scene: scene.office_do_not_disturb
+  mode: single
 - alias: 'Office: Pause Music'
   description: Pause playing music in the office when in call.
   id: '1649842819459'
@@ -1054,9 +1023,9 @@
     data:
       message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
       title: Teams activity
-- alias: WFH - Robert Available
-  id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
-  mode: single
+- id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
+  alias: 'Office: WFH Robert Available'
+  description: ''
   trigger:
   - platform: state
     entity_id: sensor.teams_status_robert
@@ -1071,3 +1040,134 @@
       state: Niet storen
   action:
   - scene: scene.office_available
+  mode: single
+- alias: Carwash Notification
+  id: b95c4d19-670d-4b96-b531-055cd0c2e4df
+  description: Geef een melding wanneer de auto gewassen kan worden
+  mode: single
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.car_wash
+    from: 'off'
+    to: 'on'
+  action:
+  - service: notify.robert
+    data:
+      message: De auto kan weer worden gewassen.
+- alias: 'Media: Pause living speaker when TV is turned on'
+  id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
+  description: 'Pause living speaker when living TV is turned on
+
+    '
+  mode: single
+  trigger:
+  - platform: state
+    entity_id: media_player.living_tv
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: media_player.woonkamer
+    state: playing
+  action:
+  - service: media_player.media_pause
+    entity_id: media_player.woonkamer
+  - service: notify.living_tv
+    data:
+      message: Muziekspeler automatisch gepauzeerd.
+- id: '1663046423659'
+  alias: 'Office: Printer powered reminder'
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: '30'
+    alias: Iedere 30 minuten
+  condition:
+  - condition: state
+    entity_id: input_boolean.printer_reminder
+    state: 'on'
+  action:
+  - service: script.1663045328980
+    data: {}
+  mode: single
+- id: '1663046870503'
+  alias: 'Office: Printer powered action'
+  description: ''
+  trigger:
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_OFF
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_REMIND
+    id: printer_remind
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_IGNORE
+  condition: []
+  action:
+  - if:
+    - condition: trigger
+      id: printer_remind
+      alias: Triggered by printer remind
+    then:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.printer_reminder
+    else:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.printer_reminder
+  mode: single
+- id: '1663060804510'
+  alias: 'Huis: Auto set mode to Home'
+  description: Set home occupance to 'Home' when someone comes home and state is away.
+  trigger:
+  - platform: state
+    entity_id:
+    - group.family
+    to: home
+  condition:
+  - condition: state
+    entity_id: input_boolean.occupancy_away
+    state: 'on'
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id:
+      - input_boolean.occupancy_home
+  - service: persistent_notification.create
+    data:
+      message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
+  mode: single
+- id: '1663299688715'
+  alias: 'Garage: Fietsaccu opgeladen'
+  description: 'Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
+    Druppel laden werkt dan niet meer. '
+  trigger:
+  - type: power
+    platform: device
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: sensor.shelly_1_power
+    domain: sensor
+    below: 1
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    alias: Fiets lader is klaar
+  condition: []
+  action:
+  - type: turn_off
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: switch.shelly_1
+    domain: switch
+    alias: Zet fiets lader uit
+  mode: single
