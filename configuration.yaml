@@ -1,8 +1,7 @@
----
 homeassistant:
 
   # allowlist_external_dirs cannot be used in a package:
-  # https://community.home-assistant.io/t/file-size-custom-component/40308/34?u=metbril
+  # https://community.home-assistant.io/t/file-size-custom-component/40308/34
   allowlist_external_dirs:
     - !secret allowlist_dir_config
     - !secret allowlist_dir_ssl
@@ -12,6 +11,7 @@ homeassistant:
 
   # Customize entities by pattern
   # customize_glob: !include customize_globs.yaml
+
   packages: !include_dir_named integrations
 
 # UI editor files
@@ -20,7 +20,9 @@ group: !include groups.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
 
-# ---- integrations ----
+# ---- integrations in alphabetical order ----
+
+binary_sensor: !include_dir_list entities/binary_sensor
 
 default_config:
 
@@ -39,9 +41,7 @@ rest_command: !include_dir_named entities/rest_command
 
 sensor: !include_dir_list entities/sensor
 
-template:
-  binary_sensor: !include_dir_list entities/template/binary_sensor
-  sensor: !include_dir_list entities/template/sensor
+template: !include_dir_list entities/template
 
 # WOL is needed for (switching on) WebOS TV
 wake_on_lan:
