@@ -290,31 +290,34 @@
     light.hoge_kast:
       effect_list:
       - colorloop
-      - random
       supported_color_modes:
-      - hs
-      icon: mdi:lamp
+      - xy
+      off_with_transition: false
+      off_brightness: 102
+      icon: mdi:lava-lamp
       friendly_name: Hoge Kast
       supported_features: 44
       state: 'off'
     light.leeslamp:
       min_mireds: 153
-      max_mireds: 500
+      max_mireds: 454
       supported_color_modes:
       - color_temp
       color_mode: color_temp
-      brightness: 128
-      color_temp: 435
+      brightness: 102
+      color_temp: 314
       hs_color:
-      - 29.464
-      - 80.379
+      - 27.547
+      - 52.114
       rgb_color:
       - 255
-      - 150
-      - 50
+      - 183
+      - 122
       xy_color:
-      - 0.569
-      - 0.388
+      - 0.479
+      - 0.38
+      off_with_transition: false
+      off_brightness:
       icon: mdi:track-light
       friendly_name: Leeslamp
       supported_features: 40
@@ -322,15 +325,14 @@
     light.turbinelamp:
       supported_color_modes:
       - onoff
-      icon: mdi:lava-lamp
       friendly_name: Turbinelamp
-      supported_features: 40
+      supported_features: 0
       state: 'off'
     light.lichtstraat:
       supported_color_modes:
       - brightness
-      off_with_transition: false
-      off_brightness: 3
+      entity_id:
+      - light.lichtstraat_zha_group
       icon: mdi:light-recessed
       friendly_name: Lichtstraat
       supported_features: 40
@@ -340,63 +342,91 @@
       max_mireds: 500
       effect_list:
       - colorloop
-      - random
       supported_color_modes:
       - color_temp
-      - hs
-      color_mode: color_temp
-      brightness: 128
-      color_temp: 435
-      hs_color:
-      - 29.464
-      - 80.379
-      rgb_color:
-      - 255
-      - 150
-      - 50
-      xy_color:
-      - 0.569
-      - 0.388
-      effect: none
+      - xy
+      off_with_transition: false
+      off_brightness:
       icon: mdi:wall-sconce-round-variant
       friendly_name: Bollamp
       supported_features: 44
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 337
+      hs_color:
+      - 27.881
+      - 57.799
+      rgb_color:
+      - 255
+      - 176
+      - 107
+      xy_color:
+      - 0.499
+      - 0.384
       state: 'on'
     light.nijntje:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      off_with_transition: false
-      off_brightness: 254
       icon: mdi:rabbit-variant
-      friendly_name: Nijntjelamp
-      supported_features: 40
+      friendly_name: Nijntje
+      supported_features: 32
       state: 'off'
     light.willner:
       min_mireds: 153
-      max_mireds: 500
+      max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 112
-      color_temp: 435
-      hs_color:
-      - 29.464
-      - 80.379
-      rgb_color:
-      - 255
-      - 150
-      - 50
-      xy_color:
-      - 0.569
-      - 0.388
+      off_with_transition: false
+      off_brightness:
       icon: mdi:wall-sconce-round-variant
       friendly_name: Willner
       supported_features: 40
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 328
+      hs_color:
+      - 27.748
+      - 55.607
+      rgb_color:
+      - 255
+      - 178
+      - 113
+      xy_color:
+      - 0.492
+      - 0.382
+      state: 'on'
+    light.magnarp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:lightbulb-group
+      friendly_name: Magnarp
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 102
+      color_temp: 355
+      hs_color:
+      - 28.156
+      - 62.138
+      rgb_color:
+      - 255
+      - 170
+      - 96
+      xy_color:
+      - 0.515
+      - 0.385
       state: 'on'
   icon: mdi:candle
-  metadata: {}
+  metadata:
+    light.magnarp:
+      entity_only: true
 - id: 23373edc-d64f-480d-9a93-b7b75c5904cb
   name: 'Lighting: Living Off'
   entities:
