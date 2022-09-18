@@ -1,4 +1,4 @@
-# This sensor switches on if the current or forecasted precipitation 
+# This sensor switches on if the current or forecasted precipitation
 # is greater than zero.
 #
 binary_sensor:

@@ -37,7 +37,7 @@ script:
   reset_energy_meters:
     sequence:
       - service: zwave.reset_node_meters
-        data: { "node_id": "7", "instance":"1" }
+        data: '{ "node_id": "7", "instance":"1" }'
       - service: logbook.log
         data:
           name: Energiemeters
