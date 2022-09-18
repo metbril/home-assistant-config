@@ -1,17 +1,22 @@
 ---
+binary_sensor.holiday:
+  friendly_name: Feestdag
+  icon: mdi:party-popper
+binary_sensor.workday:
+  friendly_name: Werkdag
+  icon: mdi:briefcase
 sensor.bad_login:
-  friendly_name: Mislukte inlogpogingen
+  friendly_name: Mislukt inloggen
   icon: mdi:alert
-sensor.buienalarm_next_rain_forecast:
-  device_class: timestamp
 sensor.buienalarm_precipitation:
   friendly_name: Buienalarm Neerslagintensiteit
   unit_of_measurement: mm/u
 sensor.buienalarm_precipitation_forecast_average:
-  friendly_name: Buienalarm Neerslagintensiteit verwacht
+  friendly_name: Buienalarm Neerslagintensiteit Verwacht
   unit_of_measurement: mm/u
 sensor.date:
   friendly_name: Datum
+  icon: mdi:calendar-today
 sensor.msteams_call_count_today_robert:
   friendly_name: Teams Call Count Today Robert
 sensor.msteams_call_time_today_robert:

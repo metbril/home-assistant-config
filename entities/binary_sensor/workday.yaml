@@ -1,0 +1,8 @@
+##############################################################################
+## Determine if today is a workday (weekend nor holiday)
+## https://www.home-assistant.io/integrations/workday/
+##############################################################################
+platform: workday
+name: Workday
+country: NL
+workdays: [mon, tue, wed, thu, fri]
