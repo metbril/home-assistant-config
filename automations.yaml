@@ -213,34 +213,28 @@
     brightness_pct: 50
   mode: single
 - id: 068719c4-88f2-44b5-a809-e2513ae65604
-  alias: 'Weer: Buienalarm melden'
-  description: Notify for rain alarms
+  alias: 'Weather: Buienalarm'
+  description: Send a notification and tweet when it's raining or rain is forecasted.
   trigger:
   - platform: state
     entity_id:
-    - sensor.buienalarm_precipitation_forecast_level
+    - sensor.buienalarm
+    attribute: index
   condition:
   - condition: not
     conditions:
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: sensor.buienalarm_precipitation_forecast_index
-        state: '0'
-      - condition: state
-        entity_id: sensor.buienalarm_precipitation_forecast_level
-        state: unavailable
-      - condition: state
-        entity_id: sensor.buienalarm_precipitation_forecast_level
-        state: unknown
+    - condition: state
+      entity_id: sensor.buienalarm
+      state: '0'
+      attribute: index
+    alias: Index not 0
   action:
   - service: notify.robert
     data:
-      message: "{{ states( 'sensor.buienalarm_precipitation_forecast_level' ) }} verwacht.
-        ({{ states( 'sensor.buienalarm_precipitation_forecast_average' ) }} {{\n    state_attr(
-        'sensor.buienalarm_precipitation_forecast_average' ,\n    'unit_of_measurement'
-        ) }})\n"
-      title: ☔️ Buienalarm
+      message: "{{ \"\U0001F53A\" if (trigger.to_state.attributes.index > trigger.from_state.attributes.index)
+        else \"\U0001F53B\" }} {{ states( 'sensor.buienalarm' ) }} {{ [\"☔️\",\"☂️\",\"\U0001F302\",\"\U0001F9E5\",\"\U0001F4A6\",\"\U0001F327\",\"\U0001F326\",\"⛈\",\"\U0001F308\"]
+        | random }}\n"
+      title: Buienalarm
       data:
         url: 'https://www.buienalarm.nl/{{ state_attr( ''zone.home'' , ''latitude''
           ) }},{{ state_attr( ''zone.home'' , ''longitude'' ) }}
@@ -248,12 +242,12 @@
           '
   - service: notify.twitter
     data:
-      message: "☔️ {{ states(trigger.entity_id) }} in de buurt verwacht. {{ [ \"Vergeet
-        je regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
-        \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm goed in de gaten! \U0001F327️\",
-        \"Sluit je ramen en deuren! \U0001FA9F\U0001F6AA\", \"Na regen komt zonneschijn!
-        \U0001F326\", \"Zie je de regenboog al? \U0001F308\" ] | random  }} #buienalarm
-        https://www.buienalarm.nl/"
+      message: "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ \"Vergeet je
+        regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
+        \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm dus goed in de gaten! \U0001F327️\",
+        \"Sluit je ramen en deuren af! \U0001FA9F\U0001F6AA\", \"Maar na regen komt
+        zonneschijn! \U0001F326\", \"Zie je al een regenboog? \U0001F308\" ] | random
+        \ }} #buienalarm https://www.buienalarm.nl/"
   mode: single
 - id: '1661359954658'
   alias: Presence - Robert bijna thuis
