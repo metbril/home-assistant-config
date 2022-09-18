@@ -10,15 +10,16 @@ feedreader.pickle
 # home assistant folders
 .cloud/
 .storage/
+custom_components/*
 deps/
 homebridge/
+image/
 lib/
+themes/
 tts/
-custom_components/*
-!custom_components/.gitkeep
 www/
 www/community/
-image/
+
 
 # zwave
 OZW_Log.txt
@@ -55,3 +56,4 @@ ssh/
 .ip_authenticated.yaml
 
 # exceptions (!...)
+!custom_components/.gitkeep
