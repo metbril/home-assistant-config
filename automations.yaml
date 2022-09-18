@@ -743,35 +743,6 @@
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
       time: '20:00:00'
-- id: '1662711505910'
-  alias: '@Nieuwe automatisering'
-  description: ''
-  trigger:
-  - platform: template
-    value_template: '{% set elevation = state_attr(''sun.sun'',''elevation'') | float(0)
-      %}
-
-      {% set cloud_coverage = states(''sensor.weatherbit_cloud_coverage'') | float(0)
-      %}
-
-      {% set treshold = (1 + (2*cloud_coverage)) %}
-
-      {{ elevation < treshold }}'
-    alias: Sun elevation moves below treshold
-  condition: []
-  action:
-  - variables:
-      elevation: '{{ state_attr(''sun.sun'',''elevation'') }}'
-      cloud_coverage: '{{ states(''sensor.weatherbit_cloud_coverage'') | int(0) /
-        100 }}'
-      treshold: '{{ (1 + (2*cloud_coverage)) }}'
-  - service: persistent_notification.create
-    data:
-      message: 'Elevation: {{ elevation }} degrees Cloud coverage: {{ cloud_coverage
-        }}% Treshold: {{ treshold }} degrees
-
-        '
-  mode: single
 - id: '1662718496282'
   alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
@@ -1041,10 +1012,9 @@
   action:
   - scene: scene.office_available
   mode: single
-- alias: Carwash Notification
-  id: b95c4d19-670d-4b96-b531-055cd0c2e4df
+- id: b95c4d19-670d-4b96-b531-055cd0c2e4df
+  alias: Carwash Notification
   description: Geef een melding wanneer de auto gewassen kan worden
-  mode: single
   trigger:
   - platform: state
     entity_id: binary_sensor.car_wash
@@ -1053,7 +1023,10 @@
   action:
   - service: notify.robert
     data:
-      message: De auto kan weer worden gewassen.
+      message: "{{ ['De auto kan weer worden gewassen.','Pak de spons en zeem maar
+        voor de auto.','Het is weer mogelijk om de auto te wassen.','Je kunt weer
+        naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
+  mode: single
 - alias: 'Media: Pause living speaker when TV is turned on'
   id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
   description: 'Pause living speaker when living TV is turned on
