@@ -10,7 +10,7 @@ feedreader.pickle
 # home assistant folders
 .cloud/
 .storage/
-custom_components/*
+custom_components/
 deps/
 homebridge/
 image/
@@ -56,4 +56,3 @@ ssh/
 .ip_authenticated.yaml
 
 # exceptions (!...)
-!custom_components/.gitkeep
