@@ -8,7 +8,7 @@
 #
 platform: buienalarm
 name: Buienalarm
-timeframe: 15  # minutes
+timeframe: 60  # minutes, default = 60
 monitored_conditions:
   - precipitation
   - precipitation_forecast_average
