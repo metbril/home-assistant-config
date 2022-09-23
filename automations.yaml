@@ -1145,3 +1145,44 @@
       message: 'Fietslader is klaar en automatisch uitgeschakeld. '
       title: Fietslader
   mode: single
+- id: '1663925197803'
+  alias: Cube Actions
+  description: ''
+  use_blueprint:
+    path: SirGoodenough/Zigbee2MQTT - Xiaomi Cube Controller.yaml
+    input:
+      remote: sensor.cube_action
+      shake:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.lighting_living_max
+        metadata: {}
+      fall:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.lighting_living_base
+        metadata: {}
+      rotate_cw_any:
+      - if:
+        - condition: device
+          device_id: 0b66a0b9458a2619643802bab0864d75
+          domain: media_player
+          entity_id: media_player.living_speaker
+          type: is_playing
+        then:
+        - service: media_player.volume_up
+          data: {}
+          target:
+            entity_id: media_player.living_speaker
+      rotate_ccw_any:
+      - if:
+        - condition: device
+          device_id: 0b66a0b9458a2619643802bab0864d75
+          domain: media_player
+          entity_id: media_player.living_speaker
+          type: is_playing
+        then:
+        - service: media_player.volume_down
+          data: {}
+          target:
+            entity_id: media_player.living_speaker
