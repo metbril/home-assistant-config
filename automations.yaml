@@ -18,6 +18,12 @@
     target:
       entity_id: scene.lighting_living_base
     data: {}
+  - service: persistent_notification.create
+    data:
+      message: 'Verlichting automatisch ingeschakeld. Hoogte: {{ states(''sensor.sun_elevation'')
+        }} Helderheid: {{ states(''sensor.outside_brightness'') }}
+
+        '
   mode: single
 - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
   alias: 'Lighting: Living lights off during vacations'
@@ -221,13 +227,10 @@
     - sensor.buienalarm
     attribute: index
   condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: sensor.buienalarm
-      state: '0'
-      attribute: index
-    alias: Index not 0
+  - condition: numeric_state
+    entity_id: sensor.buienalarm
+    attribute: index
+    above: 0
   action:
   - service: notify.robert
     data:
@@ -1137,4 +1140,8 @@
     entity_id: switch.shelly_1
     domain: switch
     alias: Zet fiets lader uit
+  - service: persistent_notification.create
+    data:
+      message: 'Fietslader is klaar en automatisch uitgeschakeld. '
+      title: Fietslader
   mode: single
