@@ -14,15 +14,27 @@ sensor.buienalarm_precipitation:
 sensor.buienalarm_precipitation_forecast_average:
   friendly_name: Buienalarm Neerslagintensiteit Verwacht
   unit_of_measurement: mm/u
+sensor.christmas_countdown:
+  friendly_name: Aftellen tot Kerstmis
 sensor.date:
   friendly_name: Datum
   icon: mdi:calendar-today
+sensor.easter_countdown:
+  friendly_name: Aftellen tot Pasen
+sensor.father_s_day_countdown:
+  friendly_name: Aftellen tot Vaderdag
+sensor.king_s_day_countdown:
+  friendly_name: Aftellen tot Koningsdag
+sensor.mother_s_day_countdown:
+  friendly_name: Aftellen tot Moederdag
 sensor.msteams_call_count_today_robert:
   friendly_name: Teams Call Count Today Robert
 sensor.msteams_call_time_today_robert:
   friendly_name: Teams Call Time Today Robert
 sensor.msteams_online_today_robert:
   friendly_name: Teams Online Today Robert
+sensor.sinterklaas_countdown:
+  friendly_name: Aftellen tot Pakjesavond
 sensor.time:
   friendly_name: Tijd
 sensor.weatherbit_precipitation:

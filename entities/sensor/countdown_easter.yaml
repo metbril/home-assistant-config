@@ -1,0 +1,12 @@
+## Wolfram Alpha queries for days until some holidays
+## https://products.wolframalpha.com/short-answers-api/documentation/
+## Save on API calls:
+## Every 12 hours = 43200 seconds
+## Every 4 hours = 14400 seconds
+##
+platform: rest
+name: Easter Countdown
+resource: !secret wolframalpha_api_easter
+value_template: "{{ (value|replace(' days', '')) | int }}"
+unit_of_measurement: Days
+scan_interval: 14400
