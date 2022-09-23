@@ -102,7 +102,6 @@ blueprint:
       description: Actions when appliance has finished (e.g. pushing a notification, TTS announcement, ...)
       selector:
         action: {}
-
     pre_actions:
       name: Actions
       description: Actions when starting threshhold is crossed
