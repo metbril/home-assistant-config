@@ -19,6 +19,7 @@ themes/
 tts/
 www/
 www/community/
+zigbee2mqtt/*
 
 
 # zwave
@@ -56,3 +57,4 @@ ssh/
 .ip_authenticated.yaml
 
 # exceptions (!...)
+!zigbee2mqtt/configuration.yaml

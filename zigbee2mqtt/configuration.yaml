@@ -1,0 +1,38 @@
+homeassistant: true
+mqtt:
+  server: "!secrets mqtt_server"
+  user: "!secrets mqtt_user"
+  password: "!secrets mqtt_password"
+serial:
+  port: /dev/ttyACM0
+  adapter: deconz
+frontend:
+  port: 8099
+devices:
+  '0x00158d0007e25295':
+    friendly_name: Living Climate
+  '0x00178801001057bd':
+    friendly_name: Hoge Kast
+  '0x00158d000802ad01':
+    friendly_name: Cube
+  '0x001788010804ffa1':
+    friendly_name: Turbinelamp
+  '0x0017880104f5fd96':
+    friendly_name: Dimmer Woonkamer
+  '0x0017880104eedc4d':
+    friendly_name: Dimmer Leeshoek
+  '0x84ba20fffe72a958':
+    friendly_name: Nijntje
+    color_sync: true
+  '0x588e81fffe58029f':
+    friendly_name: Dimmer Lichtstraat
+  '0x14b457fffe535557':
+    friendly_name: Living Speaker Controller
+advanced:
+  log_level: info
+groups:
+  '1':
+    friendly_name: living_lights
+    devices:
+      - 0x00178801001057bd/11
+      - 0x001788010804ffa1/11
