@@ -1,0 +1,10 @@
+# This sensor creates a sensor with a proper timestamp device class
+sensor:
+  - name: "Buienalarm Next Rain Forecast Timestamp"
+    unique_id: sensor.buienalarm_next_rain_forecast_timestamp
+    device_class: timestamp
+    icon: mdi:clock-alert
+    availability: "{{ states('sensor.buienalarm_next_rain_forecast') is not none }}"
+    state: >
+      {% set datetime = states('sensor.buienalarm_next_rain_forecast') %}
+      {{ (as_datetime(datetime) | as_local) }}
