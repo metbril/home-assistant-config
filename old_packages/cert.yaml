@@ -1,8 +1,13 @@
 ---
+# This package was used while I used an Nginx proxy server to connect
+# to my home assistant server. I now use Nabu Casa / Home Assistant cloud
+# so some configuration is no longer needed.
+# I keep this configuration for historical purposes and others
+#
 homeassistant:
-  ##########
+  ########################################
   ## Customize
-  ##########
+  ########################################
   customize:
     sensor.cert_pem:
       friendly_name: Grootte SSL-certificaat
@@ -13,9 +18,9 @@ homeassistant:
       friendly_name: Geldigheidsduur SSL-certificaat
       unit_of_measurement: dagen
 
-##########
+########################################
 ## Sensor
-##########
+########################################
 sensor:
   - platform: filesize
     file_paths:
@@ -27,12 +32,12 @@ sensor:
         value_template: "{{ as_timestamp(state_attr('sensor.cert_pem',
           'last_updated')) | timestamp_custom('%Y-%m-%d') }}"
 
-##########
+########################################
 ## Automation
-##########
+########################################
 automation:
 
-  ##########
+  ########################################
   - alias: "Notify SSL Certificate Renewed"
     id: fe4a7332-15a7-46f3-9992-d8c28c13f201
     description: >
@@ -53,7 +58,8 @@ automation:
           message: 'SSL-certificaat voor Home Assistant is vernieuwd van {{
             trigger.from_state.state}} naar {{trigger.to_state.state}}'
           title: "Nieuw apparaat"
-  ##########
+
+  ########################################
   - alias: "Timestamp SSL cert changed"
     id: 3eb7a320-f751-45ea-aead-7c5f15377af3
     description: >
