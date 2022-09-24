@@ -1,3 +1,4 @@
+---
 # Template sensor to fix a bug in some Neo wall plugs.
 # The applied constant is the equivalent of 0x7FFFFFFF.
 # Device precision is 2 decimals.
@@ -5,17 +6,17 @@
 #
 # https://community.home-assistant.io/t/energy-consumption-for-neo-coolcam-plug/219844/26?u=metbril
 #
-sensor:
-  - name: "Tumble Dryer Energy"
-    unique_id: 76269b18-7159-4409-9f26-72128fa2e116
-    unit_of_measurement: kWh
-    device_class: energy
-    state_class: total_increasing
-    state: >-
-      {% set value = states('sensor.tumble_dryer_raw_energy') | float(0) %}
-      {% set const = 21474836.47 %}
-      {% if value < 0 %}
-        {{ (value + const) | round(2) }}
-      {% else %}
-        {{ value }}
-      {% endif %}
+- sensor:
+    - name: "Tumble Dryer Energy"
+      unique_id: 76269b18-7159-4409-9f26-72128fa2e116
+      unit_of_measurement: kWh
+      device_class: energy
+      state_class: total_increasing
+      state: >-
+        {% set value = states('sensor.tumble_dryer_raw_energy') | float(0) %}
+        {% set const = 21474836.47 %}
+        {% if value < 0 %}
+          {{ (value + const) | round(2) }}
+        {% else %}
+          {{ value }}
+        {% endif %}

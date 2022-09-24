@@ -1,12 +1,13 @@
+---
 # This sensor switches on if the current or forecasted precipitation
 # is greater than zero.
 #
-binary_sensor:
-  - name: Buienalarm
-    unique_id: d8dabef5-3b3d-46d1-9062-3feb07c7c4a9
-    availability: >-
-      {{ states('sensor.buienalarm') is not none }}
-    state: >-
-      {{ state_attr('sensor.buienalarm','index') > 0 }}
-    icon: >-
-      mdi:umbrella{% if this.state == 'off' %}-closed{% endif %}
+- binary_sensor:
+    - name: Buienalarm
+      unique_id: d8dabef5-3b3d-46d1-9062-3feb07c7c4a9
+      availability: >-
+        {{ states('sensor.buienalarm') is not none }}
+      state: >-
+        {{ state_attr('sensor.buienalarm','index') > 0 }}
+      icon: >-
+        mdi:umbrella{% if this.state == 'off' %}-closed{% endif %}

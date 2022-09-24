@@ -1,10 +1,11 @@
+---
 # Appliance is on when power usage detected
-binary_sensor:
-  - name: "Tumble Dryer Running"
-    unique_id: e266f060-376f-4067-8b9d-c8a21e49f890
-    state: "{{ states('sensor.tumble_dryer_power') | float(0) > 2.5 }}"
-    delay_on:
-      seconds: 30
-    delay_off:
-      seconds: 55
-    icon: "mdi:tumble-dryer{{ '-off' if (this.state == 'off') }}"
+- binary_sensor:
+    - name: "Tumble Dryer Running"
+      unique_id: e266f060-376f-4067-8b9d-c8a21e49f890
+      state: "{{ states('sensor.tumble_dryer_power') | float(0) > 2.5 }}"
+      delay_on:
+        seconds: 30
+      delay_off:
+        seconds: 55
+      icon: "mdi:tumble-dryer{{ '-off' if (this.state == 'off') }}"

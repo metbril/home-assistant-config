@@ -1,21 +1,22 @@
-sensor:
-  - name: Buienalarm Precipitation Forecast Level
-    unique_id: 808f691c-6b69-4bb3-b52c-b11c50fd02db
-    icon: mdi:weather-pouring
-    state: >-
-      {% set value =
-        states('sensor.buienalarm_precipitation_forecast_average')
-        | float(0) %}
-      {% if value < 0.1 %}
-        Geen neerslag
-      {% elif value < 1 %}
-        Lichte neerslag
-      {% elif value < 3 %}
-        Matige neerslag
-      {% elif value < 10 %}
-        Zware neerslag
-      {% elif value >=10 %}
-        Zware buien
-      {% else %}
-        unknown
-      {% endif %}
+---
+- sensor:
+    - name: Buienalarm Precipitation Forecast Level
+      unique_id: 808f691c-6b69-4bb3-b52c-b11c50fd02db
+      icon: mdi:weather-pouring
+      state: >-
+        {% set value =
+          states('sensor.buienalarm_precipitation_forecast_average')
+          | float(0) %}
+        {% if value < 0.1 %}
+          Geen neerslag
+        {% elif value < 1 %}
+          Lichte neerslag
+        {% elif value < 3 %}
+          Matige neerslag
+        {% elif value < 10 %}
+          Zware neerslag
+        {% elif value >=10 %}
+          Zware buien
+        {% else %}
+          unknown
+        {% endif %}

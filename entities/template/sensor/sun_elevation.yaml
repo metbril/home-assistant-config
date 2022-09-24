@@ -1,7 +1,8 @@
-sensor:
-  - name: "Sun Elevation"
-    unique_id: "1134ed44-3d4f-4690-bd9f-af89de86f84e"
-    state: >-
-      {{ state_attr('sun.sun','elevation') }}
-    icon: "mdi:sun-angle"  # "mdi:angle-acute"
-    unit_of_measurement: "°"
+---
+- sensor:
+    - name: "Sun Elevation"
+      unique_id: "1134ed44-3d4f-4690-bd9f-af89de86f84e"
+      state: >-
+        {{ state_attr('sun.sun','elevation') }}
+      icon: "mdi:sun-angle"  # "mdi:angle-acute"
+      unit_of_measurement: "°"

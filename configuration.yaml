@@ -41,7 +41,7 @@ rest_command: !include_dir_named entities/rest_command
 
 sensor: !include_dir_list entities/sensor
 
-template: !include_dir_list entities/template
+template: !include_dir_merge_list entities/template
 
 # WOL is needed for (switching on) WebOS TV
 wake_on_lan:

@@ -4,8 +4,8 @@
 #
 # Don't use now(); this will evaluate every minute.
 #
-binary_sensor:
-  - name: "Weekday"
-    unique_id: "33ca7d1e-2764-4602-b1f3-8758fd3b9fe4"
-    icon: "mdi:calendar-week"
-    state: "{{ as_datetime(states('sensor.date')).weekday() < 5 }}"
+- binary_sensor:
+    - name: "Weekday"
+      unique_id: "33ca7d1e-2764-4602-b1f3-8758fd3b9fe4"
+      icon: "mdi:calendar-week"
+      state: "{{ as_datetime(states('sensor.date')).weekday() < 5 }}"

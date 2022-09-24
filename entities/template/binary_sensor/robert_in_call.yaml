@@ -1,7 +1,8 @@
-binary_sensor:
-  - name: "Robert In Call"
-    unique_id: aeed7e2e-2d9c-45d2-a2d1-2c9cfc54a5a0
-    state: >-
-      {{ states("input_text.teams_status_robert") in ["OnThePhone","Presenting"] }}
-    icon: >-
-      {{ "mdi:phone-in-talk" if is_state('binary_sensor.robert_in_call','on') else "mdi:phone-off" }}
+---
+- binary_sensor:
+    - name: "Robert In Call"
+      unique_id: aeed7e2e-2d9c-45d2-a2d1-2c9cfc54a5a0
+      state: >-
+        {{ states("input_text.teams_status_robert") in ["OnThePhone","Presenting"] }}
+      icon: >-
+        {{ "mdi:phone-in-talk" if is_state('binary_sensor.robert_in_call','on') else "mdi:phone-off" }}
