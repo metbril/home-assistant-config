@@ -1,0 +1,7 @@
+---
+parents:
+  name: Ouders
+  icon: mdi:account-group
+  entities:
+    - person.robert
+    - person.monique
