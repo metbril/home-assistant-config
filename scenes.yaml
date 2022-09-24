@@ -715,3 +715,165 @@
       state: 'off'
   icon: mdi:airplane
   metadata: {}
+- id: '1664046376897'
+  name: 'Lighting: Living Night'
+  entities:
+    light.eettafel:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 1
+      color_temp: 250
+      hs_color:
+      - 26.812
+      - 34.87
+      rgb_color:
+      - 255
+      - 205
+      - 166
+      xy_color:
+      - 0.421
+      - 0.364
+      state: 'on'
+    light.willner:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Willner
+      supported_features: 32
+      state: 'off'
+    light.nijntje:
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_temp_startup: 370
+      linkquality: 255
+      power_on_behavior: previous
+      update:
+        state: idle
+      update_available: false
+      friendly_name: Nijntje
+      supported_features: 47
+      state: 'off'
+    light.bollamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Bollamp
+      supported_features: 32
+      state: 'off'
+    light.lichtstraat_4:
+      supported_color_modes:
+      - brightness
+      friendly_name: Lichtstraat 4
+      supported_features: 32
+      state: 'off'
+    light.lichtstraat_3:
+      supported_color_modes:
+      - brightness
+      friendly_name: Lichtstraat 3
+      supported_features: 32
+      state: 'off'
+    light.lichtstraat_2:
+      supported_color_modes:
+      - brightness
+      friendly_name: Lichtstraat 2
+      supported_features: 32
+      state: 'off'
+    light.lichtstraat_1:
+      supported_color_modes:
+      - brightness
+      friendly_name: Lichtstraat 1
+      supported_features: 32
+      state: 'off'
+    light.leeslamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: hue:wall-spot
+      friendly_name: Leeslamp
+      supported_features: 32
+      state: 'off'
+    light.magnarp_3:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: hass:floor-lamp
+      friendly_name: Magnarp 3
+      supported_features: 32
+      state: 'off'
+    light.magnarp_2:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: hass:floor-lamp
+      friendly_name: Magnarp 2
+      supported_features: 32
+      state: 'off'
+    light.magnarp_1:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp 1
+      supported_features: 32
+      state: 'off'
+    light.hoge_kast:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - xy
+      color:
+        x: 0.507
+        y: 0.407
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      icon: hue:bloom
+      friendly_name: Hoge Kast
+      supported_features: 61
+      state: 'off'
+    switch.turbinelamp:
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      friendly_name: Turbinelamp
+      state: 'off'
+    light.turbinelamp:
+      supported_color_modes:
+      - onoff
+      icon: mdi:turbine
+      friendly_name: Turbinelamp
+      supported_features: 0
+      state: 'off'
+  icon: hue:scene-nightlight
+  metadata: {}
