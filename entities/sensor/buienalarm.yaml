@@ -1,3 +1,4 @@
+---
 ############################################################
 # Buienalarm custom component
 # https://github.com/gieljnssns/buienalarm-sensor-homeassistant
@@ -6,10 +7,10 @@
 #
 # Customization and automation through UI
 #
-platform: buienalarm
-name: Buienalarm
-timeframe: 60  # minutes, default = 60
-monitored_conditions:
-  - precipitation
-  - precipitation_forecast_average
-  - next_rain_forecast
+- platform: buienalarm
+  name: Buienalarm
+  timeframe: 60  # minutes, default = 60
+  monitored_conditions:
+    - precipitation
+    - precipitation_forecast_average
+    - next_rain_forecast

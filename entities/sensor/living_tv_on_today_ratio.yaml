@@ -1,7 +1,8 @@
-platform: history_stats
-name: Living TV On Today Ratio
-entity_id: media_player.living_tv
-state: "on"
-type: ratio
-start: "{{ now().replace(hour=0, minute=0, second=0) }}"
-end: "{{ now() }}"
+---
+- platform: history_stats
+  name: Living TV On Today Ratio
+  entity_id: media_player.living_tv
+  state: "on"
+  type: ratio
+  start: "{{ now().replace(hour=0, minute=0, second=0) }}"
+  end: "{{ now() }}"

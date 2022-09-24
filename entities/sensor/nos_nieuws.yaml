@@ -1,12 +1,13 @@
+---
 # Uses Feedparser custom component
 # https://github.com/custom-components/feedparser
 #
-platform: feedparser
-name: NOS Nieuws
-feed_url: 'http://feeds.nos.nl/nosnieuwsalgemeen'
-date_format: '%a, %d %b %Y %H:%M:%S %Z'
-scan_interval:
-  minutes: 30
-inclusions:
-  - title
-  - pubDate
+- platform: feedparser
+  name: NOS Nieuws
+  feed_url: 'http://feeds.nos.nl/nosnieuwsalgemeen'
+  date_format: '%a, %d %b %Y %H:%M:%S %Z'
+  scan_interval:
+    minutes: 30
+  inclusions:
+    - title
+    - pubDate

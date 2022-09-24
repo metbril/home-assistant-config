@@ -1,15 +1,16 @@
-platform: systemmonitor
-resources:
-  - type: memory_use_percent
-  - type: processor_use
-  - type: processor_temperature
-  - type: last_boot
+---
+- platform: systemmonitor
+  resources:
+    - type: memory_use_percent
+    - type: processor_use
+    - type: processor_temperature
+    - type: last_boot
 
-  - type: disk_use_percent
-    arg: /
+    - type: disk_use_percent
+      arg: /
 
-  - type: disk_free
-    arg: /
+    - type: disk_free
+      arg: /
 
-  - type: ipv4_address
-    arg: 'eth0'
+    - type: ipv4_address
+      arg: 'eth0'

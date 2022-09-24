@@ -4,4 +4,4 @@
 #
 # I keep this sensor, to check if it keeps working with HA
 #
-platform: brandstofprijzen
+- platform: brandstofprijzen
