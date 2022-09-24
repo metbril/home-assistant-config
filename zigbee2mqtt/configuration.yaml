@@ -1,8 +1,8 @@
 homeassistant: true
 mqtt:
-  server: "!secrets mqtt_server"
-  user: "!secrets mqtt_user"
-  password: "!secrets mqtt_password"
+  server: '!secrets mqtt_server'
+  user: '!secrets mqtt_user'
+  password: '!secrets mqtt_password'
 serial:
   port: /dev/ttyACM0
   adapter: deconz
