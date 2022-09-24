@@ -1,6 +1,7 @@
+---
 ################################################################################
 ## Car Wash - custom component
 ## https://github.com/Limych/ha-car_wash/
 ################################################################################
-platform: car_wash
-weather: weather.dark_sky
+- platform: car_wash
+  weather: weather.dark_sky

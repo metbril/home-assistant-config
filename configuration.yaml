@@ -22,7 +22,7 @@ script: !include scripts.yaml
 
 # ---- integrations in alphabetical order ----
 
-binary_sensor: !include_dir_list entities/binary_sensor
+binary_sensor: !include_dir_merge_list entities/binary_sensor
 
 default_config:
 

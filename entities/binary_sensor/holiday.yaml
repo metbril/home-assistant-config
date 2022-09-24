@@ -1,10 +1,11 @@
+---
 ##############################################################################
 ## Determine if today is a holiday
 ## https://www.home-assistant.io/integrations/workday/
 ##############################################################################
-platform: workday
-name: Holiday
-country: NL
-workdays:
-  - holiday
-excludes: []
+- platform: workday
+  name: Holiday
+  country: NL
+  workdays:
+    - holiday
+  excludes: []
