@@ -1,0 +1,50 @@
+---
+# Dark Sky is deprecated, but I continue to use it for comparison with other
+# weather providers as long as possible.
+#
+- platform: darksky
+  api_key: !secret darksky_api_key
+  units: ca
+  language: nl
+  scan_interval:  # default 2 minutes
+    minutes: 10
+  monitored_conditions:
+    - hourly_summary
+    - daily_summary
+    - temperature
+    - apparent_temperature
+    - humidity
+    - pressure
+    - visibility
+    - wind_speed
+    - wind_gust
+    - wind_bearing
+    - cloud_cover
+    - ozone
+    - uv_index
+    - precip_intensity
+    - precip_probability
+    - precip_type
+    - alerts
+
+# Some templates to translate wind directions to Dutch
+- platform: template
+  sensors:
+    dark_sky_wind_direction:
+      # https://community.home-assistant.io/t/wind-direction/210532/6
+      value_template: >
+        {% set direction = [
+          'N','NNE','NE','ENE','E','ESE','SE','SSE',
+          'S','SSW','SW','WSW','W','WNW','NW','NNW','N'
+          ] %}
+        {% set degree = states('sensor.dark_sky_wind_bearing')|float(0) %}
+        {{ direction[((degree+11.25)/22.5)|int] }}
+
+    dark_sky_wind_direction_local:
+      value_template: >
+        {% set direction = [
+          'N','NNO','NO','ONO','O','OZO','ZO','ZZO',
+          'Z','ZZW','ZW','WZW','W','WNW','NW','NNW','N'
+          ] %}
+        {% set degree = states('sensor.dark_sky_wind_bearing')|float(0) %}
+        {{ direction[((degree+11.25)/22.5)|int] }}

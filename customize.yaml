@@ -16,6 +16,14 @@ sensor.buienalarm_precipitation_forecast_average:
   unit_of_measurement: mm/u
 sensor.christmas_countdown:
   friendly_name: Aftellen tot Kerstmis
+sensor.dark_sky_precip_intensity:
+  unit_of_measurement: mm/u
+sensor.dark_sky_wind_direction:
+  icon: mdi:compass
+sensor.dark_sky_wind_direction_local:
+  icon: mdi:compass
+sensor.dark_sky_wind_gust:
+  unit_of_measurement: km/u
 sensor.date:
   friendly_name: Datum
   icon: mdi:calendar-today

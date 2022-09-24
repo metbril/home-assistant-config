@@ -1,4 +1,13 @@
 ---
 sensor.*_countdown:
-  unit_of_measurement: "dagen"
   icon: mdi:calendar-clock
+  unit_of_measurement: dagen
+sensor.diesel_*:
+  icon: mdi:gas-station
+  unit_of_measurement: €/L
+sensor.euro95_*:
+  icon: mdi:gas-station
+  unit_of_measurement: €/L
+sensor.lpg_*:
+  icon: mdi:gas-station
+  unit_of_measurement: €/L

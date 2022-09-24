@@ -16,8 +16,10 @@ homeassistant:
 
 # UI editor files
 automation: !include automations.yaml
+automation split: !include_dir_merge_list automations
 scene: !include scenes.yaml
 script: !include scripts.yaml
+script split: !include_dir_merge_named scripts
 
 # ---- integrations in alphabetical order ----
 
