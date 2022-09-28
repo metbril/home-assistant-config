@@ -6,6 +6,7 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
   schedule:
     - cron: 0 2 * * *
 
@@ -19,13 +20,28 @@ jobs:
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.3.0
 
-  check:
+  ha_version:
+        name: Get Installed Version for Testing
+        runs-on: ubuntu-latest
+        outputs:
+          current_version: ${{ steps.currentver.outputs.current_version }}
+        steps:
+          - name: Get config from GitHub
+            uses: actions/checkout@v3
+          - name: Get Installed Version from .HA_VERSION
+            id: currentver
+            run: |
+              HA_VERSION=$(<.HA_VERSION)
+              echo $HA_VERSION
+              echo "::set-output name=current_version::$HA_VERSION"
+
+  homeassistant:
     name: Home Assistant Core ${{ matrix.version }} Configuration Check
-    needs: [yamllint]
+    needs: [yamllint, ha_version]
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: ["stable", "beta"]
+        version: ["${{needs.version_env.outputs.current_version}}", "stable", "beta", "dev"]
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
