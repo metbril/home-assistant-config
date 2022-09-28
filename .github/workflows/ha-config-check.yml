@@ -21,19 +21,19 @@ jobs:
         uses: frenck/action-yamllint@v1.3.0
 
   ha_version:
-        name: Get Installed Version for Testing
-        runs-on: ubuntu-latest
-        outputs:
-          current_version: ${{ steps.currentver.outputs.current_version }}
-        steps:
-          - name: Get config from GitHub
-            uses: actions/checkout@v3
-          - name: Get Installed Version from .HA_VERSION
-            id: currentver
-            run: |
-              HA_VERSION=$(<.HA_VERSION)
-              echo $HA_VERSION
-              echo "::set-output name=current_version::$HA_VERSION"
+    name: Get Installed Version for Testing
+    runs-on: ubuntu-latest
+    outputs:
+      current_version: ${{ steps.currentver.outputs.current_version }}
+    steps:
+      - name: Get config from GitHub
+        uses: actions/checkout@v3
+      - name: Get Installed Version from .HA_VERSION
+        id: currentver
+        run: |
+          HA_VERSION=$(<.HA_VERSION)
+          echo $HA_VERSION
+          echo "::set-output name=current_version::$HA_VERSION"
 
   homeassistant:
     name: Home Assistant Core ${{ matrix.version }} Configuration Check
