@@ -5,6 +5,14 @@ binary_sensor.holiday:
 binary_sensor.workday:
   friendly_name: Werkdag
   icon: mdi:briefcase
+proximity.home:
+  friendly_name: Van huis
+proximity.parents_from_home:
+  friendly_name: Ouders van huis
+proximity.robert_from_home:
+  friendly_name: Robert van huis
+proximity.robert_from_work:
+  friendly_name: Robert van werk
 sensor.bad_login:
   friendly_name: Mislukt inloggen
   icon: mdi:alert

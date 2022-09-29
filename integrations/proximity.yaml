@@ -2,40 +2,28 @@
 # Proximity
 # https://www.home-assistant.io/integrations/proximity
 #
-homeassistant:
-  customize:
-    proximity.home:
-      friendly_name: Van huis
-    proximity.parents_from_home:
-      friendly_name: Ouders van huis
-    proximity.robert_from_home:
-      friendly_name: Robert van huis
-    proximity.robert_from_work:
-      friendly_name: Robert van werk
+home:
+  devices:
+    - person.robert
+    - person.monique
+    - person.bjorn
+  tolerance: 50
 
-proximity:
-  home:
-    devices:
-      - person.robert
-      - person.monique
-      - person.bjorn
-    tolerance: 50
+parents_from_home:
+  zone: home
+  devices:
+    - person.robert
+    - person.monique
+  tolerance: 50
 
-  parents_from_home:
-    zone: home
-    devices:
-      - person.robert
-      - person.monique
-    tolerance: 50
+robert_from_home:
+  zone: home
+  devices:
+    - device_tracker.iphone_robert_app
+  unit_of_measurement: m
 
-  robert_from_home:
-    zone: home
-    devices:
-      - device_tracker.iphone_robert_app
-    unit_of_measurement: m
-
-  robert_from_work:
-    zone: work_robert
-    devices:
-      - device_tracker.iphone_robert_app
-    unit_of_measurement: km
+robert_from_work:
+  zone: work_robert
+  devices:
+    - device_tracker.iphone_robert_app
+  unit_of_measurement: km

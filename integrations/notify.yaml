@@ -1,57 +1,55 @@
 ---
-notify:
+- name: Admin
+  platform: group
+  services:
+    - service: robert
 
-  - name: Admin
-    platform: group
-    services:
-      - service: robert
+- name: All
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
+    - service: living_tv
 
-  - name: All
-    platform: group
-    services:
-      - service: mobile_app_iphone_robert
-      - service: living_tv
+- name: Family
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
 
-  - name: Family
-    platform: group
-    services:
-      - service: mobile_app_iphone_robert
+- name: Parents
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
 
-  - name: Parents
-    platform: group
-    services:
-      - service: mobile_app_iphone_robert
+- name: Robert
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
 
-  - name: Robert
-    platform: group
-    services:
-      - service: mobile_app_iphone_robert
-
-  - name: Monique
-    platform: group
-    services:
-      - service: mobile_app_iphone_robert
-
-    ##############################################################################
-    ## Twitter
-    ## https://www.home-assistant.io/integrations/twitter
-    ##
-    ## Send notifications to the twitter account of the house
-    ## https://twitter.com/domussapiens
-    ##############################################################################
-  - name: Twitter
-    platform: twitter
-    consumer_key: !secret twitter_consumer_key
-    consumer_secret: !secret twitter_consumer_secret
-    access_token: !secret twitter_access_token
-    access_token_secret: !secret twitter_access_token_secret
+- name: Monique
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
 
   ##############################################################################
-  ## This notifier is used by the log energy consumption automation.
+  ## Twitter
+  ## https://www.home-assistant.io/integrations/twitter
   ##
-  ## https://www.home-assistant.io/integrations/file
+  ## Send notifications to the twitter account of the house
+  ## https://twitter.com/domussapiens
   ##############################################################################
-  - name: save_energy_consumption
-    platform: file
-    filename: energy_consumption.csv
-    timestamp: false
+- name: Twitter
+  platform: twitter
+  consumer_key: !secret twitter_consumer_key
+  consumer_secret: !secret twitter_consumer_secret
+  access_token: !secret twitter_access_token
+  access_token_secret: !secret twitter_access_token_secret
+
+##############################################################################
+## This notifier is used by the log energy consumption automation.
+##
+## https://www.home-assistant.io/integrations/file
+##############################################################################
+- name: save_energy_consumption
+  platform: file
+  filename: energy_consumption.csv
+  timestamp: false
