@@ -253,8 +253,8 @@
       supported_color_modes:
       - xy
       color:
-        x: 0.355
-        y: 0.355
+        x: 0.397
+        y: 0.363
       linkquality: 255
       update:
         state: idle
@@ -265,15 +265,15 @@
       color_mode: xy
       brightness: 255
       hs_color:
-      - 40
-      - 15.294
+      - 29.589
+      - 28.627
       rgb_color:
       - 255
-      - 242
-      - 216
+      - 218
+      - 182
       xy_color:
-      - 0.355
-      - 0.355
+      - 0.397
+      - 0.363
       state: 'on'
     light.magnarp:
       min_mireds: 250
@@ -289,39 +289,39 @@
       supported_features: 32
       color_mode: color_temp
       brightness: 254
-      color_temp: 353
+      color_temp: 355
       hs_color:
-      - 28.125
-      - 61.661
+      - 28.156
+      - 62.138
       rgb_color:
       - 255
-      - 171
-      - 97
+      - 170
+      - 96
       xy_color:
-      - 0.513
-      - 0.386
+      - 0.515
+      - 0.385
       state: 'on'
     light.leeslamp:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 254
-      color_temp: 326
-      hs_color:
-      - 27.718
-      - 55.105
-      rgb_color:
-      - 255
-      - 179
-      - 114
-      xy_color:
-      - 0.49
-      - 0.382
       icon: hue:wall-spot
       friendly_name: Leeslamp
       supported_features: 32
+      color_mode: color_temp
+      brightness: 254
+      color_temp: 350
+      hs_color:
+      - 28.077
+      - 60.925
+      rgb_color:
+      - 255
+      - 172
+      - 99
+      xy_color:
+      - 0.51
+      - 0.386
       state: 'on'
     light.turbinelamp:
       supported_color_modes:
@@ -357,14 +357,14 @@
       color_mode: hs
       brightness: 254
       hs_color:
-      - 32.212
-      - 55.293
+      - 31.026
+      - 61.176
       rgb_color:
       - 255
-      - 189
-      - 114
+      - 179
+      - 99
       xy_color:
-      - 0.48
+      - 0.502
       - 0.394
       state: 'on'
     light.nijntje:
@@ -379,6 +379,7 @@
       - stop_effect
       supported_color_modes:
       - color_temp
+      color_temp_startup: 370
       linkquality: 255
       power_on_behavior: previous
       update:
@@ -386,20 +387,19 @@
       update_available: false
       friendly_name: Nijntje
       supported_features: 47
-      color_temp_startup: 370
       color_mode: color_temp
-      brightness: 253
-      color_temp: 326
+      brightness: 249
+      color_temp: 350
       hs_color:
-      - 27.718
-      - 55.105
+      - 28.077
+      - 60.925
       rgb_color:
       - 255
-      - 179
-      - 114
+      - 172
+      - 99
       xy_color:
-      - 0.49
-      - 0.382
+      - 0.51
+      - 0.386
       state: 'on'
     light.willner:
       min_mireds: 250
@@ -411,36 +411,47 @@
       supported_features: 32
       color_mode: color_temp
       brightness: 254
-      color_temp: 326
+      color_temp: 350
       hs_color:
-      - 27.718
-      - 55.105
+      - 28.077
+      - 60.925
       rgb_color:
       - 255
-      - 179
-      - 114
+      - 172
+      - 99
       xy_color:
-      - 0.49
-      - 0.382
+      - 0.51
+      - 0.386
       state: 'on'
-  icon: mdi:brightness-7
+    light.eettafel:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
+      color_mode: color_temp
+      brightness: 254
+      color_temp: 353
+      hs_color:
+      - 28.125
+      - 61.661
+      rgb_color:
+      - 255
+      - 171
+      - 97
+      xy_color:
+      - 0.513
+      - 0.386
+      state: 'on'
+  icon: mdi:light-flood-down
   metadata: {}
 - id: 9c656371-07da-4140-b5d5-f7a3b6f79bac
   name: 'Lighting: Living Min'
   entities:
-    light.hoge_kast:
-      effect_list:
-      - colorloop
-      supported_color_modes:
-      - xy
-      off_with_transition: false
-      off_brightness: 102
-      icon: mdi:lava-lamp
-      friendly_name: Hoge Kast
-      supported_features: 44
-      state: 'off'
     light.leeslamp:
-      min_mireds: 153
+      min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
@@ -457,15 +468,14 @@
       xy_color:
       - 0.479
       - 0.38
-      off_with_transition: false
-      off_brightness:
-      icon: mdi:track-light
+      icon: hue:wall-spot
       friendly_name: Leeslamp
-      supported_features: 40
+      supported_features: 32
       state: 'on'
     light.turbinelamp:
       supported_color_modes:
       - onoff
+      icon: mdi:turbine
       friendly_name: Turbinelamp
       supported_features: 0
       state: 'off'
@@ -473,57 +483,62 @@
       supported_color_modes:
       - brightness
       entity_id:
-      - light.lichtstraat_zha_group
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
       icon: mdi:light-recessed
       friendly_name: Lichtstraat
-      supported_features: 40
+      supported_features: 32
       state: 'off'
     light.bollamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      supported_color_modes:
-      - color_temp
-      - xy
-      off_with_transition: false
-      off_brightness:
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Bollamp
-      supported_features: 44
-      color_mode: color_temp
-      brightness: 102
-      color_temp: 337
-      hs_color:
-      - 27.881
-      - 57.799
-      rgb_color:
-      - 255
-      - 176
-      - 107
-      xy_color:
-      - 0.499
-      - 0.384
-      state: 'on'
-    light.nijntje:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      icon: mdi:rabbit-variant
-      friendly_name: Nijntje
+      - hs
+      color_mode: hs
+      brightness: 102
+      hs_color:
+      - 31.493
+      - 58.039
+      rgb_color:
+      - 255
+      - 184
+      - 107
+      xy_color:
+      - 0.491
+      - 0.394
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Bollamp
       supported_features: 32
+      state: 'on'
+    light.nijntje:
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      friendly_name: Nijntje
+      supported_features: 47
+      color_temp_startup: 370
+      linkquality: 255
+      power_on_behavior: previous
+      update:
+        state: idle
+      update_available: false
       state: 'off'
     light.willner:
-      min_mireds: 153
+      min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      off_with_transition: false
-      off_brightness:
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Willner
-      supported_features: 40
       color_mode: color_temp
       brightness: 102
       color_temp: 328
@@ -537,19 +552,15 @@
       xy_color:
       - 0.492
       - 0.382
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Willner
+      supported_features: 32
       state: 'on'
     light.magnarp:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      entity_id:
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      icon: mdi:lightbulb-group
-      friendly_name: Magnarp
-      supported_features: 32
       color_mode: color_temp
       brightness: 102
       color_temp: 355
@@ -563,7 +574,44 @@
       xy_color:
       - 0.515
       - 0.385
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:lightbulb-group
+      friendly_name: Magnarp
+      supported_features: 32
       state: 'on'
+    light.eettafel:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
+      state: 'off'
+    light.hoge_kast:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - xy
+      icon: hue:bloom
+      friendly_name: Hoge Kast
+      supported_features: 61
+      color:
+        x: 0.397
+        y: 0.363
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      state: 'off'
   icon: mdi:candle
   metadata:
     light.magnarp:
@@ -727,18 +775,18 @@
       friendly_name: Eettafel
       supported_features: 32
       color_mode: color_temp
-      brightness: 1
-      color_temp: 250
+      brightness: 3
+      color_temp: 353
       hs_color:
-      - 26.812
-      - 34.87
+      - 28.125
+      - 61.661
       rgb_color:
       - 255
-      - 205
-      - 166
+      - 171
+      - 97
       xy_color:
-      - 0.421
-      - 0.364
+      - 0.513
+      - 0.386
       state: 'on'
     light.willner:
       min_mireds: 250
@@ -862,7 +910,7 @@
       supported_features: 61
       state: 'off'
     switch.turbinelamp:
-      linkquality: 255
+      linkquality: 232
       update:
         state: idle
       update_available: false
