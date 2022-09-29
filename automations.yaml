@@ -46,7 +46,7 @@
       message: Verlichting automatisch uitgeschakeld.
   mode: single
 - id: f120e80e-4717-4199-80a7-f56aee0f8690
-  alias: 'Lighting: Living lights dimmed late at night'
+  alias: Living > Lighting > Dim lights late at night
   description: Dim woonkamerverlichting laat in de avond
   trigger:
   - platform: time
@@ -67,26 +67,39 @@
       entity_id: scene.lighting_living_dimmed
   mode: single
 - id: b24e7ee3-fbd7-4e91-9116-095d7b24c843
-  alias: 'Lighting: Living lights wall switch on/off'
-  description: In/uitschakelen verlichting in de woonkamer bij gebruik linker wandschakelaar.
+  alias: Living > Lighting > Wall switch on/off
+  description: In/uitschakelen verlichting in de woonkamer bij gebruik wandschakelaar.
   trigger:
   - platform: state
-    entity_id: binary_sensor.wandschakelaar_links
+    entity_id:
+    - binary_sensor.wandschakelaar_links
+    to: 'on'
+    id: schakelaar-links-aan
+  - platform: state
+    entity_id:
+    - binary_sensor.wandschakelaar_links
+    to: 'off'
+    id: schakelaar-links-off
   action:
   - choose:
     - conditions:
-      - condition: template
-        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      - condition: trigger
+        id: schakelaar-links-aan
       sequence:
       - service: scene.turn_on
         data: {}
         target:
-          entity_id: scene.lighting_living_base
-    default:
-    - service: light.turn_off
-      data: {}
-      target:
-        entity_id: light.living
+          entity_id:
+          - scene.lighting_living_min
+    - conditions:
+      - condition: trigger
+        id: schakelaar-links-off
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.living
+    default: []
   mode: single
 - id: 8d8468fb-3baf-41be-88ee-9a3a71910909
   alias: 'Lighting: Garden On'
@@ -219,7 +232,7 @@
     brightness_pct: 50
   mode: single
 - id: 068719c4-88f2-44b5-a809-e2513ae65604
-  alias: 'Weather: Buienalarm'
+  alias: Outside > Weather > Buienalarm
   description: Send a notification and tweet when it's raining or rain is forecasted.
   trigger:
   - platform: state
@@ -329,7 +342,7 @@
       light: light.lichtstraat
       speed: 100
 - id: '1661538513078'
-  alias: Lightsaver Sfeerverlichting
+  alias: Living > Lighting > Lightsaver Sfeerverlichting
   description: ''
   use_blueprint:
     path: niro1987/lightsaver.yaml
@@ -453,6 +466,8 @@
     path: metbril/appliance_has_finished.yaml
     input:
       power_sensor: sensor.washing_machine_power
+      energy_sensor: sensor.washing_machine_energy
+      price_sensor: sensor.energy_consumption_tarif_2
       starting_hysteresis:
         hours: 0
         minutes: 1
@@ -495,12 +510,10 @@
       - service: notify.robert
         data:
           message: "Wasmachine is gestart. \U0001F45A\U0001F455\U0001F4A6"
-      energy_sensor: sensor.washing_machine_energy
       wait_timeout:
         hours: 5
         minutes: 0
         seconds: 0
-      price_sensor: sensor.energy_consumption_tarif_2
 - id: '1662104026902'
   alias: 'Zolder: Wasdroger is klaar'
   description: Verstuur meldingen als de wasdroger klaar is.
@@ -511,7 +524,7 @@
       starting_hysteresis:
         hours: 0
         minutes: 0
-        seconds: 30
+        seconds: 55
       finishing_hysteresis:
         hours: 0
         minutes: 0
@@ -643,7 +656,7 @@
     data: {}
   mode: single
 - id: '1662548077258'
-  alias: 'Security: Switch garden lights based on sun elevation'
+  alias: Garden > Lighting > Switch lights based on sun elevation
   description: 'Switch the outdoor lights on/off based on sun elevation. Elevation
     is an attribute of the sun integration. Elevetion is more accurate for darkness
     that a fixed time. Elevation varies over time. Note: I should create a blueprint
@@ -695,7 +708,7 @@
           \U0001F31A', 'Hit for the moon! \U0001F31B' ] | random }}"
   mode: single
 - id: '1662548148472'
-  alias: Post Gas Consumption to MinderGas.nl
+  alias: Energy > Post Gas Consumption to MinderGas.nl
   description: 'Post gas consumption to mindergas.nl daily at 00:15.
 
     The gas meter reading is updated once every hour, within 10 minutes after the
@@ -813,7 +826,8 @@
     data:
       message: "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }} {{
         url }}"
-- alias: 'Safety: Lightning notification'
+- id: 6e054688-5e75-48bd-9411-52a3e26264d1
+  alias: Outside > Safety > Lightning notification
   description: 'Lightning notification
 
     Requires the Blitzortung integration custom component: https://github.com/mrk-its/homeassistant-blitzortung
@@ -822,8 +836,6 @@
     https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml
 
     '
-  id: 6e054688-5e75-48bd-9411-52a3e26264d1
-  mode: single
   trigger:
   - platform: state
     entity_id: sensor.blitzortung_lightning_counter
@@ -852,10 +864,10 @@
           url: /map
   - delay:
       minutes: 1
-- alias: 'Safety: Snooze lightning notifications'
-  description: Snooze future lightning notifications.
-  id: 1f295bb8-8925-4b22-8f75-9l1ghtn1nga8
   mode: single
+- id: 1f295bb8-8925-4b22-8f75-9l1ghtn1nga8
+  alias: Outside > Safety > Snooze lightning notifications
+  description: Snooze future lightning notifications.
   trigger:
   - platform: event
     event_type: mobile_app_notification_action
@@ -864,6 +876,7 @@
   action:
   - service: input_boolean.turn_on
     entity_id: input_boolean.snooze_lightning
+  mode: single
 - alias: 'Safety: Unsnooze lightning notifications.'
   id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
   mode: single
@@ -1160,7 +1173,7 @@
       fall:
       - service: scene.turn_on
         target:
-          entity_id: scene.lighting_living_base
+          entity_id: scene.lighting_living_min
         metadata: {}
       rotate_cw_any:
       - if:
@@ -1186,12 +1199,12 @@
           data: {}
           target:
             entity_id: media_player.living_speaker
-- alias: HACS Updates
+- id: 4f63071f-16ae-419e-bf54-8064a147ad3e
+  alias: System > HACS Updates
   description: 'Verstuur een notificatie als er updates zijn van onderdelen die met
     HACS zijn geïnstalleerd.
 
     '
-  id: 4f63071f-16ae-419e-bf54-8064a147ad3e
   trigger:
   - platform: state
     entity_id: sensor.hacs
@@ -1223,11 +1236,11 @@
         -> {{\n  repo.available_version}}\n{% endfor %}\n"
       notification_id: update_hacs
   mode: single
-- alias: HACS Updates Done
+- id: 0923084c-025e-4f9f-b30b-029b87760465
+  alias: System > HACS Updates Done
   description: 'Verstuur een notificatie als alle updates voor HACS zijn geïnstalleerd.
 
     '
-  id: 0923084c-025e-4f9f-b30b-029b87760465
   trigger:
   - platform: numeric_state
     entity_id: sensor.hacs
@@ -1249,12 +1262,12 @@
     data:
       notification_id: update_hacs
   mode: single
-- alias: HACS Repository Toegevoegd Melden
+- id: 086eb1f7-3e73-497b-bdf8-a02414761465
+  alias: System > HACS Repository Toegevoegd Melden
   description: 'Verstuur een melding als er een nieuwe repository wordt toegevoegd
     aan HACS.
 
     '
-  id: 086eb1f7-3e73-497b-bdf8-a02414761465
   trigger:
   - platform: event
     event_type: hacs/repository
