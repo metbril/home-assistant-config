@@ -4,6 +4,8 @@
 #
 # https://api.ocr.space/parse/ImageUrl?apikey=007019321288957&language=dut&url=https://tankservice.app-it-up.com/Tankservice/v2/places/2318.png
 #
+# https://tankservice.app-it-up.com/Tankservice/v2/places/2318.png
+#
 - platform: rest
   name: Brandstoffen Dijktank Kanaalweg
   # yamllint disable-line rule:line-length
