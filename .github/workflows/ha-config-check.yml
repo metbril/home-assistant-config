@@ -79,6 +79,11 @@ jobs:
           git clone https://github.com/custom-components/feedparser.git
           mv -v feedparser/custom_components/* ./custom_components
 
+      - name: Clone custom component - Multiscrape
+        run: |
+          git clone https://github.com/danieldotnl/ha-multiscrape.git
+          mv -v ha-multiscrape/custom_components/* ./custom_components
+
       - name: Clone custom component - P2000
         run: |
           git clone https://github.com/cyberjunky/home-assistant-p2000.git
