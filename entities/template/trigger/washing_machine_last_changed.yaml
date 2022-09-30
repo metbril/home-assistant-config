@@ -1,7 +1,10 @@
 ---
+# Save timestamp of last toggle. This is used to calculate elapsed time
+# since last start or since last finish.
+#
 - trigger:
     - platform: state
-      entity_id: light.nijntje
+      entity_id: binary_sensor.washing_machine_running
       from:
         - 'on'
         - 'off'
@@ -10,7 +13,7 @@
         - 'off'
   sensor:
     - name: "Washing Machine Last Changed"
-      unique_id: "4b70ec63-7466-4d99-bf7b-b67e6d84306c"
+      unique_id: "8cc4cdab-13b3-4689-b4bc-156d6f4bc24e"
       state: "{{ now() }}"
       device_class: "timestamp"
       icon: "mdi:clock"

@@ -1,0 +1,19 @@
+---
+# Save energy meter reading to be able to calculate
+# consumption for last run.
+#
+- trigger:
+    - platform: state
+      entity_id: binary_sensor.washing_machine_running
+      from:
+        - 'off'
+      to:
+        - 'on'
+  sensor:
+    - name: "Washing Machine Start Energy"
+      unique_id: "15b7d78f-c7de-4311-8477-d67ef82b1c22"
+      icon: mdi:lightning-bolt
+      unit_of_measurement: kWh
+      device_class: energy
+      state: >
+        {{ states('sensor.washing_machine_energy') }}

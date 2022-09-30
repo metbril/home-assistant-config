@@ -1,0 +1,20 @@
+---
+# Calculate energy consumption when appliance finishes.
+#
+- trigger:
+    - platform: state
+      entity_id: binary_sensor.washing_machine_running
+      from:
+        - 'on'
+      to:
+        - 'off'
+  sensor:
+    - name: "Washing Machine Last Run Energy"
+      unique_id: "41ecee32-cf16-4ba7-95ab-574b84855e94"
+      icon: "mdi:lightning-bolt"
+      unit_of_measurement: kWh
+      device_class: energy
+      state: >
+        {% set start = states('sensor.washing_machine_start_energy') | float (0) %}
+        {% set end   = states('sensor.washing_machine_energy') | float(0) %}
+        {{ end - start | round(2) }}
