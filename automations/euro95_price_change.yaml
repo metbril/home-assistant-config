@@ -12,6 +12,7 @@
         - sensor.euro95_dijktank_kanaalweg
         - sensor.euro95_tinq_bermweg
         - sensor.euro95_lukoil_schermerhoek
+        - sensor.euro95_tamoil_ommoord
 
   action:
     - service: notify.robert
