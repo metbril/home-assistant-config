@@ -55,6 +55,15 @@ spent a lot of time fixed yaml syntax and formatting errors.
 
 So for now I have decided to move as much configuration as possible to the UI.
 
+### Automations, Scripts & Scenes
+
+Since using the UI editor for automations, scripts and scenes, I have noticed
+that I change those a lot. These means that changes are scattered around the
+files. Since I want to track changes through git and be able
+to revert to old versions, I have again decided to split these files
+`automations.yaml`, `scripts.yaml` and `scenes.yaml` into separate files.
+I will continue using the files for quick one offs or testing.
+
 ## HASS.io
 
 This file contains specific details about my HASS.io installation.
