@@ -117,13 +117,24 @@
   entities:
     light.hoge_kast:
       effect_list:
-      - colorloop
-      - random
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
       supported_color_modes:
-      - hs
-      icon: mdi:lamp
+      - xy
+      color:
+        x: 0.397
+        y: 0.363
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      icon: hue:bloom
       friendly_name: Hoge Kast
-      supported_features: 44
+      supported_features: 61
       state: 'off'
     light.magnarp:
       min_mireds: 250
@@ -152,10 +163,13 @@
       - 0.389
       state: 'on'
     light.leeslamp:
-      min_mireds: 153
-      max_mireds: 500
+      min_mireds: 250
+      max_mireds: 454
       supported_color_modes:
       - color_temp
+      icon: hue:wall-spot
+      friendly_name: Leeslamp
+      supported_features: 32
       color_mode: color_temp
       brightness: 3
       color_temp: 440
@@ -169,57 +183,77 @@
       xy_color:
       - 0.572
       - 0.388
-      icon: mdi:track-light
-      friendly_name: Leeslamp
-      supported_features: 40
       state: 'on'
     light.turbinelamp:
       supported_color_modes:
       - onoff
-      icon: mdi:lava-lamp
+      icon: mdi:turbine
       friendly_name: Turbinelamp
-      supported_features: 40
+      supported_features: 0
       state: 'off'
     light.lichtstraat:
       supported_color_modes:
       - brightness
-      off_with_transition: false
-      off_brightness:
+      entity_id:
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
       icon: mdi:light-recessed
       friendly_name: Lichtstraat
-      supported_features: 40
-      color_mode: brightness
-      brightness: 3
-      state: 'on'
+      supported_features: 32
+      state: 'off'
     light.bollamp:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
+      min_mireds: 250
+      max_mireds: 454
       supported_color_modes:
       - color_temp
       - hs
       icon: mdi:wall-sconce-round-variant
       friendly_name: Bollamp
-      supported_features: 44
-      state: 'off'
+      supported_features: 32
+      color_mode: hs
+      brightness: 3
+      hs_color:
+      - 28.34
+      - 76.077
+      rgb_color:
+      - 255
+      - 152
+      - 61
+      xy_color:
+      - 0.561
+      - 0.386
+      state: 'on'
     light.nijntje:
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_temp_startup: 370
+      linkquality: 255
+      power_on_behavior: previous
+      update:
+        state: idle
+      update_available: false
+      friendly_name: Nijntje
+      supported_features: 47
+      state: 'off'
+    light.willner:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      off_with_transition: false
-      off_brightness: 254
-      icon: mdi:rabbit-variant
-      friendly_name: Nijntjelamp
-      supported_features: 40
-      state: 'off'
-    light.willner:
-      min_mireds: 153
-      max_mireds: 500
-      supported_color_modes:
-      - color_temp
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Willner
+      supported_features: 32
       color_mode: color_temp
       brightness: 3
       color_temp: 435
@@ -233,10 +267,16 @@
       xy_color:
       - 0.569
       - 0.388
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Willner
-      supported_features: 40
       state: 'on'
+    light.eettafel:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
+      state: 'off'
   icon: mdi:weather-night
   metadata: {}
 - id: bbc621c3-a1b7-4a48-9a7f-cc800ffaea74
