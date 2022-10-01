@@ -73,18 +73,14 @@
   - platform: state
     entity_id:
     - binary_sensor.wandschakelaar_links
-    to: 'on'
-    id: schakelaar-links-aan
-  - platform: state
-    entity_id:
-    - binary_sensor.wandschakelaar_links
-    to: 'off'
-    id: schakelaar-links-off
   action:
+  - variables:
+      entity_id: '{{ trigger.to_state.entity_id }}'
+      state: '{{ trigger.to_state.state }}'
   - choose:
     - conditions:
-      - condition: trigger
-        id: schakelaar-links-aan
+      - condition: template
+        value_template: '{{ state == ''on'' }}'
       sequence:
       - service: scene.turn_on
         data: {}
@@ -92,8 +88,8 @@
           entity_id:
           - scene.lighting_living_min
     - conditions:
-      - condition: trigger
-        id: schakelaar-links-off
+      - condition: template
+        value_template: '{{ state == ''off'' }}'
       sequence:
       - service: light.turn_off
         data: {}
@@ -687,7 +683,17 @@
         transition: 5
     - service: persistent_notification.create
       data:
-        message: Gevelverlichting uitgeschakeld bij zonsopkomst.
+        message: 'Gevelverlichting uitgeschakeld bij zonsopkomst.
+
+          Elevation: {{ states(''sensor.sun_elevation'') }}gr.
+
+          Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
+
+          Clouds: {{ states(''sensor.weatherbit_cloud_coverage'') }}%.
+
+          Irradiance: {{ states(''sensor.weatherbit_solar_radiation'') }}%.
+
+          '
     - service: notify.twitter
       data:
         message: "{{ ['Zonsopkomst! \U0001F305','Het wordt een mooie dag! \U0001F603','Goedemorgen!
@@ -701,7 +707,17 @@
         brightness_pct: 70
     - service: persistent_notification.create
       data:
-        message: Gevelverlichting ingeschakeld bij zonsondergang.
+        message: 'Gevelverlichting ingeschakeld bij zonsondergang.
+
+          Elevation: {{ states(''sensor.sun_elevation'') }}gr.
+
+          Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
+
+          Clouds: {{ states(''sensor.weatherbit_cloud_coverage'') }}%.
+
+          Irradiance: {{ states(''sensor.weatherbit_solar_radiation'') }}%.
+
+          '
     - service: notify.twitter
       data:
         message: "{{ ['Zonsondergang! \U0001F305','De dag zit er weer op! \U0001F605','Goedenavond!
