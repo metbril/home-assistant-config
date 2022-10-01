@@ -399,11 +399,3 @@ bark_the_dog:
       entity_id: '{{ entity_id }}'
   mode: single
   icon: mdi:dog-side
-time_to_leave_for_robert:
-  alias: Time to Leave for Robert
-  sequence:
-  - service: notify.robert
-    data:
-      message: Tijd om te vertrekken naar je werk.
-  mode: single
-  icon: mdi:exit-run

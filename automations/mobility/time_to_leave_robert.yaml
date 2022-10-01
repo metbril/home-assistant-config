@@ -1,0 +1,17 @@
+- alias: Time to Leave for Robert
+  description: Notify when it's time to leave for work.
+  id: '1664610107813'
+  mode: single
+  trigger:
+    - platform: time
+      at: 07:50:00
+  condition:
+    - condition: state
+      entity_id: binary_sensor.workday
+      state: 'on'
+    - condition: state
+      entity_id: person.robert
+      state: home
+  action:
+    - service: script.time_to_leave_for_robert
+      data: {}

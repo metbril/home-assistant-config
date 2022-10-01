@@ -1320,20 +1320,3 @@
       integration: Zigbee2MQTT
       controller_device: 1eb9b76756c2cd628930c2e145ad4b78
       controller_entity: sensor.living_speaker_controller_action
-- id: '1664610107813'
-  alias: Time to Leave for Robert
-  description: Notify when it's time to leave for work.
-  trigger:
-  - platform: time
-    at: 07:50:00
-  condition:
-  - condition: state
-    entity_id: binary_sensor.workday
-    state: 'on'
-  - condition: state
-    entity_id: person.robert
-    state: home
-  action:
-  - service: script.time_to_leave_for_robert
-    data: {}
-  mode: single
