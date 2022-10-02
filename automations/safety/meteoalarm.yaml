@@ -1,0 +1,30 @@
+- alias: "Safety > Meteoalarm Notification"
+  description: >
+
+    Send notification on each entity update (not only at state change)
+
+  id: 418cd418-bca4-45fa-b244-736c18fa711f
+  mode: queued
+
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.meteoalarm_zuid_holland
+
+  condition:
+    - alias: "There is an active alert"
+      condition: state
+      entity_id: binary_sensor.meteoalarm_zuid_holland
+      state: "on"
+
+  action:
+    - service: notify.family
+      data:
+        title: >
+          {{ state_attr('binary_sensor.meteoalarm_zuid_holland',
+          'headline').split(' - ')[0] }} ⚠️
+        message: >
+            {{ state_attr('binary_sensor.meteoalarm_zuid_holland',
+            'description') | replace('\n', ' ') }}
+        data:
+          url: >
+            {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'web') }}
