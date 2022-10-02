@@ -23,6 +23,8 @@ script split: !include_dir_merge_named scripts
 
 # ---- integrations in alphabetical order ----
 
+air_quality: !include_dir_merge_list entities/air_quality
+
 binary_sensor: !include_dir_merge_list entities/binary_sensor
 
 calendar: !include_dir_merge_list entities/calendar

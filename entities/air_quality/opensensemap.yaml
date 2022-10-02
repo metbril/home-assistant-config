@@ -1,0 +1,6 @@
+---
+# B.Meineszlaan Observatory
+# https://opensensemap.org/explore/5b3b87025dc1ec001b665468
+- platform: opensensemap
+  name: B. Meineszlaan Rotterdam
+  station_id: 5b3b87025dc1ec001b665468
