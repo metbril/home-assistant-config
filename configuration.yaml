@@ -25,6 +25,8 @@ script split: !include_dir_merge_named scripts
 
 binary_sensor: !include_dir_merge_list entities/binary_sensor
 
+calendar: !include_dir_merge_list entities/calendar
+
 default_config:
 
 # The themes folder is in the root of the config folder, so HACS can install

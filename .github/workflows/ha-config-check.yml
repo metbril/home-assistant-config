@@ -79,6 +79,11 @@ jobs:
           git clone https://github.com/custom-components/feedparser.git
           mv -v feedparser/custom_components/* ./custom_components
 
+      - name: Clone custom component - ICS Calendar
+        run: |
+          git clone https://github.com/franc6/ics_calendar.git
+          mv -v ics_calendar/custom_components/* ./custom_components
+
       - name: Clone custom component - Multiscrape
         run: |
           git clone https://github.com/danieldotnl/ha-multiscrape.git

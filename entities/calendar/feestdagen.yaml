@@ -1,0 +1,8 @@
+---
+- platform: ics_calendar
+  calendars:
+    - name: "Feestdagen"
+      url: !secret webcal_guru_feestdagen
+      days: 2
+      include_all_day: true
+      download_interval: 60 ## minutes
