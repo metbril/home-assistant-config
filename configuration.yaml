@@ -7,10 +7,10 @@ homeassistant:
     - !secret allowlist_dir_ssl
 
   # Customize individual entities
-  customize: !include customize.yaml
+  customize: !include customizations/entities/customize.yaml
 
   # Customize entities by pattern
-  customize_glob: !include customize_globs.yaml
+  customize_glob: !include customizations/entities/customize_globs.yaml
 
   packages: !include_dir_named packages
 
