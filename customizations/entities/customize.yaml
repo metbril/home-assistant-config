@@ -59,3 +59,7 @@ sensor.weatherbit_snow:
   unit_of_measurement: mm/u
 sensor.weatherbit_solar_radiation:
   unit_of_measurement: W/m²
+sensor.current_ozone_level:
+  friendly_name: Ozon OpenUV
+sensor.current_uv_index:
+  friendly_name: UV-index OpenUV

@@ -1,0 +1,7 @@
+- alias: "Health > Update OpenUV protection window daily"
+  id: 664d5361-6383-45ec-9268-d42ad07c06ce
+  trigger:
+    - platform: time
+      at: "02:12:00"
+  action:
+    - service: openuv.update_protection_data

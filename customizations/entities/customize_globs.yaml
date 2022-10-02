@@ -11,3 +11,9 @@ sensor.euro95_*:
 sensor.lpg_*:
   icon: mdi:gas-station
   unit_of_measurement: €/L
+sensor.*_ozone*:
+  icon: mdi:vector-triangle
+  unit_of_measurement: DU
+sensor.*_uv_index:
+  icon: mdi:weather-sunny
+  unit_of_measurement: UVI
