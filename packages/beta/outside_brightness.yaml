@@ -1,49 +1,49 @@
 automation:
-  - id: '1664780304702'
+  - id: "1664780304702"
     alias: Outside Brightness Notification
-    description: ''
+    description: ""
     trigger:
-    - platform: state
-      entity_id:
-      - sun.sun
-      to: above_horizon
-    - platform: state
-      entity_id:
-      - sun.sun
-      to: below_horizon
-    - platform: numeric_state
-      entity_id: sensor.sun_elevation
-      below: 1
-    - platform: numeric_state
-      entity_id: sensor.sun_elevation
-      above: 1
-    - platform: numeric_state
-      entity_id: sensor.outside_brightness
-      above: 10
-    - platform: numeric_state
-      entity_id: sensor.outside_brightness
-      below: 10
+      - platform: state
+        entity_id:
+          - sun.sun
+        to: above_horizon
+      - platform: state
+        entity_id:
+          - sun.sun
+        to: below_horizon
+      - platform: numeric_state
+        entity_id: sensor.sun_elevation
+        below: 1
+      - platform: numeric_state
+        entity_id: sensor.sun_elevation
+        above: 1
+      - platform: numeric_state
+        entity_id: sensor.outside_brightness
+        above: 10
+      - platform: numeric_state
+        entity_id: sensor.outside_brightness
+        below: 10
     condition: []
     action:
-    - service: script.outside_brightness_notification
-      data: {}
+      - service: script.outside_brightness_notification
+        data: {}
     mode: single
 
 script:
   outside_brightness_notification:
     alias: Outside Brightness Notification
     sequence:
-    - service: persistent_notification.create
-      data:
-        message: 'Sun: {{ states(''sun.sun'') }}
+      - service: persistent_notification.create
+        data:
+          message: "Sun: {{ states('sun.sun') }}
 
-          Elevation: {{ states(''sensor.sun_elevation'') }}gr.
+            Elevation: {{ states('sensor.sun_elevation') }}gr.
 
-          Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
+            Outside brightness: {{ states('sensor.outside_brightness') }}%.
 
-          Clouds: {{ states(''sensor.weatherbit_cloud_coverage'') }}%.
+            Clouds: {{ states('sensor.weatherbit_cloud_coverage') }}%.
 
-          Irradiance: {{ states(''sensor.weatherbit_solar_radiation'') }}%.
+            Irradiance: {{ states('sensor.weatherbit_solar_radiation') }}%.
 
-          '
+            "
     mode: single
