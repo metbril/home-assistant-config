@@ -681,19 +681,6 @@
         entity_id: light.achtergevel
       data:
         transition: 5
-    - service: persistent_notification.create
-      data:
-        message: 'Gevelverlichting uitgeschakeld bij zonsopkomst.
-
-          Elevation: {{ states(''sensor.sun_elevation'') }}gr.
-
-          Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
-
-          Clouds: {{ states(''sensor.weatherbit_cloud_coverage'') }}%.
-
-          Irradiance: {{ states(''sensor.weatherbit_solar_radiation'') }}%.
-
-          '
     - service: notify.twitter
       data:
         message: "{{ ['Zonsopkomst! \U0001F305','Het wordt een mooie dag! \U0001F603','Goedemorgen!
@@ -705,19 +692,6 @@
       data:
         transition: 5
         brightness_pct: 70
-    - service: persistent_notification.create
-      data:
-        message: 'Gevelverlichting ingeschakeld bij zonsondergang.
-
-          Elevation: {{ states(''sensor.sun_elevation'') }}gr.
-
-          Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
-
-          Clouds: {{ states(''sensor.weatherbit_cloud_coverage'') }}%.
-
-          Irradiance: {{ states(''sensor.weatherbit_solar_radiation'') }}%.
-
-          '
     - service: notify.twitter
       data:
         message: "{{ ['Zonsondergang! \U0001F305','De dag zit er weer op! \U0001F605','Goedenavond!
@@ -728,10 +702,7 @@
   description: 'Post gas consumption to mindergas.nl daily at 00:15.
 
     The gas meter reading is updated once every hour, within 10 minutes after the
-    full hour. Posting as soon as possible after that, with a safe margin.
-
-
-    '
+    full hour. Posting as soon as possible after that, with a safe margin.'
   trigger:
   - platform: time
     at: 00:15:00
@@ -926,26 +897,26 @@
   action:
   - scene: scene.office_do_not_disturb
   mode: single
-- alias: 'Office: Pause Music'
+- id: '1649842819459'
+  alias: Office > Pause Music
   description: Pause playing music in the office when in call.
-  id: '1649842819459'
-  mode: single
   trigger:
   - platform: state
-    entity_id: sensor.msteams_activity_robert
-    to: In gesprek
+    entity_id:
+    - binary_sensor.robert_in_call
+    to: 'on'
   condition:
   - condition: state
     entity_id: binary_sensor.working_from_home_robert
     state: 'on'
   - condition: state
-    entity_id: media_player.studeerkamer
+    entity_id: media_player.kantoorspeaker
     state: playing
   action:
   - service: media_player.media_pause
     data: {}
     target:
-      device_id: 49324710c6344a809dae725922db2cc6
+      entity_id: media_player.kantoorspeaker
   - service: input_boolean.turn_on
     data: {}
     target:
@@ -954,6 +925,7 @@
     data:
       message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
       title: Teams activity
+  mode: single
 - alias: Reset Teams Status Robert
   description: 'Reset Teams Status when not changed for a long time outside work hours.
 
@@ -996,14 +968,14 @@
   - service: notify.robert
     data:
       message: Teams status opnieuw ingesteld door inactiviteit.
-- alias: 'Office: Resume Music'
+- id: '1649843570979'
+  alias: Office > Resume Music
   description: Resume music when Teams call has finished.
-  id: '1649843570979'
-  mode: single
   trigger:
   - platform: state
-    entity_id: sensor.msteams_activity_robert
-    from: In gesprek
+    entity_id:
+    - binary_sensor.robert_in_call
+    to: 'off'
   condition:
   - alias: Music was paused when call started
     condition: state
@@ -1012,14 +984,18 @@
   action:
   - service: media_player.media_play
     target:
-      entity_id: media_player.office_speaker
+      entity_id:
+      - media_player.kantoorspeaker
+    data: {}
   - service: input_boolean.turn_off
     target:
       entity_id: input_boolean.resume_office_music
+    data: {}
   - service: notify.robert
     data:
       message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
       title: Teams activity
+  mode: single
 - id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
   alias: 'Office: WFH Robert Available'
   description: ''
@@ -1040,7 +1016,7 @@
   mode: single
 - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
   alias: Carwash Notification
-  description: Geef een melding wanneer de auto gewassen kan worden
+  description: Geef een melding wanneer de auto gewassen kan worden.
   trigger:
   - platform: state
     entity_id: binary_sensor.car_wash
@@ -1053,12 +1029,9 @@
         voor de auto.','Het is weer mogelijk om de auto te wassen.','Je kunt weer
         naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
   mode: single
-- alias: 'Media: Pause living speaker when TV is turned on'
-  id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
-  description: 'Pause living speaker when living TV is turned on
-
-    '
-  mode: single
+- id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
+  alias: 'Media: Pause living speaker when TV is turned on'
+  description: Pause living speaker when living TV is turned on.
   trigger:
   - platform: state
     entity_id: media_player.living_tv
@@ -1073,6 +1046,7 @@
   - service: notify.living_tv
     data:
       message: Muziekspeler automatisch gepauzeerd.
+  mode: single
 - id: '1663046423659'
   alias: 'Office: Printer powered reminder'
   description: ''
@@ -1217,10 +1191,8 @@
             entity_id: media_player.living_speaker
 - id: 4f63071f-16ae-419e-bf54-8064a147ad3e
   alias: System > HACS Updates
-  description: 'Verstuur een notificatie als er updates zijn van onderdelen die met
+  description: Verstuur een notificatie als er updates zijn van onderdelen die met
     HACS zijn geïnstalleerd.
-
-    '
   trigger:
   - platform: state
     entity_id: sensor.hacs
@@ -1254,9 +1226,7 @@
   mode: single
 - id: 0923084c-025e-4f9f-b30b-029b87760465
   alias: System > HACS Updates Done
-  description: 'Verstuur een notificatie als alle updates voor HACS zijn geïnstalleerd.
-
-    '
+  description: Verstuur een notificatie als alle updates voor HACS zijn geïnstalleerd.
   trigger:
   - platform: numeric_state
     entity_id: sensor.hacs
@@ -1265,9 +1235,7 @@
   - service: notify.admin
     data:
       title: HACS Updates
-      message: 'Alle HACS-updates zijn verwerkt.
-
-        '
+      message: Alle HACS-updates zijn verwerkt.
       data:
         push:
           thread-id: updates
@@ -1280,10 +1248,8 @@
   mode: single
 - id: 086eb1f7-3e73-497b-bdf8-a02414761465
   alias: System > HACS Repository Toegevoegd Melden
-  description: 'Verstuur een melding als er een nieuwe repository wordt toegevoegd
+  description: Verstuur een melding als er een nieuwe repository wordt toegevoegd
     aan HACS.
-
-    '
   trigger:
   - platform: event
     event_type: hacs/repository
@@ -1296,9 +1262,7 @@
   - service: notify.admin
     data:
       title: HACS-repository toegevoegd
-      message: 'Repository toegevoegd: * {{trigger.event.data.repository}}
-
-        '
+      message: 'Repository toegevoegd: * {{trigger.event.data.repository}}'
       data:
         push:
           thread-id: updates
