@@ -1,0 +1,32 @@
+start_netflix:
+  alias: "Media: Start Netflix on living TV"
+  description:
+    Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
+    in.
+  icon: mdi:netflix
+  mode: single
+  sequence:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.living_tv
+              state: "off"
+          sequence:
+            - service: notify.mobile_app_iphone_robert
+              data:
+                message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+            - service: media_player.turn_on
+              target:
+                entity_id: media_player.living_tv
+              data: {}
+      default: []
+    - wait_template: "{{ is_state('media_player.living_tv', 'on') }}"
+      timeout: 00:01:00
+    - service: media_player.select_source
+      data:
+        source: Netflix
+      target:
+        entity_id: media_player.living_tv
+    - service: notify.living_tv
+      data:
+        message: Netflix is gestart. Veel kijkplezier!

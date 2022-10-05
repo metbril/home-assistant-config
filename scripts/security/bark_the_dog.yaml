@@ -1,0 +1,64 @@
+bark_the_dog:
+  alias: "Security: Bark The Dog"
+  description:
+    "Loudly play the sound of a barking dog. Delay for the duration of
+    the clip afterwards. Lower the volume just in case. Limited to Sonos players.
+
+    "
+  fields:
+    entity_id:
+      name: Media Player
+      description: The media player that plays the sound
+      example: media_player.living_speaker
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+    volume_pct:
+      name: Volume Level
+      description: The volume level of the barking dog. As loud as possible.
+      selector:
+        number:
+          min: 1
+          max: 100
+          step: 1
+          unit_of_measurement: "%"
+          mode: slider
+      default: 100
+      example: "100"
+  sequence:
+    - variables:
+        volume_level: "{{ (volume_pct | int(100) / 100) | float }}"
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.media_pause
+      target:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.volume_set
+      data:
+        volume_level: "{{ volume_level | float }}"
+        entity_id: "{{ entity_id }}"
+    - service: media_player.play_media
+      data:
+        media_content_type: music
+        media_content_id: /local/sounds/dog-barking-noise.mp3
+        entity_id: "{{ entity_id }}"
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 3
+        milliseconds: 0
+      alias: Delay so sound can start playing
+    - wait_template: "{{ is_state(entity_id, 'paused') }}"
+      continue_on_timeout: true
+      alias: Wait until sound has finished playing
+    - service: sonos.restore
+      data:
+        entity_id: "{{ entity_id }}"
+  mode: single
+  icon: mdi:dog-side

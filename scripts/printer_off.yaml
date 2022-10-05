@@ -1,0 +1,16 @@
+printer_off:
+  alias: "Kantoor: Printer ingeschakeld"
+  sequence:
+    - service: notify.robert
+      data:
+        message: Printer staat nog aan
+        title: Printer
+        data:
+          actions:
+            - action: PRINTER_OFF
+              title: Uitschakelen
+            - action: PRINTER_REMIND
+              title: Herinneren
+            - action: PRINTER_IGNORE
+              title: Negeren
+  mode: single

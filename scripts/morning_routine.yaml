@@ -1,0 +1,41 @@
+morning_routine:
+  alias: Ochtendroutine
+  fields:
+    player:
+      name: Sonos Mediaspeler
+      description: The media player that plays the morning routine.
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+          multiple: false
+  variables:
+    time_of_day: Goedemorgen.
+    vandaag:
+      "Het is vandaag {{ states('sensor.weekday') }} {{ states('sensor.long_date')
+      }} en de tijd is {{ states('sensor.time') }}.
+
+      "
+    weer:
+      "Het is nu {{ states('sensor.knmi_thuis_omschrijving') | lower }} en {{
+      state_attr('weather.knmi_thuis','temperature') | float(0) | round(0) }}
+      graden. Het wordt vandaag maximaal {{ state_attr('weather.knmi_thuis','forecast')[0].temperature
+      | float(0) | round(0) }} graden. Later vandaag: {{ states('sensor.knmi_thuis_korte_dagverwachting')
+      }}.
+
+      "
+    weer_waarschuwing:
+      "{% if is_state('binary_sensor.knmi_thuis_waarschuwing','on')
+      %}\n  Let op.\n  {{ state_attr('binary_sensor.knmi_thuis_waarschuwing', 'Waarschuwing')
+      }}\n{% endif %}\n"
+  sequence:
+    - service: script.sonos_say
+      data:
+        entity_id: "{{ player }}"
+        message: "{{ time_of_day }} {{ vandaag }} {{ weer }} {{ weer_waarschuwing }}"
+        volume_percent: 30
+    - service: script.lees_het_nieuws_voor
+      data:
+        player: "{{ player }}"
+        volume_percent: 30
