@@ -3,7 +3,8 @@ lees_het_nieuws_voor:
   fields:
     player:
       name: Media player
-      description: The media player that reads the news. Currently limited to Sonos
+      description:
+        The media player that reads the news. Currently limited to Sonos
         speakers only.
       required: true
       selector:
@@ -19,65 +20,69 @@ lees_het_nieuws_voor:
           min: 1
           max: 100
           step: 1
-          unit_of_measurement: '%'
+          unit_of_measurement: "%"
           mode: slider
       default: 30
-      example: '30'
+      example: "30"
   sequence:
-  - variables:
-      volume_level: '{{ ((volume_percent | default(30) | int(0)) / 100) | float(0)
-        }}'
-  - service: script.sonos_say
-    data:
-      entity_id: '{{ player }}'
-      message: 'Het nieuws van {{ ((states.sensor.anp_nieuws_audio.attributes.entries[0].title  |
-        regex_replace(find=''0(\d)'', replace=''\\1'', ignorecase=True)).split()[-2]  |
-        int(0)) % 12 }} uur.
+    - variables:
+        volume_level:
+          "{{ ((volume_percent | default(30) | int(0)) / 100) | float(0)
+          }}"
+    - service: script.sonos_say
+      data:
+        entity_id: "{{ player }}"
+        message:
+          'Het nieuws van {{ ((states.sensor.anp_nieuws_audio.attributes.entries[0].title  |
+          regex_replace(find=''0(\d)'', replace=''\\1'', ignorecase=True)).split()[-2]  |
+          int(0)) % 12 }} uur.
 
-        '
-      volume_percent: '{{ volume_percent }}'
-  - service: sonos.snapshot
-    data:
-      entity_id: '{{ player }}'
-  - service: media_player.unjoin
-    data:
-      entity_id: '{{ player }}'
-  - service: media_player.media_pause
-    data:
-      entity_id: '{{ player }}'
-  - service: media_player.volume_set
-    data:
-      entity_id: '{{ player }}'
-      volume_level: '{{ volume_level }}'
-  - service: media_player.play_media
-    data:
-      media_content_id: '{{ states.sensor.anp_nieuws_audio.attributes.entries[0].media_content[0].url
-        }}'
-      media_content_type: music
-    target:
-      entity_id: '{{ player }}'
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 5
-      milliseconds: 0
-    alias: Delay for 5 seconds, wait for media to download and start playing
-  - alias: Wait until media has finished, or max 2 minutes (> audio file)
-    wait_template: '{{ is_state( player,''paused'') }}'
-    timeout: '120'
-    continue_on_timeout: true
-  - service: sonos.restore
-    data:
-      entity_id: '{{ player }}'
+          '
+        volume_percent: "{{ volume_percent }}"
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.media_pause
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ player }}"
+        volume_level: "{{ volume_level }}"
+    - service: media_player.play_media
+      data:
+        media_content_id:
+          "{{ states.sensor.anp_nieuws_audio.attributes.entries[0].media_content[0].url
+          }}"
+        media_content_type: music
+      target:
+        entity_id: "{{ player }}"
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+      alias: Delay for 5 seconds, wait for media to download and start playing
+    - alias: Wait until media has finished, or max 2 minutes (> audio file)
+      wait_template: "{{ is_state( player,'paused') }}"
+      timeout: "120"
+      continue_on_timeout: true
+    - service: sonos.restore
+      data:
+        entity_id: "{{ player }}"
   mode: single
   icon: mdi:account-voice
 mindergas:
-  alias: 'Energy: Post meter reading to mindergas.nl'
-  description: 'A simple wrapper script around the RESTful command, to be able to
+  alias: "Energy: Post meter reading to mindergas.nl"
+  description:
+    "A simple wrapper script around the RESTful command, to be able to
     post a gas meter reading manually through the Services menu in the developer tools
     and call it from the automations editor.
 
-    '
+    "
   mode: single
   fields:
     date:
@@ -91,7 +96,7 @@ mindergas:
       description: The last meter reading at the end of the day of the specified date.
       required: true
       default: 0
-      example: '1234.567'
+      example: "1234.567"
       selector:
         number:
           min: 0
@@ -100,10 +105,10 @@ mindergas:
           unit_of_measurement: m3
           mode: box
   sequence:
-  - service: rest_command.mindergas
-    data:
-      date: '{{ date }}'
-      reading: '{{ reading }}'
+    - service: rest_command.mindergas
+      data:
+        date: "{{ date }}"
+        reading: "{{ reading }}"
   icon: mdi:meter-gas
 sonos_say:
   alias: Sonos Text-To-Speech
@@ -119,7 +124,7 @@ sonos_say:
       selector:
         entity:
           domain:
-          - media_player
+            - media_player
           integration: sonos
           multiple: false
     message:
@@ -134,59 +139,61 @@ sonos_say:
     volume_percent:
       name: Volume
       description: Volume of the spoken text, Range 0..1
-      example: '0.3'
+      example: "0.3"
       default: 30
       selector:
         number:
           min: 0
           max: 100
           step: 1
-          unit_of_measurement: '%'
+          unit_of_measurement: "%"
           mode: slider
     delay:
-      description: The time in seconds to wait until the media player state is restored.
+      description:
+        The time in seconds to wait until the media player state is restored.
         This is the duration of the spoken text.
-      example: '3'
+      example: "3"
       default: 5
   variables:
-    volume_level: "{% if (volume_percent is none) or (volume_percent is undefined)
+    volume_level:
+      "{% if (volume_percent is none) or (volume_percent is undefined)
       or (volume_percent == \"\") %}\n  0.3\n{% else %}\n  {{ (volume_percent / 100)
       | float(0) }}\n{% endif %}"
-    is_playing: '{{ is_state(entity_id, ''playing'') }}'
-    media: '{{ state_attr(entity_id,''media_content_id'') }}'
-    is_cloud: '{{ (media.split('':'')[0] == ''x-sonos-vli'') }}'
-    cannot_restore: '{{ is_playing and is_cloud }}'
+    is_playing: "{{ is_state(entity_id, 'playing') }}"
+    media: "{{ state_attr(entity_id,'media_content_id') }}"
+    is_cloud: "{{ (media.split(':')[0] == 'x-sonos-vli') }}"
+    cannot_restore: "{{ is_playing and is_cloud }}"
   sequence:
-  - if:
-    - condition: state
-      entity_id: input_boolean.do_not_disturb
-      state: 'on'
-    then:
-    - stop: Do not disturb
-  - service: sonos.snapshot
-    data:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.unjoin
-    data:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.media_pause
-    data:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.volume_set
-    data:
-      entity_id: '{{ entity_id }}'
-      volume_level: '{{ volume_level }}'
-  - service: tts.cloud_say
-    data:
-      entity_id: '{{ entity_id }}'
-      message: '{{ message }}'
-  - alias: Wait for text online parsing
-    delay: 3
-  - alias: Wait until speech has finished
-    wait_template: '{{ is_state( entity_id,''paused'') }}'
-  - service: sonos.restore
-    data:
-      entity_id: '{{ entity_id }}'
+    - if:
+        - condition: state
+          entity_id: input_boolean.do_not_disturb
+          state: "on"
+      then:
+        - stop: Do not disturb
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.media_pause
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ entity_id }}"
+        volume_level: "{{ volume_level }}"
+    - service: tts.cloud_say
+      data:
+        entity_id: "{{ entity_id }}"
+        message: "{{ message }}"
+    - alias: Wait for text online parsing
+      delay: 3
+    - alias: Wait until speech has finished
+      wait_template: "{{ is_state( entity_id,'paused') }}"
+    - service: sonos.restore
+      data:
+        entity_id: "{{ entity_id }}"
 morning_routine:
   alias: Ochtendroutine
   fields:
@@ -201,121 +208,126 @@ morning_routine:
           multiple: false
   variables:
     time_of_day: Goedemorgen.
-    vandaag: 'Het is vandaag {{ states(''sensor.weekday'') }} {{ states(''sensor.long_date'')
-      }} en de tijd is {{ states(''sensor.time'') }}.
+    vandaag:
+      "Het is vandaag {{ states('sensor.weekday') }} {{ states('sensor.long_date')
+      }} en de tijd is {{ states('sensor.time') }}.
 
-      '
-    weer: 'Het is nu {{ states(''sensor.knmi_thuis_omschrijving'') | lower }} en {{
-      state_attr(''weather.knmi_thuis'',''temperature'') | float(0) | round(0) }}
-      graden. Het wordt vandaag maximaal {{ state_attr(''weather.knmi_thuis'',''forecast'')[0].temperature
-      | float(0) | round(0) }} graden. Later vandaag: {{ states(''sensor.knmi_thuis_korte_dagverwachting'')
+      "
+    weer:
+      "Het is nu {{ states('sensor.knmi_thuis_omschrijving') | lower }} en {{
+      state_attr('weather.knmi_thuis','temperature') | float(0) | round(0) }}
+      graden. Het wordt vandaag maximaal {{ state_attr('weather.knmi_thuis','forecast')[0].temperature
+      | float(0) | round(0) }} graden. Later vandaag: {{ states('sensor.knmi_thuis_korte_dagverwachting')
       }}.
 
-      '
-    weer_waarschuwing: "{% if is_state('binary_sensor.knmi_thuis_waarschuwing','on')
+      "
+    weer_waarschuwing:
+      "{% if is_state('binary_sensor.knmi_thuis_waarschuwing','on')
       %}\n  Let op.\n  {{ state_attr('binary_sensor.knmi_thuis_waarschuwing', 'Waarschuwing')
       }}\n{% endif %}\n"
   sequence:
-  - service: script.sonos_say
-    data:
-      entity_id: '{{ player }}'
-      message: '{{ time_of_day }} {{ vandaag }} {{ weer }} {{ weer_waarschuwing }}'
-      volume_percent: 30
-  - service: script.lees_het_nieuws_voor
-    data:
-      player: '{{ player }}'
-      volume_percent: 30
+    - service: script.sonos_say
+      data:
+        entity_id: "{{ player }}"
+        message: "{{ time_of_day }} {{ vandaag }} {{ weer }} {{ weer_waarschuwing }}"
+        volume_percent: 30
+    - service: script.lees_het_nieuws_voor
+      data:
+        player: "{{ player }}"
+        volume_percent: 30
 start_netflix:
-  alias: 'Media: Start Netflix on living TV'
-  description: Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
+  alias: "Media: Start Netflix on living TV"
+  description:
+    Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
     in.
   icon: mdi:netflix
   mode: single
   sequence:
-  - choose:
-    - conditions:
-      - condition: state
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.living_tv
+              state: "off"
+          sequence:
+            - service: notify.mobile_app_iphone_robert
+              data:
+                message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+            - service: media_player.turn_on
+              target:
+                entity_id: media_player.living_tv
+              data: {}
+      default: []
+    - wait_template: "{{ is_state('media_player.living_tv', 'on') }}"
+      timeout: 00:01:00
+    - service: media_player.select_source
+      data:
+        source: Netflix
+      target:
         entity_id: media_player.living_tv
-        state: 'off'
-      sequence:
-      - service: notify.mobile_app_iphone_robert
-        data:
-          message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
-      - service: media_player.turn_on
-        target:
-          entity_id: media_player.living_tv
-        data: {}
-    default: []
-  - wait_template: '{{ is_state(''media_player.living_tv'', ''on'') }}'
-    timeout: 00:01:00
-  - service: media_player.select_source
-    data:
-      source: Netflix
-    target:
-      entity_id: media_player.living_tv
-  - service: notify.living_tv
-    data:
-      message: Netflix is gestart. Veel kijkplezier!
+    - service: notify.living_tv
+      data:
+        message: Netflix is gestart. Veel kijkplezier!
 switch_netflix_robert:
-  alias: 'Media: Ga naar Netflix van Robert on living TV'
-  description: Start Netflix en open het profiel van Robert. Aangenomen dat de TV
+  alias: "Media: Ga naar Netflix van Robert on living TV"
+  description:
+    Start Netflix en open het profiel van Robert. Aangenomen dat de TV
     al aan staat.
   icon: mdi:netflix
   mode: single
   sequence:
-  - condition: state
-    entity_id: media_player.living_tv
-    state: 'on'
-  - service: media_player.select_source
-    target:
+    - condition: state
       entity_id: media_player.living_tv
-    data:
-      source: Netflix
-  - delay:
-      seconds: 1
-  - service: webostv.button
-    data:
-      entity_id: media_player.living_tv
-      button: LEFT
-  - delay:
-      seconds: 1
-  - service: webostv.button
-    data:
-      entity_id: media_player.living_tv
-      button: LEFT
-  - delay:
-      seconds: 1
-  - service: webostv.button
-    data:
-      entity_id: media_player.living_tv
-      button: LEFT
-  - delay:
-      seconds: 1
-  - service: webostv.button
-    data:
-      entity_id: media_player.living_tv
-      button: LEFT
-  - delay:
-      seconds: 2
-  - service: webostv.button
-    data:
-      entity_id: media_player.living_tv
-      button: ENTER
-'1663045328980':
-  alias: 'Kantoor: Printer ingeschakeld'
-  sequence:
-  - service: notify.robert
-    data:
-      message: Printer staat nog aan
-      title: Printer
+      state: "on"
+    - service: media_player.select_source
+      target:
+        entity_id: media_player.living_tv
       data:
-        actions:
-        - action: PRINTER_OFF
-          title: Uitschakelen
-        - action: PRINTER_REMIND
-          title: Herinneren
-        - action: PRINTER_IGNORE
-          title: Negeren
+        source: Netflix
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 2
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: ENTER
+"1663045328980":
+  alias: "Kantoor: Printer ingeschakeld"
+  sequence:
+    - service: notify.robert
+      data:
+        message: Printer staat nog aan
+        title: Printer
+        data:
+          actions:
+            - action: PRINTER_OFF
+              title: Uitschakelen
+            - action: PRINTER_REMIND
+              title: Herinneren
+            - action: PRINTER_IGNORE
+              title: Negeren
   mode: single
 double_toggle:
   alias: Double Toggle
@@ -328,20 +340,21 @@ double_toggle:
         entity:
           domain: light
   sequence:
-  - service: light.toggle
-    target:
-      entity_id: '{{ entity }}'
-  - service: light.toggle
-    target:
-      entity_id: '{{ entity }}'
+    - service: light.toggle
+      target:
+        entity_id: "{{ entity }}"
+    - service: light.toggle
+      target:
+        entity_id: "{{ entity }}"
   mode: single
   icon: mdi:toggle-switch
 bark_the_dog:
-  alias: 'Security: Bark The Dog'
-  description: 'Loudly play the sound of a barking dog. Delay for the duration of
+  alias: "Security: Bark The Dog"
+  description:
+    "Loudly play the sound of a barking dog. Delay for the duration of
     the clip afterwards. Lower the volume just in case. Limited to Sonos players.
 
-    '
+    "
   fields:
     entity_id:
       name: Media Player
@@ -360,42 +373,42 @@ bark_the_dog:
           min: 1
           max: 100
           step: 1
-          unit_of_measurement: '%'
+          unit_of_measurement: "%"
           mode: slider
       default: 100
-      example: '100'
+      example: "100"
   sequence:
-  - variables:
-      volume_level: '{{ (volume_pct | int(100) / 100) | float }}'
-  - service: sonos.snapshot
-    data:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.unjoin
-    data:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.media_pause
-    target:
-      entity_id: '{{ entity_id }}'
-  - service: media_player.volume_set
-    data:
-      volume_level: '{{ volume_level | float }}'
-      entity_id: '{{ entity_id }}'
-  - service: media_player.play_media
-    data:
-      media_content_type: music
-      media_content_id: /local/sounds/dog-barking-noise.mp3
-      entity_id: '{{ entity_id }}'
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 3
-      milliseconds: 0
-    alias: Delay so sound can start playing
-  - wait_template: '{{ is_state(entity_id, ''paused'') }}'
-    continue_on_timeout: true
-    alias: Wait until sound has finished playing
-  - service: sonos.restore
-    data:
-      entity_id: '{{ entity_id }}'
+    - variables:
+        volume_level: "{{ (volume_pct | int(100) / 100) | float }}"
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.media_pause
+      target:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.volume_set
+      data:
+        volume_level: "{{ volume_level | float }}"
+        entity_id: "{{ entity_id }}"
+    - service: media_player.play_media
+      data:
+        media_content_type: music
+        media_content_id: /local/sounds/dog-barking-noise.mp3
+        entity_id: "{{ entity_id }}"
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 3
+        milliseconds: 0
+      alias: Delay so sound can start playing
+    - wait_template: "{{ is_state(entity_id, 'paused') }}"
+      continue_on_timeout: true
+      alias: Wait until sound has finished playing
+    - service: sonos.restore
+      data:
+        entity_id: "{{ entity_id }}"
   mode: single
   icon: mdi:dog-side
