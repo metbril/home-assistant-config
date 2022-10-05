@@ -1,0 +1,10 @@
+---
+- id: "1662123937783"
+  alias: "Presence: Robert verlaat werk"
+  description: ""
+  use_blueprint:
+    path: homeassistant/notify_leaving_zone.yaml
+    input:
+      person_entity: person.robert
+      zone_entity: zone.maasstad
+      notify_device: 0837dc1d02ba452e9d46a4cbdc5e3638

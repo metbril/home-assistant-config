@@ -1,0 +1,11 @@
+---
+- id: "1658943860235"
+  alias: "Woonkamer: Inschakelen TV"
+  description:
+    Door deze automatisering te activeren, verschijnt de power on knop
+    in de mediaspeler in het dashboard.
+  use_blueprint:
+    path: cvroque/webostv_turn_on.yaml
+    input:
+      webostv: media_player.living_tv
+      webostv_mac: 04:4E:AF:13:F9:7C

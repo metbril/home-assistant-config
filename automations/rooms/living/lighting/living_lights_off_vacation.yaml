@@ -1,0 +1,25 @@
+---
+- alias: "Lighting: Living lights off during vacations"
+  description:
+    Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
+    en 23:30.
+  id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
+  mode: single
+
+  trigger:
+    - platform: time
+      at: "23:00:00"
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: "on"
+
+  action:
+    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+    - service: light.turn_off
+      entity_id: light.living
+    - service: notify.admin
+      data:
+        title: Vakantie
+        message: Verlichting automatisch uitgeschakeld.

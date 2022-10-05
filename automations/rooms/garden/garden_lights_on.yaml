@@ -1,0 +1,15 @@
+---
+- id: 8d8468fb-3baf-41be-88ee-9a3a71910909
+  alias: "Lighting: Garden On"
+  description: Turn on the garden lights at sunset
+  trigger:
+    - platform: sun
+      event: sunset
+  action:
+    - service: light.turn_on
+      data:
+        brightness_pct: 70
+        transition: 20
+      target:
+        device_id: c33e67f585956e6f98937073162f6bfd
+  mode: single
