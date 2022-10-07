@@ -1,6 +1,6 @@
-- id: "1642157915331"
-  alias: "System: Home Assistant Alert"
-  description: ""
+- id: '1642157915331'
+  alias: 'System: Home Assistant Alert'
+  description: ''
   use_blueprint:
     path: CentralCommand/get-notified-any-time-there-is-a-new-home-assistant-alert.yaml
     input:
@@ -26,7 +26,7 @@
   trigger:
     - entity_id: light.signaal
       platform: state
-      to: "off"
+      to: 'off'
   action:
     - data:
         entity_id: input_select.signaallamp_scene
@@ -44,16 +44,16 @@
   condition:
     - condition: state
       entity_id: binary_sensor.signaallamp_ingeschakeld
-      state: "on"
+      state: 'on'
     - condition: time
       after: 06:00:00
       before: 09:00:00
     - condition: state
       entity_id: binary_sensor.workday
-      state: "on"
+      state: 'on'
     - condition: state
       entity_id: input_boolean.verlof
-      state: "off"
+      state: 'off'
     - condition: state
       entity_id: sensor.occupancy
       state: home
@@ -85,8 +85,8 @@
       data:
         entity_id: input_select.signaallamp_scene
         option: Uit
-- id: "1660887358846"
-  alias: "Lighting: Kledingkast Bjorn altijd aan"
+- id: '1660887358846'
+  alias: 'Lighting: Kledingkast Bjorn altijd aan'
   description:
     De verlichting in de kledingkast moet altijd aan staan, zodat de sensor
     het licht kan inschakelen.
@@ -141,8 +141,8 @@
           zonneschijn! \U0001F326\", \"Zie je al een regenboog? \U0001F308\" ] | random
           \ }} #buienalarm https://www.buienalarm.nl/"
   mode: single
-- id: "1660920784418"
-  alias: "Media: Update Sonos Source Selector"
+- id: '1660920784418'
+  alias: 'Media: Update Sonos Source Selector'
   description: Update input selector with when Sonos favorites update.
   trigger:
     - platform: state
@@ -157,12 +157,12 @@
           }}"
     - service: input_select.set_options
       data:
-        options: "{{ favs }}"
+        options: '{{ favs }}'
       target:
         entity_id: input_select.sonos_favorites
   mode: single
-- id: "1660923058113"
-  alias: "Office: Play selected Sonos favorite on office speaker"
+- id: '1660923058113'
+  alias: 'Office: Play selected Sonos favorite on office speaker'
   description:
     Switch to selected favorite (playlist or radio) when Office speaker
     is already playing.
@@ -183,30 +183,30 @@
       data:
         source: "{{ states('input_select.sonos_favorites') }}"
   mode: single
-- id: "1661499047537"
+- id: '1661499047537'
   alias: ZHA - Lichtstraat remote
-  description: ""
+  description: ''
   use_blueprint:
     path: metbril/zha_ikea_tradfri_2button_onoff_brightness.yaml
     input:
       remote: 28bb8ad428cbbf06defd66c0d19deaac
       light: light.lichtstraat
       speed: 100
-- id: "1661538513078"
+- id: '1661538513078'
   alias: Living > Lighting > Lightsaver Sfeerverlichting
-  description: ""
+  description: ''
   use_blueprint:
     path: niro1987/lightsaver.yaml
     input:
       light: light.sfeerverlichting
       sunset_delay: -50
-- id: "1661884728867"
-  alias: "Huis: Synchroniseer bezetting status"
+- id: '1661884728867'
+  alias: 'Huis: Synchroniseer bezetting status'
   description:
-    "Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+    'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
     alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
 
-    "
+    '
   trigger:
     - platform: state
       entity_id:
@@ -246,11 +246,11 @@
       default: []
   initial_state: true
   mode: queued
-- id: "1661885320722"
-  alias: "Huis: Herinnering over afwezigheid"
+- id: '1661885320722'
+  alias: 'Huis: Herinnering over afwezigheid'
   description:
-    "Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode. These modes let automations behave differently. "
+    'Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode. These modes let automations behave differently. '
   trigger:
     - platform: state
       entity_id: sensor.occupancy
@@ -289,9 +289,9 @@
     - sensor.gas_consumption"
   trigger:
     - platform: time_pattern
-      hours: "*"
-      minutes: "0"
-      seconds: "0"
+      hours: '*'
+      minutes: '0'
+      seconds: '0'
   action:
     - service: notify.save_energy_consumption
       data:
@@ -318,8 +318,8 @@
         message: opgeslagen
         entity_id: sensor.gas_consumption
         domain: sensor
-- id: "1662102264901"
-  alias: "Zolder: Wasmachine is klaar"
+- id: '1662102264901'
+  alias: 'Zolder: Wasmachine is klaar'
   description: Verstuur meldingen als de wasmachine klaar is.
   use_blueprint:
     path: metbril/appliance_has_finished.yaml
@@ -339,14 +339,14 @@
       finishing_threshold: 4
       actions:
         - variables:
-            end_time: "{{ as_timestamp(now()) }}"
-            end_energy: "{{ states(energy_sensor) }}"
+            end_time: '{{ as_timestamp(now()) }}'
+            end_energy: '{{ states(energy_sensor) }}'
         - variables:
-            total_time: "{{ (end_time - start_time) }}"
-            total_energy: "{{ end_energy - start_energy }}"
+            total_time: '{{ (end_time - start_time) }}'
+            total_energy: '{{ end_energy - start_energy }}'
         - variables:
-            minutes: "{{ (total_time / 60) | round(0) }}"
-            total_energy_rounded: "{{ (total_energy) | round(2) }}"
+            minutes: '{{ (total_time / 60) | round(0) }}'
+            total_energy_rounded: '{{ (total_energy) | round(2) }}'
             cost:
               "{{ ( states('price_sensor') | float(0) * total_energy) | round(2)
               }}"
@@ -366,8 +366,8 @@
               icon: /config/www/img/washing-machine.png
       pre_actions:
         - variables:
-            start_time: "{{ as_timestamp(now()) }}"
-            start_energy: "{{ states(energy_sensor) }}"
+            start_time: '{{ as_timestamp(now()) }}'
+            start_energy: '{{ states(energy_sensor) }}'
         - service: notify.robert
           data:
             message: "Wasmachine is gestart. \U0001F45A\U0001F455\U0001F4A6"
@@ -375,8 +375,8 @@
         hours: 5
         minutes: 0
         seconds: 0
-- id: "1662104026902"
-  alias: "Zolder: Wasdroger is klaar"
+- id: '1662104026902'
+  alias: 'Zolder: Wasdroger is klaar'
   description: Verstuur meldingen als de wasdroger klaar is.
   use_blueprint:
     path: metbril/appliance_has_finished.yaml
@@ -415,9 +415,9 @@
         minutes: 0
         seconds: 0
       price_sensor: sensor.energy_consumption_tarif_2
-- id: "1662116397887"
-  alias: "Security: Warn when door is open after everyone has left"
-  description: ""
+- id: '1662116397887'
+  alias: 'Security: Warn when door is open after everyone has left'
+  description: ''
   trigger:
     - platform: state
       entity_id:
@@ -430,14 +430,14 @@
   condition:
     - condition: state
       entity_id: binary_sensor.schuifpui_sensor_state_door_window
-      state: "on"
+      state: 'on'
   action:
     - service: notify.parents
       data:
-        message: "⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. "
+        message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
   mode: single
-- id: "1662530759975"
-  alias: "Security: Inschakelen AdGuard"
+- id: '1662530759975'
+  alias: 'Security: Inschakelen AdGuard'
   description:
     Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
     gestaan.
@@ -445,8 +445,8 @@
     - platform: state
       entity_id:
         - switch.adguard_protection
-      from: "on"
-      to: "off"
+      from: 'on'
+      to: 'off'
       for:
         hours: 0
         minutes: 30
@@ -462,8 +462,8 @@
         message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
         title: AdGuard
   mode: single
-- id: "1662547518457"
-  alias: "Office: Printer powered notification"
+- id: '1662547518457'
+  alias: 'Office: Printer powered notification'
   description:
     Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
     en laat deze met een actieknop ook direct uitschakelen.
@@ -471,7 +471,7 @@
     - platform: state
       entity_id:
         - switch.samsung_ml_2850nd
-      to: "on"
+      to: 'on'
       for:
         hours: 0
         minutes: 30
@@ -481,24 +481,24 @@
     - service: script.1663045328980
       data: {}
   mode: single
-- id: "1662548077258"
+- id: '1662548077258'
   alias: Garden > Lighting > Switch lights based on sun elevation
   description:
-    "Switch the outdoor lights on/off based on sun elevation. Elevation
+    'Switch the outdoor lights on/off based on sun elevation. Elevation
     is an attribute of the sun integration. Elevetion is more accurate for darkness
     that a fixed time. Elevation varies over time. Note: I should create a blueprint
     for this some day.
 
-    "
+    '
   trigger:
     - platform: numeric_state
       entity_id: sun.sun
       attribute: elevation
-      above: "1"
+      above: '1'
     - platform: numeric_state
       entity_id: sun.sun
       attribute: elevation
-      below: "1"
+      below: '1'
   condition: []
   action:
     - if:
@@ -530,19 +530,19 @@
               "{{ ['Zonsondergang! \U0001F305','De dag zit er weer op! \U0001F605','Goedenavond!
               \U0001F31A', 'Hit for the moon! \U0001F31B' ] | random }}"
   mode: single
-- id: "1662548148472"
+- id: '1662548148472'
   alias: Energy > Post Gas Consumption to MinderGas.nl
-  description: "Post gas consumption to mindergas.nl daily at 00:15.
+  description: 'Post gas consumption to mindergas.nl daily at 00:15.
 
     The gas meter reading is updated once every hour, within 10 minutes after the
-    full hour. Posting as soon as possible after that, with a safe margin."
+    full hour. Posting as soon as possible after that, with a safe margin.'
   trigger:
     - platform: time
       at: 00:15:00
   condition:
     - condition: numeric_state
       entity_id: sensor.gas_consumption
-      above: "0"
+      above: '0'
     - condition: not
       conditions:
         - condition: state
@@ -554,9 +554,9 @@
         date: "{{ states('sensor.yesterday') }}"
         reading: "{{ states('sensor.gas_consumption') }}"
   mode: single
-- id: "1662609361916"
-  alias: "System: Low battery level detection & notification for all battery sensors"
-  description: ""
+- id: '1662609361916'
+  alias: 'System: Low battery level detection & notification for all battery sensors'
+  description: ''
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
@@ -566,15 +566,15 @@
             message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
         - service: notify.persistent_notification
           data:
-            message: "Batterijen bijna leeg: {{sensors}}"
+            message: 'Batterijen bijna leeg: {{sensors}}'
       exclude:
         entity_id:
           - sensor.iphone_robert_battery_level
           - sensor.iphone_van_bjorn_battery_level
           - sensor.patricius_battery_level
-      time: "20:00:00"
-- id: "1662718496282"
-  alias: "Huis: automatisch ingeschakelen bezetting Weg"
+      time: '20:00:00'
+- id: '1662718496282'
+  alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
   trigger:
     - platform: state
@@ -586,13 +586,13 @@
       conditions:
         - condition: state
           entity_id: input_boolean.occupancy_vacation
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: input_boolean.occupancy_guests
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: input_boolean.occupancy_away
-          state: "on"
+          state: 'on'
   action:
     - service: input_boolean.turn_on
       data: {}
@@ -604,8 +604,8 @@
         title: Huisbezetting
         notification_id: auto_occupancy
   mode: single
-- id: "1662718880324"
-  alias: "Huis: dismiss auto notifications"
+- id: '1662718880324'
+  alias: 'Huis: dismiss auto notifications'
   description:
     Dismiss any persistent notification that has been set due to auto switching
     of occupancy.
@@ -613,19 +613,19 @@
     - platform: state
       entity_id:
         - input_boolean.occupancy_home
-      to: "on"
+      to: 'on'
   condition: []
   action:
     - service: persistent_notification.dismiss
       data:
         notification_id: auto_occupancy
   mode: single
-- alias: "Safety: Brandweer in de buurt"
+- alias: 'Safety: Brandweer in de buurt'
   description:
-    "Stuur een melding dat de brandweer dichtbij is en plaats een bericht
+    'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Twitter.
 
-    "
+    '
   id: 971fc035-f021-4015-a54b-8c6da9ddf200
   mode: single
   trigger:
@@ -641,9 +641,9 @@
     - service: notify.parents
       data:
         title: "\U0001F692 P2000 Brandweer"
-        message: "{{ address }}"
+        message: '{{ address }}'
         data:
-          url: "{{ url }}"
+          url: '{{ url }}'
     - service: notify.twitter
       data:
         message:
@@ -651,14 +651,14 @@
           url }}"
 - id: 6e054688-5e75-48bd-9411-52a3e26264d1
   alias: Outside > Safety > Lightning notification
-  description: "Lightning notification
+  description: 'Lightning notification
 
     Requires the Blitzortung integration custom component: https://github.com/mrk-its/homeassistant-blitzortung
 
     Inspired by: https://github.com/mrk-its/homeassistant-blitzortung https://www.vcloudinfo.com/2020/08/adding-a-lightning-sensor-to-home-assistant.html
     https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml
 
-    "
+    '
   trigger:
     - platform: state
       entity_id: sensor.blitzortung_lightning_counter
@@ -671,7 +671,7 @@
       above: 0
     - condition: state
       entity_id: input_boolean.snooze_lightning
-      state: "off"
+      state: 'off'
   action:
     - service: notify.robert
       data:
@@ -701,7 +701,7 @@
     - service: input_boolean.turn_on
       entity_id: input_boolean.snooze_lightning
   mode: single
-- alias: "Safety: Unsnooze lightning notifications."
+- alias: 'Safety: Unsnooze lightning notifications.'
   id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
   mode: single
   trigger:
@@ -711,7 +711,7 @@
     - service: input_boolean.turn_off
       entity_id: input_boolean.snooze_lightning
 - id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
-  alias: "Office: WFH Do Not Disturb Robert"
+  alias: 'Office: WFH Do Not Disturb Robert'
   description:
     "Show do not disturb when working from home and busy. Activate scene
     when Robert\n  - is at home and\n  - he's busy in Teams\n"
@@ -735,18 +735,18 @@
   action:
     - scene: scene.office_do_not_disturb
   mode: single
-- id: "1649842819459"
+- id: '1649842819459'
   alias: Office > Pause Music
   description: Pause playing music in the office when in call.
   trigger:
     - platform: state
       entity_id:
         - binary_sensor.robert_in_call
-      to: "on"
+      to: 'on'
   condition:
     - condition: state
       entity_id: binary_sensor.working_from_home_robert
-      state: "on"
+      state: 'on'
     - condition: state
       entity_id: media_player.kantoorspeaker
       state: playing
@@ -766,14 +766,14 @@
   mode: single
 - alias: Reset Teams Status Robert
   description:
-    "Reset Teams Status when not changed for a long time outside work hours.
+    'Reset Teams Status when not changed for a long time outside work hours.
 
     This usually happens when you put your laptop in sleep or hibernate mode without
     closing the Teams application first.
 
     The status should not be reset if you just work outside of regular hours.
 
-    "
+    '
   id: aaff7435-8f79-4657-af57-454710cde9b9
   mode: single
   trigger:
@@ -788,9 +788,9 @@
       conditions:
         - condition: state
           entity_id: binary_sensor.workday
-          state: "off"
+          state: 'off'
         - condition: time
-          after: "18:00:00"
+          after: '18:00:00'
     - condition: not
       conditions:
         - condition: state
@@ -808,19 +808,19 @@
     - service: notify.robert
       data:
         message: Teams status opnieuw ingesteld door inactiviteit.
-- id: "1649843570979"
+- id: '1649843570979'
   alias: Office > Resume Music
   description: Resume music when Teams call has finished.
   trigger:
     - platform: state
       entity_id:
         - binary_sensor.robert_in_call
-      to: "off"
+      to: 'off'
   condition:
     - alias: Music was paused when call started
       condition: state
       entity_id: input_boolean.resume_office_music
-      state: "on"
+      state: 'on'
   action:
     - service: media_player.media_play
       target:
@@ -837,8 +837,8 @@
         title: Teams activity
   mode: single
 - id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
-  alias: "Office: WFH Robert Available"
-  description: ""
+  alias: 'Office: WFH Robert Available'
+  description: ''
   trigger:
     - platform: state
       entity_id: sensor.teams_status_robert
@@ -860,8 +860,8 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.car_wash
-      from: "off"
-      to: "on"
+      from: 'off'
+      to: 'on'
   action:
     - service: notify.robert
       data:
@@ -871,12 +871,12 @@
           naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
   mode: single
 - id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
-  alias: "Media: Pause living speaker when TV is turned on"
+  alias: 'Media: Pause living speaker when TV is turned on'
   description: Pause living speaker when living TV is turned on.
   trigger:
     - platform: state
       entity_id: media_player.living_tv
-      to: "on"
+      to: 'on'
   condition:
     - condition: state
       entity_id: media_player.woonkamer
@@ -888,24 +888,24 @@
       data:
         message: Muziekspeler automatisch gepauzeerd.
   mode: single
-- id: "1663046423659"
-  alias: "Office: Printer powered reminder"
-  description: ""
+- id: '1663046423659'
+  alias: 'Office: Printer powered reminder'
+  description: ''
   trigger:
     - platform: time_pattern
-      minutes: "30"
+      minutes: '30'
       alias: Iedere 30 minuten
   condition:
     - condition: state
       entity_id: input_boolean.printer_reminder
-      state: "on"
+      state: 'on'
   action:
     - service: script.1663045328980
       data: {}
   mode: single
-- id: "1663046870503"
-  alias: "Office: Printer powered action"
-  description: ""
+- id: '1663046870503'
+  alias: 'Office: Printer powered action'
+  description: ''
   trigger:
     - platform: event
       event_type: mobile_app_notification_action
@@ -937,8 +937,8 @@
           target:
             entity_id: input_boolean.printer_reminder
   mode: single
-- id: "1663060804510"
-  alias: "Huis: Auto set mode to Home"
+- id: '1663060804510'
+  alias: 'Huis: Auto set mode to Home'
   description: Set home occupance to 'Home' when someone comes home and state is away.
   trigger:
     - platform: state
@@ -948,7 +948,7 @@
   condition:
     - condition: state
       entity_id: input_boolean.occupancy_away
-      state: "on"
+      state: 'on'
   action:
     - service: input_boolean.turn_on
       data: {}
@@ -961,11 +961,11 @@
         title: Huisbezetting
         notification_id: auto_occupancy
   mode: single
-- id: "1663299688715"
-  alias: "Garage: Fietsaccu opgeladen"
+- id: '1663299688715'
+  alias: 'Garage: Fietsaccu opgeladen'
   description:
-    "Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
-    Druppel laden werkt dan niet meer. "
+    'Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
+    Druppel laden werkt dan niet meer. '
   trigger:
     - type: power
       platform: device
@@ -987,12 +987,12 @@
       alias: Zet fiets lader uit
     - service: persistent_notification.create
       data:
-        message: "Fietslader is klaar en automatisch uitgeschakeld. "
+        message: 'Fietslader is klaar en automatisch uitgeschakeld. '
         title: Fietslader
   mode: single
-- id: "1663925197803"
+- id: '1663925197803'
   alias: Cube Actions
-  description: ""
+  description: ''
   use_blueprint:
     path: SirGoodenough/Zigbee2MQTT - Xiaomi Cube Controller.yaml
     input:
@@ -1103,12 +1103,12 @@
         action: registration
   condition:
     - condition: template
-      value_template: "{{trigger.event.data.repository is defined}}"
+      value_template: '{{trigger.event.data.repository is defined}}'
   action:
     - service: notify.admin
       data:
         title: HACS-repository toegevoegd
-        message: "Repository toegevoegd: * {{trigger.event.data.repository}}"
+        message: 'Repository toegevoegd: * {{trigger.event.data.repository}}'
         data:
           push:
             thread-id: updates
@@ -1121,9 +1121,9 @@
         message: "Repository toegevoegd: * [{{trigger.event.data.repository\n  }}](/hacs/repository/{{trigger.event.data.repository_id}})\n"
         notification_id: update_hacs_repo
   mode: queued
-- id: "1664012599561"
+- id: '1664012599561'
   alias: Nieuwe automatisering
-  description: ""
+  description: ''
   use_blueprint:
     path: EPMatt/ikea_e1744.yaml
     input:
