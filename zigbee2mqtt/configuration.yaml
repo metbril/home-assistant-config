@@ -28,6 +28,8 @@ devices:
     friendly_name: Dimmer Lichtstraat
   '0x14b457fffe535557':
     friendly_name: Living Speaker Controller
+  '0xbc33acfffeb5adaf':
+    friendly_name: Achtergevel
 advanced:
   log_level: info
 groups:
