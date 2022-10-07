@@ -9,5 +9,5 @@
       platform: sun
   action:
     - service: homeassistant.update_entity
-      target: 
+      target:
         entity_id: sensor.current_uv_index
