@@ -9,5 +9,9 @@
             "strings": true
         },
         "editor.autoIndent": "full"
+    },
+    "files.associations": {
+        ".prettierrc": "yaml",
+        ".prettierignore": "gitignore"
     }
 }
