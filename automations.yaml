@@ -965,10 +965,8 @@
     input:
       remote: sensor.cube_action
       shake:
-      - service: scene.turn_on
-        target:
-          entity_id: scene.lighting_living_max
-        metadata: {}
+      - service: script.movie_pause
+        data: {}
       fall:
       - service: scene.turn_on
         target:
@@ -1093,3 +1091,96 @@
       integration: Zigbee2MQTT
       controller_device: 1eb9b76756c2cd628930c2e145ad4b78
       controller_entity: sensor.living_speaker_controller_action
+- id: '1665290435363'
+  alias: Apple TV Movie Time
+  description: Play a movie in the living.
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.apple_tv_woomkamer
+    to: playing
+    id: playing
+  - platform: state
+    entity_id:
+    - media_player.apple_tv_woomkamer
+    to: paused
+    id: paused
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: playing
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: paused
+      sequence:
+      - service: script.movie_time_stop
+        data: {}
+  mode: single
+- id: '1665293443834'
+  alias: '!!tv'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.living_tv
+    attribute: is_volume_muted
+    from: true
+    to: false
+  condition: []
+  action:
+  - service: persistent_notification.create
+    data:
+      message: Movie resumed!
+  mode: single
+- id: '1665293798660'
+  alias: Netflix Movie Time
+  description: Set the living for movie time
+  trigger:
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: source
+    to: Netflix
+    id: started
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: is_volume_muted
+    from: true
+    to: false
+    id: playing
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: is_volume_muted
+    from: false
+    to: true
+    id: paused
+  condition:
+  - condition: state
+    entity_id: media_player.living_tv
+    attribute: source
+    state: Netflix
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: started
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: playing
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: paused
+      sequence:
+      - service: script.movie_time_stop
+        data: {}
+  mode: single

@@ -1,0 +1,42 @@
+movie_pause:
+  alias: Pause movie
+  mode: single
+  icon: mdi:television-pause
+
+  sequence:
+
+    - choose:
+      - conditions:
+          - condition: state
+            entity_id: media_player.apple_tv_woomkamer
+            state: playing
+        sequence:
+          - service: remote.send_command
+            data:
+              command: select
+            target:
+              entity_id: remote.apple_tv_woomkamer
+
+      - conditions:
+          - alias: Test if Living TV is playing a specific source
+            condition: and
+            conditions:
+              - condition: state
+                entity_id: media_player.living_tv
+                state: 'on'
+              - alias: Test for a list of sources
+                condition: or
+                conditions:
+                - condition: state
+                  entity_id: media_player.living_tv
+                  attribute: source
+                  state: Netflix          
+        sequence:
+          - service: media_player.media_pause
+            target:
+              entity_id: media_player.living_tv
+          - service: media_player.volume_mute
+            target:
+              entity_id: media_player.living_tv
+            data:
+              is_volume_muted: true

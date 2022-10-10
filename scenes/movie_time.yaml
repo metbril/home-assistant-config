@@ -1,0 +1,33 @@
+- name: Movie Time
+  id: d1433b80-33a5-457f-890d-d4bf63e4b45d
+  icon: mdi:movie
+  entities:
+    light.eettafel:
+      state: 'off'
+    light.hoge_kast:
+      state: 'off'
+    light.magnarp:
+      state: 'off'
+    light.leeslamp:
+      state: 'off'
+    light.turbinelamp:
+      state: 'off'
+    light.lichtstraat:
+      state: 'off'
+    light.bollamp:
+      color_mode: hs
+      hs_color:
+      - 29.883
+      - 69.803
+      brightness: 51
+      state: 'on'
+    light.nijntje:
+      color_mode: color_temp
+      color_temp: 400
+      brightness: 51
+      state: 'on'
+    light.willner:
+      color_mode: color_temp
+      color_temp: 400
+      brightness: 51
+      state: 'on'
