@@ -17,8 +17,8 @@
     light.bollamp:
       color_mode: hs
       hs_color:
-      - 29.883
-      - 69.803
+        - 29.883
+        - 69.803
       brightness: 51
       state: 'on'
     light.nijntje:
