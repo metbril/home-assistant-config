@@ -39,4 +39,4 @@ movie_pause:
               target:
                 entity_id: media_player.living_tv
               data:
-              is_volume_muted: true
+                is_volume_muted: true
