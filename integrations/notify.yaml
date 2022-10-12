@@ -33,18 +33,16 @@
 - name: Family
   platform: group
   services:
-    - service:
-        - robert
-        - monique
-        - bjorn
+    - service: robert
+    - service: monique
+    - service: bjorn
 
 # To send notification to both parents only
 - name: Parents
   platform: group
   services:
-    - service:
-        - robert
-        - monique
+    - service: robert
+    - service: monique
 
 # To send admin notifications. Can be a person or
 # any other notifier service.
@@ -52,12 +50,6 @@
   platform: group
   services:
     - service: robert
-
-- name: All
-  platform: group
-  services:
-    - service: mobile_app_iphone_robert
-    - service: living_tv
 
 ##############################################################################
 ## Twitter
