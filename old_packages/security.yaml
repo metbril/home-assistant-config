@@ -5,49 +5,6 @@ script:
 automation:
 
   ##############################################################################
-  - alias: Deurbel
-    id: 0a66031f-56c6-483e-ada1-2199c0b39224
-    description: Notify and tweet when the frontdoor bell is pressed.
-    mode: single
-
-    trigger:
-      - platform: state
-        entity_id: switch.bel_voordeur
-
-    action:
-      - service: notify.all
-        data:
-          message: 🛎 Er wordt aangebeld aan de voordeur.
-
-      - service: notify.twitter
-        data:
-          message: >-
-            {{ [
-            "Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.",
-            "Au! Dat deed pijn. Wie raakte de deurbel aan?",
-            "Dat deed een belletje bij me rinkelen.",
-            "Klop, klop. Wie is daar? Isabel. Isabel wie? " ~
-              "Isabel kapot. Daarom klop ik.",
-            "Klop, klop. Wie is daar? Wil. Wil wie? Wil naar binnen.",
-            "De bel gaat. Ja, ja, ik kom er aan.",
-            "Doe even open @robertvanbregt. Er staat iemand aan de deur."
-            ] | random + " #HomeAssistant" + [
-            " #Security",
-            " #Alarm",
-            " #SmartHome",
-            " #HomeAutomation"
-            ] | random }}
-          data:
-            media: >-
-              {% set pictures = [
-                "/config/www/img/klopklop.jpg",
-                "/config/www/img/deurklopper.png",
-                "/config/www/img/aankloppen.jpg",
-                "/config/www/img/deurbel.jpg",
-              ] %}
-              {{ pictures|random }}
-
-  ##############################################################################
   - alias: Deurbel blaffen
     id: 4a7e909a-5d0f-4842-958d-1b67314e771d
     description: >

@@ -9,9 +9,12 @@
       entity_id: switch.bel_voordeur
 
   action:
-    - service: notify.all
+    - service: notify.family
       data:
         message: 🛎 Er wordt aangebeld aan de voordeur.
+    - service: notify.living_tv
+      data:
+        message: Er wordt aangebeld aan de voordeur.
 
     - if:
         - condition: or
