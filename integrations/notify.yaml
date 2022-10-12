@@ -1,4 +1,53 @@
 ---
+# Person group for: Robert
+#
+# Expected service is the mobile app.
+# Use this group instead of the device directly, so device changes do not
+# require updating all uses of the notifier.
+- name: Robert
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
+
+# Person group for: Monique
+#
+# Expected service is the mobile app.
+# Use this group instead of the device directly, so device changes do not
+# require updating all uses of the notifier.
+- name: Monique
+  platform: group
+  services:
+    - service: mobile_app_iphone_robert
+
+# Person group for: Bjorn
+#
+# Expected service is the mobile app.
+# Use this group instead of the device directly, so device changes do not
+# require updating all uses of the notifier.
+- name: Bjorn
+  platform: group
+  services:
+    - service: mobile_app_iphone_van_bjorn
+
+# To send notification to all family members / residents
+- name: Family
+  platform: group
+  services:
+    - service:
+        - robert
+        - monique
+        - bjorn
+
+# To send notification to both parents only
+- name: Parents
+  platform: group
+  services:
+    - service:
+        - robert
+        - monique
+
+# To send admin notifications. Can be a person or
+# any other notifier service.
 - name: Admin
   platform: group
   services:
@@ -10,33 +59,13 @@
     - service: mobile_app_iphone_robert
     - service: living_tv
 
-- name: Family
-  platform: group
-  services:
-    - service: mobile_app_iphone_robert
-
-- name: Parents
-  platform: group
-  services:
-    - service: mobile_app_iphone_robert
-
-- name: Robert
-  platform: group
-  services:
-    - service: mobile_app_iphone_robert
-
-- name: Monique
-  platform: group
-  services:
-    - service: mobile_app_iphone_robert
-
-  ##############################################################################
-  ## Twitter
-  ## https://www.home-assistant.io/integrations/twitter
-  ##
-  ## Send notifications to the twitter account of the house
-  ## https://twitter.com/domussapiens
-  ##############################################################################
+##############################################################################
+## Twitter
+## https://www.home-assistant.io/integrations/twitter
+##
+## Send notifications to the twitter account of the house
+## https://twitter.com/domussapiens
+##############################################################################
 - name: Twitter
   platform: twitter
   consumer_key: !secret twitter_consumer_key
