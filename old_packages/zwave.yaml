@@ -3,33 +3,6 @@
 ## Z-Wave
 ################################################
 
-homeassistant:
-  customize:
-
-    ################################################
-    ## Switch
-    ################################################
-    switch.charging_station_plug_switch:
-      friendly_name: "Schakelaar Oplaadstation"
-
-    ################################################
-    ## ZWave
-    ################################################
-    zwave.charging_station_plug:
-      friendly_name: "Node 11: Schakelaar Oplaadstation"
-    zwave.controller_1:
-      friendly_name: "Node 1: Controller"
-    zwave.fibaro_wall_plug_7:
-      friendly_name: "Node 7: Fibaro Wall Plug"
-    zwave.garage_door_plug:
-      friendly_name: "Node 13: Garagedeur Schakelaar"
-    zwave.turbine_light_plug:
-      friendly_name: "Node 17: Turbine Lamp Schakelaar"
-
-    script.reset_energy_meters:
-      friendly_name: Opnieuw instellen Z-Wave Energiemeters
-
-
 ################################################
 ## Script
 ################################################
