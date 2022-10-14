@@ -4,7 +4,7 @@
 # UptimeRobot checks every 5 minutes
 #
 alert:
-  home_assistant_cloud:
+  home_assistant_cloud_down:
     name: Home Assistant Cloud
     entity_id: binary_sensor.home_assistant_cloud
     state: "off"
