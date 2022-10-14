@@ -191,81 +191,6 @@
     input:
       light: light.sfeerverlichting
       sunset_delay: -50
-- id: '1661884728867'
-  alias: 'Huis: Synchroniseer bezetting status'
-  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
-    alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
-
-    '
-  trigger:
-  - platform: state
-    entity_id:
-    - input_boolean.occupancy_home
-    - input_boolean.occupancy_eco
-    - input_boolean.occupancy_away
-    - input_boolean.occupancy_asleep
-    - input_boolean.occupancy_party
-    - input_boolean.occupancy_guests
-    - input_boolean.occupancy_vacation
-  action:
-  - variables:
-      all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
-        ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
-  - choose:
-    - conditions:
-      - condition: template
-        value_template: '{{ trigger.to_state.state == ''on'' }}'
-      sequence:
-      - service: input_boolean.turn_off
-        data:
-          entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
-            \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
-            | list | join(', ') }}\n"
-    - conditions:
-      - condition: template
-        value_template: "{{ states.input_boolean | select('search', 'occupancy_')
-          \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
-          | list | count == 0 }}"
-      sequence:
-      - service: input_boolean.turn_on
-        data:
-          entity_id: input_boolean.occupancy_home
-    default: []
-  initial_state: true
-  mode: queued
-- id: '1661885320722'
-  alias: 'Huis: Herinnering over afwezigheid'
-  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode. These modes let automations behave differently. '
-  trigger:
-  - platform: state
-    entity_id: sensor.occupancy
-    to: vacation
-  - platform: state
-    entity_id:
-    - sensor.occupancy
-    to: guests
-  - platform: time
-    at: 09:00:00
-  condition:
-  - condition: or
-    conditions:
-    - condition: state
-      entity_id: sensor.occupancy
-      state: vacation
-    - condition: state
-      entity_id: sensor.occupancy
-      state: guests
-  action:
-  - service: notify.admin
-    data:
-      title: Bezetting
-      message: "\U0001F9F7 De woning is ingesteld op bezetting door {{ label | lower
-        }}."
-  variables:
-    mode: '{{ states(''sensor.occupancy'') }}'
-    name: '{{ ''input_boolean.occupancy_'' + mode }}'
-    label: '{{ state_attr(name, ''friendly_name'') }}'
 - id: 934b4450-7816-4064-b906-3a3894d99345
   alias: Energy - Save consumption to file
   description: "Save energy consumption to file every hour, at the full hour.\nEntities
@@ -549,52 +474,6 @@
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
       time: '20:00:00'
-- id: '1662718496282'
-  alias: 'Huis: automatisch ingeschakelen bezetting Weg'
-  description: Set home occupance to 'Away' when no-one is at home.
-  trigger:
-  - platform: state
-    entity_id:
-    - group.family
-    from: home
-  condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: input_boolean.occupancy_vacation
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.occupancy_guests
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.occupancy_away
-      state: 'on'
-  action:
-  - service: input_boolean.turn_on
-    data: {}
-    target:
-      entity_id: input_boolean.occupancy_away
-  - service: persistent_notification.create
-    data:
-      message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
-      title: Huisbezetting
-      notification_id: auto_occupancy
-  mode: single
-- id: '1662718880324'
-  alias: 'Huis: dismiss auto notifications'
-  description: Dismiss any persistent notification that has been set due to auto switching
-    of occupancy.
-  trigger:
-  - platform: state
-    entity_id:
-    - input_boolean.occupancy_home
-    to: 'on'
-  condition: []
-  action:
-  - service: persistent_notification.dismiss
-    data:
-      notification_id: auto_occupancy
-  mode: single
 - alias: 'Safety: Brandweer in de buurt'
   description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Twitter.
@@ -905,53 +784,32 @@
       target:
         entity_id: input_boolean.printer_reminder
   mode: single
-- id: '1663060804510'
-  alias: 'Huis: Auto set mode to Home'
-  description: Set home occupance to 'Home' when someone comes home and state is away.
-  trigger:
-  - platform: state
-    entity_id:
-    - group.family
-    to: home
-  condition:
-  - condition: state
-    entity_id: input_boolean.occupancy_away
-    state: 'on'
-  action:
-  - service: input_boolean.turn_on
-    data: {}
-    target:
-      entity_id:
-      - input_boolean.occupancy_home
-  - service: persistent_notification.create
-    data:
-      message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
-      title: Huisbezetting
-      notification_id: auto_occupancy
-  mode: single
 - id: '1663299688715'
   alias: 'Garage: Fietsaccu opgeladen'
   description: 'Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
     Druppel laden werkt dan niet meer. '
   trigger:
-  - type: power
-    platform: device
-    device_id: fc8175d314fecd80e9526220b04ae4b7
+  - platform: numeric_state
     entity_id: sensor.shelly_1_power
-    domain: sensor
-    below: 1
     for:
       hours: 0
       minutes: 5
       seconds: 0
-    alias: Fiets lader is klaar
-  condition: []
-  action:
-  - type: turn_off
-    device_id: fc8175d314fecd80e9526220b04ae4b7
+    below: 1
+    id: battery-charged
+    alias: Verbruik onder 1
+  condition:
+  - condition: state
     entity_id: switch.shelly_1
-    domain: switch
-    alias: Zet fiets lader uit
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.occupancy_eco
+    state: 'on'
+  action:
+  - service: switch.turn_off
+    data: {}
+    target:
+      entity_id: switch.shelly_1
   - service: persistent_notification.create
     data:
       message: 'Fietslader is klaar en automatisch uitgeschakeld. '
