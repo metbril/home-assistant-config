@@ -1,8 +1,0 @@
----
-- sensor:
-    - name: "Euro95 (Dijktank Kanaalweg)"
-      state: >
-        {{ state_attr(
-          'sensor.brandstoffen_dijktank_kanaalweg',
-          'ParsedResults')[0]['ParsedText'].split('\r\n')[3].split('€')[1]
-          | replace(',', '.') | float }}
