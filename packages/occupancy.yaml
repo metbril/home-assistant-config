@@ -180,9 +180,9 @@ automation:
     mode: single
 
     trigger:
-    - platform: state
-      entity_id: input_boolean.occupancy_home
-      to: 'on'
+      - platform: state
+        entity_id: input_boolean.occupancy_home
+        to: 'on'
 
     action:
       - service: persistent_notification.dismiss
@@ -196,8 +196,7 @@ automation:
 
     trigger:
       - platform: state
-        entity_id:
-        - group.family
+        entity_id: group.family
         to: home
 
     condition:
