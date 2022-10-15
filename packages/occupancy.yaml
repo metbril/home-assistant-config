@@ -8,9 +8,6 @@ input_boolean:
   occupancy_away:
     name: Weg
     icon: mdi:exit-run
-  occupancy_eco:
-    name: Eco
-    icon: mdi:sprout
   occupancy_guests:
     name: Gasten
     icon: mdi:human-female-female
@@ -66,9 +63,8 @@ automation:
       - platform: state
         entity_id:
           - input_boolean.occupancy_home
-          - input_boolean.occupancy_eco
-          - input_boolean.occupancy_away
           - input_boolean.occupancy_asleep
+          - input_boolean.occupancy_away
           - input_boolean.occupancy_party
           - input_boolean.occupancy_guests
           - input_boolean.occupancy_vacation
@@ -98,8 +94,6 @@ automation:
               - service: input_boolean.turn_on
                 data:
                   entity_id: input_boolean.occupancy_home
-
-        default: []
 
   - alias: 'Huis: Herinnering over afwezigheid'
     description: >

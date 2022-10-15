@@ -803,7 +803,7 @@
     entity_id: switch.shelly_1
     state: 'on'
   - condition: state
-    entity_id: input_boolean.occupancy_eco
+    entity_id: input_boolean.eco_mode
     state: 'on'
   action:
   - service: switch.turn_off
@@ -1025,21 +1025,6 @@
       sequence:
       - service: script.movie_time_stop
         data: {}
-  mode: single
-- id: '1665778244098'
-  description: ''
-  trigger:
-  - platform: homeassistant
-    event: start
-  condition:
-  - condition: state
-    entity_id: input_boolean.occupancy_eco
-    state: 'on'
-  action:
-  - service: input_boolean.turn_on
-    data: {}
-    target:
-      entity_id: input_boolean.occupancy_eco
   mode: single
 - id: '1665816857275'
   alias: Force speedtest
