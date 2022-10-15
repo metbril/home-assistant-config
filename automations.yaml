@@ -979,22 +979,6 @@
       - service: script.movie_time_stop
         data: {}
   mode: single
-- id: '1665293443834'
-  alias: '!!tv'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - media_player.living_tv
-    attribute: is_volume_muted
-    from: true
-    to: false
-  condition: []
-  action:
-  - service: persistent_notification.create
-    data:
-      message: Movie resumed!
-  mode: single
 - id: '1665293798660'
   alias: Netflix Movie Time
   description: Set the living for movie time
@@ -1041,4 +1025,39 @@
       sequence:
       - service: script.movie_time_stop
         data: {}
+  mode: single
+- id: '1665778244098'
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition:
+  - condition: state
+    entity_id: input_boolean.occupancy_eco
+    state: 'on'
+  action:
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.occupancy_eco
+  mode: single
+- id: '1665816857275'
+  alias: Force speedtest
+  description: Force speedtest when downlo.ad unavailable for 1 minute. Fix for accidental
+    failure of the integration.
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.speedtest_download
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.speedtest_download
   mode: single
