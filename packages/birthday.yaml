@@ -15,7 +15,7 @@ automation:
     trigger:
       - platform: time_pattern
         minutes: 3  # every hour at 3 minutes past
-    
+
     condition:
       - condition: state
         entity_id: input_boolean.birthday
@@ -23,7 +23,7 @@ automation:
       - condition: time
         after: "07:00:00"
         before: "22:00:00"
-    
+
     action:
       - service: script.sonos_say
         data:
