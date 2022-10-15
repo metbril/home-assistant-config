@@ -41,9 +41,9 @@ script:
 
             Outside brightness: {{ states('sensor.outside_brightness') }}%.
 
-            Clouds: {{ states('sensor.weatherbit_cloud_coverage') }}%.
+            Clouds: {{ states('sensor.tomorrow_io_home_cloud_cover') }}%.
 
-            Irradiance: {{ states('sensor.weatherbit_solar_radiation') }}%.
+            Irradiance: {{ states('sensor.buinradar_irradiance') }}%.
 
             "
     mode: single

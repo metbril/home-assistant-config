@@ -8,8 +8,8 @@
       unique_id: "15c131f6-f69c-47b4-912b-e6687890ba23"
       state: >-
         {%- set elevation = state_attr('sun.sun','elevation') | float(0) %}
-        {%- set cloud_coverage = states('sensor.weatherbit_cloud_coverage') | float(0) %}
-        {%- set irradiance = states('sensor.weatherbit_solar_radiation') | float(0) %}
+        {%- set cloud_coverage = states('sensor.tomorrow_io_home_cloud_cover') | float(0) %}
+        {%- set irradiance = states('sensor.buienradar_irradiance') | float(0) %}
         {%- set irradiance_pct = irradiance / 10 %} {# max irradiance = 1.000, so  irradiance/10 = pct. See https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day #}
         {%- set adjusted_clouds = cloud_coverage -  irradiance_pct %}
         {%- set cloud_factor = (1 - (0.75 * ( adjusted_clouds / 100) ** 3 )) %}
