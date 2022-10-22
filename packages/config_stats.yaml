@@ -104,7 +104,7 @@ template:
         unique_id: 1999a1e1-6d75-49d2-8f8a-5aa2c33406f7
         icon: mdi:lightbulb
         unit_of_measurement: items
-        state: "{{ states.lights | count }}"
+        state: "{{ states.light | count }}"
 
       - name: "Count Media Players"
         unique_id: e1542ef1-d09c-4352-a9b1-fabaebfcc049
