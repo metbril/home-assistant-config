@@ -1046,3 +1046,243 @@
     target:
       entity_id: sensor.speedtest_download
   mode: single
+- id: '1666024431248'
+  alias: Alarmo > Arm when nobody at home
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - person.robert
+    to: not_home
+    from: home
+  - platform: state
+    entity_id:
+    - person.monique
+    to: not_home
+    from: home
+  - platform: state
+    entity_id:
+    - person.bjorn
+    to: not_home
+    from: home
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: person.robert
+      state: home
+    - condition: state
+      entity_id: person.monique
+      state: home
+    - condition: state
+      entity_id: person.bjorn
+      state: home
+  action:
+  - service: alarmo.arm
+    data:
+      entity_id: alarm_control_panel.alarmo
+  mode: single
+- id: '1666110623478'
+  alias: Alarmo > Process notification events
+  description: ''
+  trigger:
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: ALARM_RETRY
+    id: retry
+    alias: When retry event is fired
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: ALARM_FORCE
+    id: force
+    alias: When force event is fired
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: ALARM_IGNORE
+    id: ignore
+    alias: When ignore event is fired
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: retry
+      sequence:
+      - service: alarmo.arm
+        data:
+          entity_id: alarm_control_panel.alarmo
+    - conditions:
+      - condition: trigger
+        id: force
+      sequence:
+      - service: alarmo.arm
+        data:
+          force: true
+          entity_id: alarm_control_panel.alarmo
+          skip_delay: true
+        alias: 'Alarmo: Bypass and immediately arm'
+  mode: single
+- id: '1666250742431'
+  alias: Alarmo > Disarmed in panic mode
+  description: Send notification to parents when panic user is used to disable the
+    alarm.
+  trigger:
+  - platform: state
+    entity_id:
+    - alarm_control_panel.alarmo
+    attribute: changed_by
+    to: Ankie
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: Alarm uitgeschakeld door Ankie.
+      title: "\U0001F6E1️ Alarmo"
+      data:
+        sound:
+          name: default
+          critical: 1
+          volume: 1
+  mode: single
+- id: '1666340185709'
+  alias: Printer > Notify when connected.
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.samsung_ml_2850nd
+    to: 'on'
+  condition: []
+  action:
+  - service: notify.family
+    data:
+      message: "\U0001F5A8 Printer is beschikbaar om te gebruiken."
+  mode: single
+- id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
+  alias: 'Lighting: Living lights automated'
+  description: Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
+  trigger:
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+    id: Sunset
+    alias: Sunset
+  - platform: time
+    at: '23:30'
+    id: Late
+    alias: Late
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Sunset
+      sequence:
+      - service: scene.turn_on
+        target:
+          entity_id: scene.lighting_living_base
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: Late
+      sequence:
+      - condition: state
+        entity_id: light.living
+        state: 'on'
+        alias: Test if Woonkamerverlichting is still on
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: input_boolean.occupancy_vacation
+          state: 'on'
+      - service: scene.turn_on
+        target:
+          entity_id: scene.lighting_living_dimmed
+        data: {}
+  mode: single
+- alias: Household Applicance > Washing Machine Running
+  id: 33b00235-30e6-45af-9473-d7c2357f07cc
+  mode: single
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.washing_machine_running
+    from: 'off'
+    to: 'on'
+    id: Actief
+  - platform: state
+    entity_id:
+    - binary_sensor.washing_machine_running
+    from: 'on'
+    to: 'off'
+    id: Niet Actief
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Actief
+      sequence:
+      - service: '{{ states(''sensor.nearest_parent_notify'') }}'
+        data:
+          message: "Wasmachine is gestart. \U0001F45A\U0001F455\U0001F4A6"
+    - conditions:
+      - condition: trigger
+        id: Niet Actief
+      sequence:
+      - variables:
+          start_energy: '{{ states(''sensor.washing_machine_start_energy'')  }}'
+          finish_energy: '{{ states(''sensor.washing_machine_finish_energy'') }}'
+          start_time: '{{ states.sensor.washing_machine_start_energy.last_changed
+            | as_timestamp }}'
+          finish_time: '{{ states.sensor.washing_machine_finish_energy.last_changed
+            | as_timestamp }}'
+          price: '{{ states(''sensor.energy_consumption_tarif_2'') | float(0) }}'
+      - variables:
+          total_energy: '{{ finish_energy - start_energy }}'
+          total_time: '{{ (finish_time - start_time) }}'
+      - variables:
+          minutes: '{{ (total_time / 60) | round(0) }}'
+          total_energy_rounded: '{{ (total_energy) | round(2) }}'
+          cost: '{{ ( price * total_energy) | round(2) }}'
+      - service: '{{ states(''sensor.nearest_parent_notify'') }}'
+        data:
+          message: "De wasmachine is klaar na {{ minutes}} minuten en heeft {{ total_energy_rounded
+            }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6\n"
+      - if:
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: media_player.living_tv
+            state: 'on'
+          - condition: state
+            entity_id: media_player.living_tv
+            state: playing
+          - condition: state
+            entity_id: media_player.living_tv
+            state: paused
+        then:
+        - service: notify.living_tv
+          data:
+            message: Wasmachine is klaar.
+            data:
+              icon: /config/www/img/washing-machine.png
+- id: '1666621842129'
+  alias: Force Fast.com speed test
+  description: Force speedtest when sensor becomes unavailable.
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.fast_com_download
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  condition: []
+  action:
+  - service: fastdotcom.speedtest
+    data: {}
+  mode: single

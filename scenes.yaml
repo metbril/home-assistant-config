@@ -60,58 +60,195 @@
       - 27
       state: 'on'
   icon: mdi:crown
-- name: 'Lighting: Living Base'
-  icon: mdi:weather-sunset
-  id: 3103dea8-2c12-4988-84d7-3e5f3ff37efc
-  metadata:
-    light.magnarp:
-      entity_only: true
+- id: 3103dea8-2c12-4988-84d7-3e5f3ff37efc
+  name: 'Lighting: Living Cosy'
   entities:
     light.hoge_kast:
-      color_mode: hs
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - xy
+      color:
+        x: 0.507
+        y: 0.407
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      icon: hue:bloom
+      friendly_name: Hoge Kast
+      supported_features: 44
+      color_mode: xy
       brightness: 102
       hs_color:
-      - 34.286
-      - 65.882
-      effect: none
+      - 34.132
+      - 65.49
+      rgb_color:
+      - 255
+      - 183
+      - 88
+      xy_color:
+      - 0.507
+      - 0.407
       state: 'on'
     light.leeslamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: hue:wall-spot
+      friendly_name: Leeslamp
+      supported_features: 32
       color_mode: color_temp
       brightness: 102
       color_temp: 360
+      hs_color:
+      - 28.233
+      - 63.317
+      rgb_color:
+      - 255
+      - 169
+      - 93
+      xy_color:
+      - 0.518
+      - 0.386
       state: 'on'
     light.turbinelamp:
+      supported_color_modes:
+      - onoff
+      icon: mdi:turbine
+      friendly_name: Turbinelamp
+      supported_features: 0
       color_mode: onoff
       state: 'on'
     light.bollamp:
-      color_mode: color_temp
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
       brightness: 102
-      color_temp: 360
-      effect: none
+      hs_color:
+      - 31.004
+      - 62.745
+      rgb_color:
+      - 255
+      - 177
+      - 95
+      xy_color:
+      - 0.508
+      - 0.394
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Bollamp
+      supported_features: 32
       state: 'on'
     light.nijntje:
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_temp_startup: 370
+      linkquality: 255
+      power_on_behavior: previous
+      update:
+        state: idle
+      update_available: false
+      icon: mdi:rabbit-variant
+      friendly_name: Nijntje
+      supported_features: 44
       color_mode: color_temp
       brightness: 102
       color_temp: 360
-      off_with_transition: false
-      off_brightness:
+      hs_color:
+      - 28.233
+      - 63.317
+      rgb_color:
+      - 255
+      - 169
+      - 93
+      xy_color:
+      - 0.518
+      - 0.386
       state: 'on'
     light.willner:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
       color_mode: color_temp
       brightness: 102
       color_temp: 360
+      hs_color:
+      - 28.233
+      - 63.317
+      rgb_color:
+      - 255
+      - 169
+      - 93
+      xy_color:
+      - 0.518
+      - 0.386
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Willner
+      supported_features: 32
       state: 'on'
     light.lichtstraat:
+      supported_color_modes:
+      - brightness
+      entity_id:
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+      icon: mdi:light-recessed
+      friendly_name: Lichtstraat
+      supported_features: 32
       color_mode: brightness
       brightness: 102
-      off_with_transition: false
-      off_brightness:
       state: 'on'
     light.magnarp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp
+      supported_features: 32
       color_mode: color_temp
       brightness: 102
       color_temp: 360
+      hs_color:
+      - 28.233
+      - 63.317
+      rgb_color:
+      - 255
+      - 169
+      - 93
+      xy_color:
+      - 0.518
+      - 0.386
       state: 'on'
+  icon: mdi:candelabra-fire
+  metadata:
+    light.magnarp:
+      entity_only: true
 - id: 88a1bee5-12d9-41b9-9928-1775d42f9727
   name: 'Lighting: Living Dimmed'
   entities:
@@ -964,4 +1101,159 @@
       supported_features: 0
       state: 'off'
   icon: hue:scene-nightlight
+  metadata: {}
+- id: d1433b80-33a5-457f-890d-d4bf63e4b45d
+  name: 'Lighting: Living Theater'
+  entities:
+    light.eettafel:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
+      state: 'off'
+    light.hoge_kast:
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - xy
+      color:
+        x: 0.507
+        y: 0.407
+      linkquality: 255
+      update:
+        state: idle
+      update_available: false
+      icon: hue:bloom
+      friendly_name: Hoge Kast
+      supported_features: 44
+      state: 'off'
+    light.magnarp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp
+      supported_features: 32
+      state: 'off'
+    light.leeslamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      icon: hue:wall-spot
+      friendly_name: Leeslamp
+      supported_features: 32
+      state: 'off'
+    light.turbinelamp:
+      supported_color_modes:
+      - onoff
+      icon: mdi:turbine
+      friendly_name: Turbinelamp
+      supported_features: 0
+      state: 'off'
+    light.lichtstraat:
+      supported_color_modes:
+      - brightness
+      entity_id:
+      - light.lichtstraat_1
+      - light.lichtstraat_2
+      - light.lichtstraat_3
+      - light.lichtstraat_4
+      icon: mdi:light-recessed
+      friendly_name: Lichtstraat
+      supported_features: 32
+      state: 'off'
+    light.bollamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 51
+      hs_color:
+      - 29.878
+      - 69.802
+      rgb_color:
+      - 255
+      - 165
+      - 77
+      xy_color:
+      - 0.535
+      - 0.392
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Bollamp
+      supported_features: 32
+      state: 'on'
+    light.nijntje:
+      min_mireds: 250
+      max_mireds: 454
+      effect_list:
+      - blink
+      - breathe
+      - okay
+      - channel_change
+      - finish_effect
+      - stop_effect
+      supported_color_modes:
+      - color_temp
+      color_temp_startup: 370
+      linkquality: 255
+      power_on_behavior: previous
+      update:
+        state: idle
+      update_available: false
+      icon: mdi:rabbit-variant
+      friendly_name: Nijntje
+      supported_features: 44
+      color_mode: color_temp
+      brightness: 51
+      color_temp: 400
+      hs_color:
+      - 28.874
+      - 72.522
+      rgb_color:
+      - 255
+      - 159
+      - 70
+      xy_color:
+      - 0.546
+      - 0.389
+      state: 'on'
+    light.willner:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 51
+      color_temp: 400
+      hs_color:
+      - 28.874
+      - 72.522
+      rgb_color:
+      - 255
+      - 159
+      - 70
+      xy_color:
+      - 0.546
+      - 0.389
+      icon: mdi:wall-sconce-round-variant
+      friendly_name: Willner
+      supported_features: 32
+      state: 'on'
+  icon: mdi:theater
   metadata: {}
