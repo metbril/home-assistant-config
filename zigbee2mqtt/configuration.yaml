@@ -30,11 +30,16 @@ devices:
     friendly_name: Living Speaker Controller
   '0xbc33acfffeb5adaf':
     friendly_name: Achtergevel
+  '0x00158d0007e24a05':
+    friendly_name: Office Climate
+  '0x70ac08fffea0aea9':
+    friendly_name: Garage Ingang
 advanced:
   log_level: info
 groups:
   '1':
-    friendly_name: living_lights
+    friendly_name: living_lights_z2m
     devices:
       - 0x00178801001057bd/11
       - 0x001788010804ffa1/11
+      - 0x84ba20fffe72a958/1
