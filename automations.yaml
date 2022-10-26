@@ -1286,3 +1286,43 @@
   - service: fastdotcom.speedtest
     data: {}
   mode: single
+- id: '1666778586209'
+  alias: Garage Motion
+  description: Turn on/off light for motion in garage
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_motion
+    from: 'off'
+    to: 'on'
+    id: Motion
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    id: No motion
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Motion
+      sequence:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.voorraadkast
+    - conditions:
+      - condition: trigger
+        id: No motion
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.voorraadkast
+  mode: single
