@@ -1,0 +1,46 @@
+>
+
+  {# Daily Briefing #}
+
+  {%- macro time_of_day() -%}
+    Goedemorgen.
+    Het is vandaag
+    {{ states('sensor.weekday') }} {{ states('sensor.long_date') }}
+    en de tijd is
+    {{ states('sensor.time') }}.
+  {%- endmacro -%}
+
+  {%- macro outside_weather() -%}
+    Het is nu
+    {{ states('sensor.knmi_thuis_omschrijving') | lower }}
+    en
+    {{ state_attr('weather.knmi_thuis','temperature') | float(0) | round(0) }}
+    graden. Het wordt vandaag maximaal
+    {{ state_attr('weather.knmi_thuis','forecast')[0].temperature |
+    float(0) | round(0) }}
+    graden.
+    Later vandaag:
+    {{ states('sensor.knmi_thuis_korte_dagverwachting') }}.
+  {%- endmacro -%}
+
+  {%- macro weather_warnings() -%}
+    {% if is_state('binary_sensor.knmi_thuis_waarschuwing','on') %}
+    Let op.
+    {{ state_attr('binary_sensor.knmi_thuis_waarschuwing', 'Waarschuwing') }}
+    {% endif %}
+  {%- endmacro -%}
+
+  {# a macro that removes all newline characters, empty spaces, and returns formatted text and replaces underscores with spaces. #}
+  {%- macro cleanup(data) -%}
+    {%- for item in data.split("\n")  if item | trim != "" -%}
+      {{ item | trim | replace("_", " ") }} {% endfor -%}
+  {%- endmacro -%}
+
+  {# a macro to call all macros :)  #}
+  {%- macro mother_of_all_macros() -%}
+    {{ time_of_day() }}
+    {{ outside_weather() }}
+  {%- endmacro -%}
+
+  {# run the macro #}
+  {{- cleanup(mother_of_all_macros()) -}}

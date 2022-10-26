@@ -1,0 +1,9 @@
+script:
+  new_briefing:
+    alias: New Briefing
+    mode: single
+    icon: mdi:newspaper-variant
+    sequence:
+      - service: persistent_notification.create
+        data:
+          message: !include ../templates/briefing.yaml
