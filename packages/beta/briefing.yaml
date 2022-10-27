@@ -6,4 +6,4 @@ script:
     sequence:
       - service: persistent_notification.create
         data:
-          message: !include ../templates/briefing.yaml
+          message: !include ../../templates/briefing.yaml
