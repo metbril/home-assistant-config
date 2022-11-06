@@ -1,0 +1,33 @@
+toot_engine:
+  alias: Toot Engine
+  fields:
+    who:
+      name: Who
+      description: 'The notifier name that will send the toot. See Services for options.
+
+        '
+      required: true
+      default: mastodon
+      example: mastodon
+      selector:
+        text:
+          multiline: false
+          type: text
+    message:
+      name: Message
+      description: 'The message to toot.
+
+        '
+      required: true
+      example: Hello world!
+      selector:
+        text:
+          multiline: true
+          type: text
+  sequence:
+  - service: notify.{{ who }}
+    data:
+      message: '{{ message }}'
+  mode: queued
+  icon: mdi:elephant
+  max: 10

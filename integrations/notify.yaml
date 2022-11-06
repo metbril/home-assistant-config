@@ -66,6 +66,20 @@
   access_token_secret: !secret twitter_access_token_secret
 
 ##############################################################################
+## Mastodon
+## https://www.home-assistant.io/integrations/mastodon
+##
+## Send notifications to the Mastodon account of the house
+## https://botsin.space/@DomusSapiens
+##############################################################################
+- name: Mastodon
+  platform: mastodon
+  base_url: https://botsin.space/
+  access_token: !secret mastodon_access_token
+  client_id: !secret mastodon_client_id
+  client_secret: !secret mastodon_client_secret
+
+##############################################################################
 ## This notifier is used by the log energy consumption automation.
 ##
 ## https://www.home-assistant.io/integrations/file
