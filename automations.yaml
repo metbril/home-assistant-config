@@ -261,15 +261,15 @@
         data:
           message: "De wasmachine is klaar na {{ minutes }} minuten  en heeft {{ cost
             }} gekost voor een verbruik van {{ total_energy_rounded }} kWh. \U0001F45A\U0001F455\U0001F4A6\n"
-      - service: script.sonos_say
-        data:
-          entity_id: media_player.living_speaker
-          message: De wasmachine is klaar.
       - service: notify.living_tv
         data:
           message: Wasmachine is klaar.
           data:
             icon: /config/www/img/washing-machine.png
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_speaker
+          message: De wasmachine is klaar.
       pre_actions:
       - variables:
           start_time: '{{ as_timestamp(now()) }}'
@@ -366,6 +366,11 @@
     data:
       message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
       title: AdGuard
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: 'Iemand had het blokkeren van advertenties even uitgezet, maar ik heb
+        het inmiddels weer ingeschakeld. #AdGuard #HomeAssistant'
   mode: single
 - id: '1662547518457'
   alias: 'Office: Printer powered notification'
@@ -716,6 +721,14 @@
       message: "{{ ['De auto kan weer worden gewassen.','Pak de spons en zeem maar
         voor de auto.','Het is weer mogelijk om de auto te wassen.','Je kunt weer
         naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "{{ [\"De auto kan weer worden gewassen.\", \"Het weer zit weer mee.
+        Ga je even de auto wassen?\", \"De auto kan weer naar de wasstraat.\", \"Het
+        heeft weer zin om de auto te wassen.\", 'Pak de spons en zeem maar voor de
+        auto.'] | random ~ \" \" ~ (\"\U0001F697\U0001F698\U0001F699\" | list | random
+        ) ~ \"\U0001F4A6\" }}\n"
   mode: single
 - id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
   alias: 'Media: Pause living speaker when TV is turned on'
@@ -1182,9 +1195,14 @@
         id: Sunset
       sequence:
       - service: scene.turn_on
-        target:
-          entity_id: scene.lighting_living_base
         data: {}
+        target:
+          entity_id: scene.lighting_living_cosy
+      - service: script.toot_engine
+        data:
+          message: Het wordt schemerig. De verlichting is ingeschakeld om het een
+            beetje gezellig te maken.
+          who: mastodon
     - conditions:
       - condition: trigger
         id: Late
@@ -1325,4 +1343,19 @@
         data: {}
         target:
           entity_id: light.voorraadkast
+  mode: single
+- id: '1667754651770'
+  alias: Adviesprijs Euro95 gewijzigd
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.adviesprijs_euro95
+  condition: []
+  action:
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: De adviesprijs voor Euro 95 is gewijzigd naar {{ states('sensor.adviesprijs_euro95')
+        }}.
   mode: single
