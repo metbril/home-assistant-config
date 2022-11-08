@@ -7,7 +7,7 @@ jobs:
     name: Generate TOC
     runs-on: ubuntu-latest
     steps:
-      - uses: technote-space/toc-generator@v4.2.1
+      - uses: technote-space/toc-generator@v4.2.2
         with:
           TOC_TITLE: 'Details'
           FOLDING: true
