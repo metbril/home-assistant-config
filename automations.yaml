@@ -479,17 +479,17 @@
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
       time: '20:00:00'
-- alias: 'Safety: Brandweer in de buurt'
+- id: 971fc035-f021-4015-a54b-8c6da9ddf200
+  alias: 'Safety: Brandweer in de buurt'
   description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Twitter.
 
     '
-  id: 971fc035-f021-4015-a54b-8c6da9ddf200
-  mode: single
   trigger:
   - platform: state
     entity_id: sensor.p2000_brandweer
-  condition: '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
+  condition:
+  - '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
   action:
   - variables:
       address: '{{ states(''sensor.p2000_brandweer'') }}'
@@ -502,10 +502,12 @@
       message: '{{ address }}'
       data:
         url: '{{ url }}'
-  - service: notify.twitter
+  - service: script.toot_engine
     data:
-      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }} {{
-        url }}"
+      who: mastodon
+      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n    {{ address }}
+        {{ url }}\n"
+  mode: single
 - id: 6e054688-5e75-48bd-9411-52a3e26264d1
   alias: Outside > Safety > Lightning notification
   description: 'Lightning notification
@@ -1356,6 +1358,83 @@
   - service: script.toot_engine
     data:
       who: mastodon
-      message: De adviesprijs voor Euro 95 is gewijzigd naar {{ states('sensor.adviesprijs_euro95')
-        }}.
+      message: 'De adviesprijs voor Euro 95 is gewijzigd naar €{{ states(''sensor.adviesprijs_euro95'')
+        | replace(''.'', '','') }}/L. (bron: https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp) '
   mode: single
+- id: '1667809761090'
+  alias: Safety > Meteoalarm Notification (new)
+  description: '
+
+    Send notification on each entity update (not only at state change)
+
+    '
+  trigger:
+  - platform: state
+    entity_id: binary_sensor.meteoalarm_zuid_holland
+  condition:
+  - alias: There is an active alert
+    condition: state
+    entity_id: binary_sensor.meteoalarm_zuid_holland
+    state: 'on'
+  action:
+  - service: notify.family
+    data:
+      title: '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''headline'').split(''
+        - '')[0] }} ⚠️
+
+        '
+      message: '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''description'')
+        | replace(''\n'', '' '') }}
+
+        '
+      data:
+        url: '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''web'') }}
+
+          '
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "⚠️ {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'headline').split('
+        - ')[0] }}: \n    {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'description')
+        |\n    replace('\\n', ' ') }} {{ state_attr('binary_sensor.meteoalarm_zuid_holland',
+        'web') }} #MeteoAlarm #ZuidHolland"
+  mode: queued
+- id: f1a564aa-c8da-4f88-bf61-b938627374b2
+  alias: System > Stop Toot
+  description: Toot when HA stops
+  trigger:
+  - platform: homeassistant
+    event: shutdown
+  action:
+  - service: script.toot_engine
+    data:
+      message: "{% set phrases = [\n  \"\U0001F4A4 Ik ga even een dutje doen.\",\n
+        \ \"\U0001F6B6 Ik moet even weg, maar ik ben zo weer terug.\",\n  \"\U0001F648
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!\",\n  \"⛔ Home
+        Assistant wordt gestopt.\"\n] %} {% set hashtags = [\n  \"#HomeAutomation\",\n
+        \ \"#SmartHome\",\n  \"#Domotica\",\n  \"#IoT\"\n] %} {{ phrases | random
+        ~ \" \" ~ hashtags | random ~ \" #HomeAssistant \" ~ \"https://github.com/metbril/home-assistant-config\"
+        }}"
+- id: f5bdd57b-796d-4de6-9602-4e298473bbf8
+  alias: 'Health: Step Tracker Toot'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.iphone_robert_steps
+    above: 5000
+  action:
+  - variables:
+      steps: '{{ trigger.to_state.state }}'
+      emoji: "{{ '\U0001F6B6\U0001F3C3\U0001F97E\U0001F45F\U0001F3C5\U0001F3C6\U0001F3AF'
+        | list | random }}"
+  - service: script.toot_engine
+    data:
+      message: '{{ [ "Blijf in beweging. Een gezinslid heeft zojuist " ~ steps ~ "
+        stappen met een #AppleWatch gemaakt.", "Fitness tracking thuis, door het huis.
+        Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
+        "Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt."
+        ] | random ~ " " ~ emoji ~ " " ~ [ "#QuantifiedSelf", "#SelfTracking", "#eHealth",
+        "#ActivityTracker", "#Ommetje" ] | random }}
+
+        '
