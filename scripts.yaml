@@ -25,7 +25,7 @@ toot_engine:
           multiline: true
           type: text
   sequence:
-  - service: notify.{{ who }}
+  - service: notify.{{ who | default('mastodon') }}
     data:
       message: '{{ message }}'
   mode: queued
