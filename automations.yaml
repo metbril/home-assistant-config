@@ -1223,9 +1223,8 @@
           entity_id: scene.lighting_living_dimmed
         data: {}
   mode: single
-- alias: Household Applicance > Washing Machine Running
-  id: 33b00235-30e6-45af-9473-d7c2357f07cc
-  mode: single
+- id: 33b00235-30e6-45af-9473-d7c2357f07cc
+  alias: Household Applicance > Washing Machine Running
   trigger:
   - platform: state
     entity_id:
@@ -1245,9 +1244,7 @@
       - condition: trigger
         id: Actief
       sequence:
-      - service: '{{ states(''sensor.nearest_parent_notify'') }}'
-        data:
-          message: "Wasmachine is gestart. \U0001F45A\U0001F455\U0001F4A6"
+      - delay: ''
     - conditions:
       - condition: trigger
         id: Niet Actief
@@ -1289,6 +1286,7 @@
             message: Wasmachine is klaar.
             data:
               icon: /config/www/img/washing-machine.png
+  mode: single
 - id: '1666621842129'
   alias: Force Fast.com speed test
   description: Force speedtest when sensor becomes unavailable.
