@@ -114,7 +114,7 @@ jobs:
       # yamllint enable rule:line-length
 
       - name: Check configuration
-        uses: frenck/action-home-assistant@v1.3
+        uses: frenck/action-home-assistant@v1.4
         with:
           path: "."
           secrets: ./secrets.example.yaml
