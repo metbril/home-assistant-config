@@ -387,7 +387,7 @@
       seconds: 0
   condition: []
   action:
-  - service: script.1663045328980
+  - service: script.printer_off
     data: {}
   mode: single
 - id: '1662548077258'
