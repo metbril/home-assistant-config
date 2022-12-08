@@ -349,7 +349,7 @@
   trigger:
   - platform: state
     entity_id:
-    - switch.adguard_protection
+    - switch.adguard_filtering
     from: 'on'
     to: 'off'
     for:
@@ -370,7 +370,7 @@
     data:
       who: mastodon
       message: 'Iemand had het blokkeren van advertenties even uitgezet, maar ik heb
-        het inmiddels weer ingeschakeld. #AdGuard #HomeAssistant'
+        het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant'
   mode: single
 - id: '1662547518457'
   alias: 'Office: Printer powered notification'
