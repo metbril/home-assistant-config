@@ -14,38 +14,12 @@ homeassistant:
       unit_of_measurement: €/L
 
 sensor:
-
   # Brandstofprijzen custom component
   # https://github.com/metbril/home-assistant-brandstofprijzen
   #
   # I keep this sensor, to check if it keeps working with HA
   #
   - platform: brandstofprijzen
-
-  # --- scrape sensors ---
-
-  - platform: scrape
-    name: Euro95 (Lukoil Schermerhoek)
-    resource: "http://lukoil.nl/go/lukoil_station.cfm?id=465"
-    select: "#tabbedInfoContent div.tab:nth-of-type(2) .priceBox2 .price"
-    value_template: "{{ value|replace('EUR/L', '')|float|round(3) }}"
-    scan_interval: 3600  # be nice; once per hour only
-
-  - platform: scrape
-    name: Euro95 (Tango Hoofdweg)
-    # yamllint disable-line rule:line-length
-    resource: "https://www.tango.nl/stations/tango-capelle-aan-den-ijssel-hoofdweg"
-    select: "div#euro95 div.pump_price span.price"
-    scan_interval: 3600  # be nice; once per hour only
-
-  - platform: scrape
-    name: Euro95 (Tinq Bermweg)
-    resource: "https://www.tinq.nl/tankstations/capelle-ad-ijssel-bermweg"
-    # yamllint disable-line rule:line-length
-    select: ".field--name-field-station-prices .taxonomy-term-Euro95 .field--name-field-prices-price-pump"
-    value_template: >
-      {{ value | replace('€','') | replace('EUR/L','') | float | round(3) }}
-    scan_interval: 3600  # be nice; once per hour only
 
   # --- OCR sensors ---
 
@@ -65,8 +39,8 @@ sensor:
     name: Brandstoffen Dijktank Kanaalweg
     resource: !secret ocr_api_dijktank
     method: GET
-    scan_interval: 3600  # seconds: 1h=3600 / 2h=7200 / 3h=10800 / 4h=14400 / 6h=21600 / 8h=28800 / 12h=43200
-    value_template: "OK"  # the default  returned json would exceed 255 character limit
+    scan_interval: 3600 # seconds: 1h=3600 / 2h=7200 / 3h=10800 / 4h=14400 / 6h=21600 / 8h=28800 / 12h=43200
+    value_template: "OK" # the default  returned json would exceed 255 character limit
     json_attributes:
       - ParsedResults
 
@@ -78,13 +52,12 @@ sensor:
     resource: !secret ocr_api_ommoord
     method: GET
     # 1h=3600 / 2h=7200 / 3h=10800 / 4h=14400 / 6h=21600 / 8h=28800 / 12h=43200
-    scan_interval: 3600  # seconds
-    value_template: "OK"  # returned json exceeds 255 char. limit
+    scan_interval: 3600 # seconds
+    value_template: "OK" # returned json exceeds 255 char. limit
     json_attributes:
       - ParsedResults
 
 template:
-
   # These sensors extract the fuel price from the OCR'ed prices
   # Done in 2 steps, so only 1 API call per station is required.
   # Can be done in 1 sensor if only 1 fuel type is needed.
@@ -105,9 +78,8 @@ template:
             | replace(',', '.') | float(None) }}
 
 automation:
-
   - alias: Euro95 gewijzigd
-    description: 'Notification for updated Euro95 fuel prices'
+    description: "Notification for updated Euro95 fuel prices"
 
     id: cea83bd6-bc1a-4973-b080-8ed2bb9a3026
     mode: queued
