@@ -11,19 +11,8 @@ frontend:
 devices:
   '0x00158d0007e25295':
     friendly_name: Living Climate
-  '0x00178801001057bd':
-    friendly_name: Hoge Kast
   '0x00158d000802ad01':
     friendly_name: Cube
-  '0x001788010804ffa1':
-    friendly_name: Turbinelamp
-  '0x0017880104f5fd96':
-    friendly_name: Dimmer Woonkamer
-  '0x0017880104eedc4d':
-    friendly_name: Dimmer Leeshoek
-  '0x84ba20fffe72a958':
-    friendly_name: Nijntje
-    color_sync: true
   '0x588e81fffe58029f':
     friendly_name: Dimmer Lichtstraat
   '0x14b457fffe535557':
@@ -36,6 +25,8 @@ devices:
     friendly_name: Garage Ingang
   '0x040d84fffe9a387b':
     friendly_name: Lotus
+  '0x84ba20fffead3d8e':
+    friendly_name: Snelknop Woonkamer
 advanced:
   log_level: info
 groups:
@@ -44,4 +35,3 @@ groups:
     devices:
       - 0x00178801001057bd/11
       - 0x001788010804ffa1/11
-      - 0x84ba20fffe72a958/1
