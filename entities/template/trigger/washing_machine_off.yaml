@@ -22,4 +22,4 @@
       state: >
         {% set start = states('sensor.washing_machine_start_energy') | float (0) %}
         {% set end   = states('sensor.washing_machine_energy') | float(0) %}
-        {{ end - start | round(2) }}
+        {{ (end - start) | round(2) }}
