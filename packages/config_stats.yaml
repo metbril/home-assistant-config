@@ -22,11 +22,23 @@ template:
       # yamllint disable-line rule:line-length
       # https://github.com/basnijholt/home-assistant-config/blob/ae69265f1b9bb904e884e985b99d5d2cbaa77f82/includes/sensors.yaml#L27
       #
+      - name: "Count Entities"
+        unique_id: 67e0dedd-876b-424b-b7b0-4b868269cbac
+        icon: mdi:dots-hexagon
+        unit_of_measurement: items
+        state: "{{ states | count }}"
+
       - name: "Count Air Quality"
         unique_id: fcba5e9a-5693-4398-9404-3903fe0038d7
         icon: mdi:air-filter
         unit_of_measurement: items
         state: "{{ states.air_quality | count }}"
+
+      - name: "Count Alarms"
+        unique_id: da568223-f639-4c3a-b401-958dd5662ead
+        icon: mdi:shield-home
+        unit_of_measurement: items
+        state: "{{ states.alarm | count }}"
 
       - name: "Count Alerts"
         unique_id: 8981a34b-b6c3-4bc0-9dd1-ecae5f951ed8
@@ -52,11 +64,23 @@ template:
         unit_of_measurement: items
         state: "{{ states.button | count }}"
 
+      - name: "Count Calendars"
+        unique_id: 6b0b59ed-b91b-4bb4-a363-06f7a47215f5
+        icon: mdi:calendar
+        unit_of_measurement: items
+        state: "{{ states.calendar | count }}"
+
       - name: "Count Cameras"
         unique_id: 5e0e4b24-ed1a-4dc0-922f-434d42c8fba8
         icon: mdi:video
         unit_of_measurement: items
         state: "{{ states.camera | count }}"
+
+      - name: "Count Counters"
+        unique_id: 299346aa-3012-47fe-9832-0f880d4041db
+        icon: mdi:counter
+        unit_of_measurement: items
+        state: "{{ states.counter | count }}"
 
       - name: "Count Device Trackers"
         unique_id: 26e8c460-fdb3-4224-90d6-4e7461514f1b
@@ -142,17 +166,35 @@ template:
         unit_of_measurement: items
         state: "{{ states.scene | count }}"
 
+      - name: "Count Schedules"
+        unique_id: 1711bbf4-6622-4076-8fc9-136cb3831ae0
+        icon: mdi:calendar-clock
+        unit_of_measurement: items
+        state: "{{ states.schedule | count }}"
+
       - name: "Count Scripts"
         unique_id: 45a1471f-5048-4024-98d9-94363a1a6054
         icon: mdi:script-text
         unit_of_measurement: items
         state: "{{ states.script | count }}"
 
+      - name: "Count Selects"
+        unique_id: fdca86a2-a267-4020-8e4b-156bb35bc191
+        icon: mdi:power-settings
+        unit_of_measurement: items
+        state: "{{ states.select | count }}"
+
       - name: "Count Sensors"
         unique_id: fd84e5e1-768c-40de-8f74-675b175b417a
         icon: mdi:resistor
         unit_of_measurement: items
         state: "{{ states.sensor | count }}"
+
+      - name: "Count Suns"
+        unique_id: 1bb93d0f-46a1-41b6-bd29-8c31ce7004a5
+        icon: mdi:sun-clock
+        unit_of_measurement: items
+        state: "{{ states.sun | count }}"
 
       - name: "Count Switches"
         unique_id: cc7d050c-93bc-4021-b49b-a52037555b76
@@ -171,6 +213,12 @@ template:
         icon: mdi:download
         unit_of_measurement: items
         state: "{{ states.update | count }}"
+
+      - name: "Count Weathers"
+        unique_id: 654d37bc-f62b-4497-99d8-a00a9b2978bd
+        icon: mdi:weather-partly-cloudy
+        unit_of_measurement: items
+        state: "{{ states.weather | count }}"
 
       - name: "Count Zones"
         unique_id: 43e62ac6-3e2b-4261-b95b-e4a7356f5231
