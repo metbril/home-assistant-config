@@ -65,6 +65,10 @@ rest_command: !include_dir_named entities/rest_command
 
 sensor: !include_dir_merge_list entities/sensor
 
+system_log:
+  max_entries: 50
+  fire_event: true
+
 template: !include_dir_merge_list entities/template
 
 # WOL is needed for (switching on) WebOS TV
