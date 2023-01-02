@@ -6,4 +6,3 @@
   # icon: mdi:file-code  # set this in UI
   scan_interval: 3600  ## every 1 hour
   command: "find /config -name '*.yaml' | xargs cat | wc -l"
-
