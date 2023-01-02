@@ -8,4 +8,4 @@
       availability: "{{ states('sensor.buienalarm_next_rain_forecast') is not none }}"
       state: >
         {% set datetime = states('sensor.buienalarm_next_rain_forecast') %}
-        {{ (as_datetime(datetime) | as_local) }}
+        {{ (as_datetime(datetime) | as_local).isoformat() }}
