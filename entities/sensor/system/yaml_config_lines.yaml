@@ -1,0 +1,9 @@
+---
+- platform: command_line
+  name: YAML Config Lines
+  unique_id: c9215c95-8291-4c98-8f1c-4851432fdf1a
+  unit_of_measurement: 'lines'
+  # icon: mdi:file-code  # set this in UI
+  scan_interval: 3600  ## every 1 hour
+  command: "find /config -name '*.yaml' | xargs cat | wc -l"
+
