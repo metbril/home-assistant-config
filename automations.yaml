@@ -420,10 +420,10 @@
         entity_id: light.achtergevel
       data:
         transition: 5
-    - service: notify.twitter
+    - service: script.toot_engine
       data:
         message: "{{ ['Zonsopkomst! \U0001F305','Het wordt een mooie dag! \U0001F603','Goedemorgen!
-          ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
+          ☕️', 'Rise\n    and shine! \U0001F31E' ] | random }}"
     else:
     - service: light.turn_on
       target:
@@ -431,10 +431,10 @@
       data:
         transition: 5
         brightness_pct: 70
-    - service: notify.twitter
+    - service: script.toot_engine
       data:
         message: "{{ ['Zonsondergang! \U0001F305','De dag zit er weer op! \U0001F605','Goedenavond!
-          \U0001F31A', 'Hit for the moon! \U0001F31B' ] | random }}"
+          \U0001F31A', 'Hit\n    for the moon! \U0001F31B' ] | random }}"
   mode: single
 - id: '1662548148472'
   alias: Energy > Post Gas Consumption to MinderGas.nl
@@ -568,30 +568,6 @@
   action:
   - service: input_boolean.turn_off
     entity_id: input_boolean.snooze_lightning
-- id: e2ec598a-f7ac-48bc-b4db-173944e94bbe
-  alias: 'Office: WFH Do Not Disturb Robert'
-  description: "Show do not disturb when working from home and busy. Activate scene
-    when Robert\n  - is at home and\n  - he's busy in Teams\n"
-  trigger:
-  - platform: state
-    entity_id: sensor.teams_status_robert
-  condition:
-  - condition: and
-    conditions:
-    - condition: state
-      entity_id: person.robert
-      state: home
-    - condition: or
-      conditions:
-      - condition: state
-        entity_id: sensor.teams_status_robert
-        state: Bezet
-      - condition: state
-        entity_id: sensor.teams_status_robert
-        state: Niet storen
-  action:
-  - scene: scene.office_do_not_disturb
-  mode: single
 - id: '1649842819459'
   alias: Office > Pause Music
   description: Pause playing music in the office when in call.
@@ -656,10 +632,6 @@
     data:
       entity_id: input_text.teams_status_robert
       value: unknown
-  - service: input_text.set_value
-    data:
-      entity_id: input_text.teams_activity_robert
-      value: unknown
   - service: notify.robert
     data:
       message: Teams status opnieuw ingesteld door inactiviteit.
@@ -690,24 +662,6 @@
     data:
       message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
       title: Teams activity
-  mode: single
-- id: 4b82d606-f8c5-47bd-b1d4-17dd175a58be
-  alias: 'Office: WFH Robert Available'
-  description: ''
-  trigger:
-  - platform: state
-    entity_id: sensor.teams_status_robert
-  condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: sensor.teams_status_robert
-      state: Bezet
-    - condition: state
-      entity_id: sensor.teams_status_robert
-      state: Niet storen
-  action:
-  - scene: scene.office_available
   mode: single
 - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
   alias: Carwash Notification
@@ -955,15 +909,6 @@
       message: "Repository toegevoegd: * [{{trigger.event.data.repository\n  }}](/hacs/repository/{{trigger.event.data.repository_id}})\n"
       notification_id: update_hacs_repo
   mode: queued
-- id: '1664012599561'
-  alias: Nieuwe automatisering
-  description: ''
-  use_blueprint:
-    path: EPMatt/ikea_e1744.yaml
-    input:
-      integration: Zigbee2MQTT
-      controller_device: 1eb9b76756c2cd628930c2e145ad4b78
-      controller_entity: sensor.living_speaker_controller_action
 - id: '1665290435363'
   alias: Apple TV Movie Time
   description: Play a movie in the living.
@@ -1657,30 +1602,42 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.home_assistant_cloud
+    - binary_sensor.remote_ui
+    from: 'on'
+    to: 'off'
+    id: Remote Off
+  - platform: state
+    entity_id:
+    - binary_sensor.remote_ui
+    from: 'off'
+    to: 'on'
+    id: Remote On
   condition: []
   action:
-  - if:
-    - condition: state
-      entity_id: binary_sensor.home_assistant_cloud
-      state: 'on'
-    then:
-    - service: notify.admin
-      data:
-        message: 'Verbinding met Home Assistant Cloud is hersteld. '
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: cloud_connected
-    else:
-    - service: notify.admin
-      data:
-        message: 'Verbinding met Home Assistant Cloud is verbroken. '
-        title: Home Assistant Cloud
-    - service: persistent_notification.create
-      data:
-        message: 'Verbinding met Home Assistant Cloud is verbroken. '
-        title: Home Assistant Cloud
-        notification_id: cloud_connected
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Remote Off
+      sequence:
+      - service: notify.admin
+        data:
+          message: 'Verbinding met Home Assistant Cloud is verbroken. '
+          title: Home Assistant Cloud
+      - service: persistent_notification.create
+        data:
+          message: 'Verbinding met Home Assistant Cloud is verbroken. '
+          title: Home Assistant Cloud
+          notification_id: cloud_connected
+    - conditions:
+      - condition: trigger
+        id: Remote On
+      sequence:
+      - service: notify.admin
+        data:
+          message: 'Verbinding met Home Assistant Cloud is hersteld. '
+      - service: persistent_notification.dismiss
+        data:
+          notification_id: cloud_connected
   mode: single
 - id: '1672391012431'
   alias: Living > Lighting > Shortcut button
@@ -1701,3 +1658,79 @@
         target:
           entity_id: scene.lighting_living_off
         metadata: {}
+- id: '1672486229153'
+  alias: System > Network > WAN IP changed
+  description: Notify when WAN IP changes
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.myip
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable'',
+      None] }}'
+  - condition: template
+    value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable'',
+      None] }}'
+  action:
+  - service: notify.admin
+    data:
+      message: 'WAN-IP is gewijzigd: {{ states(''sensor.myip'') }}'
+  - service: persistent_notification.create
+    data:
+      message: 'WAN-IP is gewijzigd: {{ states(''sensor.myip'') }}'
+  - service: script.toot_engine
+    data:
+      message: 'Fijn! #VodafoneZiggo heeft mijn externe IP-adres gewijzigd. Gelukkig
+        heb ik geen externe toegang nodig tot interne systemen.'
+  mode: single
+- id: '1672640475966'
+  alias: System > System Log Event
+  description: ''
+  trigger:
+  - platform: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+    id: Error
+  - platform: event
+    event_type: system_log_event
+    event_data:
+      level: WARNING
+    id: Warning
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Error
+      sequence:
+      - service: counter.increment
+        data: {}
+        target:
+          entity_id: counter.system_errors
+    - conditions:
+      - condition: trigger
+        id: Warning
+      sequence:
+      - service: counter.increment
+        data: {}
+        target:
+          entity_id: counter.system_warnings
+  mode: queued
+  max: 50
+- id: '1672669619955'
+  alias: Office > Printer plug unavailable
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.samsung_ml_2850nd_node_status
+    from: alive
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: Schakelaar Printer is niet meer beschikbaar
+      title: Printer
+  mode: single

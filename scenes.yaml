@@ -1035,43 +1035,6 @@
       brightness: 254
       color_temp: 250
       state: 'on'
-- name: Office - Available
-  id: e9d03c5e-e877-4aec-a976-e2622e641813
-  icon: mdi:account-check
-  entities:
-    light.werkstatus:
-      state: 'off'
-- id: 7c19f66a-664e-42e8-9498-dc841c79a0e4
-  name: Office - Do not disturb
-  entities:
-    light.werkstatus:
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: hass:alarm-light
-      friendly_name: Werkstatus
-      supported_features: 44
-      color_mode: hs
-      brightness: 255
-      hs_color:
-      - 2.967
-      - 71.373
-      rgb_color:
-      - 255
-      - 81
-      - 72
-      xy_color:
-      - 0.625
-      - 0.311
-      effect: none
-      state: 'on'
-  icon: mdi:account-cancel
-  metadata: {}
 - id: '1662880954621'
   name: Vacation
   entities:
