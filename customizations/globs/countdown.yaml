@@ -1,0 +1,4 @@
+---
+sensor.*_countdown:
+  icon: mdi:calendar-clock
+  unit_of_measurement: dagen

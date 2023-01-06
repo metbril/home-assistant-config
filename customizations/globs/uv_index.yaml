@@ -1,0 +1,4 @@
+---
+sensor.*_uv_index:
+  icon: mdi:weather-sunny
+  unit_of_measurement: UVI

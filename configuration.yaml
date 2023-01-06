@@ -10,6 +10,6 @@ homeassistant:
   customize: !include customizations/entities/customize.yaml
 
   # Customize entities by pattern
-  customize_glob: !include customizations/entities/customize_globs.yaml
+  customize_glob: !include_dir_merge_named customizations/globs
 
   packages: !include_dir_named packages
