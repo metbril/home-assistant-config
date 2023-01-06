@@ -1,0 +1,6 @@
+---
+# UI editor
+scene: !include ../../scenes.yaml
+
+# Other
+scene split: !include_dir_merge_list ../../scenes

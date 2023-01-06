@@ -1,0 +1,2 @@
+---
+air_quality: !include_dir_merge_list ../../entities/air_quality
