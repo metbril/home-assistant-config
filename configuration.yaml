@@ -45,14 +45,6 @@ frontend:
 
 group: !include_dir_merge_named entities/group
 
-http: !include integrations/http.yaml
-logger: !include integrations/logger.yaml
-notify: !include integrations/notify.yaml
-proximity: !include integrations/proximity.yaml
-recorder: !include integrations/recorder.yaml
-tts: !include integrations/tts.yaml
-weather: !include integrations/weather.yaml
-
 # Enable advanced notifications like actionable notifications and categories.
 # https://companion.home-assistant.io/docs/getting_started/
 # Note: the documentation is 'tegenstrijdig' in this. It's unclear if it is

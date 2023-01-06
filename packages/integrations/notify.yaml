@@ -1,0 +1,91 @@
+---
+notify:
+  # Person group for: Robert
+  #
+  # Expected service is the mobile app.
+  # Use this group instead of the device directly, so device changes do not
+  # require updating all uses of the notifier.
+  - name: Robert
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  # Person group for: Monique
+  #
+  # Expected service is the mobile app.
+  # Use this group instead of the device directly, so device changes do not
+  # require updating all uses of the notifier.
+  - name: Monique
+    platform: group
+    services:
+      - service: mobile_app_iphone_robert
+
+  # Person group for: Bjorn
+  #
+  # Expected service is the mobile app.
+  # Use this group instead of the device directly, so device changes do not
+  # require updating all uses of the notifier.
+  - name: Bjorn
+    platform: group
+    services:
+      - service: mobile_app_iphone_van_bjorn
+
+  # To send notification to all family members / residents
+  - name: Family
+    platform: group
+    services:
+      - service: robert
+      - service: monique
+      - service: bjorn
+
+  # To send notification to both parents only
+  - name: Parents
+    platform: group
+    services:
+      - service: robert
+      - service: monique
+
+  # To send admin notifications. Can be a person or
+  # any other notifier service.
+  - name: Admin
+    platform: group
+    services:
+      - service: robert
+
+  ##############################################################################
+  ## Twitter
+  ## https://www.home-assistant.io/integrations/twitter
+  ##
+  ## Send notifications to the twitter account of the house
+  ## https://twitter.com/domussapiens
+  ##############################################################################
+  - name: Twitter
+    platform: twitter
+    consumer_key: !secret twitter_consumer_key
+    consumer_secret: !secret twitter_consumer_secret
+    access_token: !secret twitter_access_token
+    access_token_secret: !secret twitter_access_token_secret
+
+  ##############################################################################
+  ## Mastodon
+  ## https://www.home-assistant.io/integrations/mastodon
+  ##
+  ## Send notifications to the Mastodon account of the house
+  ## https://botsin.space/@DomusSapiens
+  ##############################################################################
+  - name: Mastodon
+    platform: mastodon
+    base_url: https://botsin.space/
+    access_token: !secret mastodon_access_token
+    client_id: !secret mastodon_client_id
+    client_secret: !secret mastodon_client_secret
+
+  ##############################################################################
+  ## This notifier is used by the log energy consumption automation.
+  ##
+  ## https://www.home-assistant.io/integrations/file
+  ##############################################################################
+  - name: save_energy_consumption
+    platform: file
+    filename: energy_consumption.csv
+    timestamp: false
