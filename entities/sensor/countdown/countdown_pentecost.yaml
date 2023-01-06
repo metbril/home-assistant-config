@@ -6,12 +6,12 @@
 ## Every 4 hours = 14400 seconds
 ##
 - platform: rest
-  name: Christmas Countdown
-  unique_id: 01602758-5e35-4f3a-9ac5-f951a00ff277
+  name: Pentecost Countdown
+  unique_id: 5ebacd85-cbd6-4bc2-8a14-809b6e39813d
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI
   state_class: measurement
   scan_interval: 14400
-  resource: !secret wolframalpha_api_christmas
+  resource: !secret wolframalpha_api_pentecost
   value_template: "{{ (value|replace(' days', '')) | int }}"

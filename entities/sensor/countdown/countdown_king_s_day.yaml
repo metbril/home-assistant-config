@@ -7,7 +7,11 @@
 ##
 - platform: rest
   name: King's Day Countdown
+  unique_id: f2973d50-6807-4a4a-bf27-5e6326528c10
+  unit_of_measurement: d
+  icon: mdi:progress-clock
+  # device_class: duration  ## shows as hours in UI
+  state_class: measurement
+  scan_interval: 14400
   resource: !secret wolframalpha_api_king_s_day
   value_template: "{{ (value|replace(' days', '')) | int }}"
-  unit_of_measurement: Days
-  scan_interval: 14400
