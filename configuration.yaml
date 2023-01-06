@@ -32,6 +32,8 @@ binary_sensor: !include_dir_merge_list entities/binary_sensor
 
 calendar: !include_dir_merge_list entities/calendar
 
+climate: !include_dir_merge_list entities/climate
+
 default_config:
 
 fastdotcom:
