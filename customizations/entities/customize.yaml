@@ -41,3 +41,5 @@ sensor.msteams_online_today_robert:
   friendly_name: Teams Online Today Robert
 sensor.time:
   friendly_name: Tijd
+sun.sun:
+  friendly_name: Zon
