@@ -1734,3 +1734,46 @@
       message: Schakelaar Printer is niet meer beschikbaar
       title: Printer
   mode: single
+- id: '1673082949081'
+  alias: Birthday Notification
+  description: Spreek ieder uur een felicitatie uit op een verjaardag.
+  trigger:
+  - platform: time_pattern
+    minutes: 3
+  condition:
+  - condition: state
+    entity_id: input_boolean.birthday
+    state: 'on'
+  - condition: time
+    after: 07:00:00
+    before: '22:00:00'
+  action:
+  - service: script.sonos_say
+    data:
+      entity_id: media_player.living_speaker
+      message: "{{  [\n  'Van harte gefeliciteerd met je verjaardag.',\n  'Er is er
+        een jarig, hoera, hoera. Dat kun je wel zien, dat ben jij.',\n  'Je bent een
+        jaartje ouder, maar ben je ook wijzer?',\n  'Alweer een jaartje erbij. Gefeliciteerd.',\n
+        \ 'Je wordt vanzelf ouder, maar je hoeft niet op te groeien.',\n  'Wie blaast
+        vandaag de kaarsjes uit?',\n  'Heb je al een wens gedaan?',\n  'Ik hoop dat
+        het komende jaar het mooiste van je leven wordt.',\n  'Veel gezondheid, het
+        komende jaar.',\n  'Denk nog eens terug aan het afgelopen jaar.',\n  'Kijk
+        niet achterom, maar hou je blik naar voren. Gefeliciteerd.',\n  'Vergeet niet
+        om iedereen vandaag te trakteren.',\n  'Van de 22 miljoen mensen op de wereld
+        die vandaag jarig zijn, sta jij zeker in mijn top-10.',\n  'Jij wordt niet
+        ouder, jij wordt alleen maar beter.',\n  'Vier je verjaardag vandaag, maar
+        vier iedere dag dat je gelukkig bent.',\n  'Je bent een jaar ouder geworden,
+        maar je bent geen steek veranderd. Dat is prima, want je bent perfect zoals
+        je bent.',\n  'Je bent bijzonder en ik hoop dat je deze dag rondloopt met
+        een glimlach op je gezicht. Gefeliciteerd.',\n  'Gefeliciteerd. Ik hoop dat
+        dit het begin is van je beste, meest bijzondere jaar ooit.',\n  'Ik wens je
+        een dag die net zo speciaal is als jijzelf bent. Gefeliciteerd.',\n  'Gefeliciteerd.
+        Nog een jaartje erbij en dan ben je perfect. Oh ja, dat zei ik vorig jaar
+        ook al.',\n  'Ik wens je veel geluk, gezondheid en liefde. Gefeliciteerd.',\n
+        \ 'Leef je leven alsof dit je laatste jaar is. Gefeliciteerd.',\n  'Vandaag
+        is niet het eind van weer een jaar, maar het begin van een nieuwe tijd. Gefeliciteerd.',\n
+        \ 'Vandaag geef ik je kusjes en knuffels. Gefeliciteerd.',\n  'Mijn felicitaties
+        zijn vandaag voor iemand die meer voor me betekent dan chololade.',\n  'Gefeliciteerd.
+        Daar moet op gedronken worden. Hi-ha-ho!',\n  'Hieper de piep. Hoera!',\n
+        \ 'Hoera. Hoera. Hoera.',\n  'Gefeliciteerd.'\n] | random }}\n"
+  mode: queued
