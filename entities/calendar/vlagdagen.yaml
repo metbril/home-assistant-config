@@ -1,4 +1,7 @@
 ---
+# Uses custom component ICS Calendar:
+# https://github.com/franc6/ics_calendar
+#
 - platform: ics_calendar
   calendars:
     - name: "Vlagdagen"
