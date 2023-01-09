@@ -36,3 +36,330 @@ toot_engine:
   mode: queued
   icon: mdi:elephant
   max: 10
+time_to_leave_for_robert:
+  alias: Time to Leave for Robert
+  icon: mdi:exit-run
+  mode: single
+  sequence:
+  - service: notify.robert
+    data:
+      message: Tijd om te vertrekken naar je werk.
+printer_off:
+  alias: 'Kantoor: Printer ingeschakeld melding'
+  sequence:
+  - service: notify.robert
+    data:
+      message: Printer staat nog aan
+      title: Printer
+      data:
+        actions:
+        - action: PRINTER_OFF
+          title: Uitschakelen
+        - action: PRINTER_REMIND
+          title: Herinneren
+        - action: PRINTER_IGNORE
+          title: Negeren
+  mode: single
+morning_routine:
+  alias: Ochtendroutine
+  fields:
+    player:
+      name: Sonos Mediaspeler
+      description: The media player that plays the morning routine.
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+          multiple: false
+  variables:
+    time_of_day: Goedemorgen.
+    vandaag: 'Het is vandaag {{ states(''sensor.weekday'') }} {{ states(''sensor.long_date'')
+      }} en de tijd is {{ states(''sensor.time'') }}.
+
+      '
+    weer: 'Het is nu {{ states(''sensor.knmi_thuis_omschrijving'') | lower }} en {{
+      state_attr(''weather.knmi_thuis'',''temperature'') | float(0) | round(0) }}
+      graden. Het wordt vandaag maximaal {{ state_attr(''weather.knmi_thuis'',''forecast'')[0].temperature
+      | float(0) | round(0) }} graden. Later vandaag: {{ states(''sensor.knmi_thuis_korte_dagverwachting'')
+      }}.
+
+      '
+    weer_waarschuwing: "{% if is_state('binary_sensor.knmi_thuis_waarschuwing','on')
+      %}\n  Let op.\n  {{ state_attr('binary_sensor.knmi_thuis_waarschuwing', 'Waarschuwing')
+      }}\n{% endif %}\n"
+  sequence:
+  - service: script.sonos_say
+    data:
+      entity_id: '{{ player }}'
+      message: '{{ time_of_day }} {{ vandaag }} {{ weer }} {{ weer_waarschuwing }}'
+      volume_percent: 30
+  - service: script.lees_het_nieuws_voor
+    data:
+      player: '{{ player }}'
+      volume_percent: 30
+mindergas:
+  alias: 'Energy: Post meter reading to mindergas.nl'
+  description: 'A simple wrapper script around the RESTful command, to be able to
+    post a gas meter reading manually through the Services menu in the developer tools
+    and call it from the automations editor.
+
+    '
+  mode: single
+  fields:
+    date:
+      name: Reading date
+      description: The date to post the last reading of.
+      required: true
+      selector:
+        date:
+    reading:
+      name: Meter reading
+      description: The last meter reading at the end of the day of the specified date.
+      required: true
+      default: 0
+      example: '1234.567'
+      selector:
+        number:
+          min: 0
+          max: 999999.999
+          step: 0.001
+          unit_of_measurement: m3
+          mode: box
+  sequence:
+  - service: rest_command.mindergas
+    data:
+      date: '{{ date }}'
+      reading: '{{ reading }}'
+  icon: mdi:meter-gas
+double_toggle:
+  alias: Lighting > Double Toggle
+  fields:
+    entity:
+      name: Light target
+      description: The light to toggle twice
+      required: true
+      selector:
+        entity:
+          domain: light
+  sequence:
+  - service: light.toggle
+    target:
+      entity_id: '{{ entity }}'
+  - service: light.toggle
+    target:
+      entity_id: '{{ entity }}'
+  mode: single
+  icon: mdi:toggle-switch
+bark_the_dog:
+  alias: "Security > Bark The Dog"
+  description:
+    "Loudly play the sound of a barking dog. Delay for the duration of
+    the clip afterwards. Lower the volume just in case. Limited to Sonos players.
+
+    "
+  fields:
+    entity_id:
+      name: Media Player
+      description: The media player that plays the sound
+      example: media_player.living_speaker
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+    volume_pct:
+      name: Volume Level
+      description: The volume level of the barking dog. As loud as possible.
+      selector:
+        number:
+          min: 1
+          max: 100
+          step: 1
+          unit_of_measurement: "%"
+          mode: slider
+      default: 100
+      example: "100"
+  sequence:
+    - variables:
+        volume_level: "{{ (volume_pct | int(100) / 100) | float }}"
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.media_pause
+      target:
+        entity_id: "{{ entity_id }}"
+    - service: media_player.volume_set
+      data:
+        volume_level: "{{ volume_level | float }}"
+        entity_id: "{{ entity_id }}"
+    - service: media_player.play_media
+      data:
+        media_content_type: music
+        media_content_id: /local/sounds/dog-barking-noise.mp3
+        entity_id: "{{ entity_id }}"
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 3
+        milliseconds: 0
+      alias: Delay so sound can start playing
+    - wait_template: "{{ is_state(entity_id, 'paused') }}"
+      continue_on_timeout: true
+      alias: Wait until sound has finished playing
+    - service: sonos.restore
+      data:
+        entity_id: "{{ entity_id }}"
+  mode: single
+  icon: mdi:dog-side
+movie_pause:
+  alias: Media > Pause movie
+  mode: single
+  icon: mdi:television-pause
+
+  sequence:
+
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.apple_tv_woomkamer
+              state: playing
+          sequence:
+            - service: remote.send_command
+              data:
+                command: select
+              target:
+                entity_id: remote.apple_tv_woomkamer
+
+        - conditions:
+            - alias: Test if Living TV is playing a specific source
+              condition: and
+              conditions:
+                - condition: state
+                  entity_id: media_player.living_tv
+                  state: 'on'
+                - alias: Test for a list of sources
+                  condition: or
+                  conditions:
+                    - condition: state
+                      entity_id: media_player.living_tv
+                      attribute: source
+                      state: Netflix
+          sequence:
+            - service: media_player.media_pause
+              target:
+                entity_id: media_player.living_tv
+            - service: media_player.volume_mute
+              target:
+                entity_id: media_player.living_tv
+              data:
+                is_volume_muted: true
+movie_time_start:
+  alias: Media > Start Movie Time
+  icon: mdi:movie-open
+  mode: single
+
+  sequence:
+    - if:
+        - condition: state
+          entity_id: light.living
+          state: 'on'
+      then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.movie_time
+movie_time_stop:
+  alias: Media > Stop Movie Time
+  icon: mdi:movie-open-off
+  mode: single
+
+  sequence:
+    - if:
+        - condition: state
+          entity_id: light.living
+          state: 'on'
+      then:
+        - service: scene.turn_on
+          target:
+            entity_id: scene.lighting_living_base
+start_netflix:
+  alias: "Media > Start Netflix on living TV"
+  description:
+    Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
+    in.
+  icon: mdi:netflix
+  mode: single
+  sequence:
+    - choose:
+        - conditions:
+            - condition: state
+              entity_id: media_player.living_tv
+              state: "off"
+          sequence:
+            - service: notify.mobile_app_iphone_robert
+              data:
+                message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+            - service: media_player.turn_on
+              target:
+                entity_id: media_player.living_tv
+              data: {}
+      default: []
+    - wait_template: "{{ is_state('media_player.living_tv', 'on') }}"
+      timeout: 00:01:00
+    - service: media_player.select_source
+      data:
+        source: Netflix
+      target:
+        entity_id: media_player.living_tv
+    - service: notify.living_tv
+      data:
+        message: Netflix is gestart. Veel kijkplezier!
+switch_netflix_robert:
+  alias: "Media > Ga naar Netflix van Robert on living TV"
+  description:
+    Start Netflix en open het profiel van Robert. Aangenomen dat de TV
+    al aan staat.
+  icon: mdi:netflix
+  mode: single
+  sequence:
+    - condition: state
+      entity_id: media_player.living_tv
+      state: "on"
+    - service: media_player.select_source
+      target:
+        entity_id: media_player.living_tv
+      data:
+        source: Netflix
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 1
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: LEFT
+    - delay:
+        seconds: 2
+    - service: webostv.button
+      data:
+        entity_id: media_player.living_tv
+        button: ENTER

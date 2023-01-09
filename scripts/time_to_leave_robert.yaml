@@ -1,8 +1,0 @@
-time_to_leave_for_robert:
-  alias: Time to Leave for Robert
-  icon: mdi:exit-run
-  mode: single
-  sequence:
-    - service: notify.robert
-      data:
-        message: Tijd om te vertrekken naar je werk.
