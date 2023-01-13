@@ -18,7 +18,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: Run Frenk's yamllint
-        uses: frenck/action-yamllint@v1.3.1
+        uses: frenck/action-yamllint@v1.4.0
 
   ha_version:
     name: Get Installed Version for Testing
