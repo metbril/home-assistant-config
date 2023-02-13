@@ -33,7 +33,7 @@ jobs:
         run: |
           HA_VERSION=$(<.HA_VERSION)
           echo $HA_VERSION
-          echo "::set-output name=current_version::$HA_VERSION"
+          echo "current_version=$HA_VERSION" >> $GITHUB_OUTPUT
 
   homeassistant:
     name: Home Assistant Core ${{ matrix.version }} Configuration Check
