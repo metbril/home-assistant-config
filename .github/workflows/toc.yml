@@ -1,6 +1,9 @@
 ---
 # yamllint disable-line rule:truthy
-on: push
+on:
+  push:
+    paths:
+      - 'README.md'
 name: TOC Generator
 jobs:
   generateTOC:
