@@ -202,6 +202,26 @@ Connected (smart) hardware:
 
 Sonos speakers are added through discovery. This is more convenient than configuring manually.
 
+## Dashboards
+
+### Themes
+
+I only use themes from HACS. These are installed in the `themes` folder, but are never uploaded to this repo.
+
+### Mushroom & Tile cards
+
+I really like [Mushroom](https://github.com/piitaya/lovelace-mushroom) and [Tile cards](https://www.home-assistant.io/dashboards/tile/). However, they do not (yet) have the flexibility of the entities card in combination with some custom cards.
+
+### Custom cards
+
+I use several custom cards for displaying a nice and tailored dashboard. Among thise are:
+
+- [Mini Graph Card](https://github.com/kalkih/mini-graph-card)
+- [Mini Mediaplayer](https://github.com/kalkih/mini-media-player)
+- [Fold Entity Row](https://github.com/thomasloven/lovelace-fold-entity-row)
+- [Multiple Entity Row](https://github.com/benct/lovelace-multiple-entity-row)
+- [Template Entity Row](https://github.com/thomasloven/lovelace-template-entity-row)
+
 ## Tips & Tricks
 
 Editing your configuration
