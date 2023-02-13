@@ -4,4 +4,7 @@
 ## https://github.com/Limych/ha-car_wash/
 ################################################################################
 - platform: car_wash
-  weather: weather.dark_sky
+  name: Car Wash  # default 'Car Wash'
+  weather: weather.knmi_thuis
+  unique_id: 1747e5f4-0079-4487-adaf-42891dcfe7f0
+  days: 2  ## look forward (default: 2)
