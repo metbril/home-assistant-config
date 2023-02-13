@@ -150,14 +150,13 @@ double_toggle:
     target:
       entity_id: '{{ entity }}'
   mode: single
-  icon: mdi:toggle-switch
+  icon: mdi:lightbulb-on-70
 bark_the_dog:
-  alias: "Security > Bark The Dog"
-  description:
-    "Loudly play the sound of a barking dog. Delay for the duration of
+  alias: Security > Bark The Dog
+  description: 'Loudly play the sound of a barking dog. Delay for the duration of
     the clip afterwards. Lower the volume just in case. Limited to Sonos players.
 
-    "
+    '
   fields:
     entity_id:
       name: Media Player
@@ -176,190 +175,191 @@ bark_the_dog:
           min: 1
           max: 100
           step: 1
-          unit_of_measurement: "%"
+          unit_of_measurement: '%'
           mode: slider
       default: 100
-      example: "100"
+      example: '100'
   sequence:
-    - variables:
-        volume_level: "{{ (volume_pct | int(100) / 100) | float }}"
-    - service: sonos.snapshot
-      data:
-        entity_id: "{{ entity_id }}"
-    - service: media_player.unjoin
-      data:
-        entity_id: "{{ entity_id }}"
-    - service: media_player.media_pause
-      target:
-        entity_id: "{{ entity_id }}"
-    - service: media_player.volume_set
-      data:
-        volume_level: "{{ volume_level | float }}"
-        entity_id: "{{ entity_id }}"
-    - service: media_player.play_media
-      data:
-        media_content_type: music
-        media_content_id: /local/sounds/dog-barking-noise.mp3
-        entity_id: "{{ entity_id }}"
-    - delay:
-        hours: 0
-        minutes: 0
-        seconds: 3
-        milliseconds: 0
-      alias: Delay so sound can start playing
-    - wait_template: "{{ is_state(entity_id, 'paused') }}"
-      continue_on_timeout: true
-      alias: Wait until sound has finished playing
-    - service: sonos.restore
-      data:
-        entity_id: "{{ entity_id }}"
+  - variables:
+      volume_level: '{{ (volume_pct | int(100) / 100) | float }}'
+  - service: sonos.snapshot
+    data:
+      entity_id: '{{ entity_id }}'
+  - service: media_player.unjoin
+    data:
+      entity_id: '{{ entity_id }}'
+  - service: media_player.media_pause
+    target:
+      entity_id: '{{ entity_id }}'
+  - service: media_player.volume_set
+    data:
+      volume_level: '{{ volume_level | float }}'
+      entity_id: '{{ entity_id }}'
+  - service: media_player.play_media
+    data:
+      media_content_type: music
+      media_content_id: /local/sounds/dog-barking-noise.mp3
+      entity_id: '{{ entity_id }}'
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 3
+      milliseconds: 0
+    alias: Delay so sound can start playing
+  - wait_template: '{{ is_state(entity_id, ''paused'') }}'
+    continue_on_timeout: true
+    alias: Wait until sound has finished playing
+  - service: sonos.restore
+    data:
+      entity_id: '{{ entity_id }}'
   mode: single
   icon: mdi:dog-side
 movie_pause:
   alias: Media > Pause movie
   mode: single
   icon: mdi:television-pause
-
   sequence:
-
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: media_player.apple_tv_woomkamer
-              state: playing
-          sequence:
-            - service: remote.send_command
-              data:
-                command: select
-              target:
-                entity_id: remote.apple_tv_woomkamer
-
-        - conditions:
-            - alias: Test if Living TV is playing a specific source
-              condition: and
-              conditions:
-                - condition: state
-                  entity_id: media_player.living_tv
-                  state: 'on'
-                - alias: Test for a list of sources
-                  condition: or
-                  conditions:
-                    - condition: state
-                      entity_id: media_player.living_tv
-                      attribute: source
-                      state: Netflix
-          sequence:
-            - service: media_player.media_pause
-              target:
-                entity_id: media_player.living_tv
-            - service: media_player.volume_mute
-              target:
-                entity_id: media_player.living_tv
-              data:
-                is_volume_muted: true
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.apple_tv_woomkamer
+        state: playing
+      sequence:
+      - service: remote.send_command
+        data:
+          command: select
+        target:
+          entity_id: remote.apple_tv_woomkamer
+    - conditions:
+      - alias: Test if Living TV is playing a specific source
+        condition: and
+        conditions:
+        - condition: state
+          entity_id: media_player.living_tv
+          state: 'on'
+        - alias: Test for a list of sources
+          condition: or
+          conditions:
+          - condition: state
+            entity_id: media_player.living_tv
+            attribute: source
+            state: Netflix
+      sequence:
+      - service: media_player.media_pause
+        target:
+          entity_id: media_player.living_tv
+      - service: media_player.volume_mute
+        target:
+          entity_id: media_player.living_tv
+        data:
+          is_volume_muted: true
 movie_time_start:
   alias: Media > Start Movie Time
   icon: mdi:movie-open
   mode: single
-
   sequence:
-    - if:
-        - condition: state
-          entity_id: light.living
-          state: 'on'
-      then:
-        - service: scene.turn_on
-          target:
-            entity_id: scene.movie_time
+  - if:
+    - condition: state
+      entity_id: light.living
+      state: 'on'
+    then:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.movie_time
 movie_time_stop:
   alias: Media > Stop Movie Time
   icon: mdi:movie-open-off
   mode: single
-
   sequence:
-    - if:
-        - condition: state
-          entity_id: light.living
-          state: 'on'
-      then:
-        - service: scene.turn_on
-          target:
-            entity_id: scene.lighting_living_base
+  - if:
+    - condition: state
+      entity_id: light.living
+      state: 'on'
+    then:
+    - service: scene.turn_on
+      target:
+        entity_id: scene.lighting_living_base
 start_netflix:
-  alias: "Media > Start Netflix on living TV"
-  description:
-    Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
+  alias: Media > Start Netflix on living TV
+  description: Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
     in.
   icon: mdi:netflix
   mode: single
   sequence:
-    - choose:
-        - conditions:
-            - condition: state
-              entity_id: media_player.living_tv
-              state: "off"
-          sequence:
-            - service: notify.mobile_app_iphone_robert
-              data:
-                message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
-            - service: media_player.turn_on
-              target:
-                entity_id: media_player.living_tv
-              data: {}
-      default: []
-    - wait_template: "{{ is_state('media_player.living_tv', 'on') }}"
-      timeout: 00:01:00
-    - service: media_player.select_source
-      data:
-        source: Netflix
-      target:
+  - choose:
+    - conditions:
+      - condition: state
         entity_id: media_player.living_tv
-    - service: notify.living_tv
-      data:
-        message: Netflix is gestart. Veel kijkplezier!
+        state: 'off'
+      sequence:
+      - service: notify.mobile_app_iphone_robert
+        data:
+          message: De TV wordt ingeschakeld voor Netflix. Een ogenblikje...
+      - service: media_player.turn_on
+        target:
+          entity_id: media_player.living_tv
+        data: {}
+    default: []
+  - wait_template: '{{ is_state(''media_player.living_tv'', ''on'') }}'
+    timeout: 00:01:00
+  - service: media_player.select_source
+    data:
+      source: Netflix
+    target:
+      entity_id: media_player.living_tv
+  - service: notify.living_tv
+    data:
+      message: Netflix is gestart. Veel kijkplezier!
 switch_netflix_robert:
-  alias: "Media > Ga naar Netflix van Robert on living TV"
-  description:
-    Start Netflix en open het profiel van Robert. Aangenomen dat de TV
+  alias: Media > Ga naar Netflix van Robert on living TV
+  description: Start Netflix en open het profiel van Robert. Aangenomen dat de TV
     al aan staat.
   icon: mdi:netflix
   mode: single
   sequence:
-    - condition: state
+  - condition: state
+    entity_id: media_player.living_tv
+    state: 'on'
+  - service: media_player.select_source
+    target:
       entity_id: media_player.living_tv
-      state: "on"
-    - service: media_player.select_source
-      target:
-        entity_id: media_player.living_tv
-      data:
-        source: Netflix
-    - delay:
-        seconds: 1
-    - service: webostv.button
-      data:
-        entity_id: media_player.living_tv
-        button: LEFT
-    - delay:
-        seconds: 1
-    - service: webostv.button
-      data:
-        entity_id: media_player.living_tv
-        button: LEFT
-    - delay:
-        seconds: 1
-    - service: webostv.button
-      data:
-        entity_id: media_player.living_tv
-        button: LEFT
-    - delay:
-        seconds: 1
-    - service: webostv.button
-      data:
-        entity_id: media_player.living_tv
-        button: LEFT
-    - delay:
-        seconds: 2
-    - service: webostv.button
-      data:
-        entity_id: media_player.living_tv
-        button: ENTER
+    data:
+      source: Netflix
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 1
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: LEFT
+  - delay:
+      seconds: 2
+  - service: webostv.button
+    data:
+      entity_id: media_player.living_tv
+      button: ENTER
+double_toggle_office_desk_lamp:
+  alias: Lighting > Double Toggle Office Desk Lamp
+  sequence:
+  - service: script.double_toggle
+    data:
+      entity: light.office_desk_lamp
+  mode: single
+  icon: mdi:lightbulb-on-70

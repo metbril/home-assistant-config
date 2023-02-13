@@ -1405,10 +1405,9 @@
       - sensor.euro95_tango_hoofdweg
       - sensor.euro95_tinq_bermweg
   mode: single
-- alias: Euro95 gewijzigd
+- id: cea83bd6-bc1a-4973-b080-8ed2bb9a3026
+  alias: Mobility > Euro95 price changes
   description: Notification for updated Euro95 fuel prices
-  id: cea83bd6-bc1a-4973-b080-8ed2bb9a3026
-  mode: queued
   trigger:
   - platform: state
     entity_id:
@@ -1427,6 +1426,7 @@
     data:
       message: '{{ state_attr(trigger.entity_id,''friendly_name'') }} is gewijzigd
         naar {{ trigger.to_state.state }} {{ state_attr(trigger.entity_id,''unit_of_measurement'')}}.'
+  mode: queued
 - alias: 'Huis: Synchroniseer bezetting status'
   id: '1661884728867'
   description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
