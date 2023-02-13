@@ -1,36 +1,41 @@
 ---
-
 multiscrape:
   - name: NL-Alert
     resource: https://crisis.nl/nl-alert/nl-alerts/
     scan_interval: 60  # seconds
-    binary_sensor:
-      - unique_id: nl_alert_actief  # entity_id
-        name: NL-Alert Actief
+    sensor:
+      - unique_id: nl_alert  # entity_id
+        name: NL-Alert
+        device_class: timestamp
         select: "#content > div:nth-child(4) > a > h3"
         value_template: |
-          {{ "ACTIEF" in (value | upper) }}
-        device_class: safety
+          {% set upper_value = (value | upper) %}
+          {% set stripped_value = upper_value.split('ACTIEF')[-1].strip() if 'ACTIEF' in upper_value else value.strip() %}
+          {{ (strptime(stripped_value, "%d-%m-%Y %H:%M:%S", "unavailable") | as_local).isoformat() }}
         attributes:
+          - name: Headline
+            select: "#content > div:nth-child(4) > a > h3"
           - name: Melding
             select: "#content > div:nth-child(4) > a > p"
-          - name: Datum & Tijd
-            select: "#content > div:nth-child(4) > a > h3"
-            value_template: |
-              {% set upper_value = (value | upper) %}
-              {{ upper_value.split('ACTIEF')[-1].strip() if 'ACTIEF' in upper_value else value.strip() }}
           - name: Meer informatie
             select: "#content > div:nth-child(4) > a"
             attribute: href
-          - name: Testbericht
-            select: "#content > div:nth-child(4) > a > p"
-            value_template: |
-              {% set upper_value = (value | upper) %}
-              {{ "True" if "TESTBERICHT" in upper_value else "False" }}
+    binary_sensor:
+      - unique_id: nl_alert_actief  # entity_id
+        name: NL-Alert Actief
+        device_class: safety
+        select: "#content > div:nth-child(4) > a > h3"
+        value_template: |
+          {{ "ACTIEF" in (value | upper) }}
+      - unique_id: nl_alert_test  # entity_id
+        name: NL-Alert Testbericht
+        select: "#content > div:nth-child(4) > a > p"
+        value_template: |
+          {{ "TESTBERICHT" in (value | upper) }}
 
   - name: NL-Alert Detail
-    resource_template: "https://www.crisis.nl{{ state_attr('binary_sensor.nl_alert_actief', 'meer_informatie') }}"
-    scan_interval: 3600  #seconds
+    resource_template: "https://www.crisis.nl{{ state_attr('sensor.nl_alert', 'meer_informatie') }}"
+    scan_interval: 3600  # seconds
     button:
       unique_id: nl_alert_kaart_verversen
       name: NL-Alert Kaart verversen
@@ -50,7 +55,7 @@ automation:
     trigger:
       - platform: state
         entity_id:
-          - binary_sensor.nl_alert_actief
+          - sensor.nl_alert
       - platform: homeassistant
         event: start
     condition: []
