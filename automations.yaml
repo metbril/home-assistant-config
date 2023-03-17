@@ -766,7 +766,7 @@
       seconds: 0
     below: 1
     id: battery-charged
-    alias: Verbruik onder 1
+    alias: Verbruik onder 1 voor 5 min
   condition:
   - condition: state
     entity_id: switch.shelly_1
@@ -779,13 +779,25 @@
     data: {}
     target:
       entity_id: switch.shelly_1
-  - service: persistent_notification.create
-    data:
-      message: 'Fietslader is klaar en automatisch uitgeschakeld. '
-      title: Fietslader
-  - service: notify.family
+  - service: notify.robert
     data:
       message: "De fietslader in de garage is klaar. \U0001F6B2\U0001F50B"
+  - if:
+    - condition: device
+      device_id: f76477730485d84e3077b5b0fbadf4c9
+      domain: media_player
+      entity_id: media_player.living_tv
+      type: is_on
+    then:
+    - service: notify.living_tv
+      data:
+        message: Fietslader is klaar.
+    else:
+    - service: script.sonos_say
+      data:
+        volume_percent: 30
+        entity_id: media_player.living_speaker
+        message: De fietslader is klaar.
   mode: single
 - id: '1663925197803'
   alias: Cube Actions
@@ -1643,8 +1655,8 @@
           notification_id: cloud_connected
   mode: single
 - id: '1672391012431'
-  alias: Living > Lighting > Shortcut button
-  description: ''
+  alias: Living > Lighting > Shortcut
+  description: Snelknop bij de deur. 1x = aan, lang=uit, 2x = max
   use_blueprint:
     path: EPMatt/ikea_e1812.yaml
     input:
@@ -1661,6 +1673,13 @@
         target:
           entity_id: scene.lighting_living_off
         metadata: {}
+      action_button_double:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id: scene.lighting_living_max
+      button_double_press: true
+      helper_double_press_delay: 1000
 - id: '1672486229153'
   alias: System > Network > WAN IP changed
   description: Notify when WAN IP changes

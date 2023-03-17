@@ -69,21 +69,21 @@
       - random
       supported_color_modes:
       - hs
+      friendly_name: Hoge kast
+      supported_features: 44
       color_mode: hs
       brightness: 102
       hs_color:
-      - 35.148
-      - 66.275
+      - 36.069
+      - 67.843
       rgb_color:
       - 255
-      - 184
-      - 85
+      - 185
+      - 82
       xy_color:
-      - 0.507
-      - 0.41
+      - 0.508
+      - 0.413
       effect: none
-      friendly_name: Hoge Kast
-      supported_features: 44
       state: 'on'
     light.leeslamp:
       min_color_temp_kelvin: 2000
@@ -92,6 +92,8 @@
       max_mireds: 500
       supported_color_modes:
       - color_temp
+      friendly_name: Leeslamp
+      supported_features: 40
       color_mode: color_temp
       brightness: 102
       color_temp_kelvin: 2777
@@ -106,15 +108,6 @@
       xy_color:
       - 0.518
       - 0.386
-      friendly_name: Leeslamp
-      supported_features: 40
-      state: 'on'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      color_mode: onoff
-      friendly_name: Turbinelamp
-      supported_features: 40
       state: 'on'
     light.nijntje:
       min_color_temp_kelvin: 2202
@@ -123,6 +116,8 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
+      friendly_name: Nijntje
+      supported_features: 32
       color_mode: color_temp
       brightness: 102
       color_temp_kelvin: 3003
@@ -137,8 +132,6 @@
       xy_color:
       - 0.496
       - 0.383
-      friendly_name: Nijntje
-      supported_features: 32
       state: 'on'
     light.willner:
       min_color_temp_kelvin: 2000
@@ -147,6 +140,8 @@
       max_mireds: 500
       supported_color_modes:
       - color_temp
+      friendly_name: Willner
+      supported_features: 40
       color_mode: color_temp
       brightness: 102
       color_temp_kelvin: 2777
@@ -161,14 +156,10 @@
       xy_color:
       - 0.518
       - 0.386
-      friendly_name: Willner
-      supported_features: 40
       state: 'on'
     light.lichtstraat:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 102
       entity_id:
       - light.lichtstraat_1
       - light.lichtstraat_2
@@ -177,6 +168,8 @@
       icon: mdi:light-recessed
       friendly_name: Lichtstraat
       supported_features: 32
+      color_mode: brightness
+      brightness: 102
       state: 'on'
     light.magnarp:
       min_color_temp_kelvin: 2202
@@ -185,6 +178,13 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp
+      supported_features: 32
       color_mode: color_temp
       brightness: 102
       color_temp_kelvin: 2777
@@ -199,67 +199,15 @@
       xy_color:
       - 0.518
       - 0.386
-      entity_id:
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      icon: mdi:floor-lamp
-      friendly_name: Magnarp
+      state: 'on'
+    light.pilskott:
+      supported_color_modes:
+      - brightness
+      friendly_name: Pilskott
       supported_features: 32
+      color_mode: brightness
+      brightness: 102
       state: 'on'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      supported_color_modes:
-      - color_temp
-      color_mode: color_temp
-      brightness: 176
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 69635
-        latest_version: 69635
-        state: idle
-      update_available: false
-      icon: mdi:flower-poppy
-      friendly_name: Lotus
-      supported_features: 44
-      state: 'on'
-    light.bollamp:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      friendly_name: Bollamp
-      supported_features: 44
-      state: 'off'
   icon: mdi:candelabra-fire
   metadata:
     light.magnarp:
@@ -269,27 +217,26 @@
   entities:
     light.hoge_kast:
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+      - colorloop
+      - random
       supported_color_modes:
-      - xy
-      color:
-        x: 0.507
-        y: 0.407
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 67.93.11
-        state: idle
-      update_available: false
-      icon: hue:bloom
-      friendly_name: Hoge Kast
+      - hs
+      friendly_name: Hoge kast
       supported_features: 44
-      state: 'off'
+      color_mode: hs
+      brightness: 3
+      hs_color:
+      - 28.302
+      - 62.353
+      rgb_color:
+      - 255
+      - 171
+      - 95
+      xy_color:
+      - 0.514
+      - 0.387
+      effect: none
+      state: 'on'
     light.magnarp:
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 4000
@@ -297,20 +244,6 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 3
-      color_temp_kelvin: 2710
-      color_temp: 369
-      hs_color:
-      - 28.373
-      - 65.405
-      rgb_color:
-      - 255
-      - 167
-      - 88
-      xy_color:
-      - 0.524
-      - 0.388
       entity_id:
       - light.magnarp_1
       - light.magnarp_2
@@ -318,14 +251,16 @@
       icon: mdi:floor-lamp
       friendly_name: Magnarp
       supported_features: 32
-      state: 'on'
+      state: 'off'
     light.leeslamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
+      friendly_name: Leeslamp
+      supported_features: 40
       color_mode: color_temp
       brightness: 3
       color_temp_kelvin: 2272
@@ -340,17 +275,7 @@
       xy_color:
       - 0.572
       - 0.388
-      icon: hue:wall-spot
-      friendly_name: Leeslamp
-      supported_features: 32
       state: 'on'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      icon: mdi:turbine
-      friendly_name: Turbinelamp
-      supported_features: 0
-      state: 'off'
     light.lichtstraat:
       supported_color_modes:
       - brightness
@@ -363,50 +288,25 @@
       friendly_name: Lichtstraat
       supported_features: 32
       state: 'off'
-    light.bollamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Bollamp
-      supported_features: 32
-      state: 'off'
     light.nijntje:
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 4000
       min_mireds: 250
       max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
       supported_color_modes:
       - color_temp
-      color_temp_startup: 370
-      linkquality: 255
-      power_on_behavior: previous
-      update:
-        installed_version: 1.1.003
-        state: idle
-      update_available: false
-      icon: mdi:rabbit-variant
       friendly_name: Nijntje
-      supported_features: 44
+      supported_features: 32
       state: 'off'
     light.willner:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
+      friendly_name: Willner
+      supported_features: 40
       color_mode: color_temp
       brightness: 3
       color_temp_kelvin: 2298
@@ -421,9 +321,6 @@
       xy_color:
       - 0.569
       - 0.388
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Willner
-      supported_features: 32
       state: 'on'
     light.eettafel:
       min_color_temp_kelvin: 2202
@@ -436,45 +333,13 @@
       friendly_name: Eettafel
       supported_features: 32
       state: 'off'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+    light.pilskott:
       supported_color_modes:
-      - color_temp
-      color_mode: color_temp
+      - brightness
+      friendly_name: Pilskott
+      supported_features: 32
+      color_mode: brightness
       brightness: 3
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 1.0.032
-        progress: 18.53
-        remaining: 1065
-        state: updating
-      update_available: false
-      friendly_name: Lotus
-      supported_features: 44
-      icon: mdi:flower-poppy
       state: 'on'
   icon: mdi:weather-night
   metadata: {}
@@ -487,20 +352,20 @@
       - random
       supported_color_modes:
       - hs
-      friendly_name: Hoge Kast
+      friendly_name: Hoge kast
       supported_features: 44
       color_mode: hs
       brightness: 255
       hs_color:
-      - 29.589
-      - 28.627
+      - 43.333
+      - 14.118
       rgb_color:
       - 255
+      - 244
       - 218
-      - 182
       xy_color:
-      - 0.397
-      - 0.363
+      - 0.353
+      - 0.355
       effect: none
       state: 'on'
     light.magnarp:
@@ -510,6 +375,13 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp
+      supported_features: 32
       color_mode: color_temp
       brightness: 254
       color_temp_kelvin: 4000
@@ -524,13 +396,6 @@
       xy_color:
       - 0.421
       - 0.364
-      entity_id:
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      icon: mdi:floor-lamp
-      friendly_name: Magnarp
-      supported_features: 32
       state: 'on'
     light.leeslamp:
       min_color_temp_kelvin: 2000
@@ -556,18 +421,9 @@
       - 0.326
       - 0.333
       state: 'on'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      friendly_name: Turbinelamp
-      supported_features: 40
-      color_mode: onoff
-      state: 'on'
     light.lichtstraat:
       supported_color_modes:
       - brightness
-      color_mode: brightness
-      brightness: 254
       entity_id:
       - light.lichtstraat_1
       - light.lichtstraat_2
@@ -576,35 +432,8 @@
       icon: mdi:light-recessed
       friendly_name: Lichtstraat
       supported_features: 32
-      state: 'on'
-    light.bollamp:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      friendly_name: Bollamp
-      supported_features: 44
-      color_mode: color_temp
+      color_mode: brightness
       brightness: 254
-      color_temp_kelvin: 6535
-      color_temp: 153
-      hs_color:
-      - 54.768
-      - 1.6
-      rgb_color:
-      - 255
-      - 254
-      - 250
-      xy_color:
-      - 0.326
-      - 0.333
-      effect: none
       state: 'on'
     light.nijntje:
       min_color_temp_kelvin: 2202
@@ -613,8 +442,10 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
+      friendly_name: Nijntje
+      supported_features: 32
       color_mode: color_temp
-      brightness: 247
+      brightness: 254
       color_temp_kelvin: 4000
       color_temp: 250
       hs_color:
@@ -627,8 +458,6 @@
       xy_color:
       - 0.421
       - 0.364
-      friendly_name: Nijntje
-      supported_features: 32
       state: 'on'
     light.willner:
       min_color_temp_kelvin: 2000
@@ -661,6 +490,9 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
+      icon: mdi:table-chair
+      friendly_name: Eettafel
+      supported_features: 32
       color_mode: color_temp
       brightness: 254
       color_temp_kelvin: 4000
@@ -675,48 +507,14 @@
       xy_color:
       - 0.421
       - 0.364
-      icon: mdi:table-chair
-      friendly_name: Eettafel
-      supported_features: 32
       state: 'on'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+    light.pilskott:
       supported_color_modes:
-      - color_temp
-      color_mode: color_temp
-      brightness: 172
-      color_temp_kelvin: 4000
-      color_temp: 250
-      hs_color:
-      - 26.812
-      - 34.87
-      rgb_color:
-      - 255
-      - 205
-      - 166
-      xy_color:
-      - 0.421
-      - 0.364
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 69635
-        latest_version: 69635
-        state: idle
-      update_available: false
-      icon: mdi:flower-poppy
-      friendly_name: Lotus
-      supported_features: 44
+      - brightness
+      friendly_name: Pilskott
+      supported_features: 32
+      color_mode: brightness
+      brightness: 254
       state: 'on'
   icon: mdi:light-flood-down
   metadata: {}
@@ -724,10 +522,10 @@
   name: 'Lighting: Living Min'
   entities:
     light.leeslamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
       color_mode: color_temp
@@ -744,17 +542,9 @@
       xy_color:
       - 0.479
       - 0.38
-      icon: hue:wall-spot
       friendly_name: Leeslamp
-      supported_features: 32
+      supported_features: 40
       state: 'on'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      icon: mdi:turbine
-      friendly_name: Turbinelamp
-      supported_features: 0
-      state: 'off'
     light.lichtstraat:
       supported_color_modes:
       - brightness
@@ -767,48 +557,21 @@
       friendly_name: Lichtstraat
       supported_features: 32
       state: 'off'
-    light.bollamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Bollamp
-      supported_features: 32
-      state: 'off'
     light.nijntje:
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 4000
       min_mireds: 250
       max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
       supported_color_modes:
       - color_temp
-      color_temp_startup: 370
-      linkquality: 255
-      power_on_behavior: previous
-      update:
-        installed_version: 1.1.003
-        state: idle
-      update_available: false
-      icon: mdi:rabbit-variant
       friendly_name: Nijntje
-      supported_features: 44
+      supported_features: 32
       state: 'off'
     light.willner:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
       color_mode: color_temp
@@ -825,9 +588,8 @@
       xy_color:
       - 0.492
       - 0.382
-      icon: mdi:wall-sconce-round-variant
       friendly_name: Willner
-      supported_features: 32
+      supported_features: 40
       state: 'on'
     light.magnarp:
       min_color_temp_kelvin: 2202
@@ -836,20 +598,6 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 102
-      color_temp_kelvin: 2816
-      color_temp: 355
-      hs_color:
-      - 28.156
-      - 62.138
-      rgb_color:
-      - 255
-      - 170
-      - 96
-      xy_color:
-      - 0.515
-      - 0.385
       entity_id:
       - light.magnarp_1
       - light.magnarp_2
@@ -857,80 +605,37 @@
       icon: mdi:floor-lamp
       friendly_name: Magnarp
       supported_features: 32
-      state: 'on'
-    light.eettafel:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      supported_color_modes:
-      - color_temp
-      icon: mdi:table-chair
-      friendly_name: Eettafel
-      supported_features: 32
-      state: 'off'
-    light.hoge_kast:
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      supported_color_modes:
-      - xy
-      color:
-        x: 0.507
-        y: 0.407
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 67.93.11
-        state: idle
-      update_available: false
-      icon: hue:bloom
-      friendly_name: Hoge Kast
-      supported_features: 44
-      state: 'off'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      supported_color_modes:
-      - color_temp
       color_mode: color_temp
-      brightness: 175
-      color_temp_kelvin: 4000
-      color_temp: 250
+      brightness: 102
+      color_temp_kelvin: 2777
+      color_temp: 360
       hs_color:
-      - 26.812
-      - 34.87
+      - 28.233
+      - 63.317
       rgb_color:
       - 255
-      - 205
-      - 166
+      - 169
+      - 93
       xy_color:
-      - 0.421
-      - 0.364
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 1.0.032
-        progress: 31.66
-        remaining: 913
-        state: updating
-      update_available: false
-      friendly_name: Lotus
+      - 0.518
+      - 0.386
+      state: 'on'
+    light.hoge_kast:
+      effect_list:
+      - colorloop
+      - random
+      supported_color_modes:
+      - hs
+      friendly_name: Hoge kast
       supported_features: 44
-      icon: mdi:flower-poppy
+      state: 'off'
+    light.pilskott:
+      supported_color_modes:
+      - brightness
+      friendly_name: Pilskott
+      supported_features: 32
+      color_mode: brightness
+      brightness: 102
       state: 'on'
   icon: mdi:candle
   metadata:
@@ -964,20 +669,64 @@
   metadata:
     light.living:
       entity_only: true
-- name: 'Lighting: Living Reading'
-  icon: mdi:book-open-variant
-  id: 86af0dad-d0d5-4d18-84b1-549ac0ae8768
+- id: 86af0dad-d0d5-4d18-84b1-549ac0ae8768
+  name: 'Lighting: Living Reading'
   entities:
     light.leeslamp:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
+      supported_color_modes:
+      - color_temp
+      friendly_name: Leeslamp
+      supported_features: 40
       color_mode: color_temp
       brightness: 255
-      color_temp: 306
+      color_temp_kelvin: 3508
+      color_temp: 285
+      hs_color:
+      - 27.165
+      - 44.6
+      rgb_color:
+      - 255
+      - 192
+      - 141
+      xy_color:
+      - 0.454
+      - 0.373
       state: 'on'
     light.magnarp:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      entity_id:
+      - light.magnarp_1
+      - light.magnarp_2
+      - light.magnarp_3
+      icon: mdi:floor-lamp
+      friendly_name: Magnarp
+      supported_features: 32
       color_mode: color_temp
       brightness: 254
-      color_temp: 250
+      color_temp_kelvin: 3521
+      color_temp: 284
+      hs_color:
+      - 27.152
+      - 44.32
+      rgb_color:
+      - 255
+      - 193
+      - 141
+      xy_color:
+      - 0.453
+      - 0.374
       state: 'on'
+  icon: mdi:book-open-variant
+  metadata: {}
 - id: '1662880954621'
   name: Vacation
   entities:
@@ -1060,7 +809,7 @@
       friendly_name: Eettafel
       supported_features: 32
       color_mode: color_temp
-      brightness: 3
+      brightness: 26
       color_temp_kelvin: 2202
       color_temp: 454
       hs_color:
@@ -1075,127 +824,43 @@
       - 0.388
       state: 'on'
     light.willner:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
-      icon: mdi:wall-sconce-round-variant
       friendly_name: Willner
-      supported_features: 32
+      supported_features: 40
       state: 'off'
     light.nijntje:
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 4000
       min_mireds: 250
       max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
       supported_color_modes:
       - color_temp
-      color_temp_startup: 370
-      linkquality: 255
-      power_on_behavior: previous
-      update:
-        installed_version: 1.1.003
-        state: idle
-      update_available: false
-      icon: mdi:rabbit-variant
       friendly_name: Nijntje
-      supported_features: 44
-      state: 'off'
-    light.bollamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      supported_color_modes:
-      - color_temp
-      - hs
-      icon: mdi:wall-sconce-round-variant
-      friendly_name: Bollamp
       supported_features: 32
       state: 'off'
     light.leeslamp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
+      max_mireds: 500
       supported_color_modes:
       - color_temp
-      icon: hue:wall-spot
       friendly_name: Leeslamp
-      supported_features: 32
+      supported_features: 40
       state: 'off'
     light.hoge_kast:
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+      - colorloop
+      - random
       supported_color_modes:
-      - xy
-      color:
-        x: 0.397
-        y: 0.363
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 67.93.11
-        state: idle
-      update_available: false
-      icon: hue:bloom
-      friendly_name: Hoge Kast
+      - hs
+      friendly_name: Hoge kast
       supported_features: 44
-      state: 'off'
-    switch.turbinelamp:
-      linkquality: 255
-      update:
-        installed_version: 1.93.6
-        state: idle
-      update_available: false
-      friendly_name: Turbinelamp
-      state: 'off'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      icon: mdi:turbine
-      friendly_name: Turbinelamp
-      supported_features: 0
-      state: 'off'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
-      supported_color_modes:
-      - color_temp
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 1.0.032
-        progress: 40.92
-        remaining: 785
-        state: updating
-      update_available: false
-      friendly_name: Lotus
-      supported_features: 44
-      icon: mdi:flower-poppy
       state: 'off'
     light.lichtstraat:
       supported_color_modes:
@@ -1222,6 +887,12 @@
       - light.magnarp_3
       icon: mdi:floor-lamp
       friendly_name: Magnarp
+      supported_features: 32
+      state: 'off'
+    light.pilskott:
+      supported_color_modes:
+      - brightness
+      friendly_name: Pilskott
       supported_features: 32
       state: 'off'
   icon: hue:scene-nightlight
@@ -1250,7 +921,7 @@
       - random
       supported_color_modes:
       - hs
-      friendly_name: Hoge Kast
+      friendly_name: Hoge kast
       supported_features: 44
       state: 'off'
     light.magnarp:
@@ -1278,12 +949,6 @@
       friendly_name: Leeslamp
       supported_features: 40
       state: 'off'
-    light.turbinelamp:
-      supported_color_modes:
-      - onoff
-      friendly_name: Turbinelamp
-      supported_features: 40
-      state: 'off'
     light.lichtstraat:
       supported_color_modes:
       - brightness
@@ -1296,33 +961,6 @@
       friendly_name: Lichtstraat
       supported_features: 32
       state: 'off'
-    light.bollamp:
-      min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6535
-      min_mireds: 153
-      max_mireds: 500
-      effect_list:
-      - colorloop
-      - random
-      supported_color_modes:
-      - color_temp
-      - hs
-      friendly_name: Bollamp
-      supported_features: 44
-      color_mode: hs
-      brightness: 51
-      hs_color:
-      - 29.318
-      - 69.02
-      rgb_color:
-      - 255
-      - 164
-      - 78
-      xy_color:
-      - 0.535
-      - 0.39
-      effect: none
-      state: 'on'
     light.nijntje:
       min_color_temp_kelvin: 2202
       max_color_temp_kelvin: 4000
@@ -1332,21 +970,7 @@
       - color_temp
       friendly_name: Nijntje
       supported_features: 32
-      color_mode: color_temp
-      brightness: 51
-      color_temp_kelvin: 2500
-      color_temp: 400
-      hs_color:
-      - 28.874
-      - 72.522
-      rgb_color:
-      - 255
-      - 159
-      - 70
-      xy_color:
-      - 0.546
-      - 0.389
-      state: 'on'
+      state: 'off'
     light.willner:
       min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
@@ -1358,42 +982,26 @@
       supported_features: 40
       color_mode: color_temp
       brightness: 51
-      color_temp_kelvin: 2500
-      color_temp: 400
+      color_temp_kelvin: 3508
+      color_temp: 285
       hs_color:
-      - 28.874
-      - 72.522
+      - 27.165
+      - 44.6
       rgb_color:
       - 255
-      - 159
-      - 70
+      - 192
+      - 141
       xy_color:
-      - 0.546
-      - 0.389
+      - 0.454
+      - 0.373
       state: 'on'
-    light.lotus:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - finish_effect
-      - stop_effect
+    light.pilskott:
       supported_color_modes:
-      - color_temp
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 1.1.003
-        state: idle
-      update_available: false
-      icon: mdi:flower-poppy
-      friendly_name: Lotus
-      supported_features: 44
-      state: 'off'
+      - brightness
+      friendly_name: Pilskott
+      supported_features: 32
+      color_mode: brightness
+      brightness: 51
+      state: 'on'
   icon: mdi:theater
   metadata: {}
