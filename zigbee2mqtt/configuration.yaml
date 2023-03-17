@@ -21,8 +21,9 @@ devices:
     friendly_name: Achtergevel
   '0x00158d0007e24a05':
     friendly_name: Office Climate
-    temperature_precision: 1
-    humidity_precision: 0
+    temperature_precision: 3
+    humidity_precision: 3
+    pressure_precision: 3
   '0x70ac08fffea0aea9':
     friendly_name: Garage Ingang
   '0x040d84fffe9a387b':
