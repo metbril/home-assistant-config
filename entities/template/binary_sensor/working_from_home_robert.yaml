@@ -1,0 +1,7 @@
+---
+# Is Robert working from home?
+- binary_sensor:
+    - name: Working From Home Robert
+      unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
+      device_class: presence
+      state: "{{ is_state('device_tracker.laptop_robert_werk','home') }}"

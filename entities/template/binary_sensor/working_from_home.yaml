@@ -1,0 +1,10 @@
+---
+# Is anyone working from home?
+- binary_sensor:
+    - name: Working From Home
+      unique_id: 970b1cd1-5d86-43ef-abad-d6ce18780fad
+      device_class: presence
+      state: >-
+        {{ is_state('input_boolean.working_from_home', 'on') or
+           is_state('binary_sensor.working_from_home_robert', 'on') or
+           is_state('binary_sensor.working_from_home_monique', 'on') }}
