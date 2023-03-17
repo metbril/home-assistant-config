@@ -58,9 +58,9 @@ template:
           {% elif val == "Astronomical Twilight" %}
             Astronomische schemer
           {% elif val == "Civil Twilight" %}
-            Civiele schemer 
+            Civiele schemer
           {% elif val == "Nautical Twilight" %}
-            Nautische schemer 
+            Nautische schemer
           {% else %}
             unknown
           {% endif %}

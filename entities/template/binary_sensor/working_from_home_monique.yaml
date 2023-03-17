@@ -2,6 +2,6 @@
 # Is Monique working from home?
 - binary_sensor:
     - name: Working From Home Monique
-      # unique_id: 
+      # unique_id:
       device_class: presence
       state: "{{ is_state('device_tracker.laptop_monique_werk','home') }}"
