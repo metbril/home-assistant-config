@@ -1,0 +1,66 @@
+sensor:
+  - platform: sun2
+    monitored_conditions:
+      - solar_midnight
+      - astronomical_dawn
+      - nautical_dawn
+      - dawn
+      - sunrise
+      - solar_noon
+      - sunset
+      - dusk
+      - nautical_dusk
+      - astronomical_dusk
+      - daylight
+      - civil_daylight
+      - nautical_daylight
+      - astronomical_daylight
+      - night
+      - civil_night
+      - nautical_night
+      - astronomical_night
+      - elevation
+      - min_elevation
+      - max_elevation
+      - sun_phase
+      - deconz_daylight
+  - platform: sun2
+    entity_namespace: London
+    latitude: 51.50739529645933
+    longitude: -0.12767666584664272
+    time_zone: Europe/London
+    elevation: 11
+    monitored_conditions:
+      - sunrise
+      - sunset
+
+binary_sensor:
+  - platform: sun2
+    monitored_conditions:
+      - elevation
+      - elevation: 3
+      - elevation:
+          above: -6
+          name: Above Civil Dawn
+
+template:
+  - sensor:
+      - name: Sun Phase Translated
+        unique_id: e3adff08-a9ef-4de7-b2e9-6e27dc7021e1
+        icon: >-
+          {{ state_attr('sensor.sun_phase','icon') }}
+        state: >-
+          {% set val = states('sensor.sun_phase') %}
+          {% if (val == "Day") %}
+            Dag
+          {% elif val == "Night" %}
+            Nacht
+          {% elif val == "Astronomical Twilight" %}
+            Astronomische schemer
+          {% elif val == "Civil Twilight" %}
+            Civiele schemer 
+          {% elif val == "Nautical Twilight" %}
+            Nautische schemer 
+          {% else %}
+            unknown
+          {% endif %}

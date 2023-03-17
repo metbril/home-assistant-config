@@ -43,66 +43,71 @@ jobs:
       matrix:
         version: ["${{needs.ha_version.outputs.current_version}}", "stable", "beta", "dev"]
     steps:
-      - name: Checkout repository
+      - name: 📥 Checkout repository
         uses: actions/checkout@v3
 
-      - name: Create fake empty files
+      - name: 📄 Create fake empty files
         run: |
           touch ./home-assistant_v2.db
           touch ./home-assistant.log
           touch ./fake_id_rsa
           touch ./fake_cert.pem
 
-      - name: Create empty custom components folder
+      - name: 📁 Create empty custom components folder
         run: |
           mkdir -p ./custom_components
 
       # yamllint disable rule:line-length
 
-      - name: Clone custom component - Brandstofprijzen
+      - name: 📥 Clone custom component - Brandstofprijzen
         run: |
           git clone https://github.com/metbril/home-assistant-brandstofprijzen.git
           mv -v home-assistant-brandstofprijzen/custom_components/* ./custom_components
 
-      - name: Clone custom component - Buienalarm
+      - name: 📥 Clone custom component - Buienalarm
         run: |
           git clone https://github.com/gieljnssns/buienalarm-sensor-homeassistant.git
           mv -v buienalarm-sensor-homeassistant/custom_components/* ./custom_components
 
-      - name: Clone custom component - Car Wash
+      - name:  📥 Clone custom component - Car Wash
         run: |
           git clone https://github.com/Limych/ha-car_wash.git
           mv -v ha-car_wash/custom_components/* ./custom_components
 
-      - name: Clone custom component - Feedparser
+      - name: 📥 Clone custom component - Feedparser
         run: |
           git clone https://github.com/custom-components/feedparser.git
           mv -v feedparser/custom_components/* ./custom_components
 
-      - name: Clone custom component - ICS Calendar
+      - name: 📥 Clone custom component - ICS Calendar
         run: |
           git clone https://github.com/franc6/ics_calendar.git
           mv -v ics_calendar/custom_components/* ./custom_components
 
-      - name: Clone custom component - Multiscrape
+      - name: 📥 Clone custom component - Multiscrape
         run: |
           git clone https://github.com/danieldotnl/ha-multiscrape.git
           mv -v ha-multiscrape/custom_components/* ./custom_components
 
-      - name: Clone custom component - P2000
+      - name: 📥 Clone custom component - P2000
         run: |
           git clone https://github.com/cyberjunky/home-assistant-p2000.git
           mv -v home-assistant-p2000/custom_components/* ./custom_components
 
-      - name: Clone custom component - Powercalc
+      - name: 📥 Clone custom component - Powercalc
         run: |
           git clone https://github.com/bramstroker/homeassistant-powercalc.git
           mv -v homeassistant-powercalc/custom_components/* ./custom_components
 
-      - name: Clone custom component - RDW
+      - name: 📥 Clone custom component - RDW
         run: |
           git clone https://github.com/eelcohn/home-assistant-rdw.git
           mv -v home-assistant-rdw/custom_components/* ./custom_components
+
+      - name: 📥 Clone custom component - Sun2
+        run: |
+          git clone https://github.com/pnbruckner/ha-sun2.git
+          mv -v ha-sun2/custom_components/* ./custom_components
 
       # 2022-01-04: Disabled. API unavailable
       #
@@ -113,7 +118,7 @@ jobs:
 
       # yamllint enable rule:line-length
 
-      - name: Check configuration
+      - name: 🏃 Check configuration
         uses: frenck/action-home-assistant@v1.4
         with:
           path: "."
