@@ -1816,3 +1816,18 @@
       message: '{{ trigger.to_state.name }} - {{ trigger.to_state.attributes.status
         }}'
       title: Overstroming Alert
+- id: '1679143739246'
+  alias: Disable do not disturb by default
+  description: Disable do not disturb when HA is started and at midnight.
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: time
+    at: 00:00:00
+  condition: []
+  action:
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.do_not_disturb
+  mode: single
