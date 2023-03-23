@@ -12,11 +12,9 @@
       unit_of_measurement: kWh
       device_class: energy
       state_class: total_increasing
+      availability: >-
+        {{ states('sensor.tumble_dryer_raw_energy') not in ["unavailable", "unknown", None ] }}
       state: >-
-        {% set value = states('sensor.tumble_dryer_raw_energy') | float(0) %}
-        {% set const = 21474836.47 %}
-        {% if value < 0 %}
-          {{ (value + const) | round(2) }}
-        {% else %}
-          {{ value }}
-        {% endif %}
+        {% set raw = states('sensor.tumble_dryer_raw_energy') | float (0) %}
+        {% set fix = ( raw + 21474836.47 ) | float(0) | round(2) %}
+        {{ fix if (raw < 0) else raw }}
