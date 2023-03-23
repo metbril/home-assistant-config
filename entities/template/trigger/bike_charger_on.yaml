@@ -1,0 +1,22 @@
+---
+# Save energy meter when bike charger starts running.
+- trigger:
+    - platform: state
+      entity_id: switch.shelly_1
+      from:
+        - "off"
+      to:
+        - "on"
+  sensor:
+    - name: Bike Charger Start Time
+      unique_id: "4e4ef7da-6a2d-4a93-a8c8-dd9967a7ed41"
+      icon: mdi:clock
+      device_class: timestamp
+      state: "{{ now() }}"
+
+    - name: "Bike Charger Start Energy"
+      unique_id: "d2657b62-8be9-4e3c-a5c7-0a397ac1f97d"
+      icon: mdi:lightning-bolt
+      unit_of_measurement: kWh
+      device_class: energy
+      state: "{{ states('sensor.shelly_1_energy') }}"
