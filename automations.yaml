@@ -1831,3 +1831,18 @@
     target:
       entity_id: input_boolean.do_not_disturb
   mode: single
+- id: '1679302451294'
+  alias: Keuken > Koelkast uitgeschakeld
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: fc39d2c003d6982efb53a3ddefa678fb
+    entity_id: switch.refrigerator
+    domain: switch
+  condition: []
+  action:
+  - service: notify.robert
+    data:
+      message: Koelkast uitgeschakeld.
+  mode: single
