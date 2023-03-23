@@ -8,7 +8,7 @@ notify:
   - name: Robert
     platform: group
     services:
-      - service: mobile_app_iphone_robert
+      - service: mobile_app_pontius
 
   # Person group for: Monique
   #
@@ -18,7 +18,7 @@ notify:
   - name: Monique
     platform: group
     services:
-      - service: mobile_app_iphone_robert
+      - service: mobile_app_pontius
 
   # Person group for: Bjorn
   #
