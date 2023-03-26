@@ -120,10 +120,8 @@
         | random }}\n"
       title: Buienalarm
       data:
-        url: 'https://www.buienalarm.nl/{{ state_attr( ''zone.home'' , ''latitude''
-          ) }},{{ state_attr( ''zone.home'' , ''longitude'' ) }}
-
-          '
+        url: https://www.buienalarm.nl/{{ state_attr( 'zone.home' , 'latitude' ) }},{{
+          state_attr( 'zone.home' , 'longitude' ) }}
   - service: notify.twitter
     data:
       message: "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ \"Vergeet je
@@ -205,9 +203,7 @@
   - service: notify.save_energy_consumption
     data:
       message: '{{ now() }}, {{ states(''sensor.energy_consumption_tarif_1'') }},
-        {{ states(''sensor.energy_consumption_tarif_2'') }}, {{ states(''sensor.gas_consumption'')}}
-
-        '
+        {{ states(''sensor.energy_consumption_tarif_2'') }}, {{ states(''sensor.gas_consumption'')}}'
   - service: logbook.log
     data:
       name: Energieverbruik (tarief 1)
@@ -343,7 +339,7 @@
       message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
   mode: single
 - id: '1662530759975'
-  alias: 'Security: Inschakelen AdGuard'
+  alias: Home > Security > Inschakelen AdGuard
   description: Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
     gestaan.
   trigger:
@@ -422,8 +418,8 @@
         transition: 5
     - service: script.toot_engine
       data:
-        message: "{{ ['Zonsopkomst! \U0001F305','Het wordt een mooie dag! \U0001F603','Goedemorgen!
-          ☕️', 'Rise\n    and shine! \U0001F31E' ] | random }}"
+        message: "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
+          , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
     else:
     - service: light.turn_on
       target:
@@ -433,8 +429,9 @@
         brightness_pct: 70
     - service: script.toot_engine
       data:
-        message: "{{ ['Zonsondergang! \U0001F305','De dag zit er weer op! \U0001F605','Goedenavond!
-          \U0001F31A', 'Hit\n    for the moon! \U0001F31B' ] | random }}"
+        message: "{{ [ 'Zonsondergang! \U0001F305', 'De dag zit er weer op! \U0001F605'
+          , 'Goedenavond! \U0001F31A' , 'Hit for the moon! \U0001F31B' ] | random
+          }}"
   mode: single
 - id: '1662548148472'
   alias: Energy > Post Gas Consumption to MinderGas.nl
@@ -459,6 +456,14 @@
     data:
       date: '{{ states(''sensor.yesterday'') }}'
       reading: '{{ states(''sensor.gas_consumption'') }}'
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: 'Ik heb zojuist het gasverbruik van gisteren doorgestuurd naar Mindergas.
+        #gas #energie #besparen
+
+
+        https://mindergas.nl/'
   mode: single
 - id: '1662609361916'
   alias: 'System: Low battery level detection & notification for all battery sensors'
@@ -480,7 +485,7 @@
         - sensor.patricius_battery_level
       time: '20:00:00'
 - id: 971fc035-f021-4015-a54b-8c6da9ddf200
-  alias: 'Safety: Brandweer in de buurt'
+  alias: Outside > Safety > Brandweer in de buurt
   description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Twitter.
 
@@ -505,8 +510,8 @@
   - service: script.toot_engine
     data:
       who: mastodon
-      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n    {{ address }}
-        {{ url }}\n"
+      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }}\n\n{{
+        url }}"
   mode: single
 - id: 6e054688-5e75-48bd-9411-52a3e26264d1
   alias: Outside > Safety > Lightning notification
@@ -535,7 +540,7 @@
   - service: notify.robert
     data:
       message: Er is bliksem waargenomen binnen {{ states('sensor.blitzortung_lightning_distance')
-        }} km vanaf ons huis. Wees voorzichtig buitenshuis.
+        }} km vanaf huis. Wees voorzichtig buitenshuis.
       data:
         title: Bliksemwaarschuwing!
         actions:
@@ -559,15 +564,16 @@
   - service: input_boolean.turn_on
     entity_id: input_boolean.snooze_lightning
   mode: single
-- alias: 'Safety: Unsnooze lightning notifications.'
-  id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
-  mode: single
+- id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
+  alias: Outside > Safety > Unsnooze lightning notifications.
+  description: ''
   trigger:
   - platform: time
     at: 00:00:00
   action:
   - service: input_boolean.turn_off
     entity_id: input_boolean.snooze_lightning
+  mode: single
 - id: '1649842819459'
   alias: Office > Pause Music
   description: Pause playing music in the office when in call.
@@ -754,7 +760,7 @@
         entity_id: input_boolean.printer_reminder
   mode: single
 - id: '1663299688715'
-  alias: 'Garage: Fietsaccu opgeladen'
+  alias: 'Garage: Fietsaccu opgeladen!'
   description: 'Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
     Druppel laden werkt dan niet meer. '
   trigger:
@@ -798,6 +804,11 @@
         volume_percent: 30
         entity_id: media_player.living_speaker
         message: De fietslader is klaar.
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.'] | random }} Er is weer een fietsaccu
+        opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️', '\U0001F50C'] | random }}"
   mode: single
 - id: '1663925197803'
   alias: Cube Actions
@@ -1123,7 +1134,7 @@
           volume: 1
   mode: single
 - id: '1666340185709'
-  alias: Printer > Notify when connected.
+  alias: Office > Printer > Notify when connected.
   description: ''
   trigger:
   - platform: state
@@ -1137,7 +1148,7 @@
       message: "\U0001F5A8 Printer is beschikbaar om te gebruiken."
   mode: single
 - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
-  alias: 'Lighting: Living lights automated'
+  alias: Living > Lighting > Automated
   description: Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
   trigger:
   - event: sunset
@@ -1159,7 +1170,8 @@
       - service: scene.turn_on
         data: {}
         target:
-          entity_id: scene.lighting_living_cosy
+          entity_id:
+          - scene.living_lighting_cosy
       - service: script.toot_engine
         data:
           message: Het wordt schemerig. De verlichting is ingeschakeld om het een
@@ -1180,7 +1192,8 @@
           state: 'on'
       - service: scene.turn_on
         target:
-          entity_id: scene.lighting_living_dimmed
+          entity_id:
+          - scene.living_lighting_dimmed
         data: {}
   mode: single
 - id: 33b00235-30e6-45af-9473-d7c2357f07cc
@@ -1317,7 +1330,10 @@
     data:
       who: mastodon
       message: 'De adviesprijs voor Euro 95 is gewijzigd naar €{{ states(''sensor.adviesprijs_euro95'')
-        | replace(''.'', '','') }}/L. (bron: https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp) '
+        | replace(''.'', '','') }}/L.
+
+
+        https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp'
   mode: single
 - id: '1667809761090'
   alias: Safety > Meteoalarm Notification (new)
@@ -1353,9 +1369,9 @@
     data:
       who: mastodon
       message: "⚠️ {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'headline').split('
-        - ')[0] }}: \n    {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'description')
-        |\n    replace('\\n', ' ') }} {{ state_attr('binary_sensor.meteoalarm_zuid_holland',
-        'web') }} #MeteoAlarm #ZuidHolland"
+        - ')[0] }}: {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland', 'description'
+        ) |\n    replace('\\n', ' ') }} {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland',
+        'web' ) }} #MeteoAlarm #ZuidHolland"
   mode: queued
 - id: f1a564aa-c8da-4f88-bf61-b938627374b2
   alias: System > Stop Toot
@@ -1666,18 +1682,19 @@
       action_button_short:
       - service: scene.turn_on
         target:
-          entity_id: scene.lighting_living_min
+          entity_id: scene.living_lighting_min
         metadata: {}
       action_button_long:
       - service: scene.turn_on
         target:
-          entity_id: scene.lighting_living_off
+          entity_id: scene.living_lighting_off
         metadata: {}
       action_button_double:
       - service: scene.turn_on
         data: {}
         target:
-          entity_id: scene.lighting_living_max
+          entity_id:
+          - scene.living_lighting_max
       button_double_press: true
       helper_double_press_delay: 1000
 - id: '1672486229153'
@@ -1800,7 +1817,7 @@
         \ 'Hoera. Hoera. Hoera.',\n  'Gefeliciteerd.'\n] | random }}\n"
   mode: queued
 - id: '1673099515788'
-  alias: Safety Flood Alert
+  alias: Outside > Safety > Flood Alert
   description: ''
   trigger:
   - platform: geo_location
@@ -1846,3 +1863,27 @@
     data:
       message: Koelkast uitgeschakeld.
   mode: single
+- alias: "Lighting: Living lights off during vacations"
+  description:
+    Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
+    en 23:30.
+  id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
+  mode: single
+
+  trigger:
+    - platform: time
+      at: "23:00:00"
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: "on"
+
+  action:
+    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+    - service: light.turn_off
+      entity_id: light.living
+    - service: notify.admin
+      data:
+        title: Vakantie
+        message: Verlichting automatisch uitgeschakeld.
