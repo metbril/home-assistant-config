@@ -91,6 +91,8 @@
     device_id: 6d83fdc507bebb0799f1ad633c94cb7a
     entity_id: light.kledingkast_bjorn
     domain: light
+  - platform: homeassistant
+    event: start
   condition: []
   action:
   - type: turn_on
@@ -98,6 +100,10 @@
     entity_id: light.kledingkast_bjorn
     domain: light
     brightness_pct: 50
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.lighthing_kledingkast_bjorn_altijd_aan
   mode: single
 - id: 068719c4-88f2-44b5-a809-e2513ae65604
   alias: Outside > Weather > Buienalarm
@@ -936,7 +942,7 @@
       notification_id: update_hacs_repo
   mode: queued
 - id: '1665290435363'
-  alias: Apple TV Movie Time
+  alias: Living > Media > Apple TV Movie Time
   description: Play a movie in the living.
   trigger:
   - platform: state
@@ -1834,7 +1840,7 @@
         }}'
       title: Overstroming Alert
 - id: '1679143739246'
-  alias: Disable do not disturb by default
+  alias: Home > Disable do not disturb mode
   description: Disable do not disturb when HA is started and at midnight.
   trigger:
   - platform: homeassistant
@@ -1863,27 +1869,23 @@
     data:
       message: Koelkast uitgeschakeld.
   mode: single
-- alias: "Lighting: Living lights off during vacations"
-  description:
-    Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
+- id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
+  alias: Living > Lighting > Lights off during vacations
+  description: Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
     en 23:30.
-  id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
-  mode: single
-
   trigger:
-    - platform: time
-      at: "23:00:00"
-
+  - platform: time
+    at: '23:00:00'
   condition:
-    - condition: state
-      entity_id: input_boolean.occupancy_vacation
-      state: "on"
-
+  - condition: state
+    entity_id: input_boolean.occupancy_vacation
+    state: 'on'
   action:
-    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
-    - service: light.turn_off
-      entity_id: light.living
-    - service: notify.admin
-      data:
-        title: Vakantie
-        message: Verlichting automatisch uitgeschakeld.
+  - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+  - service: light.turn_off
+    entity_id: light.living
+  - service: notify.admin
+    data:
+      title: Vakantie
+      message: Verlichting automatisch uitgeschakeld.
+  mode: single
