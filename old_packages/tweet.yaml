@@ -89,15 +89,15 @@ automation:
                 "{{ states('sensor.doorbell_presses') }} mensen kwamen aan de deur vandaag en drukten op de bel.",
                 "{{ states('sensor.doorbell_presses') }} deurbelgebruik kwamen voor in de afgelopen 24 uur."
               ],
-              "weather": [
-                "Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.dark_sky_visibility') | float(0) | round(0) }} km wegkijken.",
-                "Het is buiten {{ states('sensor.dark_sky_temperature') }} °C, maar het voelt aan als {{ states('sensor.dark_sky_apparent_temperature') }} °C. #DarkSky #weer",
-                "{{ states('sensor.dark_sky_hourly_summary') }} #DarkSky #weer",
-                "{{ states('sensor.dark_sky_daily_summary') }} #DarkSky #weer",
-                "{{ states('sensor.knmi_home_korte_dagverwachting') }} #WeerLive #weer",
-                "{{ states('sensor.knmi_home_omschrijving') }} #WeerLive #weer",
-                "De actuele UV-index is {{ states('sensor.dark_sky_uv_index') }}. #weer"
-              ],
+              # "weather": [
+              #   "Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.dark_sky_visibility') | float(0) | round(0) }} km wegkijken.",
+              #   "Het is buiten {{ states('sensor.dark_sky_temperature') }} °C, maar het voelt aan als {{ states('sensor.dark_sky_apparent_temperature') }} °C. #DarkSky #weer",
+              #   "{{ states('sensor.dark_sky_hourly_summary') }} #DarkSky #weer",
+              #   "{{ states('sensor.dark_sky_daily_summary') }} #DarkSky #weer",
+              #   "{{ states('sensor.knmi_home_korte_dagverwachting') }} #WeerLive #weer",
+              #   "{{ states('sensor.knmi_home_omschrijving') }} #WeerLive #weer",
+              #   "De actuele UV-index is {{ states('sensor.dark_sky_uv_index') }}. #weer"
+              # ],
               "speedtest": [
                 "De pingtijd naar het Internet is {{ states('sensor.wan_ping') }} ms. #speedtest",
                 "Gemiddelde Internet-snelheden: download {{ states('sensor.speedtest_download') | float(0) | round(0) }} Mbit/s, upload {{ states('sensor.speedtest_upload') | float(0) | round(0) }} Mbit/s. #speedtest",
