@@ -30,6 +30,10 @@ devices:
     friendly_name: Lotus
   '0x84ba20fffead3d8e':
     friendly_name: Snelknop Woonkamer
+  '0x385cfbfffe633f23':
+    friendly_name: Pilskott
+  '0x001788010804ffa1':
+    friendly_name: Office Printer
 advanced:
   log_level: info
 groups:
