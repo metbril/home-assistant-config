@@ -866,22 +866,8 @@
     event: start
   condition:
   - condition: template
-    value_template: '{{ states(''sensor.hacs'') != ''unknown''}}'
-  - condition: template
-    value_template: '{{ (states(''sensor.hacs'') | float) != 0}}'
+    value_template: '{{ states(''sensor.hacs'') | float(0) > 0 }}'
   action:
-  - service: notify.admin
-    data:
-      title: HACS Updates
-      message: "Te verwerken HACS-updates: {% for repo in state_attr('sensor.hacs',
-        'repositories') -%}\n  * {{repo.display_name}} {{\n  repo.installed_version}}
-        ->  {{\n  repo.available_version}}\n{%- endfor %}\n"
-      data:
-        push:
-          thread-id: updates
-        apns_headers:
-          apns-collapse-id: update_hacs
-        url: /hacs
   - service: persistent_notification.create
     data:
       title: HACS Updates
