@@ -363,3 +363,156 @@ double_toggle_office_desk_lamp:
       entity: light.office_desk_lamp
   mode: single
   icon: mdi:lightbulb-on-70
+toggle_heater:
+  alias: Toggle Heater
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: climate.office
+        state: 'off'
+      sequence:
+      - service: climate.set_hvac_mode
+        data:
+          hvac_mode: heat
+        target:
+          entity_id: climate.office
+    default:
+    - service: climate.set_hvac_mode
+      data:
+        hvac_mode: 'off'
+      target:
+        entity_id: climate.office
+  mode: single
+  icon: mdi:radiator
+sonos_say:
+  alias: Sonos Text-To-Speech
+  description: Text to speech for Sonos devices.
+  mode: queued
+  max: 10
+  fields:
+    entity_id:
+      name: Entity
+      description: The media player that speeks the text
+      example: media_player.woonkamer
+      required: true
+      selector:
+        entity:
+          domain:
+          - media_player
+          integration: sonos
+          multiple: false
+    message:
+      name: Message
+      description: The message to speak
+      example: Hallo wereld!
+      required: true
+      selector:
+        text:
+          multiline: true
+          type: text
+    volume_percent:
+      name: Volume
+      description: Volume of the spoken text, Range 0-100
+      example: '30'
+      default: 30
+      selector:
+        number:
+          min: 0
+          max: 100
+          step: 1
+          unit_of_measurement: '%'
+          mode: slider
+    delay:
+      description: The time in seconds to wait until the media player state is restored.
+        This is the duration of the spoken text.
+      example: '3'
+      default: 3
+      selector:
+        number:
+          min: 0
+          max: 300
+          step: 1
+          unit_of_measurement: s
+          mode: box
+  variables:
+    volume_level: "{% if (volume_percent is none) or (volume_percent is undefined)
+      or (volume_percent == \"\") %}\n  0.3\n{% else %}\n  {{ (volume_percent / 100)
+      | float(0) }}\n{% endif %}"
+    is_playing: '{{ is_state(entity_id, "playing") }}'
+    media: '{{ state_attr(entity_id,"media_content_id") }}'
+    is_cloud: '{{ (media.split(":")[0] == "x-sonos-vli") }}'
+    cannot_restore: '{{ is_playing and is_cloud }}'
+  sequence:
+  - if:
+    - condition: state
+      entity_id: input_boolean.audible_notifications
+      state: 'on'
+    then:
+    - service: sonos.snapshot
+      data:
+        entity_id: '{{ entity_id }}'
+    - service: media_player.unjoin
+      data:
+        entity_id: '{{ entity_id }}'
+    - service: media_player.media_pause
+      data:
+        entity_id: '{{ entity_id }}'
+    - service: media_player.volume_set
+      data:
+        entity_id: '{{ entity_id }}'
+        volume_level: '{{ volume_level }}'
+    - service: tts.cloud_say
+      data:
+        entity_id: '{{ entity_id }}'
+        message: '{{ message }}'
+    - alias: Wait for text online parsing
+      delay: 3
+    - alias: Wait until speech has finished
+      wait_template: '{{ is_state( entity_id,"paused") }}'
+    - service: sonos.restore
+      data:
+        entity_id: '{{ entity_id }}'
+    else:
+    - service: notify.persistent_notification
+      data:
+        message: '{{ message }}'
+  icon: mdi:speaker-message
+notify_living:
+  alias: Notify Living
+  fields:
+    message:
+      name: Message
+      description: Het uit te spreken bericht.
+      example: Hallo wereld!
+      required: true
+      selector:
+        text:
+          multiline: true
+          type: text
+  sequence:
+  - if:
+    - condition: device
+      device_id: f76477730485d84e3077b5b0fbadf4c9
+      domain: media_player
+      entity_id: media_player.living_tv
+      type: is_on
+    then:
+    - service: notify.living_tv
+      data:
+        message: '{{ message }}'
+    else:
+    - service: script.sonos_say
+      data:
+        entity_id: media_player.living_speaker
+        message: '{{ message }}'
+  mode: single
+  icon: mdi:account-voice
+notify_living_dashboard:
+  alias: Notify Living Dashboard
+  sequence:
+  - service: script.notify_living
+    data:
+      message: '{{ states(''input_text.audible_message'') }}'
+  mode: single
+  icon: mdi:account-voice
