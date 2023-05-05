@@ -76,7 +76,7 @@ jobs:
 
       - name: 📥 Clone custom component - Feedparser
         run: |
-          git clone https://github.com/custom-components/feedparser.git
+          git clone -b fix-ha-dev https://github.com/metbril/feedparser.git
           mv -v feedparser/custom_components/* ./custom_components
 
       - name: 📥 Clone custom component - ICS Calendar
