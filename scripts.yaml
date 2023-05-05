@@ -516,3 +516,80 @@ notify_living_dashboard:
       message: '{{ states(''input_text.audible_message'') }}'
   mode: single
   icon: mdi:account-voice
+lees_het_nieuws_voor:
+  alias: Lees het nieuws voor
+  fields:
+    player:
+      name: Media player
+      description:
+        The media player that reads the news. Currently limited to Sonos
+        speakers only.
+      required: true
+      selector:
+        entity:
+          domain: media_player
+          integration: sonos
+      example: media_player.sonos_living
+    volume_percent:
+      name: Player Volume
+      description: The player volume
+      selector:
+        number:
+          min: 1
+          max: 100
+          step: 1
+          unit_of_measurement: "%"
+          mode: slider
+      default: 30
+      example: "30"
+  sequence:
+    - variables:
+        volume_level:
+          "{{ ((volume_percent | default(30) | int(0)) / 100) | float(0)
+          }}"
+    - service: script.sonos_say
+      data:
+        entity_id: "{{ player }}"
+        message:
+          'Het nieuws van {{ ((states.sensor.anp_nieuws_audio.attributes.entries[0].title  |
+          regex_replace(find=''0(\d)'', replace=''\\1'', ignorecase=True)).split()[-2]  |
+          int(0)) % 12 }} uur.
+
+          '
+        volume_percent: "{{ volume_percent }}"
+    - service: sonos.snapshot
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.unjoin
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.media_pause
+      data:
+        entity_id: "{{ player }}"
+    - service: media_player.volume_set
+      data:
+        entity_id: "{{ player }}"
+        volume_level: "{{ volume_level }}"
+    - service: media_player.play_media
+      data:
+        media_content_id:
+          "{{ states.sensor.anp_nieuws_audio.attributes.entries[0].media_content[0].url
+          }}"
+        media_content_type: music
+      target:
+        entity_id: "{{ player }}"
+    - delay:
+        hours: 0
+        minutes: 0
+        seconds: 5
+        milliseconds: 0
+      alias: Delay for 5 seconds, wait for media to download and start playing
+    - alias: Wait until media has finished, or max 2 minutes (> audio file)
+      wait_template: "{{ is_state( player,'paused') }}"
+      timeout: "120"
+      continue_on_timeout: true
+    - service: sonos.restore
+      data:
+        entity_id: "{{ player }}"
+  mode: single
+  icon: mdi:account-voice
