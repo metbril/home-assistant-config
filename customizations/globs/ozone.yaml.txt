@@ -1,4 +1,0 @@
----
-sensor.*_ozone*:
-  icon: mdi:vector-triangle
-  unit_of_measurement: DU
