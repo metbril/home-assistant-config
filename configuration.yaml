@@ -13,3 +13,5 @@ homeassistant:
   customize_glob: !include_dir_merge_named customizations/globs
 
   packages: !include_dir_named packages
+
+air_quality: !include includes/air_quality.yaml
