@@ -6,10 +6,10 @@ homeassistant:
     - !secret allowlist_dir_ssl
 
   # Customize individual entities
-  customize: !include customizations/entities/customize.yaml
+  customize: !include includes/customize.yaml
 
   # Customize entities by pattern
-  customize_glob: !include_dir_merge_named customizations/globs
+  customize_glob: !include includes/customize_glob.yaml
 
   packages: !include_dir_named packages
 
@@ -17,8 +17,6 @@ air_quality: !include includes/air_quality.yaml
 alert: !include includes/alert.yaml
 calendar: !include includes/calendar.yaml
 climate: !include includes/climate.yaml
-default_config:
-fastdotcom:
 geo_location: !include includes/geo_location.yaml
 group: !include includes/group.yaml
 logger: !include includes/logger.yaml
@@ -27,10 +25,14 @@ notify: !include includes/notify.yaml
 proximity: !include includes/proximity.yaml
 rest_command: !include includes/rest_command.yaml
 
+default_config:
+
+fastdotcom:
+
 # The themes folder is in the root of the config folder, so HACS can install
 # themes there.
 frontend:
-  themes: !include_dir_merge_named ../../themes
+  themes: !include_dir_merge_named themes
 
 # The http component serves all files and data required for the
 # Home Assistant frontend.
