@@ -1,0 +1,19 @@
+---
+# This groups contains the person entities of all habitants of the home.
+# The group will then serve as a device_tracker entity and show
+# 'home' or 'not_home' status.
+# If at least someone in the group is home, the group will show 'home'.
+family:
+  name: Familie
+  icon: mdi:account-group
+  entities:
+    - person.robert
+    - person.bjorn
+    - person.monique
+
+parents:
+  name: Ouders
+  icon: mdi:account-group
+  entities:
+    - person.robert
+    - person.monique

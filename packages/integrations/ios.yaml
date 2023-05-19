@@ -1,6 +1,0 @@
----
-# Enable advanced notifications like actionable notifications and categories.
-# https://companion.home-assistant.io/docs/getting_started/
-# Note: the documentation is 'tegenstrijdig' in this. It's unclear if it is
-# required or not.
-ios:

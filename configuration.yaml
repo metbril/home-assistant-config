@@ -1,5 +1,4 @@
 homeassistant:
-
   # allowlist_external_dirs cannot be used in a package:
   # https://community.home-assistant.io/t/file-size-custom-component/40308/34
   allowlist_external_dirs:
@@ -15,3 +14,67 @@ homeassistant:
   packages: !include_dir_named packages
 
 air_quality: !include includes/air_quality.yaml
+alert: !include includes/alert.yaml
+calendar: !include includes/calendar.yaml
+climate: !include includes/climate.yaml
+default_config:
+fastdotcom:
+geo_location: !include includes/geo_location.yaml
+group: !include includes/group.yaml
+logger: !include includes/logger.yaml
+multiscrape: !include includes/multiscrape.yaml
+notify: !include includes/notify.yaml
+proximity: !include includes/proximity.yaml
+rest_command: !include includes/rest_command.yaml
+
+# The themes folder is in the root of the config folder, so HACS can install
+# themes there.
+frontend:
+  themes: !include_dir_merge_named ../../themes
+
+# The http component serves all files and data required for the
+# Home Assistant frontend.
+#
+# https://www.home-assistant.io/integrations/http/
+#
+http:
+  # Flag indicating whether additional IP filtering is enabled.
+  ip_ban_enabled: true
+
+  # Number of failed login attempt from single IP after which
+  # it will be automatically banned
+  login_attempts_threshold: 3
+
+# Enable advanced notifications like actionable notifications and categories.
+# https://companion.home-assistant.io/docs/getting_started/
+# Note: the documentation is 'tegenstrijdig' in this. It's unclear if it is
+# required or not.
+ios:
+
+# Recorder
+# https://www.home-assistant.io/integrations/recorder
+#
+recorder:
+  auto_purge: true # default = true
+  purge_keep_days: 3
+  exclude:
+    domains:
+    entities:
+      - sensor.time
+
+system_log:
+  max_entries: 50
+  fire_event: true
+
+tts:
+  - platform: google_translate
+    service_name: google_translate_say
+    # cache: true
+    # cache_dir: /config/tts
+    time_memory: 3600
+    # http protocol doesn't work, ssl required for sonos
+    base_url: !secret tts_base_url
+    language: "nl"
+
+# WOL is needed for (switching on) WebOS TV
+wake_on_lan:

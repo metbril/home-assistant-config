@@ -1,0 +1,19 @@
+---
+# https://www.home-assistant.io/integrations/generic_thermostat/
+- platform: generic_thermostat
+  name: Office
+  unique_id: 687e0679-f53e-4251-b616-8b3050a9c81c
+  heater: switch.office_heater
+  target_sensor: sensor.office_climate_temperature
+  min_temp: 12.0
+  max_temp: 24.0
+  target_temp: 19.0
+  ac_mode: false
+  min_cycle_duration:
+    minutes: 3
+  cold_tolerance: 0.3
+  hot_tolerance: 0.0
+  initial_hvac_mode: "off"
+  home_temp: 19.0
+  away_temp: 16.0
+  precision: 0.5
