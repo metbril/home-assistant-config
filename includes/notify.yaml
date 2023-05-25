@@ -34,7 +34,7 @@
   platform: group
   services:
     - service: robert
-    - service: monique
+    # - service: monique
     - service: bjorn
 
 # To send notification to both parents only
@@ -42,7 +42,7 @@
   platform: group
   services:
     - service: robert
-    - service: monique
+    # - service: monique
 
 # To send admin notifications. Can be a person or
 # any other notifier service.
