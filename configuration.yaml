@@ -13,6 +13,15 @@ homeassistant:
 
   packages: !include_dir_named packages
 
+automation: !include automations.yaml # UI editor
+scene: !include scenes.yaml # UI editor
+script: !include scripts.yaml # UI editor
+
+automation split: !include_dir_merge_list automations # Other
+binary_sensor: !include_dir_merge_list entities/binary_sensor
+sensor: !include_dir_merge_list entities/sensor
+template: !include_dir_merge_list entities/template
+
 air_quality: !include includes/air_quality.yaml
 alert: !include includes/alert.yaml
 calendar: !include includes/calendar.yaml

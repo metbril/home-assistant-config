@@ -1,5 +1,0 @@
-# UI editor
-automation: !include ../../automations.yaml
-
-# Other
-automation split: !include_dir_merge_list ../../automations
