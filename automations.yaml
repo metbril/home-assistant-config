@@ -297,6 +297,12 @@
         seconds: 55
       starting_threshold: 2
       finishing_threshold: 3
+      energy_sensor: sensor.tumble_dryer_energy
+      wait_timeout:
+        hours: 5
+        minutes: 0
+        seconds: 0
+      price_sensor: sensor.energy_consumption_tarif_2
       actions:
       - service: notify.robert
         data:
@@ -307,16 +313,10 @@
           message: De wasdroger is klaar.
       - service: notify.living_tv
         data:
-          message: Wasdroger is klaar.
+          message: De wasdroger is klaar.
           data:
             icon: /config/www/img/dryer.png
       pre_actions: []
-      energy_sensor: sensor.tumble_dryer_energy
-      wait_timeout:
-        hours: 5
-        minutes: 0
-        seconds: 0
-      price_sensor: sensor.energy_consumption_tarif_2
 - id: '1662116397887'
   alias: 'Security: Warn when door is open after everyone has left'
   description: ''
@@ -701,11 +701,13 @@
     to: 'on'
   condition:
   - condition: state
-    entity_id: media_player.woonkamer
+    entity_id: media_player.living_speaker
     state: playing
   action:
   - service: media_player.media_pause
-    entity_id: media_player.woonkamer
+    data: {}
+    target:
+      entity_id: media_player.living_speaker
   - service: notify.living_tv
     data:
       message: Muziekspeler automatisch gepauzeerd.
@@ -758,57 +760,6 @@
       data: {}
       target:
         entity_id: input_boolean.printer_reminder
-  mode: single
-- id: '1663299688715'
-  alias: 'Garage: Fietsaccu opgeladen!'
-  description: 'Uitschakelen fiets lader zodra deze klaar is om sluipverbruik te verminderen.
-    Druppel laden werkt dan niet meer. '
-  trigger:
-  - platform: numeric_state
-    entity_id: sensor.shelly_1_power
-    for:
-      hours: 0
-      minutes: 5
-      seconds: 0
-    below: 1
-    id: battery-charged
-    alias: Verbruik onder 1 voor 5 min
-  condition:
-  - condition: state
-    entity_id: switch.shelly_1
-    state: 'on'
-  - condition: state
-    entity_id: input_boolean.eco_mode
-    state: 'on'
-  action:
-  - service: switch.turn_off
-    data: {}
-    target:
-      entity_id: switch.shelly_1
-  - service: notify.robert
-    data:
-      message: "De fietslader in de garage is klaar. \U0001F6B2\U0001F50B"
-  - if:
-    - condition: device
-      device_id: f76477730485d84e3077b5b0fbadf4c9
-      domain: media_player
-      entity_id: media_player.living_tv
-      type: is_on
-    then:
-    - service: notify.living_tv
-      data:
-        message: Fietslader is klaar.
-    else:
-    - service: script.sonos_say
-      data:
-        volume_percent: 30
-        entity_id: media_player.living_speaker
-        message: De fietslader is klaar.
-  - service: script.toot_engine
-    data:
-      who: mastodon
-      message: "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.'] | random }} Er is weer een fietsaccu
-        opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️', '\U0001F50C'] | random }}"
   mode: single
 - id: '1663925197803'
   alias: Cube Actions
@@ -1018,107 +969,6 @@
     target:
       entity_id: sensor.speedtest_download
   mode: single
-- id: '1666024431248'
-  alias: Alarmo > Arm when nobody at home
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - person.robert
-    to: not_home
-    from: home
-  - platform: state
-    entity_id:
-    - person.monique
-    to: not_home
-    from: home
-  - platform: state
-    entity_id:
-    - person.bjorn
-    to: not_home
-    from: home
-  condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: person.robert
-      state: home
-    - condition: state
-      entity_id: person.monique
-      state: home
-    - condition: state
-      entity_id: person.bjorn
-      state: home
-  action:
-  - service: alarmo.arm
-    data:
-      entity_id: alarm_control_panel.alarmo
-  mode: single
-- id: '1666110623478'
-  alias: Alarmo > Process notification events
-  description: ''
-  trigger:
-  - platform: event
-    event_type: mobile_app_notification_action
-    event_data:
-      action: ALARM_RETRY
-    id: retry
-    alias: When retry event is fired
-  - platform: event
-    event_type: mobile_app_notification_action
-    event_data:
-      action: ALARM_FORCE
-    id: force
-    alias: When force event is fired
-  - platform: event
-    event_type: mobile_app_notification_action
-    event_data:
-      action: ALARM_IGNORE
-    id: ignore
-    alias: When ignore event is fired
-  condition: []
-  action:
-  - choose:
-    - conditions:
-      - condition: trigger
-        id: retry
-      sequence:
-      - service: alarmo.arm
-        data:
-          entity_id: alarm_control_panel.alarmo
-    - conditions:
-      - condition: trigger
-        id: force
-      sequence:
-      - service: alarmo.arm
-        data:
-          force: true
-          entity_id: alarm_control_panel.alarmo
-          skip_delay: true
-        alias: 'Alarmo: Bypass and immediately arm'
-  mode: single
-- id: '1666250742431'
-  alias: Alarmo > Disarmed in panic mode
-  description: Send notification to parents when panic user is used to disable the
-    alarm.
-  trigger:
-  - platform: state
-    entity_id:
-    - alarm_control_panel.alarmo
-    attribute: changed_by
-    to: Ankie
-  condition: []
-  action:
-  - service: notify.admin
-    data:
-      message: Alarm uitgeschakeld door Ankie.
-      title: "\U0001F6E1️ Alarmo"
-      data:
-        sound:
-          name: default
-          critical: 1
-          volume: 1
-  mode: single
 - id: '1666340185709'
   alias: Office > Printer > Notify when connected.
   description: ''
@@ -1203,7 +1053,7 @@
       - condition: trigger
         id: Actief
       sequence:
-      - delay: ''
+      - delay: 00:00
     - conditions:
       - condition: trigger
         id: Niet Actief
@@ -1913,42 +1763,6 @@
     data:
       message: Robert is minder dan {{ states('proximity.robert_from_home') }} meter
         van huis. Hij is er bijna.
-- alias: 'Presence: Robert verlaat werk na 16:00 uur (custom)'
-  id: '1662124763401'
-  mode: single
-  trigger:
-  - platform: zone
-    entity_id: person.robert
-    zone: zone.maasstad
-    event: leave
-  condition:
-  - condition: time
-    after: '16:00:00'
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-  action:
-  - service: notify.monique
-    data:
-      message: "Robert is onderweg naar huis. \U0001F6B4‍♂️\U0001F4A8\U0001F618"
-      data:
-        icon_url: /local/img/people/robert.png
-  - service: script.sonos_say
-    data:
-      entity_id: media_player.living_speaker
-      message: Robert is onderweg naar huis.
-      volume_percent: 15
-- id: '1662123937783'
-  alias: 'Presence: Robert verlaat werk'
-  description: ''
-  use_blueprint:
-    path: homeassistant/notify_leaving_zone.yaml
-    input:
-      person_entity: person.robert
-      zone_entity: zone.maasstad
-      notify_device: 0837dc1d02ba452e9d46a4cbdc5e3638
 - alias: Time to Leave for Robert
   description: Notify when it's time to leave for work.
   id: '1664610107813'
@@ -2003,3 +1817,65 @@
     input:
       webostv: media_player.living_tv
       webostv_mac: 04:4E:AF:13:F9:7C
+- id: '1684594109974'
+  alias: Bike Charger
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: switch.shelly_1
+    domain: switch
+    id: power_on
+  - type: power
+    platform: device
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: sensor.shelly_1_power
+    domain: sensor
+    below: 1
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    id: battery-charged
+    alias: 'Fietslader: vermogen onder 1 W'
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: power_on
+      sequence:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.bike_charger_start_energy_number
+        data:
+          value: '{{ states(''sensor.shelly_1_energy'') | float(0) }}'
+    - conditions:
+      - condition: trigger
+        id: battery-charged
+      sequence:
+      - if:
+        - condition: state
+          entity_id: input_boolean.eco_mode
+          state: 'on'
+        then:
+        - type: turn_off
+          device_id: fc8175d314fecd80e9526220b04ae4b7
+          entity_id: switch.shelly_1
+          domain: switch
+      - service: notify.parents
+        data:
+          message: "De fietslader is klaar. \U0001F6B2\U0001F50B⚡️\U0001F50C"
+      - service: script.notify_living
+        data:
+          icon: /config/www/img/bike-charger.png
+          message: De fietslader is klaar.
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.', \"Dat heeft even geduurd.\",
+            \"Dat duurde lang.\", \"Er kwam geen eind aan.\", \"Nou zeg!\"] | random
+            }} De fietsaccu is weer opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️',
+            '\U0001F50C'] | random }}"
+  mode: single
