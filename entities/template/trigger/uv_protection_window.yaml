@@ -1,0 +1,21 @@
+---
+# UV Protection Window
+# To save on API calls with OpenUV, get times daily just once, and then calculate every minute locally.
+- trigger:
+    - platform: time_pattern
+      # This will update every 5 minutes
+      minutes: "/5"
+    - platform: state
+      entity_id: binary_sensor.protection_window
+    - platform: homeassistant
+      event: start
+  binary_sensor:
+    - name: UV Protection Window
+      unique_id: "1fed4c80-a646-4133-961c-776da75f1624"
+      icon: mdi:sunglasses
+      device_class: safety
+      state: >-
+        {% set now = now() | as_timestamp | float(0) %}
+        {% set lower = state_attr('binary_sensor.protection_window','start_time') | as_timestamp | float(0) %}
+        {% set upper = state_attr('binary_sensor.protection_window','end_time') | as_timestamp | float(0) %}
+        {{ (lower <= now <= upper) }}
