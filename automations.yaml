@@ -536,13 +536,16 @@
   - condition: state
     entity_id: input_boolean.snooze_lightning
     state: 'off'
+  - condition: numeric_state
+    entity_id: sensor.blitzortung_lightning_distance
+    below: 5
   action:
-  - service: notify.robert
+  - service: notify.family
     data:
-      message: Er is bliksem waargenomen binnen {{ states('sensor.blitzortung_lightning_distance')
-        }} km vanaf huis. Wees voorzichtig buitenshuis.
+      message: ⛈️ Er is bliksem waargenomen op {{ states('sensor.blitzortung_lightning_distance')
+        }} km van huis. Wees voorzichtig als je buiten bent.
       data:
-        title: Bliksemwaarschuwing!
+        title: ⛈️ Bliksemwaarschuwing!
         actions:
         - action: SNOOZE_LIGHTNING
           title: Stilhouden tot morgen
@@ -1878,4 +1881,63 @@
             \"Dat duurde lang.\", \"Er kwam geen eind aan.\", \"Nou zeg!\"] | random
             }} De fietsaccu is weer opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️',
             '\U0001F50C'] | random }}"
+  mode: single
+- id: '1664780304702'
+  alias: Outside Brightness Notification
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: above_horizon
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: below_horizon
+  - platform: numeric_state
+    entity_id: sensor.sun_elevation
+    below: 1
+  - platform: numeric_state
+    entity_id: sensor.sun_elevation
+    above: 1
+  - platform: numeric_state
+    entity_id: sensor.outside_brightness
+    above: 10
+  - platform: numeric_state
+    entity_id: sensor.outside_brightness
+    below: 10
+  condition: []
+  action:
+  - service: persistent_notification.create
+    data:
+      message: 'Sun: {{ states(''sun.sun'') }}
+
+        Elevation: {{ states(''sensor.sun_elevation'') }}gr.
+
+        Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
+
+        Clouds: {{ states(''sensor.tomorrow_io_home_cloud_cover'') }}%.
+
+        Irradiance: {{ states(''sensor.buinradar_irradiance'') }}%.
+
+        '
+  mode: single
+- id: '1685117427013'
+  alias: System > HA Core update beschikbaar
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_on
+    device_id: d4812471e10df4af50e389bca6493332
+    entity_id: update.home_assistant_core_update
+    domain: update
+  condition: []
+  action:
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      visibility: public
+      message: "Er is een update beschikbaar voor Home Assistant: {{ state_attr('update.home_assistant_core_update',
+        'latest_version') }}\n#HomeAssistant \n{{ state_attr('update.home_assistant_core_update',
+        'release_url') }}"
   mode: single
