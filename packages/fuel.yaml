@@ -1,26 +1,7 @@
 ---
 # Fuel package
 
-homeassistant:
-  customize_glob:
-    sensor.diesel_*:
-      icon: mdi:gas-station
-      unit_of_measurement: €/L
-    sensor.euro95_*:
-      icon: mdi:gas-station
-      unit_of_measurement: €/L
-    sensor.lpg_*:
-      icon: mdi:gas-station
-      unit_of_measurement: €/L
-
 sensor:
-  # Brandstofprijzen custom component
-  # https://github.com/metbril/home-assistant-brandstofprijzen
-  #
-  # I keep this sensor, to check if it keeps working with HA
-  #
-  - platform: brandstofprijzen
-
   # --- OCR sensors ---
 
   # Get fuel prices through OCR

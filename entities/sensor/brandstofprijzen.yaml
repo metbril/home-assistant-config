@@ -1,0 +1,7 @@
+---
+# Brandstofprijzen custom component
+# https://github.com/metbril/home-assistant-brandstofprijzen
+#
+# I keep this sensor, to check if it keeps working with HA
+#
+- platform: brandstofprijzen
