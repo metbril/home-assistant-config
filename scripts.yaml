@@ -394,7 +394,7 @@ sonos_say:
     entity_id:
       name: Entity
       description: The media player that speeks the text
-      example: media_player.woonkamer
+      example: media_player.living_speaker
       required: true
       selector:
         entity:
@@ -423,18 +423,6 @@ sonos_say:
           step: 1
           unit_of_measurement: '%'
           mode: slider
-    delay:
-      description: The time in seconds to wait until the media player state is restored.
-        This is the duration of the spoken text.
-      example: '3'
-      default: 3
-      selector:
-        number:
-          min: 0
-          max: 300
-          step: 1
-          unit_of_measurement: s
-          mode: box
   variables:
     volume_level: "{% if (volume_percent is none) or (volume_percent is undefined)
       or (volume_percent == \"\") %}\n  0.3\n{% else %}\n  {{ (volume_percent / 100)
@@ -466,17 +454,15 @@ sonos_say:
       data:
         entity_id: '{{ entity_id }}'
         message: '{{ message }}'
-    - alias: Wait for text online parsing
+    - alias: Delay for generating speech online
       delay: 3
-    - alias: Wait until speech has finished
-      wait_template: '{{ is_state( entity_id,"paused") }}'
+    - alias: Wait until playing speech has finished
+      wait_template: '{{ is_state(entity_id, ''paused'') }}
+
+        '
     - service: sonos.restore
       data:
         entity_id: '{{ entity_id }}'
-    else:
-    - service: notify.persistent_notification
-      data:
-        message: '{{ message }}'
   icon: mdi:speaker-message
 notify_living:
   alias: Notify Living
@@ -485,6 +471,7 @@ notify_living:
       name: Message
       description: Het uit te spreken bericht.
       example: Hallo wereld!
+      default: Hallo wereld!
       required: true
       selector:
         text:
