@@ -1,0 +1,15 @@
+# https://www.home-assistant.io/integrations/command_line
+
+- sensor:
+    name: YAML Config Lines
+    unique_id: 0a97fead-b043-4573-8b96-73e90354cfaf
+    unit_of_measurement: regels # lines
+    scan_interval: 3600 ## every 1 hour; default 60
+    command: "find /config -name '*.yaml' | xargs cat | wc -l"
+
+- sensor:
+    name: Bad Login
+    unique_id: b1439ab1-f7d1-4fa9-a07d-cefedda7b844
+    unit_of_measurement: pogingen # attempts
+    command: "grep -c 'Login attempt' /config/home-assistant.log"
+    value_template: "{{ value | int(1) - 1 }}"

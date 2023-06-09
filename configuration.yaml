@@ -26,6 +26,7 @@ air_quality: !include includes/air_quality.yaml
 alert: !include includes/alert.yaml
 calendar: !include includes/calendar.yaml
 climate: !include includes/climate.yaml
+command_line: !include includes/command_line.yaml
 geo_location: !include includes/geo_location.yaml
 group: !include includes/group.yaml
 logger: !include includes/logger.yaml

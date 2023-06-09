@@ -8,10 +8,6 @@ proximity.robert_from_home:
 proximity.robert_from_work:
   friendly_name: Robert van werk
 
-sensor.bad_login:
-  friendly_name: Mislukt inloggen
-  icon: mdi:alert
-
 sensor.buienalarm_precipitation:
   friendly_name: Buienalarm Neerslagintensiteit
   unit_of_measurement: mm/u
