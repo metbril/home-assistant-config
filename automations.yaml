@@ -1,6 +1,6 @@
-- id: "1642157915331"
-  alias: "System: Home Assistant Alert"
-  description: ""
+- id: '1642157915331'
+  alias: 'System: Home Assistant Alert'
+  description: ''
   use_blueprint:
     path: CentralCommand/get-notified-any-time-there-is-a-new-home-assistant-alert.yaml
     input:
@@ -10,195 +10,186 @@
   alias: Signaallamp - bijwerken via scene
   description: Werk de signaallamp bij met behulp van de geselecteerde scene.
   trigger:
-    - entity_id: input_select.signaallamp_scene
-      platform: state
+  - entity_id: input_select.signaallamp_scene
+    platform: state
   action:
-    - data:
-        entity_id:
-          "{{('scene.signaal_' ~ trigger.to_state.state)|lower| replace('
-          ','_')}}"
-      service: scene.turn_on
+  - data:
+      entity_id: '{{(''scene.signaal_'' ~ trigger.to_state.state)|lower| replace(''
+        '',''_'')}}'
+    service: scene.turn_on
 - id: ff08a450-aa5f-4bc4-bf21-bdea71c552ce
   alias: Signaallamp - uitschakelen synchroniseren met scene
-  description:
-    Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
+  description: Synchroniseer scene input (en activeer daarmee de scene) als de signaallamp
     handmatig wordt uitgeschakeld.
   trigger:
-    - entity_id: light.signaal
-      platform: state
-      to: "off"
+  - entity_id: light.signaal
+    platform: state
+    to: 'off'
   action:
-    - data:
-        entity_id: input_select.signaallamp_scene
-        option: Uit
-      service: input_select.select_option
+  - data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+    service: input_select.select_option
 - id: 26e358e0-da5c-4ef1-8349-e9f0bde623bd
   alias: Signaallamp - regenalarm melden op werkdagen
-  description:
-    Trigger rain alarm when rain expected on workdays between 6 and 9 am,
+  description: Trigger rain alarm when rain expected on workdays between 6 and 9 am,
     but only when someone is home
   trigger:
-    - above: 0
-      entity_id: sensor.buienradar_precipitation_forecast_average
-      platform: numeric_state
+  - above: 0
+    entity_id: sensor.buienradar_precipitation_forecast_average
+    platform: numeric_state
   condition:
-    - condition: state
-      entity_id: binary_sensor.signaallamp_ingeschakeld
-      state: "on"
-    - condition: time
-      after: 06:00:00
-      before: 09:00:00
-    - condition: state
-      entity_id: binary_sensor.workday
-      state: "on"
-    - condition: state
-      entity_id: input_boolean.verlof
-      state: "off"
-    - condition: state
-      entity_id: sensor.occupancy
-      state: home
-    - condition: state
-      entity_id: group.family
-      state: home
+  - condition: state
+    entity_id: binary_sensor.signaallamp_ingeschakeld
+    state: 'on'
+  - condition: time
+    after: 06:00:00
+    before: 09:00:00
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - condition: state
+    entity_id: input_boolean.verlof
+    state: 'off'
+  - condition: state
+    entity_id: sensor.occupancy
+    state: home
+  - condition: state
+    entity_id: group.family
+    state: home
   action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.signaallamp_scene
-        option: Regenalarm
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Regenalarm
   mode: single
 - id: ca89521c-7219-4e8e-acda-9c9537ff98a1
   alias: Signaallamp - regenalarm annuleren
   description: Annuleer regenalarm om 9:00 of als er geen regen meer wordt verwacht.
   trigger:
-    - platform: template
-      value_template:
-        "{{ states('sensor.buienradar_precipitation_forecast_average')
-        |float==0}}"
-    - at: 09:00:00
-      platform: time
+  - platform: template
+    value_template: '{{ states(''sensor.buienradar_precipitation_forecast_average'')
+      |float==0}}'
+  - at: 09:00:00
+    platform: time
   condition:
-    - condition: state
-      entity_id: input_select.signaallamp_scene
-      state: Regenalarm
+  - condition: state
+    entity_id: input_select.signaallamp_scene
+    state: Regenalarm
   action:
-    - service: input_select.select_option
-      data:
-        entity_id: input_select.signaallamp_scene
-        option: Uit
-- id: "1660887358846"
-  alias: "Lighting: Kledingkast Bjorn altijd aan"
-  description:
-    De verlichting in de kledingkast moet altijd aan staan, zodat de sensor
+  - service: input_select.select_option
+    data:
+      entity_id: input_select.signaallamp_scene
+      option: Uit
+- id: '1660887358846'
+  alias: 'Lighting: Kledingkast Bjorn altijd aan'
+  description: De verlichting in de kledingkast moet altijd aan staan, zodat de sensor
     het licht kan inschakelen.
   trigger:
-    - platform: device
-      type: turned_off
-      device_id: 6d83fdc507bebb0799f1ad633c94cb7a
-      entity_id: light.kledingkast_bjorn
-      domain: light
-    - platform: homeassistant
-      event: start
+  - platform: device
+    type: turned_off
+    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
+    entity_id: light.kledingkast_bjorn
+    domain: light
+  - platform: homeassistant
+    event: start
   condition: []
   action:
-    - type: turn_on
-      device_id: 6d83fdc507bebb0799f1ad633c94cb7a
-      entity_id: light.kledingkast_bjorn
-      domain: light
-      brightness_pct: 50
-    - service: automation.turn_on
-      data: {}
-      target:
-        entity_id: automation.lighthing_kledingkast_bjorn_altijd_aan
+  - type: turn_on
+    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
+    entity_id: light.kledingkast_bjorn
+    domain: light
+    brightness_pct: 50
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.lighthing_kledingkast_bjorn_altijd_aan
   mode: single
 - id: 068719c4-88f2-44b5-a809-e2513ae65604
   alias: Outside > Weather > Buienalarm
   description: Send a notification and tweet when it's raining or rain is forecasted.
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.buienalarm
-      attribute: index
+  - platform: state
+    entity_id:
+    - sensor.buienalarm
+    attribute: index
   condition:
-    - condition: numeric_state
-      entity_id: sensor.buienalarm
-      attribute: index
-      above: 0
+  - condition: numeric_state
+    entity_id: sensor.buienalarm
+    attribute: index
+    above: 0
   action:
-    - service: notify.robert
+  - service: notify.robert
+    data:
+      message: "{{ \"\U0001F53A\" if (trigger.to_state.attributes.index > trigger.from_state.attributes.index)
+        else \"\U0001F53B\" }} {{ states( 'sensor.buienalarm' ) }} {{ [\"☔️\",\"☂️\",\"\U0001F302\",\"\U0001F9E5\",\"\U0001F4A6\",\"\U0001F327\",\"\U0001F326\",\"⛈\",\"\U0001F308\"]
+        | random }}\n"
+      title: Buienalarm
       data:
-        message:
-          "{{ \"\U0001F53A\" if (trigger.to_state.attributes.index > trigger.from_state.attributes.index)
-          else \"\U0001F53B\" }} {{ states( 'sensor.buienalarm' ) }} {{ [\"☔️\",\"☂️\",\"\U0001F302\",\"\U0001F9E5\",\"\U0001F4A6\",\"\U0001F327\",\"\U0001F326\",\"⛈\",\"\U0001F308\"]
-          | random }}\n"
-        title: Buienalarm
-        data:
-          url:
-            https://www.buienalarm.nl/{{ state_attr( 'zone.home' , 'latitude' ) }},{{
-            state_attr( 'zone.home' , 'longitude' ) }}
-    - service: notify.twitter
-      data:
-        message:
-          "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ \"Vergeet je
-          regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
-          \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm dus goed in de gaten! \U0001F327️\",
-          \"Sluit je ramen en deuren af! \U0001FA9F\U0001F6AA\", \"Maar na regen komt
-          zonneschijn! \U0001F326\", \"Zie je al een regenboog? \U0001F308\" ] | random
-          \ }} #buienalarm https://www.buienalarm.nl/"
+        url: https://www.buienalarm.nl/{{ state_attr( 'zone.home' , 'latitude' ) }},{{
+          state_attr( 'zone.home' , 'longitude' ) }}
+  - service: notify.twitter
+    data:
+      message: "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ \"Vergeet je
+        regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
+        \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm dus goed in de gaten! \U0001F327️\",
+        \"Sluit je ramen en deuren af! \U0001FA9F\U0001F6AA\", \"Maar na regen komt
+        zonneschijn! \U0001F326\", \"Zie je al een regenboog? \U0001F308\" ] | random
+        \ }} #buienalarm https://www.buienalarm.nl/"
   mode: single
-- id: "1660920784418"
-  alias: "Media: Update Sonos Source Selector"
+- id: '1660920784418'
+  alias: 'Media: Update Sonos Source Selector'
   description: Update input selector with when Sonos favorites update.
   trigger:
-    - platform: state
-      entity_id:
-        - input_select.sonos_favorites
-    - platform: homeassistant
-      event: start
+  - platform: state
+    entity_id:
+    - input_select.sonos_favorites
+  - platform: homeassistant
+    event: start
   condition: []
   action:
-    - variables:
-        favs: "{{ state_attr('sensor.sonos_favorites', 'items').values() | list
-          }}"
-    - service: input_select.set_options
-      data:
-        options: "{{ favs }}"
-      target:
-        entity_id: input_select.sonos_favorites
+  - variables:
+      favs: '{{ state_attr(''sensor.sonos_favorites'', ''items'').values() | list
+        }}'
+  - service: input_select.set_options
+    data:
+      options: '{{ favs }}'
+    target:
+      entity_id: input_select.sonos_favorites
   mode: single
-- id: "1660923058113"
-  alias: "Office: Play selected Sonos favorite on office speaker"
-  description:
-    Switch to selected favorite (playlist or radio) when Office speaker
+- id: '1660923058113'
+  alias: 'Office: Play selected Sonos favorite on office speaker'
+  description: Switch to selected favorite (playlist or radio) when Office speaker
     is already playing.
   trigger:
-    - platform: state
-      entity_id:
-        - input_select.sonos_favorites
+  - platform: state
+    entity_id:
+    - input_select.sonos_favorites
   condition:
-    - condition: device
-      device_id: 7bdba22c447d5ca9504e896de5e891d4
-      domain: media_player
-      entity_id: media_player.kantoorspeaker
-      type: is_playing
+  - condition: device
+    device_id: 7bdba22c447d5ca9504e896de5e891d4
+    domain: media_player
+    entity_id: media_player.kantoorspeaker
+    type: is_playing
   action:
-    - service: media_player.select_source
-      target:
-        entity_id: media_player.kantoorspeaker
-      data:
-        source: "{{ states('input_select.sonos_favorites') }}"
+  - service: media_player.select_source
+    target:
+      entity_id: media_player.kantoorspeaker
+    data:
+      source: '{{ states(''input_select.sonos_favorites'') }}'
   mode: single
-- id: "1661499047537"
+- id: '1661499047537'
   alias: ZHA - Lichtstraat remote
-  description: ""
+  description: ''
   use_blueprint:
     path: metbril/zha_ikea_tradfri_2button_onoff_brightness.yaml
     input:
       remote: 28bb8ad428cbbf06defd66c0d19deaac
       light: light.lichtstraat
       speed: 100
-- id: "1661538513078"
+- id: '1661538513078'
   alias: Living > Lighting > Lightsaver Sfeerverlichting
-  description: ""
+  description: ''
   use_blueprint:
     path: niro1987/lightsaver.yaml
     input:
@@ -206,41 +197,39 @@
       sunset_delay: -50
 - id: 934b4450-7816-4064-b906-3a3894d99345
   alias: Energy - Save consumption to file
-  description:
-    "Save energy consumption to file every hour, at the full hour.\nEntities
+  description: "Save energy consumption to file every hour, at the full hour.\nEntities
     used: \n- sensor.energy_consumption_tarif_1 \n- sensor.energy_consumption_tarif_2\n
     - sensor.gas_consumption"
   trigger:
-    - platform: time_pattern
-      hours: "*"
-      minutes: "0"
-      seconds: "0"
+  - platform: time_pattern
+    hours: '*'
+    minutes: '0'
+    seconds: '0'
   action:
-    - service: notify.save_energy_consumption
-      data:
-        message:
-          "{{ now() }}, {{ states('sensor.energy_consumption_tarif_1') }},
-          {{ states('sensor.energy_consumption_tarif_2') }}, {{ states('sensor.gas_consumption')}}"
-    - service: logbook.log
-      data:
-        name: Energieverbruik (tarief 1)
-        message: opgeslagen
-        entity_id: sensor.energy_consumption_tarif_1
-        domain: sensor
-    - service: logbook.log
-      data:
-        name: Energieverbruik (tarief 2)
-        message: opgeslagen
-        entity_id: sensor.energy_consumption_tarif_2
-        domain: sensor
-    - service: logbook.log
-      data:
-        name: Gasverbruik
-        message: opgeslagen
-        entity_id: sensor.gas_consumption
-        domain: sensor
-- id: "1662102264901"
-  alias: "Zolder: Wasmachine is klaar"
+  - service: notify.save_energy_consumption
+    data:
+      message: '{{ now() }}, {{ states(''sensor.energy_consumption_tarif_1'') }},
+        {{ states(''sensor.energy_consumption_tarif_2'') }}, {{ states(''sensor.gas_consumption'')}}'
+  - service: logbook.log
+    data:
+      name: Energieverbruik (tarief 1)
+      message: opgeslagen
+      entity_id: sensor.energy_consumption_tarif_1
+      domain: sensor
+  - service: logbook.log
+    data:
+      name: Energieverbruik (tarief 2)
+      message: opgeslagen
+      entity_id: sensor.energy_consumption_tarif_2
+      domain: sensor
+  - service: logbook.log
+    data:
+      name: Gasverbruik
+      message: opgeslagen
+      entity_id: sensor.gas_consumption
+      domain: sensor
+- id: '1662102264901'
+  alias: 'Zolder: Wasmachine is klaar'
   description: Verstuur meldingen als de wasmachine klaar is.
   use_blueprint:
     path: metbril/appliance_has_finished.yaml
@@ -259,42 +248,40 @@
       starting_threshold: 4
       finishing_threshold: 4
       actions:
-        - variables:
-            end_time: "{{ as_timestamp(now()) }}"
-            end_energy: "{{ states(energy_sensor) }}"
-        - variables:
-            total_time: "{{ (end_time - start_time) }}"
-            total_energy: "{{ end_energy - start_energy }}"
-        - variables:
-            minutes: "{{ (total_time / 60) | round(0) }}"
-            total_energy_rounded: "{{ (total_energy) | round(2) }}"
-            cost:
-              "{{ ( states('price_sensor') | float(0) * total_energy) | round(2)
-              }}"
-        - service: notify.robert
+      - variables:
+          end_time: '{{ as_timestamp(now()) }}'
+          end_energy: '{{ states(energy_sensor) }}'
+      - variables:
+          total_time: '{{ (end_time - start_time) }}'
+          total_energy: '{{ end_energy - start_energy }}'
+      - variables:
+          minutes: '{{ (total_time / 60) | round(0) }}'
+          total_energy_rounded: '{{ (total_energy) | round(2) }}'
+          cost: '{{ ( states(''price_sensor'') | float(0) * total_energy) | round(2)
+            }}'
+      - service: notify.robert
+        data:
+          message: "De wasmachine is klaar na {{ minutes }} minuten  en heeft {{ cost
+            }} gekost voor een verbruik van {{ total_energy_rounded }} kWh. \U0001F45A\U0001F455\U0001F4A6\n"
+      - service: notify.living_tv
+        data:
+          message: Wasmachine is klaar.
           data:
-            message:
-              "De wasmachine is klaar na {{ minutes }} minuten  en heeft {{ cost
-              }} gekost voor een verbruik van {{ total_energy_rounded }} kWh. \U0001F45A\U0001F455\U0001F4A6\n"
-        - service: notify.living_tv
-          data:
-            message: Wasmachine is klaar.
-            data:
-              icon: /config/www/img/washing-machine.png
-        - service: script.sonos_say
-          data:
-            entity_id: media_player.living_speaker
-            message: De wasmachine is klaar.
+            icon: /config/www/img/washing-machine.png
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_speaker
+          message: De wasmachine is klaar.
       pre_actions:
-        - variables:
-            start_time: "{{ as_timestamp(now()) }}"
-            start_energy: "{{ states(energy_sensor) }}"
+      - variables:
+          start_time: '{{ as_timestamp(now()) }}'
+          start_energy: '{{ states(energy_sensor) }}'
       wait_timeout:
         hours: 5
         minutes: 0
         seconds: 0
-- id: "1662104026902"
-  alias: "Zolder: Wasdroger is klaar"
+- id: '1662104026902'
+  alias: 'Zolder: Wasdroger is klaar'
   description: Verstuur meldingen als de wasdroger klaar is.
   use_blueprint:
     path: metbril/appliance_has_finished.yaml
@@ -317,1249 +304,1214 @@
         seconds: 0
       price_sensor: sensor.energy_consumption_tarif_2
       actions:
-        - service: notify.robert
+      - service: notify.robert
+        data:
+          message: "\U0001F9FA\U0001F4A8 Wasdroger is klaar."
+      - service: script.sonos_say
+        data:
+          entity_id: media_player.living_speaker
+          message: De wasdroger is klaar.
+      - service: notify.living_tv
+        data:
+          message: De wasdroger is klaar.
           data:
-            message: "\U0001F9FA\U0001F4A8 Wasdroger is klaar."
-        - service: script.sonos_say
-          data:
-            entity_id: media_player.living_speaker
-            message: De wasdroger is klaar.
-        - service: notify.living_tv
-          data:
-            message: De wasdroger is klaar.
-            data:
-              icon: /config/www/img/dryer.png
+            icon: /config/www/img/dryer.png
       pre_actions: []
-- id: "1662116397887"
-  alias: "Security: Warn when door is open after everyone has left"
-  description: ""
+- id: '1662116397887'
+  alias: 'Security: Warn when door is open after everyone has left'
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - group.family
-      from: home
-      for:
-        hours: 0
-        minutes: 5
-        seconds: 0
+  - platform: state
+    entity_id:
+    - group.family
+    from: home
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   condition:
-    - condition: state
-      entity_id: binary_sensor.schuifpui_sensor_state_door_window
-      state: "on"
+  - condition: state
+    entity_id: binary_sensor.schuifpui_sensor_state_door_window
+    state: 'on'
   action:
-    - service: notify.parents
-      data:
-        message: "⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. "
+  - service: notify.parents
+    data:
+      message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
   mode: single
-- id: "1662530759975"
+- id: '1662530759975'
   alias: Home > Security > Inschakelen AdGuard
-  description:
-    Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
+  description: Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
     gestaan.
   trigger:
-    - platform: state
-      entity_id:
-        - switch.adguard_filtering
-      from: "on"
-      to: "off"
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
+  - platform: state
+    entity_id:
+    - switch.adguard_filtering
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
   condition: []
   action:
-    - service: switch.turn_on
-      data: {}
-      target:
-        entity_id: switch.adguard_protection
-    - service: persistent_notification.create
-      data:
-        message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
-        title: AdGuard
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "Iemand had het blokkeren van advertenties even uitgezet, maar ik heb
-          het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant"
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.adguard_protection
+  - service: persistent_notification.create
+    data:
+      message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
+      title: AdGuard
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: 'Iemand had het blokkeren van advertenties even uitgezet, maar ik heb
+        het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant'
   mode: single
-- id: "1662547518457"
-  alias: "Office: Printer powered notification"
-  description:
-    Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
+- id: '1662547518457'
+  alias: 'Office: Printer powered notification'
+  description: Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
     en laat deze met een actieknop ook direct uitschakelen.
   trigger:
-    - platform: state
-      entity_id:
-        - switch.samsung_ml_2850nd
-      to: "on"
-      for:
-        hours: 0
-        minutes: 30
-        seconds: 0
+  - platform: state
+    entity_id:
+    - switch.samsung_ml_2850nd
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
   condition: []
   action:
-    - service: script.printer_off
-      data: {}
+  - service: script.printer_off
+    data: {}
   mode: single
-- id: "1662548077258"
+- id: '1662548077258'
   alias: Garden > Lighting > Switch lights based on sun elevation
-  description:
-    "Switch the outdoor lights on/off based on sun elevation. Elevation
+  description: 'Switch the outdoor lights on/off based on sun elevation. Elevation
     is an attribute of the sun integration. Elevetion is more accurate for darkness
     that a fixed time. Elevation varies over time. Note: I should create a blueprint
     for this some day.
 
-    "
+    '
   trigger:
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      above: "1"
-    - platform: numeric_state
-      entity_id: sun.sun
-      attribute: elevation
-      below: "1"
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    above: '1'
+  - platform: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: '1'
   condition: []
   action:
-    - if:
-        - condition: state
-          entity_id: sun.sun
-          attribute: rising
-          state: true
-      then:
-        - service: light.turn_off
-          target:
-            entity_id: light.achtergevel
-          data:
-            transition: 5
-        - service: script.toot_engine
-          data:
-            message:
-              "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
-              , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
-      else:
-        - service: light.turn_on
-          target:
-            entity_id: light.achtergevel
-          data:
-            transition: 5
-            brightness_pct: 70
-        - service: script.toot_engine
-          data:
-            message:
-              "{{ [ 'Zonsondergang! \U0001F305', 'De dag zit er weer op! \U0001F605'
-              , 'Goedenavond! \U0001F31A' , 'Hit for the moon! \U0001F31B' ] | random
-              }}"
-  mode: single
-- id: "1662548148472"
-  alias: Energy > Post Gas Consumption to MinderGas.nl
-  description: "Post gas consumption to mindergas.nl daily at 00:15.
-
-    The gas meter reading is updated once every hour, within 10 minutes after the
-    full hour. Posting as soon as possible after that, with a safe margin."
-  trigger:
-    - platform: time
-      at: 00:15:00
-  condition:
-    - condition: numeric_state
-      entity_id: sensor.gas_consumption
-      above: "0"
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: sensor.yesterday
-          state: unavailable
-  action:
-    - service: script.mindergas
+  - if:
+    - condition: state
+      entity_id: sun.sun
+      attribute: rising
+      state: true
+    then:
+    - service: light.turn_off
+      target:
+        entity_id: light.achtergevel
       data:
-        date: "{{ states('sensor.yesterday') }}"
-        reading: "{{ states('sensor.gas_consumption') }}"
+        transition: 5
     - service: script.toot_engine
       data:
-        who: mastodon
-        message:
-          "Ik heb zojuist het gasverbruik van gisteren doorgestuurd naar Mindergas.
-          #gas #energie #besparen
-
-
-          https://mindergas.nl/"
+        message: "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
+          , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
+    else:
+    - service: light.turn_on
+      target:
+        entity_id: light.achtergevel
+      data:
+        transition: 5
+        brightness_pct: 70
+    - service: script.toot_engine
+      data:
+        message: "{{ [ 'Zonsondergang! \U0001F305', 'De dag zit er weer op! \U0001F605'
+          , 'Goedenavond! \U0001F31A' , 'Hit for the moon! \U0001F31B' ] | random
+          }}"
   mode: single
-- id: "1662609361916"
-  alias: "System: Low battery level detection & notification for all battery sensors"
-  description: ""
+- id: '1662548148472'
+  alias: Energy > Post Gas Consumption to MinderGas.nl
+  description: 'Post gas consumption to mindergas.nl daily at 00:15.
+
+    The gas meter reading is updated once every hour, within 10 minutes after the
+    full hour. Posting as soon as possible after that, with a safe margin.'
+  trigger:
+  - platform: time
+    at: 00:15:00
+  condition:
+  - condition: numeric_state
+    entity_id: sensor.gas_consumption
+    above: '0'
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: sensor.yesterday
+      state: unavailable
+  action:
+  - service: script.mindergas
+    data:
+      date: '{{ states(''sensor.yesterday'') }}'
+      reading: '{{ states(''sensor.gas_consumption'') }}'
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: 'Ik heb zojuist het gasverbruik van gisteren doorgestuurd naar Mindergas.
+        #gas #energie #besparen
+
+
+        https://mindergas.nl/'
+  mode: single
+- id: '1662609361916'
+  alias: 'System: Low battery level detection & notification for all battery sensors'
+  description: ''
   use_blueprint:
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       actions:
-        - service: notify.admin
-          data:
-            message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
-        - service: notify.persistent_notification
-          data:
-            message: "Batterijen bijna leeg: {{sensors}}"
+      - service: notify.admin
+        data:
+          message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
+      - service: notify.persistent_notification
+        data:
+          message: 'Batterijen bijna leeg: {{sensors}}'
       exclude:
         entity_id:
-          - sensor.iphone_robert_battery_level
-          - sensor.iphone_van_bjorn_battery_level
-          - sensor.patricius_battery_level
-      time: "20:00:00"
+        - sensor.iphone_robert_battery_level
+        - sensor.iphone_van_bjorn_battery_level
+        - sensor.patricius_battery_level
+      time: '20:00:00'
 - id: 971fc035-f021-4015-a54b-8c6da9ddf200
   alias: Outside > Safety > Brandweer in de buurt
-  description:
-    "Stuur een melding dat de brandweer dichtbij is en plaats een bericht
+  description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Twitter.
 
-    "
+    '
   trigger:
-    - platform: state
-      entity_id: sensor.p2000_brandweer
+  - platform: state
+    entity_id: sensor.p2000_brandweer
   condition:
-    - "{{states('sensor.p2000_brandweer') != 'unknown'}}"
+  - '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
   action:
-    - variables:
-        address: "{{ states('sensor.p2000_brandweer') }}"
-        lat: "{{ state_attr('sensor.p2000_brandweer', 'latitude')  }}"
-        lon: "{{ state_attr('sensor.p2000_brandweer', 'longitude') }}"
-        url: http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16
-    - service: notify.parents
+  - variables:
+      address: '{{ states(''sensor.p2000_brandweer'') }}'
+      lat: '{{ state_attr(''sensor.p2000_brandweer'', ''latitude'')  }}'
+      lon: '{{ state_attr(''sensor.p2000_brandweer'', ''longitude'') }}'
+      url: http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16
+  - service: notify.parents
+    data:
+      title: "\U0001F692 P2000 Brandweer"
+      message: '{{ address }}'
       data:
-        title: "\U0001F692 P2000 Brandweer"
-        message: "{{ address }}"
-        data:
-          url: "{{ url }}"
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }}\n\n{{
-          url }}"
+        url: '{{ url }}'
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }}\n\n{{
+        url }}"
   mode: single
 - id: 6e054688-5e75-48bd-9411-52a3e26264d1
   alias: Outside > Safety > Lightning notification
-  description: "Lightning notification
+  description: 'Lightning notification
 
     Requires the Blitzortung integration custom component: https://github.com/mrk-its/homeassistant-blitzortung
 
     Inspired by: https://github.com/mrk-its/homeassistant-blitzortung https://www.vcloudinfo.com/2020/08/adding-a-lightning-sensor-to-home-assistant.html
     https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml
 
-    "
+    '
   trigger:
-    - platform: state
-      entity_id: sensor.blitzortung_lightning_counter
+  - platform: state
+    entity_id: sensor.blitzortung_lightning_counter
   condition:
-    - condition: state
-      entity_id: group.family
-      state: home
-    - condition: numeric_state
-      entity_id: sensor.blitzortung_lightning_counter
-      above: 0
-    - condition: state
-      entity_id: input_boolean.snooze_lightning
-      state: "off"
-    - condition: numeric_state
-      entity_id: sensor.blitzortung_lightning_distance
-      below: 5
+  - condition: state
+    entity_id: group.family
+    state: home
+  - condition: numeric_state
+    entity_id: sensor.blitzortung_lightning_counter
+    above: 0
+  - condition: state
+    entity_id: input_boolean.snooze_lightning
+    state: 'off'
+  - condition: numeric_state
+    entity_id: sensor.blitzortung_lightning_distance
+    below: 5
   action:
-    - service: notify.family
+  - service: notify.family
+    data:
+      message: ⛈️ Er is bliksem waargenomen op {{ states('sensor.blitzortung_lightning_distance')
+        }} km van huis. Wees voorzichtig als je buiten bent.
       data:
-        message:
-          ⛈️ Er is bliksem waargenomen op {{ states('sensor.blitzortung_lightning_distance')
-          }} km van huis. Wees voorzichtig als je buiten bent.
-        data:
-          title: ⛈️ Bliksemwaarschuwing!
-          actions:
-            - action: SNOOZE_LIGHTNING
-              title: Stilhouden tot morgen
-            - action: MAP
-              title: Toon kaart
-              url: /map
-    - delay:
-        minutes: 1
+        title: ⛈️ Bliksemwaarschuwing!
+        actions:
+        - action: SNOOZE_LIGHTNING
+          title: Stilhouden tot morgen
+        - action: MAP
+          title: Toon kaart
+          url: /map
+  - delay:
+      minutes: 1
   mode: single
 - id: 1f295bb8-8925-4b22-8f75-9l1ghtn1nga8
   alias: Outside > Safety > Snooze lightning notifications
   description: Snooze future lightning notifications.
   trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: SNOOZE_LIGHTNING
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: SNOOZE_LIGHTNING
   action:
-    - service: input_boolean.turn_on
-      entity_id: input_boolean.snooze_lightning
+  - service: input_boolean.turn_on
+    entity_id: input_boolean.snooze_lightning
   mode: single
 - id: 54dc02ae-2df9-4fc5-85e1-d18ccc859144
   alias: Outside > Safety > Unsnooze lightning notifications.
-  description: ""
+  description: ''
   trigger:
-    - platform: time
-      at: 00:00:00
+  - platform: time
+    at: 00:00:00
   action:
-    - service: input_boolean.turn_off
-      entity_id: input_boolean.snooze_lightning
+  - service: input_boolean.turn_off
+    entity_id: input_boolean.snooze_lightning
   mode: single
-- id: "1649842819459"
+- id: '1649842819459'
   alias: Office > Pause Music
   description: Pause playing music in the office when in call.
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.robert_in_call
-      to: "on"
+  - platform: state
+    entity_id:
+    - binary_sensor.robert_in_call
+    to: 'on'
   condition:
-    - condition: state
-      entity_id: binary_sensor.working_from_home_robert
-      state: "on"
-    - condition: state
-      entity_id: media_player.kantoorspeaker
-      state: playing
+  - condition: state
+    entity_id: binary_sensor.working_from_home_robert
+    state: 'on'
+  - condition: state
+    entity_id: media_player.kantoorspeaker
+    state: playing
   action:
-    - service: media_player.media_pause
-      data: {}
-      target:
-        entity_id: media_player.kantoorspeaker
-    - service: input_boolean.turn_on
-      data: {}
-      target:
-        entity_id: input_boolean.resume_office_music
-    - service: notify.robert
-      data:
-        message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
-        title: Teams activity
+  - service: media_player.media_pause
+    data: {}
+    target:
+      entity_id: media_player.kantoorspeaker
+  - service: input_boolean.turn_on
+    data: {}
+    target:
+      entity_id: input_boolean.resume_office_music
+  - service: notify.robert
+    data:
+      message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
+      title: Teams activity
   mode: single
 - alias: Reset Teams Status Robert
-  description:
-    "Reset Teams Status when not changed for a long time outside work hours.
+  description: 'Reset Teams Status when not changed for a long time outside work hours.
 
     This usually happens when you put your laptop in sleep or hibernate mode without
     closing the Teams application first.
 
     The status should not be reset if you just work outside of regular hours.
 
-    "
+    '
   id: aaff7435-8f79-4657-af57-454710cde9b9
   mode: single
   trigger:
     alias: Teams status Robert has not changed for more than 1 hours
     platform: template
-    value_template:
-      "{{ as_timestamp(now()) -\n    as_timestamp(\n      states.input_text.teams_status_robert.last_changed\n
+    value_template: "{{ as_timestamp(now()) -\n    as_timestamp(\n      states.input_text.teams_status_robert.last_changed\n
       \     ) > 1*3600 }}\n"
   condition:
-    - condition: or
-      alias: not a workday or after 18:00 ?
-      conditions:
-        - condition: state
-          entity_id: binary_sensor.workday
-          state: "off"
-        - condition: time
-          after: "18:00:00"
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: input_text.teams_status_robert
-          state: unknown
+  - condition: or
+    alias: not a workday or after 18:00 ?
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.workday
+      state: 'off'
+    - condition: time
+      after: '18:00:00'
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_text.teams_status_robert
+      state: unknown
   action:
-    - service: input_text.set_value
-      data:
-        entity_id: input_text.teams_status_robert
-        value: unknown
-    - service: notify.robert
-      data:
-        message: Teams status opnieuw ingesteld door inactiviteit.
-- id: "1649843570979"
+  - service: input_text.set_value
+    data:
+      entity_id: input_text.teams_status_robert
+      value: unknown
+  - service: notify.robert
+    data:
+      message: Teams status opnieuw ingesteld door inactiviteit.
+- id: '1649843570979'
   alias: Office > Resume Music
   description: Resume music when Teams call has finished.
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.robert_in_call
-      to: "off"
+  - platform: state
+    entity_id:
+    - binary_sensor.robert_in_call
+    to: 'off'
   condition:
-    - alias: Music was paused when call started
-      condition: state
-      entity_id: input_boolean.resume_office_music
-      state: "on"
+  - alias: Music was paused when call started
+    condition: state
+    entity_id: input_boolean.resume_office_music
+    state: 'on'
   action:
-    - service: media_player.media_play
-      target:
-        entity_id:
-          - media_player.kantoorspeaker
-      data: {}
-    - service: input_boolean.turn_off
-      target:
-        entity_id: input_boolean.resume_office_music
-      data: {}
-    - service: notify.robert
-      data:
-        message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
-        title: Teams activity
+  - service: media_player.media_play
+    target:
+      entity_id:
+      - media_player.kantoorspeaker
+    data: {}
+  - service: input_boolean.turn_off
+    target:
+      entity_id: input_boolean.resume_office_music
+    data: {}
+  - service: notify.robert
+    data:
+      message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
+      title: Teams activity
   mode: single
 - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
   alias: Carwash Notification
   description: Geef een melding wanneer de auto gewassen kan worden.
   trigger:
-    - platform: state
-      entity_id: binary_sensor.car_wash
-      from: "off"
-      to: "on"
+  - platform: state
+    entity_id: binary_sensor.car_wash
+    from: 'off'
+    to: 'on'
   action:
-    - service: notify.robert
-      data:
-        message:
-          "{{ ['De auto kan weer worden gewassen.','Pak de spons en zeem maar
-          voor de auto.','Het is weer mogelijk om de auto te wassen.','Je kunt weer
-          naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "{{ [\"De auto kan weer worden gewassen.\", \"Het weer zit weer mee.
-          Ga je even de auto wassen?\", \"De auto kan weer naar de wasstraat.\", \"Het
-          heeft weer zin om de auto te wassen.\", 'Pak de spons en zeem maar voor de
-          auto.'] | random ~ \" \" ~ (\"\U0001F697\U0001F698\U0001F699\" | list | random
-          ) ~ \"\U0001F4A6\" }}\n"
+  - service: notify.robert
+    data:
+      message: "{{ ['De auto kan weer worden gewassen.','Pak de spons en zeem maar
+        voor de auto.','Het is weer mogelijk om de auto te wassen.','Je kunt weer
+        naar de wasstraat.'] | random ~  ' \U0001F698\U0001F4A6' }}\n"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "{{ [\"De auto kan weer worden gewassen.\", \"Het weer zit weer mee.
+        Ga je even de auto wassen?\", \"De auto kan weer naar de wasstraat.\", \"Het
+        heeft weer zin om de auto te wassen.\", 'Pak de spons en zeem maar voor de
+        auto.'] | random ~ \" \" ~ (\"\U0001F697\U0001F698\U0001F699\" | list | random
+        ) ~ \"\U0001F4A6\" }}\n"
   mode: single
 - id: b27b246b-60fd-42d2-8516-cf37f2cfbc0f
-  alias: "Media: Pause living speaker when TV is turned on"
+  alias: 'Media: Pause living speaker when TV is turned on'
   description: Pause living speaker when living TV is turned on.
   trigger:
-    - platform: state
-      entity_id: media_player.living_tv
-      to: "on"
+  - platform: state
+    entity_id: media_player.living_tv
+    to: 'on'
   condition:
-    - condition: state
+  - condition: state
+    entity_id: media_player.living_speaker
+    state: playing
+  action:
+  - service: media_player.media_pause
+    data: {}
+    target:
       entity_id: media_player.living_speaker
-      state: playing
-  action:
-    - service: media_player.media_pause
-      data: {}
-      target:
-        entity_id: media_player.living_speaker
-    - service: notify.living_tv
-      data:
-        message: Muziekspeler automatisch gepauzeerd.
+  - service: notify.living_tv
+    data:
+      message: Muziekspeler automatisch gepauzeerd.
   mode: single
-- id: "1663046423659"
-  alias: "Office: Printer powered reminder"
-  description: ""
+- id: '1663046423659'
+  alias: 'Office: Printer powered reminder'
+  description: ''
   trigger:
-    - platform: time_pattern
-      minutes: "30"
-      alias: Iedere 30 minuten
+  - platform: time_pattern
+    minutes: '30'
+    alias: Iedere 30 minuten
   condition:
-    - condition: state
-      entity_id: input_boolean.printer_reminder
-      state: "on"
+  - condition: state
+    entity_id: input_boolean.printer_reminder
+    state: 'on'
   action:
-    - service: script.1663045328980
-      data: {}
+  - service: script.1663045328980
+    data: {}
   mode: single
-- id: "1663046870503"
-  alias: "Office: Printer powered action"
-  description: ""
+- id: '1663046870503'
+  alias: 'Office: Printer powered action'
+  description: ''
   trigger:
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: PRINTER_OFF
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: PRINTER_REMIND
-      id: printer_remind
-    - platform: event
-      event_type: mobile_app_notification_action
-      event_data:
-        action: PRINTER_IGNORE
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_OFF
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_REMIND
+    id: printer_remind
+  - platform: event
+    event_type: mobile_app_notification_action
+    event_data:
+      action: PRINTER_IGNORE
   condition: []
   action:
-    - if:
-        - condition: trigger
-          id: printer_remind
-          alias: Triggered by printer remind
-      then:
-        - service: input_boolean.turn_on
-          data: {}
-          target:
-            entity_id: input_boolean.printer_reminder
-      else:
-        - service: input_boolean.turn_off
-          data: {}
-          target:
-            entity_id: input_boolean.printer_reminder
+  - if:
+    - condition: trigger
+      id: printer_remind
+      alias: Triggered by printer remind
+    then:
+    - service: input_boolean.turn_on
+      data: {}
+      target:
+        entity_id: input_boolean.printer_reminder
+    else:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.printer_reminder
   mode: single
-- id: "1663925197803"
+- id: '1663925197803'
   alias: Cube Actions
-  description: ""
+  description: ''
   use_blueprint:
     path: SirGoodenough/Zigbee2MQTT - Xiaomi Cube Controller.yaml
     input:
       remote: sensor.cube_action
       shake:
-        - service: script.movie_pause
-          data: {}
+      - service: script.movie_pause
+        data: {}
       fall:
-        - service: scene.turn_on
-          target:
-            entity_id: scene.lighting_living_min
-          metadata: {}
+      - service: scene.turn_on
+        target:
+          entity_id: scene.lighting_living_min
+        metadata: {}
       rotate_cw_any:
-        - if:
-            - condition: device
-              device_id: 0b66a0b9458a2619643802bab0864d75
-              domain: media_player
-              entity_id: media_player.living_speaker
-              type: is_playing
-          then:
-            - service: media_player.volume_up
-              data: {}
-              target:
-                entity_id: media_player.living_speaker
+      - if:
+        - condition: device
+          device_id: 0b66a0b9458a2619643802bab0864d75
+          domain: media_player
+          entity_id: media_player.living_speaker
+          type: is_playing
+        then:
+        - service: media_player.volume_up
+          data: {}
+          target:
+            entity_id: media_player.living_speaker
       rotate_ccw_any:
-        - if:
-            - condition: device
-              device_id: 0b66a0b9458a2619643802bab0864d75
-              domain: media_player
-              entity_id: media_player.living_speaker
-              type: is_playing
-          then:
-            - service: media_player.volume_down
-              data: {}
-              target:
-                entity_id: media_player.living_speaker
+      - if:
+        - condition: device
+          device_id: 0b66a0b9458a2619643802bab0864d75
+          domain: media_player
+          entity_id: media_player.living_speaker
+          type: is_playing
+        then:
+        - service: media_player.volume_down
+          data: {}
+          target:
+            entity_id: media_player.living_speaker
 - id: 4f63071f-16ae-419e-bf54-8064a147ad3e
   alias: System > HACS Updates
-  description:
-    Verstuur een notificatie als er updates zijn van onderdelen die met
+  description: Verstuur een notificatie als er updates zijn van onderdelen die met
     HACS zijn geïnstalleerd.
   trigger:
-    - platform: state
-      entity_id: sensor.hacs
-    - platform: homeassistant
-      event: start
+  - platform: state
+    entity_id: sensor.hacs
+  - platform: homeassistant
+    event: start
   condition:
-    - condition: template
-      value_template: "{{ states('sensor.hacs') | float(0) > 0 }}"
+  - condition: template
+    value_template: '{{ states(''sensor.hacs'') | float(0) > 0 }}'
   action:
-    - service: persistent_notification.create
-      data:
-        title: HACS Updates
-        message:
-          "Te verwerken [HACS-updates](/hacs): {% for repo in state_attr('sensor.hacs',
-          'repositories') %}\n  * {{repo.display_name}} {{\n  repo.installed_version}}
-          -> {{\n  repo.available_version}}\n{% endfor %}\n"
-        notification_id: update_hacs
+  - service: persistent_notification.create
+    data:
+      title: HACS Updates
+      message: "Te verwerken [HACS-updates](/hacs): {% for repo in state_attr('sensor.hacs',
+        'repositories') %}\n  * {{repo.display_name}} {{\n  repo.installed_version}}
+        -> {{\n  repo.available_version}}\n{% endfor %}\n"
+      notification_id: update_hacs
   mode: single
 - id: 0923084c-025e-4f9f-b30b-029b87760465
   alias: System > HACS Updates Done
   description: Verstuur een notificatie als alle updates voor HACS zijn geïnstalleerd.
   trigger:
-    - platform: numeric_state
-      entity_id: sensor.hacs
-      below: 1
+  - platform: numeric_state
+    entity_id: sensor.hacs
+    below: 1
   action:
-    - service: notify.admin
+  - service: notify.admin
+    data:
+      title: HACS Updates
+      message: Alle HACS-updates zijn verwerkt.
       data:
-        title: HACS Updates
-        message: Alle HACS-updates zijn verwerkt.
-        data:
-          push:
-            thread-id: updates
-          apns_headers:
-            apns-collapse-id: update_hacs
-          url: /hacs
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: update_hacs
+        push:
+          thread-id: updates
+        apns_headers:
+          apns-collapse-id: update_hacs
+        url: /hacs
+  - service: persistent_notification.dismiss
+    data:
+      notification_id: update_hacs
   mode: single
 - id: 086eb1f7-3e73-497b-bdf8-a02414761465
   alias: System > HACS Repository Toegevoegd Melden
-  description:
-    Verstuur een melding als er een nieuwe repository wordt toegevoegd
+  description: Verstuur een melding als er een nieuwe repository wordt toegevoegd
     aan HACS.
   trigger:
-    - platform: event
-      event_type: hacs/repository
-      event_data:
-        action: registration
+  - platform: event
+    event_type: hacs/repository
+    event_data:
+      action: registration
   condition:
-    - condition: template
-      value_template: "{{trigger.event.data.repository is defined}}"
+  - condition: template
+    value_template: '{{trigger.event.data.repository is defined}}'
   action:
-    - service: notify.admin
+  - service: notify.admin
+    data:
+      title: HACS-repository toegevoegd
+      message: 'Repository toegevoegd: * {{trigger.event.data.repository}}'
       data:
-        title: HACS-repository toegevoegd
-        message: "Repository toegevoegd: * {{trigger.event.data.repository}}"
-        data:
-          push:
-            thread-id: updates
-          apns_headers:
-            apns-collapse-id: update_hacs_repo
-          url: /hacs/repository/{{trigger.event.data.repository_id}}
-    - service: persistent_notification.create
-      data:
-        title: HACS-repository toegevoegd
-        message: "Repository toegevoegd: * [{{trigger.event.data.repository\n  }}](/hacs/repository/{{trigger.event.data.repository_id}})\n"
-        notification_id: update_hacs_repo
+        push:
+          thread-id: updates
+        apns_headers:
+          apns-collapse-id: update_hacs_repo
+        url: /hacs/repository/{{trigger.event.data.repository_id}}
+  - service: persistent_notification.create
+    data:
+      title: HACS-repository toegevoegd
+      message: "Repository toegevoegd: * [{{trigger.event.data.repository\n  }}](/hacs/repository/{{trigger.event.data.repository_id}})\n"
+      notification_id: update_hacs_repo
   mode: queued
-- id: "1665290435363"
+- id: '1665290435363'
   alias: Living > Media > Apple TV Movie Time
   description: Play a movie in the living.
   trigger:
-    - platform: state
-      entity_id:
-        - media_player.apple_tv_woomkamer
-      to: playing
-      id: playing
-    - platform: state
-      entity_id:
-        - media_player.apple_tv_woomkamer
-      to: paused
-      id: paused
+  - platform: state
+    entity_id:
+    - media_player.apple_tv_woomkamer
+    to: playing
+    id: playing
+  - platform: state
+    entity_id:
+    - media_player.apple_tv_woomkamer
+    to: paused
+    id: paused
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: playing
-          sequence:
-            - service: script.movie_time_start
-              data: {}
-        - conditions:
-            - condition: trigger
-              id: paused
-          sequence:
-            - service: script.movie_time_stop
-              data: {}
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: playing
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: paused
+      sequence:
+      - service: script.movie_time_stop
+        data: {}
   mode: single
-- id: "1665293798660"
+- id: '1665293798660'
   alias: Netflix Movie Time
   description: Set the living for movie time
   trigger:
-    - platform: state
-      entity_id: media_player.living_tv
-      attribute: source
-      to: Netflix
-      id: started
-    - platform: state
-      entity_id: media_player.living_tv
-      attribute: is_volume_muted
-      from: true
-      to: false
-      id: playing
-    - platform: state
-      entity_id: media_player.living_tv
-      attribute: is_volume_muted
-      from: false
-      to: true
-      id: paused
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: source
+    to: Netflix
+    id: started
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: is_volume_muted
+    from: true
+    to: false
+    id: playing
+  - platform: state
+    entity_id: media_player.living_tv
+    attribute: is_volume_muted
+    from: false
+    to: true
+    id: paused
   condition:
-    - condition: state
-      entity_id: media_player.living_tv
-      attribute: source
-      state: Netflix
+  - condition: state
+    entity_id: media_player.living_tv
+    attribute: source
+    state: Netflix
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: started
-          sequence:
-            - service: script.movie_time_start
-              data: {}
-        - conditions:
-            - condition: trigger
-              id: playing
-          sequence:
-            - service: script.movie_time_start
-              data: {}
-        - conditions:
-            - condition: trigger
-              id: paused
-          sequence:
-            - service: script.movie_time_stop
-              data: {}
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: started
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: playing
+      sequence:
+      - service: script.movie_time_start
+        data: {}
+    - conditions:
+      - condition: trigger
+        id: paused
+      sequence:
+      - service: script.movie_time_stop
+        data: {}
   mode: single
-- id: "1665816857275"
+- id: '1665816857275'
   alias: Force speedtest
-  description:
-    Force speedtest when downlo.ad unavailable for 1 minute. Fix for accidental
+  description: Force speedtest when downlo.ad unavailable for 1 minute. Fix for accidental
     failure of the integration.
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.speedtest_download
-      to: unavailable
-      for:
-        hours: 0
-        minutes: 1
-        seconds: 0
+  - platform: state
+    entity_id:
+    - sensor.speedtest_download
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
   condition: []
   action:
-    - service: homeassistant.update_entity
-      data: {}
-      target:
-        entity_id: sensor.speedtest_download
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id: sensor.speedtest_download
   mode: single
-- id: "1666340185709"
+- id: '1666340185709'
   alias: Office > Printer > Notify when connected.
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.samsung_ml_2850nd
-      to: "on"
+  - platform: state
+    entity_id:
+    - binary_sensor.samsung_ml_2850nd
+    to: 'on'
   condition: []
   action:
-    - service: notify.family
-      data:
-        message: "\U0001F5A8 Printer is beschikbaar om te gebruiken."
+  - service: notify.family
+    data:
+      message: "\U0001F5A8 Printer is beschikbaar om te gebruiken."
   mode: single
 - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
   alias: Living > Lighting > Automated
   description: Schakel vlak voor zonsondergang de verlichting in de woonkamer in.
   trigger:
-    - event: sunset
-      offset: -00:30:00
-      platform: sun
-      id: Sunset
-      alias: Sunset
-    - platform: time
-      at: "23:30"
-      id: Late
-      alias: Late
+  - event: sunset
+    offset: -00:30:00
+    platform: sun
+    id: Sunset
+    alias: Sunset
+  - platform: time
+    at: '23:30'
+    id: Late
+    alias: Late
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: Sunset
-          sequence:
-            - service: scene.turn_on
-              data: {}
-              target:
-                entity_id:
-                  - scene.living_lighting_cosy
-            - service: script.toot_engine
-              data:
-                message:
-                  Het wordt schemerig. De verlichting is ingeschakeld om het een
-                  beetje gezellig te maken.
-                who: mastodon
-        - conditions:
-            - condition: trigger
-              id: Late
-          sequence:
-            - condition: state
-              entity_id: light.living
-              state: "on"
-              alias: Test if Woonkamerverlichting is still on
-            - condition: not
-              conditions:
-                - condition: state
-                  entity_id: input_boolean.occupancy_vacation
-                  state: "on"
-            - service: scene.turn_on
-              target:
-                entity_id:
-                  - scene.living_lighting_dimmed
-              data: {}
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Sunset
+      sequence:
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id:
+          - scene.living_lighting_cosy
+      - service: script.toot_engine
+        data:
+          message: Het wordt schemerig. De verlichting is ingeschakeld om het een
+            beetje gezellig te maken.
+          who: mastodon
+    - conditions:
+      - condition: trigger
+        id: Late
+      sequence:
+      - condition: state
+        entity_id: light.living
+        state: 'on'
+        alias: Test if Woonkamerverlichting is still on
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: input_boolean.occupancy_vacation
+          state: 'on'
+      - service: scene.turn_on
+        target:
+          entity_id:
+          - scene.living_lighting_dimmed
+        data: {}
   mode: single
 - id: 33b00235-30e6-45af-9473-d7c2357f07cc
   alias: Household Applicance > Washing Machine Running
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.washing_machine_running
-      from: "off"
-      to: "on"
-      id: Actief
-    - platform: state
-      entity_id:
-        - binary_sensor.washing_machine_running
-      from: "on"
-      to: "off"
-      id: Niet Actief
+  - platform: state
+    entity_id:
+    - binary_sensor.washing_machine_running
+    from: 'off'
+    to: 'on'
+    id: Actief
+  - platform: state
+    entity_id:
+    - binary_sensor.washing_machine_running
+    from: 'on'
+    to: 'off'
+    id: Niet Actief
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: Actief
-          sequence:
-            - delay: 00:00
-        - conditions:
-            - condition: trigger
-              id: Niet Actief
-          sequence:
-            - variables:
-                start_energy: "{{ states('sensor.washing_machine_start_energy')  }}"
-                finish_energy: "{{ states('sensor.washing_machine_finish_energy') }}"
-                start_time:
-                  "{{ states.sensor.washing_machine_start_energy.last_changed
-                  | as_timestamp }}"
-                finish_time:
-                  "{{ states.sensor.washing_machine_finish_energy.last_changed
-                  | as_timestamp }}"
-                price: "{{ states('sensor.energy_consumption_tarif_2') | float(0) }}"
-            - variables:
-                total_energy: "{{ finish_energy - start_energy }}"
-                total_time: "{{ (finish_time - start_time) }}"
-            - variables:
-                minutes: "{{ (total_time / 60) | round(0) }}"
-                total_energy_rounded: "{{ (total_energy) | round(2) }}"
-                cost: "{{ ( price * total_energy) | round(2) }}"
-            - service: "{{ states('sensor.nearest_parent_notify') }}"
-              data:
-                message:
-                  "De wasmachine is klaar na {{ minutes}} minuten en heeft {{ total_energy_rounded
-                  }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6\n"
-            - if:
-                - condition: or
-                  conditions:
-                    - condition: state
-                      entity_id: media_player.living_tv
-                      state: "on"
-                    - condition: state
-                      entity_id: media_player.living_tv
-                      state: playing
-                    - condition: state
-                      entity_id: media_player.living_tv
-                      state: paused
-              then:
-                - service: notify.living_tv
-                  data:
-                    message: Wasmachine is klaar.
-                    data:
-                      icon: /config/www/img/washing-machine.png
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Actief
+      sequence:
+      - delay: 00:00
+    - conditions:
+      - condition: trigger
+        id: Niet Actief
+      sequence:
+      - variables:
+          start_energy: '{{ states(''sensor.washing_machine_start_energy'') | float(0)
+            }}'
+          finish_energy: '{{ states(''sensor.washing_machine_finish_energy'') | float(0)
+            }}'
+          start_time: '{{ states.sensor.washing_machine_start_energy.last_changed
+            | as_timestamp }}'
+          finish_time: '{{ states.sensor.washing_machine_finish_energy.last_changed
+            | as_timestamp }}'
+          price: '{{ states(''sensor.energy_consumption_tarif_2'') | float(0) }}'
+      - variables:
+          total_energy: '{{ finish_energy - start_energy }}'
+          total_time: '{{ (finish_time - start_time) }}'
+      - variables:
+          minutes: '{{ (total_time / 60) | round(0) }}'
+          total_energy_rounded: '{{ (total_energy) | round(2) }}'
+          cost: '{{ ( price * total_energy) | round(2) }}'
+      - service: '{{ states(''sensor.nearest_parent_notify'') }}'
+        data:
+          message: "De wasmachine is klaar na {{ minutes}} minuten en heeft {{ total_energy_rounded
+            }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6\n"
+      - if:
+        - condition: or
+          conditions:
+          - condition: state
+            entity_id: media_player.living_tv
+            state: 'on'
+          - condition: state
+            entity_id: media_player.living_tv
+            state: playing
+          - condition: state
+            entity_id: media_player.living_tv
+            state: paused
+        then:
+        - service: notify.living_tv
+          data:
+            message: Wasmachine is klaar.
+            data:
+              icon: /config/www/img/washing-machine.png
   mode: single
-- id: "1666621842129"
+- id: '1666621842129'
   alias: Force Fast.com speed test
   description: Force speedtest when sensor becomes unavailable.
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.fast_com_download
-      to: unavailable
-      for:
-        hours: 0
-        minutes: 5
-        seconds: 0
+  - platform: state
+    entity_id:
+    - sensor.fast_com_download
+    to: unavailable
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
   condition: []
   action:
-    - service: fastdotcom.speedtest
-      data: {}
+  - service: fastdotcom.speedtest
+    data: {}
   mode: single
-- id: "1666778586209"
+- id: '1666778586209'
   alias: Garage Motion
   description: Turn on/off light for motion in garage
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.garage_motion
-      from: "off"
-      to: "on"
-      id: Motion
-    - platform: state
-      entity_id:
-        - binary_sensor.garage_motion
-      from: "on"
-      to: "off"
-      for:
-        hours: 0
-        minutes: 5
-        seconds: 0
-      id: No motion
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_motion
+    from: 'off'
+    to: 'on'
+    id: Motion
+  - platform: state
+    entity_id:
+    - binary_sensor.garage_motion
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+    id: No motion
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: Motion
-          sequence:
-            - service: light.turn_on
-              data: {}
-              target:
-                entity_id: light.voorraadkast
-        - conditions:
-            - condition: trigger
-              id: No motion
-          sequence:
-            - service: light.turn_off
-              data: {}
-              target:
-                entity_id: light.voorraadkast
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Motion
+      sequence:
+      - service: light.turn_on
+        data: {}
+        target:
+          entity_id: light.voorraadkast
+    - conditions:
+      - condition: trigger
+        id: No motion
+      sequence:
+      - service: light.turn_off
+        data: {}
+        target:
+          entity_id: light.voorraadkast
   mode: single
-- id: "1667754651770"
+- id: '1667754651770'
   alias: Adviesprijs Euro95 gewijzigd
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.adviesprijs_euro95
+  - platform: state
+    entity_id:
+    - sensor.adviesprijs_euro95
   condition: []
   action:
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "De adviesprijs voor Euro 95 is gewijzigd naar €{{ states('sensor.adviesprijs_euro95')
-          | replace('.', ',') }}/L.
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: 'De adviesprijs voor Euro 95 is gewijzigd naar €{{ states(''sensor.adviesprijs_euro95'')
+        | replace(''.'', '','') }}/L.
 
 
-          https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp"
+        https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp'
   mode: single
-- id: "1667809761090"
+- id: '1667809761090'
   alias: Safety > Meteoalarm Notification (new)
-  description: "
+  description: '
 
     Send notification on each entity update (not only at state change)
 
-    "
+    '
   trigger:
-    - platform: state
-      entity_id: binary_sensor.meteoalarm_zuid_holland
+  - platform: state
+    entity_id: binary_sensor.meteoalarm_zuid_holland
   condition:
-    - alias: There is an active alert
-      condition: state
-      entity_id: binary_sensor.meteoalarm_zuid_holland
-      state: "on"
+  - alias: There is an active alert
+    condition: state
+    entity_id: binary_sensor.meteoalarm_zuid_holland
+    state: 'on'
   action:
-    - service: notify.family
-      data:
-        title:
-          "⚠️ {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'headline').split('
-          - ')[0] }}
+  - service: notify.family
+    data:
+      title: '⚠️ {{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''headline'').split(''
+        - '')[0] }}
 
-          "
-        message:
-          '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''description'')
-          | replace(''\n'', '' '') }}
+        '
+      message: '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''description'')
+        | replace(''\n'', '' '') }}
+
+        '
+      data:
+        url: '{{ state_attr(''binary_sensor.meteoalarm_zuid_holland'', ''web'') }}
 
           '
-        data:
-          url: "{{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'web') }}
-
-            "
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "⚠️ {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'headline').split('
-          - ')[0] }}: {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland', 'description'
-          ) |\n    replace('\\n', ' ') }} {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland',
-          'web' ) }} #MeteoAlarm #ZuidHolland"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "⚠️ {{ state_attr('binary_sensor.meteoalarm_zuid_holland', 'headline').split('
+        - ')[0] }}: {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland', 'description'
+        ) |\n    replace('\\n', ' ') }} {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland',
+        'web' ) }} #MeteoAlarm #ZuidHolland"
   mode: queued
 - id: f1a564aa-c8da-4f88-bf61-b938627374b2
   alias: System > Stop Toot
   description: Toot when HA stops
   trigger:
-    - platform: homeassistant
-      event: shutdown
+  - platform: homeassistant
+    event: shutdown
   action:
-    - service: script.toot_engine
-      data:
-        message:
-          "{% set phrases = [\n  \"\U0001F4A4 Ik ga even een dutje doen.\",\n
-          \ \"\U0001F6B6 Ik moet even weg, maar ik ben zo weer terug.\",\n  \"\U0001F648
-          1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!\",\n  \"⛔ Home
-          Assistant wordt gestopt.\"\n] %} {% set hashtags = [\n  \"#HomeAutomation\",\n
-          \ \"#SmartHome\",\n  \"#Domotica\",\n  \"#IoT\"\n] %} {{ phrases | random
-          ~ \" \" ~ hashtags | random ~ \" #HomeAssistant \" ~ \"https://github.com/metbril/home-assistant-config\"
-          }}"
+  - service: script.toot_engine
+    data:
+      message: "{% set phrases = [\n  \"\U0001F4A4 Ik ga even een dutje doen.\",\n
+        \ \"\U0001F6B6 Ik moet even weg, maar ik ben zo weer terug.\",\n  \"\U0001F648
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!\",\n  \"⛔ Home
+        Assistant wordt gestopt.\"\n] %} {% set hashtags = [\n  \"#HomeAutomation\",\n
+        \ \"#SmartHome\",\n  \"#Domotica\",\n  \"#IoT\"\n] %} {{ phrases | random
+        ~ \" \" ~ hashtags | random ~ \" #HomeAssistant \" ~ \"https://github.com/metbril/home-assistant-config\"
+        }}"
 - id: f5bdd57b-796d-4de6-9602-4e298473bbf8
-  alias: "Health: Step Tracker Toot"
-  description: ""
+  alias: 'Health: Step Tracker Toot'
+  description: ''
   trigger:
-    - platform: numeric_state
-      entity_id:
-        - sensor.iphone_robert_steps
-      above: 5000
+  - platform: numeric_state
+    entity_id:
+    - sensor.iphone_robert_steps
+    above: 5000
   action:
-    - variables:
-        steps: "{{ trigger.to_state.state }}"
-        emoji:
-          "{{ '\U0001F6B6\U0001F3C3\U0001F97E\U0001F45F\U0001F3C5\U0001F3C6\U0001F3AF'
-          | list | random }}"
-    - service: script.toot_engine
-      data:
-        message:
-          '{{ [ "Blijf in beweging. Een gezinslid heeft zojuist " ~ steps ~ "
+  - variables:
+      steps: '{{ trigger.to_state.state }}'
+      emoji: "{{ '\U0001F6B6\U0001F3C3\U0001F97E\U0001F45F\U0001F3C5\U0001F3C6\U0001F3AF'
+        | list | random }}"
+  - service: script.toot_engine
+    data:
+      message: '{{ [ "Blijf in beweging. Een gezinslid heeft zojuist " ~ steps ~ "
 
-          stappen met een #AppleWatch gemaakt.", "Fitness tracking thuis, door het huis.
+        stappen met een #AppleWatch gemaakt.", "Fitness tracking thuis, door het huis.
 
-          Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
+        Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
 
-          "Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt."
+        "Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt."
 
-          ] | random ~ " " ~ emoji ~ " " ~ [ "#QuantifiedSelf", "#SelfTracking", "#eHealth",
+        ] | random ~ " " ~ emoji ~ " " ~ [ "#QuantifiedSelf", "#SelfTracking", "#eHealth",
 
-          "#ActivityTracker", "#Ommetje" ] | random }}
+        "#ActivityTracker", "#Ommetje" ] | random }}
 
-          '
-- id: "1670532851811"
+        '
+- id: '1670532851811'
   alias: Update fuel prices
   description: Update fuel prices every hour
   trigger:
-    - platform: time_pattern
-      hours: /1
+  - platform: time_pattern
+    hours: /1
   condition: []
   action:
-    - service: homeassistant.update_entity
-      data: {}
-      target:
-        entity_id:
-          - sensor.euro95_lukoil_schermerhoek
-          - sensor.euro95_tango_hoofdweg
-          - sensor.euro95_tinq_bermweg
+  - service: homeassistant.update_entity
+    data: {}
+    target:
+      entity_id:
+      - sensor.euro95_lukoil_schermerhoek
+      - sensor.euro95_tango_hoofdweg
+      - sensor.euro95_tinq_bermweg
   mode: single
 - id: cea83bd6-bc1a-4973-b080-8ed2bb9a3026
   alias: Mobility > Euro95 price changes
   description: Notification for updated Euro95 fuel prices
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.adviesprijs_euro95
-        - sensor.euro95_dijktank_kanaalweg
-        - sensor.euro95_lukoil_schermerhoek
-        - sensor.euro95_tamoil_ommoord
-        - sensor.euro95_tango_hoofdweg
-        - sensor.euro95_tinq_bermweg
+  - platform: state
+    entity_id:
+    - sensor.adviesprijs_euro95
+    - sensor.euro95_dijktank_kanaalweg
+    - sensor.euro95_lukoil_schermerhoek
+    - sensor.euro95_tamoil_ommoord
+    - sensor.euro95_tango_hoofdweg
+    - sensor.euro95_tinq_bermweg
   condition:
-    - condition: template
-      value_template:
-        "{{ trigger.to_state.state not in [None, 'unknown','unavailable']
-        }}"
+  - condition: template
+    value_template: '{{ trigger.to_state.state not in [None, ''unknown'',''unavailable'']
+      }}'
   action:
-    - service: notify.robert
-      data:
-        message:
-          "{{ state_attr(trigger.entity_id,'friendly_name') }} is gewijzigd
-          naar {{ trigger.to_state.state }} {{ state_attr(trigger.entity_id,'unit_of_measurement')}}."
+  - service: notify.robert
+    data:
+      message: '{{ state_attr(trigger.entity_id,''friendly_name'') }} is gewijzigd
+        naar {{ trigger.to_state.state }} {{ state_attr(trigger.entity_id,''unit_of_measurement'')}}.'
   mode: queued
-- alias: "Huis: Synchroniseer bezetting status"
-  id: "1661884728867"
-  description:
-    "Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+- alias: 'Huis: Synchroniseer bezetting status'
+  id: '1661884728867'
+  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
     alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
 
-    "
+    '
   initial_state: true
   mode: queued
   trigger:
-    - platform: state
-      entity_id:
-        - input_boolean.occupancy_home
-        - input_boolean.occupancy_asleep
-        - input_boolean.occupancy_away
-        - input_boolean.occupancy_party
-        - input_boolean.occupancy_guests
-        - input_boolean.occupancy_vacation
+  - platform: state
+    entity_id:
+    - input_boolean.occupancy_home
+    - input_boolean.occupancy_asleep
+    - input_boolean.occupancy_away
+    - input_boolean.occupancy_party
+    - input_boolean.occupancy_guests
+    - input_boolean.occupancy_vacation
   action:
-    - variables:
-        all_off:
-          "{{ states.input_boolean | select('search', 'occupancy_')  | selectattr('state',
-          'eq', 'on') | map(attribute='entity_id') | list | count == 0 }}"
-    - choose:
-        - conditions:
-            - condition: template
-              value_template: "{{ trigger.to_state.state == 'on' }}"
-          sequence:
-            - service: input_boolean.turn_off
-              data:
-                entity_id:
-                  "{{ states.input_boolean | select('search', 'occupancy_') | \n
-                  \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
-                  | list | join(', ') }}\n"
-        - conditions:
-            - condition: template
-              value_template:
-                "{{ states.input_boolean | select('search', 'occupancy_')
-                \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
-                | list | count == 0 }}"
-          sequence:
-            - service: input_boolean.turn_on
-              data:
-                entity_id: input_boolean.occupancy_home
-- alias: "Huis: Herinnering over afwezigheid"
-  description:
-    "Notify when vacation or guest occupancy, and daily when still in vacation
+  - variables:
+      all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
+        ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      sequence:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
+            \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
+            | list | join(', ') }}\n"
+    - conditions:
+      - condition: template
+        value_template: "{{ states.input_boolean | select('search', 'occupancy_')
+          \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
+          | list | count == 0 }}"
+      sequence:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.occupancy_home
+- alias: 'Huis: Herinnering over afwezigheid'
+  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
     or guest mode. These modes let automations behave differently.
 
-    "
-  id: "1661885320722"
+    '
+  id: '1661885320722'
   trigger:
-    - platform: state
-      entity_id: sensor.occupancy
-      to: vacation
-    - platform: state
-      entity_id: sensor.occupancy
-      to: guests
-    - platform: time
-      at: 09:00:00
+  - platform: state
+    entity_id: sensor.occupancy
+    to: vacation
+  - platform: state
+    entity_id: sensor.occupancy
+    to: guests
+  - platform: time
+    at: 09:00:00
   condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.occupancy
-          state: vacation
-        - condition: state
-          entity_id: sensor.occupancy
-          state: guests
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sensor.occupancy
+      state: vacation
+    - condition: state
+      entity_id: sensor.occupancy
+      state: guests
   variables:
-    mode: "{{ states('sensor.occupancy') }}"
-    name: "{{ 'input_boolean.occupancy_' + mode }}"
-    label: "{{ state_attr(name, 'friendly_name') | lower }}"
+    mode: '{{ states(''sensor.occupancy'') }}'
+    name: '{{ ''input_boolean.occupancy_'' + mode }}'
+    label: '{{ state_attr(name, ''friendly_name'') | lower }}'
   action:
-    - service: notify.admin
-      data:
-        title: Bezetting
-        message: '\U0001F9F7 De woningbezetting is nu ingesteld op {{ label }}.
+  - service: notify.admin
+    data:
+      title: Bezetting
+      message: '\U0001F9F7 De woningbezetting is nu ingesteld op {{ label }}.
 
-          '
-- id: "1662718496282"
-  alias: "Huis: automatisch ingeschakelen bezetting Weg"
+        '
+- id: '1662718496282'
+  alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
   trigger:
-    - platform: state
-      entity_id: group.family
-      from: home
+  - platform: state
+    entity_id: group.family
+    from: home
   condition:
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: input_boolean.occupancy_vacation
-          state: "on"
-        - condition: state
-          entity_id: input_boolean.occupancy_guests
-          state: "on"
-        - condition: state
-          entity_id: input_boolean.occupancy_away
-          state: "on"
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_guests
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_away
+      state: 'on'
   action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.occupancy_away
-    - service: persistent_notification.create
-      data:
-        message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
-        title: Huisbezetting
-        notification_id: auto_occupancy
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.occupancy_away
+  - service: persistent_notification.create
+    data:
+      message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
   mode: single
-- id: "1662718880324"
-  alias: "Huis: dismiss auto notifications"
-  description:
-    Dismiss any persistent notification that has been set due to auto switching
+- id: '1662718880324'
+  alias: 'Huis: dismiss auto notifications'
+  description: Dismiss any persistent notification that has been set due to auto switching
     of occupancy.
   mode: single
   trigger:
-    - platform: state
-      entity_id: input_boolean.occupancy_home
-      to: "on"
+  - platform: state
+    entity_id: input_boolean.occupancy_home
+    to: 'on'
   action:
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: auto_occupancy
-- id: "1663060804510"
-  alias: "Huis: Auto set mode to Home"
+  - service: persistent_notification.dismiss
+    data:
+      notification_id: auto_occupancy
+- id: '1663060804510'
+  alias: 'Huis: Auto set mode to Home'
   description: Set home occupance to 'Home' when someone comes home and state is away.
   mode: single
   trigger:
-    - platform: state
-      entity_id: group.family
-      to: home
+  - platform: state
+    entity_id: group.family
+    to: home
   condition:
-    - condition: state
-      entity_id: input_boolean.occupancy_away
-      state: "on"
+  - condition: state
+    entity_id: input_boolean.occupancy_away
+    state: 'on'
   action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.occupancy_home
-    - service: persistent_notification.create
-      data:
-        message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
-        title: Huisbezetting
-        notification_id: auto_occupancy
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.occupancy_home
+  - service: persistent_notification.create
+    data:
+      message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
 - id: f19127bd-aa93-44fe-aac9-0b2c4a626dca
   alias: Enable eco mode by default
   initial_state: true
   mode: single
   trigger:
-    - platform: homeassistant
-      event: start
-    - platform: time
-      at: 03:00:00
+  - platform: homeassistant
+    event: start
+  - platform: time
+    at: 03:00:00
   condition:
-    - condition: state
+  - condition: state
+    entity_id: input_boolean.eco_mode
+    state: 'off'
+  action:
+  - service: input_boolean.turn_on
+    target:
       entity_id: input_boolean.eco_mode
-      state: "off"
-  action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.eco_mode
-    - service: persistent_notification.create
-      data:
-        message: Eco mode automatically by default enabled.
-        title: Eco Mode
-        notification_id: eco_mode
-- id: "1671624444203"
+  - service: persistent_notification.create
+    data:
+      message: Eco mode automatically by default enabled.
+      title: Eco Mode
+      notification_id: eco_mode
+- id: '1671624444203'
   alias: Core Config Updated
-  description: ""
+  description: ''
   trigger:
-    - platform: event
-      event_type: core_config_updated
+  - platform: event
+    event_type: core_config_updated
   condition: []
   action:
-    - service: persistent_notification.create
-      data:
-        message: Core config updated! 1
+  - service: persistent_notification.create
+    data:
+      message: Core config updated! 1
   mode: single
-- id: "1671879607072"
-  alias: "Systeem > No cloud "
-  description: ""
+- id: '1671879607072'
+  alias: 'Systeem > No cloud '
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - binary_sensor.remote_ui
-      from: "on"
-      to: "off"
-      id: Remote Off
-    - platform: state
-      entity_id:
-        - binary_sensor.remote_ui
-      from: "off"
-      to: "on"
-      id: Remote On
+  - platform: state
+    entity_id:
+    - binary_sensor.remote_ui
+    from: 'on'
+    to: 'off'
+    id: Remote Off
+  - platform: state
+    entity_id:
+    - binary_sensor.remote_ui
+    from: 'off'
+    to: 'on'
+    id: Remote On
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: Remote Off
-          sequence:
-            - service: notify.admin
-              data:
-                message: "Verbinding met Home Assistant Cloud is verbroken. "
-                title: Home Assistant Cloud
-            - service: persistent_notification.create
-              data:
-                message: "Verbinding met Home Assistant Cloud is verbroken. "
-                title: Home Assistant Cloud
-                notification_id: cloud_connected
-        - conditions:
-            - condition: trigger
-              id: Remote On
-          sequence:
-            - service: notify.admin
-              data:
-                message: "Verbinding met Home Assistant Cloud is hersteld. "
-            - service: persistent_notification.dismiss
-              data:
-                notification_id: cloud_connected
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Remote Off
+      sequence:
+      - service: notify.admin
+        data:
+          message: 'Verbinding met Home Assistant Cloud is verbroken. '
+          title: Home Assistant Cloud
+      - service: persistent_notification.create
+        data:
+          message: 'Verbinding met Home Assistant Cloud is verbroken. '
+          title: Home Assistant Cloud
+          notification_id: cloud_connected
+    - conditions:
+      - condition: trigger
+        id: Remote On
+      sequence:
+      - service: notify.admin
+        data:
+          message: 'Verbinding met Home Assistant Cloud is hersteld. '
+      - service: persistent_notification.dismiss
+        data:
+          notification_id: cloud_connected
   mode: single
-- id: "1672391012431"
+- id: '1672391012431'
   alias: Living > Lighting > Shortcut
   description: Snelknop bij de deur. 1x = aan, lang=uit, 2x = max
   use_blueprint:
@@ -1569,456 +1521,443 @@
       controller_entity: sensor.snelknop_woonkamer_action
       helper_last_controller_event: input_text.snelknop_woonkamer_last_controller_event
       action_button_short:
-        - service: scene.turn_on
-          target:
-            entity_id: scene.living_lighting_min
-          metadata: {}
+      - service: scene.turn_on
+        target:
+          entity_id: scene.living_lighting_min
+        metadata: {}
       action_button_long:
-        - service: scene.turn_on
-          target:
-            entity_id: scene.living_lighting_off
-          metadata: {}
+      - service: scene.turn_on
+        target:
+          entity_id: scene.living_lighting_off
+        metadata: {}
       action_button_double:
-        - service: scene.turn_on
-          data: {}
-          target:
-            entity_id:
-              - scene.living_lighting_max
+      - service: scene.turn_on
+        data: {}
+        target:
+          entity_id:
+          - scene.living_lighting_max
       button_double_press: true
       helper_double_press_delay: 1000
-- id: "1672486229153"
+- id: '1672486229153'
   alias: System > Network > WAN IP changed
   description: Notify when WAN IP changes
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.myip
+  - platform: state
+    entity_id:
+    - sensor.myip
   condition:
-    - condition: template
-      value_template:
-        "{{ trigger.to_state.state not in ['unknown', 'unavailable',
-        None] }}"
-    - condition: template
-      value_template:
-        "{{ trigger.from_state.state not in ['unknown', 'unavailable',
-        None] }}"
+  - condition: template
+    value_template: '{{ trigger.to_state.state not in [''unknown'', ''unavailable'',
+      None] }}'
+  - condition: template
+    value_template: '{{ trigger.from_state.state not in [''unknown'', ''unavailable'',
+      None] }}'
   action:
-    - service: notify.admin
-      data:
-        message: "WAN-IP is gewijzigd: {{ states('sensor.myip') }}"
-    - service: persistent_notification.create
-      data:
-        message: "WAN-IP is gewijzigd: {{ states('sensor.myip') }}"
-    - service: script.toot_engine
-      data:
-        message:
-          "Fijn! #VodafoneZiggo heeft mijn externe IP-adres gewijzigd. Gelukkig
-          heb ik geen externe toegang nodig tot interne systemen."
+  - service: notify.admin
+    data:
+      message: 'WAN-IP is gewijzigd: {{ states(''sensor.myip'') }}'
+  - service: persistent_notification.create
+    data:
+      message: 'WAN-IP is gewijzigd: {{ states(''sensor.myip'') }}'
+  - service: script.toot_engine
+    data:
+      message: 'Fijn! #VodafoneZiggo heeft mijn externe IP-adres gewijzigd. Gelukkig
+        heb ik geen externe toegang nodig tot interne systemen.'
   mode: single
-- id: "1672640475966"
+- id: '1672640475966'
   alias: System > System Log Event
-  description: ""
+  description: ''
   trigger:
-    - platform: event
-      event_type: system_log_event
-      event_data:
-        level: ERROR
-      id: Error
-    - platform: event
-      event_type: system_log_event
-      event_data:
-        level: WARNING
-      id: Warning
+  - platform: event
+    event_type: system_log_event
+    event_data:
+      level: ERROR
+    id: Error
+  - platform: event
+    event_type: system_log_event
+    event_data:
+      level: WARNING
+    id: Warning
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: Error
-          sequence:
-            - service: counter.increment
-              data: {}
-              target:
-                entity_id: counter.system_errors
-        - conditions:
-            - condition: trigger
-              id: Warning
-          sequence:
-            - service: counter.increment
-              data: {}
-              target:
-                entity_id: counter.system_warnings
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: Error
+      sequence:
+      - service: counter.increment
+        data: {}
+        target:
+          entity_id: counter.system_errors
+    - conditions:
+      - condition: trigger
+        id: Warning
+      sequence:
+      - service: counter.increment
+        data: {}
+        target:
+          entity_id: counter.system_warnings
   mode: queued
   max: 50
-- id: "1672669619955"
+- id: '1672669619955'
   alias: Office > Printer plug unavailable
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.samsung_ml_2850nd_node_status
-      from: alive
+  - platform: state
+    entity_id:
+    - sensor.samsung_ml_2850nd_node_status
+    from: alive
   condition: []
   action:
-    - service: notify.admin
-      data:
-        message: Schakelaar Printer is niet meer beschikbaar
-        title: Printer
+  - service: notify.admin
+    data:
+      message: Schakelaar Printer is niet meer beschikbaar
+      title: Printer
   mode: single
-- id: "1673082949081"
+- id: '1673082949081'
   alias: Calendar > Birthday Notification
   description: Spreek ieder uur een felicitatie uit op een verjaardag.
   trigger:
-    - platform: time_pattern
-      minutes: 3
+  - platform: time_pattern
+    minutes: 3
   condition:
-    - condition: state
-      entity_id: input_boolean.birthday
-      state: "on"
-    - condition: time
-      after: 07:00:00
-      before: "22:00:00"
+  - condition: state
+    entity_id: input_boolean.birthday
+    state: 'on'
+  - condition: time
+    after: 07:00:00
+    before: '22:00:00'
   action:
-    - service: script.sonos_say
-      data:
-        entity_id: media_player.living_speaker
-        message:
-          "{{  [\n  'Van harte gefeliciteerd met je verjaardag.',\n  'Er is er
-          een jarig, hoera, hoera. Dat kun je wel zien, dat ben jij.',\n  'Je bent een
-          jaartje ouder, maar ben je ook wijzer?',\n  'Alweer een jaartje erbij. Gefeliciteerd.',\n
-          \ 'Je wordt vanzelf ouder, maar je hoeft niet op te groeien.',\n  'Wie blaast
-          vandaag de kaarsjes uit?',\n  'Heb je al een wens gedaan?',\n  'Ik hoop dat
-          het komende jaar het mooiste van je leven wordt.',\n  'Veel gezondheid, het
-          komende jaar.',\n  'Denk nog eens terug aan het afgelopen jaar.',\n  'Kijk
-          niet achterom, maar hou je blik naar voren. Gefeliciteerd.',\n  'Vergeet niet
-          om iedereen vandaag te trakteren.',\n  'Van de 22 miljoen mensen op de wereld
-          die vandaag jarig zijn, sta jij zeker in mijn top-10.',\n  'Jij wordt niet
-          ouder, jij wordt alleen maar beter.',\n  'Vier je verjaardag vandaag, maar
-          vier iedere dag dat je gelukkig bent.',\n  'Je bent een jaar ouder geworden,
-          maar je bent geen steek veranderd. Dat is prima, want je bent perfect zoals
-          je bent.',\n  'Je bent bijzonder en ik hoop dat je deze dag rondloopt met
-          een glimlach op je gezicht. Gefeliciteerd.',\n  'Gefeliciteerd. Ik hoop dat
-          dit het begin is van je beste, meest bijzondere jaar ooit.',\n  'Ik wens je
-          een dag die net zo speciaal is als jijzelf bent. Gefeliciteerd.',\n  'Gefeliciteerd.
-          Nog een jaartje erbij en dan ben je perfect. Oh ja, dat zei ik vorig jaar
-          ook al.',\n  'Ik wens je veel geluk, gezondheid en liefde. Gefeliciteerd.',\n
-          \ 'Leef je leven alsof dit je laatste jaar is. Gefeliciteerd.',\n  'Vandaag
-          is niet het eind van weer een jaar, maar het begin van een nieuwe tijd. Gefeliciteerd.',\n
-          \ 'Vandaag geef ik je kusjes en knuffels. Gefeliciteerd.',\n  'Mijn felicitaties
-          zijn vandaag voor iemand die meer voor me betekent dan chololade.',\n  'Gefeliciteerd.
-          Daar moet op gedronken worden. Hi-ha-ho!',\n  'Hieper de piep. Hoera!',\n
-          \ 'Hoera. Hoera. Hoera.',\n  'Gefeliciteerd.'\n] | random }}\n"
+  - service: script.sonos_say
+    data:
+      entity_id: media_player.living_speaker
+      message: "{{  [\n  'Van harte gefeliciteerd met je verjaardag.',\n  'Er is er
+        een jarig, hoera, hoera. Dat kun je wel zien, dat ben jij.',\n  'Je bent een
+        jaartje ouder, maar ben je ook wijzer?',\n  'Alweer een jaartje erbij. Gefeliciteerd.',\n
+        \ 'Je wordt vanzelf ouder, maar je hoeft niet op te groeien.',\n  'Wie blaast
+        vandaag de kaarsjes uit?',\n  'Heb je al een wens gedaan?',\n  'Ik hoop dat
+        het komende jaar het mooiste van je leven wordt.',\n  'Veel gezondheid, het
+        komende jaar.',\n  'Denk nog eens terug aan het afgelopen jaar.',\n  'Kijk
+        niet achterom, maar hou je blik naar voren. Gefeliciteerd.',\n  'Vergeet niet
+        om iedereen vandaag te trakteren.',\n  'Van de 22 miljoen mensen op de wereld
+        die vandaag jarig zijn, sta jij zeker in mijn top-10.',\n  'Jij wordt niet
+        ouder, jij wordt alleen maar beter.',\n  'Vier je verjaardag vandaag, maar
+        vier iedere dag dat je gelukkig bent.',\n  'Je bent een jaar ouder geworden,
+        maar je bent geen steek veranderd. Dat is prima, want je bent perfect zoals
+        je bent.',\n  'Je bent bijzonder en ik hoop dat je deze dag rondloopt met
+        een glimlach op je gezicht. Gefeliciteerd.',\n  'Gefeliciteerd. Ik hoop dat
+        dit het begin is van je beste, meest bijzondere jaar ooit.',\n  'Ik wens je
+        een dag die net zo speciaal is als jijzelf bent. Gefeliciteerd.',\n  'Gefeliciteerd.
+        Nog een jaartje erbij en dan ben je perfect. Oh ja, dat zei ik vorig jaar
+        ook al.',\n  'Ik wens je veel geluk, gezondheid en liefde. Gefeliciteerd.',\n
+        \ 'Leef je leven alsof dit je laatste jaar is. Gefeliciteerd.',\n  'Vandaag
+        is niet het eind van weer een jaar, maar het begin van een nieuwe tijd. Gefeliciteerd.',\n
+        \ 'Vandaag geef ik je kusjes en knuffels. Gefeliciteerd.',\n  'Mijn felicitaties
+        zijn vandaag voor iemand die meer voor me betekent dan chololade.',\n  'Gefeliciteerd.
+        Daar moet op gedronken worden. Hi-ha-ho!',\n  'Hieper de piep. Hoera!',\n
+        \ 'Hoera. Hoera. Hoera.',\n  'Gefeliciteerd.'\n] | random }}\n"
   mode: queued
-- id: "1673099515788"
+- id: '1673099515788'
   alias: Outside > Safety > Flood Alert
-  description: ""
+  description: ''
   trigger:
-    - platform: geo_location
-      source: gdacs
-      zone: zone.overstroming
-      event: enter
+  - platform: geo_location
+    source: gdacs
+    zone: zone.overstroming
+    event: enter
   condition:
-    - condition: template
-      value_template: "{{ trigger.to_state.attributes.type == 'Flood' }}"
+  - condition: template
+    value_template: '{{ trigger.to_state.attributes.type == ''Flood'' }}'
   action:
-    - service: persistent_notification.create
-      data:
-        message:
-          "{{ trigger.to_state.name }} - {{ trigger.to_state.attributes.status
-          }}"
-        title: Overstroming Alert
-- id: "1679143739246"
+  - service: persistent_notification.create
+    data:
+      message: '{{ trigger.to_state.name }} - {{ trigger.to_state.attributes.status
+        }}'
+      title: Overstroming Alert
+- id: '1679143739246'
   alias: Home > Disable do not disturb mode
   description: Disable do not disturb when HA is started and at midnight.
   trigger:
-    - platform: homeassistant
-      event: start
-    - platform: time
-      at: 00:00:00
+  - platform: homeassistant
+    event: start
+  - platform: time
+    at: 00:00:00
   condition: []
   action:
-    - service: input_boolean.turn_off
-      data: {}
-      target:
-        entity_id: input_boolean.do_not_disturb
+  - service: input_boolean.turn_off
+    data: {}
+    target:
+      entity_id: input_boolean.do_not_disturb
   mode: single
-- id: "1679302451294"
+- id: '1679302451294'
   alias: Keuken > Koelkast uitgeschakeld
-  description: ""
+  description: ''
   trigger:
-    - platform: device
-      type: turned_off
-      device_id: fc39d2c003d6982efb53a3ddefa678fb
-      entity_id: switch.refrigerator
-      domain: switch
+  - platform: device
+    type: turned_off
+    device_id: fc39d2c003d6982efb53a3ddefa678fb
+    entity_id: switch.refrigerator
+    domain: switch
   condition: []
   action:
-    - service: notify.robert
-      data:
-        message: Koelkast uitgeschakeld.
+  - service: notify.robert
+    data:
+      message: Koelkast uitgeschakeld.
   mode: single
 - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
   alias: Living > Lighting > Lights off during vacations
-  description:
-    Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
+  description: Schakel de verlichting tijdens vakanties automatisch uit tussen 23:00
     en 23:30.
   trigger:
-    - platform: time
-      at: "23:00:00"
+  - platform: time
+    at: '23:00:00'
   condition:
-    - condition: state
-      entity_id: input_boolean.occupancy_vacation
-      state: "on"
+  - condition: state
+    entity_id: input_boolean.occupancy_vacation
+    state: 'on'
   action:
-    - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
-    - service: light.turn_off
-      entity_id: light.living
-    - service: notify.admin
-      data:
-        title: Vakantie
-        message: Verlichting automatisch uitgeschakeld.
+  - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
+  - service: light.turn_off
+    entity_id: light.living
+  - service: notify.admin
+    data:
+      title: Vakantie
+      message: Verlichting automatisch uitgeschakeld.
   mode: single
 - alias: System > Persistente meldingen doorsturen naar beheerder
-  description:
-    Forward persistent notifications to the system administrator.  If it
+  description: Forward persistent notifications to the system administrator.  If it
     was a bad login attempt, then also include a link to check the IP address.
   id: 7319632e-f122-4a54-a81c-569d5601446a
   mode: single
   initial_state: false
   trigger:
-    - event_data:
-        domain: persistent_notification
-        service: create
-      event_type: call_service
-      platform: event
+  - event_data:
+      domain: persistent_notification
+      service: create
+    event_type: call_service
+    platform: event
   action:
-    - service: notify.admin
-      data:
-        message:
-          "{% set message = trigger.event.data.service_data.message %} {% if
-          'login attempt' in message|lower %}\n  {{ message }}:\n  http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\n
-          \   message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}\n"
+  - service: notify.admin
+    data:
+      message: "{% set message = trigger.event.data.service_data.message %} {% if
+        'login attempt' in message|lower %}\n  {{ message }}:\n  http://www.ip-tracker.org/locator/ip-lookup.php?ip={{\n
+        \   message.split('from ')[1] }}\n{% else %}\n  {{ message }}\n{% endif %}\n"
 - alias: Presence - Robert bijna thuis
-  description: ""
-  id: "1661359954658"
+  description: ''
+  id: '1661359954658'
   mode: single
   trigger:
-    - platform: numeric_state
-      entity_id: proximity.robert_from_home
-      below: "500"
+  - platform: numeric_state
+    entity_id: proximity.robert_from_home
+    below: '500'
   condition:
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: person.robert
-          state: not_home
-        - condition: state
-          entity_id: proximity.robert_from_home
-          attribute: dir_of_travel
-          state: towards
-        - condition: state
-          entity_id: input_boolean.do_not_disturb
-          state: "off"
-  action:
-    - service: notify.robert
-      data:
-        message:
-          Robert is minder dan {{ states('proximity.robert_from_home') }} meter
-          van huis. Hij is er bijna.
-- alias: Time to Leave for Robert
-  description: Notify when it's time to leave for work.
-  id: "1664610107813"
-  mode: single
-  trigger:
-    - platform: time
-      at: 07:50:00
-  condition:
-    - condition: state
-      entity_id: binary_sensor.workday
-      state: "on"
+  - condition: and
+    conditions:
     - condition: state
       entity_id: person.robert
-      state: home
+      state: not_home
+    - condition: state
+      entity_id: proximity.robert_from_home
+      attribute: dir_of_travel
+      state: towards
+    - condition: state
+      entity_id: input_boolean.do_not_disturb
+      state: 'off'
   action:
-    - service: script.time_to_leave_for_robert
-      data: {}
+  - service: notify.robert
+    data:
+      message: Robert is minder dan {{ states('proximity.robert_from_home') }} meter
+        van huis. Hij is er bijna.
+- alias: Time to Leave for Robert
+  description: Notify when it's time to leave for work.
+  id: '1664610107813'
+  mode: single
+  trigger:
+  - platform: time
+    at: 07:50:00
+  condition:
+  - condition: state
+    entity_id: binary_sensor.workday
+    state: 'on'
+  - condition: state
+    entity_id: person.robert
+    state: home
+  action:
+  - service: script.time_to_leave_for_robert
+    data: {}
 - id: 8d8468fb-3baf-41be-88ee-9a3a71910909
-  alias: "Lighting: Garden On"
+  alias: 'Lighting: Garden On'
   description: Turn on the garden lights at sunset
   trigger:
-    - platform: sun
-      event: sunset
+  - platform: sun
+    event: sunset
   action:
-    - service: light.turn_on
-      data:
-        brightness_pct: 70
-        transition: 20
-      target:
-        device_id: c33e67f585956e6f98937073162f6bfd
+  - service: light.turn_on
+    data:
+      brightness_pct: 70
+      transition: 20
+    target:
+      device_id: c33e67f585956e6f98937073162f6bfd
   mode: single
 - id: 61ddaf89-65e3-4853-b80d-e0abea5ec53c
-  alias: "Lighting: Garden Off"
+  alias: 'Lighting: Garden Off'
   description: Turn off the garden lights at sunrise
   trigger:
-    - platform: sun
-      event: sunrise
-      offset: -01:00:00
+  - platform: sun
+    event: sunrise
+    offset: -01:00:00
   action:
-    - service: light.turn_off
-      data:
-        transition: 20
-      target:
-        device_id: c33e67f585956e6f98937073162f6bfd
+  - service: light.turn_off
+    data:
+      transition: 20
+    target:
+      device_id: c33e67f585956e6f98937073162f6bfd
   mode: single
-- id: "1658943860235"
-  alias: "Woonkamer: Inschakelen TV"
-  description:
-    Door deze automatisering te activeren, verschijnt de power on knop
+- id: '1658943860235'
+  alias: 'Woonkamer: Inschakelen TV'
+  description: Door deze automatisering te activeren, verschijnt de power on knop
     in de mediaspeler in het dashboard.
   use_blueprint:
     path: cvroque/webostv_turn_on.yaml
     input:
       webostv: media_player.living_tv
       webostv_mac: 04:4E:AF:13:F9:7C
-- id: "1684594109974"
-  alias: Bike Charger
-  description: ""
+- id: '1684594109974'
+  alias: Appliances > Bike Charger
+  description: ''
   trigger:
-    - platform: device
-      type: turned_on
-      device_id: fc8175d314fecd80e9526220b04ae4b7
-      entity_id: switch.shelly_1
-      domain: switch
-      id: power_on
-    - type: power
-      platform: device
-      device_id: fc8175d314fecd80e9526220b04ae4b7
-      entity_id: sensor.shelly_1_power
-      domain: sensor
-      below: 1
-      for:
-        hours: 0
-        minutes: 1
-        seconds: 0
-      id: battery-charged
-      alias: "Fietslader: vermogen onder 1 W"
+  - platform: device
+    type: turned_on
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: switch.shelly_1
+    domain: switch
+    id: charger-on
+  - type: power
+    platform: device
+    device_id: fc8175d314fecd80e9526220b04ae4b7
+    entity_id: sensor.shelly_1_power
+    domain: sensor
+    below: 1
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+    id: charger-finished
+    alias: 'Fietslader: vermogen onder 1 W'
   condition: []
   action:
-    - choose:
-        - conditions:
-            - condition: trigger
-              id: power_on
-          sequence:
-            - service: input_number.set_value
-              target:
-                entity_id: input_number.bike_charger_start_energy_number
-              data:
-                value: "{{ states('sensor.shelly_1_energy') | float(0) }}"
-        - conditions:
-            - condition: trigger
-              id: battery-charged
-          sequence:
-            - if:
-                - condition: state
-                  entity_id: input_boolean.eco_mode
-                  state: "on"
-              then:
-                - type: turn_off
-                  device_id: fc8175d314fecd80e9526220b04ae4b7
-                  entity_id: switch.shelly_1
-                  domain: switch
-            - service: notify.parents
-              data:
-                message: "De fietslader is klaar. \U0001F6B2\U0001F50B⚡️\U0001F50C"
-            - service: script.notify_living
-              data:
-                icon: /config/www/img/bike-charger.png
-                message: De fietslader is klaar.
-            - service: script.toot_engine
-              data:
-                who: mastodon
-                message:
-                  "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.', \"Dat heeft even geduurd.\",
-                  \"Dat duurde lang.\", \"Er kwam geen eind aan.\", \"Nou zeg!\"] | random
-                  }} De fietsaccu is weer opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️',
-                  '\U0001F50C'] | random }}"
+  - choose:
+    - conditions:
+      - condition: trigger
+        id: charger-on
+      sequence:
+      - service: input_number.set_value
+        target:
+          entity_id: input_number.bike_charger_start_energy_number
+        data:
+          value: '{{ states(''sensor.shelly_1_energy'') | float(0) }}'
+    - conditions:
+      - condition: trigger
+        id: charger-finished
+      sequence:
+      - if:
+        - condition: state
+          entity_id: input_boolean.eco_mode
+          state: 'on'
+        then:
+        - type: turn_off
+          device_id: fc8175d314fecd80e9526220b04ae4b7
+          entity_id: switch.shelly_1
+          domain: switch
+      - service: notify.parents
+        data:
+          message: "De fietslader is klaar. \U0001F6B2\U0001F50B⚡️\U0001F50C"
+      - service: script.notify_living
+        data:
+          icon: /config/www/img/bike-charger.png
+          message: De fietslader is klaar.
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.', \"Dat heeft even geduurd.\",
+            \"Dat duurde lang.\", \"Er kwam geen eind aan.\", \"Nou zeg!\"] | random
+            }} De fietsaccu is weer opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️',
+            '\U0001F50C'] | random }}"
   mode: single
-- id: "1664780304702"
+- id: '1664780304702'
   alias: Outside Brightness Notification
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - sun.sun
-      to: above_horizon
-    - platform: state
-      entity_id:
-        - sun.sun
-      to: below_horizon
-    - platform: numeric_state
-      entity_id: sensor.sun_elevation
-      below: 1
-    - platform: numeric_state
-      entity_id: sensor.sun_elevation
-      above: 1
-    - platform: numeric_state
-      entity_id: sensor.outside_brightness
-      above: 10
-    - platform: numeric_state
-      entity_id: sensor.outside_brightness
-      below: 10
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: above_horizon
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: below_horizon
+  - platform: numeric_state
+    entity_id: sensor.sun_elevation
+    below: 1
+  - platform: numeric_state
+    entity_id: sensor.sun_elevation
+    above: 1
+  - platform: numeric_state
+    entity_id: sensor.outside_brightness
+    above: 10
+  - platform: numeric_state
+    entity_id: sensor.outside_brightness
+    below: 10
   condition: []
   action:
-    - service: persistent_notification.create
-      data:
-        message: "Sun: {{ states('sun.sun') }}
+  - service: persistent_notification.create
+    data:
+      message: 'Sun: {{ states(''sun.sun'') }}
 
-          Elevation: {{ states('sensor.sun_elevation') }}gr.
+        Elevation: {{ states(''sensor.sun_elevation'') }}gr.
 
-          Outside brightness: {{ states('sensor.outside_brightness') }}%.
+        Outside brightness: {{ states(''sensor.outside_brightness'') }}%.
 
-          Clouds: {{ states('sensor.tomorrow_io_home_cloud_cover') }}%.
+        Clouds: {{ states(''sensor.tomorrow_io_home_cloud_cover'') }}%.
 
-          Irradiance: {{ states('sensor.buinradar_irradiance') }}%.
+        Irradiance: {{ states(''sensor.buinradar_irradiance'') }}%.
 
-          "
+        '
   mode: single
-- id: "1685117427013"
+- id: '1685117427013'
   alias: System > HA Core update beschikbaar
-  description: ""
+  description: ''
   trigger:
-    - platform: device
-      type: turned_on
-      device_id: d4812471e10df4af50e389bca6493332
-      entity_id: update.home_assistant_core_update
-      domain: update
+  - platform: device
+    type: turned_on
+    device_id: d4812471e10df4af50e389bca6493332
+    entity_id: update.home_assistant_core_update
+    domain: update
   condition: []
   action:
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        visibility: public
-        message:
-          "Er is een update beschikbaar voor Home Assistant: {{ state_attr('update.home_assistant_core_update',
-          'latest_version') }}\n#HomeAssistant \n{{ state_attr('update.home_assistant_core_update',
-          'release_url') }}"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      visibility: public
+      message: "Er is een update beschikbaar voor Home Assistant: {{ state_attr('update.home_assistant_core_update',
+        'latest_version') }}\n#HomeAssistant \n{{ state_attr('update.home_assistant_core_update',
+        'release_url') }}"
   mode: single
 - id: 9aab0282-d940-4d68-b6b4-c3f5b5df3956
   alias: Boompollen
-  description: ""
+  description: ''
   trigger:
-    - platform: state
-      entity_id:
-        - sensor.tomorrow_io_home_tree_pollen_index
+  - platform: state
+    entity_id:
+    - sensor.tomorrow_io_home_tree_pollen_index
   condition: []
   action:
-    - service: script.toot_engine
-      data:
-        who: mastodon
-        message:
-          "{% set from = \"low, medium, none, very_high, very_low\".split(\",
-          \") %} {% set to = \"laag, gemiddeld, afwezig, zeer hoog, zeer laag\".split(\",
-          \") %} Op dit moment is de kans op klachten door hooikoorts door bomen lokaal
-          {{ to[(from.index( states('sensor.tomorrow_io_home_tree_pollen_index') )|int)]
-          }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "{% set from = \"low, medium, none, very_high, very_low\".split(\",
+        \") %} {% set to = \"laag, gemiddeld, afwezig, zeer hoog, zeer laag\".split(\",
+        \") %} Op dit moment is de kans op klachten door hooikoorts door bomen lokaal
+        {{ to[(from.index( states('sensor.tomorrow_io_home_tree_pollen_index') )|int)]
+        }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
   mode: single
