@@ -1,8 +1,8 @@
 ---
-# Save energy meter when bike charger starts running.
+# Save energy meter when bike charger running starts.
 - trigger:
     - platform: state
-      entity_id: switch.shelly_1
+      entity_id: binary_sensor.bike_charger_running
       from:
         - "off"
       to:

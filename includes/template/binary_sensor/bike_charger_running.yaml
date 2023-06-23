@@ -1,0 +1,11 @@
+---
+# Appliance is on when power is detected
+- binary_sensor:
+    - name: "Bike Charger Running"
+      unique_id: "cbb8b679-8322-4349-86c8-405241e208cf"
+      state: "{{ (states('sensor.shelly_1_power') | float(0)) > 1 }}"
+      delay_on:
+        seconds: 0
+      delay_off:
+        seconds: 60
+      icon: "mdi:bicycle{{ '-electric' if (this.state == 'on') }}"
