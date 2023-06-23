@@ -248,34 +248,20 @@
       starting_threshold: 4
       finishing_threshold: 4
       actions:
-      - variables:
-          end_time: '{{ as_timestamp(now()) }}'
-          end_energy: '{{ states(energy_sensor) }}'
-      - variables:
-          total_time: '{{ (end_time - start_time) }}'
-          total_energy: '{{ end_energy - start_energy }}'
-      - variables:
-          minutes: '{{ (total_time / 60) | round(0) }}'
-          total_energy_rounded: '{{ (total_energy) | round(2) }}'
-          cost: '{{ ( states(''price_sensor'') | float(0) * total_energy) | round(2)
-            }}'
       - service: notify.robert
         data:
-          message: "De wasmachine is klaar na {{ minutes }} minuten  en heeft {{ cost
-            }} gekost voor een verbruik van {{ total_energy_rounded }} kWh. \U0001F45A\U0001F455\U0001F4A6\n"
+          message: "De wasmachine is klaar. \U0001F45A\U0001F455\U0001F4A6\n"
       - service: notify.living_tv
         data:
-          message: Wasmachine is klaar.
+          message: De wasmachine is klaar.
           data:
             icon: /config/www/img/washing-machine.png
       - service: script.sonos_say
         data:
           entity_id: media_player.living_speaker
           message: De wasmachine is klaar.
-      pre_actions:
-      - variables:
-          start_time: '{{ as_timestamp(now()) }}'
-          start_energy: '{{ states(energy_sensor) }}'
+          volume_percent: 15
+      pre_actions: []
       wait_timeout:
         hours: 5
         minutes: 0
@@ -311,6 +297,7 @@
         data:
           entity_id: media_player.living_speaker
           message: De wasdroger is klaar.
+          volume_percent: 15
       - service: notify.living_tv
         data:
           message: De wasdroger is klaar.
