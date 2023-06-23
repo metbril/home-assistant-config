@@ -80,13 +80,8 @@ system_log:
 
 tts:
   - platform: google_translate
-    service_name: google_translate_say
-    # cache: true
-    # cache_dir: /config/tts
-    time_memory: 3600
-    # http protocol doesn't work, ssl required for sonos
-    base_url: !secret tts_base_url
-    language: "nl"
+    language: nl
+    tld: nl
 
 # WOL is needed for (switching on) WebOS TV
 wake_on_lan:
