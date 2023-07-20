@@ -34,6 +34,10 @@ devices:
     friendly_name: Pilskott
   '0x001788010804ffa1':
     friendly_name: Office Printer
+  '0xbc026efffe8ad6d8':
+    friendly_name: Luchtkwaliteit Woonkamer
+    temperature_precision: 1
+    humidity_precision: 1
 advanced:
   log_level: info
 groups:
