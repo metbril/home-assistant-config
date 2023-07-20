@@ -1827,7 +1827,7 @@
     below: 1
     for:
       hours: 0
-      minutes: 1
+      minutes: 3
       seconds: 0
     id: charger-finished
     alias: 'Fietslader: vermogen onder 1 W'
@@ -1944,7 +1944,7 @@
       who: mastodon
       message: "{% set from = \"low, medium, none, very_high, very_low\".split(\",
         \") %} {% set to = \"laag, gemiddeld, afwezig, zeer hoog, zeer laag\".split(\",
-        \") %} Op dit moment is de kans op klachten door hooikoorts door bomen lokaal
-        {{ to[(from.index( states('sensor.tomorrow_io_home_tree_pollen_index') )|int)]
-        }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
+        \") %} Op dit moment is de kans op hooikoortsklachten door bomen hier in de
+        buurt {{ to[(from.index( states('sensor.tomorrow_io_home_tree_pollen_index')
+        )|int)] }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
   mode: single
