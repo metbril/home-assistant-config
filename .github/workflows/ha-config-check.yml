@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Run Frenk's yamllint
         uses: frenck/action-yamllint@v1.4.1
 
@@ -27,7 +27,7 @@ jobs:
       current_version: ${{ steps.currentver.outputs.current_version }}
     steps:
       - name: Get config from GitHub
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Get Installed Version from .HA_VERSION
         id: currentver
         run: |
@@ -44,7 +44,7 @@ jobs:
         version: ["${{needs.ha_version.outputs.current_version}}", "stable", "beta", "dev"]
     steps:
       - name: 📥 Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 📄 Create fake empty files
         run: |
