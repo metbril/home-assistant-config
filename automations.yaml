@@ -332,7 +332,7 @@
   trigger:
   - platform: state
     entity_id:
-    - switch.adguard_filtering
+    - switch.adguard_protection
     from: 'on'
     to: 'off'
     for:
@@ -352,8 +352,8 @@
   - service: script.toot_engine
     data:
       who: mastodon
-      message: 'Iemand had het blokkeren van advertenties even uitgezet, maar ik heb
-        het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant'
+      message: "\U0001F6E1️ Iemand had het blokkeren van advertenties even uitgezet,
+        maar ik heb het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant"
   mode: single
 - id: '1662547518457'
   alias: 'Office: Printer powered notification'
@@ -1706,10 +1706,9 @@
   - delay: '{{ "0:" ~ ((range(0,29)|random)|int) ~ ":0" }}'
   - service: light.turn_off
     entity_id: light.living
-  - service: notify.admin
+  - service: persistent_notification.create
     data:
-      title: Vakantie
-      message: Verlichting automatisch uitgeschakeld.
+      message: Verlichting automatisch uitgeschakeld om {{ states('sensor.time') }}.
   mode: single
 - alias: System > Persistente meldingen doorsturen naar beheerder
   description: Forward persistent notifications to the system administrator.  If it

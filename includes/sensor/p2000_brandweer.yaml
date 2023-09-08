@@ -7,7 +7,7 @@
   name: P2000 Brandweer           # Determines Sensor name
   regios: 17                      # rotterdam rijnmond
   disciplines: Brandweerdiensten  # brandweer
-  radius: 1000                    # meter, default 5000; from home
-  nolocation: False               # inlucde without location, default True
-  scan_interval: 30               # seconden, default 30
+  radius: 250                     # meter, default 5000; from home
+  nolocation: False               # include without location, default True
+  scan_interval: 60               # seconden, default 30
   icon: mdi:fire-truck
