@@ -3,26 +3,30 @@
 - resource: https://www.eneco.nl/duurzame-energie/modelcontract/
   scan_interval: 28800
   sensor:
-    - unique_id: eneco_modelcontract_energy_rate_normal
-      name: Eneco Modelcontract Energy Rate Normal
+    - unique_id: eneco_modelcontract_energy_rate_tarif_2
+      name: Eneco Modelcontract Energy Rate Tarif 2 (Normaal)
       select: "tbody > tr > td:nth-child(2)"
-      unit_of_measurement: "€/kWh"
+      unit_of_measurement: "EUR/kWh"
+      icon: mdi:currency-eur
       value_template: "{{ value.split('€')[1].replace(',','.')|float(0)|round(5) }}"
 
     - unique_id: eneco_modelcontract_energy_rate_tarif_1
-      name: Eneco Modelcontract Energy Rate Tarif 1
+      name: Eneco Modelcontract Energy Rate Tarif 1 (Laag)
       select: "tbody > tr:nth-child(2) > td:nth-child(2)"
-      unit_of_measurement: "€/kWh"
+      unit_of_measurement: "EUR/kWh"
+      icon: mdi:currency-eur
       value_template: "{{ value.split('€')[1].replace(',','.')|float(0)|round(5) }}"
 
-    - unique_id: eneco_modelcontract_energy_rate_tarif_2
-      name: Eneco Modelcontract Energy Rate Tarif 2
+    - unique_id: eneco_modelcontract_energy_rate_single
+      name: Eneco Modelcontract Energy Rate Single
       select: "tbody > tr:nth-child(3) > td:nth-child(2)"
-      unit_of_measurement: "€/kWh"
+      unit_of_measurement: "EUR/kWh"
+      icon: mdi:currency-eur
       value_template: "{{ value.split('€')[1].replace(',','.')|float(0)|round(5) }}"
 
     - unique_id: eneco_modelcontract_gas_rate
       name: Eneco Modelcontract Gas Rate
       select: "tbody > tr:nth-child(4) > td:nth-child(2)"
-      unit_of_measurement: "€/m³"
+      unit_of_measurement: "EUR/m³"
+      icon: mdi:currency-eur
       value_template: "{{ value.split('€')[1].replace(',','.')|float(0)|round(5) }}"
