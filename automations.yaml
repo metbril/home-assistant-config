@@ -1135,7 +1135,7 @@
       - service: light.turn_on
         data: {}
         target:
-          entity_id: light.voorraadkast
+          entity_id: light.pantry_light
     - conditions:
       - condition: trigger
         id: No motion
@@ -1143,7 +1143,7 @@
       - service: light.turn_off
         data: {}
         target:
-          entity_id: light.voorraadkast
+          entity_id: light.pantry_light
   mode: single
 - id: '1667754651770'
   alias: Adviesprijs Euro95 gewijzigd
