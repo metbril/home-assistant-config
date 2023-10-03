@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Pentecost Countdown
-  unique_id: 5ebacd85-cbd6-4bc2-8a14-809b6e39813d
+  # unique_id: 5ebacd85-cbd6-4bc2-8a14-809b6e39813d
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI

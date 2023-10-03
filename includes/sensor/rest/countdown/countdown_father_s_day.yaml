@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Father's Day Countdown
-  unique_id: 99370271-1910-44ce-af80-72e7e486e084
+  # unique_id: 99370271-1910-44ce-af80-72e7e486e084
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI

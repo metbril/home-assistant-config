@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Christmas Countdown
-  unique_id: 01602758-5e35-4f3a-9ac5-f951a00ff277
+  # unique_id: 01602758-5e35-4f3a-9ac5-f951a00ff277
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI

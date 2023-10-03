@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Sinterklaas Countdown
-  unique_id: b08ad735-21d7-4f90-90ae-88c009ff44a3
+  # unique_id: b08ad735-21d7-4f90-90ae-88c009ff44a3
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI

@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Easter Countdown
-  unique_id: 952314fb-d315-4a1c-94b0-123483169e9f
+  # unique_id: 952314fb-d315-4a1c-94b0-123483169e9f
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI

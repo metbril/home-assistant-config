@@ -7,7 +7,7 @@
 ##
 - platform: rest
   name: Mother's Day Countdown
-  unique_id: 4dda2b4c-2569-47d4-a1df-777ec64284bc
+  # unique_id: 4dda2b4c-2569-47d4-a1df-777ec64284bc
   unit_of_measurement: d
   icon: mdi:progress-clock
   # device_class: duration  ## shows as hours in UI
