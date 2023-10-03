@@ -1,0 +1,11 @@
+- platform: trend
+  sensors:
+    adviesprijs_euro95:
+      entity_id: sensor.adviesprijs_euro95
+      friendly_name: Adviesprijs Euro95
+
+    coinbase_eth_exchange_rate:
+      entity_id: sensor.coinbase_eth_exchange_rate
+      friendly_name: Coinbase ETH Exchange Rate
+      sample_duration: 3600
+      max_samples: 60
