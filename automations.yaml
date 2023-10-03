@@ -146,6 +146,8 @@
     - input_select.sonos_favorites
   - platform: homeassistant
     event: start
+  - platform: time_pattern
+    minutes: /1
   condition: []
   action:
   - variables:
@@ -971,7 +973,10 @@
   action:
   - service: notify.family
     data:
-      message: "\U0001F5A8 Printer is beschikbaar om te gebruiken."
+      message: "\U0001F5A8 Printer kan worden gebruikt.."
+  - service: notify.persistent_notification
+    data:
+      message: "\U0001F5A8 Printer kan worden gebruikt.."
   mode: single
 - id: 79b3abe8-e220-4563-a55b-74bd3b850a3b
   alias: Living > Lighting > Automated
@@ -1054,7 +1059,7 @@
           finish_energy: '{{ states(''sensor.washing_machine_finish_energy'') | float(0)
             }}'
           start_time: '{{ states.sensor.washing_machine_start_energy.last_changed
-            | as_timestamp }}'
+            | as_timestamp | float(0) }}'
           finish_time: '{{ states.sensor.washing_machine_finish_energy.last_changed
             | as_timestamp }}'
           price: '{{ states(''sensor.energy_consumption_tarif_2'') | float(0) }}'
@@ -1422,9 +1427,8 @@
       title: Huisbezetting
       notification_id: auto_occupancy
 - id: f19127bd-aa93-44fe-aac9-0b2c4a626dca
-  alias: Enable eco mode by default
-  initial_state: true
-  mode: single
+  alias: System > Enable eco mode by default
+  description: ''
   trigger:
   - platform: homeassistant
     event: start
@@ -1438,11 +1442,14 @@
   - service: input_boolean.turn_on
     target:
       entity_id: input_boolean.eco_mode
+    data: {}
   - service: persistent_notification.create
     data:
       message: Eco mode automatically by default enabled.
       title: Eco Mode
       notification_id: eco_mode
+  initial_state: true
+  mode: single
 - id: '1671624444203'
   alias: Core Config Updated
   description: ''
@@ -1586,21 +1593,6 @@
           entity_id: counter.system_warnings
   mode: queued
   max: 50
-- id: '1672669619955'
-  alias: Office > Printer plug unavailable
-  description: ''
-  trigger:
-  - platform: state
-    entity_id:
-    - sensor.samsung_ml_2850nd_node_status
-    from: alive
-  condition: []
-  action:
-  - service: notify.admin
-    data:
-      message: Schakelaar Printer is niet meer beschikbaar
-      title: Printer
-  mode: single
 - id: '1673082949081'
   alias: Calendar > Birthday Notification
   description: Spreek ieder uur een felicitatie uit op een verjaardag.
@@ -1689,7 +1681,7 @@
   action:
   - service: notify.robert
     data:
-      message: Koelkast uitgeschakeld.
+      message: Koelkast is uitgeschakeld.
   mode: single
 - id: b17bc209-ef49-4199-bb5c-fae6c3f428a4
   alias: Living > Lighting > Lights off during vacations
@@ -1809,51 +1801,55 @@
       webostv: media_player.living_tv
       webostv_mac: 04:4E:AF:13:F9:7C
 - id: '1684594109974'
-  alias: Appliances > Bike Charger
+  alias: Appliances > Bike Charger Management
   description: ''
   trigger:
-  - platform: device
-    type: turned_on
-    device_id: fc8175d314fecd80e9526220b04ae4b7
-    entity_id: switch.shelly_1
-    domain: switch
-    id: charger-on
-  - type: power
-    platform: device
-    device_id: fc8175d314fecd80e9526220b04ae4b7
-    entity_id: sensor.shelly_1_power
-    domain: sensor
-    below: 1
+  - platform: state
+    entity_id:
+    - binary_sensor.bike_charger
+    to: 'on'
+    from: 'off'
+    id: Charger Started
+  - platform: state
+    entity_id:
+    - binary_sensor.bike_charger
+    to: 'off'
     for:
       hours: 0
-      minutes: 3
+      minutes: 1
       seconds: 0
-    id: charger-finished
-    alias: 'Fietslader: vermogen onder 1 W'
+    id: Charger Finished
   condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
-        id: charger-on
+        id:
+        - Charger Started
       sequence:
       - service: input_number.set_value
         target:
-          entity_id: input_number.bike_charger_start_energy_number
+          entity_id: input_number.bike_charger_start_energy
         data:
-          value: '{{ states(''sensor.shelly_1_energy'') | float(0) }}'
+          value: '{{ states(''sensor.bike_charger_energy'') | float(0) }}'
     - conditions:
       - condition: trigger
-        id: charger-finished
+        id:
+        - Charger Finished
       sequence:
       - if:
         - condition: state
           entity_id: input_boolean.eco_mode
           state: 'on'
+        - condition: device
+          type: is_on
+          device_id: fc8175d314fecd80e9526220b04ae4b7
+          entity_id: 0bf0b05b7ad2842d1f82e6c6b0aeeab2
+          domain: switch
         then:
         - type: turn_off
           device_id: fc8175d314fecd80e9526220b04ae4b7
-          entity_id: switch.shelly_1
+          entity_id: switch.bike_charger
           domain: switch
       - service: notify.parents
         data:
@@ -1911,7 +1907,7 @@
         '
   mode: single
 - id: '1685117427013'
-  alias: System > HA Core update beschikbaar
+  alias: Toot > HA Core update beschikbaar
   description: ''
   trigger:
   - platform: device
@@ -1936,14 +1932,75 @@
   - platform: state
     entity_id:
     - sensor.tomorrow_io_home_tree_pollen_index
-  condition: []
+  - platform: state
+    entity_id:
+    - sensor.tomorrow_io_home_weed_pollen_index
+  - platform: state
+    entity_id:
+    - sensor.tomorrow_io_home_grass_pollen_index
+  condition:
+  - condition: template
+    value_template: '{{ states.trigger.to_state not in ["none", "very_low", "low",
+      "unknown", "unavailable"] }}'
   action:
   - service: script.toot_engine
     data:
       who: mastodon
-      message: "{% set from = \"low, medium, none, very_high, very_low\".split(\",
-        \") %} {% set to = \"laag, gemiddeld, afwezig, zeer hoog, zeer laag\".split(\",
-        \") %} Op dit moment is de kans op hooikoortsklachten door bomen hier in de
-        buurt {{ to[(from.index( states('sensor.tomorrow_io_home_tree_pollen_index')
-        )|int)] }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
+      message: "{% set pollen = trigger.to_state.name.split()[4].replace('Grass',
+        'grassen').replace('Weed', 'kruiden').replace('Tree', 'bomen') %} {% set from
+        = \"low, medium, none, very_high, very_low\".split(\", \") %} {% set to =
+        \"laag, gemiddeld, afwezig, zeer hoog, zeer laag\".split(\", \") %} Op dit
+        moment is de kans op hooikoortsklachten door {{ pollen }} hier in de buurt
+        {{ to[(from.index(states('sensor.tomorrow_io_home_tree_pollen_index')) | int)]
+        }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
+  mode: single
+- id: '1696137037190'
+  alias: Admin > Blitzwolf uitgeschakeld
+  description: ''
+  trigger:
+  - platform: device
+    type: turned_off
+    device_id: 0bf213ed9a0d9cd1648485d2951c5fa6
+    entity_id: ed6c7a9faa58ee056383ddcdc065061c
+    domain: switch
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: Blitzwolf uitgeschakeld.
+  mode: single
+- id: '1696254669833'
+  alias: Office > Force preset to none
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - climate.office
+    attribute: preset_mode
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 1
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: climate.office
+      attribute: preset_mode
+      state: none
+      alias: Voorinstelling kantoorverwarming is uitgeschakeld
+      for:
+        hours: 0
+        minutes: 0
+        seconds: 0
+    alias: Niet
+  action:
+  - service: climate.set_preset_mode
+    data:
+      preset_mode: none
+    target:
+      entity_id: climate.office
+  - service: notify.persistent_notification
+    data:
+      message: Voorinstelling kantoorverwarming geforceerd naar 'none'.
   mode: single
