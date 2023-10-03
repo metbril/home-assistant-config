@@ -9,8 +9,11 @@
     - type: disk_use_percent
       arg: /
 
+    - type: disk_use
+      arg: /
+
     - type: disk_free
       arg: /
 
     - type: ipv4_address
-      arg: 'eth0'
+      arg: "eth0"
