@@ -15,7 +15,11 @@
       icon: mdi:sunglasses
       device_class: safety
       state: >-
-        {% set now = now() | as_timestamp | float(0) %}
-        {% set lower = state_attr('binary_sensor.protection_window','start_time') | as_timestamp | float(0) %}
-        {% set upper = state_attr('binary_sensor.protection_window','end_time') | as_timestamp | float(0) %}
-        {{ (lower <= now <= upper) }}
+        {% if states('binary_sensor.bescherming_venster') == 'unknown' %}
+          false
+        {% else %}
+          {% set now = now() | as_timestamp | float(0) %}
+          {% set lower = state_attr('binary_sensor.bescherming_venster','start_time') | as_timestamp | float(0) %}
+          {% set upper = state_attr('binary_sensor.bescherming_venster','end_time') | as_timestamp | float(0) %}
+          {{ (lower <= now <= upper) }}
+        {% endif %}
