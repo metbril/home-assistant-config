@@ -1,7 +1,0 @@
----
-- binary_sensor:
-    - name: Teams Online Robert
-      unique_id: b1b5dd57-8102-4e86-b63c-88a9a2a67af9
-      device_class: connectivity
-      state: >
-        {{ not states('input_text.teams_status_robert') in ['Offline','unknown','unavailable'] }}

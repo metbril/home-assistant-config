@@ -1,7 +1,0 @@
----
-# for use with minigraphs
-# shows as a gray area. Night is grayed, daytime is clear.
-- sensor:
-    - name: Nighttime
-      state: >-
-        {{ 1 if is_state('sun.sun', 'below_horizon') else 0 }}

@@ -33,7 +33,8 @@ notify: !include includes/notify.yaml
 proximity: !include includes/proximity.yaml
 rest_command: !include includes/rest_command.yaml
 sensor: !include_dir_merge_list includes/sensor
-template: !include_dir_merge_list includes/template
+# template: !include_dir_merge_list includes/template
+template: !include includes/template.yaml
 
 default_config:
 
