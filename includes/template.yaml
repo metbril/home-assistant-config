@@ -1,5 +1,4 @@
 ---
-
 ## Working from home
 
 # Is Monique working from home?
@@ -25,12 +24,12 @@
 
 ## MS Teams
 - binary_sensor:
-  - name: "Robert In Call"
-    unique_id: aeed7e2e-2d9c-45d2-a2d1-2c9cfc54a5a0
-    state: >-
-      {{ states("input_text.teams_status_robert") in ["OnThePhone","Presenting"] }}
-    icon: >-
-      {{ "mdi:phone-in-talk" if is_state('binary_sensor.robert_in_call','on') else "mdi:phone-off" }}
+    - name: "Robert In Call"
+      unique_id: aeed7e2e-2d9c-45d2-a2d1-2c9cfc54a5a0
+      state: >-
+        {{ states("input_text.teams_status_robert") in ["OnThePhone","Presenting"] }}
+      icon: >-
+        {{ "mdi:phone-in-talk" if is_state('binary_sensor.robert_in_call','on') else "mdi:phone-off" }}
 - binary_sensor:
     - name: Teams Online Robert
       unique_id: b1b5dd57-8102-4e86-b63c-88a9a2a67af9
@@ -80,8 +79,8 @@
         {{ (states('sensor.buienalarm_precipitation_forecast_average') is not none) or
           (states('sensor.buienalarm_precipitation') is not none) }}
       state: >-
-          {{ ['Geen neerslag','Lichte neerslag','Matige neerslag',
-          'Zware neerslag','Zware buien'][this.attributes.index] }}
+        {{ ['Geen neerslag','Lichte neerslag','Matige neerslag',
+        'Zware neerslag','Zware buien'][this.attributes.index] }}
       attributes:
         index: >
           {% set forecast = states('sensor.buienalarm_precipitation_forecast_average') | float(0) %}
@@ -163,7 +162,6 @@
         {% else %}
           unknown
         {% endif %}
-
 
 ## Washing Machine
 #
@@ -261,8 +259,8 @@
       availability: >-
         {{ state_attr('media_player.living_tv','volume_level') is not none }}
       state: >-
-          {{ (state_attr('media_player.living_tv','volume_level')
-            | float(0) * 100) | int }}
+        {{ (state_attr('media_player.living_tv','volume_level')
+          | float(0) * 100) | int }}
       icon: >-
         {% set state = states('sensor.living_tv_volume_level') | float(0) %}
         {% if state == 0.0 %} mdi:volume-off
@@ -384,7 +382,7 @@
       unique_id: "1134ed44-3d4f-4690-bd9f-af89de86f84e"
       state: >-
         {{ state_attr('sun.sun','elevation') }}
-      icon: "mdi:sun-angle"  # "mdi:angle-acute"
+      icon: "mdi:sun-angle" # "mdi:angle-acute"
       unit_of_measurement: "°"
 
 # UV Protection Window
