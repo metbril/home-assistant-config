@@ -206,6 +206,16 @@ Connected (smart) hardware:
 
 Sonos speakers are added through discovery. This is more convenient than configuring manually.
 
+### Neo Coolcam
+
+Template sensor to fix a bug in some Neo wall plugs.
+The applied constant is the equivalent of 0x7FFFFFFF.
+Device precision is 2 decimals.
+The original sensosr is renamed to "...raw_energy"
+The template sensor then gets the old name.
+
+https://community.home-assistant.io/t/energy-consumption-for-neo-coolcam-plug/219844/26
+
 ## Dashboards
 
 ### Themes
@@ -254,6 +264,15 @@ To use the automation editor in combination with packages, there needs to be [a 
 ### Limit database growth
 
 To limit database growth, I limit [recording](https://home-assistant.io/components/recorder/) as much as possible and purge the database daily for values older than 3 days.
+
+### Outside Brightness
+
+Use a template sensor to calculate outside brightness. This takes into account the sun elevation, cloudiness and radiation.
+
+https://community.home-assistant.io/t/virtual-light-sensor/31975/24
+https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day.
+https://gps-coordinates.org/coordinate-converter.php
+max elevation https://www.suncalc.org/#/40.1789,-3.5156,3/2022.09.13/17:15/1/3
 
 ## Maintenance
 

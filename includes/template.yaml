@@ -1,27 +1,4 @@
 ---
-## Working from home
-
-# Is Monique working from home?
-- binary_sensor:
-    - name: Working From Home Monique
-      # unique_id:
-      device_class: presence
-      state: "{{ is_state('device_tracker.laptop_monique_werk','home') }}"
-# Is Robert working from home?
-- binary_sensor:
-    - name: Working From Home Robert
-      unique_id: aa06b865-e1a8-4a79-b4a4-42cd84a679bf
-      device_class: presence
-      state: "{{ is_state('device_tracker.laptop_robert_werk','home') }}"
-- binary_sensor:
-    - name: Working From Home
-      unique_id: 970b1cd1-5d86-43ef-abad-d6ce18780fad
-      device_class: presence
-      state: >-
-        {{ is_state('input_boolean.working_from_home', 'on') or
-           is_state('binary_sensor.working_from_home_robert', 'on') or
-           is_state('binary_sensor.working_from_home_monique', 'on') }}
-
 ## MS Teams
 - binary_sensor:
     - name: "Robert In Call"
@@ -30,32 +7,6 @@
         {{ states("input_text.teams_status_robert") in ["OnThePhone","Presenting"] }}
       icon: >-
         {{ "mdi:phone-in-talk" if is_state('binary_sensor.robert_in_call','on') else "mdi:phone-off" }}
-- binary_sensor:
-    - name: Teams Online Robert
-      unique_id: b1b5dd57-8102-4e86-b63c-88a9a2a67af9
-      device_class: connectivity
-      state: >
-        {{ not states('input_text.teams_status_robert') in ['Offline','unknown','unavailable'] }}
-- sensor:
-    - name: Teams Status Robert
-      unique_id: 7a244c71-6754-48c2-9f37-dab378ece9d9
-      state: |-
-        {% if states("input_text.teams_status_robert") in ["Available"] %}
-          Beschikbaar
-        {% elif states("input_text.teams_status_robert") in ["DoNotDisturb","Presenting","Focusing"] %}
-          Niet storen
-        {% elif states("input_text.teams_status_robert") in ["Busy","OnThePhone","DoNotDisturb","Presenting","Focusing","InAMeeting"] %}
-          Bezet
-        {% elif states("input_text.teams_status_robert") in ["Away"] %}
-          Afwezig
-        {% elif states("input_text.teams_status_robert") in ["BeRightBack"] %}
-          Zo terug
-        {% elif states("input_text.teams_status_robert") in ["Offline"] %}
-          Offline
-        {% else %}
-          {{ states("input_text.teams_status_robert") }}
-        {% endif %}
-      icon: mdi:microsoft-teams
 
 ## Buienalarm
 # This sensor switches on if the current or forecasted precipitation
@@ -97,74 +48,9 @@
           {% elif value >=10 %}
             4
           {% endif %}
-- sensor:
-    - name: "Buienalarm next rain forecast minutes"
-      unique_id: 6590b7cf-cceb-48b7-a9fc-759e8a01553e
-      unit_of_measurement: "min"
-      icon: mdi:weather-pouring
-      state: >
-        {% set forecast = states('sensor.buienalarm_next_rain_forecast') %}
-        {% if forecast not in ['unknown','unavailable','',none] %}
-          {{ ((as_timestamp(forecast) - as_timestamp(now())) / 60 ) | round(0) }}
-        {% else %}
-          {{ forecast }}
-        {% endif %}
-# This sensor creates a sensor with a proper timestamp device class
-- sensor:
-    - name: "Buienalarm Next Rain Forecast Timestamp"
-      unique_id: sensor.buienalarm_next_rain_forecast_timestamp
-      device_class: timestamp
-      icon: mdi:clock-alert
-      availability: "{{ states('sensor.buienalarm_next_rain_forecast') is not none }}"
-      state: >
-        {% set datetime = states('sensor.buienalarm_next_rain_forecast') %}
-        {{ (as_datetime(datetime) | as_local).isoformat() }}
-- sensor:
-    - name: Buienalarm Precipitation Forecast Index
-      unique_id: 11d99a7b-dea0-4107-ab23-0ea67e314330
-      icon: mdi:weather-pouring
-      availability: true
-      state: >-
-        {% set value =
-          states('sensor.buienalarm_precipitation_forecast_average')
-          | float(0) %}
-        {% if value < 0.1 %}
-          0
-        {% elif value < 1 %}
-          1
-        {% elif value < 3 %}
-          2
-        {% elif value < 10 %}
-          3
-        {% elif value >=10 %}
-          4
-        {% else %}
-          unavailable
-        {% endif %}
-- sensor:
-    - name: Buienalarm Precipitation Forecast Level
-      unique_id: 808f691c-6b69-4bb3-b52c-b11c50fd02db
-      icon: mdi:weather-pouring
-      state: >-
-        {% set value =
-          states('sensor.buienalarm_precipitation_forecast_average')
-          | float(0) %}
-        {% if value < 0.1 %}
-          Geen neerslag
-        {% elif value < 1 %}
-          Lichte neerslag
-        {% elif value < 3 %}
-          Matige neerslag
-        {% elif value < 10 %}
-          Zware neerslag
-        {% elif value >=10 %}
-          Zware buien
-        {% else %}
-          unknown
-        {% endif %}
 
 ## Washing Machine
-#
+
 - binary_sensor:
     # Appliance is running when power usage detected
     - name: "Washing Machine Running"
@@ -232,26 +118,6 @@
         seconds: 55
       icon: "mdi:tumble-dryer{{ '-off' if (this.state == 'off') }}"
 
-# Template sensor to fix a bug in some Neo wall plugs.
-# The applied constant is the equivalent of 0x7FFFFFFF.
-# Device precision is 2 decimals.
-# The original sensosr is renamed to "...raw_energy"
-#
-# https://community.home-assistant.io/t/energy-consumption-for-neo-coolcam-plug/219844/26?u=metbril
-#
-- sensor:
-    - name: "Tumble Dryer Energy"
-      unique_id: 76269b18-7159-4409-9f26-72128fa2e116
-      unit_of_measurement: kWh
-      device_class: energy
-      state_class: total_increasing
-      availability: >-
-        {{ states('sensor.tumble_dryer_raw_energy') not in ["unavailable", "unknown", None ] }}
-      state: >-
-        {% set raw = states('sensor.tumble_dryer_raw_energy') | float (0) %}
-        {% set fix = ( raw + 21474836.47 ) | float(0) | round(2) %}
-        {{ fix if (raw < 0) else raw }}
-
 - sensor:
     - name: Living TV Volume Level
       unique_id: 655f97da-54dc-40d2-8de1-db1b9cc66bf3
@@ -268,122 +134,6 @@
         {% elif state <= 0.6 %} mdi:volume-medium
         {% else %} mdi:volume-high
         {% endif %}
-
-## Energy
-- sensor:
-    - name: Friendly Power Tariff
-      unique_id: friendly_power_tariff
-      state: >-
-        {% set value = states('sensor.power_tariff') %}
-        {{ value | replace('low', 'Laag') | replace('normal', 'Normaal') }}
-
-# Template sensor to fix a bug in some Neo wall plugs.
-# The applied constant is the equivalent of 0x7FFFFFFF.
-# Device precision is 2 decimals.
-# The original sensosr is renamed to "...raw_energy"
-#
-# https://community.home-assistant.io/t/energy-consumption-for-neo-coolcam-plug/219844/26?u=metbril
-#
-- sensor:
-    - name: "Office Heater Energy"
-      unique_id: eeb8adce-cdb5-42fb-8759-aa9e3d6a34b3
-      unit_of_measurement: kWh
-      device_class: energy
-      state_class: total_increasing
-      availability: >-
-        {{ states('sensor.office_heater_raw_energy') not in ["unavailable", "unknown", None ] }}
-      state: >-
-        {% set raw = states('sensor.office_heater_raw_energy') | float (0) %}
-        {% set fix = ( raw + 21474836.47 ) | float(0) | round(2) %}
-        {{ fix if (raw < 0) else raw }}
-
-## Opensensemap
-- sensor:
-    - name: "B. Meineszlaan Rotterdam P1"
-      unique_id: 7c94d3ba-3056-464a-9516-b855aec200a7
-      state: "{{ state_attr('air_quality.b_meineszlaan_rotterdam', 'particulate_matter_10') | float(0) | round(2) }}"
-      unit_of_measurement: µg/m³
-      state_class: measurement
-      icon: mdi:thought-bubble
-      # friendly_name: Fijnstof PM10 B. Meineszlaan Rotterdam
-
-    - name: "B. Meineszlaan Rotterdam P2"
-      unique_id: 0eb9affb-960e-4c82-a65f-57d9b6d6c1b2
-      state: "{{ state_attr('air_quality.b_meineszlaan_rotterdam', 'particulate_matter_2_5') | float(0) | round(2) }}"
-      unit_of_measurement: µg/m³
-      state_class: measurement
-      icon: mdi:thought-bubble-outline
-      # friendly_name: Fijnstof PM2.5 B. Meineszlaan Rotterdam
-
-    # https://www.rivm.nl/smog/waarschuwingsgrenzen-en-luchtkwaliteitsindex
-    - name: "B. Meineszlaan Rotterdam P1 Klasse"
-      unique_id: b30391a9-462d-48ab-a116-8dc9e5d9280f
-      state: >-
-        {% set pm = states('sensor.b_meineszlaan_rotterdam_p1') | float(unavailable) %}
-        {% if pm > 200 %}Zeer slecht
-        {% elif pm >= 125 %}Slecht
-        {% elif pm >= 76 %}Onvoldoende
-        {% elif pm >= 31 %}Matig
-        {% elif pm >= 0 %}Goed
-        {% else %}unavailable
-        {% endif %}
-
-# Inspired by @basnijholt
-# https://github.com/basnijholt/home-assistant-config/blob/ae69265f1b9bb904e884e985b99d5d2cbaa77f82/includes/sensors.yaml#L227
-#
-# yamllint disable rule:line-length
-# {% set parents = state_attr("proximity.home", "nearest").split(", ") | reject("eq", "Björn") | list %}
-#
-- sensor:
-    - name: Nearest Parent Notify
-      availability: >-
-        {{ state_attr('proximity.parents_from_home', 'nearest') not in
-          ['unavailable','unknown','none'] }}
-      state: >-
-        {% if is_state('person.robert', 'home') and
-          is_state('person.monique', 'home') %}
-          notify.parents
-        {% elif is_state_attr('proximity.parents_from_home', 'nearest',
-          'Robert') %}
-          notify.robert
-        {% else %}
-          notify.monique
-        {% endif %}
-
-## Outside Brightness
-#
-# https://community.home-assistant.io/t/virtual-light-sensor/31975/24
-# https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day.
-# https://gps-coordinates.org/coordinate-converter.php
-# max elevation https://www.suncalc.org/#/40.1789,-3.5156,3/2022.09.13/17:15/1/3
-- sensor:
-    - name: "Outside Brightness"
-      unique_id: "15c131f6-f69c-47b4-912b-e6687890ba23"
-      state: >-
-        {%- set elevation = state_attr('sun.sun','elevation') | float(0) %}
-        {%- set cloud_coverage = states('sensor.tomorrow_io_home_cloud_cover') | float(0) %}
-        {%- set irradiance = states('sensor.buienradar_irradiance') | float(0) %}
-        {%- set irradiance_pct = irradiance / 10 %} {# max irradiance = 1.000, so  irradiance/10 = pct. See https://en.wikipedia.org/wiki/Solar_irradiance#:~:text=Average%20annual%20solar%20radiation%20arriving,level%20on%20a%20clear%20day #}
-        {%- set adjusted_clouds = cloud_coverage -  irradiance_pct %}
-        {%- set cloud_factor = (1 - (0.75 * ( adjusted_clouds / 100) ** 3 )) %}
-        {%- set min_elevation = -6 %}{# set this to official sun elevation for end of twighlight #}
-        {%- set max_elevation = 61 %}{# set this to the maximum noon sun elevation (minimum is 15 degrees, 90 is theoretical max) #}
-        {%- set adjusted_elevation = elevation - min_elevation %}
-        {%- set adjusted_elevation = [adjusted_elevation,0] | max %}
-        {%- set adjusted_elevation = [adjusted_elevation,max_elevation - min_elevation] | min %}
-        {%- set adjusted_elevation = adjusted_elevation / (max_elevation - min_elevation) %}
-        {%- set adjusted_elevation = adjusted_elevation * 100 %}
-        {%- set brightness = adjusted_elevation * cloud_factor %}
-        {{ brightness | int(0) }}
-      unit_of_measurement: "%"
-
-- sensor:
-    - name: "Sun Elevation"
-      unique_id: "1134ed44-3d4f-4690-bd9f-af89de86f84e"
-      state: >-
-        {{ state_attr('sun.sun','elevation') }}
-      icon: "mdi:sun-angle" # "mdi:angle-acute"
-      unit_of_measurement: "°"
 
 # UV Protection Window
 # To save on API calls with OpenUV, get times daily just once, and then calculate every minute locally.
