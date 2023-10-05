@@ -1,8 +1,8 @@
 - platform: trend
   sensors:
-    adviesprijs_euro95:
+    adviesprijs_euro95_gestegen:
       entity_id: sensor.adviesprijs_euro95
-      friendly_name: Adviesprijs Euro95
+      friendly_name: Adviesprijs Euro95 gestegen
 
     coinbase_eth_exchange_rate:
       entity_id: sensor.coinbase_eth_exchange_rate
