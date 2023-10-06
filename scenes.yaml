@@ -745,9 +745,9 @@
       friendly_name: Woonkamerspeaker
       supported_features: 981567
       state: paused
-    media_player.kantoorspeaker:
+    media_player.office_speaker:
       group_members:
-      - media_player.kantoorspeaker
+      - media_player.office_speaker
       volume_level: 0.42
       is_volume_muted: false
       media_content_id: x-sonos-vli:RINCON_347E5C316A6001400:2,spotify:2de76e7a9877520ea4f3c597aab0222c
@@ -763,7 +763,7 @@
       shuffle: false
       repeat: 'off'
       queue_size: 1
-      entity_picture: /api/media_player_proxy/media_player.kantoorspeaker?token=fed8f22ddd50f08f5c173c288ade01c5f512382cda7fcdf22dfbae0e40649d6e&cache=25f94191878e35dc
+      entity_picture: /api/media_player_proxy/media_player.office_speaker?token=fed8f22ddd50f08f5c173c288ade01c5f512382cda7fcdf22dfbae0e40649d6e&cache=25f94191878e35dc
       icon: mdi:speaker-wireless
       friendly_name: Kantoorspeaker
       supported_features: 981567

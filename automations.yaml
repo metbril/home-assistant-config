@@ -169,12 +169,12 @@
   - condition: device
     device_id: 7bdba22c447d5ca9504e896de5e891d4
     domain: media_player
-    entity_id: media_player.kantoorspeaker
+    entity_id: media_player.office_speaker
     type: is_playing
   action:
   - service: media_player.select_source
     target:
-      entity_id: media_player.kantoorspeaker
+      entity_id: media_player.office_speaker
     data:
       source: '{{ states(''input_select.sonos_favorites'') }}'
   mode: single
@@ -577,13 +577,13 @@
     entity_id: binary_sensor.working_from_home_robert
     state: 'on'
   - condition: state
-    entity_id: media_player.kantoorspeaker
+    entity_id: media_player.office_speaker
     state: playing
   action:
   - service: media_player.media_pause
     data: {}
     target:
-      entity_id: media_player.kantoorspeaker
+      entity_id: media_player.office_speaker
   - service: input_boolean.turn_on
     data: {}
     target:
@@ -648,7 +648,7 @@
   - service: media_player.media_play
     target:
       entity_id:
-      - media_player.kantoorspeaker
+      - media_player.office_speaker
     data: {}
   - service: input_boolean.turn_off
     target:
