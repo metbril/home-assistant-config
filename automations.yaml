@@ -349,11 +349,6 @@
     data:
       message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
       title: AdGuard
-  - service: script.toot_engine
-    data:
-      who: mastodon
-      message: "\U0001F6E1️ Iemand had het blokkeren van advertenties even uitgezet,
-        maar ik heb het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant"
   mode: single
 - id: '1662547518457'
   alias: 'Office: Printer powered notification'
@@ -403,10 +398,6 @@
         entity_id: light.achtergevel
       data:
         transition: 5
-    - service: script.toot_engine
-      data:
-        message: "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
-          , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
     else:
     - service: light.turn_on
       target:
@@ -414,11 +405,6 @@
       data:
         transition: 5
         brightness_pct: 70
-    - service: script.toot_engine
-      data:
-        message: "{{ [ 'Zonsondergang! \U0001F305', 'De dag zit er weer op! \U0001F605'
-          , 'Goedenavond! \U0001F31A' , 'Hit for the moon! \U0001F31B' ] | random
-          }}"
   mode: single
 - id: '1662548148472'
   alias: Energy > Post Gas Consumption to MinderGas.nl
@@ -1205,7 +1191,7 @@
         'web' ) }} #MeteoAlarm #ZuidHolland"
   mode: queued
 - id: f1a564aa-c8da-4f88-bf61-b938627374b2
-  alias: System > Stop Toot
+  alias: 'Toot: Stop HA'
   description: Toot when HA stops
   trigger:
   - platform: homeassistant
@@ -1926,7 +1912,7 @@
         '
   mode: single
 - id: '1685117427013'
-  alias: Toot > HA Core update beschikbaar
+  alias: 'Toot: HA Core update beschikbaar'
   description: ''
   trigger:
   - platform: device
@@ -2125,4 +2111,70 @@
         media: "{% set pictures = [\n  \"/config/www/img/klopklop.jpg\",\n  \"/config/www/img/deurklopper.png\",\n
           \ \"/config/www/img/aankloppen.jpg\",\n  \"/config/www/img/deurbel.jpg\",\n]
           %} {{ pictures|random }}"
+  mode: single
+- id: '1696590198142'
+  alias: Toot > AdGuard Home Ingeschakeld
+  description: ''
+  trigger:
+  - platform: state
+    entity_id: []
+  - platform: device
+    type: turned_on
+    device_id: a94651ced74e24298cfdb7ed3840f4b3
+    entity_id: 83df416654e5f6851b42ad55b8b7ba98
+    domain: switch
+  condition: []
+  action:
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: "\U0001F6E1 Iemand had het blokkeren van advertenties even uitgezet,
+        maar ik heb het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant"
+  mode: single
+- id: '1696593143777'
+  alias: 'Toot: Sunrise and sunset'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: below_horizon
+    for:
+      hours: 0
+      minutes: '{{ range(0,4) | random | int(0) }}'
+      seconds: 0
+    id: Zon Onder
+  - platform: state
+    entity_id:
+    - sun.sun
+    to: above_horizon
+    for:
+      hours: 0
+      minutes: '{{ range(0,4) | random | int(0) }}'
+      seconds: 0
+    id: Zon Op
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - Zon Onder
+      sequence:
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ [ 'Zonsondergang! \U0001F307', 'De dag zit er weer op! \U0001F605',
+            'Goedenavond! \U0001F31A' , 'Hit for the moon! \U0001F31B' ] | random
+            }}"
+    - conditions:
+      - condition: trigger
+        id:
+        - Zon Op
+      sequence:
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
+            , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
   mode: single
