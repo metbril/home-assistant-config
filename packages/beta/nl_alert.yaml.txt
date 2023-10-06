@@ -1,4 +1,6 @@
 ---
+## 6-10-2023 nl alert page is giving errors. disabled the package for now.
+
 multiscrape:
   - name: NL-Alert
     resource: https://crisis.nl/nl-alert/nl-alerts/
