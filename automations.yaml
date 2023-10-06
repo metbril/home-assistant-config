@@ -146,8 +146,6 @@
     - input_select.sonos_favorites
   - platform: homeassistant
     event: start
-  - platform: time_pattern
-    minutes: /1
   condition: []
   action:
   - variables:
@@ -1654,19 +1652,40 @@
         }}'
       title: Overstroming Alert
 - id: '1679143739246'
-  alias: Home > Disable do not disturb mode
-  description: Disable do not disturb when HA is started and at midnight.
+  alias: Home > Do not disturb mode
+  description: Let do not disturb follow quiet hours.
   trigger:
-  - platform: homeassistant
-    event: start
-  - platform: time
-    at: 00:00:00
+  - platform: state
+    entity_id:
+    - schedule.quiet_hours
+    to: 'on'
+    id: Stiltetijd Aan
+  - platform: state
+    entity_id:
+    - schedule.quiet_hours
+    to: 'off'
+    id: Stittetijd Uit
   condition: []
   action:
-  - service: input_boolean.turn_off
-    data: {}
-    target:
-      entity_id: input_boolean.do_not_disturb
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - Stiltetijd Aan
+      sequence:
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.do_not_disturb
+    - conditions:
+      - condition: trigger
+        id:
+        - Stittetijd Uit
+      sequence:
+      - service: input_boolean.turn_off
+        data: {}
+        target:
+          entity_id: input_boolean.do_not_disturb
   mode: single
 - id: '1679302451294'
   alias: Keuken > Koelkast uitgeschakeld
@@ -2003,4 +2022,107 @@
   - service: notify.persistent_notification
     data:
       message: Voorinstelling kantoorverwarming geforceerd naar 'none'.
+  mode: single
+- id: '1696588324550'
+  alias: Health > Update OpenUV 5 minutes before sunrise and after sunset
+  description: ''
+  trigger:
+  - event: sunrise
+    offset: -00:05:00
+    platform: sun
+  - event: sunset
+    offset: 00:05:00
+    platform: sun
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    target:
+      entity_id:
+      - sensor.huidige_uv_index
+    data: {}
+  mode: single
+- id: '1696588370815'
+  alias: Health > Update OpenUV every 30 minutes during daytime
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /30
+  condition:
+  - condition: and
+    conditions:
+    - condition: sun
+      after: sunrise
+    - condition: sun
+      before: sunset
+  action:
+  - service: homeassistant.update_entity
+    target:
+      entity_id:
+      - sensor.huidige_uv_index
+    data: {}
+  mode: single
+- id: '1696588433291'
+  alias: Health > Update OpenUV protection window daily
+  description: ''
+  trigger:
+  - platform: time
+    at: 02:12:00
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    target:
+      entity_id:
+      - binary_sensor.bescherming_venster
+    data: {}
+  mode: single
+- id: '1696588664732'
+  alias: Deurbel
+  description: Notify and tweet when the frontdoor bell is pressed.
+  trigger:
+  - platform: state
+    entity_id: switch.bel_voordeur
+  condition: []
+  action:
+  - service: notify.family
+    data:
+      message: "\U0001F6CE Er wordt aangebeld aan de voordeur."
+  - service: notify.living_tv
+    data:
+      message: Er wordt aangebeld aan de voordeur.
+  - if:
+    - condition: or
+      conditions:
+      - condition: state
+        entity_id: group.family
+        state: not_home
+      - condition: state
+        entity_id: sensor.occupancy
+        state: away
+      - condition: state
+        entity_id: sensor.occupancy
+        state: vacation
+    then:
+    - service: script.bark_the_dog
+      data:
+        entity_id: media_player.living_speaker
+    else:
+    - service: script.sonos_say
+      data:
+        entity_id: media_player.woonkamer
+        volume_level: 0.3
+        message: Er wordt aangebeld aan de voordeur.
+  - service: notify.twitter
+    data:
+      message: "{{ [ \"Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.\",
+        \"Au! Dat deed pijn. Wie raakte de deurbel aan?\", \"Dat deed een belletje
+        bij me rinkelen.\", \"Klop, klop. Wie is daar? Isabel. Isabel wie? \" ~\n
+        \ \"Isabel kapot. Daarom klop ik.\",\n\"Klop, klop. Wie is daar? Wil. Wil
+        wie? Wil naar binnen.\", \"De bel gaat. Ja, ja, ik kom er aan.\", \"Doe even
+        open @robertvanbregt. Er staat iemand aan de deur.\" ] | random + \" #HomeAssistant\"
+        + [ \" #Security\", \" #Alarm\", \" #SmartHome\", \" #HomeAutomation\" ] |
+        random }}"
+      data:
+        media: "{% set pictures = [\n  \"/config/www/img/klopklop.jpg\",\n  \"/config/www/img/deurklopper.png\",\n
+          \ \"/config/www/img/aankloppen.jpg\",\n  \"/config/www/img/deurbel.jpg\",\n]
+          %} {{ pictures|random }}"
   mode: single
