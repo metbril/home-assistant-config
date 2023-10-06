@@ -2009,24 +2009,6 @@
     data:
       message: Voorinstelling kantoorverwarming geforceerd naar 'none'.
   mode: single
-- id: '1696588324550'
-  alias: Health > Update OpenUV 5 minutes before sunrise and after sunset
-  description: ''
-  trigger:
-  - event: sunrise
-    offset: -00:05:00
-    platform: sun
-  - event: sunset
-    offset: 00:05:00
-    platform: sun
-  condition: []
-  action:
-  - service: homeassistant.update_entity
-    target:
-      entity_id:
-      - sensor.huidige_uv_index
-    data: {}
-  mode: single
 - id: '1696588370815'
   alias: Health > Update OpenUV every 30 minutes during daytime
   description: ''
@@ -2038,8 +2020,10 @@
     conditions:
     - condition: sun
       after: sunrise
+      after_offset: 00:30:01
     - condition: sun
       before: sunset
+      before_offset: -00:30:01
   action:
   - service: homeassistant.update_entity
     target:
@@ -2052,7 +2036,7 @@
   description: ''
   trigger:
   - platform: time
-    at: 02:12:00
+    at: 00:00:00
   condition: []
   action:
   - service: homeassistant.update_entity
