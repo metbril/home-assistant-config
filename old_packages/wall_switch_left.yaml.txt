@@ -23,7 +23,7 @@ automation:
               - service: scene.turn_on
                 target:
                   entity_id:
-                    - scene.lighting_living_min
+                    - scene.living_lighting_min
 
           - conditions:
               - condition: template
