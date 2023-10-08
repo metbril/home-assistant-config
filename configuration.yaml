@@ -69,7 +69,7 @@ ios:
 #
 recorder:
   auto_purge: true  # default = true
-  purge_keep_days: 4  # default = 10
+  purge_keep_days: 7  # default = 10
   exclude:
     domains:
     entities: []
