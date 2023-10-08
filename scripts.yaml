@@ -265,7 +265,9 @@ movie_time_start:
     then:
     - service: scene.turn_on
       target:
-        entity_id: scene.movie_time
+        entity_id:
+        - scene.living_lighting_theater
+      data: {}
 movie_time_stop:
   alias: Media > Stop Movie Time
   icon: mdi:movie-open-off
@@ -278,7 +280,9 @@ movie_time_stop:
     then:
     - service: scene.turn_on
       target:
-        entity_id: scene.lighting_living_base
+        entity_id:
+        - scene.living_lighting_min
+      data: {}
 start_netflix:
   alias: Media > Start Netflix on living TV
   description: Start de TV als deze nog uit staat, en schakelt vervolgens Netflix
@@ -588,3 +592,12 @@ lees_het_nieuws_voor:
       entity_id: '{{ player }}'
   mode: single
   icon: mdi:account-voice
+pauzeer_mediaspelers_woonkamer:
+  alias: Pauzeer mediaspelers woonkamer
+  sequence:
+  - service: media_player.media_pause
+    data: {}
+    target:
+      area_id: 474a3ca8a301432eb3b99533b9833d3e
+  mode: single
+  icon: mdi:pause

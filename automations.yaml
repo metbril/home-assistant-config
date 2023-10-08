@@ -750,7 +750,7 @@
       fall:
       - service: scene.turn_on
         target:
-          entity_id: scene.lighting_living_min
+          entity_id: scene.living_lighting_min
         metadata: {}
       rotate_cw_any:
       - if:
@@ -1207,33 +1207,25 @@
         ~ \" \" ~ hashtags | random ~ \" #HomeAssistant \" ~ \"https://github.com/metbril/home-assistant-config\"
         }}"
 - id: f5bdd57b-796d-4de6-9602-4e298473bbf8
-  alias: 'Health: Step Tracker Toot'
+  alias: 'Toot: Step Tracker'
   description: ''
   trigger:
   - platform: numeric_state
-    entity_id:
-    - sensor.iphone_robert_steps
+    entity_id: sensor.pontius_steps
     above: 5000
   action:
   - variables:
       steps: '{{ trigger.to_state.state }}'
-      emoji: "{{ '\U0001F6B6\U0001F3C3\U0001F97E\U0001F45F\U0001F3C5\U0001F3C6\U0001F3AF'
-        | list | random }}"
   - service: script.toot_engine
     data:
-      message: '{{ [ "Blijf in beweging. Een gezinslid heeft zojuist " ~ steps ~ "
-
-        stappen met een #AppleWatch gemaakt.", "Fitness tracking thuis, door het huis.
-
-        Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt.",
-
-        "Een gezinslid heeft zojuist " ~ steps ~ " stappen met een #AppleWatch gemaakt."
-
-        ] | random ~ " " ~ emoji ~ " " ~ [ "#QuantifiedSelf", "#SelfTracking", "#eHealth",
-
-        "#ActivityTracker", "#Ommetje" ] | random }}
-
-        '
+      who: mastodon
+      message: "{% set steps = trigger.to_state.state %}\n{% set emoji = '\U0001F6B6\U0001F3C3\U0001F97E\U0001F45F\U0001F3C5\U0001F3C6\U0001F3AF'
+        | list | random %} {% set tag = [ \"#QuantifiedSelf\", \"#SelfTracking\",
+        \"#eHealth\", \"#ActivityTracker\", \"#Ommetje\" ] | random %} {% set cheer
+        = [ \"Blijf in beweging!\", \"Fitness tracking thuis, door het huis!\", \"Goed
+        bezig!\", \"Ga zo door!\" ] | random %}\n{{ emoji ~ \" \" ~ cheer ~ \" Een
+        gezinslid heeft zojuist \" ~  steps ~  \" stappen met een #AppleWatch gemaakt.
+        \" ~  tag }}"
 - id: '1670532851811'
   alias: Update fuel prices
   description: Update fuel prices every hour
@@ -1931,7 +1923,7 @@
         'release_url') }}"
   mode: single
 - id: 9aab0282-d940-4d68-b6b4-c3f5b5df3956
-  alias: Boompollen
+  alias: 'Toot: Boompollen'
   description: ''
   trigger:
   - platform: state
@@ -1946,7 +1938,7 @@
   condition:
   - condition: template
     value_template: '{{ states.trigger.to_state not in ["none", "very_low", "low",
-      "unknown", "unavailable"] }}'
+      "unknown", "unavailable", none] }}'
   action:
   - service: script.toot_engine
     data:
@@ -1958,7 +1950,8 @@
         moment is de kans op hooikoortsklachten door {{ pollen }} hier in de buurt
         {{ to[(from.index(states('sensor.tomorrow_io_home_tree_pollen_index')) | int)]
         }}. \U0001F333\U0001F927 #HomeAssistant #Pollen #Hooikoorts https://pollennieuws.nl/\n"
-  mode: single
+  mode: parallel
+  max: 10
 - id: '1696137037190'
   alias: Admin > Blitzwolf uitgeschakeld
   description: ''
@@ -2162,3 +2155,21 @@
           message: "{{ [ 'Zonsopkomst! \U0001F305' , 'Het wordt een mooie dag! \U0001F603'
             , 'Goedemorgen! ☕️', 'Rise and shine! \U0001F31E' ] | random }}"
   mode: single
+- id: '1696673136335'
+  alias: 'Toot: Engine On/Off'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.toot_engine
+  condition: []
+  action:
+  - service: notify.mastodon
+    data:
+      message: "{% set emoji = '\U0001F916\U0001F9BE\U0001F3BA\U0001F4EF\U0001F4E3\U0001F4E1\U0001F418'
+        | list | random %} {% set cheer = ['Yes', 'Oh nee!', 'Yolo!', 'Jeetje!', 'Joepie!',
+        'Alweer!', 'Niet weer, hè?', 'Nou ja, zeg!', 'Wat nu weer?' ] | random %}\n{{
+        emoji }} {{ cheer}} De tootmachine is {{'in' if     is_state('input_boolean.toot_engine',
+        'on') else 'uit'}}geschakeld. #HomeAssistant"
+  mode: queued
+  max: 10
