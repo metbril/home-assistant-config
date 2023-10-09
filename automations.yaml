@@ -551,33 +551,67 @@
     entity_id: input_boolean.snooze_lightning
   mode: single
 - id: '1649842819459'
-  alias: Office > Pause Music
-  description: Pause playing music in the office when in call.
+  alias: Office > Pause/Resume Music
+  description: Pause playing music in the office when Robert in call and resume afterwards.
   trigger:
   - platform: state
     entity_id:
     - binary_sensor.robert_in_call
     to: 'on'
-  condition:
-  - condition: state
-    entity_id: binary_sensor.working_from_home_robert
-    state: 'on'
-  - condition: state
-    entity_id: media_player.office_speaker
-    state: playing
+    id: Robert in gesprek
+  - platform: state
+    entity_id:
+    - binary_sensor.robert_in_call
+    to: 'off'
+    id: Robert uit gesprek
+  condition: []
   action:
-  - service: media_player.media_pause
-    data: {}
-    target:
-      entity_id: media_player.office_speaker
-  - service: input_boolean.turn_on
-    data: {}
-    target:
-      entity_id: input_boolean.resume_office_music
-  - service: notify.robert
-    data:
-      message: Muziek in kantoor gepauzeerd voor een Teamsgesprek.
-      title: Teams activity
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - Robert in gesprek
+      - condition: state
+        entity_id: binary_sensor.working_from_home_robert
+        state: 'on'
+      - condition: state
+        entity_id: media_player.office_speaker
+        state: playing
+      sequence:
+      - service: media_player.media_pause
+        data: {}
+        target:
+          entity_id: media_player.office_speaker
+      - service: input_boolean.turn_on
+        data: {}
+        target:
+          entity_id: input_boolean.resume_office_music
+      - service: notify.robert
+        data:
+          message: "\U0001F3B6 Muziek in kantoor gepauzeerd voor Teamsgesprek van
+            Robert."
+          title: Teams activity
+    - conditions:
+      - condition: trigger
+        id:
+        - Robert uit gesprek
+      - condition: state
+        entity_id: input_boolean.resume_office_music
+        state: 'on'
+      sequence:
+      - service: media_player.media_play
+        target:
+          entity_id:
+          - media_player.office_speaker
+        data: {}
+      - service: input_boolean.turn_off
+        target:
+          entity_id: input_boolean.resume_office_music
+        data: {}
+      - service: notify.robert
+        data:
+          message: "\U0001F3B6 Muziek in kantoor voortgezet."
+          title: Teams activity
   mode: single
 - alias: Reset Teams Status Robert
   description: 'Reset Teams Status when not changed for a long time outside work hours.
@@ -617,34 +651,6 @@
   - service: notify.robert
     data:
       message: Teams status opnieuw ingesteld door inactiviteit.
-- id: '1649843570979'
-  alias: Office > Resume Music
-  description: Resume music when Teams call has finished.
-  trigger:
-  - platform: state
-    entity_id:
-    - binary_sensor.robert_in_call
-    to: 'off'
-  condition:
-  - alias: Music was paused when call started
-    condition: state
-    entity_id: input_boolean.resume_office_music
-    state: 'on'
-  action:
-  - service: media_player.media_play
-    target:
-      entity_id:
-      - media_player.office_speaker
-    data: {}
-  - service: input_boolean.turn_off
-    target:
-      entity_id: input_boolean.resume_office_music
-    data: {}
-  - service: notify.robert
-    data:
-      message: "\U0001F3B6 Muziek in het kantoor is voortgezet."
-      title: Teams activity
-  mode: single
 - id: b95c4d19-670d-4b96-b531-055cd0c2e4df
   alias: Carwash Notification
   description: Geef een melding wanneer de auto gewassen kan worden.
@@ -2173,3 +2179,66 @@
         'on') else 'uit'}}geschakeld. #HomeAssistant"
   mode: queued
   max: 10
+- id: '1696846540710'
+  alias: 'Toot: Pause/resume Music when in call'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - input_boolean.resume_office_music
+    id: Resume On
+    to: 'on'
+  - platform: state
+    entity_id:
+    - input_boolean.resume_office_music
+    to: 'off'
+    id: Resume Off
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - Resume On
+      sequence:
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ '\U0001F3B6\U0001F4FB\U0001F3B5\U0001F39A️\U0001F507' | list
+            | random }} De muziek in het kantoor is gepauzeerd, omdat een thuiswerker
+            een gesprek is gestart."
+    - conditions:
+      - condition: trigger
+        id:
+        - Resume Off
+      sequence:
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ '\U0001F3B5\U0001F3B6\U0001F4FB\U0001F39A️\U0001F509\U0001F50A'
+            | list | random }} De muziek in het kantoor is herstart, omdat het gesprek
+            van de thuiswerker is afgelopen."
+  mode: single
+- id: '1696859511831'
+  alias: 'Toot: sun phase'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.deconz_daylight
+  condition: []
+  action:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: sensor.deconz_daylight
+        state: solar_noon
+      sequence:
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: "{{ '\U0001F31E☀️\U0001F60E\U0001F576️\U0001F324️⛱️' | list | random
+            }} {{ ['Het middaguur is aangebroken.', 'We zijn weer op weg naar de avondschemer',
+            'Het gouden uurtje in de ochtend is voorbij.', 'De zon staat op het hoogste
+            punt'] | random }}"
+  mode: single
