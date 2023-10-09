@@ -601,3 +601,14 @@ pauzeer_mediaspelers_woonkamer:
       area_id: 474a3ca8a301432eb3b99533b9833d3e
   mode: single
   icon: mdi:pause
+system_reset_error_warning_counters:
+  alias: 'System: Reset error warning counters'
+  sequence:
+  - service: counter.reset
+    data: {}
+    target:
+      entity_id:
+      - counter.system_errors
+      - counter.system_warnings
+  mode: single
+  icon: mdi:restore
