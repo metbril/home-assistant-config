@@ -267,7 +267,8 @@ movie_time_start:
       target:
         entity_id:
         - scene.living_lighting_theater
-      data: {}
+      data:
+        transition: 3
 movie_time_stop:
   alias: Media > Stop Movie Time
   icon: mdi:movie-open-off
