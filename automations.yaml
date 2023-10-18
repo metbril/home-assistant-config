@@ -896,14 +896,14 @@
   - platform: state
     entity_id: media_player.living_tv
     attribute: is_volume_muted
-    from: true
-    to: false
+    from: 'true'
+    to: 'false'
     id: playing
   - platform: state
     entity_id: media_player.living_tv
     attribute: is_volume_muted
-    from: false
-    to: true
+    from: 'false'
+    to: 'true'
     id: paused
   condition:
   - condition: state
@@ -1038,32 +1038,32 @@
       - condition: trigger
         id: Actief
       sequence:
-      - delay: 00:00
+      - delay: '0:00:00.000'
     - conditions:
       - condition: trigger
         id: Niet Actief
       sequence:
       - variables:
-          start_energy: '{{ states(''sensor.washing_machine_start_energy'') | float(0)
-            }}'
-          finish_energy: '{{ states(''sensor.washing_machine_finish_energy'') | float(0)
-            }}'
-          start_time: '{{ states.sensor.washing_machine_start_energy.last_changed
-            | as_timestamp | float(0) }}'
-          finish_time: '{{ states.sensor.washing_machine_finish_energy.last_changed
+          start_energy: '{{ states(''sensor.washing_machine_running_start_energy'')
+            | float(0) }}'
+          finish_energy: '{{ states(''sensor.washing_machine_running_finish_energy'')
+            | float(0) }}'
+          start_time: '{{ states(''sensor.washing_machine_running_start_time'') |
+            as_timestamp }}'
+          finish_time: '{{ states(''sensor.washing_machine_running_finish_time'')
             | as_timestamp }}'
-          price: '{{ states(''sensor.energy_consumption_tarif_2'') | float(0) }}'
+          price: '{{ states(''input_number.energy_rate_tarif_2'') | float(0) }}'
       - variables:
           total_energy: '{{ finish_energy - start_energy }}'
           total_time: '{{ (finish_time - start_time) }}'
       - variables:
           minutes: '{{ (total_time / 60) | round(0) }}'
-          total_energy_rounded: '{{ (total_energy) | round(2) }}'
-          cost: '{{ ( price * total_energy) | round(2) }}'
+          total_energy_rounded: '{{ total_energy | round(2) }}'
+          cost: '{{ (price * total_energy) | round(2) }}'
       - service: '{{ states(''sensor.nearest_parent_notify'') }}'
         data:
-          message: "De wasmachine is klaar na {{ minutes}} minuten en heeft {{ total_energy_rounded
-            }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6\n"
+          message: "De wasmachine is klaar na {{ minutes }} minuten en heeft {{ total_energy_rounded
+            }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6"
       - if:
         - condition: or
           conditions:
@@ -1573,7 +1573,7 @@
         data: {}
         target:
           entity_id: counter.system_warnings
-  mode: queued
+  mode: parallel
   max: 50
 - id: '1673082949081'
   alias: Calendar > Birthday Notification
