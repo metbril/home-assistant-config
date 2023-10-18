@@ -22,11 +22,12 @@ automation split: !include_dir_merge_list automations # Other
 air_quality: !include includes/air_quality.yaml
 alert: !include includes/alert.yaml
 binary_sensor: !include_dir_merge_list includes/binary_sensor
-calendar: !include includes/calendar.yaml
+# calendar: !include includes/calendar.yaml
 climate: !include includes/climate.yaml
 command_line: !include includes/command_line.yaml
 geo_location: !include includes/geo_location.yaml
 group: !include includes/group.yaml
+ics_calendar: !include includes/ics_calendar.yaml
 logger: !include includes/logger.yaml
 multiscrape: !include includes/multiscrape.yaml
 notify: !include includes/notify.yaml
