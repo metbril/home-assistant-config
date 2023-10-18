@@ -1,0 +1,87 @@
+---
+# This package is here for lots of related template sensors and
+# some template sensor functions not (yet) being available as helpers
+
+# Using template sensors prevent the need for input helpers and extra
+# automations.
+
+# --- WASHING MACHINE ---
+
+## Washing Machine
+
+template:
+  - binary_sensor:
+      # Appliance is running when power usage detected
+      - name: "Washing Machine Running"
+        unique_id: 7a04404c-be07-4651-82d1-74a804d5cf25
+        state: "{{ states('sensor.washing_machine_power') | float(0) > 4 }}"
+        delay_off:
+          seconds: 30
+        icon: >
+          mdi:washing-machine{{ '-off' if (this.state == 'off') }}
+
+  - sensor:
+      - name: Washing Machine Running Duration
+        unique_id: f059cf66-215c-4dd7-a421-ff45e262b72d
+        device_class: duration
+        unit_of_measurement: s
+        state: >-
+          {% set start = states('sensor.washing_machine_running_start_time') | as_timestamp %}
+          {% set finish = states('sensor.washing_machine_running_finish_time') | as_timestamp %}
+          {% set current = now() | as_timestamp %}
+          {% if (start > finish) %}
+            {% set secs = current - start %}
+          {% else %}
+            {% set secs = (finish - start) %}
+          {% endif %}
+          {{ secs }}
+
+      - name: Washing Machine Running Energy
+        unique_id: 55a0f954-a7a8-4040-9eb1-32967c0054f6
+        device_class: "energy"
+        unit_of_measurement: "kWh"
+        state: >-
+          {% set start = states('sensor.washing_machine_running_start_energy') | float(0) %}
+          {% set finish = states('sensor.washing_machine_running_finish_energy') | float(0) %}
+          {% set current = states('sensor.washing_machine_energy') | float(0) %}
+          {{ (([current, finish] | max) - start) | round(2) }}
+
+  # Save time and energy meter when washing machine running starts.
+  - trigger:
+      - platform: state
+        entity_id: binary_sensor.washing_machine_running
+        from:
+          - "off"
+        to:
+          - "on"
+    sensor:
+      - name: "Washing Machine Running Start Time"
+        unique_id: "632cecf0-6e54-41c3-87d9-7b9bcbca4242"
+        device_class: timestamp
+        state: "{{ now() }}"
+
+      - name: "Washing Machine Running Start Energy"
+        unique_id: "15b7d78f-c7de-4311-8477-d67ef82b1c22"
+        unit_of_measurement: kWh
+        device_class: energy
+        state: "{{ states('sensor.washing_machine_energy') }}"
+
+  # Save time and energy meter when washing machine running finishes.
+  - trigger:
+      - platform: state
+        entity_id: binary_sensor.washing_machine_running
+        from:
+          - "on"
+        to:
+          - "off"
+    sensor:
+      - name: "Washing Machine Running Finish Time"
+        unique_id: "b55d795b-e8f0-403f-b777-7bacecef66ea"
+        device_class: timestamp
+        state: "{{ now() }}"
+
+      - name: "Washing Machine Running Finish Energy"
+        unique_id: "41ecee32-cf16-4ba7-95ab-574b84855e94"
+        unit_of_measurement: kWh
+        device_class: energy
+        state: "{{ states('sensor.washing_machine_energy') }}"
