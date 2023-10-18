@@ -5,7 +5,7 @@
 ################################################################################
 - platform: car_wash
   name: Car Wash # default 'Car Wash'
-  # weather: weather.knmi_thuis
-  weather: weather.buienradar # temp, wait for integration fix
+  weather: weather.knmi_thuis
+  # weather: weather.tomorrow_io_home_daily # temp, wait for integration fix
   unique_id: 1747e5f4-0079-4487-adaf-42891dcfe7f0
   days: 2 ## look forward (default: 2)
