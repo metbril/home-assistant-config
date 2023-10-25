@@ -1011,6 +1011,9 @@
         - condition: state
           entity_id: input_boolean.occupancy_vacation
           state: 'on'
+        - condition: state
+          entity_id: input_boolean.occupancy_party
+          state: 'on'
       - service: scene.turn_on
         target:
           entity_id:
@@ -1141,22 +1144,25 @@
           entity_id: light.pantry_light
   mode: single
 - id: '1667754651770'
-  alias: Adviesprijs Euro95 gewijzigd
+  alias: 'Toot: Adviesprijs Euro95 gewijzigd'
   description: ''
   trigger:
   - platform: state
     entity_id:
     - sensor.adviesprijs_euro95
-  condition: []
+  condition:
+  - condition: template
+    value_template: '{{ trigger.to_state.state not in [''unavailable'', ''unknown'',
+      None] }}'
   action:
   - service: script.toot_engine
     data:
       who: mastodon
-      message: 'De adviesprijs voor Euro 95 is gewijzigd naar €{{ states(''sensor.adviesprijs_euro95'')
-        | replace(''.'', '','') }}/L.
-
-
-        https://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp'
+      message: "{% set from = trigger.from_state.state | float(0) %} {% set to = trigger.to_state.state
+        | float(0) %} {% set change = (to - from) %}  De adviesprijs voor Euro 95
+        is volgens United Consumers zojuist {% if change > 0 -%}\n  verhoogd\n{%-
+        else -%}\n  verlaagd\n{%- endif %} naar €{{ states('sensor.adviesprijs_euro95')
+        | replace('.', ',') }}/L.\n\n\nhttps://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp"
   mode: single
 - id: '1667809761090'
   alias: Safety > Meteoalarm Notification (new)
@@ -1822,6 +1828,7 @@
       minutes: 1
       seconds: 0
     id: Charger Finished
+    from: 'on'
   condition: []
   action:
   - choose:
@@ -2096,7 +2103,7 @@
           %} {{ pictures|random }}"
   mode: single
 - id: '1696590198142'
-  alias: Toot > AdGuard Home Ingeschakeld
+  alias: 'Toot: AdGuard Home Ingeschakeld'
   description: ''
   trigger:
   - platform: state
@@ -2226,6 +2233,10 @@
   - platform: state
     entity_id:
     - sensor.deconz_daylight
+    for:
+      hours: 0
+      minutes: '{{ range(0,4) | random | int(0) }}'
+      seconds: 0
   condition: []
   action:
   - choose:
@@ -2234,11 +2245,65 @@
         entity_id: sensor.deconz_daylight
         state: solar_noon
       sequence:
+      - variables:
+          icon: "{{ '\U0001F31E☀️\U0001F60E\U0001F576️\U0001F324️⛱️' | list | random
+            }}"
       - service: script.toot_engine
         data:
           who: mastodon
-          message: "{{ '\U0001F31E☀️\U0001F60E\U0001F576️\U0001F324️⛱️' | list | random
-            }} {{ ['Het middaguur is aangebroken.', 'We zijn weer op weg naar de avondschemer',
-            'Het gouden uurtje in de ochtend is voorbij.', 'De zon staat op het hoogste
-            punt'] | random }}"
+          message: '{{ icon }} {{ [''Het middaguur is aangebroken.'', ''We zijn weer
+            op weg naar de avondschemer.'', ''Het gouden uurtje in de ochtend is voorbij.'',
+            ''De zon staat op het hoogste punt.'', ''Het dagelijkse hoogtepunt ligt
+            achter ons.''] | random }}'
+    - conditions:
+      - condition: state
+        entity_id: sensor.deconz_daylight
+        state: sunset_end
+      sequence:
+      - variables:
+          icon: "{{ '\U0001F31A\U0001F31D\U0001F31B\U0001F31C\U0001F30C\U0001F309\U0001F307\U0001F526'
+            | list | random }}"
+      - service: script.toot_engine
+        data:
+          who: mastodon
+          message: '{{ icon }}  {{ [ ''De zon is onder.'', ''Zonsondergang!'', ''De
+            dag zit er weer op!'', ''Goedenavond!'' , ''Shoot for the stars. Hit for
+            the moon!'', ''De avond is begonnen.'' ] | random }}'
+  mode: single
+- id: '1698078300179'
+  alias: Kantoor > Verwarming aan als stekker aan gaat
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.office_heater
+    from: 'off'
+    to: 'on'
+  condition:
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: climate.office
+      state: heat
+  action:
+  - service: climate.set_hvac_mode
+    data:
+      hvac_mode: heat
+    target:
+      entity_id: climate.office
+  mode: single
+- id: '1698204489630'
+  alias: 'Toot: 13:37'
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.time
+    to: '13:37'
+  condition: []
+  action:
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: '1337'
   mode: single
