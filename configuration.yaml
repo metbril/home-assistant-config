@@ -71,8 +71,11 @@ ios:
 recorder:
   auto_purge: true  # default = true
   purge_keep_days: 7  # default = 10
+  include:
+    entities: []
   exclude:
     domains:
+      - device_tracker
     entities: []
 
 system_log:
