@@ -156,7 +156,7 @@
       options: '{{ favs }}'
     target:
       entity_id: input_select.sonos_favorites
-  mode: single
+  mode: restart
 - id: '1660923058113'
   alias: 'Office: Play selected Sonos favorite on office speaker'
   description: Switch to selected favorite (playlist or radio) when Office speaker
