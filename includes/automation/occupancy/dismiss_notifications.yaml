@@ -1,13 +1,12 @@
 - id: '1662718880324'
   alias: 'Huis: dismiss auto notifications'
-  description: Dismiss any persistent notification that has been set due to auto switching
-    of occupancy.
+  description: Dismiss any persistent notification that has been set due to auto switching of occupancy.
   mode: single
   trigger:
-  - platform: state
-    entity_id: input_boolean.occupancy_home
-    to: 'on'
+    - platform: state
+      entity_id: input_boolean.occupancy_home
+      to: 'on'
   action:
-  - service: persistent_notification.dismiss
-    data:
-      notification_id: auto_occupancy
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: auto_occupancy

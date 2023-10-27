@@ -3,19 +3,19 @@
   description: Set home occupance to 'Home' when someone comes home and state is away.
   mode: single
   trigger:
-  - platform: state
-    entity_id: group.family
-    to: home
+    - platform: state
+      entity_id: group.family
+      to: home
   condition:
-  - condition: state
-    entity_id: input_boolean.occupancy_away
-    state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_away
+      state: 'on'
   action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.occupancy_home
-  - service: persistent_notification.create
-    data:
-      message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
-      title: Huisbezetting
-      notification_id: auto_occupancy
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.occupancy_home
+    - service: persistent_notification.create
+      data:
+        message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
+        title: Huisbezetting
+        notification_id: auto_occupancy

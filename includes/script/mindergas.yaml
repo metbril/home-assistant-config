@@ -1,7 +1,7 @@
 alias: 'Energy: Post meter reading to mindergas.nl'
 description: >-
   A simple wrapper script around the RESTful command, to be able to
-  post a gas meter reading both manually through the Services menu in the 
+  post a gas meter reading both manually through the Services menu in the
   developer tools and call it from the automations editor.
 mode: single
 fields:

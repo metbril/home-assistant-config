@@ -2,28 +2,28 @@
   alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
   trigger:
-  - platform: state
-    entity_id: group.family
-    from: home
+    - platform: state
+      entity_id: group.family
+      from: home
   condition:
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: input_boolean.occupancy_vacation
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.occupancy_guests
-      state: 'on'
-    - condition: state
-      entity_id: input_boolean.occupancy_away
-      state: 'on'
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: input_boolean.occupancy_vacation
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.occupancy_guests
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.occupancy_away
+          state: 'on'
   action:
-  - service: input_boolean.turn_on
-    target:
-      entity_id: input_boolean.occupancy_away
-  - service: persistent_notification.create
-    data:
-      message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
-      title: Huisbezetting
-      notification_id: auto_occupancy
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.occupancy_away
+    - service: persistent_notification.create
+      data:
+        message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
+        title: Huisbezetting
+        notification_id: auto_occupancy
   mode: single
