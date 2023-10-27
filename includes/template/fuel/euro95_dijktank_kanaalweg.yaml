@@ -1,0 +1,18 @@
+# Extract the fuel price from the OCR'ed prices.
+# Done in 2 steps, so only 1 API call per station is required.
+# Can be done in 1 sensor if only 1 fuel type is needed.
+
+- sensor:
+    - name: "Euro95 (Dijktank Kanaalweg)"
+      state: >
+        {% set results = state_attr( 'sensor.brandstoffen_dijktank_kanaalweg', 'ParsedResults') %}
+        {% if results == None %}
+          None
+        {% else %}
+          {% set split = results[0]['ParsedText'].split('\r\n')[3].split('€') %}
+          {% if (split | count) == 1 %}
+            None
+          {% else %}
+            {{ split[1] | replace(',', '.') | float(None) }}
+          {% endif %}
+        {% endif %}
