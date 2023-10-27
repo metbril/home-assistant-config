@@ -10,10 +10,9 @@
 # Use yesterday's date when posting reading right after midnight.
 # API documentation at https://www.mindergas.nl/member/api
 #
-mindergas:
-  url: https://www.mindergas.nl/api/meter_readings
-  method: post
-  headers:
-    Content-Type: application/json
-    AUTH-TOKEN: !secret mindergas_token
-  payload: '{"date" : "{{ date }}", "reading" : "{{ reading }}"}'
+url: https://www.mindergas.nl/api/meter_readings
+method: post
+headers:
+  Content-Type: application/json
+  AUTH-TOKEN: !secret mindergas_token
+payload: '{"date" : "{{ date }}", "reading" : "{{ reading }}"}'

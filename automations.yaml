@@ -406,38 +406,6 @@
         transition: 5
         brightness_pct: 70
   mode: single
-- id: '1662548148472'
-  alias: Energy > Post Gas Consumption to MinderGas.nl
-  description: 'Post gas consumption to mindergas.nl daily at 00:15.
-
-    The gas meter reading is updated once every hour, within 10 minutes after the
-    full hour. Posting as soon as possible after that, with a safe margin.'
-  trigger:
-  - platform: time
-    at: 00:15:00
-  condition:
-  - condition: numeric_state
-    entity_id: sensor.gas_consumption
-    above: '0'
-  - condition: not
-    conditions:
-    - condition: state
-      entity_id: sensor.yesterday
-      state: unavailable
-  action:
-  - service: script.mindergas
-    data:
-      date: '{{ states(''sensor.yesterday'') }}'
-      reading: '{{ states(''sensor.gas_consumption'') }}'
-  - service: script.toot_engine
-    data:
-      who: mastodon
-      message: 'Ik heb zojuist het gasverbruik van gisteren doorgestuurd naar Mindergas.
-        #gas #energie #besparen
-
-
-        https://mindergas.nl/'
-  mode: single
 - id: '1662609361916'
   alias: 'System: Low battery level detection & notification for all battery sensors'
   description: ''
@@ -2307,3 +2275,17 @@
       who: mastodon
       message: '1337'
   mode: single
+- id: '1698345068706'
+  alias: Always On Koelkaststekker
+  description: ''
+  use_blueprint:
+    path: metbril/always_on.yaml
+    input:
+      target_entity: switch.refrigerator
+- id: '1698345137071'
+  alias: Always On Kledingkast Bjorn
+  description: ''
+  use_blueprint:
+    path: metbril/always_on.yaml
+    input:
+      target_entity: light.kledingkast_bjorn

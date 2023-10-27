@@ -17,7 +17,8 @@ automation: !include automations.yaml # UI editor
 scene: !include scenes.yaml # UI editor
 script: !include scripts.yaml # UI editor
 
-automation split: !include_dir_merge_list automations # Other
+automation split: !include_dir_merge_list includes/automation # Other
+script split: !include_dir_named includes/script # Other
 
 air_quality: !include includes/air_quality.yaml
 alert: !include includes/alert.yaml
@@ -32,7 +33,7 @@ logger: !include includes/logger.yaml
 multiscrape: !include includes/multiscrape.yaml
 notify: !include includes/notify.yaml
 proximity: !include includes/proximity.yaml
-rest_command: !include includes/rest_command.yaml
+rest_command: !include_dir_named includes/rest_command/
 sensor: !include_dir_merge_list includes/sensor
 # template: !include_dir_merge_list includes/template
 template: !include includes/template.yaml
