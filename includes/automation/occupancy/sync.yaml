@@ -1,0 +1,40 @@
+- alias: 'Huis: Synchroniseer bezetting status'
+  id: '1661884728867'
+  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+    alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
+
+    '
+  initial_state: true
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.occupancy_home
+        - input_boolean.occupancy_asleep
+        - input_boolean.occupancy_away
+        - input_boolean.occupancy_party
+        - input_boolean.occupancy_guests
+        - input_boolean.occupancy_vacation
+  action:
+    - variables:
+        all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
+          ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
+    - choose:
+      - conditions:
+          - condition: template
+            value_template: '{{ trigger.to_state.state == ''on'' }}'
+        sequence:
+          - service: input_boolean.turn_off
+            data:
+              entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
+                \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
+                | list | join(', ') }}\n"
+      - conditions:
+        - condition: template
+          value_template: "{{ states.input_boolean | select('search', 'occupancy_')
+            \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
+            | list | count == 0 }}"
+        sequence:
+          - service: input_boolean.turn_on
+            data:
+              entity_id: input_boolean.occupancy_home
