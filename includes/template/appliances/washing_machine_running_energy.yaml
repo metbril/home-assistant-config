@@ -1,0 +1,10 @@
+- sensor:
+  - name: Washing Machine Running Energy
+    unique_id: 55a0f954-a7a8-4040-9eb1-32967c0054f6
+    device_class: energy
+    unit_of_measurement: kWh
+    state: >-
+      {% set start = states('sensor.washing_machine_running_start_energy') | float(0) %}
+      {% set finish = states('sensor.washing_machine_running_finish_energy') | float(0) %}
+      {% set current = states('sensor.washing_machine_energy') | float(0) %}
+      {{ (([current, finish] | max) - start) | round(2) }}

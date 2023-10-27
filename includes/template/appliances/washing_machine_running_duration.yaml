@@ -1,0 +1,15 @@
+- sensor:
+    - name: Washing Machine Running Duration
+      unique_id: f059cf66-215c-4dd7-a421-ff45e262b72d
+      device_class: duration
+      unit_of_measurement: s
+      state: >-
+        {% set start = states('sensor.washing_machine_running_start_time') | as_timestamp %}
+        {% set finish = states('sensor.washing_machine_running_finish_time') | as_timestamp %}
+        {% set current = now() | as_timestamp %}
+        {% if (start > finish) %}
+          {% set secs = current - start %}
+        {% else %}
+          {% set secs = (finish - start) %}
+        {% endif %}
+        {{ secs }}

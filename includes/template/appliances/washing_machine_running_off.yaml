@@ -1,0 +1,19 @@
+# Save time and energy meter when washing machine running finishes.
+- trigger:
+    - platform: state
+      entity_id: binary_sensor.washing_machine_running
+      from:
+        - "on"
+      to:
+        - "off"
+  sensor:
+    - name: "Washing Machine Running Finish Time"
+      unique_id: "b55d795b-e8f0-403f-b777-7bacecef66ea"
+      device_class: timestamp
+      state: "{{ now() }}"
+
+    - name: "Washing Machine Running Finish Energy"
+      unique_id: "41ecee32-cf16-4ba7-95ab-574b84855e94"
+      unit_of_measurement: kWh
+      device_class: energy
+      state: "{{ states('sensor.washing_machine_energy') }}"
