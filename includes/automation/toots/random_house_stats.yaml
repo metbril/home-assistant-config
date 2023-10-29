@@ -73,12 +73,12 @@
               "🔭 Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.buienradar_visibility') | float(0) | round(0) }} km wegkijken. #Buienradar #weer",
               "🌡️ Buiten is het {{ state_attr('weather.knmi_thuis', 'temperature') | round(0) }} °C, maar dat voelt aan als {{ states('sensor.knmi_thuis_gevoelstemperatuur') | round(0) }} °C. #KNMI #WeerLive #weer",
               "☀️ De actuele UV-index is {{ states('sensor.huidige_uv_index') }}. #OpenUV #weer",
-              " Buiten is het {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} graden, 
+              " Buiten is het {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} graden,
                 met een luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} procent
                 en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} millibar.
                 De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
                 uit het {{ states('sensor.buienradar_wind_direction') }}. #Buienradar #weer",
-              " Buiten is de temperatuur {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} gr C, 
+              " Buiten is de temperatuur {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} gr C,
                 met een relatieve luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} %
                 en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} hPa.
                 De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
