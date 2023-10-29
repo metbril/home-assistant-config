@@ -11,6 +11,7 @@
         "editor.autoIndent": "full"
     },
     "files.associations": {
+        "*.yaml": "home-assistant",
         ".prettierrc": "yaml",
         ".prettierignore": "gitignore"
     }
