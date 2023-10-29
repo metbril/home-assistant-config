@@ -40,8 +40,6 @@ template: !include_dir_merge_list includes/template
 
 default_config:
 
-fastdotcom:
-
 # The themes folder is in the root of the config folder, so HACS can install
 # themes there.
 frontend:
