@@ -51,16 +51,16 @@
               "Het Domus Sapiens huis draait nu op {{ states('sensor.yaml_config_lines') }} regels YAML-code. Neem een kijkje in mijn hoofd. (https://github.com/metbril/home-assistant-config)",
               "{{ ((states('sensor.sensor_entities_count') | int) + (states('sensor.binary_sensor_entities_count') | int)) }} sensoren voeden mijn Smart Home. (https://github.com/metbril/home-assistant-config)",
               "{{ states('sensor.automation_entities_count') }} automatiseringen en {{ states('sensor.script_entities_count') }} scripts maken mijn huis slim. (https://github.com/metbril/home-assistant-config)",
-              "Let maar niet op mij.  Ik hou alleen maar {{ states('sensor.lights_count')}} lampen en {{ states('sensor.device_trackers_count') }} apparaten in huis in de gaten. (https://github.com/metbril/home-assistant-config)"
+              "Let maar niet op mij.  Ik hou alleen maar {{ states('sensor.light_entities_count')}} lampen en {{ states('sensor.device_tracker_entities_count') }} apparaten in huis in de gaten. (https://github.com/metbril/home-assistant-config)"
             ],
             "host": [
               "De laatste #backup van Home Assistant is {{ relative(as_datetime(state_attr('sensor.backup_state', 'last_backup'))) }} oud.",
               "Op {{ as_timestamp(state_attr('sensor.backup_state','last_backup')) | timestamp_custom('%d-%m-%Y %H:%M', true) }} is voor het laatst een #backup gemaakt van Home Assistant."
             ],
             "speedtest": [
-              "De pingtijd naar het Internet is {{ states('sensor.orbi_router_average_ping') }} ms. #SpeedTest",
-              "Gemiddelde Internet-snelheden: download {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s, upload {{ states('sensor.orbi_router_uplink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest",
-              "Mijn downloadsnelheid bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #speedtest"
+              "De pingtijd naar het Internet is {{ states('sensor.orbi_router_average_ping') }} milliseconden. #Ziggo #SpeedTest",
+              "Gemiddelde Internet-snelheden: download **{{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }}** Mbit/s, upload **{{ states('sensor.orbi_router_uplink_bandwidth') | float(0) | round(0) }}** Mbit/s. #Ziggo #SpeedTest",
+              "Mijn downloadsnelheid bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest"
             ],
             "internet": [
               "Tot nu toe heb ik voorkomen dat {{ states('sensor.adguard_dns_queries_blocked') }} advertenties en trackers het thuisnetwerk konden bereiken door gebruik van AdGuard Home! #Tracking #Privacy (https://adguard.com/nl/adguard-home/overview.html)",
