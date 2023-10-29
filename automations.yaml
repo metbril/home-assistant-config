@@ -1170,22 +1170,6 @@
         ) |\n    replace('\\n', ' ') }} {{ state_attr( 'binary_sensor.meteoalarm_zuid_holland',
         'web' ) }} #MeteoAlarm #ZuidHolland"
   mode: queued
-- id: f1a564aa-c8da-4f88-bf61-b938627374b2
-  alias: 'Toot: Stop HA'
-  description: Toot when HA stops
-  trigger:
-  - platform: homeassistant
-    event: shutdown
-  action:
-  - service: script.toot_engine
-    data:
-      message: "{% set phrases = [\n  \"\U0001F4A4 Ik ga even een dutje doen.\",\n
-        \ \"\U0001F6B6 Ik moet even weg, maar ik ben zo weer terug.\",\n  \"\U0001F648
-        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!\",\n  \"⛔ Home
-        Assistant wordt gestopt.\"\n] %} {% set hashtags = [\n  \"#HomeAutomation\",\n
-        \ \"#SmartHome\",\n  \"#Domotica\",\n  \"#IoT\"\n] %} {{ phrases | random
-        ~ \" \" ~ hashtags | random ~ \" #HomeAssistant \" ~ \"https://github.com/metbril/home-assistant-config\"
-        }}"
 - id: f5bdd57b-796d-4de6-9602-4e298473bbf8
   alias: 'Toot: Step Tracker'
   description: ''

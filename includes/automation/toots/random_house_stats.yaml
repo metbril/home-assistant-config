@@ -1,0 +1,105 @@
+# Inspired by:
+# https://github.com/CCOSTAN/Home-AssistantConfig/blob/5c020091a89fac5e8419c97ad7df2d37341b91c3/config/packages/twitter.yaml
+#
+- alias: 'Toot: Random House stats'
+  id: b274a40d-cb67-4d6a-94d1-5fa685ae5ea4
+  initial_state: true
+  mode: single
+
+  trigger:
+    - platform: time_pattern
+      minutes: "0" # every hour at 0 minutes
+
+  condition: []
+
+  action:
+    - delay:
+        minutes: '{{ range(0,59) | random | int }}'
+    - variables:
+        pick: >-
+          {{ [
+            "robot",
+            "host",
+            "speedtest",
+            "internet",
+            "promo"
+            ] | random }}
+        message: >-
+          {%- macro relative(dt) -%}
+            {{ relative_time(dt)
+              .replace('years','jaren')
+              .replace('year','jaar')
+              .replace('months',',maanden')
+              .replace('month','maand')
+              .replace('days','dagen')
+              .replace('day','dag')
+              .replace('hours','uren')
+              .replace('hour','uur')
+              .replace('minutes','minuten')
+              .replace('minute','minuut')
+              .replace('seconds','seconden')
+              .replace('second','seconde')
+            }}
+          {%- endmacro -%}
+          {{ {
+            "robot": [
+              "Biep-bop-biep-boep. Ik ben een #RoBot 🤖 bestuurd door @ro@mastodon.nl",
+              "Home Assistant is beschikbaar sinds {{ relative(as_datetime(states('sensor.uptime'))) }} ⏱ geleden. (https://github.com/metbril/home-assistant-config)",
+              "Home Assistant gebruikt momenteel {{ states('sensor.disk_use_percent') | replace('.', ',') }}% van de harde schijf. (https://github.com/metbril/home-assistant-config)",
+              "Ik draai op Home Assistant versie {{ state_attr('update.home_assistant_core_update', 'installed_version') }} (https://github.com/metbril/home-assistant-config)",
+              "{{ states('sensor.yaml_config_lines') }} regels Home Assistant configuratie draaien sinds {{ states('sensor.uptime') | as_timestamp | timestamp_custom('%d-%m-%Y %H:%M') }}. (https://github.com/metbril/home-assistant-config)",
+              "Het Domus Sapiens huis draait nu op {{ states('sensor.yaml_config_lines') }} regels YAML-code. Neem een kijkje in mijn hoofd. (https://github.com/metbril/home-assistant-config)",
+              "{{ ((states('sensor.sensor_entities_count') | int) + (states('sensor.binary_sensor_entities_count') | int)) }} sensoren voeden mijn Smart Home. (https://github.com/metbril/home-assistant-config)",
+              "{{ states('sensor.automation_entities_count') }} automatiseringen en {{ states('sensor.script_entities_count') }} scripts maken mijn huis slim. (https://github.com/metbril/home-assistant-config)",
+              "Let maar niet op mij.  Ik hou alleen maar {{ states('sensor.lights_count')}} lampen en {{ states('sensor.device_trackers_count') }} apparaten in huis in de gaten. (https://github.com/metbril/home-assistant-config)"
+            ],
+            "host": [
+              "De laatste #backup van Home Assistant is {{ relative(as_datetime(state_attr('sensor.backup_state', 'last_backup'))) }} oud.",
+              "Op {{ as_timestamp(state_attr('sensor.backup_state','last_backup')) | timestamp_custom('%d-%m-%Y %H:%M', true) }} is voor het laatst een #backup gemaakt van Home Assistant."
+            ],
+            "speedtest": [
+              "De pingtijd naar het Internet is {{ states('sensor.orbi_router_average_ping') }} ms. #SpeedTest",
+              "Gemiddelde Internet-snelheden: download {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s, upload {{ states('sensor.orbi_router_uplink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest",
+              "Mijn downloadsnelheid bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #speedtest"
+            ],
+            "internet": [
+              "Tot nu toe heb ik voorkomen dat {{ states('sensor.adguard_dns_queries_blocked') }} advertenties en trackers het thuisnetwerk konden bereiken door gebruik van AdGuard Home! #Tracking #Privacy (https://adguard.com/nl/adguard-home/overview.html)",
+              "Met behulp van {{ states('sensor.adguard_rules_count') }} regels heeft AdGuard Home {{ states('sensor.adguard_dns_queries_blocked_ratio') }} % van de DNS-verzoeken gefilterd op advertenties. #AdBlocker (https://adguard.com/nl/adguard-home/overview.html)",
+              "AdGuard Home heeft vandaag {{ states('sensor.adguard_dns_queries') }} DNS-verzoeken afgehandeld! (https://adguard.com/nl/adguard-home/overview.html)"
+            ],
+            "weather": [
+              "Vandaag wordt het {{ states('sensor.knmi_thuis_korte_dagverwachting') | lower }}. #KNMI #WeerLive #weer",
+              "Het is buiten nu {{ states('sensor.knmi_thuis_omschrijving') | lower }}. #KNMI #WeerLive #weer",
+              "🔭 Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.buienradar_visibility') | float(0) | round(0) }} km wegkijken. #Buienradar #weer",
+              "🌡️ Buiten is het {{ state_attr('weather.knmi_thuis', 'temperature') | round(0) }} °C, maar dat voelt aan als {{ states('sensor.knmi_thuis_gevoelstemperatuur') | round(0) }} °C. #KNMI #WeerLive #weer",
+              "☀️ De actuele UV-index is {{ states('sensor.huidige_uv_index') }}. #OpenUV #weer",
+              " Buiten is het {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} graden, 
+                met een luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} procent
+                en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} millibar.
+                De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
+                uit het {{ states('sensor.buienradar_wind_direction') }}. #Buienradar #weer",
+              " Buiten is de temperatuur {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} gr C, 
+                met een relatieve luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} %
+                en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} hPa.
+                De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
+                uit het {{ states('sensor.buienradar_wind_direction') }}
+                en heeft een snelheid van {{ states('sensor.buienradar_wind_speed') | float(0) | round(0) }} km/u.
+                De zon heeft een kracht van {{ states('sensor.buienradar_irradiance') }} W/m2. #Buienradar #weer",
+            ],
+            "promo": [
+              "Jij kunt van je huis ook een #SmartHome maken. Alles wat je nodig hebt is #HomeAssistant, wat tijd en wat configuratiebestanden. Neem daarvoor een kijkje in mijn GitHub repo. (https://github.com/metbril/home-assistant-config)",
+              "Je kunt bekijken hoe dit alles is gedaan door te bladeren door mijn GitHub repository. (https://github.com/metbril/home-assistant-config)",
+              "Meld je aan voor mijn repository met nu al {{ states('sensor.metbril_home_assistant_config_sterren') }} andere gebruikers. Bekijk de {{ states('sensor.metbril_home_assistant_config_issues') }} open taken. (https://github.com/metbril/home-assistant-config)",
+              "Mijn Github code heeft {{ states('sensor.metbril_home_assistant_config_sterren') }} sterren 🌟 en loopt op. Nu met {{ states('sensor.metbril_home_assistant_config_issues') }} open taken. (https://github.com/metbril/home-assistant-config)",
+              "Zorg dat je onze 🐘 Mastodon-accounts @ro@mastodon.nl en @DomusSapiens@botsin.space volgt!"
+            ]
+          }[pick] | random }}
+    - service: script.toot_engine
+      data:
+        message: "{{ message }}"
+
+            # "door": [
+            #   "Het aantal keren dat gisteren op de bel werd gedrukt is {{ states('sensor.doorbell_presses') }}",
+            #   "{{ states('sensor.doorbell_presses') }} mensen kwamen aan de deur vandaag en drukten op de bel.",
+            #   "{{ states('sensor.doorbell_presses') }} deurbelgebruik kwamen voor in de afgelopen 24 uur."
+            # ],

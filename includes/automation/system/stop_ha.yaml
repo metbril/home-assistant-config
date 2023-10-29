@@ -1,0 +1,24 @@
+- id: f1a564aa-c8da-4f88-bf61-b938627374b2
+  alias: 'Toot: Stop HA'
+  description: Toot when HA stops
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - variables:
+        phrase: >-
+          {{ ["💤 Ik ga even een dutje doen.",
+              "🚶‍♂️ Ik moet even weg, maar ik ben zo weer terug.",
+              "🛬 Ga even zitten en sluit je gordel voor de landing.",
+              "🙇 Buig voorover en doe je hoofd tussen je knieën,",
+              "🙈 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!"] | random }}
+        hashtag: >-
+          {{ ["HomeAutomation", "SmartHome", "Domotica", "IoT"] | random }}
+    - service: script.toot_engine
+      data:
+        message: >-
+          {{ phrase }}
+          Home Assistant wordt gestopt.
+          #{{ hashtag }} #HomeAssistant
+
+          https://github.com/metbril/home-assistant-config
