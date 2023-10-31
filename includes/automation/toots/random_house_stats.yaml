@@ -22,6 +22,7 @@
             "host",
             "speedtest",
             "internet",
+            "weather",
             "promo"
             ] | random }}
         message: >-
@@ -54,42 +55,33 @@
               "Let maar niet op mij.  Ik hou alleen maar {{ states('sensor.light_entities_count')}} lampen en {{ states('sensor.device_tracker_entities_count') }} apparaten in huis in de gaten. (https://github.com/metbril/home-assistant-config)"
             ],
             "host": [
-              "De laatste #backup van Home Assistant is {{ relative(as_datetime(state_attr('sensor.backup_state', 'last_backup'))) }} oud.",
-              "Op {{ as_timestamp(state_attr('sensor.backup_state','last_backup')) | timestamp_custom('%d-%m-%Y %H:%M', true) }} is voor het laatst een #backup gemaakt van Home Assistant."
+              "De laatste 🗄️ #backup van Home Assistant is {{ relative(as_datetime(state_attr('sensor.backup_state', 'last_backup'))) }} oud.",
+              "Op {{ as_timestamp(state_attr('sensor.backup_state','last_backup')) | timestamp_custom('%d-%m-%Y %H:%M', true) }} is voor het laatst een 🗄️ #backup gemaakt van Home Assistant."
             ],
             "speedtest": [
-              "De pingtijd naar het Internet is {{ states('sensor.orbi_router_average_ping') }} milliseconden. #Ziggo #SpeedTest",
-              "Gemiddelde Internet-snelheden: download **{{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }}** Mbit/s, upload **{{ states('sensor.orbi_router_uplink_bandwidth') | float(0) | round(0) }}** Mbit/s. #Ziggo #SpeedTest",
-              "Mijn downloadsnelheid bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest"
+              "De pingtijd 🌀 naar het Internet is {{ states('sensor.orbi_router_average_ping') }} milliseconden. #Ziggo #SpeedTest",
+              "Gemiddelde Internet-snelheden 💨: download {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s, upload {{ states('sensor.orbi_router_uplink_bandwidth') | float(0) | round(0) }} Mbit/s. #Ziggo #SpeedTest",
+              "Mijn downloadsnelheid ⬇️ bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest"
             ],
             "internet": [
-              "Tot nu toe heb ik voorkomen dat {{ states('sensor.adguard_dns_queries_blocked') }} advertenties en trackers het thuisnetwerk konden bereiken door gebruik van AdGuard Home! #Tracking #Privacy (https://adguard.com/nl/adguard-home/overview.html)",
-              "Met behulp van {{ states('sensor.adguard_rules_count') }} regels heeft AdGuard Home {{ states('sensor.adguard_dns_queries_blocked_ratio') }} % van de DNS-verzoeken gefilterd op advertenties. #AdBlocker (https://adguard.com/nl/adguard-home/overview.html)",
-              "AdGuard Home heeft vandaag {{ states('sensor.adguard_dns_queries') }} DNS-verzoeken afgehandeld! (https://adguard.com/nl/adguard-home/overview.html)"
+              "🚪 Mijn toegang van buitenaf wordt mede mogelijk gemaakt door Home Assistant Cloud van Nabu Casa. Zo sponsor ik meteen het @homeassistant@fosstodon.org project. #HomeAssistant #RemoteAccess #ExterneToegang",
+              "🛡️ Tot nu toe heb ik voorkomen dat {{ states('sensor.adguard_dns_queries_blocked') }} advertenties en trackers het thuisnetwerk konden bereiken door gebruik van AdGuard Home! #Tracking #Privacy (https://adguard.com/nl/adguard-home/overview.html)",
+              "🛡️ Met behulp van {{ states('sensor.adguard_rules_count') }} regels heeft AdGuard Home {{ states('sensor.adguard_dns_queries_blocked_ratio') }} % van de DNS-verzoeken gefilterd op advertenties. #AdBlocker #Privacy #Tracking (https://adguard.com/nl/adguard-home/overview.html)",
+              "🛡️ AdGuard Home heeft vandaag {{ states('sensor.adguard_dns_queries') }} DNS-verzoeken afgehandeld! #Privacy #Tracking (https://adguard.com/nl/adguard-home/overview.html)"
             ],
             "weather": [
               "Vandaag wordt het {{ states('sensor.knmi_thuis_korte_dagverwachting') | lower }}. #KNMI #WeerLive #weer",
               "Het is buiten nu {{ states('sensor.knmi_thuis_omschrijving') | lower }}. #KNMI #WeerLive #weer",
-              "🔭 Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.buienradar_visibility') | float(0) | round(0) }} km wegkijken. #Buienradar #weer",
-              "🌡️ Buiten is het {{ state_attr('weather.knmi_thuis', 'temperature') | round(0) }} °C, maar dat voelt aan als {{ states('sensor.knmi_thuis_gevoelstemperatuur') | round(0) }} °C. #KNMI #WeerLive #weer",
-              "☀️ De actuele UV-index is {{ states('sensor.huidige_uv_index') }}. #OpenUV #weer",
-              " Buiten is het {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} graden,
-                met een luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} procent
-                en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} millibar.
-                De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
-                uit het {{ states('sensor.buienradar_wind_direction') }}. #Buienradar #weer",
-              " Buiten is de temperatuur {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} gr C,
-                met een relatieve luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} %
-                en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} hPa.
-                De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort
-                uit het {{ states('sensor.buienradar_wind_direction') }}
-                en heeft een snelheid van {{ states('sensor.buienradar_wind_speed') | float(0) | round(0) }} km/u.
-                De zon heeft een kracht van {{ states('sensor.buienradar_irradiance') }} W/m2. #Buienradar #weer",
+              "Wie zijn best doet, kan door het raam ongeveer {{ states('sensor.buienradar_visibility') | float(0) | round(0) }} km wegkijken 🔭. #Buienradar #weer",
+              "Buiten is het 🌡️ {{ state_attr('weather.knmi_thuis', 'temperature') | round(0) }} °C, maar dat voelt aan als {{ states('sensor.knmi_thuis_gevoelstemperatuur') | round(0) }} °C. #KNMI #WeerLive #weer",
+              "De actuele UV-index ☀️ is {{ states('sensor.huidige_uv_index') }}. #OpenUV #weer",
+              "🌦️ Buiten is het {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} graden, met een luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} procent en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} millibar. De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort uit het {{ states('sensor.buienradar_wind_direction') }}. #Buienradar #weer",
+              "⛅ Buiten is de temperatuur {{ states('sensor.buienradar_temperature') | float(0) | round(0) }} °C, met een relatieve luchtvochtigheid van {{ states('sensor.buienradar_humidity') | float(0) | round(0) }} % en een luchtdruk van {{ states('sensor.buienradar_pressure') | float(0) | round(0) }} hPa. De wind komt met een kracht van {{ states('sensor.buienradar_wind_force') }} Beaufort uit het {{ states('sensor.buienradar_wind_direction') }} en heeft een snelheid van {{ states('sensor.buienradar_wind_speed') | float(0) | round(0) }} km/u. De zon heeft een kracht van {{ states('sensor.buienradar_irradiance') }} W/m2. #Buienradar #weer",
             ],
             "promo": [
-              "Jij kunt van je huis ook een #SmartHome maken. Alles wat je nodig hebt is #HomeAssistant, wat tijd en wat configuratiebestanden. Neem daarvoor een kijkje in mijn GitHub repo. (https://github.com/metbril/home-assistant-config)",
-              "Je kunt bekijken hoe dit alles is gedaan door te bladeren door mijn GitHub repository. (https://github.com/metbril/home-assistant-config)",
-              "Meld je aan voor mijn repository met nu al {{ states('sensor.metbril_home_assistant_config_sterren') }} andere gebruikers. Bekijk de {{ states('sensor.metbril_home_assistant_config_issues') }} open taken. (https://github.com/metbril/home-assistant-config)",
+              "Jij kunt van je huis 🏡 ook een #SmartHome maken. Alles wat je nodig hebt is #HomeAssistant, wat tijd en wat configuratiebestanden. Neem daarvoor een kijkje in mijn GitHub repo. (https://github.com/metbril/home-assistant-config)",
+              "Je kunt bekijken hoe dit alles is gedaan door te bladeren 📖 door mijn GitHub repository. (https://github.com/metbril/home-assistant-config)",
+              "Meld je aan voor mijn repository 📚 met nu al {{ states('sensor.metbril_home_assistant_config_sterren') }} andere gebruikers. Bekijk de {{ states('sensor.metbril_home_assistant_config_issues') }} open taken. (https://github.com/metbril/home-assistant-config)",
               "Mijn Github code heeft {{ states('sensor.metbril_home_assistant_config_sterren') }} sterren 🌟 en loopt op. Nu met {{ states('sensor.metbril_home_assistant_config_issues') }} open taken. (https://github.com/metbril/home-assistant-config)",
               "Zorg dat je onze 🐘 Mastodon-accounts @ro@mastodon.nl en @DomusSapiens@botsin.space volgt!"
             ]
