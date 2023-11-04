@@ -11,8 +11,8 @@
   ac_mode: false
   min_cycle_duration:
     minutes: 3
-  cold_tolerance: 0.3
-  hot_tolerance: 0.0
+  cold_tolerance: 0.2
+  hot_tolerance: 0.2
   initial_hvac_mode: "off"
   precision: 0.5
   comfort_temp: 21.0
