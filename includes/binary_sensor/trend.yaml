@@ -1,3 +1,5 @@
+## UI configuration not yet possible.
+## https://www.home-assistant.io/integrations/trend/
 - platform: trend
   sensors:
     adviesprijs_euro95_gestegen:

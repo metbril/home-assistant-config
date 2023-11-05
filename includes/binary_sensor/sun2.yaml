@@ -1,3 +1,5 @@
+## Custom integration
+## UI configuration not yet possible.
 - platform: sun2
   monitored_conditions:
     - elevation

@@ -2,6 +2,7 @@
 ################################################################################
 ## Car Wash - custom component
 ## https://github.com/Limych/ha-car_wash/
+## UI configuration not yet possible.
 ################################################################################
 - platform: car_wash
   name: Car Wash # default 'Car Wash'

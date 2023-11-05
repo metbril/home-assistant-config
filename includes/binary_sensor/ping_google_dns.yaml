@@ -1,4 +1,6 @@
 ---
+## UI configuration not yet possible.
+## https://www.home-assistant.io/integrations/ping/
 - platform: ping
   host: 8.8.8.8
   name: "Google DNS Ping"
