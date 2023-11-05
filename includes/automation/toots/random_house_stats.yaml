@@ -64,7 +64,7 @@
               "Mijn downloadsnelheid ⬇️ bij #Ziggo is ongeveer {{ states('sensor.orbi_router_downlink_bandwidth') | float(0) | round(0) }} Mbit/s. #SpeedTest"
             ],
             "internet": [
-              "🚪 Mijn toegang van buitenaf wordt mede mogelijk gemaakt door Home Assistant Cloud van Nabu Casa. Zo sponsor ik meteen het @homeassistant@fosstodon.org project. #HomeAssistant #RemoteAccess #ExterneToegang",
+              "Mijn toegang 🚪 van buitenaf wordt mede mogelijk gemaakt door Home Assistant Cloud van Nabu Casa. Zo sponsor ik meteen het @homeassistant@fosstodon.org project. #HomeAssistant #RemoteAccess #ExterneToegang (https://nabucasa.com/)",
               "🛡️ Tot nu toe heb ik voorkomen dat {{ states('sensor.adguard_dns_queries_blocked') }} advertenties en trackers het thuisnetwerk konden bereiken door gebruik van AdGuard Home! #Tracking #Privacy (https://adguard.com/nl/adguard-home/overview.html)",
               "🛡️ Met behulp van {{ states('sensor.adguard_rules_count') }} regels heeft AdGuard Home {{ states('sensor.adguard_dns_queries_blocked_ratio') }} % van de DNS-verzoeken gefilterd op advertenties. #AdBlocker #Privacy #Tracking (https://adguard.com/nl/adguard-home/overview.html)",
               "🛡️ AdGuard Home heeft vandaag {{ states('sensor.adguard_dns_queries') }} DNS-verzoeken afgehandeld! #Privacy #Tracking (https://adguard.com/nl/adguard-home/overview.html)"
