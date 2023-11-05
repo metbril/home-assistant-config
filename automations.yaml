@@ -2135,3 +2135,160 @@
     path: metbril/always_on.yaml
     input:
       target_entity: light.kledingkast_bjorn
+- id: '1662718496282'
+  alias: 'Huis: automatisch ingeschakelen bezetting Weg'
+  description: Set home occupance to 'Away' when no-one is at home.
+  trigger:
+    - platform: state
+      entity_id: group.family
+      from: home
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: input_boolean.occupancy_vacation
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.occupancy_guests
+          state: 'on'
+        - condition: state
+          entity_id: input_boolean.occupancy_away
+          state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.occupancy_away
+    - service: persistent_notification.create
+      data:
+        message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
+        title: Huisbezetting
+        notification_id: auto_occupancy
+  mode: single
+- id: '1663060804510'
+  alias: 'Huis: Auto set mode to Home'
+  description: Set home occupance to 'Home' when someone comes home and state is away.
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: home
+  condition:
+    - condition: state
+      entity_id: input_boolean.occupancy_away
+      state: 'on'
+  action:
+    - service: input_boolean.turn_on
+      target:
+        entity_id: input_boolean.occupancy_home
+    - service: persistent_notification.create
+      data:
+        message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
+        title: Huisbezetting
+        notification_id: auto_occupancy
+- id: '1662718880324'
+  alias: 'Huis: dismiss auto notifications'
+  description: Dismiss any persistent notification that has been set due to auto switching of occupancy.
+  mode: single
+  trigger:
+    - platform: state
+      entity_id: input_boolean.occupancy_home
+      to: 'on'
+  action:
+    - service: persistent_notification.dismiss
+      data:
+        notification_id: auto_occupancy
+- alias: 'Huis: Herinnering over afwezigheid'
+  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode. These modes let automations behave differently.'
+  id: '1661885320722'
+  trigger:
+    - platform: state
+      entity_id: sensor.occupancy
+      to: vacation
+    - platform: state
+      entity_id: sensor.occupancy
+      to: guests
+    - platform: time
+      at: 09:00:00
+  condition:
+    - condition: or
+      conditions:
+        - condition: state
+          entity_id: sensor.occupancy
+          state: vacation
+        - condition: state
+          entity_id: sensor.occupancy
+          state: guests
+  variables:
+    mode: '{{ states(''sensor.occupancy'') }}'
+    name: '{{ ''input_boolean.occupancy_'' + mode }}'
+    label: '{{ state_attr(name, ''friendly_name'') | lower }}'
+  action:
+    - service: notify.admin
+      data:
+        title: Bezetting
+        message: '\U0001F9F7 De woningbezetting is nu ingesteld op {{ label }}.'
+- alias: 'Huis: Synchroniseer bezetting status'
+  id: '1661884728867'
+  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
+    alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
+
+    '
+  initial_state: true
+  mode: queued
+  trigger:
+    - platform: state
+      entity_id:
+        - input_boolean.occupancy_home
+        - input_boolean.occupancy_asleep
+        - input_boolean.occupancy_away
+        - input_boolean.occupancy_party
+        - input_boolean.occupancy_guests
+        - input_boolean.occupancy_vacation
+  action:
+    - variables:
+        all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
+          ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
+    - choose:
+        - conditions:
+            - condition: template
+              value_template: '{{ trigger.to_state.state == ''on'' }}'
+          sequence:
+            - service: input_boolean.turn_off
+              data:
+                entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
+                  \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
+                  | list | join(', ') }}\n"
+        - conditions:
+            - condition: template
+              value_template: "{{ states.input_boolean | select('search', 'occupancy_')
+                \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
+                | list | count == 0 }}"
+              sequence:
+                - service: input_boolean.turn_on
+                  data:
+                    entity_id: input_boolean.occupancy_home
+- id: f1a564aa-c8da-4f88-bf61-b938627374b2
+  alias: 'Toot: Stop HA'
+  description: Toot when HA stops
+  trigger:
+    - platform: homeassistant
+      event: shutdown
+  action:
+    - variables:
+        phrase: >-
+          {{ ["💤 Ik ga even een dutje doen.",
+              "🚶‍♂️ Ik moet even weg, maar ik ben zo weer terug.",
+              "🛬 Ga even zitten en sluit je gordel voor de landing.",
+              "🙇 Buig voorover en doe je hoofd tussen je knieën,",
+              "🙈 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!"] | random }}
+        hashtag: >-
+          {{ ["HomeAutomation", "SmartHome", "Domotica", "IoT"] | random }}
+    - service: script.toot_engine
+      data:
+        message: >-
+          {{ phrase }}
+          Home Assistant wordt gestopt.
+          #{{ hashtag }} #HomeAssistant
+
+          https://github.com/metbril/home-assistant-config
