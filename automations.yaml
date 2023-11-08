@@ -81,30 +81,6 @@
     data:
       entity_id: input_select.signaallamp_scene
       option: Uit
-- id: '1660887358846'
-  alias: 'Lighting: Kledingkast Bjorn altijd aan'
-  description: De verlichting in de kledingkast moet altijd aan staan, zodat de sensor
-    het licht kan inschakelen.
-  trigger:
-  - platform: device
-    type: turned_off
-    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
-    entity_id: light.kledingkast_bjorn
-    domain: light
-  - platform: homeassistant
-    event: start
-  condition: []
-  action:
-  - type: turn_on
-    device_id: 6d83fdc507bebb0799f1ad633c94cb7a
-    entity_id: light.kledingkast_bjorn
-    domain: light
-    brightness_pct: 50
-  - service: automation.turn_on
-    data: {}
-    target:
-      entity_id: automation.lighthing_kledingkast_bjorn_altijd_aan
-  mode: single
 - id: 068719c4-88f2-44b5-a809-e2513ae65604
   alias: Outside > Weather > Buienalarm
   description: Send a notification and tweet when it's raining or rain is forecasted.
@@ -121,21 +97,22 @@
   action:
   - service: notify.robert
     data:
-      message: "{{ \"\U0001F53A\" if (trigger.to_state.attributes.index > trigger.from_state.attributes.index)
-        else \"\U0001F53B\" }} {{ states( 'sensor.buienalarm' ) }} {{ [\"☔️\",\"☂️\",\"\U0001F302\",\"\U0001F9E5\",\"\U0001F4A6\",\"\U0001F327\",\"\U0001F326\",\"⛈\",\"\U0001F308\"]
-        | random }}\n"
+      message: "{{ '\U0001F53A' if (trigger.to_state.attributes.index > trigger.from_state.attributes.index)
+        else '\U0001F53B' }} {{ states( 'sensor.buienalarm' ) }} {{ ['☔️', '☂️', '\U0001F302',
+        '\U0001F9E5', '\U0001F4A6', '\U0001F327', '\U0001F326', '⛈', '\U0001F308']
+        | random }}"
       title: Buienalarm
       data:
         url: https://www.buienalarm.nl/{{ state_attr( 'zone.home' , 'latitude' ) }},{{
           state_attr( 'zone.home' , 'longitude' ) }}
-  - service: notify.twitter
+  - service: notify.mastodon
     data:
-      message: "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ \"Vergeet je
-        regenjas niet mee te nemen! \U0001F9E5\", \"Neem een paraplu mee! \U0001F302\",
-        \"Je bent gewaarschuwd! ⚠️\", \"Hou @buienalarm dus goed in de gaten! \U0001F327️\",
-        \"Sluit je ramen en deuren af! \U0001FA9F\U0001F6AA\", \"Maar na regen komt
-        zonneschijn! \U0001F326\", \"Zie je al een regenboog? \U0001F308\" ] | random
-        \ }} #buienalarm https://www.buienalarm.nl/"
+      message: "☔️ {{ states(trigger.entity_id) }} in de buurt. {{ [ 'Vergeet je regenjas
+        niet mee te nemen! \U0001F9E5', 'Neem een paraplu mee! \U0001F302', 'Je bent
+        gewaarschuwd! ⚠️', 'Hou @buienalarm dus goed in de gaten! \U0001F327', 'Sluit
+        je ramen en deuren af! \U0001FA9F\U0001F6AA', 'Maar na regen komt zonneschijn!
+        \U0001F326️', 'Zie je al een regenboog? \U0001F308' ] | random  }} #buienalarm
+        https://www.buienalarm.nl/"
   mode: single
 - id: '1660920784418'
   alias: 'Media: Update Sonos Source Selector'
@@ -428,7 +405,7 @@
 - id: 971fc035-f021-4015-a54b-8c6da9ddf200
   alias: Outside > Safety > Brandweer in de buurt
   description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
-    op Twitter.
+    op Mastodon.
 
     '
   trigger:
@@ -1901,7 +1878,7 @@
         entity_id: media_player.woonkamer
         volume_level: 0.3
         message: Er wordt aangebeld aan de voordeur.
-  - service: notify.twitter
+  - service: notify.mastodon
     data:
       message: "{{ [ \"Oei, dat kietelt. Iemand drukte zojuist op mijn belletje.\",
         \"Au! Dat deed pijn. Wie raakte de deurbel aan?\", \"Dat deed een belletje
@@ -2129,7 +2106,7 @@
     input:
       target_entity: switch.refrigerator
 - id: '1698345137071'
-  alias: Always On Kledingkast Bjorn
+  alias: 'Lighting: Always On Kledingkast Bjorn'
   description: ''
   use_blueprint:
     path: metbril/always_on.yaml
@@ -2139,156 +2116,150 @@
   alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
   trigger:
-    - platform: state
-      entity_id: group.family
-      from: home
+  - platform: state
+    entity_id: group.family
+    from: home
   condition:
-    - condition: not
-      conditions:
-        - condition: state
-          entity_id: input_boolean.occupancy_vacation
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.occupancy_guests
-          state: 'on'
-        - condition: state
-          entity_id: input_boolean.occupancy_away
-          state: 'on'
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: input_boolean.occupancy_vacation
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_guests
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.occupancy_away
+      state: 'on'
   action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.occupancy_away
-    - service: persistent_notification.create
-      data:
-        message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
-        title: Huisbezetting
-        notification_id: auto_occupancy
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.occupancy_away
+  - service: persistent_notification.create
+    data:
+      message: Niemand meer thuis. Huisbezetting automatisch ingesteld op 'Weg'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
   mode: single
 - id: '1663060804510'
   alias: 'Huis: Auto set mode to Home'
   description: Set home occupance to 'Home' when someone comes home and state is away.
   mode: single
   trigger:
-    - platform: state
-      entity_id: group.family
-      to: home
+  - platform: state
+    entity_id: group.family
+    to: home
   condition:
-    - condition: state
-      entity_id: input_boolean.occupancy_away
-      state: 'on'
+  - condition: state
+    entity_id: input_boolean.occupancy_away
+    state: 'on'
   action:
-    - service: input_boolean.turn_on
-      target:
-        entity_id: input_boolean.occupancy_home
-    - service: persistent_notification.create
-      data:
-        message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
-        title: Huisbezetting
-        notification_id: auto_occupancy
+  - service: input_boolean.turn_on
+    target:
+      entity_id: input_boolean.occupancy_home
+  - service: persistent_notification.create
+    data:
+      message: Er is weer iemand thuis. Huisbezetting automatisch ingesteld op 'Thuis'.
+      title: Huisbezetting
+      notification_id: auto_occupancy
 - id: '1662718880324'
   alias: 'Huis: dismiss auto notifications'
-  description: Dismiss any persistent notification that has been set due to auto switching of occupancy.
+  description: Dismiss any persistent notification that has been set due to auto switching
+    of occupancy.
   mode: single
   trigger:
-    - platform: state
-      entity_id: input_boolean.occupancy_home
-      to: 'on'
+  - platform: state
+    entity_id: input_boolean.occupancy_home
+    to: 'on'
   action:
-    - service: persistent_notification.dismiss
-      data:
-        notification_id: auto_occupancy
+  - service: persistent_notification.dismiss
+    data:
+      notification_id: auto_occupancy
 - alias: 'Huis: Herinnering over afwezigheid'
-  description: 'Notify when vacation or guest occupancy, and daily when still in vacation
-    or guest mode. These modes let automations behave differently.'
+  description: Notify when vacation or guest occupancy, and daily when still in vacation
+    or guest mode. These modes let automations behave differently.
   id: '1661885320722'
   trigger:
-    - platform: state
-      entity_id: sensor.occupancy
-      to: vacation
-    - platform: state
-      entity_id: sensor.occupancy
-      to: guests
-    - platform: time
-      at: 09:00:00
+  - platform: state
+    entity_id: sensor.occupancy
+    to: vacation
+  - platform: state
+    entity_id: sensor.occupancy
+    to: guests
+  - platform: time
+    at: 09:00:00
   condition:
-    - condition: or
-      conditions:
-        - condition: state
-          entity_id: sensor.occupancy
-          state: vacation
-        - condition: state
-          entity_id: sensor.occupancy
-          state: guests
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: sensor.occupancy
+      state: vacation
+    - condition: state
+      entity_id: sensor.occupancy
+      state: guests
   variables:
     mode: '{{ states(''sensor.occupancy'') }}'
     name: '{{ ''input_boolean.occupancy_'' + mode }}'
     label: '{{ state_attr(name, ''friendly_name'') | lower }}'
   action:
-    - service: notify.admin
-      data:
-        title: Bezetting
-        message: '\U0001F9F7 De woningbezetting is nu ingesteld op {{ label }}.'
+  - service: notify.admin
+    data:
+      title: Bezetting
+      message: \U0001F9F7 De woningbezetting is nu ingesteld op {{ label }}.
 - alias: 'Huis: Synchroniseer bezetting status'
   id: '1661884728867'
-  description: 'Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden
-    alle andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
-
-    '
+  description: Synchroniseer alle knoppen. Als er een wordt ingeschakeld, worden alle
+    andere uitgeschakeld. Als alles is uitgeschakeld, wordt Thuis ingeschakeld.
   initial_state: true
   mode: queued
   trigger:
-    - platform: state
-      entity_id:
-        - input_boolean.occupancy_home
-        - input_boolean.occupancy_asleep
-        - input_boolean.occupancy_away
-        - input_boolean.occupancy_party
-        - input_boolean.occupancy_guests
-        - input_boolean.occupancy_vacation
+  - platform: state
+    entity_id:
+    - input_boolean.occupancy_home
+    - input_boolean.occupancy_asleep
+    - input_boolean.occupancy_away
+    - input_boolean.occupancy_party
+    - input_boolean.occupancy_guests
+    - input_boolean.occupancy_vacation
   action:
-    - variables:
-        all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
-          ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
-    - choose:
-        - conditions:
-            - condition: template
-              value_template: '{{ trigger.to_state.state == ''on'' }}'
-          sequence:
-            - service: input_boolean.turn_off
-              data:
-                entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
-                  \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
-                  | list | join(', ') }}\n"
-        - conditions:
-            - condition: template
-              value_template: "{{ states.input_boolean | select('search', 'occupancy_')
-                \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
-                | list | count == 0 }}"
-              sequence:
-                - service: input_boolean.turn_on
-                  data:
-                    entity_id: input_boolean.occupancy_home
+  - variables:
+      all_off: '{{ states.input_boolean | select(''search'', ''occupancy_'')  | selectattr(''state'',
+        ''eq'', ''on'') | map(attribute=''entity_id'') | list | count == 0 }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ trigger.to_state.state == ''on'' }}'
+      sequence:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: "{{ states.input_boolean | select('search', 'occupancy_') | \n
+            \ map(attribute='entity_id') |\n  reject('equalto', trigger.entity_id)
+            | list | join(', ') }}\n"
+    - conditions:
+      - condition: template
+        value_template: "{{ states.input_boolean | select('search', 'occupancy_')
+          \ \n  | selectattr('state', 'eq', 'on') \n  | map(attribute='entity_id')
+          | list | count == 0 }}"
+      sequence:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.occupancy_home
 - id: f1a564aa-c8da-4f88-bf61-b938627374b2
   alias: 'Toot: Stop HA'
   description: Toot when HA stops
   trigger:
-    - platform: homeassistant
-      event: shutdown
+  - platform: homeassistant
+    event: shutdown
   action:
-    - variables:
-        phrase: >-
-          {{ ["💤 Ik ga even een dutje doen.",
-              "🚶‍♂️ Ik moet even weg, maar ik ben zo weer terug.",
-              "🛬 Ga even zitten en sluit je gordel voor de landing.",
-              "🙇 Buig voorover en doe je hoofd tussen je knieën,",
-              "🙈 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, wie niet weg is, is gezien!"] | random }}
-        hashtag: >-
-          {{ ["HomeAutomation", "SmartHome", "Domotica", "IoT"] | random }}
-    - service: script.toot_engine
-      data:
-        message: >-
-          {{ phrase }}
-          Home Assistant wordt gestopt.
-          #{{ hashtag }} #HomeAssistant
+  - variables:
+      phrase: "{{ [\"\U0001F4A4 Ik ga even een dutje doen.\",\n    \"\U0001F6B6‍♂️
+        Ik moet even weg, maar ik ben zo weer terug.\",\n    \"\U0001F6EC Ga even
+        zitten en sluit je gordel voor de landing.\",\n    \"\U0001F647 Buig voorover
+        en doe je hoofd tussen je knieën,\",\n    \"\U0001F648 1, 2, 3, 4, 5, 6, 7,
+        8, 9, 10, wie niet weg is, is gezien!\"] | random }}"
+      hashtag: '{{ ["HomeAutomation", "SmartHome", "Domotica", "IoT"] | random }}'
+  - service: script.toot_engine
+    data:
+      message: '{{ phrase }} Home Assistant wordt gestopt. #{{ hashtag }} #HomeAssistant
 
-          https://github.com/metbril/home-assistant-config
+        https://github.com/metbril/home-assistant-config'
