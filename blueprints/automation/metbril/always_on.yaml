@@ -1,18 +1,19 @@
 blueprint:
   name: Always On
   description: >-
-    Always keep on a light or switch. If it is turned on, 
+    Always keep on a light or switch. If it is turned off, 
     then immediately turn it back on.
   domain: automation
 
   input:
     target_entity:
-      name: Entity to keep on
+      name: Entity to always keep on
       selector:
         entity:
           domain:
             - light
             - switch
+            - input_boolean
           multiple: false
 
 trigger:
@@ -20,6 +21,8 @@ trigger:
     entity_id: !input target_entity
     from: 'on'
     to: 'off'
+  - platform: homeassistant
+    event: start
 
 action:
   - service: homeassistant.turn_on
