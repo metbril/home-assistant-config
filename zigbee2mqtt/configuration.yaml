@@ -38,6 +38,19 @@ devices:
     friendly_name: Luchtkwaliteit Woonkamer
     temperature_precision: 1
     humidity_precision: 1
+  '0x001788010489e455':
+    friendly_name: Leeslamp
+  '0x0017880104eedc4d':
+    friendly_name: Dimmer Leeslamp
+  '0x70ac08fffe8c2ec1':
+    friendly_name: TuYa Stekker
+    measurement_poll_interval: 6
+    power_calibration: 0
+    state_action: false
+    power_precision: 2
+    current_calibration: 0
+    voltage_calibration: 0
+    energy_calibration: 0
 advanced:
   log_level: info
 groups:
