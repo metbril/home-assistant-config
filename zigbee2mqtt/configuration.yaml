@@ -40,22 +40,40 @@ devices:
     humidity_precision: 1
   '0x001788010489e455':
     friendly_name: Leeslamp
-  '0x0017880104eedc4d':
-    friendly_name: Dimmer Leeslamp
   '0x70ac08fffe8c2ec1':
     friendly_name: TuYa Stekker
-    measurement_poll_interval: 6
+    measurement_poll_interval: 15
     power_calibration: 0
     state_action: false
     power_precision: 2
     current_calibration: 0
     voltage_calibration: 0
     energy_calibration: 0
+  '0x00178801001057bd':
+    friendly_name: Hoge kast
+  '0x00178801036082bf':
+    friendly_name: Willner
+  '0x0017880104eedc4d':
+    friendly_name: Dimmer Leeslamp
+  '0x0017880104f5fd96':
+    friendly_name: Dimmer Woonkamer
 advanced:
   log_level: info
+  log_syslog:
+    app_name: Zigbee2MQTT
+    eol: /n
+    host: localhost
+    localhost: localhost
+    path: /dev/log
+    pid: process.pid
+    port: 514
+    protocol: udp4
+    type: '5424'
 groups:
   '1':
     friendly_name: living_lights_z2m
     devices:
       - 0x00178801001057bd/11
-      - 0x001788010804ffa1/11
+      - 0x001788010489e455/11
+      - 0x385cfbfffe633f23/1
+      - 0x00178801036082bf/11
