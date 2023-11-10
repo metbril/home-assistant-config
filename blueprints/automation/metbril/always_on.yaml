@@ -1,3 +1,15 @@
+#
+# Author: Robert van Bregt
+# Version: 1.1
+# Last update: 2023-11-10
+#
+# CHANGE LOG:
+# - v1.1 (2023-11-10)
+#   - Add 'on' duration as selector
+#   - Create persistant notification
+# - v1.0 (2023-11-09)
+#   - Initial release
+#
 blueprint:
   name: Always On
   description: >-
@@ -16,19 +28,37 @@ blueprint:
             - switch
             - input_boolean
           multiple: false
+    on_duration:
+      name: Time entity is on before switching off
+      selector:
+        duration:
 
 trigger:
   - platform: state
     entity_id: !input target_entity
     from: 'on'
     to: 'off'
+    for: !input on_duration
+    id: by_entity
   - platform: homeassistant
     event: start
+    id: by_start
+
+condition:
+  - condition: state
+    entity_id: !input target_entity
+    state: 'off'
 
 action:
+  - variables:
+      target_entity: !input target_entity
+
   - service: homeassistant.turn_on
     target:
-      entity_id: !input target_entity
+      entity_id: "{{ target_entity }}"
+
+  - service: persistent_notification.create
+    data:
+      message: "Switched on entity {{ state_attr(target_entity, 'friendly_name') }}"
 
 mode: single
-max_exceeded: silent

@@ -302,31 +302,6 @@
     data:
       message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
   mode: single
-- id: '1662530759975'
-  alias: Home > Security > Inschakelen AdGuard
-  description: Schakel AdGuard opnieuw in zodra deze meer dan 30 minuten uit heeft
-    gestaan.
-  trigger:
-  - platform: state
-    entity_id:
-    - switch.adguard_protection
-    from: 'on'
-    to: 'off'
-    for:
-      hours: 0
-      minutes: 30
-      seconds: 0
-  condition: []
-  action:
-  - service: switch.turn_on
-    data: {}
-    target:
-      entity_id: switch.adguard_protection
-  - service: persistent_notification.create
-    data:
-      message: AdGuard is na 30 minuten weer automatisch ingeschakeld.
-      title: AdGuard
-  mode: single
 - id: '1662547518457'
   alias: 'Office: Printer powered notification'
   description: Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
@@ -350,9 +325,7 @@
   description: 'Switch the outdoor lights on/off based on sun elevation. Elevation
     is an attribute of the sun integration. Elevetion is more accurate for darkness
     that a fixed time. Elevation varies over time. Note: I should create a blueprint
-    for this some day.
-
-    '
+    for this some day.'
   trigger:
   - platform: numeric_state
     entity_id: sun.sun
@@ -404,10 +377,8 @@
       time: '20:00:00'
 - id: 971fc035-f021-4015-a54b-8c6da9ddf200
   alias: Outside > Safety > Brandweer in de buurt
-  description: 'Stuur een melding dat de brandweer dichtbij is en plaats een bericht
+  description: Stuur een melding dat de brandweer dichtbij is en plaats een bericht
     op Mastodon.
-
-    '
   trigger:
   - platform: state
     entity_id: sensor.p2000_brandweer
@@ -438,9 +409,7 @@
     Requires the Blitzortung integration custom component: https://github.com/mrk-its/homeassistant-blitzortung
 
     Inspired by: https://github.com/mrk-its/homeassistant-blitzortung https://www.vcloudinfo.com/2020/08/adding-a-lightning-sensor-to-home-assistant.html
-    https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml
-
-    '
+    https://github.com/CCOSTAN/Home-AssistantConfig/blob/master/config/packages/lightning.yaml'
   trigger:
   - platform: state
     entity_id: sensor.blitzortung_lightning_counter
@@ -564,9 +533,7 @@
     This usually happens when you put your laptop in sleep or hibernate mode without
     closing the Teams application first.
 
-    The status should not be reset if you just work outside of regular hours.
-
-    '
+    The status should not be reset if you just work outside of regular hours.'
   id: aaff7435-8f79-4657-af57-454710cde9b9
   mode: single
   trigger:
@@ -2099,12 +2066,16 @@
       message: '1337'
   mode: single
 - id: '1698345068706'
-  alias: Always On Koelkaststekker
+  alias: Kitchen > Koelkast Always On
   description: ''
   use_blueprint:
     path: metbril/always_on.yaml
     input:
       target_entity: switch.refrigerator
+      on_duration:
+        hours: 0
+        minutes: 0
+        seconds: 0
 - id: '1698345137071'
   alias: 'Lighting: Always On Kledingkast Bjorn'
   description: ''
@@ -2112,6 +2083,10 @@
     path: metbril/always_on.yaml
     input:
       target_entity: light.kledingkast_bjorn
+      on_duration:
+        hours: 0
+        minutes: 0
+        seconds: 0
 - id: '1662718496282'
   alias: 'Huis: automatisch ingeschakelen bezetting Weg'
   description: Set home occupance to 'Away' when no-one is at home.
@@ -2263,3 +2238,37 @@
       message: '{{ phrase }} Home Assistant wordt gestopt. #{{ hashtag }} #HomeAssistant
 
         https://github.com/metbril/home-assistant-config'
+- id: '1699508412007'
+  alias: 'System: Home Assistant started'
+  description: Stuur een notificatie zodra Home Assistant is gestart.
+  trigger:
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: Home Assistant is gestart.
+  - variables:
+      cheer: '{{ [''Halleluja!'', ''Yes!'', ''Gelukkig!'', ''Joepie!'', ''We have
+        lift-off!'', ''Touch down!'', ''The eagle has landed.'', ''En, actie!'', ''Goed
+        bezig!'', ''Goed gedaan, jochie!'', ''Lekkerrr!'', ''Go, go, go!''] | random
+        }}'
+      emoji: "{{ '\U0001F680✈️\U0001F6EB\U0001F6EC\U0001F6E9️\U0001F3AC\U0001F64F\U0001F973\U0001F525'
+        | list | random }}"
+  - service: script.toot_engine
+    data:
+      who: mastodon
+      message: '{{ cheer }} {{ emoji }} Home Assistant is gestart.'
+  mode: single
+- id: '1699617264939'
+  alias: 'Security: AdGuard Always On'
+  description: Switch on AdGuard when it's been disabled for more than 30 minutes.
+  use_blueprint:
+    path: metbril/always_on.yaml
+    input:
+      target_entity: switch.adguard_protection
+      on_duration:
+        hours: 0
+        minutes: 30
+        seconds: 0
