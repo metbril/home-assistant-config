@@ -1021,18 +1021,18 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.garage_motion
+    - binary_sensor.pantry_light
     from: 'off'
     to: 'on'
     id: Motion
   - platform: state
     entity_id:
-    - binary_sensor.garage_motion
+    - binary_sensor.pantry_light
     from: 'on'
     to: 'off'
     for:
       hours: 0
-      minutes: 5
+      minutes: 0
       seconds: 0
     id: No motion
   condition: []
@@ -1573,13 +1573,13 @@
   trigger:
   - platform: state
     entity_id:
-    - binary_sensor.bike_charger
+    - binary_sensor.bike_charger_plug
     to: 'on'
     from: 'off'
     id: Charger Started
   - platform: state
     entity_id:
-    - binary_sensor.bike_charger
+    - binary_sensor.bike_charger_plug
     to: 'off'
     for:
       hours: 0
@@ -1597,9 +1597,9 @@
       sequence:
       - service: input_number.set_value
         target:
-          entity_id: input_number.bike_charger_start_energy
+          entity_id: input_number.bike_charger_plug_start_energy
         data:
-          value: '{{ states(''sensor.bike_charger_energy'') | float(0) }}'
+          value: '{{ states(''sensor.bike_charger_plug_energy'') | float(0) }}'
     - conditions:
       - condition: trigger
         id:
@@ -1617,7 +1617,7 @@
         then:
         - type: turn_off
           device_id: fc8175d314fecd80e9526220b04ae4b7
-          entity_id: switch.bike_charger
+          entity_id: switch.bike_charger_plug
           domain: switch
       - service: notify.parents
         data:
@@ -1626,13 +1626,15 @@
         data:
           icon: /config/www/img/bike-charger.png
           message: De fietslader is klaar.
+      - variables:
+          cheer: '{{ [''Zo!'', ''Eindelijk!'', ''Hè, hè.'', "Dat heeft even geduurd.",
+            "Dat duurde lang.", "Daar kwam geen eind aan.", "Nou zeg!", "Nou, nou.",
+            "Tjongejonge", "Tjemig", "Yes!", "Joepie!"] | random }}'
+          icon: "{{ '\U0001F6B2\U0001F50B⚡️\U0001F50C' | list | random }}"
       - service: script.toot_engine
         data:
           who: mastodon
-          message: "{{ ['Zo!', 'Eindelijk!', 'Hè, hè.', \"Dat heeft even geduurd.\",
-            \"Dat duurde lang.\", \"Er kwam geen eind aan.\", \"Nou zeg!\"] | random
-            }} De fietsaccu is weer opgeladen. {{ ['\U0001F6B2', '\U0001F50B', '⚡️',
-            '\U0001F50C'] | random }}"
+          message: '{{ cheer }} {{ icon }} De fietsaccu is weer opgeladen.'
   mode: single
 - id: '1664780304702'
   alias: Outside Brightness Notification
@@ -2272,3 +2274,16 @@
         hours: 0
         minutes: 30
         seconds: 0
+- id: '1699710901676'
+  alias: 'System: Clear TTS caches'
+  description: Clear all TTS caches every day at 3:00.
+  trigger:
+  - platform: time
+    at: 03:00:00
+  condition: []
+  action:
+  - service: tts.clear_cache
+    data: {}
+  - service: chime_tts.clear_cache
+    data: {}
+  mode: single

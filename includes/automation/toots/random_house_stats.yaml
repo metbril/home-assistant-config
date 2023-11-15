@@ -51,6 +51,7 @@
               "{{ states('sensor.yaml_config_lines') }} regels Home Assistant configuratie draaien sinds {{ states('sensor.uptime') | as_timestamp | timestamp_custom('%d-%m-%Y %H:%M') }}. (https://github.com/metbril/home-assistant-config)",
               "Het Domus Sapiens huis draait nu op {{ states('sensor.yaml_config_lines') }} regels YAML-code. Neem een kijkje in mijn hoofd. (https://github.com/metbril/home-assistant-config)",
               "{{ ((states('sensor.sensor_entities_count') | int) + (states('sensor.binary_sensor_entities_count') | int)) }} sensoren voeden mijn Smart Home. (https://github.com/metbril/home-assistant-config)",
+              "Ik houd van {{ states('sensor.update_entities_count') }} onderdelen bij of er een software update beschikbaar is.",
               "{{ states('sensor.automation_entities_count') }} automatiseringen en {{ states('sensor.script_entities_count') }} scripts maken mijn huis slim. (https://github.com/metbril/home-assistant-config)",
               "Let maar niet op mij.  Ik hou alleen maar {{ states('sensor.light_entities_count')}} lampen en {{ states('sensor.device_tracker_entities_count') }} apparaten in huis in de gaten. (https://github.com/metbril/home-assistant-config)"
             ],
