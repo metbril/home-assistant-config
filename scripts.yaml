@@ -579,3 +579,12 @@ system_reset_error_warning_counters:
       - counter.system_warnings
   mode: single
   icon: mdi:restore
+garage_motion_timer_start:
+  alias: Pantry Light Timer Start
+  sequence:
+  - service: timer.start
+    data:
+      duration: '{{ states(''input_number.pantry_light_timeout'') | int(0) }}'
+    target:
+      entity_id: timer.pantry_light
+  mode: single

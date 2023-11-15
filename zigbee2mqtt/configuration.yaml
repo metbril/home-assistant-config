@@ -26,6 +26,8 @@ devices:
     pressure_precision: 3
   '0x70ac08fffea0aea9':
     friendly_name: Garage Ingang
+    occupancy_timeout: 180
+    illuminance_below_threshold_check: false
   '0x040d84fffe9a387b':
     friendly_name: Lotus
   '0x84ba20fffead3d8e':
@@ -57,6 +59,13 @@ devices:
     friendly_name: Dimmer Leeslamp
   '0x0017880104f5fd96':
     friendly_name: Dimmer Woonkamer
+  '0x943469fffe75d670':
+    friendly_name: Garage Entreedeur
+    illuminance_below_threshold_check: true
+    occupancy_timeout: 180
+  '0x0017880100ff526f':
+    friendly_name: Pantry Light
+    transition: 1
 advanced:
   log_level: info
   log_syslog:
