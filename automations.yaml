@@ -1587,6 +1587,9 @@
       seconds: 0
     id: Charger Finished
     from: 'on'
+  - platform: homeassistant
+    event: start
+    id: Herstart
   condition: []
   action:
   - choose:
@@ -1604,6 +1607,10 @@
       - condition: trigger
         id:
         - Charger Finished
+        - Herstart
+      - condition: state
+        entity_id: binary_sensor.bike_charger_plug
+        state: 'off'
       sequence:
       - if:
         - condition: state
@@ -1992,7 +1999,7 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.deconz_daylight
+    - sensor.thuis_zon_deconz_daglicht
     for:
       hours: 0
       minutes: '{{ range(0,4) | random | int(0) }}'
@@ -2002,7 +2009,7 @@
   - choose:
     - conditions:
       - condition: state
-        entity_id: sensor.deconz_daylight
+        entity_id: sensor.thuis_zon_deconz_daglicht
         state: solar_noon
       sequence:
       - variables:
@@ -2017,7 +2024,7 @@
             achter ons.''] | random }}'
     - conditions:
       - condition: state
-        entity_id: sensor.deconz_daylight
+        entity_id: sensor.thuis_zon_deconz_daglicht
         state: sunset_end
       sequence:
       - variables:
@@ -2286,4 +2293,30 @@
     data: {}
   - service: chime_tts.clear_cache
     data: {}
+  mode: single
+- id: '1700326949347'
+  alias: Lamp voorraadkast lang aan
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - light.pantry_light
+    to: 'on'
+    for:
+      hours: 0
+      minutes: 15
+      seconds: 0
+  condition:
+  - condition: state
+    entity_id: binary_sensor.garage_motion
+    state: 'off'
+  - condition: state
+    entity_id: timer.pantry_light
+    state: idle
+  action:
+  - service: notify.admin
+    data:
+      message: Licht voorraadkast is al 15 minuten aan, maar er is geen beweging en
+        geen timer.
+      title: Controleer garage
   mode: single
