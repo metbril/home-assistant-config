@@ -49,7 +49,7 @@
 - name: Admin
   platform: group
   services:
-    - service: robert
+    - service: pushover
 
 ##############################################################################
 ## Twitter
