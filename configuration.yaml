@@ -36,6 +36,7 @@ notify: !include includes/notify.yaml
 proximity: !include includes/proximity.yaml
 rest_command: !include_dir_named includes/rest_command/
 sensor: !include_dir_merge_list includes/sensor
+sun2: !include includes/sun2.yaml
 template: !include_dir_merge_list includes/template
 
 default_config:
