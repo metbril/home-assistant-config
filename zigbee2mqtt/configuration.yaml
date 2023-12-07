@@ -13,12 +13,8 @@ devices:
     friendly_name: Living Climate
   '0x00158d000802ad01':
     friendly_name: Cube
-  '0x588e81fffe58029f':
-    friendly_name: Dimmer Lichtstraat
   '0x14b457fffe535557':
     friendly_name: Living Speaker Controller
-  '0xbc33acfffeb5adaf':
-    friendly_name: Achtergevel
   '0x00158d0007e24a05':
     friendly_name: Office Climate
     temperature_precision: 3
@@ -28,12 +24,8 @@ devices:
     friendly_name: Garage Ingang
     occupancy_timeout: 180
     illuminance_below_threshold_check: false
-  '0x040d84fffe9a387b':
-    friendly_name: Lotus
   '0x84ba20fffead3d8e':
     friendly_name: Snelknop Woonkamer
-  '0x385cfbfffe633f23':
-    friendly_name: Pilskott
   '0x001788010804ffa1':
     friendly_name: Office Printer
   '0xbc026efffe8ad6d8':
@@ -53,8 +45,6 @@ devices:
     energy_calibration: 0
   '0x00178801001057bd':
     friendly_name: Hoge kast
-  '0x00178801036082bf':
-    friendly_name: Willner
   '0x0017880104eedc4d':
     friendly_name: Dimmer Leeslamp
   '0x0017880104f5fd96':
@@ -63,9 +53,20 @@ devices:
     friendly_name: Garage Entreedeur
     illuminance_below_threshold_check: true
     occupancy_timeout: 180
+  '0x54ef441000560867':
+    friendly_name: Office Presence
+  '0x0017880100ff56fb':
+    friendly_name: Bollamp
   '0x0017880100ff526f':
+    friendly_name: Willner
+    transition: 0
+    state_action: false
+    color_sync: true
+  '0x0017880100d346a6':
     friendly_name: Pantry Light
-    transition: 1
+    transition: 0
+    color_sync: true
+    state_action: false
 advanced:
   log_level: info
   log_syslog:
@@ -84,5 +85,4 @@ groups:
     devices:
       - 0x00178801001057bd/11
       - 0x001788010489e455/11
-      - 0x385cfbfffe633f23/1
       - 0x00178801036082bf/11
