@@ -64,9 +64,6 @@ devices:
     color_sync: true
   '0x0017880100d346a6':
     friendly_name: Pantry Light
-    transition: 0
-    color_sync: true
-    state_action: false
 advanced:
   log_level: info
   log_syslog:
