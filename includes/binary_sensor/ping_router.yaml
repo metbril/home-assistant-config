@@ -1,8 +1,0 @@
----
-## UI configuration not yet possible.
-## https://www.home-assistant.io/integrations/ping/
-- platform: ping
-  host: !secret router_host
-  name: "Router Ping"
-  count: 5
-  scan_interval: 60
