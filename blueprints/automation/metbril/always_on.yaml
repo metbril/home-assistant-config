@@ -1,64 +1,44 @@
-#
-# Author: Robert van Bregt
-# Version: 1.1
-# Last update: 2023-11-10
-#
-# CHANGE LOG:
-# - v1.1 (2023-11-10)
-#   - Add 'on' duration as selector
-#   - Create persistant notification
-# - v1.0 (2023-11-09)
-#   - Initial release
-#
 blueprint:
   name: Always On
-  description: >-
-    Always keep on a light or switch. If it is turned off, 
-    then immediately turn it back on.
+  description: Always keep on a switch. If it is turned off, then turn it back on.
   source_url: https://github.com/metbril/home-assistant-blueprints/blob/main/automation/always_on.yaml
   domain: automation
-
   input:
     target_entity:
       name: Entity to always keep on
       selector:
         entity:
           domain:
-            - light
-            - switch
-            - input_boolean
+          - light
+          - switch
+          - input_boolean
           multiple: false
     on_duration:
-      name: Time entity is on before switching off
+      name: Duration before target entity is switched off
       selector:
-        duration:
-
+        duration: {}
 trigger:
-  - platform: state
-    entity_id: !input target_entity
-    from: 'on'
-    to: 'off'
-    for: !input on_duration
-    id: by_entity
-  - platform: homeassistant
-    event: start
-    id: by_start
-
+- platform: state
+  entity_id: !input target_entity
+  from: 'on'
+  to: 'off'
+  for: !input on_duration
+  id: by_entity
+- platform: homeassistant
+  event: start
+  id: by_start
 condition:
-  - condition: state
-    entity_id: !input target_entity
-    state: 'off'
-
+- condition: state
+  entity_id: !input target_entity
+  state: 'off'
 action:
-  - variables:
-      target_entity: !input target_entity
-
-  - service: homeassistant.turn_on
-    target:
-      entity_id: "{{ target_entity }}"
-
-  - service: persistent_notification.create
-    data:
-      message: "Switched on entity {{ state_attr(target_entity, 'friendly_name') }}"
-
+- variables:
+    target_entity: !input target_entity
+- service: homeassistant.turn_on
+  target:
+    entity_id: '{{ target_entity }}'
+- service: persistent_notification.create
+  data:
+    message: 'Automation switched on entity: {{ state_attr(target_entity, ''friendly_name'')
+      }}'
 mode: single
