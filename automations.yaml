@@ -1607,7 +1607,6 @@
       - condition: trigger
         id:
         - Charger Finished
-        - Herstart
       - condition: state
         entity_id: binary_sensor.bike_charger_plug
         state: 'off'
