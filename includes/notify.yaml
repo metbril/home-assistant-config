@@ -74,7 +74,8 @@
 ##############################################################################
 - name: Mastodon
   platform: mastodon
-  base_url: https://botsin.space/
+  # base_url: https://botsin.space/
+  base_url: https://mastodon.social/
   access_token: !secret mastodon_access_token
   client_id: !secret mastodon_client_id
   client_secret: !secret mastodon_client_secret
