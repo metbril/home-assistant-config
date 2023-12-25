@@ -1,7 +1,11 @@
+# Uses a 'delay_off'.
+# Cannot be configured as a helper through the UI.
+#
 - binary_sensor:
     # Appliance is running when power usage detected
     - name: "Washing Machine Running"
       unique_id: 7a04404c-be07-4651-82d1-74a804d5cf25
+      device_class: running
       icon: >
         mdi:washing-machine{{ '-off' if (this.state == 'off') }}
       delay_off:
