@@ -328,22 +328,15 @@
       - stop_hue_effect
       supported_color_modes:
       - xy
-      color_mode: xy
-      brightness: 3
+      color_mode:
+      brightness:
       hs_color:
-      - 28.481
-      - 61.961
       rgb_color:
-      - 255
-      - 172
-      - 97
       xy_color:
-      - 0.514
-      - 0.387
       effect:
       color:
-        x: 0.514
-        y: 0.387
+        x: 0.441
+        y: 0.392
       linkquality: 255
       power_on_behavior:
       update:
@@ -353,28 +346,6 @@
       update_available: false
       friendly_name: Hoge kast
       supported_features: 44
-      state: 'on'
-    light.magnarp:
-      min_color_temp_kelvin: 2202
-      max_color_temp_kelvin: 4000
-      min_mireds: 250
-      max_mireds: 454
-      supported_color_modes:
-      - color_temp
-      color_mode:
-      brightness:
-      color_temp_kelvin:
-      color_temp:
-      hs_color:
-      rgb_color:
-      xy_color:
-      entity_id:
-      - light.magnarp_1
-      - light.magnarp_2
-      - light.magnarp_3
-      icon: mdi:lightbulb-group
-      friendly_name: Magnarp
-      supported_features: 32
       state: 'off'
     light.leeslamp:
       min_color_temp_kelvin: 2202
@@ -450,8 +421,8 @@
       state: 'off'
     light.willner:
       min_color_temp_kelvin: 2000
-      max_color_temp_kelvin: 6666
-      min_mireds: 150
+      max_color_temp_kelvin: 6535
+      min_mireds: 153
       max_mireds: 500
       effect_list:
       - blink
@@ -459,13 +430,16 @@
       - okay
       - channel_change
       - candle
+      - fireplace
+      - colorloop
       - finish_effect
       - stop_effect
       - stop_hue_effect
       supported_color_modes:
       - color_temp
+      - xy
       color_mode: color_temp
-      brightness: 151
+      brightness: 3
       color_temp_kelvin: 3174
       color_temp: 315
       hs_color:
@@ -480,12 +454,12 @@
       - 0.38
       effect:
       linkquality: 255
-      power_on_behavior: previous
+      power_on_behavior:
       update:
-        installed_version: 16786948
-        latest_version: 16786948
-        state: idle
-      update_available: false
+        installed_version: -1
+        latest_version: -1
+        state:
+      update_available:
       friendly_name: Willner
       supported_features: 44
       state: 'on'
@@ -541,13 +515,73 @@
       rgb_color:
       xy_color:
       effect:
-      friendly_name: Bollamp
-      supported_features: 44
       linkquality: 255
+      power_on_behavior:
       update:
         installed_version: -1
         latest_version: -1
         state:
+      update_available:
+      friendly_name: Bollamp
+      supported_features: 44
+      state: 'off'
+    light.magnarp_1:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 3
+      color_temp_kelvin: 2801
+      color_temp: 357
+      hs_color:
+      - 28.185
+      - 62.588
+      rgb_color:
+      - 255
+      - 170
+      - 95
+      xy_color:
+      - 0.516
+      - 0.386
+      friendly_name: Magnarp 1
+      supported_features: 32
+      state: 'on'
+    light.magnarp_2:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Magnarp 2
+      supported_features: 32
+      state: 'off'
+    light.magnarp_3:
+      min_color_temp_kelvin: 2202
+      max_color_temp_kelvin: 4000
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode:
+      brightness:
+      color_temp_kelvin:
+      color_temp:
+      hs_color:
+      rgb_color:
+      xy_color:
+      friendly_name: Magnarp 3
+      supported_features: 32
       state: 'off'
   icon: mdi:weather-night
   metadata: {}

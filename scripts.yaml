@@ -441,8 +441,8 @@ notify_living:
     message:
       name: Message
       description: Het uit te spreken bericht.
-      example: Hallo wereld!
-      default: Hallo wereld!
+      example: Hallo. Ik ben de virtuele assistent.
+      default: Hallo. Ik ben de virtuele assistent.
       required: true
       selector:
         text:
@@ -452,30 +452,37 @@ notify_living:
       name: Icon
       description: De afbeelding die wordt getoond bij het bericht op de TV.
       example: /config/www/img/home-assistant.png
-      required: true
       default: /config/www/img/home-assistant.png
       selector:
         text:
           multiline: false
           type: text
   sequence:
-  - if:
-    - condition: device
-      device_id: f76477730485d84e3077b5b0fbadf4c9
-      domain: media_player
-      entity_id: media_player.living_tv
-      type: is_on
-    then:
-    - service: notify.living_tv
+  - variables:
+      message: '{{ message | default(''Hallo. Ik ben de virtuele assistent.'', true)
+        }}'
+      icon: '{{ icon | default(''/config/www/img/home-assistant.png'', true) }}'
+  - service: notify.living_tv
+    data:
+      message: '{{ message }}'
       data:
-        message: '{{ message }}'
-        data:
-          icon: '{{ icon }}'
-    else:
-    - service: script.sonos_say
-      data:
-        entity_id: media_player.living_speaker
-        message: '{{ message }}'
+        icon: '{{ icon }}'
+  - service: chime_tts.say
+    target:
+      entity_id:
+      - media_player.office_speaker
+      - media_player.living_speaker
+    data:
+      chime_path: bells
+      delay: 450
+      tts_playback_speed: 100
+      volume_level: 0.15
+      tts_platform: cloud
+      gender: male
+      message: '{{ message }}'
+      cache: true
+      announce: true
+      language: nl-NL
   mode: single
   icon: mdi:account-voice
 notify_living_dashboard:

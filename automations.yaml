@@ -228,16 +228,10 @@
       - service: notify.robert
         data:
           message: "De wasmachine is klaar. \U0001F45A\U0001F455\U0001F4A6\n"
-      - service: notify.living_tv
+      - service: script.notify_living
         data:
           message: De wasmachine is klaar.
-          data:
-            icon: /config/www/img/washing-machine.png
-      - service: script.sonos_say
-        data:
-          entity_id: media_player.living_speaker
-          message: De wasmachine is klaar.
-          volume_percent: 15
+          icon: /config/www/img/washing-machine.png
       pre_actions: []
       wait_timeout:
         hours: 5
@@ -270,16 +264,10 @@
       - service: notify.robert
         data:
           message: "\U0001F9FA\U0001F4A8 Wasdroger is klaar."
-      - service: script.sonos_say
-        data:
-          entity_id: media_player.living_speaker
-          message: De wasdroger is klaar.
-          volume_percent: 15
-      - service: notify.living_tv
+      - service: script.notify_living
         data:
           message: De wasdroger is klaar.
-          data:
-            icon: /config/www/img/dryer.png
+          icon: /config/www/img/dryer.png
       pre_actions: []
 - id: '1662116397887'
   alias: 'Security: Warn when door is open after everyone has left'
@@ -933,7 +921,8 @@
         data: {}
   mode: single
 - id: 33b00235-30e6-45af-9473-d7c2357f07cc
-  alias: Household Applicance > Washing Machine Running
+  alias: 'Zolder: Household Applicance > Washing Machine Running'
+  description: ''
   trigger:
   - platform: state
     entity_id:
@@ -959,6 +948,9 @@
         id: Niet Actief
       sequence:
       - variables:
+          message: De wasmachine is klaar.
+          icon: /config/www/img/home-assistant.png
+      - variables:
           start_energy: '{{ states(''sensor.washing_machine_running_start_energy'')
             | float(0) }}'
           finish_energy: '{{ states(''sensor.washing_machine_running_finish_energy'')
@@ -979,24 +971,12 @@
         data:
           message: "De wasmachine is klaar na {{ minutes }} minuten en heeft {{ total_energy_rounded
             }} kWh verbruikt voor een bedrag van €{{ cost }}. \U0001F455\U0001F45A\U0001F4A6"
-      - if:
-        - condition: or
-          conditions:
-          - condition: state
-            entity_id: media_player.living_tv
-            state: 'on'
-          - condition: state
-            entity_id: media_player.living_tv
-            state: playing
-          - condition: state
-            entity_id: media_player.living_tv
-            state: paused
-        then:
-        - service: notify.living_tv
-          data:
-            message: Wasmachine is klaar.
-            data:
-              icon: /config/www/img/washing-machine.png
+        alias: Notify nearest parent
+      - service: script.notify_living
+        data:
+          message: '{{ message }}'
+          icon: '{{ icon }}'
+        alias: Notify living
   mode: single
 - id: '1666621842129'
   alias: Force Fast.com speed test
@@ -1071,10 +1051,10 @@
     data:
       who: mastodon
       message: "{% set from = trigger.from_state.state | float(0) %} {% set to = trigger.to_state.state
-        | float(0) %} {% set change = (to - from) %}  De adviesprijs voor Euro 95
-        is volgens United Consumers zojuist {% if change > 0 -%}\n  verhoogd\n{%-
-        else -%}\n  verlaagd\n{%- endif %} naar €{{ states('sensor.adviesprijs_euro95')
-        | replace('.', ',') }}/L.\n\n\nhttps://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp"
+        | float(0) %} {% set change = (to - from) %}  According to United Consumers,
+        \ the Dutch suggested retail price for  Euro 95 has just been {% if change
+        > 0 -%}\n  increased\n{%- else -%}\n  decreased\n{%- endif %} to {{ states('sensor.adviesprijs_euro95')
+        }} €/L.\n\n\nhttps://www.unitedconsumers.com/tanken/informatie/gemiddelde-landelijke-adviesprijs.asp"
   mode: single
 - id: '1667809761090'
   alias: Safety > Meteoalarm Notification (new)
@@ -1400,7 +1380,7 @@
         }}'
       title: Overstroming Alert
 - id: '1679143739246'
-  alias: Home > Do not disturb mode
+  alias: 'Huis: Do not disturb mode'
   description: Let do not disturb follow quiet hours.
   trigger:
   - platform: state
@@ -1697,7 +1677,7 @@
     data:
       who: mastodon
       visibility: public
-      message: "Er is een update beschikbaar voor Home Assistant: {{ state_attr('update.home_assistant_core_update',
+      message: "An update for Home Assistant Core is available: {{ state_attr('update.home_assistant_core_update',
         'latest_version') }}\n#HomeAssistant \n{{ state_attr('update.home_assistant_core_update',
         'release_url') }}"
   mode: single
@@ -1884,8 +1864,8 @@
   - service: script.toot_engine
     data:
       who: mastodon
-      message: "\U0001F6E1 Iemand had het blokkeren van advertenties even uitgezet,
-        maar ik heb het inmiddels weer ingeschakeld. #Privacy #Tracking #AdGuard #HomeAssistant"
+      message: "\U0001F6E1 Someone at home disabIed blocking ads for a while, but
+        I've turned it back on since. #AdGuard #Privacy #Tracking #HomeAssistant"
   mode: single
 - id: '1696593143777'
   alias: 'Toot: Sunrise and sunset'
@@ -1946,10 +1926,10 @@
   - service: notify.mastodon
     data:
       message: "{% set emoji = '\U0001F916\U0001F9BE\U0001F3BA\U0001F4EF\U0001F4E3\U0001F4E1\U0001F418'
-        | list | random %} {% set cheer = ['Yes', 'Oh nee!', 'Yolo!', 'Jeetje!', 'Joepie!',
-        'Alweer!', 'Niet weer, hè?', 'Nou ja, zeg!', 'Wat nu weer?' ] | random %}\n{{
-        emoji }} {{ cheer}} De tootmachine is {{'in' if     is_state('input_boolean.toot_engine',
-        'on') else 'uit'}}geschakeld. #HomeAssistant"
+        | list | random %} {% set cheer = ['Yes', 'Oh no!', 'Yolo!', 'Jee!', 'Hurray!',
+        'Again!', 'Not again?', 'Wat now?' ] | random %}\n{{ emoji }} {{ cheer}} The
+        toot engine has been {{'enabled' if     is_state('input_boolean.toot_engine',
+        'on') else 'disabled'}}. #HomeAssistant"
   mode: queued
   max: 10
 - id: '1696846540710'
@@ -1978,8 +1958,8 @@
         data:
           who: mastodon
           message: "{{ '\U0001F3B6\U0001F4FB\U0001F3B5\U0001F39A️\U0001F507' | list
-            | random }} De muziek in het kantoor is gepauzeerd, omdat een thuiswerker
-            een gesprek is gestart."
+            | random }} The music in the office is paused, since a home worker has
+            entered a call."
     - conditions:
       - condition: trigger
         id:
@@ -1989,8 +1969,8 @@
         data:
           who: mastodon
           message: "{{ '\U0001F3B5\U0001F3B6\U0001F4FB\U0001F39A️\U0001F509\U0001F50A'
-            | list | random }} De muziek in het kantoor is herstart, omdat het gesprek
-            van de thuiswerker is afgelopen."
+            | list | random }} The music in the office is restarted, since the call
+            from a home worker has finished."
   mode: single
 - id: '1696859511831'
   alias: 'Toot: sun phase'
@@ -2319,3 +2299,13 @@
         geen timer.
       title: Controleer garage
   mode: single
+- id: '1702046592143'
+  alias: Garage > Motion-activated Light
+  description: Schakelen lamp voorraadkast op basis van beweging
+  use_blueprint:
+    path: homeassistant/motion_light.yaml
+    input:
+      motion_entity: binary_sensor.garage_motion
+      light_target:
+        entity_id: light.pantry_light
+      no_motion_wait: 240
