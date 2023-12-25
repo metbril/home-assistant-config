@@ -32,8 +32,6 @@ devices:
     friendly_name: Luchtkwaliteit Woonkamer
     temperature_precision: 1
     humidity_precision: 1
-  '0x001788010489e455':
-    friendly_name: Leeslamp
   '0x70ac08fffe8c2ec1':
     friendly_name: TuYa Stekker
     measurement_poll_interval: 15
@@ -43,27 +41,14 @@ devices:
     current_calibration: 0
     voltage_calibration: 0
     energy_calibration: 0
-  '0x00178801001057bd':
-    friendly_name: Hoge kast
-  '0x0017880104eedc4d':
-    friendly_name: Dimmer Leeslamp
-  '0x0017880104f5fd96':
-    friendly_name: Dimmer Woonkamer
   '0x943469fffe75d670':
     friendly_name: Garage Entreedeur
     illuminance_below_threshold_check: true
     occupancy_timeout: 180
   '0x54ef441000560867':
     friendly_name: Office Presence
-  '0x0017880100ff56fb':
-    friendly_name: Bollamp
-  '0x0017880100ff526f':
-    friendly_name: Willner
-    transition: 0
-    state_action: false
-    color_sync: true
-  '0x0017880100d346a6':
-    friendly_name: Pantry Light
+  '0x00178801036082bf':
+    friendly_name: '0x00178801036082bf'
 advanced:
   log_level: info
   log_syslog:
