@@ -67,11 +67,6 @@ jobs:
           git clone https://github.com/gieljnssns/buienalarm-sensor-homeassistant.git
           mv -v buienalarm-sensor-homeassistant/custom_components/* ./custom_components
 
-      - name: 📥 Clone custom component - Car Wash
-        run: |
-          git clone https://github.com/Limych/ha-car_wash.git
-          mv -v ha-car_wash/custom_components/* ./custom_components
-
       - name: 📥 Clone custom component - Feedparser
         run: |
           git clone -b fix-ha-dev https://github.com/metbril/feedparser.git
