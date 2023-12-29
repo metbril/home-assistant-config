@@ -49,6 +49,8 @@ devices:
     friendly_name: Office Presence
   '0x00178801036082bf':
     friendly_name: '0x00178801036082bf'
+  '0x0017880104eedc4d':
+    friendly_name: Leeshoek dimmer
 advanced:
   log_level: info
   log_syslog:

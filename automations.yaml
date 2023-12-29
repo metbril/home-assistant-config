@@ -2337,3 +2337,32 @@
       message: "\U0001F525 The daily gas usage has been sent to Mindergas using their
         member API. #gas #energy #savings #sustainability\n\nhttps://mindergas.nl/"
   mode: single
+- id: '1703782279413'
+  alias: Lighting > Leeslamp dimmer controller
+  description: ''
+  use_blueprint:
+    path: EPMatt/philips_324131092621.yaml
+    input:
+      integration: Zigbee2MQTT
+      controller_entity: sensor.leeshoek_dimmer_action
+      helper_last_controller_event: input_text.leeshoek_dimmer_action
+      action_button_on_short:
+      - type: turn_on
+        device_id: 29811c6724d2db28a3c36f03e9181d4d
+        entity_id: 75d7781e36c571b13bf88743a3d94949
+        domain: light
+      action_button_off_short:
+      - type: turn_off
+        device_id: 29811c6724d2db28a3c36f03e9181d4d
+        entity_id: 75d7781e36c571b13bf88743a3d94949
+        domain: light
+      action_button_up_long:
+      - device_id: 29811c6724d2db28a3c36f03e9181d4d
+        domain: light
+        entity_id: 75d7781e36c571b13bf88743a3d94949
+        type: brightness_increase
+      action_button_down_long:
+      - device_id: 29811c6724d2db28a3c36f03e9181d4d
+        domain: light
+        entity_id: 75d7781e36c571b13bf88743a3d94949
+        type: brightness_decrease
