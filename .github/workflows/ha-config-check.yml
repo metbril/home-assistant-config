@@ -57,8 +57,6 @@ jobs:
         run: |
           mkdir -p ./custom_components
 
-      # yamllint disable rule:line-length
-
       - name: 📥 Clone custom component - Brandstofprijzen
         run: |
           git clone https://github.com/metbril/home-assistant-brandstofprijzen.git
@@ -94,29 +92,10 @@ jobs:
           git clone https://github.com/cyberjunky/home-assistant-p2000.git
           mv -v home-assistant-p2000/custom_components/* ./custom_components
 
-      - name: 📥 Clone custom component - Powercalc
-        run: |
-          git clone https://github.com/bramstroker/homeassistant-powercalc.git
-          mv -v homeassistant-powercalc/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - RDW
-        run: |
-          git clone https://github.com/eelcohn/home-assistant-rdw.git
-          mv -v home-assistant-rdw/custom_components/* ./custom_components
-
       - name: 📥 Clone custom component - Sun2
         run: |
           git clone https://github.com/pnbruckner/ha-sun2.git
           mv -v ha-sun2/custom_components/* ./custom_components
-
-      # 2022-01-04: Disabled. API unavailable
-      #
-      # - name: Clone custom component 9292 OV API sensor
-      #   run: |
-      #     git clone https://github.com/Juvawa/HomeAssistant9292OvApiSensor.git
-      #     mv -v HomeAssistant9292OvApiSensor/custom_components/* ./custom_components
-
-      # yamllint enable rule:line-length
 
       - name: 🏃 Check configuration
         uses: frenck/action-home-assistant@v1.4
