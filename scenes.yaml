@@ -65,23 +65,15 @@
   entities:
     light.hoge_kast:
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - candle
-      - fireplace
       - colorloop
-      - finish_effect
-      - stop_effect
-      - stop_hue_effect
+      - random
       supported_color_modes:
-      - xy
-      color_mode: xy
+      - hs
+      color_mode: hs
       brightness: 79
       hs_color:
-      - 34.957
-      - 45.098
+      - 34.737
+      - 44.706
       rgb_color:
       - 255
       - 207
@@ -89,60 +81,33 @@
       xy_color:
       - 0.441
       - 0.392
-      effect:
-      color:
-        x: 0.441
-        y: 0.392
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 1124097291
-        latest_version: 1124097291
-        state: idle
-      update_available: false
+      effect: none
       friendly_name: Hoge kast
       supported_features: 44
       state: 'on'
     light.leeslamp:
-      min_color_temp_kelvin: 2202
+      min_color_temp_kelvin: 2000
       max_color_temp_kelvin: 6535
       min_mireds: 153
-      max_mireds: 454
-      effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - candle
-      - finish_effect
-      - stop_effect
-      - stop_hue_effect
+      max_mireds: 500
       supported_color_modes:
       - color_temp
       color_mode: color_temp
-      brightness: 102
-      color_temp_kelvin: 2583
-      color_temp: 387
+      brightness: 128
+      color_temp_kelvin: 2666
+      color_temp: 375
       hs_color:
-      - 28.664
-      - 69.597
+      - 28.47
+      - 66.821
       rgb_color:
       - 255
-      - 162
-      - 77
+      - 165
+      - 84
       xy_color:
-      - 0.538
-      - 0.389
-      effect:
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: 16786948
-        latest_version: 16786948
-        state: idle
-      update_available: false
+      - 0.53
+      - 0.388
       friendly_name: Leeslamp
-      supported_features: 44
+      supported_features: 40
       state: 'on'
     light.nijntje:
       min_color_temp_kelvin: 2202
@@ -165,6 +130,7 @@
       xy_color:
       - 0.516
       - 0.386
+      icon: mdi:lamp
       friendly_name: Nijntje
       supported_features: 32
       state: 'on'
@@ -174,19 +140,11 @@
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - candle
-      - fireplace
       - colorloop
-      - finish_effect
-      - stop_effect
-      - stop_hue_effect
+      - random
       supported_color_modes:
       - color_temp
-      - xy
+      - hs
       color_mode: color_temp
       brightness: 105
       color_temp_kelvin: 2724
@@ -201,14 +159,8 @@
       xy_color:
       - 0.524
       - 0.387
-      effect:
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: -1
-        latest_version: -1
-        state:
-      update_available:
+      effect: none
+      icon: mdi:lamp
       friendly_name: Willner
       supported_features: 44
       state: 'on'
@@ -260,6 +212,7 @@
       - brightness
       color_mode: brightness
       brightness: 79
+      icon: mdi:floor-lamp
       friendly_name: Pilskott
       supported_features: 32
       state: 'on'
@@ -269,19 +222,11 @@
       min_mireds: 153
       max_mireds: 500
       effect_list:
-      - blink
-      - breathe
-      - okay
-      - channel_change
-      - candle
-      - fireplace
       - colorloop
-      - finish_effect
-      - stop_effect
-      - stop_hue_effect
+      - random
       supported_color_modes:
       - color_temp
-      - xy
+      - hs
       color_mode: color_temp
       brightness: 76
       color_temp_kelvin: 2915
@@ -296,14 +241,8 @@
       xy_color:
       - 0.505
       - 0.385
-      effect:
-      linkquality: 255
-      power_on_behavior:
-      update:
-        installed_version: -1
-        latest_version: -1
-        state:
-      update_available:
+      effect: none
+      icon: mdi:lamp
       friendly_name: Bollamp
       supported_features: 44
       state: 'on'
