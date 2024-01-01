@@ -82,11 +82,6 @@ jobs:
           git clone https://github.com/danieldotnl/ha-multiscrape.git
           mv -v ha-multiscrape/custom_components/* ./custom_components
 
-      - name: 📥 Clone custom component - P2000
-        run: |
-          git clone https://github.com/cyberjunky/home-assistant-p2000.git
-          mv -v home-assistant-p2000/custom_components/* ./custom_components
-
       - name: 📥 Clone custom component - Sun2
         run: |
           git clone https://github.com/pnbruckner/ha-sun2.git

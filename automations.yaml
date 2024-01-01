@@ -363,33 +363,6 @@
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
       time: '20:00:00'
-- id: 971fc035-f021-4015-a54b-8c6da9ddf200
-  alias: Outside > Safety > Brandweer in de buurt
-  description: Stuur een melding dat de brandweer dichtbij is en plaats een bericht
-    op Mastodon.
-  trigger:
-  - platform: state
-    entity_id: sensor.p2000_brandweer
-  condition:
-  - '{{states(''sensor.p2000_brandweer'') != ''unknown''}}'
-  action:
-  - variables:
-      address: '{{ states(''sensor.p2000_brandweer'') }}'
-      lat: '{{ state_attr(''sensor.p2000_brandweer'', ''latitude'')  }}'
-      lon: '{{ state_attr(''sensor.p2000_brandweer'', ''longitude'') }}'
-      url: http://www.openstreetmap.org/?mlat={{ lat }}&mlon={{ lon }}&zoom=16
-  - service: notify.parents
-    data:
-      title: "\U0001F692 P2000 Brandweer"
-      message: '{{ address }}'
-      data:
-        url: '{{ url }}'
-  - service: script.toot_engine
-    data:
-      who: mastodon
-      message: "\U0001F692 De #brandweer is in de buurt. #P2000\n{{ address }}\n\n{{
-        url }}"
-  mode: single
 - id: 6e054688-5e75-48bd-9411-52a3e26264d1
   alias: Outside > Safety > Lightning notification
   description: 'Lightning notification

@@ -17,8 +17,6 @@ logs:
   # homeassistant.components.scrape: debug
 
   # custom_components: debug
-  # custom_components.p2000: debug
-  # custom_components.sensor.p2000: debug
   # custom_components.knmi: debug
   # custom_components.multiscrape: debug
 
