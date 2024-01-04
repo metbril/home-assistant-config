@@ -66,14 +66,5 @@ recorder:
       - device_tracker
     entities: []
 
-system_log:
-  max_entries: 50 # default = 50
-  fire_event: true # default = false, true required when used for triggers
-
-tts:
-  - platform: google_translate
-    language: nl
-    tld: nl
-
 # WOL is needed for (switching on) WebOS TV
 wake_on_lan:
