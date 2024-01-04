@@ -33,8 +33,8 @@ devices:
     temperature_precision: 1
     humidity_precision: 1
   '0x70ac08fffe8c2ec1':
-    friendly_name: TuYa Stekker
-    measurement_poll_interval: 15
+    friendly_name: Charging Station
+    measurement_poll_interval: 60
     power_calibration: 0
     state_action: false
     power_precision: 2

@@ -57,36 +57,6 @@ jobs:
         run: |
           mkdir -p ./custom_components
 
-      - name: 📥 Clone custom component - Brandstofprijzen
-        run: |
-          git clone https://github.com/metbril/home-assistant-brandstofprijzen.git
-          mv -v home-assistant-brandstofprijzen/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - Buienalarm
-        run: |
-          git clone https://github.com/gieljnssns/buienalarm-sensor-homeassistant.git
-          mv -v buienalarm-sensor-homeassistant/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - Feedparser
-        run: |
-          git clone -b fix-ha-dev https://github.com/metbril/feedparser.git
-          mv -v feedparser/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - ICS Calendar
-        run: |
-          git clone https://github.com/franc6/ics_calendar.git
-          mv -v ics_calendar/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - Multiscrape
-        run: |
-          git clone https://github.com/danieldotnl/ha-multiscrape.git
-          mv -v ha-multiscrape/custom_components/* ./custom_components
-
-      - name: 📥 Clone custom component - Sun2
-        run: |
-          git clone https://github.com/pnbruckner/ha-sun2.git
-          mv -v ha-sun2/custom_components/* ./custom_components
-
       - name: 🏃 Check configuration
         uses: frenck/action-home-assistant@v1.4
         with:

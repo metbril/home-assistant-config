@@ -52,20 +52,6 @@
     - service: pushover
 
 ##############################################################################
-## Twitter
-## https://www.home-assistant.io/integrations/twitter
-##
-## Send notifications to the twitter account of the house
-## https://twitter.com/domussapiens
-##############################################################################
-- name: Twitter
-  platform: twitter
-  consumer_key: !secret twitter_consumer_key
-  consumer_secret: !secret twitter_consumer_secret
-  access_token: !secret twitter_access_token
-  access_token_secret: !secret twitter_access_token_secret
-
-##############################################################################
 ## Mastodon
 ## https://www.home-assistant.io/integrations/mastodon
 ##
