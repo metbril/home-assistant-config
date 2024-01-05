@@ -21,6 +21,7 @@ climate: !include includes/climate.yaml
 group: !include includes/group.yaml
 logger: !include includes/logger.yaml
 notify: !include includes/notify.yaml
+rest_command: !include includes/rest_command.yaml
 sensor: !include_dir_merge_list includes/sensor
 template: !include_dir_merge_list includes/template
 
