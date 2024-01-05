@@ -1,22 +1,19 @@
 homeassistant:
-  # allowlist_external_dirs cannot be used in a package:
-  # https://community.home-assistant.io/t/file-size-custom-component/40308/34
   allowlist_external_dirs:
     - !secret allowlist_dir_config
     - !secret allowlist_dir_ssl
 
-  # Customize individual entities
   customize: !include includes/customize.yaml
 
-  # Customize entities by pattern
   customize_glob: !include includes/customize_glob.yaml
+
+default_config:
 
 automation: !include automations.yaml # UI editor
 scene: !include scenes.yaml # UI editor
 script: !include scripts.yaml # UI editor
 
-automation split: !include_dir_merge_list includes/automation # Other
-
+automation split: !include_dir_merge_list includes/automation
 climate: !include includes/climate.yaml
 group: !include includes/group.yaml
 logger: !include includes/logger.yaml
@@ -25,38 +22,15 @@ rest_command: !include includes/rest_command.yaml
 sensor: !include_dir_merge_list includes/sensor
 template: !include_dir_merge_list includes/template
 
-default_config:
-
-## https://github.com/andrew-codechimp/HA-Battery-Notes
-battery_notes:
-
-# The themes folder is in the root of the config folder, so HACS can install
-# themes there.
 frontend:
-  themes: !include_dir_merge_named themes
+  themes: !include_dir_merge_named themes  ## location needed for HACS
 
-# The http component serves all files and data required for the
-# Home Assistant frontend.
-#
-# https://www.home-assistant.io/integrations/http/
-#
 http:
-  # Flag indicating whether additional IP filtering is enabled.
   ip_ban_enabled: true
-
-  # Number of failed login attempt from single IP after which
-  # it will be automatically banned
   login_attempts_threshold: 3
 
-# Enable advanced notifications like actionable notifications and categories.
-# https://companion.home-assistant.io/docs/getting_started/
-# Note: the documentation is 'tegenstrijdig' in this. It's unclear if it is
-# required or not.
 ios:
 
-# Recorder
-# https://www.home-assistant.io/integrations/recorder
-#
 recorder:
   auto_purge: true # default = true
   purge_keep_days: 7 # default = 10
@@ -67,5 +41,4 @@ recorder:
       - device_tracker
     entities: []
 
-# WOL is needed for (switching on) WebOS TV
-wake_on_lan:
+wake_on_lan:  # Required to power on WebOS TV
