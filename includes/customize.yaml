@@ -1,32 +1,9 @@
 ---
-proximity.home:
-  friendly_name: Van huis
-proximity.parents_from_home:
-  friendly_name: Ouders van huis
-proximity.robert_from_home:
-  friendly_name: Robert van huis
-proximity.robert_from_work:
-  friendly_name: Robert van werk
-
-sensor.buienalarm_precipitation:
-  friendly_name: Buienalarm Neerslagintensiteit
-  unit_of_measurement: mm/u
-sensor.buienalarm_precipitation_forecast_average:
-  friendly_name: Buienalarm Neerslagintensiteit Verwacht
-  unit_of_measurement: mm/u
-
 sensor.date:
   friendly_name: Datum
   icon: mdi:calendar-today
 sensor.time:
   friendly_name: Tijd
-
-sensor.msteams_call_count_today_robert:
-  friendly_name: Teams Call Count Today Robert
-sensor.msteams_call_time_today_robert:
-  friendly_name: Teams Call Time Today Robert
-sensor.msteams_online_today_robert:
-  friendly_name: Teams Online Today Robert
 
 sun.sun:
   friendly_name: Zon

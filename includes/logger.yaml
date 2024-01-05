@@ -1,26 +1,16 @@
 ---
-################################################################################
-# name        : Logger
-# author      : Robert van Bregt
-# date        : 14-01-2022
-# description : Logger component configuration
-#
 # https://www.home-assistant.io/integrations/logger/
-################################################################################
 default: warn
 logs:
   homeassistant.core: warn
 
   # homeassistant.components: info
-  # homeassistant.components.binary_sensor.meteoalarm: debug
-  # homeassistant.components.meteoalarm: debug
-  # homeassistant.components.scrape: debug
 
+  # Custom components
+  #
   # custom_components: debug
   # custom_components.knmi: debug
-  # custom_components.multiscrape: debug
 
   # Custom components maintained by me
   #
-  custom_components.brandstofprijzen: info
-  custom_components.dutch_public_transport_api: info
+  # custom_components.brandstofprijzen: info

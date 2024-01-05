@@ -2,12 +2,3 @@
 sensor.*_uv_index:
   icon: mdi:weather-sunny
   unit_of_measurement: UVI
-sensor.diesel_*:
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.euro95_*:
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
-sensor.lpg_*:
-  icon: mdi:gas-station
-  unit_of_measurement: €/L
