@@ -39,7 +39,7 @@ recorder:
     entities: []
   exclude:
     domains:
-      - device_tracker
+      # - device_tracker  # for privacy
     entities: []
 
 wake_on_lan:  # Required to power on WebOS TV
