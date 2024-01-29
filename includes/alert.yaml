@@ -7,11 +7,11 @@ front_door:
     entity_id: binary_sensor.front_door_contact
     state: "on"
     repeat:
-      - 5
-      - 10
-      - 15
-      - 30
+        - 5
+        - 10
+        - 15
+        - 30
     can_acknowledge: true
     skip_first: true
     notifiers:
-      - robert
+        - robert
