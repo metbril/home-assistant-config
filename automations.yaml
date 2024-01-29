@@ -890,9 +890,6 @@
         state: 'off'
       sequence:
       - if:
-        - condition: state
-          entity_id: input_boolean.eco_mode
-          state: 'on'
         - condition: device
           type: is_on
           device_id: fc8175d314fecd80e9526220b04ae4b7
@@ -910,15 +907,6 @@
         data:
           icon: /config/www/img/bike-charger.png
           message: De fietslader is klaar.
-      - variables:
-          cheer: '{{ [''Zo!'', ''Eindelijk!'', ''Hè, hè.'', "Dat heeft even geduurd.",
-            "Dat duurde lang.", "Daar kwam geen eind aan.", "Nou zeg!", "Nou, nou.",
-            "Tjongejonge", "Tjemig", "Yes!", "Joepie!"] | random }}'
-          icon: "{{ '\U0001F6B2\U0001F50B⚡️\U0001F50C' | list | random }}"
-      - service: script.toot_engine
-        data:
-          who: mastodon
-          message: '{{ cheer }} {{ icon }} De fietsaccu is weer opgeladen.'
   mode: single
 - id: '1696254669833'
   alias: Office > Force preset to none
@@ -1109,9 +1097,11 @@
   - condition: state
     entity_id: binary_sensor.garage_motion
     state: 'off'
-  - condition: state
-    entity_id: timer.pantry_light
-    state: idle
+  - condition: not
+    conditions:
+    - condition: state
+      entity_id: timer.pantry_light
+      state: active
   action:
   - service: notify.admin
     data:

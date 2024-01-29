@@ -1658,16 +1658,16 @@
       - media_player.office_speaker
       volume_level: 0.05
       is_volume_muted: false
-      media_content_id: x-sonos-spotify:spotify%3atrack%3a0c1z7NPGh6SEyFHP9VXzUh?sid=9&flags=8232&sn=1
       media_content_type: music
       shuffle: false
       repeat: 'off'
-      queue_position: 1
-      queue_size: 1
       device_class: speaker
       icon: mdi:speaker-wireless
       friendly_name: Kantoorspeaker
       supported_features: 4127295
+      media_content_id: x-sonos-spotify:spotify%3atrack%3a0c1z7NPGh6SEyFHP9VXzUh?sid=9&flags=8232&sn=1
+      queue_position: 1
+      queue_size: 1
       state: paused
     climate.office:
       hvac_modes:
@@ -1678,12 +1678,8 @@
       target_temp_step: 0.5
       preset_modes:
       - none
-      - away
-      - comfort
       - home
-      - sleep
-      - activity
-      current_temperature: 19
+      current_temperature: 15.5
       temperature: 19
       hvac_action: 'off'
       preset_mode: home
@@ -1698,9 +1694,40 @@
       friendly_name: Bureaulamp
       supported_features: 0
       state: 'off'
+    switch.office_printer:
+      linkquality: 255
+      update:
+        installed_version: 16781314
+        latest_version: 16781314
+        state: idle
+      update_available: false
+      device_class: outlet
+      friendly_name: Kantoorprinter
+      state: 'off'
   icon: mdi:coffee
   metadata:
     climate.office:
       entity_only: true
     light.office_desk_lamp:
       entity_only: true
+- id: '1705391973994'
+  name: 'Kantoor: Achtergrondmuziek'
+  entities:
+    media_player.office_speaker:
+      group_members:
+      - media_player.office_speaker
+      volume_level: 0.05
+      is_volume_muted: false
+      media_content_id: x-sonos-spotify:spotify%3atrack%3a2IEJDnXmqa2QEkcUureE1p?sid=9&flags=8232&sn=1
+      media_content_type: music
+      shuffle: false
+      repeat: 'off'
+      queue_position: 1
+      queue_size: 1
+      device_class: speaker
+      icon: mdi:speaker-wireless
+      friendly_name: Kantoorspeaker
+      supported_features: 4127295
+      state: playing
+  icon: mdi:music-note
+  metadata: {}
