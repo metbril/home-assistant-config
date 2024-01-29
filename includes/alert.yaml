@@ -1,0 +1,17 @@
+# Alerts
+# https://www.home-assistant.io/integrations/alert/
+
+front_door:
+    name: Voordeur is open
+    done_message: Voordeur is gesloten
+    entity_id: binary_sensor.front_door_contact
+    state: "on"
+    repeat:
+      - 5
+      - 10
+      - 15
+      - 30
+    can_acknowledge: true
+    skip_first: true
+    notifiers:
+      - robert
