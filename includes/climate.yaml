@@ -15,8 +15,4 @@
   hot_tolerance: 0.2
   initial_hvac_mode: "off"
   precision: 0.5
-  comfort_temp: 21.0
   home_temp: 19.0
-  activity_temp: 18.0
-  sleep_temp: 17.0
-  away_temp: 16.0
