@@ -37,10 +37,12 @@ devices:
     measurement_poll_interval: 30
     power_calibration: 0
     state_action: false
-    power_precision: 2
+    power_precision: 3
     current_calibration: 0
     voltage_calibration: 0
     energy_calibration: 0
+    energy_precision: 3
+    voltage_precision: 2
   '0x943469fffe75d670':
     friendly_name: Garage Entreedeur
     illuminance_below_threshold_check: true
