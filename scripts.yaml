@@ -45,7 +45,7 @@ time_to_leave_for_robert:
     data:
       message: Tijd om te vertrekken naar je werk.
 printer_off:
-  alias: 'Kantoor: Printer ingeschakeld melding'
+  alias: 'Kantoor: Printer ingeschakeld actionable melding'
   sequence:
   - service: notify.robert
     data:
@@ -597,10 +597,9 @@ garage_motion_timer_start:
   mode: single
 mindergas:
   alias: 'Energy: Post meter reading to mindergas.nl'
-  description: >-
-    A simple wrapper script around the RESTful command, to be able to
-    post a gas meter reading both manually through the Services menu in the
-    developer tools and call it from the automations editor.
+  description: A simple wrapper script around the RESTful command, to be able to post
+    a gas meter reading both manually through the Services menu in the developer tools
+    and call it from the automations editor.
   mode: single
   fields:
     date:
@@ -623,8 +622,8 @@ mindergas:
           unit_of_measurement: m3
           mode: box
   sequence:
-    - service: rest_command.mindergas
-      data:
-        date: '{{ date }}'
-        reading: '{{ reading }}'
+  - service: rest_command.mindergas
+    data:
+      date: '{{ date }}'
+      reading: '{{ reading }}'
   icon: mdi:meter-gas

@@ -247,7 +247,7 @@
   trigger:
   - platform: state
     entity_id:
-    - switch.samsung_ml_2850nd
+    - switch.office_printer
     to: 'on'
     for:
       hours: 0
@@ -397,7 +397,7 @@
       message: Muziekspeler automatisch gepauzeerd.
   mode: single
 - id: '1663046423659'
-  alias: 'Office: Printer powered reminder'
+  alias: Office > Printer > Remind still powered
   description: ''
   trigger:
   - platform: time_pattern
@@ -408,26 +408,29 @@
     entity_id: input_boolean.printer_reminder
     state: 'on'
   action:
-  - service: script.1663045328980
+  - service: script.printer_off
     data: {}
   mode: single
 - id: '1663046870503'
-  alias: 'Office: Printer powered action'
+  alias: Office > Printer > Handle notification actions
   description: ''
   trigger:
   - platform: event
     event_type: mobile_app_notification_action
     event_data:
       action: PRINTER_OFF
+    alias: PRINTER_OFF action
   - platform: event
     event_type: mobile_app_notification_action
     event_data:
       action: PRINTER_REMIND
     id: printer_remind
+    alias: PRINTER_REMIND action
   - platform: event
     event_type: mobile_app_notification_action
     event_data:
       action: PRINTER_IGNORE
+    alias: PRINTER_IGNORE action
   condition: []
   action:
   - if:
@@ -1176,3 +1179,22 @@
         domain: light
         entity_id: 75d7781e36c571b13bf88743a3d94949
         type: brightness_decrease
+- id: '1708353445469'
+  alias: Office temperature not updated
+  description: ''
+  trigger:
+  - platform: template
+    value_template: '{% set last_updated = (states.sensor.office_climate_temperature.last_updated
+      | as_timestamp) %}
+
+      {% set limit = 12 %}
+
+      {{ ((((now() | as_timestamp) - last_updated) / (60 * 60)) > limit) }}'
+  condition: []
+  action:
+  - service: notify.admin
+    metadata: {}
+    data:
+      message: Something is wrong. Sensor climate temperature has not changed for
+        12 hours.
+  mode: single
