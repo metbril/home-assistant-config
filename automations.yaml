@@ -241,7 +241,7 @@
       message: '⚠️ Er is niemand meer thuis, maar er zijn nog vensters en deuren geopend. '
   mode: single
 - id: '1662547518457'
-  alias: 'Office: Printer powered notification'
+  alias: Office > Printer powered notification
   description: Stuur een notificatie wanneer de printer een tijdje is ingeschakeld
     en laat deze met een actieknop ook direct uitschakelen.
   trigger:
