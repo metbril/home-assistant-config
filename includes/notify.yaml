@@ -7,7 +7,7 @@
 - name: Robert
   platform: group
   services:
-    - service: mobile_app_robert_s_iphone
+    - service: mobile_app_iphone_van_robert
 
 # Person group for: Monique
 #
