@@ -467,6 +467,9 @@ notify_living:
       message: '{{ message }}'
       data:
         icon: '{{ icon }}'
+  - condition: state
+    entity_id: input_boolean.do_not_disturb
+    state: 'off'
   - service: chime_tts.say
     target:
       entity_id:
@@ -490,7 +493,7 @@ notify_living_dashboard:
   sequence:
   - service: script.notify_living
     data:
-      message: '{{ states(''input_text.audible_message'') }}'
+      message: '{{ states(''input_text.notification_message'') }}'
   mode: single
   icon: mdi:account-voice
 lees_het_nieuws_voor:
@@ -626,4 +629,3 @@ mindergas:
     data:
       date: '{{ date }}'
       reading: '{{ reading }}'
-  icon: mdi:meter-gas
