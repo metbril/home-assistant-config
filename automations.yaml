@@ -1198,3 +1198,113 @@
       message: Something is wrong. Sensor climate temperature has not changed for
         12 hours.
   mode: single
+- id: '1711572201405'
+  alias: Regelmatige Speedtest
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: /30
+  - platform: homeassistant
+    event: start
+  condition: []
+  action:
+  - service: homeassistant.update_entity
+    metadata: {}
+    data: {}
+    target:
+      entity_id: sensor.orbi_router_downlink_bandwidth
+  mode: single
+- id: '1711590189201'
+  alias: 'Systeem: Download low'
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.orbi_router_downlink_bandwidth
+    for:
+      hours: 2
+      minutes: 1
+      seconds: 0
+    below: 150
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: De Internetsnelheid is te laag. Controleer modem en router.
+  mode: single
+- id: '1712209113279'
+  alias: 'Host: high temperature '
+  description: ''
+  trigger:
+  - platform: numeric_state
+    entity_id:
+    - sensor.processor_temperature
+    for:
+      hours: 0
+      minutes: 10
+      seconds: 0
+    above: 30
+  condition: []
+  action:
+  - service: notify.admin
+    data:
+      message: Processor temperatuur is te hoog. Controleer de server.
+  mode: single
+- id: '1712388466675'
+  alias: Internet verbroken
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.google_dns_ping
+    from: 'on'
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  condition: []
+  action:
+  - service: notify.robert
+    metadata: {}
+    data:
+      message: De Internet-verbinding is verbroken.
+  mode: single
+- id: '1712388698798'
+  alias: Home Assistant Cloud verbinding verbroken
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - binary_sensor.remote_ui
+    from: 'on'
+    to: 'off'
+  condition: []
+  action:
+  - service: notify.robert
+    metadata: {}
+    data:
+      message: De verbinding met de Home Assistant Cloud is verbroken. Het systeem
+        is van buitenaf niet meer bereikbaar.
+  mode: single
+- id: '1712431074448'
+  alias: Zigbee Offline Devices state changed
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.zigbee_offline_devices
+  condition: []
+  action:
+  - variables:
+      message: 'De offline status van de volgene apparaten is gewijzigd: {{ states(''sensor.zigbee_offline_devices'')
+        }}'
+  - service: persistent_notification.create
+    metadata: {}
+    data:
+      message: '{{ message }}'
+  - service: notify.admin
+    metadata: {}
+    data:
+      message: '{{ message }}'
+  mode: single
