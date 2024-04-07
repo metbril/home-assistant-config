@@ -481,11 +481,12 @@ notify_living:
       tts_playback_speed: 100
       volume_level: 0.15
       tts_platform: cloud
-      gender: male
       message: '{{ message }}'
       cache: true
       announce: true
       language: nl-NL
+      options:
+        voice: MaartenNeural
   mode: single
   icon: mdi:account-voice
 notify_living_dashboard:
