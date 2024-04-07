@@ -67,6 +67,7 @@ advanced:
     port: 514
     protocol: udp4
     type: '5424'
+  last_seen: ISO_8601
 groups:
   '1':
     friendly_name: living_lights_z2m
@@ -74,3 +75,12 @@ groups:
       - 0x00178801001057bd/11
       - 0x001788010489e455/11
       - 0x00178801036082bf/11
+availability:
+  active:
+    timeout: 20
+  passive:
+    timeout: 1500
+device_options:
+  homeassistant:
+    last_seen:
+      enabled_by_default: true
