@@ -49,8 +49,6 @@ devices:
     occupancy_timeout: 180
   '0x54ef441000560867':
     friendly_name: Office Presence
-  '0x00178801036082bf':
-    friendly_name: '0x00178801036082bf'
   '0x0017880104eedc4d':
     friendly_name: Leeshoek dimmer
   '0x142d41fffe5833b8':
@@ -74,7 +72,6 @@ groups:
     devices:
       - 0x00178801001057bd/11
       - 0x001788010489e455/11
-      - 0x00178801036082bf/11
 availability:
   active:
     timeout: 20
