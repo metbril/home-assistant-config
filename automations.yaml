@@ -304,14 +304,15 @@
       - service: notify.admin
         data:
           message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
+        enabled: false
       - service: notify.persistent_notification
         data:
           message: 'Batterijen bijna leeg: {{sensors}}'
       exclude:
         entity_id:
-        - sensor.iphone_robert_battery_level
         - sensor.iphone_van_bjorn_battery_level
         - sensor.patricius_battery_level
+        - sensor.iphone_battery_level
       time: '20:00:00'
 - id: '1649842819459'
   alias: Office > Pause/Resume Music
@@ -770,26 +771,26 @@
         heb ik geen externe toegang nodig tot interne systemen.'
   mode: single
 - id: '1679143739246'
-  alias: 'Huis: Do not disturb mode'
+  alias: Niet storen instellen door stiltetijd schema
   description: Let do not disturb follow quiet hours.
   trigger:
   - platform: state
     entity_id:
     - schedule.quiet_hours
     to: 'on'
-    id: Stiltetijd Aan
+    id: Stiltetijd Schema Aan
   - platform: state
     entity_id:
     - schedule.quiet_hours
     to: 'off'
-    id: Stittetijd Uit
+    id: Stiltetijd Schema Uit
   condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
         id:
-        - Stiltetijd Aan
+        - Stiltetijd Schema Aan
       sequence:
       - service: input_boolean.turn_on
         data: {}
@@ -798,7 +799,7 @@
     - conditions:
       - condition: trigger
         id:
-        - Stittetijd Uit
+        - Stiltetijd Schema Uit
       sequence:
       - service: input_boolean.turn_off
         data: {}
@@ -1297,8 +1298,8 @@
   condition: []
   action:
   - variables:
-      message: 'De offline status van de volgene apparaten is gewijzigd: {{ states(''sensor.zigbee_offline_devices'')
-        }}'
+      message: "De offline status van de volgende Zigbee-apparaten is gewijzigd: \n\n{{
+        states('sensor.zigbee_offline_devices') }}"
   - service: persistent_notification.create
     metadata: {}
     data:
@@ -1307,4 +1308,37 @@
     metadata: {}
     data:
       message: '{{ message }}'
+    enabled: false
   mode: single
+- id: '1713018222529'
+  alias: Front Door Alert
+  description: ''
+  use_blueprint:
+    path: metbril/actionable_alert.yaml
+    input:
+      sensor_entity: binary_sensor.front_door_contact
+      initial_delay: 300
+      repeat_delay: 900
+      max_alerts: 8
+      alert_action:
+      - service: script.notification_engine
+        metadata: {}
+        data:
+          emergency: true
+          mobile: true
+          message: '{{ notify_message }}'
+          media_players:
+          - media_player.living_speaker
+          - media_player.office_speaker
+      notify_message: Let op. De voordeur staat open.
+      resolved_message: De voordeur is gesloten.
+      resolved_action:
+      - service: script.notification_engine
+        metadata: {}
+        data:
+          emergency: false
+          mobile: true
+          message: '{{ resolved_message }}'
+          media_players:
+          - media_player.living_speaker
+          - media_player.office_speaker
