@@ -1,0 +1,179 @@
+blueprint:
+  name: Actionable Alert
+  description: >
+    Trigger an alert based on the state of a given sensor.
+    An action is executed and repeats as long as the sensor is in the alert state.
+  domain: automation
+  #   source_url: https://gist.github.com/pavax/08705e383bdd3b58ea7b75a1f01c7e54
+  input:
+    sensor_entity:
+      name: Sensor Entity
+      description: "Sensor that triggers an alert"
+      default:
+      selector:
+        entity:
+    alert_state:
+      name: Sensor Alert state
+      description: "Sensor state that triggers the alert notification"
+      default: "on"
+    initial_delay:
+      name: Initial Alert Delay
+      description: "Time to wait until an alert notification will be send (inital)"
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+    repeat_delay:
+      name: Repeat Alert Delay
+      description: "Time to wait until an alert notification will be send (subsequently)"
+      default: 120
+      selector:
+        number:
+          min: 0
+          max: 3600
+          unit_of_measurement: seconds
+    max_alerts:
+      name: Max Alert Notifications
+      description: "How often should the alert get triggered while the alert is active"
+      default: 3
+      selector:
+        number:
+          min: 0
+          max: 100
+          unit_of_measurement: count
+    notify_message:
+      name: Notifcation Message (Optional)
+      description: 'Default: "Alert {{ entity_name }} triggered"'
+      default: "Alert {{ entity_name }} triggered"
+    resolved_message:
+      name: Message when the alert is resolved (Optional)
+      description: 'Default: "Alert {{ entity_name }} resolved"'
+      default: "Alert {{ entity_name }} resolved"
+    alert_action:
+      name: Alert Action (Optional)
+      description: "Action to run while the alert is active. You can reuse the {{ notify_message }} variable"
+      default: []
+      selector:
+        action:
+    resolved_action:
+      name: Resolved Action (Optional)
+      description: "Action to run after an alert was resolved. You can reuse the {{ resolved_message }} variable"
+      default: []
+      selector:
+        action:
+    dismiss_entity:
+      name: Dismiss Alert (Optional)
+      description: "Input Boolean to dismiss an alert"
+      default:
+      selector:
+        entity:
+          domain: input_boolean
+    condition_entity:
+      name: Condition Entity (Optional)
+      description: "Condition Entity before an alert gets triggered"
+      default:
+      selector:
+        entity:
+    condition_entity_state:
+      name: Condition Entity state (Optional)
+      description: "State of the condition entity"
+      default: "on"
+
+mode: restart
+max_exceeded: silent
+
+variables:
+  sensor_entity: !input sensor_entity
+  notify_message: !input notify_message
+  resolved_message: !input resolved_message
+  entity_name: "{{ state_attr(sensor_entity,'friendly_name') }}"
+  alert_action: !input alert_action
+  alert_state: !input alert_state
+  dismiss_entity: !input dismiss_entity
+  resolved_action: !input resolved_action
+  send_notification: "false"
+  initial_delay: !input initial_delay
+  repeat_delay: !input repeat_delay
+  condition_entity: !input condition_entity
+  condition_entity_state: !input condition_entity_state
+
+trigger:
+  - platform: state
+    entity_id: !input sensor_entity
+    to: !input alert_state
+  - platform: homeassistant
+    event: start
+
+condition:
+  - condition: template
+    value_template: "{{ is_state(sensor_entity, alert_state) }}"
+  - condition: template
+    value_template: "{{ condition_entity == None or is_state(condition_entity, condition_entity_state) }}"
+
+action:
+  - choose:
+      - conditions: "{{ dismiss_entity != None }}"
+        sequence:
+          - service: input_boolean.turn_on
+            data:
+              entity_id: !input dismiss_entity
+
+  # Initial Wait
+  - wait_for_trigger:
+      - platform: template
+        value_template: "{{ not is_state(sensor_entity, alert_state)}}"
+      - platform: template
+        value_template: "{{ dismiss_entity != None and not is_state(dismiss_entity, 'on') }}"
+    timeout: !input initial_delay
+
+  # None = alert was not resolved or dimissed in the specified wait-time thus we need to send notifications.
+  - variables:
+      send_notification: "{{ wait.trigger == None }}"
+
+  - repeat:
+      count: !input max_alerts
+      sequence:
+        - variables:
+            repeat_count: "{{ repeat.index }}"
+
+        # Break conditions (aka. stop the loop)
+        - condition: template
+          value_template: "{{ is_state(sensor_entity, alert_state)}}"
+        - condition: template
+          value_template: "{{ dismiss_entity == None or is_state(dismiss_entity, 'on') }}"
+
+        # Notification Actions
+        - choose:
+            - conditions: "{{ alert_action is defined and alert_action|length > 0 }}"
+              sequence: !input alert_action
+        # Wait
+        - wait_for_trigger:
+            - platform: template
+              value_template: "{{ not is_state(sensor_entity, alert_state)}}"
+            - platform: template
+              value_template: "{{ dismiss_entity != None and not is_state(dismiss_entity, 'on') }}"
+          timeout: !input repeat_delay
+
+  # Repeat finished
+  - choose:
+      # If Alert was dismissed
+      - conditions: "{{ send_notification and dismiss_entity != None and not is_state(dismiss_entity, 'on') }}"
+        sequence:
+          - service: system_log.write
+            data:
+              message: "Alert {{ entity_name }} dismissed"
+              level: warning
+      # If Alert was resolved
+      - conditions: "{{ send_notification and not is_state(sensor_entity, alert_state) }}"
+        sequence:
+          - choose:
+              - conditions: "{{ resolved_action is defined and resolved_action|length > 0 }}"
+                sequence: !input resolved_action
+  - choose:
+      - conditions: "{{ dismiss_entity != None }}"
+        sequence:
+          - service: input_boolean.turn_off
+            data:
+              entity_id: !input dismiss_entity
