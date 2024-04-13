@@ -630,3 +630,128 @@ mindergas:
     data:
       date: '{{ date }}'
       reading: '{{ reading }}'
+notification_engine:
+  alias: Notification Engine
+  fields:
+    message:
+      name: Message
+      description: The notification message. Required.
+      required: true
+      example: Hello world!
+      selector:
+        text:
+          multiline: true
+          type: text
+    media_players:
+      selector:
+        entity:
+          domain: media_player
+          multiple: true
+      name: Media Players
+      description: De mediaspelers om het bericht op af te spelen. Bericht wordt niet
+        afgespeeld indien leeg.
+      example: '["media_player.living_speaker", "media_player.office_speaker"]'
+      required: false
+    emergency:
+      selector:
+        boolean: {}
+      name: Emergency
+      required: true
+      description: Spreekt melding uit tijdens stiltetijd. Stuurt een mobiele en permanente
+        melding.
+    mobile:
+      selector:
+        boolean: {}
+      name: Mobile
+      required: true
+    persistent:
+      selector:
+        boolean: {}
+      name: Blijvend
+      description: Toont een blijvende melding.
+      required: true
+  sequence:
+  - variables:
+      emoji_alert: "{{ '\U0001F6A8 ' if emergency }}"
+  - alias: Spreek bericht uit
+    if:
+    - condition: and
+      conditions:
+      - condition: template
+        value_template: '{{ media_players != null }}'
+        alias: Mediaspeler(s) gekozen
+      - condition: or
+        conditions:
+        - condition: template
+          value_template: '{{ emergency is true }}'
+          alias: Noodgeval
+        - condition: state
+          entity_id: input_boolean.do_not_disturb
+          state: 'off'
+        - condition: state
+          entity_id: input_boolean.occupancy_guests
+          state: 'off'
+    then:
+    - variables:
+        chime: '{{ "/config/www/sounds/emergency.mp3" if emergency else "bells" }}'
+    - service: chime_tts.say
+      target:
+        entity_id: '{{ media_players }}'
+      data:
+        message: '{{ message }}'
+        chime_path: '{{ chime }}'
+        end_chime_path: ''
+        offset: 450
+        final_delay: 0
+        volume_level: 0.2
+        tts_platform: cloud
+        language: nl-NL
+        options:
+          voice: MaartenNeural
+        cache: true
+        announce: true
+        tts_speed: 100
+        tts_pitch: 0
+        join_players: false
+        unjoin_players: false
+    enabled: true
+  - alias: Verzend mobiel bericht
+    if:
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ emergency is true }}'
+        alias: Noodgeval
+      - condition: template
+        value_template: '{{ mobile is true }}'
+        alias: Mobiel
+      - condition: state
+        entity_id: input_boolean.occupancy_guests
+        state: ''
+    then:
+    - service: notify.family
+      metadata: {}
+      data:
+        message: '{{ emoji_alert }}{{ message }}'
+  - alias: Maak blijvende melding
+    if:
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ emergency is true }}'
+        alias: Noodgeval
+      - condition: template
+        value_template: '{{ persistent is true }}'
+        alias: Blijvend ingeschakeld
+      - condition: state
+        entity_id: input_boolean.do_not_disturb
+        state: 'on'
+      - condition: state
+        entity_id: input_boolean.occupancy_guests
+        state: ''
+    then:
+    - service: notify.persistent_notification
+      metadata: {}
+      data:
+        message: '{{ emoji_alert }}{{ message }}'
+  mode: single
