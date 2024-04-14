@@ -1,0 +1,18 @@
+- sensor:
+    - name: Zigbee Devices Offline
+      unique_id: a618479f-192e-497b-b9d5-ed4f72592cb4
+      unit_of_measurement: "count"
+      availability: true
+      state: >-
+        {{ this.attributes.sensors | count }}
+      attributes:
+        sensors: >-
+          {% set age = (24 | int) * 60 * 60 %}
+          {% set result = namespace(sensors=[]) %}
+          {% for state in states.sensor | rejectattr('attributes.device_class', 'undefined') | selectattr('attributes.device_class', '==', 'timestamp') %}
+              {% if 'last_seen' in state.entity_id and (states(state.entity_id) == 'unavailable' or ((as_timestamp(now()) - as_timestamp(states(state.entity_id))) > age)) %}
+                  {% set result.sensors = result.sensors + [state.name | regex_replace(find=' Last seen', replace='') ~ ' (' ~ relative_time(strptime(states(state.entity_id), '%Y-%m-%dT%H:%M:%S%z', 'unavailable')) ~ ')'] %}
+              {% endif %}
+          {% endfor %}
+          {{ result.sensors }}
+      icon: mdi:zigbee
