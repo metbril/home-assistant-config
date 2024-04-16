@@ -301,13 +301,13 @@
     path: sbyx/low-battery-level-detection-notification-for-all-battery-sensors.yaml
     input:
       actions:
+      - service: notify.persistent_notification
+        data:
+          message: 'Batterijen bijna leeg: {{sensors}}'
       - service: notify.admin
         data:
           message: "⚠️\U0001FAAB Deze sensoren hebben we lage batterij: {{sensors}}"
         enabled: false
-      - service: notify.persistent_notification
-        data:
-          message: 'Batterijen bijna leeg: {{sensors}}'
       exclude:
         entity_id:
         - sensor.iphone_van_bjorn_battery_level
@@ -858,7 +858,7 @@
     - binary_sensor.bike_charger_plug
     to: 'on'
     from: 'off'
-    id: Charger Started
+    id: Charging Started
   - platform: state
     entity_id:
     - binary_sensor.bike_charger_plug
@@ -867,18 +867,15 @@
       hours: 0
       minutes: 1
       seconds: 0
-    id: Charger Finished
+    id: Charging Finished
     from: 'on'
-  - platform: homeassistant
-    event: start
-    id: Herstart
   condition: []
   action:
   - choose:
     - conditions:
       - condition: trigger
         id:
-        - Charger Started
+        - Charging Started
       sequence:
       - service: input_number.set_value
         target:
@@ -888,29 +885,38 @@
     - conditions:
       - condition: trigger
         id:
-        - Charger Finished
-      - condition: state
-        entity_id: binary_sensor.bike_charger_plug
-        state: 'off'
+        - Charging Finished
       sequence:
-      - if:
-        - condition: device
-          type: is_on
-          device_id: fc8175d314fecd80e9526220b04ae4b7
-          entity_id: 0bf0b05b7ad2842d1f82e6c6b0aeeab2
-          domain: switch
-        then:
-        - type: turn_off
-          device_id: fc8175d314fecd80e9526220b04ae4b7
-          entity_id: switch.bike_charger_plug
-          domain: switch
+      - type: turn_off
+        device_id: fc8175d314fecd80e9526220b04ae4b7
+        entity_id: switch.bike_charger_plug
+        domain: switch
+      - variables:
+          message: '{{ [''Zo.'', ''Eindelijk.'', ''Gelukkig.'', ''Dat duurde lang.'',
+            ''Dat heeft even geduurd.'', ''Dat duurde even.'', ''Nou zeg.'', ''Tjongejonge.'']
+            | random }} De fietslader is klaar.'
+      - service: script.notification_engine
+        metadata: {}
+        data:
+          emergency: false
+          mobile: true
+          persistent: false
+          message: '{{ [''OK.'', ''Zo.'', ''Eindelijk.'', ''Gelukkig.'', ''Dat duurde
+            lang.'', ''Dat heeft even geduurd.'', ''Dat duurde even.'', ''Nou zeg.'',
+            ''Tjongejonge.''] | random }} De fietslader is klaar.  '
+          media_players:
+          - media_player.office_speaker
+          - media_player.homepod_slaapkamer
+        enabled: false
       - service: notify.parents
         data:
           message: "De fietslader is klaar. \U0001F6B2\U0001F50B⚡️\U0001F50C"
+        enabled: true
       - service: script.notify_living
         data:
           icon: /config/www/img/bike-charger.png
           message: De fietslader is klaar.
+        enabled: true
   mode: single
 - id: '1696254669833'
   alias: Office > Force preset to none
@@ -1294,12 +1300,15 @@
   trigger:
   - platform: state
     entity_id:
-    - sensor.zigbee_offline_devices
+    - sensor.zigbee_devices_offline
+    attribute: sensors
   condition: []
   action:
   - variables:
-      message: "De offline status van de volgende Zigbee-apparaten is gewijzigd: \n\n{{
-        states('sensor.zigbee_offline_devices') }}"
+      message: "\n{% set sensors = state_attr('sensor.zigbee_devices_offline', 'sensors')
+        %}\n{% if (sensors | count) == 0 %}\n  Alle Zigbee-apparaten zijn nu online.\n{%
+        else %}\n  Er zijn nu {{ sensors | count }} Zigbee-apparaten offline: \n\n
+        \ - {{ sensors | join('\\n- ') }}\n{% endif %}"
   - service: persistent_notification.create
     metadata: {}
     data:
@@ -1342,3 +1351,48 @@
           media_players:
           - media_player.living_speaker
           - media_player.office_speaker
+- id: '1713098368370'
+  alias: Set low battery group
+  description: ''
+  trigger:
+  - platform: homeassistant
+    event: start
+  - platform: time_pattern
+    minutes: '*'
+  condition: []
+  action:
+  - service: group.set
+    metadata: {}
+    data:
+      object_id: low_battery
+      name: Entities with low battery
+      icon: mdi:battery-alert
+      entities: "{% set ns = namespace(ret=[]) %} {% for e in states.sensor | selectattr('attributes.device_class',
+        'defined') | selectattr('attributes.device_class', 'eq', 'battery') %}\n  {%
+        if e.state | is_number and e.state | float < 25 %}\n    {% set ns.ret = ns.ret
+        + [ e.entity_id ] %}\n  {% endif %}\n{% endfor %} {{ ns.ret }}"
+  mode: single
+- id: '1713107852663'
+  alias: Pingpong
+  description: ''
+  trigger:
+  - platform: device
+    type: changed_states
+    device_id: f0b450a0149335e09a979d6c9b2917f7
+    entity_id: 518681eac115fa69424f8fe3e6ca67c2
+    domain: light
+  - platform: state
+    entity_id:
+    - light.office_desk_lamp
+  condition: []
+  action:
+  - service: script.notification_engine
+    metadata: {}
+    data:
+      emergency: false
+      mobile: false
+      persistent: false
+      message: Pingpong
+      media_players:
+      - media_player.living_speaker
+  mode: single
