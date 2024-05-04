@@ -1,0 +1,55 @@
+- platform: statistics
+  name: "Max Temperature Last 24h"
+  unique_id: c79484d1-6b64-466b-8d93-cc17297fe897
+  entity_id: sensor.openweathermap_temperature
+  state_characteristic: value_max
+  max_age:
+    hours: 24
+
+- platform: statistics
+  name: "Max Temperature Last 48h"
+  unique_id: 3264af18-4407-4beb-ad40-06116eab545c
+  entity_id: sensor.openweathermap_temperature
+  state_characteristic: value_max
+  max_age:
+    hours: 48
+
+- platform: statistics
+  name: "Max Temperature Last 72h"
+  unique_id: d6eb8dc6-7227-4587-a7eb-703d05f7c9a3
+  entity_id: sensor.openweathermap_temperature
+  state_characteristic: value_max
+  max_age:
+    hours: 72
+
+- platform: statistics
+  name: "Total Rain Last 24h"
+  unique_id: a1bdd807-be03-4d33-88d2-b8f0e3565f87
+  entity_id: sensor.openweathermap_rain
+  state_characteristic: sum
+  max_age:
+    hours: 24
+
+- platform: statistics
+  name: "Total Rain Last 48h"
+  unique_id: f0fa2a52-13b7-405b-9765-d94c615a60e8
+  entity_id: sensor.openweathermap_rain
+  state_characteristic: sum
+  max_age:
+    hours: 48
+
+- platform: statistics
+  name: "Total Rain Last 72h"
+  unique_id: 0a7ef5a8-1a89-40dd-ab50-7ae02a808212
+  entity_id: sensor.openweathermap_rain
+  state_characteristic: sum
+  max_age:
+    hours: 72
+
+- platform: statistics
+  name: "Rain Last 24h"
+  unique_id: af2985f2-b4d6-4997-85d1-d8489a9ac3ce
+  entity_id: sensor.total_rain
+  state_characteristic: change
+  max_age:
+    hours: 24
