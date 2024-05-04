@@ -1,0 +1,26 @@
+- trigger:
+    - platform: state
+      entity_id:
+        - weather.openweathermap
+  action:
+    - service: weather.get_forecasts
+      data:
+        type: hourly
+      target:
+        entity_id: weather.openweathermap
+      response_variable: hourly
+  sensor:
+    - name: Expected Precipitation
+      icon: mdi:weather-pouring
+      unique_id: 409ddc89-7df3-42ee-8cb5-d396bad42a47
+      unit_of_measurement: mm
+      state: >-
+        {% set ns = namespace() %}
+        {% set ns.total = 0 %}
+        {% for r in range(0, 8) %}
+          {% set probab = (hourly['weather.openweathermap'].forecast[r].precipitation_probability / 100) | float(0) %}
+          {% set precip = hourly['weather.openweathermap'].forecast[r].precipitation | float(0) %}
+          {% set precip = precip * probab %}
+          {% set ns.total = ns.total + precip %}
+        {% endfor %}
+        {{ ns.total | round(0) }}
