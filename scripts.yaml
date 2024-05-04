@@ -479,7 +479,7 @@ notify_living:
       chime_path: bells
       delay: 450
       tts_playback_speed: 100
-      volume_level: 0.15
+      volume_level: 0.3
       tts_platform: cloud
       message: '{{ message }}'
       cache: true
@@ -673,6 +673,48 @@ notification_engine:
   sequence:
   - variables:
       emoji_alert: "{{ '\U0001F6A8 ' if emergency }}"
+  - alias: Maak blijvende melding
+    if:
+    - condition: or
+      conditions:
+      - condition: template
+        value_template: '{{ persistent }}'
+        alias: Blijvend ingeschakeld
+      - condition: template
+        value_template: '{{ emergency }}'
+        alias: Noodgeval
+      - condition: state
+        entity_id: input_boolean.do_not_disturb
+        state: 'on'
+    then:
+    - service: notify.persistent_notification
+      metadata: {}
+      data:
+        message: '{{ emoji_alert }}{{ message }}'
+  - alias: Verzend mobiel bericht
+    if:
+    - condition: and
+      conditions:
+      - condition: state
+        entity_id: input_boolean.occupancy_guests
+        state: 'off'
+      - alias: Mobiel of Noodgeval
+        condition: or
+        conditions:
+        - alias: Mobiel
+          condition: template
+          value_template: '{{ mobile }}'
+        - alias: Noodgeval
+          condition: template
+          value_template: '{{ emergency }}'
+        - condition: state
+          entity_id: input_boolean.do_not_disturb
+          state: 'on'
+    then:
+    - service: notify.family
+      metadata: {}
+      data:
+        message: '{{ emoji_alert }}{{ message }}'
   - alias: Spreek bericht uit
     if:
     - condition: and
@@ -680,17 +722,17 @@ notification_engine:
       - condition: template
         value_template: '{{ media_players != null }}'
         alias: Mediaspeler(s) gekozen
+      - condition: state
+        entity_id: input_boolean.occupancy_guests
+        state: 'off'
       - condition: or
         conditions:
-        - condition: template
-          value_template: '{{ emergency is true }}'
-          alias: Noodgeval
         - condition: state
           entity_id: input_boolean.do_not_disturb
           state: 'off'
-        - condition: state
-          entity_id: input_boolean.occupancy_guests
-          state: 'off'
+        - condition: template
+          value_template: '{{ emergency }}'
+          alias: Noodgeval
     then:
     - variables:
         chime: '{{ "/config/www/sounds/emergency.mp3" if emergency else "bells" }}'
@@ -703,7 +745,7 @@ notification_engine:
         end_chime_path: ''
         offset: 450
         final_delay: 0
-        volume_level: 0.2
+        volume_level: 0.3
         tts_platform: cloud
         language: nl-NL
         options:
@@ -715,43 +757,14 @@ notification_engine:
         join_players: false
         unjoin_players: false
     enabled: true
-  - alias: Verzend mobiel bericht
-    if:
-    - condition: or
-      conditions:
-      - condition: template
-        value_template: '{{ emergency is true }}'
-        alias: Noodgeval
-      - condition: template
-        value_template: '{{ mobile is true }}'
-        alias: Mobiel
-      - condition: state
-        entity_id: input_boolean.occupancy_guests
-        state: ''
-    then:
-    - service: notify.family
-      metadata: {}
-      data:
-        message: '{{ emoji_alert }}{{ message }}'
-  - alias: Maak blijvende melding
-    if:
-    - condition: or
-      conditions:
-      - condition: template
-        value_template: '{{ emergency is true }}'
-        alias: Noodgeval
-      - condition: template
-        value_template: '{{ persistent is true }}'
-        alias: Blijvend ingeschakeld
-      - condition: state
-        entity_id: input_boolean.do_not_disturb
-        state: 'on'
-      - condition: state
-        entity_id: input_boolean.occupancy_guests
-        state: ''
-    then:
-    - service: notify.persistent_notification
-      metadata: {}
-      data:
-        message: '{{ emoji_alert }}{{ message }}'
   mode: single
+run_speedtest:
+  alias: Run Speedtest
+  sequence:
+  - service: homeassistant.update_entity
+    metadata: {}
+    data: {}
+    target:
+      entity_id: sensor.orbi_router_downlink_bandwidth
+  mode: single
+  icon: mdi:speedometer
