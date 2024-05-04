@@ -5,6 +5,11 @@
 
 This repository contains my configuration for Home Assistant.
 
+NOTE: I have decided to no longer maintain my configuration with git. 
+Home Assistant is moving outside YAML more and more.
+Larger parts of the configuration are stored outside these files.
+This is the last commit before the repository is archived.
+
 ## Table of Contents
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
