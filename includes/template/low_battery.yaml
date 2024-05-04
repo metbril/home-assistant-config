@@ -1,0 +1,21 @@
+- sensor:
+    - name: Low Batteries
+      unique_id: 649ecb19-3c59-48ac-a22a-bad30c5ec548
+      unit_of_measurement: "count"
+      availability: true
+      state: >-
+        {{ this.attributes.sensors | count }}
+      attributes:
+        sensors: >-
+          {% set limit = 20 | int %}
+          {% set result = namespace(sensors=[]) %}
+          {% for sensor in states.sensor | rejectattr('attributes.device_class', 'undefined') | selectattr('attributes.device_class', '==', 'battery') %}
+              {% if (states(sensor.entity_id) == 'unavailable' or (states(sensor.entity_id) | float) <= limit) %}
+                  {% set result.sensors = result.sensors + [sensor.name 
+                    | regex_replace(find=' Battery Level', replace='') 
+                    | regex_replace(find=' Batterij', replace='') 
+                    ~ ' (' ~ states(sensor.entity_id) ~ '%)'] %}
+              {% endif %}
+          {% endfor %}
+          {{ result.sensors }}
+      icon: mdi:zigbee
